@@ -56,8 +56,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   sink->set_input(out_spk);
 
   // load params
-  RegistryKey reg(REG_KEY_PRESET"\\Default");
-  load_params(&reg, AC3FILTER_ALL);
+  load_params(0, AC3FILTER_ALL);
 }
 
 AC3Filter::~AC3Filter()
@@ -114,19 +113,6 @@ AC3Filter::set_input(Speakers _spk)
   dec.set_input(in_spk);
   dec.proc.set_input_order(win_order);
   dec.reset();
-
-  if (old_in_spk.format != in_spk.format)
-  {
-    RegistryKey reg;
-    switch (in_spk.format)
-    {
-      case FORMAT_AC3: reg.open_key(REG_KEY_PRESET"\\Default AC3"); break;
-      case FORMAT_DTS: reg.open_key(REG_KEY_PRESET"\\Default DTS"); break;
-      case FORMAT_MPA: reg.open_key(REG_KEY_PRESET"\\Default MPA"); break;
-      default:         reg.open_key(REG_KEY_PRESET"\\Default"); break;
-    }
-    load_params(&reg, AC3FILTER_ALL);
-  }
 
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): Ok", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate));
   return true;
@@ -804,6 +790,13 @@ STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
   AudioProcessorState state;
   dec.get_state(&state);
 
+  RegistryKey reg;
+  if (!_conf)
+  {
+    _conf = &reg;
+    reg.open_key(REG_KEY_PRESET"\\Default");
+  }
+
   if (_what & AC3FILTER_SPK)
   {
     Speakers spk_tmp = out_spk;
@@ -968,6 +961,13 @@ STDMETHODIMP AC3Filter::save_params(Config *_conf, int _what)
 {
   AudioProcessorState state;
   dec.get_state(&state);
+
+  RegistryKey reg;
+  if (!_conf)
+  {
+    _conf = &reg;
+    reg.create_key(REG_KEY_PRESET"\\Default");
+  }
 
   if (_what & AC3FILTER_SPK)
   {
