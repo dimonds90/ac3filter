@@ -422,30 +422,31 @@ BEGIN
                     IDC_STATIC,13,72,182,24
     LTEXT           "Latest releases, sources and documentation are always avilable at official project homepage:",
                     IDC_STATIC,13,109,182,17
-    LTEXT           "Please report about all bugs. Feel free to email with all ideas, criticism, etc. to",
-                    IDC_STATIC,209,127,176,16
-    CTEXT           "<--- DOCUMENTATION          HERE!!!",IDC_STATIC,117,126,
-                    78,17
-    CONTROL         "http://ac3filter.sourceforge.net",IDC_LNK_AC3FILTER,
-                    "Button",BS_OWNERDRAW | BS_FLAT | WS_TABSTOP,13,126,102,
-                    8
+    LTEXT           "Please report about all bugs. Feel free to email with all ideas, criticism, etc. to:",
+                    IDC_STATIC,209,109,176,17
+    CONTROL         "http://ac3filter.sourceforge.net/ac3filter",
+                    IDC_LNK_AC3FILTER,"Button",BS_OWNERDRAW | BS_FLAT | 
+                    WS_TABSTOP,13,127,130,8
     CONTROL         "http://sourceforge.net/forum/?group_id=66022",
                     IDC_LNK_FORUM,"Button",BS_OWNERDRAW | BS_FLAT | 
                     WS_TABSTOP,13,145,155,8
     LTEXT           "Project forum:",IDC_STATIC,13,136,44,8
     CONTROL         "mailto:xvalex@mail.ru?Subject=AC3Filter",IDC_LNK_EMAIL,
-                    "Button",BS_OWNERDRAW | BS_FLAT | WS_TABSTOP,209,143,131,
+                    "Button",BS_OWNERDRAW | BS_FLAT | WS_TABSTOP,209,127,131,
                     8
     GROUPBOX        "What is it?",IDC_STATIC,7,7,193,56
-    GROUPBOX        "Contact author",IDC_STATIC,203,116,187,41
-    LTEXT           "AC3Filter is high quality audio decoder and processor DirectShow filter used to playback multimedia files. Used by most of multimedia players automatically. Required to playback AVI files with AC3 or DTS audio tracks. Can be used to playback DVD.",
+    GROUPBOX        "Contact author",IDC_STATIC,203,99,187,58
+    LTEXT           "AC3Filter is high quality DirectShow audio decoder and processor filter used to playback multimedia files. Used automatically by most of multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.",
                     IDC_STATIC,13,17,182,42
     GROUPBOX        "License",IDC_STATIC,7,63,193,36
     GROUPBOX        "Links",IDC_STATIC,7,99,193,59
-    PUSHBUTTON      "DONATE!",IDC_BTN_DONATE,180,172,47,14
-    GROUPBOX        "Thanks to",IDC_STATIC,203,7,187,109
+    PUSHBUTTON      "!!! DONATE !!!",IDC_BTN_DONATE,149,171,93,16,BS_CENTER | 
+                    BS_VCENTER | BS_MULTILINE
+    GROUPBOX        "Thanks to",IDC_STATIC,203,7,187,93
     CTEXT           "If you want this project to continue and become better please donate. Any sum is important!",
-                    IDC_STATIC,13,161,372,10
+                    IDC_STATIC,13,160,372,9
+    LTEXT           "Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).",
+                    IDC_STATIC,209,137,176,17
 END
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202

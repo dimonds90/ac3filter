@@ -96,8 +96,8 @@ PostBuild_Cmds=_reg_debug.bat
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
-# PROP BASE Output_Dir "AC3Filter_Perf"
-# PROP BASE Intermediate_Dir "AC3Filter_Perf"
+# PROP BASE Output_Dir "Perf"
+# PROP BASE Intermediate_Dir "Perf"
 # PROP BASE Ignore_Export_Lib 0
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0

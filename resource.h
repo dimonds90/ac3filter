@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Developer Studio generated include file.
-// Used by ac3filter.rc
+// Used by AC3Filter.rc
 //
 #define IDB_LOGO                        111
 #define IDC_EDT_BASS_FREQ               1104
