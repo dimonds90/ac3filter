@@ -730,7 +730,7 @@ AC3FilterDlg::set_controls()
   /////////////////////////////////////
   // Formats
 
-  CheckDlgButton(m_Dlg, IDC_CHK_PCM, (formats & FORMAT_MASK_PCM) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_PCM, (formats & FORMAT_CLASS_PCM) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_MPA, (formats & FORMAT_MASK_MPA) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_AC3, (formats & FORMAT_MASK_AC3) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_DTS, (formats & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
@@ -991,7 +991,7 @@ AC3FilterDlg::command(int control, int message)
     case IDC_CHK_PES:
     {
       formats = 0;
-      formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_PCM) == BST_CHECKED? FORMAT_MASK_PCM: 0;
+      formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_PCM) == BST_CHECKED? FORMAT_CLASS_PCM: 0;
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_MPA) == BST_CHECKED? FORMAT_MASK_MPA: 0;
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_AC3) == BST_CHECKED? FORMAT_MASK_AC3: 0;
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
