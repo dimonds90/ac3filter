@@ -9,6 +9,8 @@
 #include "resource.h"
 #include "registry.h"
 #include "filters\delay.h"
+#include "ac3filter_ver.h"
+
 
 #define SAFE_RELEASE(p) { if (p) p->Release(); p = 0; }
 
@@ -647,6 +649,15 @@ AC3FilterDlg::init_controls()
   lnk_forum.link(m_Dlg, IDC_LNK_FORUM);
   lnk_email.link(m_Dlg, IDC_LNK_EMAIL);
   lnk_donate.link(m_Dlg, IDC_LNK_DONATE);
+
+  /////////////////////////////////////
+  // Version
+
+  char ver1[255];
+  char ver2[255];
+  GetDlgItemText(m_Dlg, IDC_VER, ver1, array_size(ver1));
+  sprintf(ver2, ver1, AC3FILTER_VER);
+  SetDlgItemText(m_Dlg, IDC_VER, ver2);
 }
 
 void 

@@ -29,7 +29,7 @@ doc/ac3filter_rus.html (russian)
 doc/ac3filter_eng.html (english)
 doc/ac3filter_ita.html (italian)
 
-Copyright (c) 2002-2004 by Alexander Vigovsky (xvalex@mail.ru)
+Copyright (c) 2002-2005 by Alexander Vigovsky (xvalex@mail.ru)
 
 
 License:

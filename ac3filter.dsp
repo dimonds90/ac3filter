@@ -58,7 +58,7 @@ LINK32=link.exe
 # SUBTRACT LINK32 /map
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
-PostBuild_Cmds=_reg_release.bat
+PostBuild_Cmds=_reg.bat release
 # End Special Build Tool
 
 !ELSEIF  "$(CFG)" == "ac3filter - Win32 Debug"
@@ -89,7 +89,7 @@ LINK32=link.exe
 # ADD LINK32 strmbasd.lib msvcrtd.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /debug /machine:I386 /nodefaultlib /out:"Debug/ac3filter.ax" /pdbtype:sept
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
-PostBuild_Cmds=_reg_debug.bat
+PostBuild_Cmds=_reg.bat debug
 # End Special Build Tool
 
 !ELSEIF  "$(CFG)" == "ac3filter - Win32 Perf"
@@ -122,7 +122,7 @@ LINK32=link.exe
 # SUBTRACT LINK32 /map
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
-PostBuild_Cmds=_reg_perf.bat
+PostBuild_Cmds=_reg.bat perf
 # End Special Build Tool
 
 !ENDIF 
@@ -158,6 +158,10 @@ SOURCE=.\ac3filter_dlg.cpp
 # Begin Source File
 
 SOURCE=.\ac3filter_dlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ac3filter_ver.h
 # End Source File
 # Begin Source File
 

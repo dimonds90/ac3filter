@@ -29,7 +29,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
 IDD_GAINS DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
                     PBS_SMOOTH,181,115,7,50
@@ -134,8 +134,6 @@ BEGIN
                     56
     EDITTEXT        IDC_EDT_DRC_LEVEL,36,170,23,14,ES_AUTOHSCROLL | 
                     WS_DISABLED
-    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
-                    IDC_STATIC,183,190,207,8
     LTEXT           "Voice",IDC_STATIC,89,15,19,8
     CONTROL         "Slider3",IDC_SLIDER_VOICE,"msctls_trackbar32",TBS_VERT | 
                     TBS_BOTH | WS_TABSTOP,86,22,27,56
@@ -161,11 +159,13 @@ BEGIN
     CONTROL         "Slider3",IDC_SLIDER_LFE,"msctls_trackbar32",TBS_VERT | 
                     TBS_BOTH | WS_TABSTOP,137,22,27,56
     EDITTEXT        IDC_EDT_LFE,140,79,23,14,ES_AUTOHSCROLL
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
 END
 
 IDD_MIXER DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     CONTROL         "One-pass norm",IDC_CHK_NORMALIZE,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,99,118,64,8
@@ -304,8 +304,6 @@ BEGIN
     LTEXT           "-20dB",IDC_STATIC,66,65,20,8
     LTEXT           "0dB",IDC_STATIC,64,45,16,8,0,WS_EX_RIGHT
     GROUPBOX        "Gains",IDC_STATIC,7,7,161,90
-    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
-                    IDC_STATIC,183,190,207,8
     LTEXT           "LFE",IDC_STATIC,144,15,14,8
     CONTROL         "Slider3",IDC_SLIDER_LFE,"msctls_trackbar32",TBS_VERT | 
                     TBS_BOTH | WS_TABSTOP,137,22,27,56
@@ -313,6 +311,8 @@ BEGIN
     CONTROL         "Bass redir:",IDC_CHK_BASS_REDIR,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,90,171,49,10
     EDITTEXT        IDC_EDT_BASS_FREQ,140,169,23,14,ES_AUTOHSCROLL
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
 END
 
 IDD_EQ DIALOG DISCARDABLE  0, 0, 397, 201
@@ -408,16 +408,14 @@ BEGIN
     PUSHBUTTON      "Delete",IDC_BTN_EQ_DELETE,59,172,42,10
     PUSHBUTTON      "Save",IDC_BTN_DELAY_SAVE,16,119,42,10
     PUSHBUTTON      "Delete",IDC_BTN_DELAY_DELETE,59,119,42,10
-    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
-                    IDC_STATIC,183,190,207,8
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
 END
 
 IDD_ABOUT DIALOG DISCARDABLE  0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
-    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
-                    IDC_STATIC,183,190,207,8
     LTEXT           "This program is free software and can be distributed according to the terms of GNU General Public License version 2.",
                     IDC_STATIC,13,72,182,24
     LTEXT           "Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).",
@@ -445,11 +443,13 @@ BEGIN
                     BS_VCENTER | BS_FLAT | WS_TABSTOP,13,110,62,8
     LTEXT           "- documentaion, new versions",IDC_STATIC,77,110,118,9
     LTEXT           "- support, ideas, critics",IDC_STATIC,77,120,118,9
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
 END
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "+20dB",IDC_STATIC,110,27,20,8
     LTEXT           "-20dB",IDC_STATIC,112,66,20,8
@@ -515,8 +515,6 @@ BEGIN
     PUSHBUTTON      "Delete",IDC_BTN_PRESET_DELETE,70,81,27,10
     EDITTEXT        IDC_EDT_INFO,15,116,117,53,ES_MULTILINE | ES_AUTOHSCROLL | 
                     ES_READONLY | ES_WANTRETURN | WS_VSCROLL
-    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
-                    IDC_STATIC,183,190,207,8
     GROUPBOX        "Decoder info",IDC_STATIC,7,97,132,90
     GROUPBOX        "Gain",IDC_STATIC,105,7,92,90
     CONTROL         "Slider1",IDC_SLIDER_GAIN,"msctls_trackbar32",TBS_VERT | 
@@ -552,6 +550,8 @@ BEGIN
     CONTROL         111,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
                     WS_BORDER,141,101,115,84
     CONTROL         131,IDC_LOGO,"Static",SS_BITMAP,206,143,50,22
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
 END
 
 IDD_SYS DIALOG DISCARDABLE  0, 0, 397, 201
@@ -587,8 +587,6 @@ BEGIN
     CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,14,127,66,8
     LTEXT           "0",IDC_LBL_JITTER,136,127,14,8
-    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
-                    IDC_STATIC,183,190,207,8
     CONTROL         "MPEG Audio",IDC_CHK_SPDIF_MPA,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,112,55,57,10
     CONTROL         "AC3",IDC_CHK_SPDIF_AC3,"Button",BS_AUTOCHECKBOX | 
@@ -607,6 +605,8 @@ BEGIN
     CONTROL         "PES (DVD)",IDC_CHK_PES,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,60,51,10
     LTEXT           "Current jitter (ms):",IDC_STATIC,79,127,55,8
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
 END
 
 IDD_FILE DIALOG DISCARDABLE  0, 0, 178, 81

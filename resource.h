@@ -13,6 +13,7 @@
 #define IDB_FORMAT_MPA                  134
 #define IDB_FORMAT_PES                  135
 #define IDC_EDT_BASS_FREQ               1104
+#define IDC_LBL_MEAN                    1242
 #define IDC_CHK_SPDIF_MPA               3130
 #define IDC_CHK_SPDIF_AC3               3131
 #define IDC_CHK_SPDIF_DTS               3132
@@ -34,6 +35,7 @@
 #define IDC_LNK_HOME2                   3159
 #define IDC_SLIDER_TIME_SHIFT           3160
 #define IDC_EDT_TIME_SHIFT              3161
+#define IDC_VER                         3162
 
 // Next default values for new objects
 // 
@@ -43,7 +45,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        136
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         3162
+#define _APS_NEXT_CONTROL_VALUE         3163
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -5,7 +5,6 @@
   * DRC bug fixed (sound disappeared sometimes)
   * AC3 encoder bug fixed
   + Added AC3 CRC check
-  + Separate settings for AC3/DTS/other formats
 
 <b>1.01a</b> (unofficial release)
   * First working alfa for new filter generation
