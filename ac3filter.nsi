@@ -71,5 +71,6 @@ Section "Uninstall"
 
   ;; Delete shit from old versions
   DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls" "AC3Filter"
+  Delete "$SYSDIR\ac3filter.ax"
   Delete "$SYSDIR\ac3filter.cpl"
 SectionEnd
