@@ -1,0 +1,54 @@
+First order
+============
+
+* Documentation!!!
+* option to disable AC3 encoding!
+* BUG: DShowSink::process(): chunk buffer is not locked and may become invalid!
+* BUG: set_input(): update of sample rate of output format procedure is incorrect
+* revert jitter correction
+* Reset to defaults button
+* Presets: standard, film (no matrix norm), music (matrix norm), 
+  loud (one-pass norm), very loud (with DRC)
+* AC3-specific options (DRC, equzlizer, clev, slev)
+
+Other
+=====
+* Take in account dialog flags when updating controls (ac3filter_dlg.cpp)
+?* HPF for all channels
+* Configuration files
+* Configuration files versioning
+* Slider class; reset to default on right-click
+* Custom mixing matrix for different mixing modes
+* Sync is lost after fast output mode changes
+* Specify where to mix LFE channel
+* Simplified output configurations list
+* registry updates at installation stage to make
+  WO/DS switch with fresh installed computer 
+  (Creative drivers bug?)
+* 90-degree phase shifts for DPL/DPL II downmixes. 
+  (90-degree shifted IMDCT function?)
+
+Testing
+=======
+* send test version to AnD (it was some distortions with v0.70b)
+* message from SBN about distortion?
+* SPDIF does not work with 44100Hz
+
+
+Done:
+=====
++* BUG: chash on output format change
+  [AC3Filter::set_out_spk() did not lock sink]
++* BUG: chash on mpg files
+  [1->2 channels mix fails; sample buffer was not initialized]
++* BUG: One-pass normalize option indication incorrect
++* Option to select what formats to use AC3Filter
++* Option to select SPDIF passthrough mode
++* Filter require relogon when changing merit [now it deos not]
++* revert DS/WO selector
++* Save settings!!!
++* revert time shift option
++* revert filter merit
++* BUG: On first load SPDIF is on even it is not supported
++* Main page interface!!!
++* Bass redirection LPF

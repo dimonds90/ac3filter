@@ -1,0 +1,25 @@
+rc5 - fixed: cannot playback DTS
+      fixed: Dolby mode reset
+
+...........
+
+04.04.15 - Presets are working now
+
+
+04.04.01 - Bug fixed: auto_gain, normalize indication
+           Some rearrangements with SPDIF
+           spdif, spdif_on options added
+
+
+04.03.20 - Bug fixed: crash on output configuration change
+           Bug fixed: crash on mono PCM source
+           SPDIF encode/passthrough
+           Format selection
+           Much of interface changes
+           Change dynamic controls only when modified
+
+04.03.18 - DTS channel order is correct now
+
+
+04.03.17 - Log started
+           Now filter is working but much of work remains...

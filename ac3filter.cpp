@@ -1,0 +1,1039 @@
+#include "guids.h"
+#include "ac3filter.h"
+#include "decss\DeCSSInputPin.h"
+
+//#define MAX_NSAMPLES 2048
+//#define MAX_BUFFER_SIZE (MAX_NSAMPLES * NCHANNELS * 4)
+
+#define MAX_NSAMPLES 2048
+#define MAX_BUFFER_SIZE (MAX_NSAMPLES * NCHANNELS * 4)
+
+CUnknown * WINAPI 
+AC3Filter::CreateInstance(LPUNKNOWN punk, HRESULT *phr)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter::CreateInstance"));
+  AC3Filter *pobj = new AC3Filter("AC3Filter", punk, phr);
+  if (!pobj) *phr = E_OUTOFMEMORY;
+  return pobj;
+}
+
+AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
+  CTransformFilter(tszName, punk, CLSID_AC3Filter), 
+  dec((IAC3Filter*)this)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x, %s)::AC3Filter", this, tszName));
+
+  if (!(m_pInput = new CDeCSSInputPin(this, phr))) 
+  {
+    *phr = E_OUTOFMEMORY;
+    return;
+  }
+
+  if (!(sink = new DShowSink(this, phr))) 
+  {
+    delete m_pInput; 
+    m_pInput = 0; 
+    *phr = E_OUTOFMEMORY;
+    return;
+  }
+  else
+    m_pOutput = sink;
+  
+  in_spk = def_spk;
+  out_spk = def_spk;
+
+  spdif = false;
+  spdif_on = false;
+
+  config_autoload = false;
+  formats = FORMAT_MASK_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES;
+
+  error   = false;
+
+  dec.set_input(in_spk);
+  dec.set_output(out_spk);
+  dec.proc.set_input_order(win_order);
+  dec.proc.set_output_order(win_order);
+  dec.reset();
+
+  sink->set_input(out_spk);
+
+  // load params
+  RegistryKey reg(REG_KEY);
+  load_params(&reg, AC3FILTER_ALL);
+}
+
+AC3Filter::~AC3Filter()
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::~AC3Filter", this));
+}
+
+void 
+AC3Filter::reset()
+{
+  dec.reset();
+  sink->send_discontinuity();
+  cpu.reset();
+  error = false;
+}
+
+bool        
+AC3Filter::set_input(CMediaType &_mt)
+{
+  Speakers spk_tmp;
+  return mt2spk(_mt, spk_tmp) && set_input(spk_tmp);
+}
+
+bool        
+AC3Filter::set_input(Speakers _spk)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz)...", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate));
+  if (in_spk == _spk)
+    return true;
+
+  if (!dec.query_input(_spk))
+  {
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): FAILED", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate));
+    return false;
+  }
+
+  Speakers old_in_spk;
+  in_spk = _spk;
+
+  // update output sample rate
+  if (_spk.sample_rate != out_spk.sample_rate)
+  {
+    Speakers spk_tmp = out_spk;
+    spk_tmp.sample_rate = _spk.sample_rate;
+    if (!set_output(spk_tmp, spdif))
+    {
+      in_spk = old_in_spk;
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): FAILED", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate));
+      return false;
+    }
+  }
+
+  in_spk = _spk;
+  dec.set_input(in_spk);
+  dec.proc.set_input_order(win_order);
+  dec.reset();
+
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): Ok", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate));
+  return true;
+}
+
+bool        
+AC3Filter::set_output(Speakers _spk, bool _spdif)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_output(%s %s %iHz%s)...", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate, _spdif? " (spdif if possible)": ""));
+  // output sample rate should be equal to input sample rate
+  _spk.sample_rate = in_spk.sample_rate;
+
+  Speakers spk_spdif = _spk;
+  spk_spdif.format = FORMAT_SPDIF;
+
+  if (_spdif && dec.query_output(spk_spdif) && sink->query_input(spk_spdif))
+    spdif_on = true;
+  else if (dec.query_output(_spk) && sink->query_input(_spk))
+    spdif_on = false;
+  else
+  {
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_output(%s %s %iHz%s): FAILED", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate, _spdif? " (spdif if possible)": ""));
+    return false;
+  }
+
+  spdif     = _spdif;
+  out_spk   = _spk;
+  out_spdif = spk_spdif;
+
+  if (spdif_on)
+    dec.set_output(out_spdif);
+  else
+    dec.set_output(out_spk);
+
+  dec.proc.set_output_order(win_order);
+  dec.reset();
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_output(%s %s %iHz%s): Ok", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate, _spdif? " (spdif if possible)": ""));
+  return true;
+}
+
+
+STDMETHODIMP 
+AC3Filter::NonDelegatingQueryInterface(REFIID riid, void **ppv)
+{
+  CheckPointer(ppv, E_POINTER);
+
+  if (riid == IID_IAC3Filter)
+    return GetInterface((IAC3Filter *) this, ppv);
+
+  if (riid == IID_IAudioProcessor)
+    return GetInterface((IAudioProcessor *) &dec, ppv);
+
+  if (riid == IID_IDecoder)
+    return GetInterface((IDecoder *) &dec, ppv);
+
+  if (riid == IID_ISpecifyPropertyPages)
+    return GetInterface((ISpecifyPropertyPages *) this, ppv);
+
+  return CTransformFilter::NonDelegatingQueryInterface(riid, ppv);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+////////////////////////////// DATA FLOW //////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+HRESULT
+AC3Filter::Receive(IMediaSample *in)
+{
+  uint8_t *buf;
+  int buf_size;
+  time_t time;
+
+  Chunk chunk1;
+  Chunk chunk2;
+
+  /////////////////////////////////////////////////////////
+  // Dynamic input format change
+
+  CMediaType *mt;
+  if (in->GetMediaType((_AMMediaType**)&mt) == S_OK)
+  {
+    DbgLog((LOG_TRACE, 3, "Transform(): Input format change"));
+    if (!set_input(*mt))
+      return VFW_E_INVALIDMEDIATYPE;
+  }
+
+  /////////////////////////////////////////////////////////
+  // Discontinuity
+
+  if (in->IsDiscontinuity() == S_OK)
+  {
+    DbgLog((LOG_TRACE, 3, "Transform(): Discontinuity"));
+    reset();
+    error = false;
+  }
+
+  /////////////////////////////////////////////////////////
+  // Drop stream on errors
+
+  if (error)
+    return S_FALSE;
+
+
+  /////////////////////////////////////////////////////////
+  // Data
+
+  in->GetPointer((BYTE**)&buf);
+  buf_size = in->GetActualDataLength();
+
+  /////////////////////////////////////////////////////////
+  // Fill chunk
+
+  chunk1.set_spk(in_spk);
+  chunk1.set_buf(buf, buf_size);
+  chunk1.set_time(false);
+
+  /////////////////////////////////////////////////////////
+  // Timing
+
+  REFERENCE_TIME begin, end;
+  switch (in->GetTime(&begin, &end))
+  {
+    case S_OK:
+    case VFW_S_NO_STOP_TIME:
+      time = time_t(begin) * in_spk.sample_rate / 10000000;
+      chunk1.set_time(true, time);
+      DbgLog((LOG_TRACE, 3, "-> > timestamp: %ims\t> %.0fsm", int(begin/10000), time));
+      break;
+  }
+
+  /////////////////////////////////////////////////////////
+  // Process
+
+  cpu.start();
+//  DbgLog((LOG_TRACE, 3, "process()"));
+  if (!dec.process(&chunk1))
+  {
+    cpu.stop();
+    error = true;
+    DbgLog((LOG_TRACE, 3, "Transform(): Processing failed! [ process() ]"));
+    DbgLog((LOG_TRACE, 3, "Transform(): Processing stopped!"));
+    return E_FAIL;
+  }
+
+  while (!dec.is_empty())
+  {
+    cpu.start();
+//    DbgLog((LOG_TRACE, 3, "get_chunk()"));
+    // Process
+    if (!dec.get_chunk(&chunk2))
+    {
+      cpu.stop();
+      error = true;
+      DbgLog((LOG_TRACE, 3, "Transform(): Processing failed! [ get_chunk() ]"));
+      DbgLog((LOG_TRACE, 3, "Transform(): Processing stopped!"));
+      return E_FAIL;
+    }
+    cpu.stop();
+
+    // Send data downstream
+//    DbgLog((LOG_TRACE, 3, "send"));
+    if (!sink->process(&chunk2))
+    {
+      DbgLog((LOG_TRACE, 3, "Transform(): Sending data failed!"));
+//      DbgLog((LOG_TRACE, 3, "Transform(): Filter stopped!"));
+      return E_FAIL;
+    }
+  }
+
+  return S_OK;
+}
+
+HRESULT 
+AC3Filter::EndOfStream()
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndOfStream", this));
+  reset();
+  return CTransformFilter::EndOfStream();
+}
+
+HRESULT 
+AC3Filter::NewSegment(REFERENCE_TIME tStart, REFERENCE_TIME tStop, double dRate)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::NewSegment", this));
+  reset();
+  return CTransformFilter::NewSegment(tStart, tStop, dRate);
+}
+
+HRESULT 
+AC3Filter::StartStreaming()
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StartStreaming()", this));
+  return CTransformFilter::StartStreaming();
+}
+HRESULT 
+AC3Filter::StopStreaming()
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StopStreaming()", this));
+  return CTransformFilter::StopStreaming();
+}
+
+HRESULT 
+AC3Filter::BeginFlush()
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::BeginFlush()", this));
+  return CTransformFilter::BeginFlush();
+}
+HRESULT 
+AC3Filter::EndFlush()
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndFlush()", this));
+  return CTransformFilter::EndFlush();
+}
+
+STDMETHODIMP 
+AC3Filter::Stop()
+{
+  #ifdef REGISTER_FILTERGRAPH
+  rot.unregister_graph();
+  #endif
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Stop()", this));
+  return CTransformFilter::Stop();
+}
+STDMETHODIMP 
+AC3Filter::Pause()
+{
+  #ifdef REGISTER_FILTERGRAPH
+  rot.register_graph(m_pGraph);
+  #endif
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Pause()", this));
+  return CTransformFilter::Pause();
+}
+STDMETHODIMP 
+AC3Filter::Run(REFERENCE_TIME tStart)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Run(%.0f)", this, float(tStart)));
+  return CTransformFilter::Run(tStart);
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+////////////////////////////// PIN CONNECTIION ////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+
+HRESULT 
+AC3Filter::GetMediaType(int i, CMediaType *_mt)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::GetMediaType #%i", this, i));
+
+  // todo: remove this?
+  if (m_pInput->IsConnected() == FALSE)
+    return E_UNEXPECTED;
+
+  if (i < 0) 
+    return E_INVALIDARG;
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Depending on current settings output formats may be:
+  //
+  // i | spdif/simple | spdif/ext  | simple    | ext
+  // --|--------------|------------|-----------|-----------
+  // 0 | mt_spdif     | mt_spdif   | mt_simple | mt_ext_wfx
+  // 1 | mt_simple    | mt_ext_wfx |           | mt_ext_wf
+  // 2 |              | mt_ext_wf  |           |
+  // 3 |              |            |           |
+  //
+  // where i - format number
+  //       spdif - 'use spdif if possible' flag set
+  //       simple - output is set to mono/stereo PCM16 format
+  //       ext - output is set to any other format (extended formats)
+  //       mt_spdif - spdif media type
+  //       mt_simple - mono/stereo PCM16 media type
+  //       mt_ext_wfx - media type using WAVEFORMATEXTENSIBLE
+  //       mt_ext_wf - media type using WAVEFORMATEX
+  //
+  // So even if output cannot support some of formats, it can use other.
+  // (simple format at least can be used)
+  //
+  // mt_ext_wf formats are nessesary for some old sound cards that do not 
+  // understand WAVEFORMATEXTENSIBLE format (Vortex-based cards, for example).
+
+  if (spdif)
+    // SPDIF format
+    if (i != 0)
+      i--;
+    else
+      if (spk2mt(out_spdif, *_mt, false))
+        return NOERROR;
+      else
+        return E_FAIL;
+
+  if ((out_spk.mask != MODE_MONO && out_spk.mask != MODE_STEREO) || 
+      out_spk.format != FORMAT_PCM16)
+  {
+    // 2 extended formats
+    if (i != 0)
+      i--;
+    else
+      if (spk2mt(out_spk, *_mt, false))
+        return NOERROR;
+      else
+        return E_FAIL;
+
+    if (i != 0)
+      i--;
+    else
+      if (spk2mt(out_spk, *_mt, true))
+        return NOERROR;
+      else
+        return E_FAIL;
+  }
+  else
+  {
+    if (i != 0)
+      i--;
+    else
+    {
+      // simple format
+      if (spk2mt(out_spk, *_mt, false))
+        return NOERROR;
+      else
+        return E_FAIL;
+    }
+  }
+
+  return VFW_S_NO_MORE_ITEMS;
+}
+
+
+HRESULT 
+AC3Filter::CheckInputType(const CMediaType *mt)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType", this));
+
+  Speakers spk_tmp;
+  if (mt2spk(*mt, spk_tmp) && dec.query_input(spk_tmp))
+    if ((FORMAT_MASK(spk_tmp.format) & formats) != 0)
+      return S_OK;
+
+  return VFW_E_TYPE_NOT_ACCEPTED;
+} 
+
+
+HRESULT 
+AC3Filter::CheckTransform(const CMediaType *mt_in, const CMediaType *mt_out)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckTransform", this));
+
+  if FAILED(CheckInputType(mt_in)) 
+    return VFW_E_TYPE_NOT_ACCEPTED;
+
+  CMediaType mt_tmp;
+  CMediaType mt_tmp_wfx;
+  CMediaType mt_tmp_spdif;
+
+  spk2mt(out_spk, mt_tmp, false);
+  spk2mt(out_spk, mt_tmp_wfx, true);
+  spk2mt(out_spdif, mt_tmp_spdif, false);
+
+  if (*mt_out == mt_tmp || *mt_out == mt_tmp_wfx || *mt_out == mt_tmp_spdif)
+    return S_OK;
+
+  return VFW_E_TYPE_NOT_ACCEPTED;
+}
+
+bool 
+AC3Filter::CheckConnectPin(IPin *pin)
+{
+  PIN_DIRECTION dir;
+  PIN_INFO      pin_info;
+  IBaseFilter  *some_filter;
+  IUnknown     *some_interface;
+  IEnumPins    *enum_pins;
+  IPin         *some_pin;
+  IPin         *connected_pin;
+
+  bool result = true;
+
+  if (!pin)
+    return true;
+
+  if FAILED(pin->QueryPinInfo(&pin_info)) 
+    return true;
+
+  if (!(some_filter = pin_info.pFilter)) 
+    return true;
+
+  if SUCCEEDED(pin_info.pFilter->QueryInterface(IID_IMatrixMixer, (void**) &some_interface))
+  {
+    some_interface->Release();
+    some_filter->Release();
+    return false; 
+  }
+  
+  if SUCCEEDED(pin_info.pFilter->QueryInterface(IID_IAC3Filter, (void**) &some_interface))
+  {
+    some_interface->Release();
+    some_filter->Release();
+    return false; 
+  }
+  
+  some_filter->EnumPins(&enum_pins);
+  while (result && enum_pins->Next(1, &some_pin, 0) == S_OK)
+  {
+    some_pin->QueryDirection(&dir);
+    if (dir == PINDIR_INPUT)
+      if (some_pin->ConnectedTo(&connected_pin) == S_OK)
+      {
+        result = CheckConnectPin(connected_pin);
+        connected_pin->Release();
+      }
+    some_pin->Release();
+  }
+  enum_pins->Release();
+  some_filter->Release();
+
+  return result;
+}
+
+HRESULT 
+AC3Filter::CheckConnect(PIN_DIRECTION dir, IPin *pin)
+{
+  if (dir == PINDIR_INPUT && !CheckConnectPin(pin))
+    return E_FAIL;
+  else
+    return CTransformFilter::CheckConnect(dir, pin);
+}
+
+HRESULT 
+AC3Filter::SetMediaType(PIN_DIRECTION direction, const CMediaType *mt_set)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::SetMediaType(%s)", this, direction == PINDIR_INPUT? "input": "output"));
+
+  if (direction == PINDIR_INPUT)
+  {
+    Speakers spk_tmp;
+    if (!mt2spk(*mt_set, spk_tmp) || !set_input(spk_tmp))
+      return E_FAIL;
+  }
+  if (direction == PINDIR_OUTPUT)
+    // SPDIF output may not be possible, so we may require format change
+    set_output(out_spk, spdif);
+
+  return S_OK;
+}
+
+
+HRESULT                     
+AC3Filter::DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProperties)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::DecideBufferSize", this));
+
+  ASSERT(pAlloc);
+  ASSERT(pProperties);
+  HRESULT hr = NOERROR;
+
+  pProperties->cBuffers = 5;
+  pProperties->cbBuffer = MAX_BUFFER_SIZE;
+
+  ALLOCATOR_PROPERTIES Actual;
+  if FAILED(hr = pAlloc->SetProperties(pProperties, &Actual))
+    return hr;
+
+  if (pProperties->cBuffers > Actual.cBuffers ||
+      pProperties->cbBuffer > Actual.cbBuffer)
+    return E_FAIL;
+
+  return NOERROR;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///
+/// ISpecifyPropertyPages
+///
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+STDMETHODIMP 
+AC3Filter::GetPages(CAUUID *pPages)
+{
+  pPages->cElems = 4;
+  pPages->pElems = (GUID *) CoTaskMemAlloc(sizeof(GUID) * pPages->cElems);
+  if (pPages->pElems == NULL)
+    return E_OUTOFMEMORY;
+
+  (pPages->pElems)[0] = CLSID_AC3Filter_main;
+  (pPages->pElems)[1] = CLSID_AC3Filter_mixer;
+  (pPages->pElems)[2] = CLSID_AC3Filter_gains;
+  (pPages->pElems)[3] = CLSID_AC3Filter_sys;
+  return NOERROR;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///
+/// ISpecifyPropertyPages
+///
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+// Speakers
+STDMETHODIMP 
+AC3Filter::get_in_spk(Speakers *_spk)
+{
+  *_spk = in_spk;
+  return S_OK;
+}
+STDMETHODIMP 
+AC3Filter::get_out_spk(Speakers *_spk)
+{
+  *_spk = out_spk;
+  return S_OK;
+}
+STDMETHODIMP 
+AC3Filter::set_out_spk(Speakers  _spk)
+{
+  AutoLock config_lock(&dec.config);
+
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_out_spk(%s %s %iHz)", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate));
+  if (set_output(_spk, spdif))
+  {
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_out_spk(): Ok", this));
+    return S_OK;
+  }
+  else
+  {
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_out_spk(): Failed!", this));
+    return E_FAIL;
+  }
+}
+
+// SPDIF
+STDMETHODIMP 
+AC3Filter::get_spdif(bool *_spdif, int* _spdif_mode)
+{
+  *_spdif = spdif;
+  *_spdif_mode = dec.get_spdif_mode();
+
+  return S_OK;
+}
+STDMETHODIMP 
+AC3Filter::set_spdif(bool _spdif)
+{
+  AutoLock config_lock(&dec.config);
+  set_output(out_spk, _spdif);
+  return S_OK;
+}
+
+STDMETHODIMP 
+AC3Filter::get_spdif_pt(int *_spdif_pt)
+{
+  *_spdif_pt = dec.get_spdif();
+  return S_OK;
+}
+STDMETHODIMP 
+AC3Filter::set_spdif_pt(int _spdif_pt)
+{
+  AutoLock config_lock(&dec.config);
+  dec.set_spdif(_spdif_pt);
+  return S_OK;
+}
+
+// Formats to accept
+STDMETHODIMP 
+AC3Filter::get_formats(int *_formats)
+{
+  *_formats = formats;
+  return S_OK;
+}
+STDMETHODIMP 
+AC3Filter::set_formats(int  _formats)
+{
+  formats = _formats;
+  return S_OK;
+}
+
+
+STDMETHODIMP 
+AC3Filter::get_playback_time(time_t *_time)
+{
+  *_time = 0;
+  if (m_pClock)
+  {
+    REFERENCE_TIME t;
+    if SUCCEEDED(m_pClock->GetTime(&t))
+      *_time = time_t(double(t - m_tStart) * in_spk.sample_rate / 10000000);
+  }
+  return S_OK;
+}
+
+// CPU usage
+STDMETHODIMP 
+AC3Filter::get_cpu_usage(double *_cpu_usage)
+{
+  *_cpu_usage = cpu.usage();
+  return S_OK;
+}
+
+// Config
+STDMETHODIMP 
+AC3Filter::get_config_file(char *_filename, int _size)
+{
+  _filename[0] = 0;
+  return S_OK;
+}
+STDMETHODIMP 
+AC3Filter::get_config_autoload(bool *_config_autoload)
+{
+  *_config_autoload = config_autoload;
+  return S_OK;
+}
+STDMETHODIMP 
+AC3Filter::set_config_autoload(bool  _config_autoload)
+{
+  config_autoload = _config_autoload;
+  return S_OK;
+}
+
+// Load/save settings
+STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
+{
+  AutoLock config_lock(&dec.config);
+  AudioProcessorState state;
+  dec.get_state(&state);
+
+  if (_what & AC3FILTER_SPK)
+  {
+    Speakers spk_tmp = out_spk;
+    bool spdif_tmp = spdif;
+    _conf->get_int32("format"           ,spk_tmp.format  );
+    _conf->get_int32("mask"             ,spk_tmp.mask    );
+    _conf->get_int32("relation"         ,spk_tmp.relation);
+    _conf->get_bool ("spdif"            ,spdif_tmp       );
+
+    switch (spk_tmp.format)
+    {
+      case FORMAT_PCM16_LE:
+      case FORMAT_PCM16: 
+        spk_tmp.level = 32767;
+        break;
+
+      case FORMAT_PCM24_LE:
+      case FORMAT_PCM24: 
+        spk_tmp.level = 8388607;
+        break;
+
+      case FORMAT_PCM32_LE:
+      case FORMAT_PCM32: 
+        spk_tmp.level = 2147483647;      
+        break;
+
+      case FORMAT_PCMFLOAT:
+      case FORMAT_PCMFLOAT_LE:
+        spk_tmp.level = 1.0; 
+        break;
+
+      default: 
+        spk_tmp.level = 1.0; 
+        break;
+    }
+
+    set_out_spk(spk_tmp);
+    set_spdif(spdif_tmp);
+  }
+
+  if (_what & AC3FILTER_PROC)
+  {
+    // Options
+    _conf->get_bool ("auto_gain"        ,state.auto_gain       );
+    _conf->get_bool ("normalize"        ,state.normalize       );
+    _conf->get_bool ("normalize_matrix" ,state.normalize_matrix);
+    _conf->get_bool ("auto_matrix"      ,state.auto_matrix     );
+    _conf->get_bool ("expand_stereo"    ,state.expand_stereo   );
+    _conf->get_bool ("voice_control"    ,state.voice_control   );
+    _conf->get_float("release"          ,state.release         );
+    // Gains
+    _conf->get_float("master"           ,state.master          );
+    _conf->get_float("clev"             ,state.clev            );
+    _conf->get_float("slev"             ,state.slev            );
+    _conf->get_float("lfelev"           ,state.lfelev          );
+    // DRC
+    _conf->get_bool ("drc"              ,state.drc             );
+    _conf->get_float("drc_power"        ,state.drc_power       );
+    // Bass redirection
+    _conf->get_bool ("bass_redir"       ,state.bass_redir      );
+    _conf->get_int32("bass_freq"        ,state.bass_freq       );
+  }
+
+  if (_what & AC3FILTER_GAINS)
+  {
+    // I/O Gains
+    _conf->get_float("gain_input_L"     ,state.input_gains[CH_L]   );
+    _conf->get_float("gain_input_C"     ,state.input_gains[CH_C]   );
+    _conf->get_float("gain_input_R"     ,state.input_gains[CH_R]   );
+    _conf->get_float("gain_input_SL"    ,state.input_gains[CH_SL]  );
+    _conf->get_float("gain_input_SR"    ,state.input_gains[CH_SR]  );
+    _conf->get_float("gain_input_LFE"   ,state.input_gains[CH_LFE] );
+
+    _conf->get_float("gain_output_L"    ,state.output_gains[CH_L]  );
+    _conf->get_float("gain_output_C"    ,state.output_gains[CH_C]  );
+    _conf->get_float("gain_output_R"    ,state.output_gains[CH_R]  );
+    _conf->get_float("gain_output_SL"   ,state.output_gains[CH_SL] );
+    _conf->get_float("gain_output_SR"   ,state.output_gains[CH_SR] );
+    _conf->get_float("gain_output_LFE"  ,state.output_gains[CH_LFE]);
+  }
+
+  if (_what & AC3FILTER_DELAY)
+  {
+    // Delays
+    _conf->get_bool ("delay"            ,state.delay           );
+    _conf->get_int32("delay_units"      ,state.delay_units     );
+    _conf->get_float("delay_L"          ,state.delays[CH_L]    );
+    _conf->get_float("delay_C"          ,state.delays[CH_C]    );
+    _conf->get_float("delay_R"          ,state.delays[CH_R]    );
+    _conf->get_float("delay_SL"         ,state.delays[CH_SL]   );
+    _conf->get_float("delay_SR"         ,state.delays[CH_SR]   );
+    _conf->get_float("delay_LFE"        ,state.delays[CH_LFE]  );
+    _conf->get_float("delay_ms"         ,state.delay_ms        );
+  }
+
+  if (_what & AC3FILTER_MATRIX)
+  {
+    // state.matrix
+    _conf->get_float("matrix_L_L",    state.matrix[0][0]);
+    _conf->get_float("matrix_L_C",    state.matrix[0][1]);
+    _conf->get_float("matrix_L_R",    state.matrix[0][2]);
+    _conf->get_float("matrix_L_SL",   state.matrix[0][3]);
+    _conf->get_float("matrix_L_SR",   state.matrix[0][4]);
+    _conf->get_float("matrix_L_LFE",  state.matrix[0][5]);
+                                       
+    _conf->get_float("matrix_C_L",    state.matrix[1][0]);
+    _conf->get_float("matrix_C_C",    state.matrix[1][1]);
+    _conf->get_float("matrix_C_R",    state.matrix[1][2]);
+    _conf->get_float("matrix_C_SL",   state.matrix[1][3]);
+    _conf->get_float("matrix_C_SR",   state.matrix[1][4]);
+    _conf->get_float("matrix_C_LFE",  state.matrix[1][5]);
+                                       
+    _conf->get_float("matrix_R_L",    state.matrix[2][0]);
+    _conf->get_float("matrix_R_C",    state.matrix[2][1]);
+    _conf->get_float("matrix_R_R",    state.matrix[2][2]);
+    _conf->get_float("matrix_R_SL",   state.matrix[2][3]);
+    _conf->get_float("matrix_R_SR",   state.matrix[2][4]);
+    _conf->get_float("matrix_R_LFE",  state.matrix[2][5]);
+      
+    _conf->get_float("matrix_SL_L",   state.matrix[3][0]);
+    _conf->get_float("matrix_SL_C",   state.matrix[3][1]);
+    _conf->get_float("matrix_SL_R",   state.matrix[3][2]);
+    _conf->get_float("matrix_SL_SL",  state.matrix[3][3]);
+    _conf->get_float("matrix_SL_SR",  state.matrix[3][4]);
+    _conf->get_float("matrix_SL_LFE", state.matrix[3][5]);
+                                       
+    _conf->get_float("matrix_SR_L",   state.matrix[4][0]);
+    _conf->get_float("matrix_SR_C",   state.matrix[4][1]);
+    _conf->get_float("matrix_SR_R",   state.matrix[4][2]);
+    _conf->get_float("matrix_SR_SL",  state.matrix[4][3]);
+    _conf->get_float("matrix_SR_SR",  state.matrix[4][4]);
+    _conf->get_float("matrix_SR_LFE", state.matrix[4][5]);
+
+    _conf->get_float("matrix_LFE_L",  state.matrix[5][0]);
+    _conf->get_float("matrix_LFE_C",  state.matrix[5][1]);
+    _conf->get_float("matrix_LFE_R",  state.matrix[5][2]);
+    _conf->get_float("matrix_LFE_SL", state.matrix[5][3]);
+    _conf->get_float("matrix_LFE_SR", state.matrix[5][4]);
+    _conf->get_float("matrix_LFE_LFE",state.matrix[5][5]);
+  }
+
+  dec.set_state(&state);
+
+  if (_what & AC3FILTER_SYS)
+  {
+    int spdif_pt = dec.get_spdif();
+    _conf->get_int32("formats"          ,formats         );
+    _conf->get_int32("spdif_pt"         ,spdif_pt        );
+    dec.set_spdif(spdif_pt);
+//    conf->get_bool   ("generate_timestamps", generate_timestamps);
+//    conf->get_int32  ("time_shift"       ,time_shift      );
+//    conf->get_bool   ("jitter"           ,jitter_on       );
+//    conf->get_bool   ("config_autoload"  ,config_autoload );
+                       
+  }
+
+
+  return S_OK;
+}
+
+STDMETHODIMP AC3Filter::save_params(Config *_conf, int _what)
+{
+  AudioProcessorState state;
+  dec.get_state(&state);
+
+  if (_what & AC3FILTER_SPK)
+  {
+    _conf->set_int32("format"           ,out_spk.format  );
+    _conf->set_int32("mask"             ,out_spk.mask    );
+    _conf->set_int32("relation"         ,out_spk.relation);
+    _conf->set_bool ("spdif"            ,spdif           );
+  }
+
+  if (_what & AC3FILTER_PROC)
+  {
+    // Options
+    _conf->set_bool ("auto_gain"        ,state.auto_gain       );
+    _conf->set_bool ("normalize"        ,state.normalize       );
+    _conf->set_bool ("normalize_matrix" ,state.normalize_matrix);
+    _conf->set_bool ("auto_matrix"      ,state.auto_matrix     );
+    _conf->set_bool ("expand_stereo"    ,state.expand_stereo   );
+    _conf->set_bool ("voice_control"    ,state.voice_control   );
+    _conf->set_float("release"          ,state.release         );
+    // Gains
+    _conf->set_float("master"           ,state.master          );
+    _conf->set_float("clev"             ,state.clev            );
+    _conf->set_float("slev"             ,state.slev            );
+    _conf->set_float("lfelev"           ,state.lfelev          );
+    // DRC
+    _conf->set_bool ("drc"              ,state.drc             );
+    _conf->set_float("drc_power"        ,state.drc_power       );
+    // Bass redirection
+    _conf->set_bool ("bass_redir"       ,state.bass_redir      );
+    _conf->set_int32("bass_freq"        ,state.bass_freq       );
+  }
+
+  if (_what & AC3FILTER_GAINS)
+  {
+    // I/O Gains
+    _conf->set_float("gain_input_L"     ,state.input_gains[CH_L]   );
+    _conf->set_float("gain_input_C"     ,state.input_gains[CH_C]   );
+    _conf->set_float("gain_input_R"     ,state.input_gains[CH_R]   );
+    _conf->set_float("gain_input_SL"    ,state.input_gains[CH_SL]  );
+    _conf->set_float("gain_input_SR"    ,state.input_gains[CH_SR]  );
+    _conf->set_float("gain_input_LFE"   ,state.input_gains[CH_LFE] );
+
+    _conf->set_float("gain_output_L"    ,state.output_gains[CH_L]  );
+    _conf->set_float("gain_output_C"    ,state.output_gains[CH_C]  );
+    _conf->set_float("gain_output_R"    ,state.output_gains[CH_R]  );
+    _conf->set_float("gain_output_SL"   ,state.output_gains[CH_SL] );
+    _conf->set_float("gain_output_SR"   ,state.output_gains[CH_SR] );
+    _conf->set_float("gain_output_LFE"  ,state.output_gains[CH_LFE]);
+  }
+
+  if (_what & AC3FILTER_DELAY)
+  {
+    // Delays
+    _conf->set_bool ("delay"            ,state.delay           );
+    _conf->set_int32("delay_units"      ,state.delay_units     );
+    _conf->set_float("delay_L"          ,state.delays[CH_L]    );
+    _conf->set_float("delay_C"          ,state.delays[CH_C]    );
+    _conf->set_float("delay_R"          ,state.delays[CH_R]    );
+    _conf->set_float("delay_SL"         ,state.delays[CH_SL]   );
+    _conf->set_float("delay_SR"         ,state.delays[CH_SR]   );
+    _conf->set_float("delay_LFE"        ,state.delays[CH_LFE]  );
+  }
+
+  if (_what & AC3FILTER_MATRIX)
+  {
+    // state.matrix
+    _conf->set_float("matrix_L_L",    state.matrix[0][0]);
+    _conf->set_float("matrix_L_C",    state.matrix[0][1]);
+    _conf->set_float("matrix_L_R",    state.matrix[0][2]);
+    _conf->set_float("matrix_L_SL",   state.matrix[0][3]);
+    _conf->set_float("matrix_L_SR",   state.matrix[0][4]);
+    _conf->set_float("matrix_L_LFE",  state.matrix[0][5]);
+                                       
+    _conf->set_float("matrix_C_L",    state.matrix[1][0]);
+    _conf->set_float("matrix_C_C",    state.matrix[1][1]);
+    _conf->set_float("matrix_C_R",    state.matrix[1][2]);
+    _conf->set_float("matrix_C_SL",   state.matrix[1][3]);
+    _conf->set_float("matrix_C_SR",   state.matrix[1][4]);
+    _conf->set_float("matrix_C_LFE",  state.matrix[1][5]);
+                                       
+    _conf->set_float("matrix_R_L",    state.matrix[2][0]);
+    _conf->set_float("matrix_R_C",    state.matrix[2][1]);
+    _conf->set_float("matrix_R_R",    state.matrix[2][2]);
+    _conf->set_float("matrix_R_SL",   state.matrix[2][3]);
+    _conf->set_float("matrix_R_SR",   state.matrix[2][4]);
+    _conf->set_float("matrix_R_LFE",  state.matrix[2][5]);
+      
+    _conf->set_float("matrix_SL_L",   state.matrix[3][0]);
+    _conf->set_float("matrix_SL_C",   state.matrix[3][1]);
+    _conf->set_float("matrix_SL_R",   state.matrix[3][2]);
+    _conf->set_float("matrix_SL_SL",  state.matrix[3][3]);
+    _conf->set_float("matrix_SL_SR",  state.matrix[3][4]);
+    _conf->set_float("matrix_SL_LFE", state.matrix[3][5]);
+                                       
+    _conf->set_float("matrix_SR_L",   state.matrix[4][0]);
+    _conf->set_float("matrix_SR_C",   state.matrix[4][1]);
+    _conf->set_float("matrix_SR_R",   state.matrix[4][2]);
+    _conf->set_float("matrix_SR_SL",  state.matrix[4][3]);
+    _conf->set_float("matrix_SR_SR",  state.matrix[4][4]);
+    _conf->set_float("matrix_SR_LFE", state.matrix[4][5]);
+
+    _conf->set_float("matrix_LFE_L",  state.matrix[5][0]);
+    _conf->set_float("matrix_LFE_C",  state.matrix[5][1]);
+    _conf->set_float("matrix_LFE_R",  state.matrix[5][2]);
+    _conf->set_float("matrix_LFE_SL", state.matrix[5][3]);
+    _conf->set_float("matrix_LFE_SR", state.matrix[5][4]);
+    _conf->set_float("matrix_LFE_LFE",state.matrix[5][5]);
+  }
+
+  if (_what & AC3FILTER_SYS)
+  {
+    _conf->set_float("delay_ms"         ,state.delay_ms        );
+
+    int spdif_pt = dec.get_spdif();
+    _conf->set_int32("formats"          ,formats         );
+    _conf->set_int32("spdif_pt"         ,spdif_pt        );
+//    conf->set_bool   ("generate_timestamps", generate_timestamps);
+//    conf->set_int32  ("time_shift"       ,time_shift      );
+//    conf->set_bool   ("jitter"           ,jitter_on       );
+//    conf->set_bool   ("config_autoload"  ,config_autoload );
+                       
+  }
+
+  return S_OK;
+}

@@ -1,0 +1,1204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><title>AC3Filter</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=windows-1251"><!--  Versione italiana curata da Fabrizio Degni (fabriziodegni@rushware.net)
+    --  ultimo aggiornamento: 13-07-03 (AC3Filter v067b)
+    --></head><body>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <h1><b>AC3Filter</b><small><i> ver $ver</i></small></h1>
+      </td>
+      <td style="text-align: right;"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=66022&amp;type=5" width="210" height="62" border="0" alt="SourceForge Logo"></a></td>
+    </tr>
+  </tbody>
+</table>
+<table cellpadding="2" cellspacing="2" border="0">
+  <tbody>
+    <tr>
+      <td><a href="ac3filter_eng.html"><img src="pic/flag_eng.gif" width="24" height="18" border="0" align="middle">English</a>&nbsp;&nbsp;</td>
+      <td><a href="ac3filter_rus.html"><img src="pic/flag_rus.gif" width="24" height="18" border="0" align="middle">Russian</a>&nbsp;&nbsp;</td>
+      <td><img src="pic/flag_ita.gif" width="24" height="18" border="0" align="middle"><b>Italian</b>&nbsp;&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<table cellpadding="2" cellspacing="2" border="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top"><a href="$download_bin">Download</a></td>
+      <td valign="top"><a href="http://sourceforge.net/projects/ac3filter">Homepage su Sourceforge</a></td>
+      <td valign="top"><a href="http://sourceforge.net/forum/?group_id=66022">Forum del progetto</a></td>
+      <td valign="top"><a href="http://xvalex.hotbox.ru">Homepage dell'autore</a></td>
+    </tr>
+  </tbody>
+</table>
+<hr width="100%" size="2"><br>
+AC3Filter - e' un filtro DirectShow per la decodifica AC3 utile nella
+riproduzione di file .AVI con tracce audio AC3 e MPEG2 (DVD). Questo
+programma e' distribuito gratuitamente (FREEWARE, OpenSource).<br>
+<b><font color="#990000"><br>
+<font color="#ff0000"> La documentazione corrente si basa sulla <u>versione
+0.67b</u> del programma. Versioni piu recenti del software potrebbero
+differire da quanto illustrato nella guida per questo motivo e
+consigliabile consultare la versione in <a href="ac3filter_eng.html">lingua
+inglese</a> della documentazione, costantemente aggiornata. </font></font></b><br>
+<h2>Caratteristiche principali:</h2>
+<ul>
+  <li>Conforme pienamente allo standard AC3.</li>
+  <li>Supporto S/P DIF passthrough.<br>
+  </li>
+  <li>Decodifica flussi MPEG2 PES.</li>
+  <li>Supporto per output multicanale.</li>
+  <li>Supporto LFE.</li>
+  <li>Supporto per Dynamic Range Compression (DRC).</li>
+  <li>Controllo overflow e del guadagno (automatico).<br>
+  </li>
+  <li>Livelli di controllo del guadagno.</li>
+  <li>Informazioni Bitstream (formato canale, velocita' di bit,
+frequenza di campionamento,     frequenza di aggancio e massima
+frequenza).</li>
+  <li>Livelli di Input/output.</li>
+  <li>Matrice di missaggio con controllo diretto del missaggio stesso.</li>
+  <li>Missaggio sorgenti stereo in multicanale.</li>
+  <li>DolbySurround/ProLogic/ProLogicII downmixing.</li>
+  <li>Possibilita' di impostare ritardi per ogni canale. </li>
+  <li>Equalizzatore.</li>
+</ul>
+<hr width="100%" size="2">
+<h2><font color="#000000">Progetti relativi:</font></h2>
+<font color="#ff0000">&nbsp;&nbsp;&nbsp; <a href="http://matrix-mixer.sourceforge.net/">MatrixMixer</a><font color="#000000"> - Abilita l'upmix su qualsiasi sorgente audio (non
+solo AC3) compreso il formato 5.1 (basato sulla matrice di missaggio
+AC3Filter).</font><br>
+&nbsp;&nbsp;&nbsp; <a href="http://winampac3.sourceforge.net/">WinampAC3</a> <font color="#000000">- Plug-in per la riproduzione multicanale AC3 con
+Winamp (basato sullo stesso decoder di AC3Filter).</font><br>
+&nbsp;&nbsp;&nbsp; <a href="http://liba52.sourceforge.net/">LibA52</a> <font color="#000000">- Libreria di decodifica AC3 crossplatform (da Michel
+LESPINASSE).</font></font><br>
+<br>
+<hr width="100%" size="2">
+<h2>Contenuti</h2>
+<br>
+<ul>
+  <li><a href="#download">Download</a></li>
+  <li><a href="#install">Installazione</a></li>
+  <li><a href="#uninstall">Disinstallazione</a></li>
+  <li><a href="#system_setup">Setup del sistema<br>
+    </a></li>
+  <ul>
+    <li><a href="#w98">Windows 98</a></li>
+    <li><a href="#w2k">Windows 2000<br>
+      </a></li>
+  </ul>
+  <li><a href="#player_settings">Setup del player<br>
+    </a></li>
+  <ul>
+    <li><a href="#BSPlayer">BSPlayer</a></li>
+    <li><a href="#ZoomPlayer">ZoomPlayer</a></li>
+  </ul>
+  <li><a href="#usage">Configurazione Filter<br>
+    </a></li>
+  <ul>
+    <li><a href="#main_settings">Impostazioni principali<br>
+      </a></li>
+    <li><a href="#mixer">Impostazioni Mixer<br>
+      </a></li>
+    <li><a href="#equalizer">Equalizzazione &amp; ritardo<br>
+      </a></li>
+  </ul>
+  <li><a href="#lfe">Cos'e' LFE<br>
+    </a></li>
+  <li><a href="#cookbook">Cookbook</a></li>
+  <ul>
+    <li><a href="#lfe_mix">LFE mixing<br>
+      </a></li>
+    <li><a href="#swap_speakers">Swap channels<br>
+      </a></li>
+    <li><a href="#max_loud">Maximum loudness<br>
+      </a></li>
+  </ul>
+  <li><a href="#registry">Registro</a></li>
+  <ul>
+    <li><a href="#reg_presets">Preset</a></li>
+    <li><a href="#reg_matrix">Matrici</a></li>
+  </ul>
+  <li><a href="#misc">Varie</a></li>
+  <li><a href="#distribution">Distribuzione</a></li>
+  <li><a href="#author">Come contattare l'autore<br>
+    </a></li>
+  <li><a href="#changelog">Cronologia cambiamenti</a></li>
+  <li><a href="#links">Collegamenti utili<br>
+    </a></li>
+</ul>
+<br>
+<hr width="100%" size="2">
+<h2><a name="download"></a>Download.</h2>
+Per versioni aggiornate del programma visitate:<br>
+<a href="http://ac3filter.sourceforge.net">http://ac3filter.sourceforge.net</a>
+- homepage<br>
+<a href="http://sourceforge.net/projects/ac3filter">http://sourceforge.net/projects/ac3filter</a>
+- homepage del progetto su Sourceforge (report bug, richiesta nuove feature e altro...)<br>
+<a href="http://sourceforge.net/forum/?group_id=66022">http://sourceforge.net/forum/?group_id=66022</a>
+- Forum dedicato ad AC3Filter<br>
+<br>
+<a href="mailto:ac3filter_news-subscribe@yahoogroups.com"></a><b><b>Tutte
+le versioni disponibili:</b></b><b><b><br>
+</b></b><a href="http://sourceforge.net/projects/ac3filter/">http://sourceforge.net/projects/ac3filter</a><br>
+<b><b><br>
+</b></b><b><b>ac3filter ver $ver</b></b><br>
+<a href="$download_bin">$download_bin</a>&nbsp;- binario (eseguibile)<br>
+<a href="$download_src">$download_src</a> - sorgenti<br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><b><a name="install"></a>Installazione.</b></h2>
+&nbsp;&nbsp;&nbsp; Cliccate sull'icona del programma e sara'
+automaticamente avviata la procedura di installazione del software!<br>
+<br>
+&nbsp;&nbsp;&nbsp; Se state utilizzando Windows 98 Simplified Chineese
+e la finestra di dialogo dei filtri ha dimensioni troppo ridotte provate
+utilizzando la patch denominata <b>dialog_patch.exe</b> (lanciate
+nuovamente la patch per ripristinare lo stato iniziale del sistema).<br>
+<br>
+&nbsp;&nbsp;&nbsp; Per le normali operazioni sui filtri non sono
+richiesti file aggiuntivi ma sono disponibili in versioni stand-alone
+per una maggiore comodita'. L'unico modulo richiesto e' <b>AC3filter.ax</b>. In
+aggiunta c'e' anche il modulo del Pannello di Controllo per la
+configurazione del programma. Per W2K+ puт essere registrato utilizando
+la chiave di registrazione <b>[HKLM\Software\Microsoft\Windows\CurrentVersion\Control
+Panel\Cpls]</b>. Per una migliore compatibilita' con l'ambiente
+operativoWindows98 il modulo di controllo e' copiato all'interno della
+cartella di installazione di Windows in formato .cpl.<br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><b><a name="uninstall"></a>Disinstallazione.</b><br>
+</h2>
+&nbsp;&nbsp;&nbsp; Lanciate l'apposita utility di dinstallazione dal
+menu dei programmi o tramite Pannello di Controllo.<br>
+<br>
+&nbsp;&nbsp;&nbsp; <font color="#ff0000">Attenzione: tutte le
+matrici e i settaggi utenti definiti saranno dopo l'installazione
+andranno perduti!</font><br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><a name="system_setup"></a>Impostazione del sistema.</h2>
+&nbsp;&nbsp;&nbsp; Se l'installazione e' stata portata a termine con
+successo nella maggior parte dei casi il filtro funzionera' fin da subito.<br>
+<br>
+&nbsp;&nbsp;&nbsp; La modalita' di funzionamento che assicura la
+maggiore compatibilita' e' la "stereo mode". Dovrebbe funzionare
+correttamente in qualsiasi versione di Windows e con qualunque scheda
+sonora installata.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Alcuni driver (Creative, in particolare) non
+aggiornano le impostazioni in '<b>Control Panel-&gt;Sounds and
+Multimedia-&gt;Audio-&gt;Sound Playback-&gt;Advanced</b>' dopo le
+modifiche apportate alla configurazione degli altoparlanti durante
+all'installazione. Per questo motivo controllate il modulo "Suoni e
+periferiche audio".<br>
+<br>
+&nbsp;&nbsp;&nbsp; Dopo l'installazione al filtro e' assegnata
+priorita' massima, cio' significa che verra' utilizzato al posto di
+qualsiasi altro decoder AC3 installato sul sistema. Se per un motivo o l'altro
+aveste necessita' di utilizzare un decoder differente potreste impostare
+a livelli di priorita' minimi il decoder con l'icona '<b>Prefer other
+decoder</b>'. Per ripristinare la priorita' massima cliccate su '<b>Prefer
+AC3Filter</b>'. Quest'operazione e' necessaria per il player NVDVD
+prodotto da nVidia. NVDVD infatti utilizza un decoder proprietario e nel
+tentativo di caricare AC3Filter interrompe bruscamente l'esecuzione.<br>
+<br>
+&nbsp;&nbsp;&nbsp; La scheda sonora puo' lavorare in due modalita':
+DirectSound e WaveOut. Se si verificassero problemi usando questo filtro
+(ad esempio l'uscita SPDIF non funzionasse piu' correttamente) l'altra
+modalita' di funzionamento potrebbe rivelarsi risolutiva. Alcuni player
+multimediali (BSP) hanno impostazioni personalizzate per l'opzione ma la
+maggior parte dei riproduttori fa riferimento alle impostazioni
+predefinite di Windows. Per cambiare modalita' sono disponibili due
+icone dal menu di avvio: 'Use DirectSound' per abilitare DirectSound
+come interfaccia predefinita; 'Use WaveOut' per abilitare WaveOut come
+interfaccia predefinita.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Alcuni filtri audio non supportano la modalita'
+multicanale (DeDynamic ad esempio). I player piu' evoluti hanno propri
+filtri di codifica audio integrati (gli equalizzatori) che non
+supportano il formato multicanale. In tal caso AC3filter passera'
+automaticamente alla modalita' stereo non consentendo di variare tale
+modalita' durante la riproduzione. Altri filtri, invece, possono
+supportare audio multicanale ma in modo scorretto (ad esempio il canale
+centrale potrebbe essere desincronizzato o del tutto assente). Per
+evitare questi problemi si consiglia di non installare il "filter-pack"
+e di rimuovere dal sistema tutti i filtri non necessari.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Tra i filtri piu' problematici c'e' <b>mmswitch</b>
+(filtro che supporta .avi e DVD con piu' tracce audio e consente il
+cambiamento dall'una all'altra durante la riproduzione, ideale per i
+film con multiaudio). Se per la maggiore utilizzate il PC per guardare
+DVD e' preferibile disinstallare questo filtro ed utilizzare il parser
+MPEG2 che supporta gli streaming audio direttamente (un esempio puo'
+essere l'<b>MPEG2 Splitter</b>). In aggiunta utilizzerete un minor
+quantitativo di tempo-CPU. Se il parser MPEG2 non supportasse il
+cambiamento di stream (flusso audio) come per le <b>Elecard</b>
+verrebbero create piu' catene di rendering audio processate
+simultaneamente ma soltano una tra queste sarebbe effettivamente in
+riproduzione.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Se<b> </b> proprio non poteste fare a meno di <b>mmswitch</b>
+ci sarebbero le seguenti possibilita':<br>
+<ul>
+  <li>Tutti gli stream audio (flussi audio) in formato AC3. Per il
+corretto passaggio     da uno stream all'altro tutti i decoder
+dovrebbero avere lo stesso formato     di output. </li>
+  <li>Il primo stream in AC3, il secondo in MP3 (o qualsiasi altro
+formato purche'     non multicanale). Prima di passare allo stream mp3,
+l'AC3 deve figurare a     16bit stereo.</li>
+  <li>Primo stream audio MP3 secondo in AC3. Prima di passare all'AC3,
+il filtro     deve essere configurato a 16bit stereo. Il formato di
+output e' impostabile     anche dopo il cambiamento.</li>
+</ul>
+<br>
+<br>
+<h3><a name="w98"></a>Windows 98</h3>
+&nbsp;&nbsp;&nbsp; Come impostazione predefinita Windows 98 non supporta
+il formato multicanale e l'SPDIF.<br>
+&nbsp;&nbsp;&nbsp; Per prima cosa, quindi, e' necessario scaricare ed
+installare la patch seguente per il WaveOut resa disponibile da
+Microsoft:<br>
+<b>server1:</b> <a href="ftp://ftp.asus.com.tw/pub/ASUS/beta/mb/driver/269601USA8.EXE">ftp://ftp.as
+us.com.tw/pub/ASUS/beta/mb/driver/269601USA8.EXE</a><br>
+<b>server2:</b> <a href="ftp://download.intel.com/design/motherbd/bt2/269601USA8.EXE">ftp://downloa
+d.intel.com/design/motherbd/bt2/269601USA8.EXE</a><br>
+<b> server3:</b> <a href="http://AC3filter.sourceforge.net/download/269601USA8.EXE">http://AC3filter
+.sourceforge.net/download/269601USA8.EXE</a><br>
+<br>
+&nbsp;&nbsp;&nbsp; Ulteriori dettagli sulla patch sono riportati presso <a href="http://www.microsoft.com/hwdev/tech/audio/Non-%0D%0APCM.asp">http://www.microsoft.com/hwdev/tech/audio/Non-PCM.asp</a>.<br>
+&nbsp;&nbsp;&nbsp; Fatto cio' impostate come periferica di riproduzione
+predefinita "WaveOut Device". <br>
+&nbsp;&nbsp;&nbsp; Se avete completato i passi seguenti correttamente i
+piu' diffusi player e l'uscita SPDIF funzioneranno correttamente sul
+vostro computer!<br>
+<br>
+<h3><a name="w2k"></a>Win2K</h3>
+&nbsp;&nbsp;&nbsp; E' caldamenta raccomandata l'installazione del
+Service Pack 2 (SP2).<br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><a name="player_settings"></a>Impostazione dei player.</h2>
+&nbsp;&nbsp;&nbsp; I player piu' diffusi sul mercato non richiedono
+impostazioni aggiuntive poiche' generalmente il filtro e' usato in modo
+trasparente.<br>
+<br>
+<h3><a name="BSPlayer"></a>BSPlayer</h3>
+&nbsp;&nbsp;&nbsp; Nelle impostazioni del player (<b>Options-&gt;Preferences</b>)
+impostate: <br>
+<ul>
+  <li>General-&gt;Don't load AC3 settings: selezionato</li>
+  <li>Audio-&gt;For AC3 decoding use: '--'</li>
+  <li>Audio-&gt;Use DeDynamic filter: deselezionato. (DeDynamic non
+supporta la     modalita' audio multicanale!)</li>
+</ul>
+<br>
+<h3><a name="ZoomPlayer"></a>ZoomPlayer</h3>
+&nbsp;&nbsp;&nbsp; Per riprodurre file AVI il player non richiede
+configurazioni aggiuntive. Se tuttavia adottarlo come
+riproduttore DVD (invece di usare programmi dedicati come PowerDVD o
+WinDVD) con AC3Filter sono richiesti i file seguenti:<br>
+<br>
+&nbsp;&nbsp;&nbsp; <a href="http://AC3filter.sourceforge.net/download/AC3Filter-%0D%0AInterVideo.dvdgraph">http://AC3filter.sourceforge.net/download/AC3Filter-
+InterVideo.dvdgraph</a> (per l'uso con il decoder video InterVideo)<br>
+&nbsp;&nbsp;&nbsp; <a href="http://AC3filter.sourceforge.net/download/AC3Filter-%0D%0ACyberLink.dvdgraph">http://AC3filter.sourceforge.net/download/AC3Filter-
+CyberLink.dvdgraph</a>&nbsp;(per l'uso con il decoder video CyberLink)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://AC3filter.sourceforge.net/download/AC3Filter-%0D%0AElecard.dvdgraph">http://AC3filter.sourceforge.net/download/AC3Filter-
+Elecard.dvdgraph</a>&nbsp;(per l'uso con il decoder video Elecard)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://AC3filter.sourceforge.net/download/AC3Filter-%0D%0AFhG.dvdgraph">http://AC3filter.sourceforge.net/download/AC3Filter-
+FhG.dvdgraph</a> (per l'uso con il decoder video Fraunhofer)<br>
+<br>
+&nbsp;&nbsp;&nbsp; Salvate i file nella cartella
+...\ZoomPlayer\DVDGraph. Nelle impostazioni del player invece <b>Player
+Options-&gt;DVD-&gt;DVD Setup</b> scegliete l'impostazione opportuna a
+seconda del decoder video installato.<br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><b><a name="usage"></a>Configurazione del filtro.</b><br>
+</h2>
+&nbsp;&nbsp;&nbsp; Il filtro puo' essere utilizzato in vari modi.
+L'ideale sarebbe che il player stesso consentisse di ridefinirne le
+proprieta' (WMP 6.4, BSP, Sasami, ecc... non WMP 7, 8, 9!).&nbsp;Ad
+esempio con WMP 6.4 la lista dei filtri e' accessibile tramite <b>File-
+&gt;Properties-&gt;Advanced</b>:<br>
+<br>
+<div align="center"><img src="pic/filters.gif" alt="" width="425" height="435"> <br>
+</div>
+<br>
+<br>
+&nbsp;&nbsp;&nbsp; Se il player non consente di modificare le
+proprieta' del filtro e' necessario configurarlo tramite il programma '<b>AC3Filter
+Config</b>' nel Pannello di Controllo di Windows. Questo metodo
+tuttavia non influenza gli stream audio in elaborazione ne' riflette lo
+stato attuale del sistema! I livelli I.e. non cambieranno, le
+informazioni bit-stream mostreranno solo degli zero ecc. Oltre a cio'
+tutti i player dovranno essere chiusi <i><small>(quando il player e'
+chiuso salva le impostazioni del filtro nei Registro ed in tal modo i
+valori salvati possono essere modificati da AC3Filter e resi
+disponibili all'avvio dell'applicazione). </small></i>E'
+caldamente consigliato configurare il filtro dall'interno del player
+quando possibile (tra i player che lo consentono: BSPlayer, Sasami,
+ZoomPlayer, LightAlloy, ecc...). In tal modo potrete valutare in tempo
+reale i cambiamenti apportati al flusso audio. Sono sconsigliati quindi
+riproduttori come Windows Media Plater v7, 8, 9.<br>
+<br>
+<h3><a name="main_settings"></a>Impostazioni principali</h3>
+&nbsp;&nbsp;&nbsp; Nell'immagine troverete la finestra <b>principale</b>
+del programma (livelli e informazioni di bitstream sono disponibili solo
+invocando le proprieta' del filtro dal player):<br>
+<br>
+<div align="center"><img src="pic/main.gif" title="" alt="" width="628" height="427"> <br>
+</div>
+<br>
+<b>* Informazioni bitstream</b><br>
+<br>
+&nbsp;&nbsp;&nbsp; Nella parte superiore a sinistra della finestra e'
+contenuta la sezione "bitstream information" (BSI):<br>
+<ul>
+  <li><b>Сhannels</b> - la configurazione dei canali nel formato
+front_channels/surround_channels + LFE (canale per effetti Low
+frequency). Nel nostro caso 3 frontali, 2 surround     e canal iLFE , si
+tratta di una configurazione 5.1.</li>
+  <li><b>Sample rate</b> [kHz]</li>
+  <li><b>Bitrate</b> [bps]</li>
+  <li><b>Freq</b> (coupl/high) - [kHz], frequenza di accoppiameno e
+massima frequenza     decodificata. Alcuni canali AC3 (solitamente tutti
+i canali) sono raggruppati     in un unico canale a partire da
+specifiche frequenze - la frequenza di accoppiamento     e' salvata
+proprio in questo campo e visualizzabile nei dettagli "bitstream
+information". I canali sono del tutto indipendenti solo in determinati
+interfalli di frequenza - fino alla frequenza di accoppiamento. Il campo
+High     frequency riporta la massima frequenza decodificata, e
+definisce quindi la     massima frequenza del flusso audio.</li>
+  <li><b>Frames/errors</b> - numeto totale di frame decodificati e degli
+errori occorsi durante la decodifica.</li>
+</ul>
+<h4><b>* Switch per la configurazione degli altoparlanti (Speaker
+configuration switch).</b></h4>
+&nbsp;&nbsp;&nbsp;Nella parte inferiore sinistra c'e' un pulsante
+dedicato alla configurazione degli altoparlanti. Definisce che che modo
+i canali AC3 saranno missati per l'output su speaker. Le configurazioni
+sono mostrate nel formato front_channels/surround_channels + subwoofer
+con flag (SW). Alcune configurazioni sono riportate con il nome di uso
+comune. Qual'e' la differenza tra LFE esubwoofer? Corrette a leggere
+quanto riportato nella sezione <a href="#lfe">What is LFE?</a>.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Le modalita' '<b>Dolby Surround/ProLogic</b>'
+indicano che tutti i canali presenti nello stream AC3 saranno missati in
+due canali in modo che il decoder Dolby Surround/Pro Logic possa
+processarli correttamente. La modalita' '<b>Dolby ProLogic II</b>' e'
+simile alla DPL ma si differenzia per il decoder DPL II. Il DPLII e'
+supportato solo in modo sperimentale per la scarsita' di informazioni
+attendibili su questo standard.<br>
+<br>
+&nbsp;&nbsp;&nbsp; La modalita' '<b>SPDIF</b>' indica che il flusso AC3
+sara' automaticamente indirizzato sull'uscita digitale della scheda
+sonora senza alcuna modifica. Attivando questa opzione non sara'
+possibile definire impostazioni aggiuntive sul flusso audio di output.<br>
+<br>
+&nbsp;&nbsp;&nbsp;Il campo '<b>Sample format</b>' (formato di
+campionamento) definisce il formato di output del flusso audio. Tra le
+opzioni disponibili: formato PCM 16 bit, 24, 32 bit e PCM Float. Non
+tutti i formati sono supportate dalle schede audio in commercio per cui
+impostate con cura tale opzione.<br>
+<br>
+<b>* Gain levels.</b> Il pulsante centrale e' dedicato ai livelli di
+guadagno.
+<ul>
+  <li><b>Master</b> - livello di guadagno desiderato</li>
+  <li><b>Gain</b> - mostra il livello di guadagno corrente</li>
+  <li><b>LFE</b> - livello di guadagno per il canale LFE</li>
+  <li><b>Voice</b> - livello di guadagno per il canale centrale
+(dedicato ai dialoghi)</li>
+  <li><b>Surround</b> - livello di guadagno per i canali surround</li>
+  <li><b>BSI Lock</b> - blocca il livello di guadagno del canale ai
+valori forniti     dalle impostazioni standard. Non e' possibile
+intervenire sui livelli Voice,     LFE e surround se l'opzione e'
+attivata</li>
+  <li><b>Normalize</b> - normalizzazione audio ad una singola passata.
+(per ulteriore     dettagli consultare <a href="#mixer">Impostazioni
+Mixer</a>).</li>
+</ul>
+&nbsp;&nbsp;&nbsp;I controlli <b>Master</b> e <b>Gain</b> determinano
+il livello sonoro complessivo del flusso audio. Il controllo <b>Master</b>
+definisce il livello di guadagno desiderato. Se il livello sonoro e'
+troppo alto e si verificano distorsioni e' bene diminuirlo intervenendo
+proprio su questo controllo. Il livello di guadagno corrente e'
+visualizzabile tramite il controllo <b>Gain</b>.<br>
+<br>
+<h4><b>* Dynamic range compression.</b></h4>
+&nbsp;&nbsp;&nbsp; L'AC3 e' un formato fondamentalmente logaritmico. I
+sample sono salvati in formato: esponente + mantissa. Parlando di bit 1
+sample puo' essere lungo anche 40bit (solo in teoria) o raggiungere i
+24bit (risoluzione predefinita). Cio garantisce un'ampio range dinamico
+(ma, come disse Einstein, "tutte le cose buone in questo mondo sono
+relative" :-)): i suoni piu' bassi con un basso livello se riprodotti da
+una scheda sonora con meno di 16 bit risulteranno non udibili come
+tutto il resto dell'audio al di sotto di questo livello assoluto (=&gt;
+elevata distorsione). Per risolvere questo inconveniente e' stata
+adottata la tecnica della compressione dinamica. Alla base di questa
+idea c'e' un algoritmo che provvede ad incrementare il livello in
+presenza di suoni bassi (e viceversa) prima di eseguire la conversione
+nel formato16-bit. Ci sono speciali matrici nello stream AC3 dedicate
+proprio alla variazione del livello sonoro. Le scelte sulla dinamica
+audio sono prese dai responsabili in fase di produzione durante la
+preparazione del mastering al fine di preservare la migliore qualita'
+sonora. Il <b>DRC level</b> indica proprio questo livello. Con la
+checkbox <b>Use DRC</b> puoi attivare/disattivare l'utilizzo del DRC. <i>(naturalmente
+quanto riportato di seguito e' una semplificazione del reale processo
+di elaborazione).</i><br>
+<br>
+&nbsp;&nbsp;&nbsp;I controlli <b>DRC Power</b> consentono di definire
+il cambiamento del livello sonoro <b>DRC level</b>. Aumentando il
+valore di <b>DRC Power</b> i suoi piu' bassi saranno accentuati e quelli
+piu' alti saranno attenuati. Diminuendo invece il valore del controllo <b>DRC
+Power</b> sara' automaticamente ridotto il range di compressione
+dinamico anche se gli effetti saranno meno vistosi di quanto illustrato
+in precedenza. Impostando a 0 il livello <b>DRC Power</b> il range
+dinamico di compressione sara' applicato secondo le impostazioni
+predefinite della sorgente.
+<h4><b>* CPU load.</b><br>
+</h4>
+&nbsp;&nbsp;&nbsp; Mostra il livello di carico della CPU per
+l'elaborazione e la decodifica della sorgente audio. Saranno inclusi nel
+valore mostrato tutti i processi di elaborazione (se esistenti).
+<h4><b>* Input/output levels.</b><br>
+</h4>
+&nbsp;&nbsp;&nbsp; Parte destra - indicatori di livello. Tutti i
+livelli sono espressi in scala logaritmica. Il livello di input mostra
+la configurazione <i>reale</i> dei canali audio. Spesso potrebbe
+accadere che il BSI mostri 5.1 anche se il canale LFE fosse assente.
+<h4>* Presets</h4>
+<p>&nbsp;&nbsp;&nbsp; La finestra a tendina e i pulsanti subito in
+basso possono   essere utilizzati per caricare, salvare, rimuovere
+configurazioni personalizzate   (presets). Alcuni preset sono gia'
+disponibili fin dalla prima installazione   del programma:<br>
+</p>
+<ul>
+  <li><b>standard</b> - compatibilita' massima</li>
+  <li><b>one-pass normalize</b> - come da etichetta, per incrementare
+l'intensita' sonora della sorgente.</li>
+  <li><b>LFE boost</b> - LFE incrementato di +10dB.</li>
+</ul>
+<font color="#ff0000">&nbsp;&nbsp;&nbsp;<font color="#000000"> In
+aggiunta e' possibile caricare/salvare preset da/su file con il pulsante <b>file</b>:</font><br>
+<br>
+</font>
+<div align="center"><font color="#ff0000"><img src="pic/preset.gif" title="" alt="" width="273" height="157"><br>
+</font></div>
+<p><font color="#000000"><br>
+&nbsp;&nbsp;&nbsp; Il file di configurazione puo' avere lo stesso nome
+del filmato   (si tratta dell'opzione predefinita). In tal caso sarebbe
+automaticamente caricato   all'apertura del filmato stesso.<br>
+&nbsp;&nbsp;&nbsp; Le impostazioni del filtro sono suddivise in varie
+categorie. Raccomandiamo caldamente di salvare solo le impostazioni
+generali (e volendo quelle dell'equalizzatore)   nei file di
+configurazione autocaricati (puiche'   potreste volere utilizzare queste
+impostazioni su un altro sistema per la visione   del filmato). Le
+impostazioni non salvate nel file di configurazione non intaccheranno
+la configurazione corrente al caricamento del file stesso.</font><br>
+<br>
+</p>
+<h3><a name="mixer"></a>Impostazioni Mixer</h3>
+&nbsp;&nbsp;&nbsp; Nella seconda pagina sono riportate le impostazioni
+di configurazione del Mixer.. <br>
+<br>
+<div align="center"><img src="pic/mixer.gif" title="" alt="" width="628" height="427"> <br>
+</div>
+<br>
+&nbsp;&nbsp;&nbsp; Il controllo principale e' costituito dalla matrice
+di missaggio (mixing matrix). Nel formato adottato per la
+rappresentazione della matrice di moltiplicazione: S' = M S, dove S = {
+L, C, R, SL, SR, LFE } - sample di input, S' = { L', C', R', SL', SR',
+SW' } - sample di output.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Piu' semplicemente per ogni singola cella vige la
+regola seguente: e' missato il canale specificato dalla colonna dal
+canale specificato dalla riga con il guadagno specificato nella cella
+stessa. Se ad esempio voleste indirizzare il canale sinistro
+sull'altoparlante destro dovreste impostare il valore 1 nella cella in
+corrispondenza della colonna 'L' e della riga 'R'. Per non ascoltare il
+canale sinistro dall'altoparlante sinistro, invece, sarebbe sufficiente
+inserire il valore 0 in corrispondenza della colonna 'L' e della riga
+'L'. Operando operazioni analoghe anche con il canale destro e con il
+canale di surround si otterrebbe lo swapping completo dei canali (Nota
+che andrebbero scambiate anche le righe 'L' e 'R').<br>
+<br>
+&nbsp;&nbsp;&nbsp; Per maggior chiarezza e' opportuno fare alcune
+distinzioni tra il canale di input e di output. Il canale di input e'
+codificato nel flusso AC3. Il canale di output e' quello che alla fine
+ascoltate dagli altoparlanti.<br>
+<br>
+&nbsp;&nbsp;&nbsp; I valori sulle righe determinano cosa ascolterete
+dal corrispondente canale di output. Nella matrice e' rappresentato da
+parte del canale sinistro di input, parte del canale centrale, parte del
+canale destro, parte dal canale sinistro surround attenuato, dal canale
+destro surround attenuato e dal canale LFE (in questo esempio la matrice
+ha canale sinistro, canale centrale, canale sinistro attenuato, e
+canale LFE).<br>
+<br>
+&nbsp;&nbsp;&nbsp; I valori sulle colonne quali canali di input saranno
+soggetti a missaggio. Per la matrice mostrata il canale centrale e'
+stato riindirizzato sul canale sinistro e destro per un fattore pari a
+0.7. In tal modo il canale centrale sara' ripartito in egual modo tra
+canale sinistro e canale destro. Se desiderate variare il bilanciamento
+del canale centrale riindirizzato modificate semplicemente il fattore
+impostato in precedenza!<br>
+<br>
+&nbsp;&nbsp;&nbsp; Se l'opzione <b>Auto matrix</b> e' attivata la
+matrice e' automaticamente calcolata ed i campi aggiornati per
+rifletterne le nuove impostazioni. Ad esempio cambiando il livello di <b>Center</b>
+noteremo cambiamenti alla colonna 'C'.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Per convenienza alcuni controlli nella pagina
+principale sono stati spostati in questa sezione. Per una descrizione
+accurata dei controlli consultate le <a href="#main_settings">Impostazioni
+principali</a>.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Descrizione delle impostazioni disponibili:<br>
+<ul>
+  <li><b>Auto gain control</b> - controllo automatico del guadagno. Per
+la gestione     del livello di guadagno (al fine di evitare overflow).
+Il guadagno corrente     e' mostrato dal livello <b>Gain</b>. Se questa
+opzione e' disattivata potrebbero     verificarsi, presenza di livelli
+di segnali alti, indesiderati effetti di     distorsione del segnale
+audio. Se l'opzione e' attivata, invece, il livello     di guadagno
+corrente sara' costantemente monitorato dal programma e decrementato
+per prevenire overflow del segnale. Il comportamento del sistema dopo un
+overflow     e' determinato dall'opzione <b>One- pass norm</b>. Se<b>
+One-pass norm</b> e' disattivata, il livello di guadagno corrente sara'
+gradualmente ripristinato     al livello del controllo <b>Master</b>.
+In tal caso <b>Master</b> definisce     il livello di guagnano finale
+dopo un overflow. L'overflow puo' verificarsi     in vari casi e
+circostanze determinando sgradevoli effetti di 'salto' nel     segnale
+audio. Per questo motivo e' preferibile non impostare un livello troppo
+alto al controllo <b>Master</b>. Questa modalita' e' raccomandata se
+pensate che non si verificheranno spesso overflow. Se l'opzione <b>One-pass
+norm</b> e' attivata il livello di guadagno non sara' ripristinato dopo
+un overflow.     Dopo un overflow la probabilita' che se ne verifichi un
+altro diminuisce notevolmente     fino a quando il livello di guadagno
+si stabilizzera' su un determinato valore.     Generalmente il tempo
+per la stabilizzazione e' di circa 10 minuti di riproduzione del
+filmato. Il livello <b>Master</b>, in questa circostanza, riporta il
+livello     di guadagno iniziale per l'algoritmo di normalizzazione ad
+una passata e puo'     essere impostato anche al massimo. Questa
+modalita' e' da preferire se si     desidera incrementare il livello
+sonoro mantenendo al minimo la generazione     di artefatti ed
+alterazione all'audio dovuti all'elaborazione. (per ulteriori dettagli
+consultate la sezione <a href="#max_loud">Massima intensita'</a>).<br>
+  </li>
+  <li><b>One-pass norm</b> - normalizzazione ad una singola passata
+(come per <b>Auto gain control</b>).</li>
+  <li><b>Auto matrix</b> - determinazione automatica della matrice di
+missaggio. Se l'opzione e' attivata non sara' possibile modificare
+manualmente le impostazioni     della matrice. I livelli di guadagno per <b>LFE</b>,<b>Voice</b>
+e <b>Surround</b> saranno calcolati automaticamente dall'algoritmo del
+programma. Disattivando     questa opzione, invece, i controlli seguenti
+non avranno effetto sull'output:  livelli di guadagno per <b>LFE</b>,<b>Voice</b>
+e<b>Surround</b>,<b> Normalize matrix</b>, <b>Expand stereo</b>, <b>Voice
+control</b>, <b>Expand stereo</b>.     Gli unici controlli realamente
+funzionanti resteranno: <b>Master</b>,<b>Gain</b>,<b>DRC level</b>, <b>DRC
+power</b>, <b>One-pass norm</b>; e' tuttavia possibile modificare
+manualmente i valori della matrice.</li>
+  <li><b>Normalize marix</b> - normalizzazione della matrice. Se
+l'opzione e'     attivata la matrice verra' normalizzata limitando la
+probabilita' di overflow     nell'output (la somma dei canali in output
+sara' &lt; 1). Se tuttavia cambiassero     i livelli di <b>LFE</b>,<b>Voice</b>
+o<b> Surround</b> sarebbero aggiornati     anche tutti gli altri livelli
+di guadagno (ad esempio incrementando il livello     del canale LFE
+tutti gli altri canali saranno automaticamente decrementati).
+L'aggiornamento puo'' essere evitato disattivando l'opzione. L'overflow,
+tuttavia, e' altamente probabile in tale situazione per cui e'
+preferibile diminuire     il livello di guadagno del controllo <b>Master</b>
+prima di disattivare l'opzione.</li>
+  <li><b>Expand stereo</b> - funziona correttamente soltanto se lo AC3
+non contiente     canali surround. In questo modo e' possibile
+intervenire sui dati del surround     con il controllo di guadagno <b>Surround</b>
+(che, da impostazione predefinita     non ha alcun effetto se non sono
+presenti canali surround in input). Se fossero     presenti canali
+surround nella configurazione di output selezionata l'impostazione
+applicherebbe loro i settaggi scelti. In termini tecnici controlla le
+componenti audio "non in fase" (canali di differenziazione) e
+riindirizza i     canali surround se esistenti.<br>
+  </li>
+  <li><b>Voice control</b> - il controllo ha effetto soltanto se nello
+stream AC3 non c'e' alcun canale centrale. In tale situazione e'
+consentito variare     le impostazioni del controllo di guadagno <b>Voice</b>
+(non ha effetto, come     predefinito, in assenza del canale centrale in
+input). Se fosse specificato     un canale centrale nella configurazione
+di output sarebbero applicati i settaggi     definiti da questo
+controllo. Con l'opzione <b>Expand stereo</b> la sorgente in full
+stereo sara' ripartita in formato multicanale (ad esempio abilitando il
+altoparlante centrale e surround anche se in il flusso di input era
+soltanto     stereo). Tecnicamente interviene sulle componenti audio
+"in fase"     (uguali in entrambi i canali) e riindirizza il flusso
+audio al canale centrale     se presente.<br>
+  </li>
+  <li><b>B</b><b>ass redir</b> - riindirizzamento bassi. Riindirizza i
+bassi da     tutti i canali sul subwoofer. Gli effetti dell'opzione sono
+tangibili soltanto     se il kit di altoparlanti e' dotato di un
+subwoofer. Questa impostazione e'     caldamente raccomandata per
+sistemi dotati di subwoofer (consultate la voce <a href="#lfe">Cos'e'
+LFE?</a> per ulteriori dettagli). I bassi sono riindirizzati     prima
+del missaggio e visualizzati nel livello di input LFE (nonostante possa
+essere assente un 'reale' canale LFE). La frequenza di taglio e' fissata
+a 375Hz (per frequenze di campionamento pari a 48000Hz).</li>
+</ul>
+&nbsp;&nbsp;&nbsp; Tramite combo-box e' possibile caricare e salvare
+matrici personalizzate.<br>
+<br>
+<br>
+<h3><a name="equalizer"></a>Equalizzatore e ritardo.</h3>
+<div align="center"><img src="pic/equalizer.gif" title="" alt="" width="628" height="427"><br>
+</div>
+<br>
+&nbsp;&nbsp;&nbsp; La parte destra e' dedicata completamente
+all'equalizzazione e credo che ogni spiegazione sia superflua sul suo
+funzionamento ;-).<br>
+<br>
+&nbsp;&nbsp;&nbsp; Nella parte in alto a sinistra invece sono riportati
+i settaggi relativi al ritardo (delay) per compensare sfasamenti tra i
+flussi audio riindirizzati a specifici altoparlanti. Idealmente tutti
+gli altoparlanti dovrebbero avere stessa distanza dall'ascoltatore in
+modo tale che il suono emesso da ogni altoparlante raggiunga
+l'ascoltatore nel medesimo istante di tempo. In altre circostante,
+tuttavia, questa rappresentazione sonora potrebbe avere dei problemi.
+Nella realta', comunque, gli altoparlanti sono disposti a distanza
+differente. Per compensare questa differenza potrebbe essere
+consigliabile impostare dei tempi di ritardo nell'emissione di un flusso
+audio o dell'altro.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Il valore di ritardo e' esprimibile in millisecondi o sample.
+Valori negativi indicano che il canale sonoro sara' riprodotto 'prima'
+del 'tempo nullo' (per chiarire il concetto, se alcuni altoparlanti
+fossero posizionati lontano dall'ascoltatore rispetto ad altri, il suono
+dovrebbe essere riprodotto prima da quest'ultimi in modo tale da
+giungere all'ascoltatore insieme a quelli degli altoparlanti piu'
+vicini).<br>
+<br>
+&nbsp;&nbsp;&nbsp; Per facilitare la configurazione di questa opzione
+e' possibile inserire anche la distanza fisica degli altoparlanti
+dall'ascoltatore. In tal caso valori positivi hanno lo stesso effetto di
+un ritardo negativo (quindi il suono verrebbe riprodotto prima). Valori
+negativi, invece, un ritardo positivo.<br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><a name="lfe"></a>Cos'e' LFE?</h2>
+<br>
+&nbsp;&nbsp;&nbsp; Chiariamo subito una cosa importantissima quanto
+fondamentale: LFE non e' la stessa cosa di subwoofer! 5.1, quindi,
+nel caso di stream AC3 non e' come dire sistema acustico 5.1.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Il formato AC3 e' stato creato per le sale
+cinematografiche e solo in seguito adattato al mercato home PC (per
+computer). I sistemi home-theater sono in grado di riprodurre con
+correttezza le basse frequenze. Il canale LFE e' stato ideato per
+potenziare gli <i>effetti speciali </i>a basse frequenze, effetti che
+generalmente sono ignorati dai tradizionali sistemi acustici. Tutti i
+canali nello stream AC3 contengono basse frequenze e LFE interviene
+soltanto in alcuni casi per aiutare gli altoparlanti a far tremare muri
+e oggetti! Pensate che in alcuni film LFE potrebbe non essere neanche
+presente e non sarebbe nulla di strano...<br>
+<br>
+&nbsp;&nbsp;&nbsp; I sistemi acustici per computer sono totalmente
+differenti. La maggior parte dei sistemi 5.1 non e' in grado di
+riprodurre basse frequenze tramite i satelliti per questo il subwoofer
+e' costretto a lavorare ininterrottamente.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Se con un sistema audio 5.1 provaste a
+guardare un film contenente una traccia audio 5.1 demandando al
+subwoofer il trattamento del canale LFE non udireste piu' i bassi!<br>
+<br>
+&nbsp;&nbsp;&nbsp; Quindi se l'impianto acustico ha un subwoofer
+separato, e' caldamente consigliato riindirizzare a quest'ultimi i bassi
+di tutti i canali (<i>tutti</i> canali hanno bassi). Attivate per prova
+l'opzione <b>Bass redirection</b> nelle proprieta' del filtro. In
+alternativa utilizzate l'opzione analoga disponibile tra i settaggi
+della vostra scheda sonora (se presente) e disattiva questa opzione in
+AC3Filter. Per approfondimenti si consiglia la lettura dell'articolo (<a href="http://www.dolby.com/tech/c.in.0011.LFE.pdf">http://www.dolby.com/tech/c.i
+n.0011.LFE.pdf</a>) contenente dettagli e funzionalita' di LFE. <br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><a name="cookbook"></a>Cookbool.</h2>
+<h3><a name="lfe_mix"></a> Missaggio LFE.</h3>
+&nbsp;&nbsp;&nbsp; Se non c'e' un subwoofer dedicato, la configurazione
+di output LFE e' missata utilizzando i canali frontali. Se i canali
+posteriori sono tuttavia sufficientemente potenti e' possibile anche
+missare in quest'ultimi LFE per una maggiore intensita' sonora: <br>
+<ul>
+  <li>Avviate la riproduzione del film o del filmato<br>
+  </li>
+  <li>Aprite la finestra contenente le proprieta' dei filtri (ricodate
+che versioni     di WMP dalla 7 in poi non hanno piu' questa
+possibilita'!).<br>
+  </li>
+  <li>Impostate su OFF l'opzione <b>Auto Matrix</b>.</li>
+  <li>Nella colonna della matrice LFE inserite il valore '1' (per
+questo esempio)     come pure nelle righe SR e SL</li>
+  <li>Salvate la nuova matrice.</li>
+</ul>
+<br>
+<h3><a name="swap_speakers"></a> Swapping dei canali.</h3>
+&nbsp;&nbsp;&nbsp; Per una maggiore comprensione degli argomenti
+trattati in questa sezione consigliamo la lettura delle <a href="#mixer">Impostazioni
+mixer</a> prima di proseguire (in particolare per la descrizione della
+matrice di missaggio).<br>
+<br>
+&nbsp;&nbsp;&nbsp; Vorreste avere un reale canale centrale nonostante
+la vostra scheda audio possa avere output su 4 o meno altoparlanti? E'
+possibile... anche se naturalmente non sara' mai un effetto paragonabile
+a quello ottenibile con 5 altoparlanti dedicati per ogni canale di
+output. L'effetto e' simulabile utilizzando uno dei canali frontali come
+canale centrale in una configurazione tipo 3/1 (3 frontali / 1
+posteriore) invece della tradizionale 2/2 (2 frontali / 2 posteriori).
+<ul>
+  <li>Avviate la riproduzione del film o del filmato.</li>
+  <li>Impostate su ON l'opzione <b>Auto Matrix</b> (per ottenere la
+matrice dedicata     ai bassi).</li>
+  <li>Impostate su 3/1 la configurazione di output. Ora non avremo
+nessun canale     centrale che verra' opportunamente missato sui canali
+frontali dai driver.     Noi tuttavia faremo un piccolo trucco.<br>
+  </li>
+  <li>Impostate le opzioni per il gioco interessato (livelli di
+guadagno, ecc...)     . </li>
+  <li>Impostate su OFF l'opzione <b>Auto Matrix.</b></li>
+  <li>Arrivati a questo punto dovreste avere anche una matrice dei
+bassi. Riprodurremo     il canale centrale utilizzando gli altoparlanti
+posteriori. Copiate tutti     i valori della riga 'С' sulla riga 'SR' e
+riempite la riga 'С' con tutti 0.     Ora la matrice e' pronta!<br>
+  </li>
+  <li>Salvate la matrice.<br>
+  </li>
+  <li>L'altoparlante posteriore destro e' ora dedicato agli effetti del
+canale centrale.</li>
+  <li>Impostate una configurazione di output 2/2. I driver in tal modo
+saranno ingannati pensando di avere 2/2 canali che in realta' dedicato
+uno dei canali     posteriori al canale centrale :-).</li>
+</ul>
+<br>
+<h3><a name="max_loud"></a>Massimizzazione intensita' sonora<br>
+</h3>
+&nbsp;&nbsp;&nbsp; Se per voi le impostazioni predefinite del programma
+tendono a restituire in output suoni troppo bassi continuate la lettura
+di questa sezione. <br>
+Le impostazioni predefinite producono un output che generalmente e'
+sufficiente per la maggior parte dei sistemi PC. Qualsiasi modifica o
+cambiamento, naturalmente, porta a variazioni fuori dello standard.<br>
+<br>
+&nbsp;&nbsp;Ricordate prima di tutto che i film contengono audio gia'
+normalizzato proprio per evitare spiacevoli effetti di overflow. Se
+quindi incrementate il livello di guadagno nelle scene piu' silenziose
+potreste incorrere nell'overflow in altre con intensita' sonora maggiore.<br>
+<br>
+&nbsp;&nbsp;&nbsp; In generale sono 3 i metodi a cui e' possibile
+ricorrere per evitare overflow:<br>
+<ul>
+  <li>Taglio del segnale: rimuovere segnali audio superiori ad
+una certa     frequenza. Cio' tuttavia conduce a notevoli distorsioni.</li>
+  <li>Controllo automatico del guadagno: in presenza di overflow il
+livello di     guadagno verrebbe automaticamente decrementato. Non
+produce distorsioni tangibili     ma la vistosita' dei cambiamenti tra i
+livelli sonori potrebbero infastidire     piu' di qualche utente.</li>
+  <li>Range dinamico di compressione (DRC). Si tratta di una specie di
+controllo automatico del guadagno gestito direttamente dai dati del
+flusso AC3 (dati     inseriti dal produttore).</li>
+</ul>
+<br>
+&nbsp;&nbsp;&nbsp; Il metodo piu' semplice per incrementare
+l'intensita' sonora e' quello di disattivare l'<b>Auto gain control</b>
+ed aumentare il livello di guadagno <b>Master</b>. In questo caso gli
+overflow saranno automaticamente rimossi. Questo metono aumenta
+l'intensita' della sorgente sonora ma pregiudica la qualita' complessiva
+dell'audio.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Un metodo piu' avanzato e' quello di attivare l'<b>Auto
+gain control</b>, attivare l'opzione <b>Normalize</b> e alzare il
+livello di guadagno <b>Master</b> (al massimo o quasi). In tal caso dopo
+un overflow il livello di guadagno sarebbe automaticamente decrementato
+e dopo varie correzioni tenderebbe a stabilizzarsi. In questo modo
+l'intensita' sonora aumentera' tangibilmente senza compromessi di
+qualita'. Come ogni cosa, tuttavia, anche questo metodo ha lati
+negativi: anzitutto e' richiesto un certo lasso di tempo prima che il
+livello sonoro si stabilizzi; in seconda istanza il nostro obiettivo di
+riprodurre chiaramente i suoni dei livelli sonori piu' bassi non e'
+raggiunto. Questo metodo e' quindi raccomandato per ottenere rapidamente
+incrementi al livello sonoro cercando di limitare al massimo la
+generazione di rumori o impurita' sonore.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Una variante del metono illustrato in precedenza
+potrebbe consistere nel disattivare l'opzione <b>Normalize</b>. In tal
+caso il livello di guadagno dopo un overflow verrebbe gradualmente
+ripristinato come definito ne livello <b>Master</b>. Questo metodo e'
+piu' raffinato della semplice impostazione del livello <b>Master</b> se
+tuttavia quest'ultimo e' troppo alto la probabilita' di overflow
+crescerebbe esponenzialmente (proprio per diretta conseguenza del
+livello <b>Master</b>) determinando frequenti cambiamenti e
+riadattamenti del livello di guadagno. Il metodo precedente non ha
+questi problemi poiche' il livello di guadagno non viene ripristinato
+dopo un overflow. Cosi' tuttavia avrete modo di ascoltare anche i suoni
+piu' a bassa frequenza &nbsp; (il parlato ad esempio) dopo esplosioni
+(qualche istante dopo tale l'evento). I dialoghi durante un'esplosione,
+comuque, verrebbero totalmente coperti. Si raccomanda di utilizzare
+questo metodo se il livello <b>Master</b> deve essere incrementato
+sensibilmente e se non si prevedono numerosi overflow.<br>
+<br>
+&nbsp;&nbsp;&nbsp; L'ultimo metodo esaminato si basa sul range di
+compressione dinamica (attivate l'opzione <b>Use DRC</b>) con
+incremento del livello <b>Master</b>. Il livello di guadagno corrente
+DRC e' mostrato in tempo reale dall'indicatore dedicato. Nelle scene di
+silenzio dovrebbe raggiungere i valori piu' alti mentre, per converso,
+in quelle piu' rumorose valori minini. E' possibile che l'effetto
+prodotto dal DRC non sia sufficiente per cui e' modificabile agendo sul
+controllo <b>DRC level</b>. E' chiaro che i 'salti' (variazioni
+repentine) del livello sonoro sono tanto piu' vistose quanto e' elevato
+il livello DRC. L'impostazione e' quindi da applicare con cura in modo
+da privilegiare i suoni a frequenze piu' basse e minimizzare la
+probabilita' di 'salti' tra un livello sonoro e l'altro. Nel metodo i
+'salti' del livello di guadagno possono ricondursi fondamentalmente al
+DRC stesso ed il controllo di guadagno automatico. Potreste anche
+tentare di disattivare il controllo automatico del guadagno ma
+incorrereste in una maggiore probabilita' di segnale distorto. E' quindi
+fondamentale cercare di trovare un corretto bilanciamento intervenendo
+sulle varie impostazioni.<br>
+<br>
+&nbsp;&nbsp;&nbsp; I parametri seguenti influenzano il livello
+dell'intensita' sonora: <b>Master</b>, <b>Auto gain control</b>, <b>Normalize</b>,<b>Use
+DRC</b>, <b>DRC Level</b>. I parametri dovrebbero essere impostati
+singolarmente tenendo in considerazione l'impianto acustico,
+l'ascoltatore ed il film/filmato stesso).<br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><a name="registry"></a>File di registro e configurazione.</h2>
+<p>&nbsp;&nbsp;&nbsp; Il filtro salva le sue impostazioni nel Registro
+di Windows: <b>[HKCU\Software\AC3Filter]</b>.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Tutte le impostazioni del filtro sono suddivise in 4
+parti: general, matrix, equalizer e delay. Ogni parte e' salvata in una
+chiare di registro   a se' stante. Ogni chiave ha un proprio insieme di
+impostazioni e preset quindi   possiamo avere benissimo varie
+equalizzazioni o matrici per una stessa configurazione caricabili
+indipendentemente. Oggetti speciali hanno preset denominati '_default'.
+Al caricamento del filtro vengono automaticamente caricati tutti i
+preset '_default'   (per le impostazioni generali, di matrice,
+equalizzazione e ritardo) ed i cambiamenti,   alla chiusura del filtro,
+sono salvati proprio in quest'ultimi.</p>
+<p>I file di configurazione sono divisi in 4 sezioni: generale,
+matrice, equalizzazione   e ritardo. Ogni sezione contiene esattamente
+gli stessi valori presenti nei   preset del registro.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Tutti i livelli sono salvati con valori in virgola
+mobile come fattori (non in dB!).<br>
+&nbsp;&nbsp;&nbsp; Tutti i valori in virgola mobile sono salvati nella
+chiave di registro 'REG_SZ'.<br>
+&nbsp;&nbsp;&nbsp; I valori booleani sono salvati come interi nel
+registro e   come "true/false" nei file di configurazione'.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Le abbreviazioni dei nomi dei canali sono riportate
+in tabella:<br>
+</p>
+<table cellpadding="2" cellspacing="2" border="1" align="center">
+  <tbody>
+    <tr>
+      <td valign="top" align="center"><b>Abbreviation</b><br>
+      </td>
+      <td valign="top" align="center"><b>Meaning</b><br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center">L<br>
+      </td>
+      <td valign="top" align="center">Left front<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center">C<br>
+      </td>
+      <td valign="top" align="center">Center<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center">R<br>
+      </td>
+      <td valign="top" align="center">Right front<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center">SL<br>
+      </td>
+      <td valign="top" align="center">Left surround<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center">SR<br>
+      </td>
+      <td valign="top" align="center">Right surround<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" align="center">LFE<br>
+      </td>
+      <td valign="top" align="center">LFE channel <br>
+or subwoofer<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3><a name="reg_presets"></a>Preset</h3>
+Valori del registro:<br>
+<ul>
+  <li>mode (int) - configurazione degli altoparlanti, caricata
+all'applicazione del preset. Questo valore non e' indispensabile e
+potrebbe essere assente.     In tal caso la configurazione degli
+altoparlanti non cambierebbe al caricamento     del present. I valori
+consentiti sono:<br>
+    <table cellpadding="2" cellspacing="2" align="center" border="1">
+      <tbody>
+        <tr>
+          <td valign="top" align="center"><b>Valore</b></td>
+          <td valign="top" align="center"><b>Significato</b><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" align="center">0<br>
+1<br>
+2<br>
+3<br>
+4<br>
+5<br>
+6<br>
+7<br>
+8<br>
+9<br>
+10<br>
+11<br>
+12<br>
+13<br>
+14<br>
+15<br>
+          </td>
+          <td valign="top">2/0 (stereo)<br>
+1/0 (mono)<br>
+2/0 (stereo)<br>
+3/0<br>
+2/1<br>
+3/1<br>
+2/2 (quadro)<br>
+3/2<br>
+2/0+SW<br>
+1/0+SW<br>
+2/0+SW<br>
+3/0+SW<br>
+2/1+SW<br>
+3/1+SW<br>
+2/2+SW<br>
+3/2+SW (5.1)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>spdif (int) - attiva SPDIF passthrough.</li>
+  <li>dolby (int) - attiva il downmix Dolby:
+    <table cellpadding="2" cellspacing="2" align="center" border="1">
+      <tbody>
+        <tr>
+          <td valign="top" align="center"><b> Valore</b><br>
+          </td>
+          <td valign="top" align="center"><b>Significato</b></td>
+        </tr>
+        <tr>
+          <td valign="top" align="center">0<br>
+1<br>
+2<br>
+          </td>
+          <td valign="top">No Dolby downmix<br>
+Dolby Surround/ProLogic<br>
+Dolby ProLogicII<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>format (int) - formato di output dell'esempio:
+    <table cellpadding="2" cellspacing="2" align="center" border="1">
+      <tbody>
+        <tr>
+          <td valign="top" align="center"><b>Valore</b></td>
+          <td valign="top" align="center"><b>Significato<br>
+          </b></td>
+        </tr>
+        <tr>
+          <td valign="top" align="center">0<br>
+1<br>
+2<br>
+3<br>
+          </td>
+          <td valign="top">PCM 16bit<br>
+PCM 24bit<br>
+PCM 32bit<br>
+PCM float</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>generate_timestamps (bool) - genera timestamp di sistema.</li>
+  <li>time_shift (int) - sfasamento temporale (in ms)</li>
+  <li>matrix (text) - nome della matrice di missaggio da impostare al
+caricamento del preset. Non ha alcun effetto se l'opzione auto_matrix e'
+attivata. Questo     valore potrebbe essere assente, in tal caso la
+matrice di missaggio non sarebbe     cambiata all'applicazione del
+preset.</li>
+  <li>master (double) - livello di guadagno principale</li>
+  <li>clev (double) - livello di guadagno canale centrale</li>
+  <li>slev (double) - livello di guadagno canale surround</li>
+  <li>lfelev (double) - livello di guadagno canale LFE</li>
+  <li>clev_lock (bool) - livello di guadagno canale centrale bloccato</li>
+  <li>slev_lock (bool) - livello di guadagno canale surround bloccato</li>
+  <li>lfelev_lock (bool) - livello di guadagno canale LFE bloccato</li>
+  <li>dynrng (bool) - usa range compressione dinamica</li>
+  <li>dynrng_power (double) - incrementa range compressione dinamica</li>
+  <li>auto_matrix (bool) - calcola matrice di missaggio automaticamente</li>
+  <li>normalize_matrix (bool) - normalizza matrice di missaggio</li>
+  <li>bass_redir (bool) - riidirezione dei bassi</li>
+  <li>expand_stereo (bool) - ricava surround da input stereo<br>
+  </li>
+  <li>voice_control (bool) - ricava centrale da input stereo</li>
+  <li>eq_on (bool) - attiva l'equalizzatore</li>
+  <li>delay_on (bool) - attiva modifiche ritardo.</li>
+</ul>
+<br>
+<h3><a name="reg_matrix"></a>Missaggio di matrici.</h3>
+&nbsp;&nbsp;&nbsp; I valori della matrice possono essere invocati in
+questo modo: [from_channel]_[to_channel], dove from_channel e' missato
+su to_channel con il valore specificato per il fattore .<br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><b><a name="misc"></a>Varie.</b></h2>
+<p>&nbsp;&nbsp;&nbsp;Il filtro si basa principalmente sulla libreria
+opensource LibA/52 (<a href="http://liba52.sourceforge.net/">http://liba52.sourceforge.net</a>)
+riprendendone le caratteristiche e le funzionalita' principali. La
+maggior parte   del codice e' stato riscritto cercando di valorizzare il
+lavoro fatto con il   progetto opensource. Il mio obiettivo e' quello di
+migliorare per quanto possibile   questa libreria cercando di
+conformarmi per quanto possibile allo standard (<a class="moz-txt-link-freetext" href="http://www.atsc.org/standards/a_52a.pdf">http://www.atsc.org/standards/a_52a.pdf</a>).
+Un sentito grazie a Aaron Holtzman e Michel Lespinasse per il loro
+lavoro e   la loro dedizione.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Un grazie particolare a Marcello Mota per il suo
+supporto e l'aiuto fornito nel difficile lavoro di debugging e testing.<br>
+&nbsp;&nbsp;&nbsp; Grazie anche a Gabest per il supporto della
+riproduzione DVD playback.<br>
+&nbsp;&nbsp;&nbsp; Grazie a Frank (forum di Doom9) per la matrice di
+downmix Dolby ProLogic II.<br>
+&nbsp;&nbsp;&nbsp; Valery Shabaev per aver ideato lo script di
+installazione.<br>
+&nbsp;&nbsp;&nbsp; Ai membri del forum di IXBT e Doom9 per il tempo
+concesso nella fase di testing e nella segnalazione di bug.<br>
+&nbsp;&nbsp;&nbsp; Un grazie a Fabrizio Degni (<a href="mailto:rush@openaccess.it">rush@openaccess.it</a>)   per aver
+tradotto la documentazione in lingua italiana.<br>
+&nbsp;&nbsp;&nbsp; A tutte le persone che hanno creduto e continuano a
+credere in questo progetto.....<br>
+<br>
+<br>
+</p>
+<hr width="100%" size="2">
+<h2><a name="distribution"></a>Distribuzione.</h2>
+&nbsp;&nbsp;&nbsp; Questo programma e' distribuito con licenza GNU
+General Public Licence v2, licenza consultabile nel file GNU_eng.txt (in
+inglese) e GNU_rus.txt (in russo). La versione in lingua russa e' stata
+ideata solo per scopi illustrativi. La versione inglese e' la
+distribuzione principale del programma, quella in cui gli aggiornamenti
+sono rilasciati con maggiore tempestivita'.<br>
+<br>
+&nbsp;&nbsp;&nbsp; L'applicazione e' stata ideata solo per scopo
+dimostrativo ed didattico. Qualsiasi altro uso potrebbe essere vietato
+dalle leggi vigenti in alcuni stati. L'autore non ha alcuna
+responsabilita' diretta o indiretta derivante dall'utilizzo di questa
+applicazione. L'applicazione puo' essere distribuita gratuidamente a
+meno di restrizioni vigenti nello stato di distribuzione.<br>
+<font color="#000000"><br>
+&nbsp;&nbsp;&nbsp; Questo prodotto e' distribuito nella speranza che
+sia di aiuto alla comunita' di utilizzatori PC, <b>ma non ha alcuna
+garanzia</b>; senza alcuna implicazione diretta o indiretta di
+assistenza o supporto derivante dal suo utilizzo e senza vincoli di
+compiacenza agli standard interessati. Il supporto tecnico non e'
+garantito 24 ore su 24 (e sempre), la correzione di bug, il recupero di
+dati andati perduti e in particolare l'autore ed il localizzatore di
+tale guida non si assumono nessuna responsabilita' per perdita di dati,
+danneggiamento di componenti hardware o software, tempo-lavoro speso
+nell'uso del programma. Io <b>non</b> sono responsabile per la legalita'
+della distribuzione e pubblicazione di software multimediale basato sul
+programma.<br>
+</font> <br>
+<br>
+<hr width="100%" size="2">
+<h2><a name="author"></a>Come contattare l'autore...</h2>
+&nbsp;&nbsp;&nbsp; Per le domande sul programma inviate una email a
+questo indirizzo: <img src="pic/email.gif" title="" alt="" width="111" height="15" align="middle">. Per favore in merito a segnalazioni di
+bug cercate di inserire nel messaggio le seguenti informazioni:<br>
+<ul>
+  <li>Descrizione del problema<br>
+  </li>
+  <li>Versione di Windows in uso<br>
+  </li>
+  <li>Scheda sonora installata</li>
+  <li>Nome e versione per player usato<br>
+  </li>
+  <li>La chiave di registro <b>[HKEY_CURRENT_USER\Software\AC3Filter]</b></li>
+  <li>La configurazione degli altoparlanti usata (stereo, quadro,
+5.1...).</li>
+  <li>Informazioni sul bitstream della finestra principale delle
+proprieta'</li>
+  <li>Se conoscete Graphedit, catturate una screenshot (o descrivete a
+parole) del grafico che ha causato il problema.</li>
+  <li>Se il problema e' inerente il file stesso, inviatemi una parte
+dell'AC3.<br>
+  </li>
+</ul>
+In tal modo rendere il mio lavoro di tracciamento e risoluzione del bug
+estremamente piu' facile.<br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><a name="changelog"></a>Changelog.</h2><tt>
+$changelog</tt><br>
+<br>
+<br>
+<hr width="100%" size="2">
+<h2><a name="links"></a>Collegamenti utili<br>
+</h2>
+AC3Filter site (<i>rus+eng</i>): (<a href="http://xvalex.hotbox.ru/programs/AC3filter">http://xvalex.hotbox.ru/programs/AC3filter</a>)<br>
+AC3Filter site (<i>rus+eng</i>): (<a href="http://AC3filter.sourceforge.net/">http://AC3filter.sourceforge.net</a>)<br>
+Valex's AC3 decoder for Winamp site (<i>rus+eng</i>): (<a href="http://xvalex.hotbox.ru/programs/winampAC3">http://xvalex.hotbox.ru/programs/winampAC3</a>)<br>
+Valex's AC3 decoder for Winamp site (<i>rus+eng</i>): (<a href="http://winampAC3.sourceforge.net/">http://winampAC3.sourceforge.net</a>)<br>
+<br>
+A/52a standart (AC3) (<i>eng</i>): (<a class="moz-txt-link-freetext" href="http://www.atsc.org/standards/a_52a.pdf">http://www.atsc.org/standards/a_52a.pdf</a>).<br>
+Dolby explanations about LFE (eng): (<a href="http://www.dolby.com/tech/c.in.0011.LFE.pdf">http://www.dolby.com/tech/c.in.0011.LFE.pdf</a>)<br>
+LibA52 library (was AC3dec) (<i>eng</i>):   (<a href="http://liba52.sourceforge.net/">http://liba52.sourceforge.net</a>).<br>
+Multichannel audio reproduction at Windows (<i>eng</i>):    (<a href="http://www.microsoft.com/hwdev/tech/audio/multichaudP.asp">http://www.microsoft.com/hwdev/tech/audio/multichaudP.asp</a>).<br>
+Just best video-related site (<i>eng</i>): (<a href="http://www.doom9.org">http://www.doom9.org</a>).<br>
+And one more (<i>rus</i>): (<a class="moz-txt-link-freetext" href="http://freetime.sinor.ru/observatory/digitalvideo">http://freetime.sinor.ru/observatory/digitalvideo</a>).<br>
+<br>
+<br>
+<hr width="100%" size="2">
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top"><i><small>Copyright (c) 2002-2003 by Vigovsky
+Alexanderi.<br>
+      </small></i></td>
+      <td valign="top" align="right"><i><small> Last updated 6.03.2003</small></i></td>
+    </tr>
+  </tbody>
+</table>
+</body></html>

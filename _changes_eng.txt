@@ -1,0 +1,16 @@
+<b>1.01a</b> - 
+  * First working alfa for new filter generation
+  * Totally rewrited
+  * 10%-20% faster
+  * Level meters are now syncronized with playback
+  + DTS decoding support (including AVI/DTS and WAV/DTS)
+  + MPEG1/2 Audio Layer I/II decoding support
+  + DVD/LPCM decoding support
+  + Audio processing for any kind of audio track
+  + AC3/DTS/MPEG Audio SPDIF passthrough
+  + Real-time AC3 encoding for multichannel SPDIF output
+  + More powerful dynamic range compression
+  + Bass redirection crossover frequency
+  + Per-channel gain control
+  - equalizer
+  - save configuration to file
