@@ -17,9 +17,9 @@ goto endofperl
 
 use strict;
 
-my $ver  = "1.01a";
-my $ver1 = "1_01a";
-my $date = "05.11.2004";
+my $ver  = "1.02a";
+my $ver1 = "1_02a";
+my $date = "29.09.2004";
 my $download_bin = "http://prdownloads.sourceforge.net/ac3filter/ac3filter_$ver1.exe?download";
 my $download_src = "http://prdownloads.sourceforge.net/ac3filter/ac3filter_${ver1}_src.zip?download";
 my $bin = "..\\ac3filter_$ver1.exe";

@@ -2,8 +2,9 @@
 AC3Filter
 =========
 
-AC3Filter is high quality DirectShow audio decoder and processor filter
-focused on flexible audio controls during playback.
+AC3Filter is high quality freeware DirectShow audio decoder and processor 
+filter used to decode audio tracks in movies (DVD, MPEG4 and others). 
+Focused on poweful and flexible audio control.
 
 Main features:
 * Decode AC3/DTS/MPEG Audio Layer I/II formats
@@ -100,7 +101,7 @@ http://sourceforge.net/forum/?group_id=66022 - Forum
 Donate:
 =======
 
-
+http://order.kagi.com/?6CZJZ&lang=en
 
 Contact Author: 
 ===============
