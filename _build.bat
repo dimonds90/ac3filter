@@ -80,6 +80,14 @@ system('msdev chineese_patch\\chineese_patch.dsp /MAKE "chineese_patch - Win32 R
 `rmdir /s /q chineese_patch\\debug 2> nul`;
 `rmdir /s /q chineese_patch\\release 2> nul`;
 
+
+system('msdev ac3config\\ac3config.dsp /MAKE "ac3config - Win32 Release" /REBUILD')
+  && die "failed!!!";
+
+`copy ac3config\\release\\ac3config.exe $package\\ac3config.exe`;
+`rmdir /s /q ac3config\\debug 2> nul`;
+`rmdir /s /q ac3config\\release 2> nul`;
+
 `_clear.bat`;
 
 ###############################################################################

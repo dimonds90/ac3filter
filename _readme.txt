@@ -3,7 +3,7 @@ AC3Filter
 =========
 
 AC3Filter is high quality DirectShow audio decoder and processor filter
-focused on flexible audio controls during movie playback.
+focused on flexible audio controls during playback.
 
 Main features:
 * Decode AC3/DTS/MPEG Audio Layer I/II formats
@@ -15,13 +15,13 @@ Main features:
 * Detailed input bitstream format information
 * Automatic Gain Control
 * Dynamic Range Compression
-* Per-channel delays
 * Online output configuraion change
 * Upmix from any stereo source to 3-6 channels
 * Downmix to DolbySurround/ProLogic/ProLogic2
-* Per-channel gain for all input/output channels
-* Direct access to mixing matrix
 * Input/output levels indication
+* Per-channel gain for all input/output channels
+* Per-channel delays
+* Direct access to mixing matrix
   
 More information you can find in files:
 doc/ac3filter_rus.html (russian)
@@ -107,5 +107,5 @@ Contact Author:
 
 mailto:xvalex@mail.ru?Subject=AC3Filter
 
-Please write only in English or Russian. Subject should have 'AC3Filter' 
-word otherwise it may be accidentally deleted with tons of other junk mail.
+Please write in English or Russian. Subject should have 'AC3Filter'  word 
+otherwise it may be accidentally deleted with tons of other junk mail.

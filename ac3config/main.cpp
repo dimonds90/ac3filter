@@ -25,5 +25,5 @@ INT APIENTRY WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR pCmdLine,
   CoTaskMemFree(cauuid.pElems);
   spp->Release();
   CoUninitialize();
-  return true;
+  return 0;
 };

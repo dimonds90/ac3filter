@@ -22,3 +22,7 @@ del release\*.map 2> nul
 cd chineese_patch
 call _clear.bat
 cd ..
+
+cd ac3config
+call _clear.bat
+cd ..

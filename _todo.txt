@@ -1,3 +1,12 @@
+Documentation
+============
+
+* Documentation!!!
+* Add desription of DIVXG400 & VobSub finters (how to reach filter settings)
+* Add link to donation system
+* SPDIF breaks - switch to WaveOut? (AlexK, ICQ conversation)
+
+
 First order
 ============
 
@@ -12,7 +21,6 @@ First order
      * to default preset if we're disconnected;
    load old preset on 'Cancel' button;
   ]
-* Documentation!!!
 * option to disable AC3 encoding.
 * BUG: DShowSink::process(): chunk buffer is not locked and may become invalid!
 * BUG: set_input(): update of sample rate of output format procedure is incorrect

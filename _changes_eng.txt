@@ -3,6 +3,7 @@
     (much of information about how to setup and tune the filter)
   * updated DRC algorithm (reduced noise)
   * DRC bug fixed (sound disappeared sometimes)
+  * AC3 encoder bug fixed
   + Added AC3 CRC check
   + Separate settings for AC3/DTS/other formats
 
