@@ -337,6 +337,15 @@ CUnknown * WINAPI AC3FilterDlg::CreateSystem(LPUNKNOWN lpunk, HRESULT *phr)
   return punk;
 }
 
+CUnknown * WINAPI AC3FilterDlg::CreateAbout(LPUNKNOWN lpunk, HRESULT *phr)
+{
+  DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter System property page"));
+  CUnknown *punk = new AC3FilterDlg("AC3Filter System property page", lpunk, phr, IDD_ABOUT, IDS_ABOUT, 0);
+  if (punk == NULL) 
+    *phr = E_OUTOFMEMORY;
+  return punk;
+}
+
 AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int DialogId, int TitleId, int _flags) 
 :CBasePropertyPage(pName, pUnk, DialogId, TitleId)
 {
@@ -348,6 +357,7 @@ AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int Dialo
 
   flags  = _flags;
   InitCommonControls();
+  logo   = 0;
 }
 
 HRESULT 
@@ -384,19 +394,27 @@ AC3FilterDlg::OnDisconnect()
     filter->get_in_spk(&in_spk);
 
     RegistryKey reg;
+    reg.create_key(REG_KEY_PRESET"\\Default");
+    filter->save_params(&reg, AC3FILTER_SPK | AC3FILTER_SYS);
+
     switch (in_spk.format)
     {
       case FORMAT_AC3: reg.create_key(REG_KEY_PRESET"\\Default AC3"); break;
       case FORMAT_DTS: reg.create_key(REG_KEY_PRESET"\\Default DTS"); break;
-      default:         reg.create_key(REG_KEY_PRESET"\\Default"); break;
+      case FORMAT_MPA: reg.create_key(REG_KEY_PRESET"\\Default MPA"); break;
     }
-    filter->save_params(&reg, AC3FILTER_ALL);
+    filter->save_params(&reg, AC3FILTER_PRESET);
   }
 
   SAFE_RELEASE(filter);
   SAFE_RELEASE(proc);
   SAFE_RELEASE(dec);
 
+  if (logo)
+  {
+    DeleteObject(logo);
+    logo = 0;
+  }
   return NOERROR;
 }
 
@@ -407,9 +425,12 @@ AC3FilterDlg::OnActivate()
 
   visible = false;
   refresh = true;
+
+  reload_state();
   init_controls();
   set_dynamic_controls();
   set_controls();
+  set_cpu_usage();
 
   SetTimer(m_hwnd, 1, refresh_time, 0);  // for all dynamic controls
   SetTimer(m_hwnd, 2, 1000, 0);          // for CPU usage (should be averaged)
@@ -450,16 +471,27 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
       if (IsWindowVisible(hwnd))
         if (visible)
         {
-          if (wParam == 1) set_dynamic_controls();
-          if (wParam == 2) set_cpu_usage();
+          reload_state();
+          if (in_spk != old_in_spk)
+          {
+            set_controls();
+            set_dynamic_controls();
+          }
+          else
+            if (wParam == 1) 
+              set_dynamic_controls();
+
+          if (wParam == 2) 
+            set_cpu_usage();
         }
         else
         {
-          refresh = true;
-          visible = true;
+          reload_state();
           set_controls();
           set_dynamic_controls();
           set_cpu_usage();
+          refresh = true;
+          visible = true;
         }
       else
         visible = false;
@@ -474,6 +506,14 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 ///////////////////////////////////////////////////////////////////////////////
 // Controls initalization/update
 ///////////////////////////////////////////////////////////////////////////////
+
+void 
+AC3FilterDlg::update()
+{
+  reload_state();
+  set_dynamic_controls();
+  set_controls();
+}
 
 
 void 
@@ -506,6 +546,7 @@ AC3FilterDlg::init_controls()
   SendDlgItemMessage(m_Dlg, IDC_CMB_SPK, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < sizeof(spklist) / sizeof(spklist[0]); i++)
     SendDlgItemMessage(m_Dlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LONG)spklist[i]);
+  set_logo();
 
   /////////////////////////////////////
   // CPU usage
@@ -610,22 +651,29 @@ AC3FilterDlg::init_controls()
   for (i = 0; i < sizeof(units_list) / sizeof(units_list[0]); i++)
     SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_ADDSTRING, 0, (LONG)units_list[i]);
 
+  /////////////////////////////////////
+  // Links
+
+  lnk_home.link(m_Dlg, IDC_LNK_HOME);
+  lnk_forum.link(m_Dlg, IDC_LNK_FORUM);
+  lnk_email.link(m_Dlg, IDC_LNK_EMAIL);
+  lnk_donate.link(m_Dlg, IDC_LNK_DONATE);
 }
 
 void 
 AC3FilterDlg::set_dynamic_controls()
 {
   char buf[sizeof(old_info)];
-  reload_state();
 
   /////////////////////////////////////////////////////////
   // Input format
 
-  if (old_spk != in_spk || refresh)
+  if (old_in_spk != in_spk || refresh)
   {
-    old_spk = in_spk;
+    old_in_spk = in_spk;
     sprintf(buf, "%s %s %iHz", in_spk.format_text(), in_spk.mode_text(), in_spk.sample_rate);
     SetDlgItemText(m_Dlg, IDC_LBL_INPUT, buf);
+    set_logo();
   }
 
   /////////////////////////////////////
@@ -706,8 +754,6 @@ AC3FilterDlg::set_controls()
   m_bDirty = true;
   if(m_pPageSite)
     m_pPageSite->OnStatusChange(PROPPAGESTATUS_DIRTY);
-
-  reload_state();
 
   /////////////////////////////////////
   // Speakers
@@ -905,6 +951,26 @@ AC3FilterDlg::set_cpu_usage()
   SendDlgItemMessage(m_Dlg, IDC_CPU, PBM_SETPOS, int(cpu_usage * 100),  0);
 }
 
+void 
+AC3FilterDlg::set_logo()
+{
+  if (logo)
+  {
+    DeleteObject(logo);
+    logo = 0;
+  }
+
+  int resource = IDB_LOGO_PCM;
+  switch (in_spk.format)
+  {
+    case FORMAT_AC3: resource = IDB_LOGO_AC3; break;
+    case FORMAT_DTS: resource = IDB_LOGO_DTS; break;
+    case FORMAT_MPA: resource = IDB_LOGO_MPA; break;
+  }
+  logo = LoadBitmap(g_hInst, MAKEINTRESOURCE(resource));
+  SendDlgItemMessage(m_Dlg, IDC_LOGO, STM_SETIMAGE, IMAGE_BITMAP, (long)logo);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Commands
 ///////////////////////////////////////////////////////////////////////////////
@@ -950,7 +1016,7 @@ AC3FilterDlg::command(int control, int message)
 
         Speakers spk = list2spk(ispk, ifmt, out_spk.sample_rate);
         filter->set_out_spk(spk);
-        set_controls();
+        update();
       }
       break;
 
@@ -961,7 +1027,7 @@ AC3FilterDlg::command(int control, int message)
     {
       spdif = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF) == BST_CHECKED;
       filter->set_spdif(spdif);
-      set_controls();
+      update();
       break;
     }
 
@@ -977,7 +1043,7 @@ AC3FilterDlg::command(int control, int message)
       spdif_pt |= IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_AC3) == BST_CHECKED? FORMAT_MASK_AC3: 0;
       spdif_pt |= IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
       filter->set_spdif_pt(spdif_pt);
-      set_controls();
+      update();
       break;
     }
 
@@ -997,7 +1063,7 @@ AC3FilterDlg::command(int control, int message)
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_PES) == BST_CHECKED? FORMAT_MASK_PES: 0;
       filter->set_formats(formats);
-      set_controls();
+      update();
       break;
     }
 
@@ -1009,7 +1075,7 @@ AC3FilterDlg::command(int control, int message)
       {
         master = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLIDER_MASTER,TBM_GETPOS, 0, 0))/ticks);
         proc->set_master(master);
-        set_controls();
+        update();
       }
       break;
 
@@ -1017,7 +1083,7 @@ AC3FilterDlg::command(int control, int message)
       if (message == CB_ENTER)
       {
         proc->set_master(db2value(edt_master.value));
-        set_controls();
+        update();
       }
       break;
 
@@ -1035,7 +1101,7 @@ AC3FilterDlg::command(int control, int message)
         proc->set_clev(clev);
         proc->set_slev(slev);
         proc->set_lfelev(lfelev);
-        set_controls();
+        update();
       }
       break;
 
@@ -1050,7 +1116,7 @@ AC3FilterDlg::command(int control, int message)
         proc->set_clev(clev);
         proc->set_slev(slev);
         proc->set_lfelev(lfelev);
-        set_controls();
+        update();
       }
       break;
 
@@ -1069,7 +1135,7 @@ AC3FilterDlg::command(int control, int message)
           input_gains[ch] = db2value(-double(SendDlgItemMessage(m_Dlg, idc_slider_in[ch], TBM_GETPOS, 0, 0))/ticks);
 
         proc->set_input_gains(input_gains);
-        set_controls();
+        update();
       }
       break;
 
@@ -1085,7 +1151,7 @@ AC3FilterDlg::command(int control, int message)
           input_gains[ch] = db2value(edt_in_gains[ch].value);
 
         proc->set_input_gains(input_gains);
-        set_controls();
+        update();
       }
       break;
 
@@ -1101,7 +1167,7 @@ AC3FilterDlg::command(int control, int message)
           output_gains[ch] = db2value(-double(SendDlgItemMessage(m_Dlg, idc_slider_out[ch], TBM_GETPOS, 0, 0))/ticks);
 
         proc->set_output_gains(output_gains);
-        set_controls();
+        update();
       }
       break;
 
@@ -1117,7 +1183,7 @@ AC3FilterDlg::command(int control, int message)
           output_gains[ch] = db2value(edt_out_gains[ch].value);
 
         proc->set_output_gains(output_gains);
-        set_controls();
+        update();
       }
       break;
 
@@ -1129,7 +1195,7 @@ AC3FilterDlg::command(int control, int message)
     {
       delay = (SendDlgItemMessage(m_Dlg, IDC_CHK_DELAY, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_delay(delay);
-      set_controls();
+      update();
       break;
     }
 
@@ -1145,7 +1211,7 @@ AC3FilterDlg::command(int control, int message)
           delays[ch] = (float)edt_delay[ch].value;
 
         proc->set_delays(delays);
-        set_controls();
+        update();
       }
       break;
 
@@ -1154,7 +1220,7 @@ AC3FilterDlg::command(int control, int message)
       {
         delay_units = list2units(SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_GETCURSEL, 0, 0));
         proc->set_delay_units(delay_units);
-        set_controls();
+        update();
       }
       break;
 
@@ -1163,7 +1229,7 @@ AC3FilterDlg::command(int control, int message)
       {
         delay_ms = float(edt_delay_ms.value);
         proc->set_delay_ms(delay_ms);
-        set_controls();
+        update();
       }
       break;
 
@@ -1172,7 +1238,7 @@ AC3FilterDlg::command(int control, int message)
       {
         delay_ms = float(SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME, TBM_GETPOS, 0, 0));
         proc->set_delay_ms(delay_ms);
-        set_controls();     
+        update();     
       }
       break;
 
@@ -1184,7 +1250,7 @@ AC3FilterDlg::command(int control, int message)
     {
       drc = (SendDlgItemMessage(m_Dlg, IDC_CHK_DRC, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_drc(drc);
-      set_controls();
+      update();
       break;
     }
 
@@ -1193,7 +1259,7 @@ AC3FilterDlg::command(int control, int message)
       {
         drc_power = -double(SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_GETPOS, 0, 0)) / ticks;
         proc->set_drc_power(drc_power);
-        set_controls();
+        update();
       }
       break;
 
@@ -1202,7 +1268,7 @@ AC3FilterDlg::command(int control, int message)
       {
         drc_power = edt_drc_power.value;
         proc->set_drc_power(drc_power);
-        set_controls();
+        update();
       }
       break;
 
@@ -1214,7 +1280,7 @@ AC3FilterDlg::command(int control, int message)
     {
       bass_redir = (SendDlgItemMessage(m_Dlg, IDC_CHK_BASS_REDIR, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_bass_redir(bass_redir);
-      set_controls();
+      update();
       break;
     }
 
@@ -1223,7 +1289,7 @@ AC3FilterDlg::command(int control, int message)
       {
         bass_freq = (int)edt_bass_freq.value;
         proc->set_bass_freq(bass_freq);
-        set_controls();
+        update();
       }
       break;
 
@@ -1236,7 +1302,7 @@ AC3FilterDlg::command(int control, int message)
       auto_matrix = (SendDlgItemMessage(m_Dlg, IDC_CHK_AUTO_MATRIX, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_auto_matrix(auto_matrix);
       refresh = true;
-      set_controls();
+      update();
       break;
     }
 
@@ -1244,7 +1310,7 @@ AC3FilterDlg::command(int control, int message)
     {
       normalize_matrix = (SendDlgItemMessage(m_Dlg, IDC_CHK_NORM_MATRIX, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_normalize_matrix(normalize_matrix);
-      set_controls();
+      update();
       break;
     }
 
@@ -1252,7 +1318,7 @@ AC3FilterDlg::command(int control, int message)
     {
       auto_gain = (SendDlgItemMessage(m_Dlg, IDC_CHK_AUTO_GAIN, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_auto_gain(auto_gain);
-      set_controls();
+      update();
       break;
     }
 
@@ -1260,7 +1326,7 @@ AC3FilterDlg::command(int control, int message)
     {
       normalize = (SendDlgItemMessage(m_Dlg, IDC_CHK_NORMALIZE, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_normalize(normalize);
-      set_controls();
+      update();
       break;
     }
 
@@ -1268,7 +1334,7 @@ AC3FilterDlg::command(int control, int message)
     {
       expand_stereo = (SendDlgItemMessage(m_Dlg, IDC_CHK_EXPAND_STEREO, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_expand_stereo(expand_stereo);
-      set_controls();
+      update();
       break;
     }
 
@@ -1276,7 +1342,7 @@ AC3FilterDlg::command(int control, int message)
     {
       voice_control = (SendDlgItemMessage(m_Dlg, IDC_CHK_VOICE_CONTROL, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_voice_control(voice_control);
-      set_controls();
+      update();
       break;
     }
 
@@ -1294,7 +1360,7 @@ AC3FilterDlg::command(int control, int message)
 
         RegistryKey reg(buf);
         filter->load_params(&reg, AC3FILTER_ALL);
-        set_controls();
+        update();
       }
       if (message == CB_ENTER)
       {
@@ -1306,7 +1372,7 @@ AC3FilterDlg::command(int control, int message)
         RegistryKey reg;
         reg.create_key(buf);
         filter->save_params(&reg, AC3FILTER_PRESET);
-        set_controls();
+        update();
       }
 
       break;
@@ -1321,7 +1387,7 @@ AC3FilterDlg::command(int control, int message)
       RegistryKey reg;
       reg.create_key(buf);
       filter->save_params(&reg, AC3FILTER_PRESET);
-      set_controls();
+      update();
       break;
     }
 
@@ -1337,7 +1403,7 @@ AC3FilterDlg::command(int control, int message)
         sprintf(buf, REG_KEY_PRESET"\\%s", preset);
         delete_reg_key(buf, HKEY_CURRENT_USER);
         SendDlgItemMessage(m_Dlg, IDC_CMB_PRESET, WM_SETTEXT, 0, (LONG)"");
-        set_controls();
+        update();
       }
       break;
     }
@@ -1384,7 +1450,7 @@ AC3FilterDlg::command(int control, int message)
         proc->set_auto_matrix(false);
         RegistryKey reg(buf);
         filter->load_params(&reg, AC3FILTER_MATRIX);
-        set_controls();
+        update();
       }
       if (message == CB_ENTER)
       {
@@ -1396,7 +1462,7 @@ AC3FilterDlg::command(int control, int message)
         RegistryKey reg;
         reg.create_key(buf);
         filter->save_params(&reg, AC3FILTER_MATRIX);
-        set_controls();
+        update();
       }
       break;
 
@@ -1410,7 +1476,7 @@ AC3FilterDlg::command(int control, int message)
       RegistryKey reg;
       reg.create_key(buf);
       filter->save_params(&reg, AC3FILTER_MATRIX);
-      set_controls();
+      update();
       break;
     }
 
@@ -1427,7 +1493,7 @@ AC3FilterDlg::command(int control, int message)
         delete_reg_key(buf, HKEY_CURRENT_USER);
         SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_SETTEXT, 0, (LONG)"");
         proc->set_auto_matrix(true);
-        set_controls();
+        update();
       }
       break;
     }
@@ -1445,7 +1511,7 @@ AC3FilterDlg::command(int control, int message)
       // Clear filter cache
       delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 
-      set_controls();
+      update();
       break;
 
     case IDC_RB_RENDER_WO:
@@ -1458,7 +1524,7 @@ AC3FilterDlg::command(int control, int message)
       // Clear filter cache
       delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 
-      set_controls();
+      update();
       break;
 
     case IDC_RB_MERIT_PREFERRED:
@@ -1466,7 +1532,7 @@ AC3FilterDlg::command(int control, int message)
       // Clear filter cache
       delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 
-      set_controls();
+      update();
       break;
 
     case IDC_RB_MERIT_UNLIKELY:
@@ -1474,7 +1540,9 @@ AC3FilterDlg::command(int control, int message)
       // Clear filter cache
       delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 
-      set_controls();
+      update();
       break;
   }
 }
+
+

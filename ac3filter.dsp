@@ -54,7 +54,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386
-# ADD LINK32 strmbase.lib msvcrt.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /pdb:none /machine:I386 /nodefaultlib /out:"Release/ac3filter.ax"
+# ADD LINK32 strmbase.lib msvcrt.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib shell32.lib gdi32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /pdb:none /machine:I386 /nodefaultlib /out:"Release/ac3filter.ax"
 # SUBTRACT LINK32 /map
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
@@ -86,7 +86,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 strmbasd.lib msvcrtd.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /debug /machine:I386 /nodefaultlib /out:"Debug/ac3filter.ax" /pdbtype:sept
+# ADD LINK32 strmbasd.lib msvcrtd.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /debug /machine:I386 /nodefaultlib /out:"Debug/ac3filter.ax" /pdbtype:sept
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
 PostBuild_Cmds=_reg_debug.bat
@@ -243,6 +243,22 @@ SOURCE=.\ac3filter.ico
 # Begin Source File
 
 SOURCE=.\ac3filter.rc
+# End Source File
+# Begin Source File
+
+SOURCE=.\ac3filter_ac3.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ac3filter_dts.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ac3filter_mpa.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ac3filter_pcm.bmp
 # End Source File
 # Begin Source File
 

@@ -122,6 +122,7 @@ AC3Filter::set_input(Speakers _spk)
     {
       case FORMAT_AC3: reg.open_key(REG_KEY_PRESET"\\Default AC3"); break;
       case FORMAT_DTS: reg.open_key(REG_KEY_PRESET"\\Default DTS"); break;
+      case FORMAT_MPA: reg.open_key(REG_KEY_PRESET"\\Default MPA"); break;
       default:         reg.open_key(REG_KEY_PRESET"\\Default"); break;
     }
     load_params(&reg, AC3FILTER_ALL);
@@ -656,7 +657,7 @@ AC3Filter::DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProper
 STDMETHODIMP 
 AC3Filter::GetPages(CAUUID *pPages)
 {
-  pPages->cElems = 4;
+  pPages->cElems = 5;
   pPages->pElems = (GUID *) CoTaskMemAlloc(sizeof(GUID) * pPages->cElems);
   if (pPages->pElems == NULL)
     return E_OUTOFMEMORY;
@@ -665,6 +666,7 @@ AC3Filter::GetPages(CAUUID *pPages)
   (pPages->pElems)[1] = CLSID_AC3Filter_mixer;
   (pPages->pElems)[2] = CLSID_AC3Filter_gains;
   (pPages->pElems)[3] = CLSID_AC3Filter_sys;
+  (pPages->pElems)[4] = CLSID_AC3Filter_about;
   return NOERROR;
 }
 

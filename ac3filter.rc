@@ -29,7 +29,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
 IDD_GAINS DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
                     PBS_SMOOTH,181,115,7,50
@@ -165,7 +165,7 @@ END
 
 IDD_MIXER DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     CONTROL         "One-pass norm",IDC_CHK_NORMALIZE,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,99,118,64,8
@@ -420,33 +420,31 @@ BEGIN
                     IDC_STATIC,183,190,207,8
     LTEXT           "This program is free software and can be distributed according to the terms of GNU General Public License version 2.",
                     IDC_STATIC,13,72,182,24
-    LTEXT           "Latest releases, sources and documentation are always avilable at official project homepage:",
-                    IDC_STATIC,13,109,182,17
-    LTEXT           "Please report about all bugs. Feel free to email with all ideas, criticism, etc. to:",
-                    IDC_STATIC,209,109,176,17
-    CONTROL         "http://ac3filter.sourceforge.net/ac3filter",
-                    IDC_LNK_AC3FILTER,"Button",BS_OWNERDRAW | BS_FLAT | 
-                    WS_TABSTOP,13,127,130,8
-    CONTROL         "http://sourceforge.net/forum/?group_id=66022",
-                    IDC_LNK_FORUM,"Button",BS_OWNERDRAW | BS_FLAT | 
-                    WS_TABSTOP,13,145,155,8
-    LTEXT           "Project forum:",IDC_STATIC,13,136,44,8
-    CONTROL         "mailto:xvalex@mail.ru?Subject=AC3Filter",IDC_LNK_EMAIL,
-                    "Button",BS_OWNERDRAW | BS_FLAT | WS_TABSTOP,209,127,131,
-                    8
+    LTEXT           "Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).",
+                    IDC_STATIC,209,110,176,33
+    CONTROL         "Project forum|http://sourceforge.net/forum/?group_id=66022",
+                    IDC_LNK_FORUM,"Button",BS_OWNERDRAW | BS_LEFT | 
+                    BS_VCENTER | BS_FLAT | WS_TABSTOP,13,120,49,8
+    CONTROL         "mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter",
+                    IDC_LNK_EMAIL,"Button",BS_OWNERDRAW | BS_LEFT | BS_FLAT | 
+                    WS_TABSTOP,267,146,50,8
     GROUPBOX        "What is it?",IDC_STATIC,7,7,193,56
-    GROUPBOX        "Contact author",IDC_STATIC,203,99,187,58
+    GROUPBOX        "Contact author",IDC_STATIC,203,100,187,58
     LTEXT           "AC3Filter is high quality DirectShow audio decoder and processor filter used to playback multimedia files. Used automatically by most of multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.",
                     IDC_STATIC,13,17,182,42
     GROUPBOX        "License",IDC_STATIC,7,63,193,36
-    GROUPBOX        "Links",IDC_STATIC,7,99,193,59
-    PUSHBUTTON      "!!! DONATE !!!",IDC_BTN_DONATE,149,171,93,16,BS_CENTER | 
-                    BS_VCENTER | BS_MULTILINE
+    GROUPBOX        "Links",IDC_STATIC,7,100,193,58
+    CONTROL         "!!! DONATE !!!|http://order.kagi.com/?6CZJZ",
+                    IDC_LNK_DONATE,"Button",BS_OWNERDRAW | BS_LEFT | 
+                    BS_VCENTER | BS_FLAT | WS_TABSTOP,178,171,51,16
     GROUPBOX        "Thanks to",IDC_STATIC,203,7,187,93
-    CTEXT           "If you want this project to continue and become better please donate. Any sum is important!",
+    CTEXT           "If you like this and want it to become better please make a donation. Any sum is important!",
                     IDC_STATIC,13,160,372,9
-    LTEXT           "Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).",
-                    IDC_STATIC,209,137,176,17
+    CONTROL         "Official homepage|http://ac3filter.sourceforge.net/ac3filter",
+                    IDC_LNK_HOME,"Button",BS_OWNERDRAW | BS_LEFT | 
+                    BS_VCENTER | BS_FLAT | WS_TABSTOP,13,110,62,8
+    LTEXT           "- documentaion, new versions",IDC_STATIC,77,110,118,9
+    LTEXT           "- support, ideas, critics",IDC_STATIC,77,120,118,9
 END
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202
@@ -495,9 +493,9 @@ BEGIN
     LTEXT           "SW",IDC_STATIC,320,170,13,8
     CTEXT           "0%",IDC_CPU_LABEL,269,167,15,8
     LTEXT           "Frames / Errors",IDC_STATIC,15,171,49,8
-    EDITTEXT        IDC_EDT_ERRORS,103,170,30,12,ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDT_ERRORS,110,170,23,12,ES_AUTOHSCROLL | 
                     ES_READONLY
-    EDITTEXT        IDC_EDT_FRAMES,73,170,30,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDT_FRAMES,73,170,36,12,ES_AUTOHSCROLL | ES_READONLY
     LTEXT           "0dB",IDC_STATIC,294,23,22,8,0,WS_EX_RIGHT
     LTEXT           "-50dB",IDC_STATIC,294,72,22,8,0,WS_EX_RIGHT
     LTEXT           "0dB",IDC_STATIC,294,116,22,8,0,WS_EX_RIGHT
@@ -551,7 +549,7 @@ BEGIN
     LTEXT           "0dB",IDC_STATIC,209,46,15,8,0,WS_EX_RIGHT
     LTEXT           "Input:",IDC_STATIC,14,106,19,8
     LTEXT           "input config",IDC_LBL_INPUT,34,106,97,8
-    CONTROL         111,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+    CONTROL         "",IDC_LOGO,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
                     WS_BORDER,141,101,115,84
 END
 
@@ -810,7 +808,10 @@ IDI_AC3FILTER           ICON    DISCARDABLE     "ac3filter.ico"
 // Bitmap
 //
 
-IDB_LOGO                BITMAP  DISCARDABLE     "logo256.bmp"
+IDB_LOGO_PCM            BITMAP  DISCARDABLE     "ac3filter_pcm.bmp"
+IDB_LOGO_AC3            BITMAP  DISCARDABLE     "ac3filter_ac3.bmp"
+IDB_LOGO_DTS            BITMAP  DISCARDABLE     "ac3filter_dts.bmp"
+IDB_LOGO_MPA            BITMAP  DISCARDABLE     "ac3filter_mpa.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

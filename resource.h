@@ -3,6 +3,10 @@
 // Used by AC3Filter.rc
 //
 #define IDB_LOGO                        111
+#define IDB_LOGO_PCM                    120
+#define IDB_LOGO_AC3                    121
+#define IDB_LOGO_DTS                    122
+#define IDB_LOGO_MPA                    123
 #define IDC_EDT_BASS_FREQ               1104
 #define IDC_CHK_SPDIF_MPA               3130
 #define IDC_CHK_SPDIF_AC3               3131
@@ -19,14 +23,19 @@
 #define IDC_CHK_SPDIF                   3144
 #define IDC_CHK_SPDIF_ON                3148
 #define IDC_BTN_DONATE                  3157
+#define IDC_LNK_DONATE                  3157
+#define IDC_LNK_HOME                    3158
+#define IDC_LOGO                        3159
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        113
+#define _APS_NO_MFC                     1
+#define _APS_3D_CONTROLS                     1
+#define _APS_NEXT_RESOURCE_VALUE        125
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         3158
+#define _APS_NEXT_CONTROL_VALUE         3160
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

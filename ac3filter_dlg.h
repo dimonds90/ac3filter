@@ -14,6 +14,7 @@ public:
   static CUnknown * WINAPI CreateMixer (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateGains (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateSystem(LPUNKNOWN lpunk, HRESULT *phr);
+  static CUnknown * WINAPI CreateAbout (LPUNKNOWN lpunk, HRESULT *phr);
 
   int flags;
 
@@ -41,7 +42,7 @@ private:
   int      frames;
   int      errors;
 
-  Speakers old_spk;
+  Speakers old_in_spk;
   int      old_spdif_mode;
   matrix_t old_matrix;
   char     old_info[1024];
@@ -66,7 +67,13 @@ private:
   int         delay_units;
   DoubleEdit  edt_delay[NCHANNELS];
   DoubleEdit  edt_delay_ms;
-
+  // Links
+  LinkButton  lnk_home;
+  LinkButton  lnk_forum;
+  LinkButton  lnk_email;
+  LinkButton  lnk_donate;
+  // Images
+  HANDLE      logo;
 
   AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, int TitleId, int flags);
 
@@ -77,11 +84,13 @@ private:
   HRESULT OnActivate();
   HRESULT OnDeactivate();
 
+  void update();
   void init_controls();
   void set_dynamic_controls();
+  void set_controls();
   void set_matrix_controls();
   void set_cpu_usage();
-  void set_controls();
+  void set_logo();
 
   void command(int control, int message);
 };

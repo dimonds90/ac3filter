@@ -16,22 +16,23 @@
 #define REG_KEY_PRESET "Software\\AC3Filter\\preset"
 #define REG_KEY_MATRIX "Software\\AC3Filter\\matrix"
 
-#define AC3FILTER_SPK    1    // Speakers configuration: 
+// preset settings
+#define AC3FILTER_SPK    0x01 // Speakers configuration: 
                               // spk
-#define AC3FILTER_PROC   2    // audio processor settings
+#define AC3FILTER_PROC   0x02 // Audio processor settings:
                               // auto_gain, normalize, auto_matrix, normalize_matrix, voice_control, expand_stereo,
                               // drc, drc_power, master, clev, slev, lfelev
-#define AC3FILTER_GAINS  4    // Input/output gains: 
+#define AC3FILTER_GAINS  0x04 // Input/output gains: 
                               // input_gains, output_gains
-#define AC3FILTER_MATRIX 8    // Mixing matrix:
+#define AC3FILTER_MATRIX 0x08 // Mixing matrix:
                               // matrix
-#define AC3FILTER_DELAY  16   // Delay settings:
+#define AC3FILTER_DELAY  0x10 // Delay settings:
                               // delay, delay_units, delays
-#define AC3FILTER_SYS    32   // system settings: 
+#define AC3FILTER_SYS    0x20 // System settings: 
                               // formats, spdif, config_autoload, (time_shift, generate_timestamps, jitter)
 
-#define AC3FILTER_ALL    63   // all settings
-#define AC3FILTER_PRESET 30   // settings that saved into preset (all except system settings & speaker config)
+#define AC3FILTER_ALL    0x3f // all settings
+#define AC3FILTER_PRESET 0x1e // settings that saved into preset (all except system settings & speaker config)
 
 #define SPDIF_MODE_NONE         0    // see dvd_decoder.h
 #define SPDIF_MODE_PASSTHROUGH  1    // see dvd_decoder.h

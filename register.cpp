@@ -87,11 +87,9 @@ CFactoryTemplate g_Templates[] = {
     { L"AC3Filter System page"
     , &CLSID_AC3Filter_sys
     , AC3FilterDlg::CreateSystem },
-/*
     { L"AC3Filter About page"
     , &CLSID_AC3Filter_about
-    , CAC3Filter_conf::CreateInstanceAbout },
-*/
+    , AC3FilterDlg::CreateAbout },
     { L"AC3Filter"
     , &CLSID_AC3Filter
     , AC3Filter::CreateInstance
