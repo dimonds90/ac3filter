@@ -386,9 +386,9 @@ AC3FilterDlg::OnDisconnect()
     RegistryKey reg;
     switch (in_spk.format)
     {
-      case FORMAT_AC3: reg.create_key(REG_KEY"\\preset\\Default AC3"); break;
-      case FORMAT_DTS: reg.create_key(REG_KEY"\\preset\\Default DTS"); break;
-      default:         reg.create_key(REG_KEY"\\preset\\Default"); break;
+      case FORMAT_AC3: reg.create_key(REG_KEY_PRESET"\\Default AC3"); break;
+      case FORMAT_DTS: reg.create_key(REG_KEY_PRESET"\\Default DTS"); break;
+      default:         reg.create_key(REG_KEY_PRESET"\\Default"); break;
     }
     filter->save_params(&reg, AC3FILTER_ALL);
   }
@@ -863,8 +863,8 @@ AC3FilterDlg::set_controls()
     SendDlgItemMessage(m_Dlg, control, WM_SETTEXT, 0, (LONG)preset);                      \
   }
 
-  fill_combobox(IDC_CMB_PRESET, REG_KEY "\\preset");
-  fill_combobox(IDC_CMB_MATRIX, REG_KEY "\\matrix");
+  fill_combobox(IDC_CMB_PRESET, REG_KEY_PRESET);
+  fill_combobox(IDC_CMB_MATRIX, REG_KEY_MATRIX);
 
   /////////////////////////////////////
   // Matrix
@@ -1290,7 +1290,7 @@ AC3FilterDlg::command(int control, int message)
         char preset[256];
         SendDlgItemMessage(m_Dlg, IDC_CMB_PRESET, CB_GETLBTEXT, SendDlgItemMessage(m_Dlg, IDC_CMB_PRESET, CB_GETCURSEL, 0, 0), (LONG)preset);
         SendDlgItemMessage(m_Dlg, IDC_CMB_PRESET, WM_SETTEXT, 0, (LONG)preset);
-        sprintf(buf, REG_KEY "\\preset\\%s", preset);
+        sprintf(buf, REG_KEY_PRESET"\\%s", preset);
 
         RegistryKey reg(buf);
         filter->load_params(&reg, AC3FILTER_ALL);
@@ -1301,7 +1301,7 @@ AC3FilterDlg::command(int control, int message)
         char buf[256];
         char preset[256];
         SendDlgItemMessage(m_Dlg, IDC_CMB_PRESET, WM_GETTEXT, 256, (LONG)preset);
-        sprintf(buf, REG_KEY "\\preset\\%s", preset);
+        sprintf(buf, REG_KEY_PRESET"\\%s", preset);
 
         RegistryKey reg;
         reg.create_key(buf);
@@ -1316,7 +1316,7 @@ AC3FilterDlg::command(int control, int message)
       char buf[256];
       char preset[256];
       SendDlgItemMessage(m_Dlg, IDC_CMB_PRESET, WM_GETTEXT, 256, (LONG)preset);
-      sprintf(buf, REG_KEY "\\preset\\%s", preset);
+      sprintf(buf, REG_KEY_PRESET"\\%s", preset);
 
       RegistryKey reg;
       reg.create_key(buf);
@@ -1334,7 +1334,7 @@ AC3FilterDlg::command(int control, int message)
       sprintf(buf, "Are you sure you want to delete '%s' preset?", preset);
       if (MessageBox(m_Dlg, buf, "Delete confirmation", MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
       {     
-        sprintf(buf, REG_KEY "\\preset\\%s", preset);
+        sprintf(buf, REG_KEY_PRESET"\\%s", preset);
         delete_reg_key(buf, HKEY_CURRENT_USER);
         SendDlgItemMessage(m_Dlg, IDC_CMB_PRESET, WM_SETTEXT, 0, (LONG)"");
         set_controls();
@@ -1379,7 +1379,7 @@ AC3FilterDlg::command(int control, int message)
         char preset[256];
         SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, CB_GETLBTEXT, SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, CB_GETCURSEL, 0, 0), (LONG)preset);
         SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_SETTEXT, 0, (LONG)preset);
-        sprintf(buf, REG_KEY "\\matrix\\%s", preset);
+        sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
 
         proc->set_auto_matrix(false);
         RegistryKey reg(buf);
@@ -1391,7 +1391,7 @@ AC3FilterDlg::command(int control, int message)
         char buf[256];
         char preset[256];
         SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_GETTEXT, 256, (LONG)preset);
-        sprintf(buf, REG_KEY "\\matrix\\%s", preset);
+        sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
 
         RegistryKey reg;
         reg.create_key(buf);
@@ -1405,7 +1405,7 @@ AC3FilterDlg::command(int control, int message)
       char buf[256];
       char preset[256];
       SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_GETTEXT, 256, (LONG)preset);
-      sprintf(buf, REG_KEY "\\matrix\\%s", preset);
+      sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
 
       RegistryKey reg;
       reg.create_key(buf);
@@ -1423,7 +1423,7 @@ AC3FilterDlg::command(int control, int message)
       sprintf(buf, "Are you sure you want to delete '%s' matrix?", preset);
       if (MessageBox(m_Dlg, buf, "Delete confirmation", MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
       {     
-        sprintf(buf, REG_KEY "\\matrix\\%s", preset);
+        sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
         delete_reg_key(buf, HKEY_CURRENT_USER);
         SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_SETTEXT, 0, (LONG)"");
         proc->set_auto_matrix(true);

@@ -56,7 +56,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   sink->set_input(out_spk);
 
   // load params
-  RegistryKey reg(REG_KEY"\\presets\\Default");
+  RegistryKey reg(REG_KEY_PRESET"\\Default");
   load_params(&reg, AC3FILTER_ALL);
 }
 
@@ -120,9 +120,9 @@ AC3Filter::set_input(Speakers _spk)
     RegistryKey reg;
     switch (in_spk.format)
     {
-      case FORMAT_AC3: reg.open_key(REG_KEY"\\preset\\Default AC3"); break;
-      case FORMAT_DTS: reg.open_key(REG_KEY"\\preset\\Default DTS"); break;
-      default:         reg.open_key(REG_KEY"\\preset\\Default"); break;
+      case FORMAT_AC3: reg.open_key(REG_KEY_PRESET"\\Default AC3"); break;
+      case FORMAT_DTS: reg.open_key(REG_KEY_PRESET"\\Default DTS"); break;
+      default:         reg.open_key(REG_KEY_PRESET"\\Default"); break;
     }
     load_params(&reg, AC3FILTER_ALL);
   }
@@ -499,11 +499,14 @@ AC3Filter::CheckTransform(const CMediaType *mt_in, const CMediaType *mt_out)
     CMediaType mt_tmp2;
 
     mt_tmp1 = *mt_out;
-    spk2mt(out_spdif, mt_tmp1, false);
+    spk2mt(out_spdif, mt_tmp2, false);
 
     // Media Player Classics bug hack: do not check sample rates
     if (*mt_tmp1.FormatType() == FORMAT_WaveFormatEx) ((WAVEFORMATEX *)mt_tmp1.Format())->nSamplesPerSec = 0;
     if (*mt_tmp2.FormatType() == FORMAT_WaveFormatEx) ((WAVEFORMATEX *)mt_tmp2.Format())->nSamplesPerSec = 0;
+
+    WAVEFORMATEX *w1 = (WAVEFORMATEX *)mt_tmp1.Format();
+    WAVEFORMATEX *w2 = (WAVEFORMATEX *)mt_tmp2.Format();
 
     if (mt_tmp1 == mt_tmp2)
       return S_OK;

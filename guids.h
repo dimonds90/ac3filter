@@ -12,7 +12,9 @@
 #include "registry.h"
 
 // registry key
-#define REG_KEY "Software\\AC3Filter"
+#define REG_KEY        "Software\\AC3Filter"
+#define REG_KEY_PRESET "Software\\AC3Filter\\preset"
+#define REG_KEY_MATRIX "Software\\AC3Filter\\matrix"
 
 #define AC3FILTER_SPK    1    // Speakers configuration: 
                               // spk
