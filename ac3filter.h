@@ -68,12 +68,12 @@ public:
   STDMETHODIMP JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName);
 
   HRESULT GetMediaType(int iPosition, CMediaType *pMediaType);
-  HRESULT CheckInputType(const CMediaType *mtIn);
-  HRESULT CheckOutputType(const CMediaType *mtIn);
+  HRESULT CheckInputType(const CMediaType *mt);
+  HRESULT CheckOutputType(const CMediaType *mt);
   HRESULT CheckTransform(const CMediaType *mtIn, const CMediaType *mtOut);
   bool    CheckConnectPin(IPin *pin);
   HRESULT CheckConnect(PIN_DIRECTION dir, IPin *pin);
-  HRESULT SetMediaType(PIN_DIRECTION direction, const CMediaType *pmt);
+  HRESULT SetMediaType(PIN_DIRECTION direction, const CMediaType *mt);
 
   HRESULT DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProperties);
 

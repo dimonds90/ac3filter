@@ -312,11 +312,8 @@ AC3Filter::StartStreaming()
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StartStreaming()", this));
 
-  // SPDIF output may not be possible, so we may require format change
-  CAutoLock lock(&m_csReceive);
+  // switch between spdif/analog
   set_output(out_spk, spdif);
-  reset();
-  sink->send_mediatype();
 
   return CTransformFilter::StartStreaming();
 }
@@ -544,7 +541,7 @@ AC3Filter::CheckInputType(const CMediaType *mt)
 HRESULT 
 AC3Filter::CheckOutputType(const CMediaType *mt)
 {
-  CMediaType mt_tmp1;
+  CMediaType mt_tmp1 = *mt;
   CMediaType mt_tmp2;
   CMediaType mt_tmp3;
   /////////////////////////////////////////////////////////
@@ -552,7 +549,6 @@ AC3Filter::CheckOutputType(const CMediaType *mt)
 
   if (spdif)
   {
-    mt_tmp1 = *mt;
     spk2mt(out_spdif, mt_tmp2, false);
     spk2mt(out_spdif, mt_tmp3, true);
 
@@ -572,7 +568,6 @@ AC3Filter::CheckOutputType(const CMediaType *mt)
   // Verify PCM output
   // (used also in case when SPDIF is not available)
 
-  mt_tmp1 = *mt;
   spk2mt(out_spk, mt_tmp2, false);
   spk2mt(out_spk, mt_tmp3, true);
 
@@ -699,7 +694,6 @@ AC3Filter::SetMediaType(PIN_DIRECTION direction, const CMediaType *mt)
 
   return S_OK;
 }
-
 
 HRESULT                     
 AC3Filter::DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProperties)
