@@ -19,6 +19,7 @@ protected:
   CPUMeter   cpu;       // CPU usage meter
   COMDecoder dec;       // decoder & processor
   DShowSink  *sink;     // sink
+  ROTEntry   rot;       // registred objects table entry
 
   Speakers in_spk;      // input configuration
   Speakers out_spk;     // output configuration
@@ -36,9 +37,6 @@ protected:
   bool process_chunk(const Chunk *chunk);
   void reset();
 
-  #ifdef REGISTER_FILTERGRAPH
-  ROTEntry rot;
-  #endif
 
 private:
   AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr);
@@ -48,6 +46,7 @@ public:
   DECLARE_IUNKNOWN;
   STDMETHODIMP NonDelegatingQueryInterface(REFIID riid, void **ppv);
   static CUnknown * WINAPI CreateInstance(LPUNKNOWN punk, HRESULT *phr);
+
 
   /////////////////////////////////////////////////////////
   // CTransformFilter
@@ -66,6 +65,7 @@ public:
   STDMETHODIMP Stop();
   STDMETHODIMP Pause();
   STDMETHODIMP Run(REFERENCE_TIME tStart);
+  STDMETHODIMP JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName);
 
   HRESULT GetMediaType(int iPosition, CMediaType *pMediaType);
   HRESULT CheckInputType(const CMediaType *mtIn);

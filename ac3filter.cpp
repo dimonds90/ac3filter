@@ -5,6 +5,9 @@
 // uncomment this to log timing information into DirectShow log
 #define LOG_TIMING
 
+// uncomment this to register graph at running objects table
+//#define REGISTER_FILTERGRAPH
+
 #define MAX_NSAMPLES 2048
 #define MAX_BUFFER_SIZE (MAX_NSAMPLES * NCHANNELS * 4)
 
@@ -58,12 +61,29 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
 
   // load params
   load_params(0, AC3FILTER_ALL);
+
+
 }
 
 AC3Filter::~AC3Filter()
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::~AC3Filter", this));
 }
+
+STDMETHODIMP 
+AC3Filter::JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::JoinFilterGraph(%x)", this, pGraph));
+
+  // Register graph at running objects table
+  #ifdef REGISTER_FILTERGRAPH
+  rot.register_graph(m_pGraph);
+  #endif
+
+  return CTransformFilter::JoinFilterGraph(pGraph, pName);
+}
+
+
 
 void 
 AC3Filter::reset()
@@ -122,7 +142,7 @@ bool
 AC3Filter::set_output(Speakers _spk, bool _spdif)
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_output(%s %s %iHz%s)...", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate, _spdif? " (spdif if possible)": ""));
-  // output sample rate should be equal to input sample rate
+  // output sample rate should be equal to the input sample rate
   _spk.sample_rate = in_spk.sample_rate;
 
   Speakers spk_spdif = _spk;
@@ -182,12 +202,17 @@ AC3Filter::NonDelegatingQueryInterface(REFIID riid, void **ppv)
 bool
 AC3Filter::process_chunk(const Chunk *_chunk)
 {
+  // Here we want to measure processor time used by filter only
+  // so we cannot use just dec->process_to(_chunk, sink)
+  // (time used by downstream filters will be also counted in the last case)
+  // and we have to write full processing cycle
+
   cpu.start();
 
   if (!dec.process(_chunk))
   {
     cpu.stop();
-    DbgLog((LOG_TRACE, 3, "Transform(): Processing failed! [ process() ]"));
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): dec.process() failed!", this));
     return false;
   }
 
@@ -198,14 +223,14 @@ AC3Filter::process_chunk(const Chunk *_chunk)
     if (!dec.get_chunk(&chunk))
     {
       cpu.stop();
-      DbgLog((LOG_TRACE, 3, "Transform(): Processing failed! [ get_chunk() ]"));
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): dec.get_chunk() failed!", this));
       return false;
     }
     cpu.stop();
 
     if (!sink->process(&chunk))
     {
-      DbgLog((LOG_TRACE, 3, "Transform(): Sending data failed!"));
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): sink->process() failed!", this));
       return false;
     }
   }
@@ -226,12 +251,14 @@ AC3Filter::Receive(IMediaSample *in)
   /////////////////////////////////////////////////////////
   // Dynamic input format change
 
-  CMediaType *mt;
-  if (in->GetMediaType((_AMMediaType**)&mt) == S_OK)
   {
-    DbgLog((LOG_TRACE, 3, "Transform(): Input format change"));
-    if (!set_input(*mt))
-      return VFW_E_INVALIDMEDIATYPE;
+    CMediaType *mt;
+    if (in->GetMediaType((_AMMediaType**)&mt) == S_OK)
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change", this));
+      if (!set_input(*mt))
+        return VFW_E_INVALIDMEDIATYPE;
+    }
   }
 
   /////////////////////////////////////////////////////////
@@ -239,7 +266,9 @@ AC3Filter::Receive(IMediaSample *in)
 
   if (in->IsDiscontinuity() == S_OK)
   {
-    DbgLog((LOG_TRACE, 3, "Transform(): Discontinuity"));
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Discontinuity", this));
+    // we have to reset because we may need to drop incomplete frame in the decoder
+    reset();
   }
 
   /////////////////////////////////////////////////////////
@@ -273,14 +302,13 @@ AC3Filter::Receive(IMediaSample *in)
   // Process
 
   process_chunk(&chunk);
-
   return S_OK;
 }
 
 HRESULT 
 AC3Filter::EndOfStream()
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndOfStream", this));
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndOfStream()", this));
 
   Chunk chunk;
   chunk.set(in_spk, 0, 0, false, 0, true);
@@ -293,6 +321,7 @@ HRESULT
 AC3Filter::NewSegment(REFERENCE_TIME tStart, REFERENCE_TIME tStop, double dRate)
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::NewSegment(%ims, %ims)", this, int(tStart/10000), int(tStop/10000)));
+  // we have to reset because we may need to drop incomplete frame in the decoder
   reset();
   return CTransformFilter::NewSegment(tStart, tStop, dRate);
 }
@@ -326,25 +355,19 @@ AC3Filter::EndFlush()
 STDMETHODIMP 
 AC3Filter::Stop()
 {
-  #ifdef REGISTER_FILTERGRAPH
-  rot.unregister_graph();
-  #endif
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Stop()", this));
   return CTransformFilter::Stop();
 }
 STDMETHODIMP 
 AC3Filter::Pause()
 {
-  #ifdef REGISTER_FILTERGRAPH
-  rot.register_graph(m_pGraph);
-  #endif
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Pause()", this));
   return CTransformFilter::Pause();
 }
 STDMETHODIMP 
 AC3Filter::Run(REFERENCE_TIME tStart)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Run(%.0f)", this, float(tStart)));
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Run(%ims)", this, int(tStart/10000)));
   return CTransformFilter::Run(tStart);
 }
 
@@ -614,7 +637,7 @@ AC3Filter::DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProper
   ASSERT(pProperties);
   HRESULT hr = NOERROR;
 
-  pProperties->cBuffers = 5;
+  pProperties->cBuffers = 10;
   pProperties->cbBuffer = MAX_BUFFER_SIZE;
 
   ALLOCATOR_PROPERTIES Actual;
