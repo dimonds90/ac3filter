@@ -66,7 +66,7 @@ private:
   // Delay
   int         delay_units;
   DoubleEdit  edt_delay[NCHANNELS];
-  DoubleEdit  edt_delay_ms;
+  DoubleEdit  edt_time_shift;
   // Links
   LinkButton  lnk_home;
   LinkButton  lnk_forum;

@@ -104,7 +104,7 @@ public:
   STDMETHODIMP set_formats(int  formats);
 
   // Timing
-  STDMETHODIMP get_playback_time (time_t *time);
+  STDMETHODIMP get_playback_time (vtime_t *time);
 
   // CPU usage
   STDMETHODIMP get_cpu_usage(double *cpu_usage);

@@ -204,7 +204,7 @@ STDMETHODIMP COMDecoder::set_output_gains(sample_t *_output_gains)
 }
 
 // Input/output levels
-STDMETHODIMP COMDecoder::get_levels(time_t _time, sample_t *_input_levels, sample_t *_output_levels)
+STDMETHODIMP COMDecoder::get_levels(vtime_t _time, sample_t *_input_levels, sample_t *_output_levels)
 {
   proc.get_input_levels(_time, _input_levels);
   proc.get_output_levels(_time, _output_levels);
@@ -311,21 +311,61 @@ STDMETHODIMP COMDecoder::set_delays(float *_delays)
   proc.set_delays(_delays);
   return S_OK;
 }
-STDMETHODIMP COMDecoder::get_delay_ms(float *_delay_ms)
+
+// Syncronization
+STDMETHODIMP COMDecoder::get_time_shift(vtime_t *_time_shift)
 {
-  *_delay_ms = proc.get_delay_ms();
+  *_time_shift = proc.get_time_shift();
   return S_OK;
 }
-STDMETHODIMP COMDecoder::set_delay_ms(float  _delay_ms)
+STDMETHODIMP COMDecoder::set_time_shift(vtime_t _time_shift)
 {
   AutoLock config_lock(&config);
-  proc.set_delay_ms(_delay_ms);
+  proc.set_time_shift(_time_shift);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_time_factor(vtime_t *_time_factor)
+{
+  *_time_factor = proc.get_time_factor();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_time_factor(vtime_t _time_factor)
+{
+  AutoLock config_lock(&config);
+  proc.set_time_factor(_time_factor);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_dejitter(bool *_dejitter)
+{
+  *_dejitter = proc.get_dejitter();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_dejitter(bool _dejitter)
+{
+  AutoLock config_lock(&config);
+  proc.set_dejitter(_dejitter);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_threshold(vtime_t *_threshold)
+{
+  *_threshold = proc.get_threshold();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_threshold(vtime_t _threshold)
+{
+  AutoLock config_lock(&config);
+  proc.set_threshold(_threshold);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_jitter(vtime_t *_jitter)
+{
+  *_jitter = proc.get_jitter();
   return S_OK;
 }
 
 
 
-STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, time_t _time)
+STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, vtime_t _time)
 {
   AutoLock config_lock(&config);
 
@@ -372,7 +412,13 @@ STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, time_t _time)
   get_delay(&_state->delay);
   get_delay_units(&_state->delay_units);
   get_delays(_state->delays);
-  get_delay_ms(&_state->delay_ms);
+
+  // Syncronization
+  get_time_shift(&_state->time_shift);
+  get_time_factor(&_state->time_factor);
+  get_dejitter(&_state->dejitter);
+  get_threshold(&_state->threshold);
+  get_jitter(&_state->jitter);
 
   return S_OK;
 };
@@ -419,7 +465,12 @@ STDMETHODIMP COMDecoder::set_state     (AudioProcessorState *_state)
   set_delay(_state->delay);
   set_delay_units(_state->delay_units);
   set_delays(_state->delays);
-  set_delay_ms(_state->delay_ms);
+
+  // Syncronization
+  set_time_shift(_state->time_shift);
+  set_time_factor(_state->time_factor);
+  set_dejitter(_state->dejitter);
+  set_threshold(_state->threshold);
 
   return S_OK;
 };

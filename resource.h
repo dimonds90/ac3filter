@@ -31,6 +31,8 @@
 #define IDC_LNK_DONATE                  3157
 #define IDC_LNK_HOME                    3158
 #define IDC_LOGO                        3159
+#define IDC_SLIDER_TIME_SHIFT           3160
+#define IDC_EDT_TIME_SHIFT              3161
 
 // Next default values for new objects
 // 
@@ -40,7 +42,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        136
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         3160
+#define _APS_NEXT_CONTROL_VALUE         3162
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

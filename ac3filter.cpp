@@ -37,7 +37,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
     m_pOutput = sink;
   
   in_spk = def_spk;
-  out_spk = def_spk;
+  out_spk = stereo_spk;
 
   spdif = false;
   spdif_on = false;
@@ -184,7 +184,7 @@ AC3Filter::Receive(IMediaSample *in)
 {
   uint8_t *buf;
   int buf_size;
-  time_t time;
+  vtime_t time;
 
   Chunk chunk1;
   Chunk chunk2;
@@ -225,9 +225,7 @@ AC3Filter::Receive(IMediaSample *in)
   /////////////////////////////////////////////////////////
   // Fill chunk
 
-  chunk1.set_spk(in_spk);
-  chunk1.set_buf(buf, buf_size);
-  chunk1.set_time(false);
+  chunk1.set(in_spk, buf, buf_size);
 
   /////////////////////////////////////////////////////////
   // Timing
@@ -237,8 +235,8 @@ AC3Filter::Receive(IMediaSample *in)
   {
     case S_OK:
     case VFW_S_NO_STOP_TIME:
-      time = time_t(begin) * in_spk.sample_rate / 10000000;
-      chunk1.set_time(true, time);
+      time = vtime_t(begin) * in_spk.sample_rate / 10000000;
+      chunk1.set_sync(true, time);
       DbgLog((LOG_TRACE, 3, "-> > timestamp: %ims\t> %.0fsm", int(begin/10000), time));
       break;
   }
@@ -743,14 +741,14 @@ AC3Filter::set_formats(int  _formats)
 
 
 STDMETHODIMP 
-AC3Filter::get_playback_time(time_t *_time)
+AC3Filter::get_playback_time(vtime_t *_time)
 {
   *_time = 0;
   if (m_pClock)
   {
     REFERENCE_TIME t;
     if SUCCEEDED(m_pClock->GetTime(&t))
-      *_time = time_t(double(t - m_tStart) * in_spk.sample_rate / 10000000);
+      *_time = vtime_t(double(t - m_tStart) * in_spk.sample_rate / 10000000);
   }
   return S_OK;
 }
@@ -889,7 +887,14 @@ STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
     _conf->get_float("delay_SL"         ,state.delays[CH_SL]   );
     _conf->get_float("delay_SR"         ,state.delays[CH_SR]   );
     _conf->get_float("delay_LFE"        ,state.delays[CH_LFE]  );
-    _conf->get_float("delay_ms"         ,state.delay_ms        );
+  }
+
+  if (_what & AC3FILTER_SYNC)
+  {
+    _conf->get_float("time_shift"       ,state.time_shift      );
+    _conf->get_float("time_factor"      ,state.time_factor     );
+    _conf->get_bool ("dejitter"         ,state.dejitter        );
+    _conf->get_float("threshold"        ,state.threshold       );
   }
 
   if (_what & AC3FILTER_MATRIX)
@@ -1031,6 +1036,14 @@ STDMETHODIMP AC3Filter::save_params(Config *_conf, int _what)
     _conf->set_float("delay_LFE"        ,state.delays[CH_LFE]  );
   }
 
+  if (_what & AC3FILTER_SYNC)
+  {
+    _conf->set_float("time_shift"       ,state.time_shift      );
+    _conf->set_float("time_factor"      ,state.time_factor     );
+    _conf->set_bool ("dejitter"         ,state.dejitter        );
+    _conf->set_float("threshold"        ,state.threshold       );
+  }
+
   if (_what & AC3FILTER_MATRIX)
   {
     // state.matrix
@@ -1079,8 +1092,6 @@ STDMETHODIMP AC3Filter::save_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SYS)
   {
-    _conf->set_float("delay_ms"         ,state.delay_ms        );
-
     int spdif_pt = dec.get_spdif();
     _conf->set_int32("formats"          ,formats         );
     _conf->set_int32("spdif_pt"         ,spdif_pt        );

@@ -78,7 +78,7 @@ public:
   STDMETHODIMP get_output_gains (sample_t *output_gains);
   STDMETHODIMP set_output_gains (sample_t *output_gains);
   // Input/output levels
-  STDMETHODIMP get_levels       (time_t time, sample_t *input_levels, sample_t *output_levels);
+  STDMETHODIMP get_levels       (vtime_t time, sample_t *input_levels, sample_t *output_levels);
   STDMETHODIMP get_hist         (int count, double *input_hist, double *output_hist);
   // Matrix                     
   STDMETHODIMP get_matrix       (matrix_t *matrix);
@@ -101,10 +101,18 @@ public:
   STDMETHODIMP set_delay_units  (int  delay_units);
   STDMETHODIMP get_delays       (float *delays);
   STDMETHODIMP set_delays       (float *delays);
-  STDMETHODIMP get_delay_ms     (float *delay_ms);
-  STDMETHODIMP set_delay_ms     (float  delay_ms);
+  // Syncronization
+  STDMETHODIMP get_time_shift   (vtime_t *time_shift);
+  STDMETHODIMP set_time_shift   (vtime_t  time_shift);
+  STDMETHODIMP get_time_factor  (vtime_t *time_factor);
+  STDMETHODIMP set_time_factor  (vtime_t  time_factor);
+  STDMETHODIMP get_dejitter     (bool *dejitter);
+  STDMETHODIMP set_dejitter     (bool  dejitter);
+  STDMETHODIMP get_threshold    (vtime_t *threshold);
+  STDMETHODIMP set_threshold    (vtime_t  threshold);
+  STDMETHODIMP get_jitter       (vtime_t *jitter);
                                 
-  STDMETHODIMP get_state        (AudioProcessorState *state, time_t time = 0);
+  STDMETHODIMP get_state        (AudioProcessorState *state, vtime_t time = 0);
   STDMETHODIMP set_state        (AudioProcessorState *state);
                                 
   /////////////////////////////////////////////////////////

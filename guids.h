@@ -28,11 +28,13 @@
                               // matrix
 #define AC3FILTER_DELAY  0x10 // Delay settings:
                               // delay, delay_units, delays
-#define AC3FILTER_SYS    0x20 // System settings: 
-                              // formats, spdif, config_autoload, (time_shift, generate_timestamps, jitter)
+#define AC3FILTER_SYNC   0x20 // Syncronization settings:
+                              // time_shift, time_factor, dejitter, threshold
+#define AC3FILTER_SYS    0x40 // System settings: 
+                              // formats, spdif, config_autoload, 
 
-#define AC3FILTER_ALL    0x3f // all settings
-#define AC3FILTER_PRESET 0x1e // settings that saved into preset (all except system settings & speaker config)
+#define AC3FILTER_ALL    0x7f // all settings
+#define AC3FILTER_PRESET 0x3e // settings that saved into preset (all except system settings & speaker config)
 
 #define SPDIF_MODE_NONE         0    // see dvd_decoder.h
 #define SPDIF_MODE_PASSTHROUGH  1    // see dvd_decoder.h
@@ -130,7 +132,7 @@ DECLARE_INTERFACE_(IAC3Filter, IUnknown)
   STDMETHOD (set_formats) (int  formats) = 0;
 
   // Timing
-  STDMETHOD (get_playback_time)(time_t *time) = 0;
+  STDMETHOD (get_playback_time)(vtime_t *time) = 0;
 
   // CPU usage
   STDMETHOD (get_cpu_usage)(double *cpu_usage) = 0;
@@ -192,7 +194,13 @@ struct AudioProcessorState
   bool     delay;
   int      delay_units;
   float    delays[NCHANNELS];
-  float    delay_ms;
+
+  // Syncronization
+  vtime_t  time_shift;
+  vtime_t  time_factor;
+  bool     dejitter;
+  vtime_t  threshold;
+  vtime_t  jitter;
 };
 
 
@@ -231,7 +239,7 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (get_output_gains) (sample_t *output_gains) = 0;
   STDMETHOD (set_output_gains) (sample_t *output_gains) = 0;
   // Input/output levels
-  STDMETHOD (get_levels)       (time_t time, sample_t *input_levels, sample_t *output_levels) = 0;
+  STDMETHOD (get_levels)       (vtime_t time, sample_t *input_levels, sample_t *output_levels) = 0;
   // Matrix                    
   STDMETHOD (get_matrix)       (matrix_t *matrix) = 0;
   STDMETHOD (set_matrix)       (matrix_t *matrix) = 0;
@@ -253,10 +261,18 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_delay_units)  (int  delay_units) = 0;
   STDMETHOD (get_delays)       (float *delays) = 0;
   STDMETHOD (set_delays)       (float *delays) = 0;
-  STDMETHOD (get_delay_ms)     (float *delay_ms) = 0;
-  STDMETHOD (set_delay_ms)     (float  delay_ms) = 0;
+  // Syncronization
+  STDMETHOD (get_time_shift)   (vtime_t *time_shift) = 0;
+  STDMETHOD (set_time_shift)   (vtime_t  time_shift) = 0;
+  STDMETHOD (get_time_factor)  (vtime_t *time_factor) = 0;
+  STDMETHOD (set_time_factor)  (vtime_t  time_factor) = 0;
+  STDMETHOD (get_dejitter)     (bool *dejitter) = 0;
+  STDMETHOD (set_dejitter)     (bool  dejitter) = 0;
+  STDMETHOD (get_threshold)    (vtime_t *threshold) = 0;
+  STDMETHOD (set_threshold)    (vtime_t  threshold) = 0;
+  STDMETHOD (get_jitter)       (vtime_t *jitter) = 0;
                                
-  STDMETHOD (get_state)        (AudioProcessorState *state, time_t time = 0) = 0;
+  STDMETHOD (get_state)        (AudioProcessorState *state, vtime_t time = 0) = 0;
   STDMETHOD (set_state)        (AudioProcessorState *state) = 0;
 };
 

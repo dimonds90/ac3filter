@@ -515,7 +515,7 @@ AC3FilterDlg::reload_state()
   dec->get_spk(&spk);
   dec->get_frames(&frames, &errors);
 
-  time_t time;
+  vtime_t time;
   filter->get_playback_time(&time);
   proc->get_state(this, time);
 }
@@ -610,10 +610,13 @@ AC3FilterDlg::init_controls()
 
   for (ch = 0; ch < NCHANNELS; ch++)
     edt_delay[ch].link(m_Dlg, idc_edt_delay[ch]);
-  edt_delay_ms.link(m_Dlg, IDC_EDT_TIME);
 
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME, TBM_SETRANGE, TRUE, MAKELONG(-500, 500));
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME, TBM_SETTIC, 0, 0);
+  /////////////////////////////////////
+  // Syncronization
+
+  edt_time_shift.link(m_Dlg, IDC_EDT_TIME_SHIFT);
+  SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_SETRANGE, TRUE, MAKELONG(-500, 500));
+  SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_SETTIC, 0, 0);
 
   /////////////////////////////////////
   // DRC
@@ -724,6 +727,11 @@ AC3FilterDlg::set_dynamic_controls()
   edt_drc_level.update_value(value2db(drc_level));
 
   /////////////////////////////////////
+  // Syncronization
+
+  SetDlgItemInt(m_Dlg, IDC_LBL_JITTER, int(jitter * 1000), false);
+
+  /////////////////////////////////////
   // Matrix controls
 
   if (auto_matrix)
@@ -812,8 +820,12 @@ AC3FilterDlg::set_controls()
   SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_SETCURSEL, units2list(delay_units), 0);
   EnableWindow(GetDlgItem(m_Dlg, IDC_CMB_UNITS), delay);
 
-  edt_delay_ms.update_value(delay_ms);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME, TBM_SETPOS, TRUE, int(delay_ms));
+  /////////////////////////////////////
+  // Syncronization
+
+  edt_time_shift.update_value(time_shift * 1000);
+  SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_SETPOS, TRUE, int(time_shift * 1000));
+  SetDlgItemInt(m_Dlg, IDC_LBL_JITTER, int(jitter * 1000), false);
 
   /////////////////////////////////////
   // DRC
@@ -1211,21 +1223,21 @@ AC3FilterDlg::command(int control, int message)
       }
       break;
 
-    case IDC_EDT_TIME:
+    case IDC_EDT_TIME_SHIFT:
       if (message == CB_ENTER)
       {
-        delay_ms = float(edt_delay_ms.value);
-        proc->set_delay_ms(delay_ms);
+        time_shift = vtime_t(edt_time_shift.value) / 1000;
+        proc->set_time_shift(time_shift);
         update();
       }
       break;
 
-    case IDC_SLIDER_TIME:
+    case IDC_SLIDER_TIME_SHIFT:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        delay_ms = float(SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME, TBM_GETPOS, 0, 0));
-        proc->set_delay_ms(delay_ms);
-        update();     
+        time_shift = vtime_t(SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_GETPOS, 0, 0)) / 1000;
+        proc->set_time_shift(time_shift);
+        update();
       }
       break;
 
