@@ -2,6 +2,9 @@
 #include "ac3filter.h"
 #include "decss\DeCSSInputPin.h"
 
+// uncomment this to log timing information into DirectShow log
+#define LOG_TIMING
+
 #define MAX_NSAMPLES 2048
 #define MAX_BUFFER_SIZE (MAX_NSAMPLES * NCHANNELS * 4)
 
@@ -260,7 +263,9 @@ AC3Filter::Receive(IMediaSample *in)
     case VFW_S_NO_STOP_TIME:
       time = vtime_t(begin) * in_spk.sample_rate / 10000000;
       chunk.set_sync(true, time);
+#ifdef LOG_TIMING
       DbgLog((LOG_TRACE, 3, "-> > timestamp: %ims\t> %.0fsm", int(begin/10000), time));
+#endif
       break;
   }
 

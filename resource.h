@@ -31,6 +31,7 @@
 #define IDC_LNK_DONATE                  3157
 #define IDC_LNK_HOME                    3158
 #define IDC_LOGO                        3159
+#define IDC_LNK_HOME2                   3159
 #define IDC_SLIDER_TIME_SHIFT           3160
 #define IDC_EDT_TIME_SHIFT              3161
 

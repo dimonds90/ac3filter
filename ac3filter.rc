@@ -577,16 +577,16 @@ BEGIN
     LTEXT           "+0",IDC_STATIC,98,101,8,8
     LTEXT           "-0.5s",IDC_STATIC,15,101,16,8
     LTEXT           "+0.5s",IDC_STATIC,171,101,18,8
-    GROUPBOX        "Audio/Video sync",IDC_STATIC,7,78,188,64
+    GROUPBOX        "Audio/Video sync",IDC_STATIC,7,78,188,62
     EDITTEXT        IDC_EDT_TIME_SHIFT,67,109,25,12,ES_AUTOHSCROLL
     LTEXT           "Time shift (ms):",IDC_STATIC,15,111,49,8
     CONTROL         "Auto load movie configuration files",
                     IDC_CHK_CONFIG_AUTOLOAD,"Button",BS_AUTOCHECKBOX | 
                     WS_DISABLED | WS_TABSTOP,15,163,123,10
-    GROUPBOX        "System options",IDC_STATIC,7,145,188,42,WS_DISABLED
-    CONTROL         "Jitter correction. Current jitter (ms):",IDC_CHK_JITTER,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,127,122,10
-    LTEXT           "0",IDC_LBL_JITTER,137,128,8,8
+    GROUPBOX        "System options",IDC_STATIC,7,143,188,44,WS_DISABLED
+    CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,127,66,8
+    LTEXT           "0",IDC_LBL_JITTER,136,127,14,8
     LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
                     IDC_STATIC,183,190,207,8
     CONTROL         "MPEG Audio",IDC_CHK_SPDIF_MPA,"Button",BS_AUTOCHECKBOX | 
@@ -606,6 +606,7 @@ BEGIN
     GROUPBOX        "Use AC3Filter for ..",IDC_STATIC,7,7,92,69
     CONTROL         "PES (DVD)",IDC_CHK_PES,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,60,51,10
+    LTEXT           "Current jitter (ms):",IDC_STATIC,79,127,55,8
 END
 
 IDD_FILE DIALOG DISCARDABLE  0, 0, 178, 81

@@ -825,6 +825,8 @@ AC3FilterDlg::set_controls()
 
   edt_time_shift.update_value(time_shift * 1000);
   SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_SETPOS, TRUE, int(time_shift * 1000));
+
+  SendDlgItemMessage(m_Dlg, IDC_CHK_JITTER, BM_SETCHECK, dejitter? BST_CHECKED: BST_UNCHECKED, 1);
   SetDlgItemInt(m_Dlg, IDC_LBL_JITTER, int(jitter * 1000), false);
 
   /////////////////////////////////////
@@ -1223,6 +1225,9 @@ AC3FilterDlg::command(int control, int message)
       }
       break;
 
+    /////////////////////////////////////
+    // Syncronization
+
     case IDC_EDT_TIME_SHIFT:
       if (message == CB_ENTER)
       {
@@ -1241,6 +1246,13 @@ AC3FilterDlg::command(int control, int message)
       }
       break;
 
+    case IDC_CHK_JITTER:
+    {
+      dejitter = (SendDlgItemMessage(m_Dlg, IDC_CHK_JITTER, BM_GETCHECK, 0, 0) == BST_CHECKED);
+      proc->set_dejitter(dejitter);
+      update();
+      break;
+    }
 
     /////////////////////////////////////
     // DRC
