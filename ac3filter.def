@@ -5,4 +5,3 @@ EXPORTS
   DllRegisterServer PRIVATE
   DllUnregisterServer PRIVATE
   config
-  CPlApplet
