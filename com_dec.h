@@ -30,17 +30,12 @@ public:
 
   /////////////////////////////////////////////////////////
   // Filter interface
+  // (protect state-changing functions)
 
   virtual void reset();
-
-  virtual bool query_input(Speakers spk);
   virtual bool set_input(Speakers spk);
   virtual bool process(const Chunk *chunk);
-
-  virtual Speakers get_output();
-  virtual bool is_empty();
   virtual bool get_chunk(Chunk *chunk);
-
 
   /////////////////////////////////////////////////////////
   // IAudioProcessor

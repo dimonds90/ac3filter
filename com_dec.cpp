@@ -9,12 +9,6 @@ void COMDecoder::reset()
   AutoLock config_lock(&config);
   DVDDecoder::reset();
 }
-
-bool COMDecoder::query_input(Speakers _spk)
-{
-  AutoLock config_lock(&config);
-  return DVDDecoder::query_input(_spk);
-}
 bool COMDecoder::set_input(Speakers _spk)
 {
   AutoLock config_lock(&config);
@@ -24,17 +18,6 @@ bool COMDecoder::process(const Chunk *_chunk)
 {
   AutoLock config_lock(&config);
   return DVDDecoder::process(_chunk);
-}
-
-Speakers COMDecoder::get_output()
-{
-  AutoLock config_lock(&config);
-  return DVDDecoder::get_output();
-}
-bool COMDecoder::is_empty()
-{
-  AutoLock config_lock(&config);
-  return DVDDecoder::is_empty();
 }
 bool COMDecoder::get_chunk(Chunk *_chunk)
 {
