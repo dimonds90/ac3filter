@@ -176,8 +176,9 @@ AC3Filter::process_chunk(const Chunk *_chunk)
 {
   // Here we want to measure processor time used by filter only
   // so we cannot use just dec->process_to(_chunk, sink)
-  // (time used by downstream filters will be also counted in the last case)
-  // and we have to write full processing cycle
+  // (time used by downstream filters will be also counted in this case)
+  // and we have to write full processing cycle.
+  // It's also useful because of extended error reporting.
 
   cpu.start();
   if (!dec.process(_chunk))
@@ -365,17 +366,17 @@ AC3Filter::BeginFlush()
   // Serialize with state changes
   CAutoLock filter_lock(&m_csFilter);
 
-  // Send BeginFlush downstream to release all holding samples
+  // Send BeginFlush() downstream to release all holding samples
   HRESULT hr = CTransformFilter::BeginFlush();
   if FAILED(hr) return hr;
 
-  // Now we can be sure that Receive in streaming thread is 
+  // Now we can be sure that Receive() at streaming thread is 
   // unblocked waiting for GetBuffer so we can now serialize 
   // with streaming thread
 
   CAutoLock streaming_lock(&m_csReceive);
 
-  // Now we can be sure that Receive (or other call at streaming thread) 
+  // Now we can be sure that Receive() (or other call at streaming thread) 
   // is finished and all data is processed.
 
   reset();
@@ -438,31 +439,33 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   /////////////////////////////////////////////////////////////////////////////
   // Depending on current settings output formats may be:
   //
-  // i | spdif/simple | spdif/ext  | simple    | ext
-  // --|--------------|------------|-----------|-----------
-  // 0 | mt_spdif     | mt_spdif   | mt_simple | mt_ext_wfx
-  // 1 | mt_simple    | mt_ext_wfx |           | mt_ext_wf
-  // 2 |              | mt_ext_wf  |           |
-  // 3 |              |            |           |
+  // i | simple    | ext        | spdif/simple | spdif/ext    
+  // --|-----------|------------|--------------|--------------
+  // 0 | mt_pcm_wf | mt_pcm_wfx | mt_spdif_wfx | mt_spdif_wfx 
+  // 1 |           | mt_pcm_wf  | mt_spdif_wf  | mt_spdif_wf  
+  // 2 |           |            | mt_pcm_wf    | mt_pcm_wfx   
+  // 3 |           |            |              | mt_pcm_wf    
   //
   // where i - format number
-  //       spdif - 'use spdif if possible' flag set
+  //
   //       simple - output is set to mono/stereo PCM16 format
   //       ext - output is set to any other format (extended formats)
-  //       mt_spdif - spdif media type
-  //       mt_simple - mono/stereo PCM16 media type
-  //       mt_ext_wfx - media type using WAVEFORMATEXTENSIBLE
-  //       mt_ext_wf - media type using WAVEFORMATEX
+  //       spdif - 'use spdif if possible' flag set
+  //
+  //       mt_spdif_wfx - spdif media type using WAVEFORMATEXTENSIBLE
+  //       mt_spdif_wf  - spdif media type using WAVEFORMATEX
+  //       mt_pcm_wfx   - PCM media type using WAVEFORMATEXTENSIBLE
+  //       mt_pcm_wf    - PCM media type using WAVEFORMATEX
   //
   // So even if output cannot support some of formats, it can use other.
-  // (simple format at least can be used)
   //
-  // mt_ext_wf formats are nessesary for some old sound cards that do not 
-  // understand WAVEFORMATEXTENSIBLE format (Vortex-based cards, for example).
+  // multichannel mt_pcm_wf formats are nessesary for some old sound cards 
+  // that do not understand WAVEFORMATEXTENSIBLE format 
+  // (Vortex-based cards, for example).
 
   if (spdif)
   {
-    // SPDIF format
+    // mt_spdif_wfx
     if (i != 0)
       i--;
     else
@@ -471,6 +474,7 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
       else
         return E_FAIL;
 
+    // mt_spdif_wf
     if (i != 0)
       i--;
     else
@@ -480,18 +484,19 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
         return E_FAIL;
   }
 
+  // mt_pcm_wf
+  if (i != 0)
+    i--;
+  else
+    if (spk2mt(out_spk, *_mt, false))
+      return NOERROR;
+    else
+      return E_FAIL;
+
+  // mt_pcm_wf
   if ((out_spk.mask != MODE_MONO && out_spk.mask != MODE_STEREO) || 
       out_spk.format != FORMAT_PCM16)
   {
-    // 2 extended formats
-    if (i != 0)
-      i--;
-    else
-      if (spk2mt(out_spk, *_mt, false))
-        return NOERROR;
-      else
-        return E_FAIL;
-
     if (i != 0)
       i--;
     else
@@ -499,19 +504,6 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
         return NOERROR;
       else
         return E_FAIL;
-  }
-  else
-  {
-    if (i != 0)
-      i--;
-    else
-    {
-      // simple format
-      if (spk2mt(out_spk, *_mt, false))
-        return NOERROR;
-      else
-        return E_FAIL;
-    }
   }
 
   return VFW_S_NO_MORE_ITEMS;
@@ -548,27 +540,41 @@ AC3Filter::CheckTransform(const CMediaType *mt_in, const CMediaType *mt_out)
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckTransform", this));
 
-  if FAILED(CheckInputType(mt_in)) 
+  if FAILED(CheckInputType(mt_in))
+  {
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckTransform(): FAILED!", this));
     return VFW_E_TYPE_NOT_ACCEPTED;
+  }
+
+  /////////////////////////////////////////////////////////
+  // Verify SPDIF output
 
   if (spdif)
   {
     CMediaType mt_tmp1;
     CMediaType mt_tmp2;
+    CMediaType mt_tmp3;
 
     mt_tmp1 = *mt_out;
     spk2mt(out_spdif, mt_tmp2, false);
+    spk2mt(out_spdif, mt_tmp3, true);
 
     // Media Player Classics bug hack: do not check sample rates
     if (*mt_tmp1.FormatType() == FORMAT_WaveFormatEx) ((WAVEFORMATEX *)mt_tmp1.Format())->nSamplesPerSec = 0;
     if (*mt_tmp2.FormatType() == FORMAT_WaveFormatEx) ((WAVEFORMATEX *)mt_tmp2.Format())->nSamplesPerSec = 0;
+    if (*mt_tmp3.FormatType() == FORMAT_WaveFormatEx) ((WAVEFORMATEX *)mt_tmp3.Format())->nSamplesPerSec = 0;
 
-    if (mt_tmp1 == mt_tmp2)
+    if (mt_tmp1 == mt_tmp2 || mt_tmp1 == mt_tmp3)
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckTransform(): Ok...", this));
       return S_OK;
-    else
-      return VFW_E_TYPE_NOT_ACCEPTED;
+    }
   }
-  else
+
+  /////////////////////////////////////////////////////////
+  // Verify PCM output
+  // (used also in case if SPDIF is not available)
+
   {
     CMediaType mt_tmp1;
     CMediaType mt_tmp2;
@@ -584,9 +590,15 @@ AC3Filter::CheckTransform(const CMediaType *mt_in, const CMediaType *mt_out)
     if (*mt_tmp3.FormatType() == FORMAT_WaveFormatEx) ((WAVEFORMATEX *)mt_tmp3.Format())->nSamplesPerSec = 0;
 
     if (mt_tmp1 == mt_tmp2 || mt_tmp1 == mt_tmp3)
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckTransform(): Ok...", this));
       return S_OK;
+    }
     else
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckTransform(): FAILED!", this));
       return VFW_E_TYPE_NOT_ACCEPTED;
+    }
   }
 }
 
