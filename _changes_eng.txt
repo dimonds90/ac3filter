@@ -1,3 +1,9 @@
+<b>1.02a</b> -
+  * Documentation was fully rewrited (much of writing about
+    how to tune the filter)
+  * updated DRC algorithm (reduced noise)
+  * DRC bug fixed (sound disappeared sometimes)
+
 <b>1.01a</b> - (unofficial release)
   * First working alfa for new filter generation
   * Totally rewrited

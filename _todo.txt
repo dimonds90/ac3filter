@@ -24,6 +24,8 @@ First order
 
 Other
 =====
+* SPDIF: SPDIF output does not work with USB Audio. But foobar2000 does...
+  [https://sourceforge.net/forum/message.php?msg_id=2653711]
 * Take in account dialog flags when updating controls (ac3filter_dlg.cpp)
 ?* HPF for all channels
 * Configuration files
