@@ -157,3 +157,124 @@ DoubleEdit::print_value()
   sprintf(buf, "%.4g", value);
   SetDlgItemText(dlg, item, buf);
 }
+
+
+LinkButton::~LinkButton()
+{
+  unlink();
+}
+
+void
+LinkButton::link(HWND _dlg, int _item)
+{
+  if (hwnd) unlink();
+
+  dlg = _dlg;
+  item = _item;
+  hwnd = GetDlgItem(_dlg, _item);
+  if (hwnd)
+  {
+    wndproc = (WNDPROC) SetWindowLong(hwnd, GWL_WNDPROC, (DWORD) SubClassProc);
+    SetWindowLong(hwnd, GWL_USERDATA, (DWORD)(Edit *)this);
+  }
+
+  // Create underlined font
+  HFONT dlg_font = (HFONT)SendDlgItemMessage(dlg, item, WM_GETFONT, 0, 0);
+  LOGFONT logfont;
+  GetObject(dlg_font, sizeof(LOGFONT), &logfont);
+  logfont.lfUnderline = TRUE;
+  font = CreateFontIndirect(&logfont);
+}
+
+void 
+LinkButton::unlink()
+{
+  if (hwnd)
+  {
+    SetWindowLong(hwnd, GWL_WNDPROC, (DWORD)wndproc);
+    SetWindowLong(hwnd, GWL_USERDATA, 0);
+  }
+  DeleteObject(font);
+
+  dlg = 0;
+  item = 0;
+  hwnd = 0;
+  font = 0;
+}
+
+LRESULT CALLBACK 
+LinkButton::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+  LinkButton *iam = (LinkButton *)GetWindowLong(hwnd, GWL_USERDATA);
+
+  switch (msg) 
+  { 
+    case WM_PAINT: 
+    {
+      PAINTSTRUCT ps;
+      HDC dc = BeginPaint(hwnd, &ps);
+      iam->paint(dc);
+      EndPaint(hwnd, &ps);
+      return 0;
+    }
+
+    case WM_LBUTTONDOWN:
+    {
+      iam->press();
+      return 0;
+    }
+
+  } 
+        
+  // Call the original window procedure for default processing. 
+  return CallWindowProc(iam->wndproc, hwnd, msg, wParam, lParam); 
+}
+
+void 
+LinkButton::paint(HDC dc)
+{
+  RECT client_rect;
+  GetClientRect(hwnd, &client_rect);
+
+  int i;
+  char link_text[256];
+  int link_text_len = GetWindowText(hwnd, link_text, 256);
+
+  // find description text
+  for (i = 0; i < link_text_len; i++)
+    if (link_text[i] == '|')
+      break;
+
+  link_text_len = i;
+
+  // Draw description text or url
+  HFONT old_font = (HFONT)SelectObject(dc, font);
+  COLORREF old_color = SetTextColor(dc, RGB(0, 0, 255));
+  DrawText(dc, link_text, link_text_len, &client_rect, DT_SINGLELINE | DT_LEFT | DT_VCENTER);
+  SetTextColor(dc, old_color);
+  SelectObject(dc, old_font);
+//  DeleteObject(font);
+}
+
+void 
+LinkButton::press()
+{
+  int i;
+  char link_text[256];
+  int link_text_len = GetWindowText(hwnd, link_text, 256);
+
+  // find url
+  for (i = 0; i < link_text_len; i++)
+    if (link_text[i] == '|')
+    {
+      i++;
+      break;
+    }
+
+  if (i < link_text_len)
+    ShellExecute(hwnd, 0, link_text + i, 0, 0, SW_SHOWMAXIMIZED);
+  else
+    ShellExecute(hwnd, 0, link_text, 0, 0, SW_SHOWMAXIMIZED);
+
+  // execute url
+}

@@ -65,6 +65,28 @@ public:
   void update_value(double _value) { value = _value; print_value(); };
 };
 
+class LinkButton
+{
+protected:
+  HWND    dlg;
+  HWND    hwnd;
+  int     item;
+  WNDPROC wndproc;
+  HFONT   font;
+
+  static LRESULT CALLBACK SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+public:
+  LinkButton(): dlg(0), hwnd(0), item(0), wndproc(0) {};
+  ~LinkButton();
+
+  void link(HWND dlg, int item);
+  void unlink();  
+
+  virtual void paint(HDC dc);
+  virtual void press();
+};
+
 /*
 class Slider
 {
