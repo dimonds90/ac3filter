@@ -61,8 +61,6 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
 
   // load params
   load_params(0, AC3FILTER_ALL);
-
-
 }
 
 AC3Filter::~AC3Filter()
@@ -88,6 +86,8 @@ AC3Filter::JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName)
 void 
 AC3Filter::reset()
 {
+  CAutoLock lock(&m_csReceive);
+
   dec.reset();
   // sink->send_discontinuity();
   cpu.reset();
@@ -96,6 +96,8 @@ AC3Filter::reset()
 bool        
 AC3Filter::set_input(CMediaType &_mt)
 {
+  CAutoLock lock(&m_csReceive);
+
   Speakers spk_tmp;
   return mt2spk(_mt, spk_tmp) && set_input(spk_tmp);
 }
@@ -103,6 +105,8 @@ AC3Filter::set_input(CMediaType &_mt)
 bool        
 AC3Filter::set_input(Speakers _spk)
 {
+  CAutoLock lock(&m_csReceive);
+
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz)...", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate));
   if (in_spk == _spk)
     return true;
@@ -141,6 +145,8 @@ AC3Filter::set_input(Speakers _spk)
 bool        
 AC3Filter::set_output(Speakers _spk, bool _spdif)
 {
+  CAutoLock lock(&m_csReceive);
+
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_output(%s %s %iHz%s)...", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate, _spdif? " (spdif if possible)": ""));
   // output sample rate should be equal to the input sample rate
   _spk.sample_rate = in_spk.sample_rate;
@@ -173,6 +179,48 @@ AC3Filter::set_output(Speakers _spk, bool _spdif)
   return true;
 }
 
+bool
+AC3Filter::process_chunk(const Chunk *_chunk)
+{
+  CAutoLock lock(&m_csReceive);
+
+  // Here we want to measure processor time used by filter only
+  // so we cannot use just dec->process_to(_chunk, sink)
+  // (time used by downstream filters will be also counted in the last case)
+  // and we have to write full processing cycle
+
+  cpu.start();
+  if (!dec.process(_chunk))
+  {
+    cpu.stop();
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): dec.process() failed!", this));
+    return false;
+  }
+  cpu.stop();
+
+  Chunk chunk;
+  while (!dec.is_empty())
+  {
+    cpu.start();
+    if (!dec.get_chunk(&chunk))
+    {
+      cpu.stop();
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): dec.get_chunk() failed!", this));
+      return false;
+    }
+    cpu.stop();
+
+    if (!sink->process(&chunk))
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): sink->process() failed!", this));
+      return false;
+    }
+  }
+  return true;
+}
+
+
+
 
 STDMETHODIMP 
 AC3Filter::NonDelegatingQueryInterface(REFIID riid, void **ppv)
@@ -199,49 +247,11 @@ AC3Filter::NonDelegatingQueryInterface(REFIID riid, void **ppv)
 ////////////////////////////// DATA FLOW //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-bool
-AC3Filter::process_chunk(const Chunk *_chunk)
-{
-  // Here we want to measure processor time used by filter only
-  // so we cannot use just dec->process_to(_chunk, sink)
-  // (time used by downstream filters will be also counted in the last case)
-  // and we have to write full processing cycle
-
-  cpu.start();
-
-  if (!dec.process(_chunk))
-  {
-    cpu.stop();
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): dec.process() failed!", this));
-    return false;
-  }
-
-  Chunk chunk;
-  while (!dec.is_empty())
-  {
-    cpu.start();
-    if (!dec.get_chunk(&chunk))
-    {
-      cpu.stop();
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): dec.get_chunk() failed!", this));
-      return false;
-    }
-    cpu.stop();
-
-    if (!sink->process(&chunk))
-    {
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): sink->process() failed!", this));
-      return false;
-    }
-  }
-  return true;
-}
-
-
-
 HRESULT
 AC3Filter::Receive(IMediaSample *in)
 {
+  CAutoLock lock(&m_csReceive);
+
   uint8_t *buf;
   int buf_size;
   vtime_t time;
@@ -302,28 +312,8 @@ AC3Filter::Receive(IMediaSample *in)
   // Process
 
   process_chunk(&chunk);
+
   return S_OK;
-}
-
-HRESULT 
-AC3Filter::EndOfStream()
-{
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndOfStream()", this));
-
-  Chunk chunk;
-  chunk.set(in_spk, 0, 0, false, 0, true);
-  process_chunk(&chunk);
-
-  return CTransformFilter::EndOfStream();
-}
-
-HRESULT 
-AC3Filter::NewSegment(REFERENCE_TIME tStart, REFERENCE_TIME tStop, double dRate)
-{
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::NewSegment(%ims, %ims)", this, int(tStart/10000), int(tStop/10000)));
-  // we have to reset because we may need to drop incomplete frame in the decoder
-  reset();
-  return CTransformFilter::NewSegment(tStart, tStop, dRate);
 }
 
 HRESULT 
@@ -332,6 +322,7 @@ AC3Filter::StartStreaming()
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StartStreaming()", this));
   return CTransformFilter::StartStreaming();
 }
+
 HRESULT 
 AC3Filter::StopStreaming()
 {
@@ -340,15 +331,79 @@ AC3Filter::StopStreaming()
 }
 
 HRESULT 
+AC3Filter::NewSegment(REFERENCE_TIME tStart, REFERENCE_TIME tStop, double dRate)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::NewSegment(%ims, %ims)", this, int(tStart/10000), int(tStop/10000)));
+
+  // We have to reset because we may need to 
+  // drop incomplete frame in the decoder
+
+  CAutoLock lock(&m_csReceive);
+  reset();
+
+  return CTransformFilter::NewSegment(tStart, tStop, dRate);
+}
+
+HRESULT 
+AC3Filter::EndOfStream()
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndOfStream()", this));
+
+  // Syncronize with streaming thread 
+  // (wait for all data to process)
+
+  CAutoLock lock(&m_csReceive);
+
+  // Force flushing of internal buffers of 
+  // processing chain.
+
+  Chunk chunk;
+  chunk.set(in_spk, 0, 0, false, 0, true);
+  process_chunk(&chunk);
+  reset();
+
+  // Send end-of-stream downstream to indicate that we have no
+  // more samples to send.
+  return CTransformFilter::EndOfStream();
+}
+
+HRESULT 
 AC3Filter::BeginFlush()
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::BeginFlush()", this));
-  return CTransformFilter::BeginFlush();
+
+  // Serialize with state changes
+  CAutoLock filter_lock(&m_csFilter);
+
+  // Send BeginFlush downstream to release all holding samples
+  HRESULT hr = CTransformFilter::BeginFlush();
+  if FAILED(hr) return hr;
+
+  // Now we can be sure that Receive in streaming thread is 
+  // unblocked waiting for GetBuffer so we can now serialize 
+  // with streaming thread
+
+  CAutoLock streaming_lock(&m_csReceive);
+
+  // Now we can be sure that Receive (or other call at streaming thread) 
+  // is finished and all data is processed.
+
+  reset();
+
+  // All internal processing buffers are now dropped. So we can 
+  // now correctly start processing from new position.
+
+  return S_OK;
 }
 HRESULT 
 AC3Filter::EndFlush()
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndFlush()", this));
+
+  // Syncronize with streaming thread 
+  // (wait for all data to process)
+  CAutoLock lock(&m_csReceive);
+
   return CTransformFilter::EndFlush();
 }
 

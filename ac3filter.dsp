@@ -24,8 +24,8 @@ CFG=ac3filter - Win32 Debug
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
-# PROP Scc_ProjName ""
-# PROP Scc_LocalPath ""
+# PROP Scc_ProjName "ac3filter"
+# PROP Scc_LocalPath "."
 CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe
@@ -247,10 +247,6 @@ SOURCE=.\ac3filter.ico
 # Begin Source File
 
 SOURCE=.\ac3filter.rc
-# End Source File
-# Begin Source File
-
-SOURCE=..\valib\valib\filters\convert.cpp
 # End Source File
 # Begin Source File
 

@@ -3,10 +3,14 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "ac3filter"=".\ac3filter.dsp" - Package Owner=<4>
+Project: "ac3filter"=.\ac3filter.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
+    begin source code control
+    ac3filter
+    .
+    end source code control
 }}}
 
 Package=<4>
@@ -18,10 +22,14 @@ Package=<4>
 
 ###############################################################################
 
-Project: "valib"="..\VALib\lib\valib.dsp" - Package Owner=<4>
+Project: "valib"=..\VALib\lib\valib.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
+    begin source code control
+    valib
+    ..\valib
+    end source code control
 }}}
 
 Package=<4>
