@@ -91,6 +91,127 @@ AC3Filter::reset()
   cpu.reset();
 }
 
+/*
+bool
+AC3Filter::setup_chain(Speakers _in_spk, Speakers _out_spk, bool _use_spdif)
+{
+  DbgLog((LOG_TRACE, 3, "> AC3Filter(%x)::setup_chain(%s %s %iHz => %s %s %iHz%s)...", this, 
+    _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate,
+    _out_spk.mode_text(), _out_spk.format_text(), _out_spk.sample_rate,
+    _use_spdif? " use SPDIF", ""));
+
+  ///////////////////////////////////////////////////////////////////////////
+  // Query everything
+
+  if (!dec.query_input(_in_spk))
+  {
+    // it is expected behaviour
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): input format refused", this));
+    return false;
+  }
+
+  bool _spdif_on;
+  Speakers _out_spdif = _out_spk;
+  _out_spdif.format = FORMAT_SPDIF;
+
+  if (_use_spdif && dec.query_output(_out_spdif) && sink->query_input(_out_spdif))
+    _spdif_on = true;
+  else if (dec.query_output(_out_spk) && sink->query_input(_out_spk))
+    _spdif_on = false;
+  else
+  {
+    // it is expected behaviour
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): output format refused", this));
+    return false;
+  }
+
+  ///////////////////////////////////////////////////////////////////////////
+  // Setup everything
+
+  if (!dec.set_input(_in_spk))
+  {
+    // we do not expect error here
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): dec.set_input() FAILED!!!", this));
+    return false;
+  }
+
+  dec.set_output(_spdif_on? _out_spdif: _out_spk);
+  {
+    // we do not expect error here
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): dec.set_output() FAILED!!!", this));
+    return false;
+  }
+
+  dec.proc.set_input_order(win_order);
+  dec.proc.set_output_order(win_order);
+  dec.reset();
+
+  ///////////////////////////////////////////////////////////////////////////
+  // Update state
+
+  in_spk    = _in_spk;
+  out_spk   = _out_spk;
+  spdif     = _spdif;
+
+  DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): Ok", this));
+  return true;
+}
+
+
+
+bool        
+AC3Filter::set_input(CMediaType &_mt)
+{
+  Speakers spk_tmp;
+  return mt2spk(_mt, spk_tmp) && set_input(spk_tmp);
+}
+
+bool        
+AC3Filter::set_input(Speakers _in_spk)
+{
+  DbgLog((LOG_TRACE, 3, "> AC3Filter(%x)::set_input(%s %s %iHz)...", this, 
+    _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
+
+  if (in_spk == _in_spk)
+  {
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(): no change", this));
+    return true;
+  }
+
+  if (!setup_chain(_in_spk, out_spk, spdif))
+  {
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(): format refused", this));
+    return false;
+  }
+
+  DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(): Ok", this));
+  return true;
+}
+
+bool        
+AC3Filter::set_output(Speakers _out_spk, bool _use_spdif)
+{
+  DbgLog((LOG_TRACE, 3, "> AC3Filter(%x)::set_output(%s %s %iHz%s)...", this, 
+    _out_spk.mode_text(), _out_spk.format_text(), _out_spk.sample_rate, 
+    _use_spdif? " use SPDIF": ""));
+
+  if (out_spk == _out_spk && use_spfif == _use_spdif)
+  {
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_output(): no change", this));
+    return true;
+  }
+
+  if (!setup_chain(in_spk, _out_spk, _use_spdif))
+  {
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_output(): format refused", this));
+    return false;
+  }
+
+  DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_output(): Ok", this));
+  return true;
+}
+*/
+
 bool        
 AC3Filter::set_input(CMediaType &_mt)
 {
