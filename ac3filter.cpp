@@ -43,7 +43,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   spdif_on = false;
 
   config_autoload = false;
-  formats = FORMAT_MASK_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES;
+  formats = FORMAT_CLASS_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES;
 
   error   = false;
 
@@ -409,7 +409,16 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   // understand WAVEFORMATEXTENSIBLE format (Vortex-based cards, for example).
 
   if (spdif)
+  {
     // SPDIF format
+    if (i != 0)
+      i--;
+    else
+      if (spk2mt(out_spdif, *_mt, true))
+        return NOERROR;
+      else
+        return E_FAIL;
+
     if (i != 0)
       i--;
     else
@@ -417,6 +426,7 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
         return NOERROR;
       else
         return E_FAIL;
+  }
 
   if ((out_spk.mask != MODE_MONO && out_spk.mask != MODE_STEREO) || 
       out_spk.format != FORMAT_PCM16)
