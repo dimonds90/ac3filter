@@ -76,8 +76,6 @@ private:
   HRESULT OnDisconnect();
   HRESULT OnActivate();
   HRESULT OnDeactivate();
-  HRESULT OnApplyChanges();
-
 
   void init_controls();
   void set_dynamic_controls();

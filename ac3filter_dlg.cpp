@@ -379,6 +379,20 @@ AC3FilterDlg::OnDisconnect()
 {
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::OnDisconnect()"));
 
+  if (filter)
+  {
+    filter->get_in_spk(&in_spk);
+
+    RegistryKey reg;
+    switch (in_spk.format)
+    {
+      case FORMAT_AC3: reg.create_key(REG_KEY"\\preset\\Default AC3"); break;
+      case FORMAT_DTS: reg.create_key(REG_KEY"\\preset\\Default DTS"); break;
+      default:         reg.create_key(REG_KEY"\\preset\\Default"); break;
+    }
+    filter->save_params(&reg, AC3FILTER_ALL);
+  }
+
   SAFE_RELEASE(filter);
   SAFE_RELEASE(proc);
   SAFE_RELEASE(dec);
@@ -397,8 +411,8 @@ AC3FilterDlg::OnActivate()
   set_dynamic_controls();
   set_controls();
 
-  SetTimer(m_hwnd, 1, refresh_time, 0);
-  SetTimer(m_hwnd, 2, 1000, 0);
+  SetTimer(m_hwnd, 1, refresh_time, 0);  // for all dynamic controls
+  SetTimer(m_hwnd, 2, 1000, 0);          // for CPU usage (should be averaged)
 
   return NOERROR;
 }
@@ -412,17 +426,6 @@ AC3FilterDlg::OnDeactivate()
   KillTimer(m_hwnd, 2);
 
   return NOERROR;
-}
-
-HRESULT 
-AC3FilterDlg::OnApplyChanges()
-{
-  RegistryKey reg;
-  reg.create_key(REG_KEY);
-  if SUCCEEDED(filter->save_params(&reg, AC3FILTER_ALL))
-    return NOERROR;
-  else
-    return E_FAIL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

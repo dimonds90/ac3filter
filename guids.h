@@ -29,7 +29,7 @@
                               // formats, spdif, config_autoload, (time_shift, generate_timestamps, jitter)
 
 #define AC3FILTER_ALL    63   // all settings
-#define AC3FILTER_PRESET 31   // settings that saved into preset (all except system settings)
+#define AC3FILTER_PRESET 30   // settings that saved into preset (all except system settings & speaker config)
 
 #define SPDIF_MODE_NONE         0    // see dvd_decoder.h
 #define SPDIF_MODE_PASSTHROUGH  1    // see dvd_decoder.h
