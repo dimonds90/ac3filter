@@ -7,7 +7,7 @@
   + Added AC3 CRC check
   + Separate settings for AC3/DTS/other formats
 
-<b>1.01a</b> - (unofficial release)
+<b>1.01a</b> (unofficial release)
   * First working alfa for new filter generation
   * Totally rewrited
   * 10%-20% less CPU usage
