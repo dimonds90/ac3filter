@@ -1,1131 +1,2116 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-
 <head>
-  <title>AC3Filter</title>
-  <meta http-equiv="content-type" content="text/html; charset=windows-1251">
+<title>AC3Filter</title>
+<meta name="author" content="Alexander Vigovsky">
+<meta name="keywords" content="AC3Filter AC3 DTS DolbyDigital">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<link href="ac3filter.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
-<!-- --------------------------------------------------------------------------
+<!-- ==========================================================================
                                     Header
---------------------------------------------------------------------------- -->
+=========================================================================== -->
 
 <!-- AC3Filter title & Source forge logo -->
 
-<table width="100%"><tbody><tr>
-
-  <td>
-    <h1><b>AC3Filter</b><small><i> ver $ver</i></small></h1>
-  </td>
-
-  <td style="text-align: right;">
-    <a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=66022&amp;type=5" alt="SourceForge Logo" border="0" height="62" width="210"></a> 
-  </td>
-
-</tr></tbody></table>
+<table width="100%">
+  <tr>
+    <td><h1><b>AC3Filter</b><small><i> ver $ver</i></small></h1></td>
+    <td style="text-align: right;"><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=66022&amp;type=5"
+    alt="SourceForge Logo" border="0" height="62" width="210"></a> </td>
+  </tr>
+</table>
 
 <!-- Language selection -->
 
-<table><tbody><tr>
-  <td>                             <img src="pic/flag_eng.gif" style="border: 0px solid;" align="middle"><b>English</b>&nbsp;&nbsp;</td>
-  <td><a href="ac3filter_rus.html"><img src="pic/flag_rus.gif" style="border: 0px solid;" align="middle">Russian</a>&nbsp;&nbsp;</td>
-  <td><a href="ac3filter_ita.html"><img src="pic/flag_ita.gif" style="border: 0px solid;" align="middle">Italian</a>&nbsp;&nbsp;</td>
-</tr></tbody></table>
+<table>
+  <tr>
+    <td><a href="ac3filter_eng.html"><img src="pic/flag_eng.gif" border="0">English</a>&nbsp;&nbsp;&nbsp;</td>
+    <td><img src="pic/flag_rus.gif" border="0"><b>Russian</b>&nbsp;&nbsp;&nbsp;</td>
+    <td><a href="ac3filter_ita.html"><img src="pic/flag_ita.gif" border="0">Italian</a>&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+</table>
 
 <!-- Top-level links -->
 
-<table width="100%"><tbody><tr>
-  <td><a href="$download_bin">Download</a></td>
-  <td><a href="http://sourceforge.net/projects/ac3filter">Source forge project</a></td>
-  <td><a href="http://sourceforge.net/forum/?group_id=66022">Project forum</a></td>
-</tr></tbody></table>
+<table width="100%">
+  <tr>
+    <td><a href="http://order.kagi.com/?6CZJZ">Donate!</a></td>
+    <td><a href="$download_bin">Download</a></td>
+    <td><a href="http://sourceforge.net/forum/?group_id=66022">Forum</a></td>
+    <td><a href="http://sourceforge.net/projects/ac3filter">Source forge project</a></td>
+  </tr>
+</table>
 
-<hr width="100%" size="2"><br>
-AC3Filter - it is DirectShow filter for AC3    decoding to play .AVI
-with AC3 audio tracks and MPEG2 (DVD).    Distributed absolutely for
-free (FREEWARE, OpenSource). Sorry if my English is bad, but I  think it
-is better to have something than nothing.<br>
-<br>
-<h2>Main features:</h2>
-<ul>
-  <li>Full AC3 standard compliance.</li>
-  <li>S/P DIF passthrough support.<br>
-  </li>
-  <li>Decode MPEG2 PES streams.</li>
-  <li>Multichannel output support.</li>
-  <li>LFE support.</li>
-  <li>Dynamic Range Compression (DRC)  support.</li>
-  <li>Overflow control and automatic gain control.<br>
-  </li>
-  <li>Gain levels control.</li>
-  <li>Bitstream information (channel format,     bitrate,     sample
-rate, coupling freq and maximun freq).</li>
-  <li>Input/output levels.</li>
-  <li>Matrix mixer with direct control of mixing matrix.</li>
-  <li>Stereo to multichannel mixing.</li>
-  <li><font color="#000000"> DolbySurround/ProLogic/ProLogicII
-downmixing.</font></li>
-  <li><font color="#000000">Delays for each channel.</font></li>
-  <li><font color="#000000">Equalizer.</font></li>
-</ul>
-<hr width="100%" size="2">
-<h2><font color="#000000">Related projects:</font></h2>
-<font color="#000000">&nbsp;&nbsp;&nbsp; <a href="http://matrix-mixer.sourceforge.net/">MatrixMixer</a> - Allows to
-upmix any audio source (not only ac3s) up to 5.1 format (based on
-AC3Filter mixing matrix).<br>
-&nbsp;&nbsp;&nbsp; <a href="http://winampac3.sourceforge.net/">WinampAC3</a>
-- Multichannel Winamp ac3 playback plugin (based on the same decoder as
-AC3Filter).<br>
-&nbsp;&nbsp;&nbsp; <a href="http://liba52.sourceforge.net/">LibA52</a>
-- Crossplatform ac3 decoding library (by Michel LESPINASSE).</font><br>
-<br>
-<hr width="100%" size="2">
-<h2>Contents</h2>
-<ul>
-  <li><a href="#download">Download</a></li>
-  <li><a href="#install">Install</a></li>
-  <li><a href="#uninstall">Uninstall</a></li>
-  <li><a href="#system_setup">System setup<br>
-    </a></li>
+<!-- ==========================================================================
+                                  Description
+=========================================================================== -->
+
+<div class="chapter">
+  <p>AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing.
+    It has a priority on wide functionality and convenient settings. Filter can decode following audio
+  formats: AC3/DTS/MPEG Audio. It also supports multi-channel and digital (SPDIF) outputs. </p>
+</div>
+
+<!-- ==========================================================================
+                                   Features
+=========================================================================== -->
+
+<div id="features" class="chapter">
+  <h2><a name="features">Main features:</a></h2>
+
   <ul>
-    <li><a href="#w98">Windows 98</a></li>
-    <li><a href="#nt4">Windows NT4</a><br>
+    <li>Decoding of AC3/DTS/MPEG1/2 Audio Layer I/II formats </li>
+    <li>Support of DVD, AVI/AC3, AVI/DTS, WAV/AC3 and WAV/DTS </li>
+    <li>Audio processing for any source </li>
+    <li>6-channel decomposition of any source </li>
+    <li>Full information about audio track format </li>
+    <li>Support of SPDIF passthrough mode </li>
+    <li>Multi-channel audio output from all sources on SPDIF (on-the-fly AC3 encoding) </li>
+    <li>Channel-by-channel amplification for all input/output channels </li>
+    <li>Channel-by-channel delays (for compensation of distance difference to speakers) </li>
+    <li>Automatic gain control </li>
+    <li>Clipping</li>
+    <li>Dynamic Range Compression, DRC</li>
+    <li>Level indication for input and output channels </li>
+    <li>Matrix mixer and ability of direct modification of mixing matrix </li>
+  </ul>
+</div>
+
+<!-- ==========================================================================
+                                  Contents
+=========================================================================== -->
+
+<div id="contents" class="chapter">
+  <h2>Contents </h2>
+
+  <ol>
+    <li> <a href="#download">Download </a></li>
+    <li> <a href="#install">Install</a></li>
+    <li> <a href="#uninstall">Uninstall</a></li>
+    <li> <a href="#system_setup">System setup</a>
+      <ol>
+        <li><a href="#system_setup_windows">Windows</a></li>
+        <li><a href="#system_setup_multichannel">Setup for multichannel mode</a></li>
+        <li><a href="#system_setup_spdif">Setup for SPDIF mode (digital output)</a></li>
+        <li><a href="#system_setup_subwoofer">Low-frequency channel (subwoofer) setup</a></li>
+        <li><a href="#system_setup_filter">Filter setup</a></li>
+      </ol>
     </li>
-    <li><a href="#w2k">Windows 2000</a></li>
-    <li><a href="#vortex">Vortex</a><br>
+    <li> <a href="#player_setup">Player setup</a>
+      <ol>
+        <li><a href="#player_setup_table">Compatibility table</a></li>
+        <li><a href="#player_setup_mpc">Media Player Classics</a></li>
+        <li><a href="#player_setup_wmp64">Windows Media Player 6.4</a></li>
+        <li><a href="#player_setup_wmp7">Windows Media Player 7+</a></li>
+        <li><a href="#player_setup_bsp">BSPlayer</a></li>
+        <li><a href="#player_setup_zp">ZoomPlayer</a></li>
+        <li><a href="#player_setup_la">LightAlloy</a></li>
+      </ol>
     </li>
-  </ul>
-  <li><a href="#player_settings">Players setup<br>
-    </a></li>
+    <li> <a href="#filter_setup">Filter settings</a>
+      <ol>
+        <li><a href="#filter_setup_settings">Filter settings window opening</a></li>
+        <li><a href="#filter_setup_main">Main settings</a></li>
+        <li><a href="#filter_setup_mixer">Mixer settings</a></li>
+        <li><a href="#filter_setup_gains">Gains</a></li>
+        <li><a href="#filter_setup_system">System settings</a></li>
+      </ol>
+    </li>
+    <li><a href="#theory">Theory</a>
+      <ol>
+        <li><a href="#theory_loudness">Loudness and dynamic range</a></li>
+        <li><a href="#theory_lfe">What is LFE?</a></li>
+        <li><a href="#theory_spdif">SPDIF</a></li>
+      </ol>
+    </li>
+    <li><a href="#distribution">Вistribution</a></li>
+    <li><a href="#contact_author">Feedback</a></li>
+    <li><a href="#donations">Help to the project</a></li>
+    <li><a href="#changelog">Changelog</a></li>
+  </ol>
+</div>
+
+
+<!-- ==========================================================================
+                                  Projects
+=========================================================================== -->
+<!-- rus -->
+<div id="download" class="chapter">
+  <h2><a name="download">1. Download.</a></h2>
+
+  <b>ac3filter ver $ver:</b> <a href="$download_bin">$download_bin</a><br>
+  <b>All versions:</b> <a href="http://sourceforge.net/projects/ac3filter/">http://sourceforge.net/projects/ac3filter</a><br>
+  <br>
+  New versions of the program can be found at the following site:<br>
+  <a href="http://ac3filter.sourceforge.net">http://ac3filter.sourceforge.net</a> - official site of the project<br>
+  <a href="http://sourceforge.net/forum/?group_id=66022">http://sourceforge.net/forum/?group_id=66022</a> - AC3Filter forum<br>
+  <a href="http://sourceforge.net/projects/ac3filter">http://sourceforge.net/projects/ac3filter</a> - project page on Sourceforge - errors, requests...<br>
+</div>
+
+<!-- ==========================================================================
+                                  Install
+=========================================================================== -->
+
+<div id="install" class="chapter">
+  <h2><a name="install">2. Install.</a></h2>
+
+  <p>Run the installation program and follow the instructions. Additional system settings may be required
+    for using of multi-channel modes and digital output mode (refer to <a href="#system_setup">4. System
+    setup</a>).</p>
+</div>
+
+<!-- ==========================================================================
+                                  Uninstall
+=========================================================================== -->
+
+<div id="uninstall" class="chapter">
+  <h2><a name="uninstall">3. Uninstall.</a></h2>
+
+  <p>Run uninstalling program from the Start menu or from the Control Panel.</p>
+  <p class="warning">All recorded settings of matrices, equalizers, etc. will be deleted!</p>
+  <p>Filter can be installed together with other programs (codec-packs, players…). In this case, filter
+    can be uninstalled only together with that program. If you have no idea about the program installed
+    with the filter or you are going to uninstall the filter but not the program you can uninstall the
+    filter independently as follows:</p>
   <ul>
-    <li><a href="#BSPlayer">BSPlayer</a></li>
-    <li><a href="#ZoomPlayer">ZoomPlayer</a></li>
+    <li> Download installation package from the official site: <a href="$download_bin">$download_bin</a></li>
+    <li> Install the package. After that filter will appear in the installed programs list of the Control
+      Panel.</li>
+    <li>Uninstall filter from the Control Panel. Filter will be deleted from the system.</li>
   </ul>
-  <li><a href="#usage">Filter configuration<br>
-    </a></li>
-  <ul>
-    <li><a href="#main_settings">Main settings<br>
-      </a></li>
-    <li><a href="#mixer">Mixer settings<br>
-      </a></li>
-    <li><a href="#equalizer">Equalizer &amp; delays<br>
-      </a></li>
-  </ul>
-  <li><a href="#lfe">What is LFE<br>
-    </a></li>
-  <li><a href="#cookbook">Cookbook</a></li>
-  <ul>
-    <li><a href="#lfe_mix">LFE mixing<br>
-      </a></li>
-    <li><a href="#swap_speakers">Swap channels<br>
-      </a></li>
-    <li><a href="#max_loud">Maximum loudness<br>
-      </a></li>
-  </ul>
-  <li><a href="#registry">Registry and configuration files<br>
-    </a></li>
-  <ul>
-    <li><a href="#reg_presets">Presets</a></li>
-    <li><a href="#reg_matrix">Matrices</a></li>
-  </ul>
-  <li><a href="#misc">Misc</a></li>
-  <li><a href="#distribution">Distribution</a></li>
-  <li><a href="#author">Contact author<br>
-    </a></li>
-  <li><a href="#changelog">Changelog</a></li>
-  <li><a href="#links">Useful links<br>
-    </a></li>
-</ul>
-<br>
-<hr width="100%" size="2">
-<h2><a name="download"></a>Download.</h2>
-New versions can be  found  at site:<br>
-<a href="http://ac3filter.sourceforge.net">http://ac3filter.sourceforge.net</a>
-- home page<br>
-<a href="http://sourceforge.net/projects/ac3filter">http://sourceforge.net/projects/ac3filter</a>
-- sourceforge project page (bug reports, feature requests)<br>
-<a href="http://sourceforge.net/forum/?group_id=66022">http://sourceforge.net/forum/?group_id=66022</a>
-- AC3Filter forum<br>
-<br>
-<b><b>All versions:<br>
-</b></b><a href="http://sourceforge.net/projects/ac3filter/">http://sourceforge.net/projects/ac3filter</a><br>
-<b><b><br>
-</b></b><b><b>ac3filter ver $ver<br>
-</b></b><a href="$download_bin">$download_bin</a>&nbsp;- binary<br>
-<a href="$download_src">$download_src</a>&nbsp;- sources<br>
-<b><b>
-</b></b><a href="http://prdownloads.sourceforge.net/ac3filter/ac3filter_0_69b.exe?download"></a><br>
-<br>
-<hr width="100%" size="2">
-<h2><b><a name="install"></a>Install.</b></h2>
-&nbsp;&nbsp;&nbsp; Just run setup program.<br>
-<br>
-&nbsp;&nbsp;&nbsp; If you are using Windows 98 Simplified Chineese and
-filter's property dialog is too small you can try <b>dialog_patch.exe</b>
-patch (run it again to revert  changes).<br>
-<br>
-&nbsp;&nbsp;&nbsp; For normal filter operation all accompaniment files
-are not required and shipped only for serviceability. The only required
-module is <b>ac3filter.ax</b>. This module is also Control Panel
-configuration module for itself. For W2K+ it can be registred in
-registry key <b>[HKLM\Software\Microsoft\Windows\CurrentVersion\Control
-Panel\Cpls]</b>. But for W98 compatibility at installation it is copied
-to windows system folder with .cpl extension.<br>
-<br>
-<br>
-<hr width="100%" size="2">
-<h2><b><a name="uninstall"></a>Uninstall.</b><br>
-</h2>
-&nbsp;&nbsp;&nbsp; Just run uninstaller from Start Menu or Control
-Panel.<br>
-<br>
-&nbsp;&nbsp;&nbsp; <font color="#ff0000">! Note that all your saved
-matrices, equaliers etc will be lost !</font><br>
-<br>
-&nbsp;&nbsp;&nbsp; It is possible that filter was installed with one of
-codec packs. In this case most simple way to uninstall codec is to
-uninstall this codec pack. If you want to uninstall only this codec you
-may uninstall it manually:
-<ul>
-  <li>Find ac3filter.ax file.</li>
-  <li>Unregister this module from command line: &gt;regsvr32 /u
-x:\some_dir\ac3filter.ax</li>
-  <li>Find and delee files ac3filter.ax and ac3filter.cpl</li>
-  <li>Delete registry key HKCU\Software\AC3Filter<br>
-  </li>
-</ul>
-<br>
-<hr width="100%" size="2">
-<h2><a name="system_setup"></a>System setup</h2>
-&nbsp;&nbsp;&nbsp; If installation was successful then in most cases
-filter is ready to work immediately and does not require any settings.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Most compatible mode of operation is stereo mode. It
-should work with any Windows version and any sound card.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Some drivers (Creative!) do not update settings in '<b>Control
-Panel-&gt;Sounds and Multimedia-&gt;Audio-&gt;Sound
-Playback-&gt;Advanced</b>' after speaker configuration change in
-drivers. So it is necessary to check it.<br>
-<br>
-&nbsp;&nbsp;&nbsp; It is possible that some audio processing filter
-(equalizers, enhancer, etc) may handle multichannel audio format
-incorrectly and cause problems with playback. For example center channel
-may fairly disappear or it will be impossible to change speaker
-configuration at playback time. To prevent this things do not install
-filter-packs and unregister unnecessary filters.<br>
-<br>
-&nbsp;&nbsp;&nbsp; One of problematic filters is <b>mmswitch</b> filter
-(filter that support .avi and DVDs with several audio tracks and allow
-to switch between it, especially   for multi-language films). If you
-mainly watch DVDs it is better  to uninstall this filter and use MPEG2
-parser wich support   stream  switching directly (standard <b>MPEG2
-Splitter</b> for example). In this case you'll also get lower   CPU
-usage. If MPEG2 parser does not support stream switching (<b>Elecard</b>
-for example) then many audio rendering chains are created, and all of
-them are working together when only one is really reproduced.<br>
-<br>
-&nbsp;&nbsp;&nbsp; If <b>mmswitch</b> is really needed  then   it  is
-several possibilities:<br>
-<ul>
-  <li>All audio streams are ac3. For correct stream switching all
-decoders must have the same output format.<br>
-  </li>
-  <li>First stream is ac3, and second is mp3 (or any other non-
-multichannel). Before switching to mp3 stream ac3 must be configured to
-16bit stereo.</li>
-  <li>First stream is mp3 and second is ac3. Before switching to ac3
-filter must be confugured to 16bit stereo. You can change output format
-after switching.</li>
-</ul>
-<br>
-&nbsp;&nbsp;&nbsp; Some of system settings may be configured from
-filter properties page (read <a href="#usage">Filter configuration</a>
-to know how to call it):<br>
-<br>
-<div align="center"><img src="pic/system.gif" title="" alt="" width="628" height="429"><br>
 </div>
-<br>
-<b>* Filter merit</b><br>
-<br>
-&nbsp;&nbsp;&nbsp; After installation filter have highest priority,
-i.e. it will be used instead of any other installed ac3 decoder. If for
-any reason it is needed to use other decoder it is possible to decrease
-filter's priority to minimal with '<b>Prefer other decoder'</b>. In this
-case filter will be used only if it is no other decoders installed. It
-is needed for example to use NVDVD player. It can only use its own
-decoder. But with AC3Filter installed NVDVD tries to load AC3Filter
-instead and cannot proceed. To revert high priority choose <b>'Prefer
-AC3Filter</b>'. <br>
-&nbsp;&nbsp;&nbsp; This option requires relogon in W2k/XP and system
-restart in W98.<br>
-<br>
-<b>* Default audio renderer</b><br>
-<br>
-&nbsp;&nbsp;&nbsp; Sound card may work in two modes: DirectSound and
-WaveOut. If it is some problems when using filter (for example if SPDIF
-does not work) it is possible that mode switch may help. Some media
-players (BSP) have corresponding settings but most of others use system
-default settings. Choose <b>'Use DirectSound'</b> to make DirectSound to
-be default interface; choose <b>'Use WaveOut</b>' to make WaveOut to be
-default interface.<br>
-&nbsp;&nbsp;&nbsp; This option requires relogon in W2k/XP and system
-restart in W98.<br>
-<br>
-<b> * Audio/Video sync.</b><br>
-<br>
-&nbsp;&nbsp;&nbsp; Sometimes it may happen that audio and video are not
-in sync. Mostly it happens because of incorrect mixing, but it may be
-also some hardware reasons. This option is designed to fix <b>hardware</b>
-issues. You can use it to watch movies that was incorrectly mixed but do
-not forget to change it back after! This option specifies time shift
-between audio and video. If audio is played <u><i>before</i></u> video
-you need to <u><i>increase</i></u> this value. If audio is played <u><i>after</i></u>
-video you need to <u><i>decrease</i></u> this value. Note, that this
-option allows to fix only constant time shift.<br>
-&nbsp;&nbsp;&nbsp; This option have immediate effect. When you change
-it picture may freeze for several seconds to resync, it is normal.<br>
-<br>
-<b>* System options</b><br>
-<br>
-&nbsp;&nbsp;&nbsp; <b>Auto load movie configuration files</b> - If this
-option is enabled filter will try to find and load configuration file
-with the same name as media file.<br>
-<br>
-&nbsp;&nbsp;&nbsp; <b>Generate timestamps</b> - This option may affect
-video stuttering. Try to switch it if you see video stuttering,
-non-fluent video. It is most common case when this option is enabled. In
-this case filter will calculate time for each ac3 frame decoded. But
-this time may differ from time got from media file (in fact times are
-always different for .avi files) and this may produce video stuttering
-on some systems. It does not mean that filter calculate timestamps
-incorrectly or timestamps in media file are incorrect, but it is a
-general problem of .avi files with frame-based interleaving. Partially
-this porblem may be solved with '<b>Jitter correction</b>' option.<br>
-&nbsp;&nbsp;&nbsp; If this option is disabled filter will use only
-timestamps from media file. This may solve the problem with different
-timestamps. But in this case some decoded ac3 frames will have no
-timestamps at all. Some players/drivers cannot handle this situation
-correctly and may produce stuttering/frozen frames or other unpleasant
-effects.<br>
-<br>
-&nbsp;&nbsp;&nbsp; <b>Jitter Correction</b> - works only when '<b>Generate
-timestamps</b>' is enabled. Decrease the stutterring due to the
-difference between calculated and received timestamps. '<b>Current jitter</b>'
-shows the current  amplitude of deviations.<br>
-<br>
-&nbsp;&nbsp;&nbsp; <b>Use WAVEFORMATEXTENSIBLE</b> - generally for
-multichannel modes it is WAVEFORMATEXTENSIBLE structure used (described
-at <a href="http://www.microsoft.com/hwdev/tech/audio/multichaud.asp">http://www.microsoft.com/hwdev/tech/audio/multichaud.asp</a>).
-Some old drivers cannot work with it (opposite, some new drivers can
-work only with this structure in multichannel).<br>
-<br>
-<h3><a name="w98"></a>Windows 98</h3>
-&nbsp;&nbsp;&nbsp; By deafult Windows98 does not support multichannel
-and spdif modes.<br>
-&nbsp;&nbsp;&nbsp; First you need to install microsoft patch for
-WaveOut:<br>
-<b>server1:</b> <a href="ftp://ftp.asus.com.tw/pub/ASUS/beta/mb/driver/269601USA8.EXE">ftp://ftp.as
-us.com.tw/pub/ASUS/beta/mb/driver/269601USA8.EXE</a><br>
-<b>server2:</b> <a href="ftp://download.intel.com/design/motherbd/bt2/269601USA8.EXE">ftp://downloa
-d.intel.com/design/motherbd/bt2/269601USA8.EXE</a><br>
-<b> server3:</b> <a href="http://ac3filter.sourceforge.net/download/269601USA8.EXE">http://ac3filter
-.sourceforge.net/download/269601USA8.EXE</a><br>
-<br>
-&nbsp;&nbsp;&nbsp; This patch is described at <a href="http://www.microsoft.com/hwdev/tech/audio/Non-%0D%0APCM.asp">http://www.microsoft.com/hwdev/tech/audio/Non-PCM.asp</a>.<br>
-&nbsp;&nbsp;&nbsp; Second is set WaveOut Device as default device for
-audio output. <br>
-&nbsp;&nbsp;&nbsp; After it in most players multichannel modes and
-spdif output may work.<br>
-<br>
-<h3><a name="nt4"></a>WinNT4</h3>
-&nbsp;&nbsp;&nbsp; ServicePack6 is required.<br>
-<br>
-<h3><a name="w2k"></a>Win2K</h3>
-&nbsp;&nbsp;&nbsp; ServicePack2 is highly recommended.<br>
-<br>
-<h3><a name="vortex"></a>Vortex</h3>
-&nbsp;&nbsp;&nbsp; If muiltichannel modes do not work try to uncheck '<b>Use
-WAVEFORMATEXTENSIBLE</b>' option at 'System' filter's property page.<br>
-<br>
-<br>
-<hr width="100%" size="2">
-<h2><a name="player_settings"></a>Players setup.</h2>
-&nbsp;&nbsp;&nbsp; Most players do not require any setup and filter is
-used automatically.<br>
-<br>
-<h3><a name="BSPlayer"></a>BSPlayer</h3>
-&nbsp;&nbsp;&nbsp; In player settings (<b>Options-&gt;Preferences</b>)
-set: <br>
-<ul>
-  <li>General-&gt;Don't load ac3 settings: checked </li>
-  <li>Audio-&gt;For AC3 decoding use: '--'</li>
-</ul>
-<h3><a name="ZoomPlayer"></a>ZoomPlayer</h3>
-&nbsp;&nbsp;&nbsp; To play AVI files player does not require any
-settings. But this player can be used as DVD player (instead of widely
-used PowerDVD or WinDVD). To play DVDs with using of AC3Filter next
-files are required:<br>
-<br>
-<a href="http://ac3filter.sourceforge.net/download/zoom/AC3Filter-CyberLink-DirectSound.dvdgraph">http://ac3filter.sourceforge.net/download/zoom/AC3Filter-CyberLink-DirectSound.dvdgraph</a><br>
-<a href="http://ac3filter.sourceforge.net/download/zoom/AC3Filter-InterVideo-DirectSound.dvdgraph">http://ac3filter.sourceforge.net/download/zoom/AC3Filter-InterVideo-DirectSound.dvdgraph</a><br>
-<a href="http://ac3filter.sourceforge.net/download/zoom/AC3Filter-CyberLink-Waveout.dvdgraph">http://ac3filter.sourceforge.net/download/zoom/AC3Filter-CyberLink-Waveout.dvdgraph</a><br>
-<a href="http://ac3filter.sourceforge.net/download/zoom/AC3Filter-InterVideo-Waveout.dvdgraph">http://ac3filter.sourceforge.net/download/zoom/AC3Filter-InterVideo-Waveout.dvdgraph</a><br>
-<br>
-&nbsp;&nbsp;&nbsp; Place this files to ...\ZoomPlayer\DVDGraph folder.
-In player settings <b>Player Options-&gt;DVD-&gt;DVD Setup</b> choose
-required option (depends on installed video decoder).<br>
-<br>
-<br>
-<hr width="100%" size="2">
-<h2><b><a name="usage"></a>Filter configuration.</b><br>
-</h2>
-<big><i><br>
-&nbsp;&nbsp;&nbsp; First it is two main rules of tuning:<br>
-&nbsp;&nbsp;&nbsp; 1. If you do not understand what some option does do
-not touch it.<br>
-&nbsp;&nbsp;&nbsp; 2. If you did not follow the first rule and broke
-anything and do not know how to fix it just load 'standart' preset.<br>
-&nbsp;&nbsp;&nbsp; :)))<br>
-</i></big><br>
-&nbsp;&nbsp;&nbsp; Filter can be configured with several ways. Best is
-if player allow to call filter properties (WMP 6.4, BSP, Sasami, etc,
-not in WMP 7, 8, 9!).&nbsp;For example in WMP 6.4 filter list can be
-accessed <b>File- &gt;Properties-&gt;Advanced</b>:<br>
-<br>
-<div align="center"><img src="pic/filters.gif" alt="" width="425" height="435"> <br>
+
+<!-- ==========================================================================
+                                  System setup
+=========================================================================== -->
+
+<div id="system_setup" class="chapter">
+  <h2><a name="system_setup">4. System setup</a></h2>
+
+  <p>This section describes one-time settings, which should be made after the filter installation. The
+    most compatible operation mode is 16-bit stereo mode (not multi-channel), which is the default filter
+    operating mode. This mode is compatible with all Windows versions and all audio cards. There is no
+    need for additional settings to operate in this mode. For operating in multi-channel modes and in
+    digital output mode some system settings may be required.</p>
+		
+  <!-- ------------------------------ Windows ------------------------------- -->
+	
+  <div id="system_setup_windows" class="subchapter">
+    <h3><a name="system_setup_windows">4.1. Windows</a></h3>
+
+    <table style="text-align: center;" border="1" cellpadding="2" cellspacing="2">
+      <caption>
+      Compatibility table
+      </caption>
+      <tr>
+        <th align="left"></th>
+        <th>Win95, Win98</th>
+        <th>Win98SE</th>
+        <th>WinNT <a href="#system_setup_note3">(3)</a></th>
+        <th>Win2000</th>
+        <th>WinXP</th>
+      </tr>
+      <tr>
+        <th align="left">16bit mono/stereo </th>
+        <td>+</td>
+        <td>+</td>
+        <td>+</td>
+        <td>+</td>
+        <td>+</td>
+      </tr>
+      <tr>
+        <th align="left">multichannel</th>
+        <td>- (?)</td>
+        <td>WaveOut <a href="#system_setup_note1">(1)</a></td>
+        <td>SP6</td>
+        <td>+</td>
+        <td>+</td>
+      </tr>
+      <tr>
+        <th align="left">SPDIF</th>
+        <td>- (?)</td>
+        <td>WaveOut <a href="#system_setup_note1">(1)</a> + patch <a href="#system_setup_note2">(2)</a></td>
+        <td>- (?)</td>
+        <td>SP2</td>
+        <td>+</td>
+      </tr>
+    </table>
+
+    <div style="font-size:80%"> <a name="system_setup_note1"></a>1) Refer to <a href="#filter_setup_system">6.5.
+        System settings</a><br>
+      <a name="system_setup_note2"></a>2) You can download the patch from here:<br>
+      <div style="margin-left: 40px;"> <b>server1:</b><a href="http://ac3filter.sourceforge.net/download/269601USA8.EXE">http://ac3filter.sourceforge.net/download/269601USA8.EXE</a><br>
+        <b>server2:</b><a href="ftp://download.intel.com/design/motherbd/bt2/269601USA8.EXE">ftp://download.intel.com/design/motherbd/bt2/269601USA8.EXE</a><br>
+        <b>server3:</b><a href="ftp://ftp.asus.com.tw/pub/ASUS/beta/mb/driver/269601USA8.EXE">ftp://ftp.asus.com.tw/pub/ASUS/beta/mb/driver/269601USA8.EXE</a><br>
+        Patch effect is described in <a href="http://www.microsoft.com/hwdev/tech/audio/Non-PCM.asp">http://www.microsoft.com/hwdev/tech/audio/Non-PCM.asp</a>.<br>
+      </div>
+      <a name="system_setup_note3"></a>3) Audio card must support 48 kHz output mode.<br>
+    </div>
+  </div>
+
+  <!-- ------------------------------ Multichannel -------------------------- -->
+
+  <div id="system_setup_multichannel" class="subchapter">
+    <h3><a name="system_setup_multichannel">4.2. Setup for multichannel mode.</a></h3>
+
+    <p>Configure speakers in filter settings (refer to <a href="#filter_setup_main">6.2. Main settings</a>).
+      Some audio cards operates incorrectly with <em>odd</em> number of speakers (for instance, <span class="value">2/2+SW
+      4.1 quadro</span> or <span class="value">3/0 3 front</span>). Therefore, such modes should be avoided,
+      if possible. <span class="value">Dolby Surround/ProLogic</span> and <span class="value">Dolby ProLogic2</span> modes <em>are
+      not</em> multichannel modes. Moreover, modes with subwoofer (<span class="value">2/0+SW 2.1 stereo</span>, <span class="value">4/0+SW
+      4.1 quadro</span>) should not be used if acoustics has no separate input for subwoofer (refer to <a href="#theory_lfe">7.2.
+      What is LFE?</a>).</p>
+			
+    <p>Set speakers mode in <span class="action">Control Panel->Sounds and Multimedia->Audio->Sound Playback->Advanced</span>.
+      Furthermore, audio card drivers often have their own utilities for switching of speakers configuration.
+      It is necessary to set the proper configuration at both locations – within audio card driver settings
+      and within the Control Panel. </p>
+			
+    <p>For Creative audio card it is <em>necessary</em> to switch off all sound effects and equalizers,
+      otherwise there can be a loss of central/rear channels. </p>
+			
+    <p>Audio card can operate in two modes: DirectSound and WaveOut. In some cases, the multi-channel
+      mode can operate only in one of those modes and cannot operate in another one. If that is the case,
+      output device should be changed in player settings. To get information whether the player supports
+      the device changing function, refer to the table of compatibility in <a href="#player_setup">5. Player
+      setup</a> section (Renderer column). If the player has no such function, it is possible to change
+      the default system output device (refer to <a href="#filter_setup_system">6.5. System settings</a>).
+      However, this option changes the <em>global</em> system settings; therefore, it is recommended
+      to use it <em>only</em> if the player does not support the mentioned function. </p>
+  </div>
+
+  <!-- ------------------------------ SPDIF --------------------------------- -->
+
+  <div id="system_setup_spdif" class="subchapter">
+    <h3><a name="system_setup_spdif">4.3. Setup for SPDIF mode (digital output)</a></h3>
+    <small>(It is recommended to read <a href="#theory_spdif">7.3 SPDIF</a> section firstly) </small>
+
+    <p>SPDIF mode is required <em>only</em> if the digital connection and external decoder/receiver exist.
+      It is important previously to ensure whether the receiver connected correctly (refer to audio card
+      and receiver documentation).</p>
+
+    <p>It is necessary to check <span class="option">SPDIF</span> box in filter settings to switch the
+      SPDIF mode on (refer to <a href="#filter_setup_main"> 6.2. Main settings</a>)</p>
+
+    <p>Digital connection supports different formats of data transfer (PCM, AC3, DTS, MPEG Audio). Refer
+      to receiver documentation to get information about the formats supported by receiver. In most cases
+      only AC3 format is supported – if that is the case, there is no need for additional settings (it
+      is active by default). If the receiver supports some other formats, they can be indicated in filter
+      settings (refer to <a href="#filter_setup_system"> 6.5. System settings</a> ).</p>
+
+    <p>Some drivers have an ability of AC3 decoding. If such option is available it should be disabled
+      (refer to audio card manual).</p>
+
+    <p>Audio card can operate in two modes: DirectSound and WaveOut. In some cases, the multi-channel
+      mode can operate only in one of those modes and cannot operate in another one. If that is the case,
+      output device should be changed in player settings. To get information whether the player supports
+      the device changing function, refer to the table of compatibility in <a href="#player_setup">5. Player
+      setup</a> section (Renderer column). If the player has no such function, it is possible to change
+      the default system output device (refer to <a href="#filter_setup_system">6.5. System settings</a>).
+      However, this option changes the <em>global</em> system settings; therefore, it is recommended
+      to use it <em>only</em> if the player does not support the mentioned function. </p>
+
+    <p>Some audio cards cannot operate in digital transfer mode with sample rate of 44100 Hz. Therefore,
+      in some cases the digital transfer is impossible at all. Current digital output mode can be checked
+      on the main page of filter settings (refer to <a href="#filter_setup_main"> 6.2.
+      Main settings</a>)</p>
+  </div>
+
+  <!-- ------------------------------ Subwoofer ----------------------------- -->
+
+  <div id="system_setup_subwoofer" class="subchapter">
+    <h3><a name="system_setup_subwoofer">4.4. Low-frequency channel (subwoofer) setup</a></h3>
+    <small>(It is recommended to read <a href="#theory_lfe">7.2. What is LFE?</a> section firstly)</small>
+
+    <p>If acoustics has no <em>separate</em> input for subwoofer, modes with subwoofer (2/0+SW, 4/0+SW)
+      should not be used (refer to <a href="#theory_lfe">7.2. What is LFE?</a>).</p>
+
+    <p>It is recommended to activate bass redirection for the modes with subwoofer. In acoustics documentation,
+      information about bandwidth of speakers and subwoofer should be found; it is recommended to set
+      the cutoff frequency equal to lower bound for speakers and to upper bound of subwoofer. For instance,
+      if the bandwidth of speakers is 100 Hz – 20 kHz and that of subwoofer is 30 Hz – 100 Hz then the
+      cutoff frequency must be set at 100 Hz. In most cases, the default setting is satisfactory, so
+      there is no need to change anything.</p>
+
+    <p>Some audio cards have their own bass redirection control settings. It is prohibited to activate
+      both options at the same time! This can result in significant distortions. Bass redirection must
+      be switched on either in filter only or in audio card settings only.</p>
+  </div>
+
+  <div id="system_setup_filter" class="subchapter">
+    <h3><a name="system_setup_filter">4.5. Filter setup</a></h3>
+
+    <p>After installation filter has already all settings and in general, it does not require any additional
+      settings. Therefore, if you are not familiar with it, do not make any changes. It is recommended
+      to modify settings only if there are some problems with sound. However, if you are inquisitive
+      and you like to play with settings, please, refer to <a href="#theory">7.
+      Theory</a> section.</p>
+  </div>
+
 </div>
-<br>
-<br>
-&nbsp;&nbsp;&nbsp; If player does not allow to reach filter settings it
-is possible to configure it from Start menu with '<b>AC3Filter Config</b>'
-icon or Control Panel icon. But this method do not show current
-activity and do not affect it! I.e. levels will not change, bitstream
-information will be filled with zeros etc. Moreover all players should
-be closed <i><small>(because when player is closing filter saves its
-configuration to registry, so now configured values may be overwrited
-with old values that was read at player startup). </small></i>So it is
-highly recommended to configure filter from within player that allow
-access to filter properties (almost any of widespreaded: BSPlayer,
-Sasami, ZoomPlayer, LightAlloy, etc). In last case you can hear how any
-change in settings affects sound. WMP v7, 8, 9 are not recommended.<br>
-<br>
-<h3><a name="main_settings"></a>Main settings</h3>
-&nbsp;&nbsp;&nbsp; Here is <b>Main</b> property page (levels and
-bitstream info are only shown when property page is called from player):<br>
-<br>
-<div align="center"><img src="pic/main.gif" title="" alt="" width="628" height="427"> <br>
+<!-- ==========================================================================
+                                  Player setup
+=========================================================================== -->
+<div id="player_setup" class="chapter">
+  <h2><a name="player_setup">5. Player setup.</a></h2>
+
+  <p>This section briefly describes the most known players and possibility of their operation together
+    with AC3Filter, abilities of players and required settings.</p>
+
+  <div id="player_setup_table" class="subchapter">
+    <h3><a name="player_setup_table">5.1 Compatibility table</a></h3>
+
+    <table bgcolor="#ccffcc" border="1" cellpadding="2" cellspacing="2">
+      <tr align="center">
+        <th bgcolor="#66ff99">Player</th>
+        <th bgcolor="#66ff99">Abbr.</th>
+        <th bgcolor="#66ff99">Site</th>
+        <th bgcolor="#66ff99">License</th>
+        <th bgcolor="#66ff99">AVI</th>
+        <th bgcolor="#66ff99">DVD</th>
+        <th bgcolor="#66ff99">Filters</th>
+        <th bgcolor="#66ff99">Renderer</th>
+        <th bgcolor="#66ff99">Decoder</th>
+        <th bgcolor="#66ff99">Supported</th>
+        <th bgcolor="#66ff99">Details</th>
+      </tr>
+      <tr align="center">
+        <td>Media Player Classics</td>
+        <td>MPC</td>
+        <td><a href="http://sourceforge.net/projects/guliverkli">(site)</a></td>
+        <td bgcolor="#66ffff">OpenSource</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td><a href="#player_setup_mpc">(details)</a></td>
+      </tr>
+      <tr align="center">
+        <td>Windows Media Player v6.4</td>
+        <td>WMP64</td>
+        <td><a href="http://download.microsoft.com">(site)</a></td>
+        <td bgcolor="#33cc00">Freeware</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#9c0000">-</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#9c0000">-</td>
+        <td bgcolor="#9c0000">-</td>
+        <td bgcolor="#33ff33">+</td>
+        <td><a href="#player_setup_wmp64">(details)</a></td>
+      </tr>
+      <tr align="center">
+        <td>Windows Media Player 7+</td>
+        <td>WMP7+</td>
+        <td><a href="http://download.microsoft.com">(site)</a></td>
+        <td bgcolor="#33cc00">Freeware</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#9c0000">-</td>
+        <td bgcolor="#9c0000">-</td>
+        <td bgcolor="#9c0000">-</td>
+        <td bgcolor="#33ff33">+</td>
+        <td><a href="#player_setup_wmp7"> (details)</a></td>
+      </tr>
+      <tr align="center">
+        <td>BSPlayer</td>
+        <td>BSP</td>
+        <td><a href="http://www.bsplayer.org/">(site)</a></td>
+        <td bgcolor="#33cc00">Freeware</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#9c0000">-</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td><a href="#player_setup_bsp">(details)</a></td>
+      </tr>
+      <tr align="center">
+        <td>ZoomPlayer</td>
+        <td>ZP</td>
+        <td><a href="http://www.inmatrix.com/">(site)</a></td>
+        <td bgcolor="#33cc00">Freeware</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#9c0000">-</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td><a href="#player_setup_zp"> (details)</a></td>
+      </tr>
+      <tr align="center">
+        <td>ZoomPlayerPro</td>
+        <td>ZPP</td>
+        <td><a href="http://www.inmatrix.com/">(site)</a></td>
+        <td bgcolor="#ffcf00">Shareware</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td><a href="#player_setup_zp"> (details)</a></td>
+      </tr>
+      <tr align="center">
+        <td>LightAlloy</td>
+        <td>LA</td>
+        <td><a href="http://www.softella.com/index.en.htm">(site)</a></td>
+        <td bgcolor="#33cc00">Freeware</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#33ff33">+</td>
+        <td bgcolor="#9c0000">-</td>
+        <td bgcolor="#33ff33">+</td>
+        <td><a href="#player_setup_la"> (details)</a></td>
+      </tr>
+      <tr align="center">
+        <td>PowerDVD<br>WinDVD</td>
+        <td>PDVD<br>WDVD</td>
+        <td><a href="http://www.gocyberlink.com">(site)</a><br>
+            <a href="http://www.intervideo.com">(site)</a></td>
+        <td bgcolor="#ffcf00">Shareware<br>Shareware</td>
+        <td bgcolor="#33ff33">+<br>+</td>
+        <td bgcolor="#33ff33">+<br>+</td>
+        <td bgcolor="#9c0000">-<br>-</td>
+        <td bgcolor="#9c0000">-<br>-</td>
+        <td bgcolor="#9c0000">-<br>-</td>
+        <td bgcolor="#ce0000">AVI only<br>AVI only</td>
+        <td><a href="#player_setup_pdvd">(details)</a></td>
+      </tr>
+    </table>
+
+    <div style="font-size:80%">
+			Abbr. – abbreviated player name.<br>
+			AVI – ability to play AVI files.<br>
+			DVD - ability to play DVD files.<br>
+			Filters – player supports filter configuring feature.<br>
+			Renderer - player supports output device changing feature.<br>
+			Decoder - player supports decoder changing feature.<br>
+			Supported – player has an ability to use the AC3Filter.<br>
+    </div>
+
+    <p>Of course the table is far from completing, therefore any corrections and additions are welcomed. </p>
+  </div>
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="player_setup_mpc" class="subchapter">
+    <h3><a name="player_setup_mpc">5.2. Media Player Classics</a></h3>
+
+    <p>It is one of the most multifunctional players. Though it has a simple look and a small memory
+      size (~1Mb), of player surrenders only ZoomPlayer by functionality. Furthermore the player has
+      a great number of internal decoders (there is no need to install any codec-packs and other external
+      decoders). It supports DVD playing, Flash animation (with rewind function!), RealVideo/RealAudio,
+      QuickTime and many others. This player is reliable, stable and has no special requirements for
+      resources <small>(my favorite player :-)</small>. </p>
+
+    <p>During watching filter settings can be called by right button click on the frame, then select <span class="action">Filters->AC3Filter</span> in
+      drop-down menu:</p>
+
+    <div class="image">
+      <img alt="" src="pic/players/mpc_filters.png" height="401" width="500">
+    </div>
+
+    <p>Player settings can be called from <span class="action">View->Options</span> menu. To make the
+      player to use AC3Filter player settings should be changed as shown in the figure:</p>
+
+    <div class="image">
+      <img alt="" src="pic/players/mpc_options1.png" height="424" width="620">
+    </div>
+
+    <p>If there are several decoders installed in the system, decoder with the highest priority will
+      be in use. To modify the filter priority, refer to <a href="#filter_setup_system">6.5. System settings</a>.
+      The player can be configured for continuous use of AC3Filter independently of current system settings.
+      For that, enter the Overrides section of player settings, press <span class="action">AddFilter</span> button
+      and then select <span class="action">AC3Filter</span> from
+      the list. That will result as follows:</p>
+
+    <div class="image">
+      <img alt="" src="pic/players/mpc_options2.png" height="424" width="620">
+    </div>
+  </div>
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="player_setup_wmp64" class="subchapter">
+    <h3><a name="player_setup_wmp64">5.3. Windows Media Player 6.4</a></h3>
+
+    <p>Simple player delivered within <em>all</em> Windows versions from Win98 (Win98, WinME, Win2000,
+      WinXP, ...). Player is located at <span class="file">C:\Program files\Windows Media Player\mplayer2.exe</span>.
+      This player is extremely reliable, has no special requirements for resources and utilizes standard
+      playback methods only; therefore, it is essential for detection of different problems. Many functions
+      are not available but the player excellently copes with its general task – file playing. If there,
+      any playing problems appear when using other players it is recommended to try this player.</p>
+
+    <p>During watching filter settings can be called from <span class="action">File->Properties->Advanced</span> menu:</p>
+
+    <div class="image">
+      <img alt="" src="pic/players/wmp64_filters.png" height="482" width="457">
+    </div>
+
+    <p>Player has no settings for specific AC3Filter use, therefore if there are several decoders installed in the system, the decoder with the highest priority will be in use. To modify the filter priority, refer to <a href="#filter_setup_system">6.5.
+      System settings</a>.</p>
+  </div>
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="player_setup_wmp7" class="subchapter">
+    <h3><a name="player_setup_wmp7">5.4. Windows Media Player 7+</a></h3>
+
+    <p>This family of players has no ability of calling the filter settings during watching. Thus, you
+      cannot know whether AC3Filter or some other decoder is in use. Also, you cannot change the settings
+      and monitor the current activity (properties of current audio stream, input/output levels, DRC
+      activity, etc.) during playing. The single exception is the Windows Media Player 9 in DVD playing
+      mode only. In this case, the filter settings can be called from <span class="action">Tools->Options</span> menu
+      (this option will not take effect when watching .avi files or files of other formats):</p>
+
+    <div class="image">
+      <img alt="" src="pic/players/wmp9_dvd.png" height="473" width="403">
+    </div>
+
+    <p>In all other cases, it is possible to configure the filter only by configuration utility <em>before</em> watching
+      the film.</p>
+
+    <p>Player has no settings for specific AC3Filter use, therefore if there are several decoders installed
+      in the system, the decoder with the highest priority will be in use. To modify the filter priority,
+      refer to <a href="#filter_setup_system"> 6.5. System settings</a>.</p>
+  </div>
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="player_setup_bsp" class="subchapter">
+    <h3><a name="player_setup_bsp">5.5. BSPlayer</a></h3>
+
+    <p>Multifunctional player with skins support.</p>
+
+    <p>Filter settings can be called by right button click on the frame. Then select <span class="action">Options->Filters->AC3Filter </span>in
+      drop-down menu:</p>
+
+    <div class="image">
+        <img alt="" src="pic/players/bsp_filters.png" height="528" width="649">
+    </div>
+
+    <p>Player settings can be called from <span class="action">Options->Preferences</span> menu. To make
+      the player to use AC3Filter you should change player settings as shown in the figure:</p>
+
+    <div class="image">
+      <img alt="" src="pic/players/bsp_options.png" height="444" width="572">
+    </div>
+  </div>
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="player_setup_zp" class="subchapter">
+    <h3><a name="player_setup_zp">5.6. ZoomPlayer</a></h3>
+
+    <p>This is the most multifunctional player. There is no sense to specify all functions because of
+    their great number.</p>
+
+    <p>Filter settings can be called by right button click on the frame. Then select <span class="action">Filter
+        Properties->AC3Filter</span> in drop-down menu:</p>
+
+    <div class="image">
+      <img alt="" src="pic/players/zoom_filters.png" height="417" width="507">
+    </div>
+  </div>
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="player_setup_la" class="subchapter">
+    <h3><a name="player_setup_la">5.7. LightAlloy</a></h3>
+
+    <p>Filter settings calling is shown in the picture: </p>
+
+    <div class="image">
+      <img alt="" src="pic/players/la_filters.png" height="354" width="376">
+    </div>
+
+    <p>Player has no settings for specific AC3Filter use, therefore if there were several decoders installed
+      in the system, the decoder with the highest priority will be in use. To modify filter priority
+      refer to <a href="#filter_setup_system">6.5. System settings</a>.</p>
+  </div>
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="player_setup_pdvd" class="subchapter">
+    <h3><a name="player_setup_pdvd">5.8. PowerDVD/WinDVD</a></h3>
+
+    <p>Both players <em>cannot</em> use the AC3Filter to play DVD. <em>It’s concerned with the players
+        features</em>, therefore it is impossible to force them to use AC3Filter. That is no ways in
+        principle to force those players to operate with AC3Filter! So to watch DVD with AC3Filter use
+        it is recommended to use other players – Media Player Classics, LightAlloy or ZoomPlayer.</p>
+
+    <p>When playing AVI-files by these players you can use AC3Filter both for post-processing and for
+      AC3/DTS audio track decoding. However, the player cannot call the filter settings, so you should
+      configure the filter by configuration utility <em>before</em> watching only.</p>
+  </div>
+
 </div>
-<br>
-<b>* Bitstream information</b>.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Top left it is bitstream information (BSI):<br>
-<ul>
-  <li><b>Сhannels</b> - channels configuration  in  form
-front_channels/surround_channels + LFE  (Low frequency effects channel)
-presence flag. In this example     it   is 3 front, 2 surround and LFE
-channels, i.e. 5.1 configuration.</li>
-  <li><b>Sample rate</b> [Hz]</li>
-  <li><b>Bitrate</b> [bps]</li>
-  <li><b>Freq</b> (coupl/high) - [kHz], coupling frequency     and high
-freuency. In ac3 some channels (in most cases   all channels) are
-grouped in one coupling    channel beginning from   some frequency -
-coupling frequency   and stored in   the bitstream in  that form. So
-channels are really  independent   only in some   frequency   band - up
-to coupling frequency. High  frequency  is a maximum frequency coded, so
-it defines   total frequency bandwidth.</li>
-  <li><b>Frames/errors</b> - total number of decoded frames    and
-number of errors when decoding.</li>
-</ul>
-<h4><b>* Output.</b></h4>
-&nbsp;&nbsp;&nbsp; Here you can change output configuration. It define
-the real  speaker   configuration  to wich ac3 channels will be mixed.
-Shown in  form front_channels/surround_channels + subwoofer presence
-flag (SW). For some configurations common names are given. What is the
-difference between LFE and subwoofer read in <a href="#lfe">What is LFE?</a>
-section.<br>
-<br>
-&nbsp;&nbsp;&nbsp; '<b>Dolby Surround/ProLogic</b>' modes mean that
-that all channels presented in ac3 stream will be mixed into two
-channels so Dolby Surround/Pro Logic decoder can extract surround
-channel. '<b>Dolby ProLogic II</b>' mode is similar to DPL but for DPL
-II decoder. DPLII support is only experimental because of lack of
-reliable information.<br>
-<br>
-&nbsp;&nbsp;&nbsp; '<b>SPDIF</b>' mode means that ac3 stream will be
-routed to digital out of sound card directly and without any
-modification. So no one of other settings will work if this checkbox is
-checked.<br>
-<br>
-&nbsp;&nbsp;&nbsp; '<b>Sample format</b>' combo box sets output sample
-format. There are PCM 16 bit, 24 and 32 bit and PCM Float formats are
-now supported. On some sound cards some formats may not work so use this
-option with care.<br>
-<br>
-<b>* Gain levels.</b> <br>
-<br>
-&nbsp;&nbsp;&nbsp; Here you can control gain levels.
-<ul>
-  <li><b>Master</b> - desired gain level.</li>
-  <li><b>Gain</b> - shows current gain level.</li>
-  <li><b>LFE</b> - LFE channel gain level</li>
-  <li><b>Voice</b> - center channel gain level (dialogue channel)</li>
-  <li><b>Surround</b> - surround channel(s) gain level..</li>
-  <li><b>BSI Lock</b> checkboxes - lock channel gain level at values
-given by standard. You cannot change Voice, LFE and surround gains when
-it is enables.</li>
-  <li><b>Normalize</b> - one-pass sound normalize. (look at <a href="#mixer">Mixer settings</a>)</li>
-</ul>
-&nbsp;&nbsp;&nbsp; <b>Master</b> and <b>Gain</b> controls are
-responsible for global gain level. <b>Master</b> sets desired gain
-level. If current sound level is too high and overflow occurs then real
-gain level will be decreased. Current gain level shown at <b>Gain</b>
-control.<br>
-<br>
-<h4><b>* Dynamic range compression.</b></h4>
-&nbsp;&nbsp;&nbsp; By its nature ac3 is a logarithmic format. Samples
-are stored in form of exponents and mantissas. In terms of bits  one
-sample can be up to 40bits   long (only theoretically) or up to 24bits
-(normal). It provides huge dynamic   range (but, as said by great
-Einstein all good things in this word are relative :-). This means that
-quiet sound with low level when played on 16- bit sound card will be not
-audible at all or will have very low absolute level (=&gt; high
-distortions). To solve this problem  it is dynamic range comression.
-Main idea is to raise level when sound is  quiet (and vice versa when
-loud) before converting to 16-bit  form. There are special markers in
-ac3 stream for current level change. This  markers are set by producer
-at a mastering stage, so it guarantees   high quality. <b>DRC level</b>
-indicates this level. With <b>Use DRC</b> chekbox  you can enabe/disable
-using DRC. <i>(of course this is only rough problem description).</i><br>
-<br>
-&nbsp;&nbsp;&nbsp; <b>DRC Power</b> control adjusts how much <b>DRC
-level</b> changes sound level. When <b>DRC Power</b> is increased all
-quiet sounds will be more stressed and loud sound will be more shaded.
-When <b>DRC Power</b> is decreasd dynamic range compression will have
-less influence at output. Zero <b>DRC Power</b> level means that dynamic
-range compression applied at normal.
-<h4><b>* CPU load.</b><br>
-</h4>
-&nbsp;&nbsp;&nbsp; Indicates CPU load by sound decoding and processing.
-All sound processing (if exists) before reproduction included here.
-<h4><b>* Input/output levels.</b><br>
-</h4>
-<font color="#000000"> &nbsp;&nbsp;&nbsp; Current audio levels
-indication for each channel. Note  that   levels here are in logarithmic
-scale. Input levels shows <i>real</i> channels configuration. Often
-happens that when    BSI shows 5.1 in real LFE channel is absent</font><font color="#000000"> (read <a href="file:///E:/&amp;USERS/VA/PROJECTS/AC3Filter/AC3Filter/ac3filter_0_67b/ac3filter_eng.html#lfe">What
-is LFE?</a> section for more information about this). If output levels
-become red it indicates overflow and you need to decrease gain.<br>
-</font>
-<h4><font color="#000000">* Presets</font></h4>
-<font color="#000000"> &nbsp;&nbsp;&nbsp; This section allows to manage
-persets. You can load/save/delete presets. Several predefined presets
-are available:<br>
-</font>
-<ul>
-  <li><font color="#000000"><b>standard</b> - maximum standard
-compatibility</font></li>
-  <li><font color="#000000"><b>loud</b>&nbsp; - as named, for maximum
-loudness.</font></li>
-  <li><font color="#000000"><b>LFE boost</b> - LFE boosted at +10dB.</font></li>
-</ul>
-<font color="#000000">&nbsp;&nbsp;&nbsp; You can also load/save presets
-to/from file with <b>file</b> button:<br>
-</font>
-<div align="center"><font color="#000000"><img src="pic/preset.gif" title="" alt="" width="273" height="157"><br>
-</font></div>
-<font color="#000000"><br>
-&nbsp;&nbsp;&nbsp; Configuration file may be saved with the same name
-as movie (proposed by default). In this case this configuration will be
-loaded automatically with movie.<br>
-&nbsp;&nbsp;&nbsp; All filter settings are divided to several
-categories. It is recommended to save only general settings (and maybe
-equalizer) to autoloaded config files because in future you may watch
-this movie at different system. Settings that not in configuration file
-are not altered with file load.</font><br>
-<br>
-<h3><a name="mixer"></a>Mixer settings</h3>
-&nbsp;&nbsp;&nbsp; Second page is mixer settings. <br>
-<br>
-<div align="center"><img src="pic/mixer.gif" title="" alt="" width="628" height="429">&nbsp; <br>
+
+<!-- ==========================================================================
+                                  Player setup
+=========================================================================== -->
+
+<div id="filter_setup" class="chapter">
+  <h2><a name="filter_setup">6. Filter settings.</a></h2>
+
+  <div style="font-size:120%;font-style:italic">
+    <p>After installation filter has already all settings and in general, it does not require additional
+      settings. Therefore, if you are not familiar with it, do not make any changes. It is recommended
+      to modify the settings only if there are some problems with sound. However, if you are inquisitive
+      and you like to play with settings, please, refer to <a href="#theory">7. Theory</a> section.</p>
+
+    <p>There are two principal rules of configuring:</p>
+    <ul>
+      <li>If you have no idea what does this setting make – do not change it.</li>
+      <li>If something has broken load the 'standard' preset (Page <span class="action">Main->Preset->Standard</span>).</li>
+    </ul>
+  </div>
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="filter_setup_settings" class="subchapter">
+    <h3><a name="filter_setup_settings">6.1. Filter settings window opening</a></h3>
+
+    <p>You should enter the filter property window to configure the filter. There are two ways to do
+      that:</p>
+
+    <ul>
+      <li> Directly during playing. Here you can monitor the filter activity and change settings directly
+        during playing. Player must be able to configure the filters. Refer to the table of compatibility
+        in <a href="#player_setup"> 5.
+        Player settings</a> section to know whether the player supports this function or not. The mentioned
+        section also describes actions required to call the settings window. When changing settings,
+        changes take effect immediately (or rather with a little delay of 0.5..2 s depending on player
+        buffer size).</li>
+      <li> If the player has no ability to configure the filter you can adjust settings by configuration
+        utility (from the Start menu):
+        <div class="image">
+          <img alt="" src="pic/config.png" height="384" width="550">
+        </div>
+
+        <span class="warning">When configuring by the utility the current statistics cannot be displayed
+        in the settings window. All settings will take effect after the settings window is closed and
+        the player restarted!</span></li>
+    </ul>
+  </div> <!-- <div id="filter_setup_settings" class="subchapter"> -->
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="filter_setup_main" class="subchapter">
+    <h3><a name="filter_setup_main">6.2. Main settings </a></h3>
+
+    <p>This page contains most essential filter settings and information about audio playing. Information
+      and levels are displayed when calling the settings from the player <em>only</em>:</p>
+
+    <div class="image">
+      <img src="pic/dlg_main.png" alt="" height="427" width="623">
+    </div>
+
+    <div class="subsubchapter">
+      <h4>6.2.1. Output.</h4>
+
+      <p>This section describes the settings of filter output format. Filter will automatically convert
+        all input formats into defined configuration. Speakers' configuration is represented in the form
+        of front/rear+subwoofer. There are conventional names for some configurations. For instance, <span class="value">2/0
+        – stereo</span> means 2 front speakers, i.e. stereo. <span class="value">2/2 - quadro</span> means
+        2 front and 2 rear speakers, i.e. quadro. <span class="value">3/2+SW 5.1 channels</span> – 3
+        front speakers, 2 rear speakers and subwoofer – 5.1 configuration. It is desirable for defined
+        configuration to be in accordant with the system settings (refer to <a href="#system_setup_multichannel"> 4.2.
+        Multi-channel mode settings</a> ), which in turn must match with the actual number of speakers.
+        To know the difference for subwoofer and for LFE channel, and how to set configuration, refer
+        to <a href="#theory_lfe"> 7.2. What is LFE?</a> section.</p>
+
+      <p><span class="value">Dolby Surround/ProLogic</span> and <span class="value">Dolby ProLogic</span> modes
+        are required only when computer has stereo output only and is connected to Dolby ProLogic decoder.
+        In this case, central and rear channels are mixed into two channels to let external decoder to
+        extract them from those two channels backwards. <em>This is not a multi-channel modes!</em> This
+        is a special type of stereo mode required <em>only</em> if the external Dolby ProLogic decoder
+        exists.</p>
+
+      <p>The second selection list sets the sample output format. Filter will automatically convert
+        any input format into defined one. When decoding the filter defines decoding precision. At present
+      floating-point format and 16/24/32 bit formats are supported. </p>
+
+      <p><span class="option">SPDIF</span> flag switches on the digital output mode. This mode is required <em>only</em> when
+        digital (SPDIF) connection and external hardware decoder/receiver exists. In this case the coded
+        stream will be transferred to external decoder without any modifications (if the decoder supports
+        this format) or will be recoded into the format clear for decoder (for more information refer
+        to <a href="#theory_spdif">7.3. SPDIF</a>). Current digital output mode status is shown in parentheses:</p>
+
+      <ul>
+        <li><span class="value">disabled</span> – digital output mode is inactive, there is an ordinary
+          decoded PCM stream transferred to the output. When <span class="option">SPDIF</span> is on,
+          the filter always attempts to use digital transfer. And only in case when digital transfer
+          is impossible (audio card driver rejects to process the indicated format) ordinary PCM is transferred.
+          For instance, many audio cards support digital transfer <em>only</em> when the sample rate
+          is 48000 Hz but <em>do not support</em> widespread format of 44100 Hz.</li>
+        <li><span class="value">passthrough</span> – pass-through transfer mode (for AC3, DTS and MPEG
+          Audio formats only). In this case, encoded digital stream is transferred without any modifications
+          and decoding is performed by external decoder. In this mode the filer does not display current
+          activity and all filter settings do not affect sound (since sound is not decoded and the coded
+          data is transferred ‘as is’).</li>
+        <li><span class="value">AC3 encode</span> – AC3 encoding mode. In this mode filter performs decoding of the input stream
+          and post-processing (all filter options are active including changing of speakers number).
+          Then the resulted signal is encoded into AC3 and transfer into external hardware decoder in
+          digital format. This mode is required to transfer multi-channel audio in formats, which are
+          not supported by external decoder (e.g., AAC or OGG Vorbis) or in case when the external decoder
+          does not support stereo decomposition into multi-channel format. Remember that AC3 encoding
+          leads to quality loss, therefore it is preferable to use analogue connection for multi-channel
+        formats.</li>
+      </ul>
+
+      <p>Форматы, поддерживаемые внешним декодером, указываются на странице системных настроек в разделе <span class="option">SPDIF
+          passthrough</span> (см. <a href="#filter_setup_system">6.5. Системные настройки</a>). </p>
+
+      <p>Необходимо отметить, что текущий режим может изменяться во время просмотра при изменении формата
+        входного потока. Например, при просмотре DVD есть возможность переключать звуковые дорожки. При этом
+        формат дорожки также может изменяться. Если ресивер поддерживает только формат AC3, то при переключении
+        со звуковой дорожки формата AC3 на звуковую дорожку формата DTS произойдет переключение с режима <span class="value">passthrough</span> в
+        режим <span class="value">AC3 encode</span>.</p>
+    </div> 
+    <div class="subsubchapter">
+      <h4>6.2.2. Пресеты (Preset)</h4>
+
+      <p>Все настройки фильтра можно записать как единый набор настроек (<dfn>пресет</dfn>) и потом быстро
+        загружать их. Вместе с фильтром устанавливается несколько стандартных пресетов:</p>
+
+      <ul>
+        <li><span class="value">Standard</span> - не производится никаких дополнительных обработок; сигнал передается без изменений.</li>
+        <li><span class="value">Loud</span> - максимальная громкость.</li>
+      </ul>
+
+      <p>Пресет <span class="value">Default</span> имеет особое значение - он загружается при загрузке фильтра.
+        <!-- <div class="subsubchapter"> -->
+    </p>
+
+    </div> 
+    <div class="subsubchapter">
+      <h4>6.2.3. Усиление сигнала (Gain)</h4>
+
+      <p>Не следует использовать эту опцию вместо громкости
+        плеера или системной громкости. При сильном усилении возможно возникновение переполнения и заметное
+        снижение качества проигрывания. Подробнее см. <a href="#theory_loudness">7.1. Громкость и динамический
+        диапазон</a>.</p>
+
+      <p>Уровень <span class="option">Master</span> задает желаемый уровень усиления в дБ. Если имеющейся шкалы недостаточно,
+        можно указать желаемый уровень в поле ввода в любых пределах.</p>
+
+      <p>Уровень <span class="option">Gain</span> отображает текущий уровень усиления. В отсутствии переполнения
+        совпадает с уровнем <span class="option">Master</span>.
+        В случае переполнения система автоматической регулировки усиления понижает этот уровень. Таким
+        образом, изменение уровня <span class="option">Gain</span> может сигнализировать о том, что установлен
+        слишком высокий уровень <span class="option">Master</span>.</p>
+
+      <p>См. также опции <span class="option">Auto gain control</span> и <span class="option">One-pass norm</span> в разделе <a href="#filter_setup_mixer">6.3.
+          Настройки микшера</a>.</p>
+    </div> <!-- <div class="subsubchapter"> -->
+
+    <div class="subsubchapter">
+      <h4>6.2.4. Сжатие динамического диапазона (DRC)</h4>
+      <p>Флаг <span class="option">DRC Enabled</span> включает/отключает функцию сжатия динамического
+        диапазона. Первый уровень задает уровень сжатия динамического диапазона. Второй уровень отображает
+        текущий уровень усиления. Подробнее см. <a href="#theory_loudness">7.1. Громкость и динамический
+        диапазон</a>.</p>
+    </div> <!-- <div class="subsubchapter"> -->
+
+    <div class="subsubchapter">
+      <h4>6.2.5. Информация о потоке (Decoder info).</h4>
+
+      <p>Отображает тип и параметры текущего аудио-потока. Строка <span class="option">Input</span> отображает тип входного потока.
+        В текстовом окне отображается информация о формате. Декодеры для разных форматов показывают разную
+        информацию, в том числе:</p>
+
+      <ul>
+        <li>speakers - конфигурация каналов в потоке</li>
+        <li>sample rate - частота дискретизации</li>
+        <li>bitrate - битрейт</li>
+        <li>stream - тип битового потока (8/14/16 bit big/little endian)</li>
+        <li>frame size - размер фрейма</li>
+        <li>nsamples - количество сэмплов на фрейм</li>
+      </ul>
+
+      <p>Поля <span class="option">Frames/errors</span> отображают статистику декодера: количество декодированных фреймов / количество
+        фреймов с ошибками. В нормальном режиме работы ошибок быть не должно!</p>
+    </div> <!-- <div class="subsubchapter"> -->
+
+    <div class="subsubchapter">
+      <h4>6.2.6 Загрузка процессора (CPU).</h4>
+
+      <p>Индикатор показывает загрузку процессора фильтром.</p>
+    </div> <!-- <div class="subsubchapter"> -->
+
+    <div class="subsubchapter">
+      <h4>6.2.7 Индикаторы уровней (Levels).</h4>
+
+      <p>Здесь отображаются текущие входные и выходные пик-уровни сигнала. Уровни отображаются в логарифмическом
+        формате. При возникновении переполнения индикаторы выходных уровней становятся красными. В этом случае
+        желательно уменьшить усиление (уровень <span class="option">Gain</span>) т.к. переполнение означает возникновение искажений
+        (см. <a href="#theory_loudness">7.1. Громкость и динамический диапазон</a>).</p>
+    </div> <!-- <div class="subsubchapter"> -->
+
+  </div> <!-- <div id="filter_setup_main" class="subchapter"> -->
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="filter_setup_mixer" class="subchapter">
+    <h3><a name="filter_setup_mixer">6.3. Настройки микшера (страница Mixer)</a></h3>
+
+    <p>На этой странице находятся настройки для управления микшированием</p>
+
+    <div class="image">
+      <img src="pic/dlg_mixer.png" alt="" height="427" width="623">
+    </div>
+
+    <div class="subsubchapter">
+      <h4>6.3.1. Матрица микширования (Matrix).</h4>
+      <p>Основной элемент этой страницы - матрица микширования. Она представлена в форме матричного умножения: </p>
+      <div class="image">
+        <img alt="" src="pic/matrix.gif" height="132" width="331">
+      </div>
+      <p>Более приземленно это означает, что для каждой клетки действует следующее правило: мы микширует
+        канал заданный колонкой в канал заданный строкой с усилением заданным в клетке. Так, если мы
+        хотим направить левый канал в правый, то мы должны поставить значение 1 в клетке на пересечении
+        колонки 'L' и строки 'R'. После этого из правого канала будет слышен и левый и правый каналы. </p>
+      <p>Необходимо четко разделять понятия входного и выходного канала. Входной канал - это то, что было
+        закодировано в исходном потоке. Выходной канал - это то, что мы будем слышать в колонках.</p>
+      <p>Строка матрицы определяет содержание выходного канала (колонки), заданного этой строкой. Так,
+        для вышеприведенной матрицы первая строка показывает, что будет слышно
+        из левой колонки:</p>
+      <p>L' = 1 * L + 0.7071 * C + 1 * SL + 1 * LFE</p>
+      <p>т.е. из левой колонки будет слышен левый канал, часть центрального, левый тыл и канал низкочастотных
+        эффектов. Таким образом осуществляется микширование из 6 оригинальных каналов в 2 канала стереосистемы
+        (downmix).</p>
+      <p>Важное свойство матрицы состоит в том, что поменяв местами содержание двух строк матрицы мы
+        можем 'поменять местами' соответствующие колонки. Так, поменяв местами первую и
+        третью строку левая и правая колонки 'поменяются местами'. Это свойство можно использовать для
+        'перестановки' колонок без физического из переключения.</p>
+      <p>Значения в столбце матрицы показывают куда будет микшироваться входной канал. Так, центральный
+        канал направляется одновременно и на левую и на правую колонку с множителем 0.7 (иначе центр
+        идущий из двух колонок будет звучать громче, чем если бы у нас была настоящая третья колонка).
+        Таким образом мы услышим центральный канал посередине между левой и правой колонками. Изменяя
+        множитель в левом или правом выходном канале можно 'подвинуть' центр. Так, если поставить 1 в
+        столбце 'С' строки 'L', то центр будет слышен громче из левого канала и будет казаться сдвинутым
+        влево.</p>
+      <p>В большинстве случаев нет необходимости изменять матрицу вручную: при включенной опции <span class="option">AutoMatrix</span> матрица
+        микширования расчитывается автоматически на основе следующих параметров: режима колонок, уровней <span class="option">Voice</span>, <span class="option">Surround</span>, <span class="option">LFE</span>,
+        опции <span class="option">NormalizeMatrix</span>, <span class="option">VoiceControl</span>, <span class="option">ExpandStereo</span>.
+        Так, изменив уровень для центрального канала <span class="option">Voice</span> мы также увидим изменения в коэффициентах матрицы
+        (столбец 'C').</p>
+    </div>
+
+    <div class="subsubchapter">
+      <h4>6.3.2. Уровни усиления (Gains).</h4>
+      <p><span class="option">Master/Gain</span> - желаемый и текущий уровень усиления (см. <a href="#filter_setup_main">6.2.
+          Основные настройки</a>).</p>
+      <p><span class="option">Voice</span> - уровень усиления центра. В случае, если во входном сигнале присутствует реальный
+        центральный канал, то этот уровень влияет только на него. Если центрального канала нет но установлен
+        флаг <span class="option">Voice control</span>, то этот уровень управляет уровнем 'виртуального' центра. Этот уровень
+        является параметром матрицы, поэтому имеет смысл только когда включена опция <span class="option">AutoMatrix</span>. При
+        изменении уровня матрица пересчитывается.</p>
+      <p><span class="option">Surround</span> - уровень усиления тыла. В случае, если во входном сигнале присутствуют тыловые
+        каналы то этот уровень влияет только на них, как в случае с понижающим микшированием (в этом случае
+        будет регулироваться уровень микширования тыловых каналов во фронтальные), так и без него (т.е.
+        просто регулироваться уровень тыловых каналов относительно фронтальных). В случае, если тыловых каналов
+        в источнике нет но установлен флаг <span class="option">Expand stereo</span>, то этот уровень управляет уровнем 'виртуального'
+        тыла. Этот уровень является параметром матрицы, поэтому имеет смысл только когда включена опция <span class="option">AutoMatrix</span>.
+        При изменении уровня матрица пересчитывается.</p>
+      <p><span class="option">LFE</span> - уровень канала LFE. Этот уровень является параметром матрицы, поэтому имеет смысл только
+        когда включена опция <b>AutoMatrix</b>. При изменении уровня матрица пересчитывается.</p>
+    </div>
+
+    <div class="subsubchapter">
+      <h4>6.3.3. Опции (Options)</h4>
+      <ul>
+        <li><span class="option">Auto gain control</span> - автоматическая регулировка усиления. Уменьшает текущий уровень усиления,
+          чтобы не допустить переполнения. Текущий уровень усиления показывает индикатор <span class="option">Gain</span>. При
+          отключенной опции слишком сильный сигнал будет обрезаться, что приводит к неприятным на слух
+          искажениям. При включенной опции при возникновении переполнения звук будет становиться тише и переполнения
+          просто не происходит. Поведение системы после переполнения определяется опцией <span class="option">One-pass
+          norm</span>.
+          Если опция <span class="option">One-pass norm</span> выключена, то текущий уровень будет возвращаться к заданному уровню <span class="option">Master</span>.
+          В этом случае этот уровень задает средний уровень усиления. При большом количестве мест, где
+          происходит переполнение такое поведение может привести к неприятным скачкам громкости, поэтому не
+          следует устанавливать уровень <span class="option">Master</span> слишком большим. Этот режим рекомендуется использовать, когда
+          переполнений не ожидается или они достаточно редки. Если опция <span class="option">One-pass norm</span> включена, то
+          после переполнения уровень усиления не восстанавливается. Таким образом каждое переполнение уменьшает
+          вероятность и 'силу' следующего переполнения и через некоторое время уровень усиления устанавливается
+          на некоторое среднее значение, которого потом и придерживается. Обычно после ~10 минут фильма
+          уровень стабилизируется (а текущий уровень усиления отображается уровнем <span class="option">Gain</span>). Этот режим используется
+          для того, чтобы получить максимальную возможную громкость при минимуме возможных артефактов.
+          Уровень <span class="option">Master</span> в
+          этом случае работает как начальное значение усиления для работы однопроходной нормализации и
+          поэтому обычно устанавливается на максимум. Более подробно см. <a href="#theory_loudness">7.1. Громкость
+          и динамический диапазон</a>.      </li>
+        <li><span class="option">One-pass norm</span> - однопроходная нормализация. См. <span class="option">Auto gain control</span>.      </li>
+        <li><span class="option">Auto matrix</span> - автоматический рассчет матрицы микширования. Когда эта опция включена, прямое
+          редактирование матрицы невозможно. Уровни усиления <span class="option">LFE</span>, <span class="option">Voice</span> и <span class="option">Surround</span> являются
+          параметрами для рассчета матрицы при их изменении матрица изменяется немедленно. При отключении
+          этой опции следующие элементы управления теряют влияние: уровни усиления <span class="option">LFE</span>, <span class="option">Voice</span> и <span class="option">Surround</span>  опции <span class="option">Normalize
+          matrix</span>, <span class="option">Expand stereo</span>, <span class="option">Voice control</span>, <span class="option">Expand
+          stereo</span>.
+          Появляется возможность напрямую редактировать матрицу микширования.</li>
+        <li><span class="option">Normalize matrix</span> - нормализация матрицы. При включении этой опции матрица микширования
+          нормируется так, чтобы гарантированно не происходило переполнения в выходных каналах (сумма каналов
+          на выходе &lt;= 1). Но при этом при изменении уровней усиления <span class="option">LFE</span>, <span class="option">Voice</span> и <span class="option">Surround</span>  может
+          происходить перераспределение громкостей (например увеличив громкость LFE мы получим уменьшение
+          громкости всех остальных каналов), что не всегда удобно. Кроме того, в большинстве случаев нормализация
+          матрицы сильно уменьшает общую громкость. Отключение этой опции позволяет избежать этих эффектов,
+          однако при этом возникает возможность переполнения.</li>
+        <li><span class="option">Expand stereo</span> - работает только при отсутствии тыловых каналов во входном сигнале. Позволяет
+          управлять уровнем усиления виртуального окружения при помощи уровня <span class="option">Surround</span>. Если в выходной
+          конфигурации колонок присутствуют тыловые колонки, то выделенная окружающая информация перенаправляется
+          туда.</li>
+        <li><span class="option">Voice control</span> - работает только при отсутствии центрального канала во входном сигнале.
+          Позволяет управлять уровнем усиления виртуального центра при помощи уровня <span class="option">Voice</span>. Если в
+          выходной конфигурации колонок присутствует центральный канал, то выделенный виртуальный центр
+          перенаправляется туда. Совместно с опцией <span class="option">Expand stereo</span> позволяет раскладывать стерео сигнал на 5
+          колонок.</li>
+        <li><span class="option">Bass redirection</span> - перенаправление басов со всех каналов на сабвуфер. Работает только
+          при наличиии сабвуфера в выходной конфигурации колонок. Рекомендуется для систем с отдельным
+          сабовуфером (см. <a href="#theory_lfe">7.2. Что такое LFE?</a>). В поле ввода можно задать частоту среза в
+          Гц.</li>
+      </ul>
+    </div>
+
+    <div class="subsubchapter">
+      <h4>6.3.3. Матрица (Matrix)</h4>
+
+      <p>Список выбора <span class="option">Matrix</span> позволяет сохранять и загружать матрицы.</p>
+    </div>
+  </div> <!-- <div id="filter_setup_mixer" class="subchapter"> -->
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="filter_setup_gains" class="subchapter">
+    <h3><a name="filter_setup_gains">6.4. Уровни (страница Gains)</a></h3>
+		
+    <p>На этой странице находятся настройки уровней усиления:</p>
+		
+    <div class="image">
+      <img alt="" src="pic/dlg_gains.png" height="427" width="623">
+    </div>
+		
+    <div class="subsubchapter">
+			<h4>6.4.1. Уровни усиления (Gains)</h4>
+			
+			<p><span class="option">Master/Gain</span> - желаемый и текущий уровень усиления (см. <a href="#filter_setup_main">6.2.
+					Основные настройки</a>).</p>
+		</div>
+		
+    <div class="subsubchapter">
+			<h4>6.4.2. Сжатие динамического диапазона (DRC)</h4>
+			
+			<p>Флаг <span class="option">DRC Enabled</span> включает/отключает функцию сжатия динамического диапазона. Первый уровень
+				задает уровень сжатия динамичкеского диапазона. Второй уровень отображает текущий уровень усиления.
+				Подробнее см. <a href="#theory_loudness">7.1. Громкость и динамический диапазон</a>.</p>
+    </div>
+
+    <div class="subsubchapter">
+			<h4>6.4.3. Задержки (Delays)</h4>
+			
+			<p>Задержки для каждого из выходных каналов. Величины задержек можно задавать в различных единицах
+				(список выбора <span class="option">Units</span>). Положительные величины для единиц времени означают, что будет вносится
+				положительная задержка, т.е. звук будет задерживаться. Положительные величины для единиц расстояния
+				наоборот, означают отрицательную задержку, т.е. что звук будет воспроизводиться 'заранее'. В обоих
+				случаях допустимы отрицательные величины задержек. Есть два основных применения задержек:</p>
+			<ul>
+				<li>Компенсация разных расстояних до колонок. Звуковой волне требуется определенное время для того,
+					чтобы достигнуть слушателя, поэтому в идеале все колонки должны находиться на равном расстоянии
+					от слушателя, чтобы звук изданный в определенный момент времени одновременно изо всех колонок дошел
+					до слушателя также одновременно. В противном случае звуки будут позиционироваться неверно. Однако,
+					на практике расстояние до колонок может быть разным. Чем дальше находится колонка, тем раньше должен
+					воспроизводиться ей звук. Для компенсации этого дефекта можно непосредственно задать расстояния
+					до колонок.</li>
+				<li>Создание эффекта объема при разложении стерео записи на многоканальную систему. Введение дополнительной
+					задержки на тыловые каналы может усилить эффект объема.</li>
+			</ul>
+    </div>
+		
+    <div class="subsubchapter">
+			<h4>6.4.4. Уровни входных каналов (Input gains)</h4>
+			
+			<p>Уровни усиления для входных каналов. В некоторых сучаях необходимо изменить уровени усиления именно
+				входных каналов. Например, если входной сигнал имеет центральный канал, а выходной - нет (центр микшируется
+				во фронтальные каналы), но требуется изменить именно уровень диалогов. Т.е. предназначены для компенсации
+				дефектов записи. </p>
+    </div>
+
+    <div class="subsubchapter">
+			<h4>6.4.5. Уровни выходных каналов (Output gains)</h4>
+			
+			<p>Уровни усиления выходных каналов. Предназначены в первую очередь для выравнивания громкости динамиков
+				(если они расположены несимметрично). Иными словами, для компенсации дефектов акустической системы.</p>
+		</div>
+
+  </div> <!-- <div id="filter_setup_gains" class="subchapter"> -->
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="filter_setup_system" class="subchapter">
+    <h3><a name="filter_setup_system">6.5. Системные настройки (страница System)</a></h3>
+		
+    <p>На этой странице находятся системные настройки (не влияющие на звук непосредственно):</p>
+		
+    <div class="image">
+      <img alt="" src="pic/dlg_system.png" height="427" width="623">
+    </div>
+		
+    <div class="subsubchapter">
+			<h4>6.5.1. Использовать AC3Filter для ... (Use AC3Filter for ...)</h4>
+			
+			<p>Определяет, в каких случаях будет использоваться AC3Filter.</p>
+			<ul>
+				<li>PCM - использовать AC3Filter для пост-обработки любых аудио-потоков. Для использования этого
+					режима фильтр должен иметь высокий приоритет (см. опцию <span class="option">Filter
+					merit</span> далее в этом разделе) </li>
+				<li>AC3 - использовать AC3Filter для декодирования AC3      </li>
+				<li>DTS - использовать AC3Filter для декодирования DTS      </li>
+				<li>MPEG Audio - использовать AC3Filter для декодирования MPEG Audio      </li>
+				<li>PES (DVD) - использовать AC3Filter для декодирования аудио в MPEG1/MPEG2 PES потоках. Режим необходим
+					для проигрывания DVD/VideoCD.     </li>
+			</ul>
+    </div>
+		
+    <div class="subsubchapter">
+			<h4>6.5.2. Цифровая передача (SPDIF passthrough)</h4>
+			
+			<p>Определяет, какие форматы поддерживаются внешним декодером и будут передаваться без изменений при
+				использовании цифрового выхода. Имеет значение только при включенной опции <span class="option">SPDIF</span> (см. <a href="#filter_setup_main">6.2.
+				Основные настройки</a>).</p>
+    </div>
+		
+    <div class="subsubchapter">
+			<h4>6.5.3. Приоритет фильтра (Filter merit)</h4>
+
+			<p>Фильтр устанавливается в систему с наивысшим приоритетом, т.е. будет использоваться вместо любых
+				других установленных декодеров. Если по каким-то причинам необходимо использовать другие декодеры,
+				то приоритет можно понизить до минимального при помощи опции <span class="option">Prefer other decoder</span>. Фильтр
+				останется в системе и будет использоваться только если не установлено других декодеров. <span class="option">Prefer
+				AC3Filter</span> - высокий приоритет.</p>
+    </div>
+		
+    <div class="subsubchapter">
+			<h4>6.5.4. Устройство вывода по умолчанию (Default audio renderer)</h4>
+
+			<p>Звуковая карта может работать в двух режимах: DirectSound и WaveOut. Если при использовании фильтра
+				возникают проблемы (например не работает SPDIF), то переключение режима работы в некоторых случаях
+				может помочь. Некоторые плееры имеют настройки для изменения устройства вывода (см. <a href="#player_setup">5.
+				Настройка плеера</a>), прочие же используют настройки системы по умолчанию. Для переключения режима
+				работы используются&nbsp; опции <span class="option">Use DirectSound</span> - для использования интерфейса DirectSound
+				и <span class="option">Use WaveOut</span> для использования интерфейса WaveOut. Эта опция изменяет глобальные настройки
+				системы! Поэтому если плеер имеет собственные настройки устройства вывода, то предпочтительнее
+				использовать средства плеера.</p>
+			<p>Эта опция действует только если плеер использует устройство вывода по умолчанию, или это указано
+				в его настройках.</p>
+    </div>
+		
+    <div class="subsubchapter">
+			<h4>6.5.5. Синхронизация аудио и видео (Audio/Video sync)</h4>
+			<p>В некоторых случаях возможно что аудио и видео рассинхронизированы. В основном это случается из-за
+				неправильного микширования видео файла, но возможны и аппаратные причины десинхронизации. Эта опция
+				предназначена для решения <em>аппаратных</em> проблем. Эта опция может быть применена для исправления
+				дефекта конкретного файла, но необходимо не забывать изменить ее обратно! Здесь указывается сдвиг
+				аудио относительно видео в мс. Если звук слышен <em>до</em> видео, то необходимо <em>увеличить</em> это
+				значение. Если звук происходит <em>после</em> событий на экране, то необходимо <em>уменьшить</em> это
+				значение. Эта опция может исправить только постоянный временной сдвиг.</p>
+			<p>Эта опция действует немедленно. При изменении значения задержки; возможно, что изображение замрет
+				или будет двигаться скачками в течении нескольких секунд.</p>
+		</div>
+  </div> <!-- <div id="filter_setup_system" class="subchapter"> -->
+</div> <!-- <div id="filter setup" class="chapter"> -->
+
+<!-- ==========================================================================
+                                  Theory
+=========================================================================== -->
+
+<div id="theory" class="chapter">
+  <h2><a name="theory">7. Теоретические сведения</a></h2>
+
+  <p>Качество звука - это очень сложное понятие которое зависит от огромного количества факторов
+    и их взаимосвязи: типа акустической системы, условий прослушивания, качества исходной записи, самого
+    слушателя и многих прочих. Невозможно дать однозначные рекомендации как добиться качества, нет единого
+    рецепта как нет и идеального звука: запись подготовленная для одних условий прослушивания
+    в других условиях может звучать совершенно неприемлемо. Однако можно попытаться изложить некоторые
+    главные принципы, которые помогут понять что необходимо делать в каждом конкретном случае. Поэтому
+    крайне рекомендуется ознакомиться с этим разделом для более полного понимания возможностей фильтра.</p>
+
+  <!-- ---------------------------------------------------------------------- -->
+
+  <div id="theory_loudness" class="subchapter">
+    <h3><a name="theory_loudness"></a>7.1. Громкость и динамический диапазон</h3>
+    
+    <div class="subsubchapter">
+      <h4>7.1.1. Что такое громкость</h4>
+
+      <p>Этот, казалось бы, очевидный вопрос достаточно трудно формализовать, поскольку в разных случаях подразумеваются
+        совершенно разные вещи.</p>
+      <p>Наиболее очевиден смысл громкости, когда мы говорим о <dfn>звуковом давлении</dfn>, поскольку это
+        то, что непосредственно воспринимается ухом.</p>
+      <blockquote><dfn>Звуковое давление</dfn> - давление, дополнительно возникающее при прохождении
+          звуковой волны в жидкой и газообразной среде. Распространяясь в среде, звуковая волна образует сгущения
+          и разрежения, которые создают добавочные изменения давления по отношению к среднему значению давления
+          в среде. Т.о., звуковое давление представляет собой переменную часть давления, т.е. колебания давления
+          относительно среднего значения, частота которых соответствует частоте звуковой волны. (Большая Советская
+          Энциклопедия)</small></blockquote>
+
+      <p>Таким образом мы можем оценить любой звук - громкие звуки создают большое давление, тихие - малое.
+        Давление измеряется в Паскалях, однако в акустике звуковое давление обычно измеряется в <dfn>децибелах</dfn> (дБ)
+        относительно <dfn>порога слышимости</dfn>. По определению, величина порога принята равной pt = 0.00002Па
+        = 20мкПа. Порог слышимости принимается за 0дБ, а <dfn>громкость</dfn> вычисляется как l = 20 * log(p
+        / pt), где l [дБ] - громкость (в смысле звукового давления), p [Па]- звуковое давление, pt [Па]- порог
+        слышимости. При этом: все слышимые звуки имеют положительную величину громкости; неслышимые (ниже порога
+        громкости) - отрицательную; изменение громкости на 6дБ соответствует двукратному изменению давления;
+        изменение на 20дБ - изменению давления в 10 раз. Громкость в смысле звукового давления далее мы будем
+        называть <dfn>абсолютной громкостью</dfn>.</p>
+      <p>Несколько типичных значений громкости:</p>
+      <table align="center" border="1" cellpadding="2" cellspacing="2" width="80%">
+        <tbody>
+          <tr>
+            <td align="center"><b>Звук</b></td>
+            <td align="center"><b>Громкость</b></td>
+            <td align="center"><b>Давление</b></td>
+          </tr>
+          <tr>
+            <td>Порог слышимости</td>
+            <td>0дБ</td>
+            <td>20мкПа</td>
+          </tr>
+          <tr>
+            <td>Шелест листвы и слабого ветра<br>
+              Тиканье наручных часов<br>
+              Дыхание</td>
+            <td>10-20дБ</td>
+            <td>0.05-0.2мПа</td>
+          </tr>
+          <tr>
+            <td>Тихий шепот<br>
+              Тиканье настенных часов</td>
+            <td>20-30дБ</td>
+            <td>0.2-0.5мПа</td>
+          </tr>
+          <tr>
+            <td>Шум в помещении</td>
+            <td>30-40дБ</td>
+            <td>0.5-2мПа</td>
+          </tr>
+          <tr>
+            <td>Тихий разговор</td>
+            <td>40-50дБ</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Разговор средней громкости</td>
+            <td>50-60дБ</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Громкий разгвор</td>
+            <td>60-70дБ</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Шумная улица</td>
+            <td>70-80дБ</td>
+            <td>50-200мПа</td>
+          </tr>
+          <tr>
+            <td>Двигатель грузового автомобиля</td>
+            <td>80дБ</td>
+            <td>200мПа</td>
+          </tr>
+          <tr>
+            <td>Шум в метро во время движения<br>
+              Отбойный молоток</td>
+            <td>90дБ</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Громкая дискотека</td>
+            <td>100-120дБ</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Самолет на взлете</td>
+            <td>120дБ</td>
+            <td>20Па</td>
+          </tr>
+          <tr>
+            <td>Болевой порог</td>
+            <td>130дБ</td>
+            <td>60Па</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Обратите внимание на диапазон воспринимаемых давлений: давление у порога слышимости и создаваемое
+        самолетом отличаются в миллион раз! Поэтому логарифмическая шкала гораздо лучше согласуется с физиологией
+        слуха - линейное изменение звукового давления не соответствует ощущению линейного изменения громкости.
+        Например, изменение звукового давления на 50мПа при разговоре будет очень заметно, однако совершенно
+        незаметно при взлете самолета. Изменение же звукового давления на 6дБ (в два раза) будет воспринято
+        как примерно равное изменение громкости в обоих случаях, хотя в первом случае это будет соответствовать
+        изменению давления на 25мПа, а во втором - 10Па.</p>
+      <p>Другая громкость - это <dfn>громкость записи</dfn> (<dfn>громкость сигнала</dfn>). Эта громкость не
+        является звуковым давлением (это может быть напряжение, намагниченность и т.д.), однако, звуковое давление
+        создается в соответствии с громкостью сигнала записи при помощи системы воспроизведения. Каждой определенной
+        громкости сигнала соответствует определенное звуковое давление. Громкость сигнала также может измеряться
+        в децибелах. Однако, если звуковое давление обычно измеряется относительно порога слышимости (минимального
+        слышимого звукового давления), то громкость цифрового сигнала обычно измеряется относительно максимального
+        цифрового уровня, принятого за 0дБ. Таким образом громкость цифрового сигнала выражается отрицательными
+        величинами (-3дБ, -20дБ) поскольку громкость записи всегда должна быть ниже максимальной. Чем меньше
+        значение громкости, тем тише сигнал (-20дБ тише, чем -3дБ). Если громкость цифрового сигнала положительна,
+        то это означает переполнение и, как следствие, возникновение цифровых искажений. (Суть этих искажений
+        будет рассмотрена далее).</p>
+      <p>Регуляторы громкости на усилителе, в настройках системы, в плеере не создают звукового давления вообще.
+        При отсутствии сигнала даже на при максимальных установках громкости мы не услышим ничего (при условии,
+        что сама система воспроизведения не создает шума). Таким образом они влияют на громкость лишь косвенно
+        и имеют смысл <dfn>усиления</dfn> сигнала. <small>(усиление может означать и ослабление сигнала).</small> В
+        дальнейшем термин <dfn>громкость</dfn> не будет использоваться для обозначения уровней усиления, за
+        исключением <dfn>системной громкости</dfn>, поскольку это уже устоявшийся термин. Под системной громкостью
+        будет пониматься как уровень усиления установленный в настройках операционной системы, так и в плеере,
+        усилителе/ресивере и т.д.</p>
+      <p>Уровень усиления также может измеряться в децибелах. Это удобно поскольку громкость сигнала и уровень
+        усиления в таком случае просто складываются. Например, сигнал с громкостью 70дБ, усиленный на 10дБ
+        будет звучать с громкостью 80дБ. Однако, несмотря на одинаковые единицы измерения необходимо всегда
+        отличать громкоть от усиления.</p>
+      <p>При воспроизведении сигнал записи преобразуется в звуковое давление при помощи акустической системы.
+        Пусть максимальное давление создаваемое акустической системой составляет 100дБ. Тогда запись громкостью
+        0дБ будет создавать давление 100дБ, запись громкостью -30дБ будет создавать давление 70дБ и т.д. При
+        изменении уровня усиления абсолютная громкость тоже будет изменяться. Таким образом изменяя уровень
+        усиления всегда возможно установить соответствие между громкостью записи и необходимой абсолютной громкостью.
+        Например, если уровень диалогов в фильме составляет -30дБ, и мы хотим слышать их с естественной громкостью,
+        то необходимо, чтобы громкость записи равная -30дБ соотвествовала давлению 50дБ. Т.к. при максимальном
+        уровне усиления (0дБ) уровень записи -30дБ создает давление 70дБ (что многовато), то при уровне усиления
+        -20дБ, та же громкость записи создаст необходимые 50дБ давления. Отрегулированная таким образом акустическая
+        система называется <dfn>калиброванной</dfn>, т.е. откалиброванная акустическая система - это система,
+        где звуки воспроизводятся с правильной абсолютной громкостью. <small>(На самом деле процесс калибровки
+        может быть гораздо сложнее и включать намного больше параметров, однако здесь и далее мы будем говорить
+        только о калибровке громкости)</small>. На большинстве бытовых приборов регулятор уровня усиления никак
+        не маркируется (или наносятся абстрактные проценты или другие ничего не обозначающие цифры), поэтому
+        для пользователя произвести точную калибровку акустической системы достаточно сложно.</p>
+      <p>На восприятие громкости также влияет свойство <dfn>адаптации</dfn> слуха. Слух приспосабливается к
+        громкости окружающего шума, и соответственно корректирует восприятие громкости. Многие наверняка замечали,
+        что человек в наушниках, в которых играет громкая музыка начинает говорить громко (согласно восприятию
+        окружающих), однако с его точки зрения это нормальная громкость речи (относительно громкости звука
+        в наушниках). И наоборот - в полной тишине люди начинают говорить шепотом и при этом шепот все равно
+        кажется громким. В условиях обычного городского шума тиканье механических часов услышать очень сложно
+        - этот звук воспринимается как очень тихий. То же самое тикание часов в полной тишине ночью может восприниматься
+        как четко слышимое. Таким образом возникает третья громкость - <dfn>субъективная громкость</dfn>. Мы
+        не будем говорить о каком-либо измерении субьективной громкости, а только о качественном сравнении
+        з вуков (громче-тише).</p>
+      <p>Таким образом звук одной и той же абсолютной громкости может восприниматься как громкий или тихий
+        в зависимости от окружающих условий. Допустим, мы отрегулировали уровень усиления так, чтобы громкость
+        диалогов в фильме приблизительно соответствовал реальности. Тогда, если в фильме есть звук тикающих
+        в тишине часов, то при просмотре фильма в условиях городского шума мы не услышим часов вовсе, поскольку
+        звук часов значительно тише окружающего шума, а слух адаптирован отсеивать окружающий шум. В хороших
+        условиях прослушивания, когда окружающего шума нет, те же самые часы будут ясно слышны.</p>
+      <p>Во многих случаях громкость записи удобно измерять относительно некоторого опорного уровня. Например,
+        если громкость записи составляет -20дБ - это громко или тихо? А если нам известно, что громкость диалогов
+        в той же записи составляет -30дБ, то сразу можно сказать, что это достаточно громко, а если громкость
+        диалогов равна -10дБ, то можно сказать, что это достаточно тихо. <dfn>Уровень диалогов</dfn> (средняя
+        громкость разговора) - это очень удобный опорный уровень, относительно которого можно легко ориентироваться.
+        Если громкость звука на 10дБ выше уровня диалогов, то это громко, а если на 10дБ ниже - то это тихо.
+        При этом сам уровень диалогов может быть произвольным и зависеть от записи - в одной записи уровень
+        диалогов может составлять -10дБ, а в другой и все -30дБ. В любом случае звуки громкостью ниже уровня
+        диалогов будут восприниматься как тихие, а выше уровня диалогов - как громкие, даже в случае если акустическая
+        система будет неправильно откалибрована, и диалоги будут звучать с абсолютной громкостью в 40дБ или
+        60дБ. Благодаря свойству адаптации слух приспосабливается к текущей средней громкости и вносит соответствующую
+        'поправку'. Однако правильное восприятие громкости будет нарушено когда громкость окружающего шума
+        приближается к громкости диалогов (или даже превышает его) - в этом случае все воспроизводимые звуки
+        будут казаться тихими.</p>
+      <p>Таким образом можно ввести еще одну шкалу громкости (в дополнение к шкале громкости цифрового сигнала
+        и шкале абсолютной громкости) - громкость относительно уровня диалогов. При сопоставлении разных громкостей
+        получим:</p>
+      <br>
+      <table align="center" border="1" cellpadding="2" cellspacing="2" width="80%">
+        <tbody>
+          <tr>
+            <td bgcolor="#ccccff" valign="top"></td>
+            <td bgcolor="#ccccff" valign="top">абсолютная громкость реальных звуков</td>
+            <td bgcolor="#ccccff" valign="top">громкость относительно уровня диалогов</td>
+            <td bgcolor="#ccccff" valign="top">громкость записи-1</td>
+            <td bgcolor="#ccccff" valign="top">громкость записи-2</td>
+            <td bgcolor="#ccccff" valign="top">абсолютная громкость при воспр. записи 1</td>
+            <td bgcolor="#ccccff" valign="top">абсолютная громкость при воспр. записи 2</td>
+          </tr>
+          <tr align="center">
+            <td colspan="1" rowspan="1" bgcolor="#ccccff" valign="top"></td>
+            <td rowspan="1" colspan="6" bgcolor="#99ff99" valign="top"><b>Тихие звуки</b></td>
+          </tr>
+          <tr>
+            <td bgcolor="#ccccff" valign="top">тихий шепот</td>
+            <td bgcolor="#99ff99" valign="top">10дБ</td>
+            <td bgcolor="#99ff99" valign="top">-40дБ</td>
+            <td bgcolor="#99ff99" valign="top">-70дБ</td>
+            <td bgcolor="#99ff99" valign="top">-50дБ</td>
+            <td bgcolor="#99ff99" valign="top">10дБ</td>
+            <td bgcolor="#99ff99" valign="top">10дБ</td>
+          </tr>
+          <tr>
+            <td bgcolor="#ccccff" valign="top">норма шума в жилых помещениях</td>
+            <td bgcolor="#99ff99" valign="top">20..30дБ</td>
+            <td bgcolor="#99ff99" valign="top">-20..-30дБ</td>
+            <td bgcolor="#99ff99" valign="top">-50..-60дБ</td>
+            <td bgcolor="#99ff99" valign="top">-30..-40дБ</td>
+            <td bgcolor="#99ff99" valign="top">20..30дБ</td>
+            <td bgcolor="#99ff99" valign="top">20..30дБ</td>
+          </tr>
+          <tr>
+            <td bgcolor="#ccccff" valign="top">тихий разговор</td>
+            <td bgcolor="#99ff99" valign="top">40дБ</td>
+            <td bgcolor="#99ff99" valign="top">-10дБ</td>
+            <td bgcolor="#99ff99" valign="top">-40дБ</td>
+            <td bgcolor="#99ff99" valign="top">-20дБ</td>
+            <td bgcolor="#99ff99" valign="top">40дБ</td>
+            <td bgcolor="#99ff99" valign="top">40дБ</td>
+          </tr>
+          <tr align="center">
+            <td colspan="1" rowspan="1" bgcolor="#ccccff" valign="top"></td>
+            <td rowspan="1" colspan="6" bgcolor="#99ffff" valign="top"><b>Уровень диалогов</b></td>
+          </tr>
+          <tr>
+            <td bgcolor="#ccccff" valign="top">разговор средней громкости</td>
+            <td bgcolor="#99ffff" valign="top">50дБ</td>
+            <td bgcolor="#99ffff" valign="top">0дБ</td>
+            <td bgcolor="#99ffff" valign="top">-30дБ</td>
+            <td bgcolor="#99ffff" valign="top">-10дБ</td>
+            <td bgcolor="#99ffff" valign="top">50дБ</td>
+            <td bgcolor="#99ffff" valign="top">50дБ</td>
+          </tr>
+          <tr align="center">
+            <td colspan="1" rowspan="1" bgcolor="#ccccff" valign="top"></td>
+            <td rowspan="1" colspan="6" bgcolor="#ffcccc" valign="top"><b>Громкие звуки</b></td>
+          </tr>
+          <tr>
+            <td bgcolor="#ccccff" valign="top">шум пишущей машинки</td>
+            <td bgcolor="#ffcccc" valign="top">70дБ</td>
+            <td bgcolor="#ffcccc" valign="top">+20дБ</td>
+            <td bgcolor="#ffcccc" valign="top">-10дБ</td>
+            <td bgcolor="#ffcccc" valign="top">0дБ (максимум)</td>
+            <td bgcolor="#ffcccc" valign="top">70дБ</td>
+            <td bgcolor="#ffcccc" valign="top">60дБ</td>
+          </tr>
+          <tr>
+            <td bgcolor="#ccccff" valign="top">двигатель грузового автомобиля</td>
+            <td bgcolor="#ffcccc" valign="top">80дБ</td>
+            <td bgcolor="#ffcccc" valign="top">+30дБ</td>
+            <td bgcolor="#ffcccc" valign="top">0дБ (максимум)</td>
+            <td bgcolor="#ffcccc" valign="top">0дБ</td>
+            <td bgcolor="#ffcccc" valign="top">80дБ</td>
+            <td bgcolor="#ffcccc" valign="top">60дБ</td>
+          </tr>
+          <tr>
+            <td bgcolor="#ccccff" valign="top"> громкий автомобильный сигнал на расстоянии 5–7м</td>
+            <td bgcolor="#ffcccc" valign="top">100дБ</td>
+            <td bgcolor="#ffcccc" valign="top">+50дБ</td>
+            <td bgcolor="#ffcccc" valign="top">0дБ</td>
+            <td bgcolor="#ffcccc" valign="top">0дБ</td>
+            <td bgcolor="#ffcccc" valign="top">80дБ</td>
+            <td bgcolor="#ffcccc" valign="top">60дБ</td>
+          </tr>
+          <tr>
+            <td bgcolor="#ccccff" valign="top">шум работающего трактора на расстоянии 1м</td>
+            <td bgcolor="#ffcccc" valign="top">120дБ</td>
+            <td bgcolor="#ffcccc" valign="top">+70дБ</td>
+            <td bgcolor="#ffcccc" valign="top">0дБ</td>
+            <td bgcolor="#ffcccc" valign="top">0дБ</td>
+            <td bgcolor="#ffcccc" valign="top">80дБ</td>
+            <td bgcolor="#ffcccc" valign="top">60дБ</td>
+          </tr>
+          <tr>
+            <td bgcolor="#ccccff" valign="top">порог болевого ощущения</td>
+            <td bgcolor="#ffcccc" valign="top">130дБ</td>
+            <td bgcolor="#ffcccc" valign="top">+80дБ</td>
+            <td bgcolor="#ffcccc" valign="top">0дБ</td>
+            <td bgcolor="#ffcccc" valign="top">0дБ</td>
+            <td bgcolor="#ffcccc" valign="top">80дБ</td>
+            <td bgcolor="#ffcccc" valign="top">60дБ</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>В таблице также приведены две гипотетические записи записанные в разных условиях: уровень диалогов
+        в записи-1 составляет -30дБ, а в записи-2 -10дБ. Видно, что при воспроизведении на откалиброванной
+        системе первая запись значительно лучше передает громкие звуки - возможно воспроизводить звуки громкостью
+        до 80дБ, в то время как вторая запись воспроизводит звуки громкостью всего лишь до 60дБ. </p>
+      <p>Заметим также, что для двух приведенных записей требуется разная калибровка акустической системы.
+        Так, для акустики, способной создавать давление в 100дБ уровень усиления, необходимый для первой записи
+        составляет -20дБ, а для второй - -40дБ. Т.о. первая запись требует значительно бОльшего усиления и
+        при воспроизведении обоих записей при одинаковых настройках уровня усиления первая запись будет звучать
+        значительно тише. Поэтому вторая запись удобна для некалиброванных систем, поскольку допускает сильные
+        отклонения в уровне усиления.</p>
+      <p>Таким образом запись-1 хорошо передает громкие звуки, но требует большего уровня усиления; при недостаточном
+        усилении и наличии внешних шумов будет восприниматься как черезмерно тихая. Запись-2 не требует большого
+        усиления, хорошо слышна даже на малых уровнях усиления и при наличии шума, но не может хорошо передавать
+        громкие звуки. </p>
+      <p>А теперь вспомним, что звуковой сигнал - переменный:</p>
+      <div class="image">
+        <img alt="" src="pic/a_signal.png" height="362" width="623">
+      </div>
+      <p>Что брать для расчета громкости? Очевидно, что изменение давления за один период звуковой волны не
+        имеет смысла изменения громкости звука, поскольку мы не слышим отдельные колебания. Поэтому громкость
+        определяется не для одной точки, а на определенном промежутке времени. Еслть много разных способов
+        для определения громкости. Простейшие - это определение максимума и вычисление энергии сигнала. Более
+        сложные методики учитывают неравномерность слуха к звукам разной частоты и интенсивности.</p>
+      <p>При определении громкости как максимума сигнала мы просматриваем диапазон и ищем максимум сигнала:</p>
+      <div class="image">
+        <img alt="" src="pic/a_loudness.png" height="362" width="623">
+      </div>
+      <p>Найденный уровень, выраженный в дБ и будет характеризовать громкость. Чтобы отличить эту громкость
+        от полученных другим способом эта громкость также называется <dfn>пик-уровнем</dfn>. В дальнейшем мы
+        будем пользоваться только таким определением громкости. В действительности это определение не очень
+        хорошо отражает реальное восприятие громкости, однако оно удобно для последующих рассуждений и поэтому
+        мы не будем более подробно останавливаться на других, более точных методах определения громкости.</p>
+    </div>
+    <!-- ---------------------------------------------------------------------- -->
+    <div class="subsubchapter">
+			<h4>7.1.2. Гистограмма громкостей</h4>
+			
+			<div class="image">
+				<img alt="" src="pic/h_fightclub.png" height="444" width="534">
+			</div>
+			<p>Этот рисунок иллюстрирует распределение громкостей типичного DVD фильма (DVD FightClub, здесь и далее
+				берутся только оригинальные аудио-треки, без перевода и без микширования, дабы не искажать звуковую
+				картину). По оси Х откладывается громкость в децибелах, по оси Y - насколько чато звук с этой громкостью
+				появляется. Проще говоря, на протяжении фильма постоянно контролировалсь текущяя громкость и чем чаще
+				встречается какая-то громкость тем выше с этом месте график. Т.е. можно сказать, что громких взрывов
+				было мало, зато очень много разных фоновых звуков. График поделен на несколько условных областей:</p>
+			<ol>
+				<li>Голос. Уровень диалогов для фильмов - это один из наиболее важных параметров. Он является отправной
+					точкой для всех остальных звуков: все, что ниже - считается тихими звуками, все, что выше - громкими.
+					Хорошая слышимость диалогов это один из главных критериев настройки (о которой мы будем говорить
+					дальше).</li>
+				<li>Фоновые звуки - проезжающие автомобили, звуки шагов, фоновая музыка</li>
+				<li>Очень тихие звуки - легкий ветер, шуршание травы и т.д.</li>
+				<li>Громкие звуки - звонок телефона, удары и прочее</li>
+				<li>Взрывы и прочие глобальные катастрофы</li>
+				<li>Шумы записи<br>
+				</li>
+			</ol>
+			<p>Границы между областями весьма условны и могут изменяться для разных записей. В данном случае <i>известно</i>,
+				что уровень диалогов равен -27дБ.</p>
+			<p>Рассматривая график можно отметить несколько интересных моментов. Во-первых, чаще всего в фильме встречались
+				звуки с громкостью -40дБ. Пока просто отметим этот факт. Во-вторых главный горб расположен от 0дБ (максимальный
+				уровень) до -70дБ (минимальный уровень). Разумно предположить, что все важные звуки расположены внутри
+				этого горба, а все, что тише - просто шумы. Разность максимального и минимального уровней составляет
+				70дБ. Эта величина называется динамическим диапазоном и будет далее иметь огромное значение.</p>
+			<p>Для фильмов на DVD привденная картина достаточно типична. Диалоги занимают значительное время, немного
+				больше - фоновый звук и музыка, периодические всплески громкости и периодический же постепенный уход
+				в тишину. В целом, звуковая картина этого фильма достаточно сбалансирована и использует практически
+				весь доступный динамический диапазон.</p>
+			<p>Теперь посмотрим и на другие фильмы:</p>
+			<a name="theory_loudness_pic_movies"></a>
+			<div class="image">
+				<img alt="" src="pic/h_movies.png" height="475" width="612"><br>
+				<small>(для всех фильмов уровень диалогов равен -27дБ)</small>
+			</div>
+			<p>На этих примерах очень хорошо видно разделение на две большие группы. Для первой группы фильмов характерно
+				практически полное отсутствие громких звуков (Cube, Dracula, About Schmidt, Savior). Для них диапазон
+				громкостей от 0дБ до -15дБ (очень громкие звуки) практически не используется. Для другой группы фильмов,
+				наоборот громкие звуки черезвычайно важны (Interstate60, Blood (Last Vampire), Pitch Black, Matrix).
+				Казалось бы, что этих звуков относительно мало, поэтому особой роли они не играют. Однако, например,
+				продолжительность звука выстрела (его громкой части) составляет доли секунды, но именно большая громкость
+				выделяет этот звук. Если бы этот звук был тише, то создалось бы впечатление 'плоскости' и невыразительности
+				звука. В фильмах первого типа ('тихие' фильмы) громкий звук даже если встретится один раз на фильм,
+				он все равно не несет большой смысловой нагрузки, поэтому его громкость не так критична. В фильмах
+				второго типа эти звуки (даже при относительно малой продолжительности) формируют настроение фильма.</p>
+			<p>Другая бросающаяся в глаза особенность - это высокие 'горбы' в фильмах Cube и Interstate60. В фильме
+				Cube присутствует постоянный тихий фоновый гул и именно поэтому график имеет горб на громкости около
+				-50дБ. То же самое касается фильма Interstate 60 - это путешествие на автомобиле, и как следствие,
+				постоянный звук движения.Формы обоих гистограмм очень похожи, однако максимум гистограммы для фильма
+				Cube находится на 10дБ ниже. Так как уровень голоса в обоих фильмах одинаковый, то сразу можно заключить,
+				что фильм Cube значительно тише. Это далеко неочевидный вывод. Вспомним про свойство адаптации слуха
+				- если сдвинуть графики так, чтобы их максимумы находились на одном и том же уровне фильм Cube все
+				равно будет восприниматься как 'тихий'!</p>
+			<p>Для прочих фильмов нет настолько хорошо выраженных фоновых звуков поэтому графики более 'размазанны'
+				по динамическому диапазону. </p>
+			<p>Фильм About Schmidt имеет большой горб на уровне -70дБ..-80дБ. Это шумы записи - в этом фильме они
+				относительно громкие по сравнению с другими фильмами, однако достаточно тихие, чтобы они не мешали
+				просмотру.</p>
+			<p>До сих пор мы рассматривали исключительно фильмы. Посмотрим теперь на музыку:</p>
+			<a name="theory_loudness_pic_music"></a>
+			<div class="image">
+				<img alt="" src="pic/h_music.png" height="451" width="623">
+			</div>
+			<p>Сразу бросается в глаза совершенно другое распределение громкостей. <small>(Здесь собраны гистограммы
+					музыки разных направлений и разного качества для того чтобы показать разнообрразие. Они не показывают
+					реального соотношения разных типов композиций.)</small>. Все звуки сильно сдвинуты в 'громкую' часть
+					динамического диапазона. Разница в средней громкости фильмов и музыки достигает 40дБ. Кроме того,
+					для фильмов характерен плавный спад гистограммы в громкой области. Для музыки же максимум гистограммы
+					зачастую находится на максимальном уровне (0дБ). Таких графиков приведено немного, однако такая ситуация
+					является очень распространенной.</p>
+			<p>Понятие уровня диалогов к музыке зачастую неприменимо, поэтому разделить громкие и тихие звуки очень
+				затруднительно. Поэтому также затруднено определение субъективной громкости композиции. Так, субъективно
+				громкая композиция может быть объективно тише субъективно громкой. Большое значение здесь имеют положительные
+				или отрицательные <i>перепады</i> громкости, которые на данных гистограммах не видны.</p>
+			<p>Отсутствие единого ориентира приводит к хаосу - звук из разных источников имеет разную громкость -
+				разница в максимумах гистограмм композиций достигает 20дБ. Да и вообще понятие 'громкости композиции'
+				очень сложно как-то формализовать. Многим наверняка знакома ситуация, когда есть много разной музыки
+				из разных источников и при проигрывании ее подряд (например, если записать AudioCD) громкость постоянно
+				меняется при переходе от одной композиции к другой, что неприятно (а упомянутый эффект несоответствия
+				реальной и субъективной громкости может еще более запутать восприятие). Приведенные графики очень хорошо
+				иллюстрируют такую ситуацию.</p>
+			<p>Динамический диапазон музыкальных композиций (разница между самым громким и самым тихим звуком) составляет
+				20-40дБ, что значительно меньше динамического диапазона фильмов (70дБ).</p>
+		</div>	
+    <!-- ---------------------------------------------------------------------- -->
+    <div class="subsubchapter">
+			<h4>7.1.3. Проблема громкости DVD</h4>
+			<p>В среднем уровень громкости на музыкальных записях (а также системные звуки Windows) оказывается
+			  значительно выше чем на DVD-фильмах. Поэтому при одинаковых настройках системной громкости абсолютная
+			  громкость фильмов будет значительно ниже и при наличии внешних шумов может оказаться недостаточной,
+			  слышно будет плохо (sic!) и будет казаться, что звук некачественный. Увеличение усиления в настройках
+			  системы и на усилителе даже до максимальной может не решить проблемы: разница в средней громкости
+			  достигает 40дБ, что очень много. Однако, даже если мощности усилителя окажется достаточно и проигрывание
+			  DVD происходит с достаточной абсолютной громкостью это не всегда удобно, поскольку звуки операционной
+			  системы, которые звучат с нормальной абсолютной громкостью при нормальных настройках усиления
+			  при большом усилении будут просто громоподобными. </p>
+			<p>Эта проблема характерна в основном для компьютерного проигрвания, поскольку в аппаратных проигрывателях
+				управление уровнем усиления осуществляется самим декодером. Некоторые программные DVD-проигрыватели
+				умеют управлять системной громкостью, однако это тоже не всегда удобно, поскольку изменяется громкость <i>всех</i> звуков
+				системы (можно случайно оглушить соседей), да и управлять громкостью на внешнем усилителе программа
+				все равно не может. Поэтому это только частичное решение проблемы.</p>
+			<p>Компромиссное решение состоит в обработке звука непосредственно перед проигрыванием. Подобная обработка
+				может сильно повысить качество проигрывания <i>конкретной</i> записи и в <i>конкретных</i> условиях.
+				Многие могут возразить, что при этом теряется 'качество', однако, как уже упоминалось - нет абсолютного
+				качества, Мы не ставим себе целью <i>монтировать</i> звук, наша цель - добиться того, чтобы в наших
+				условиях <i>слушать</i> его было приятно. Если акустическая система не обладает достаточной мощностью
+				или у нас нервные соседи смотреть фильм с пониженной громкостью, когда не разобрать половины слов и
+				не слышно половины тихих звуков будет просто неприятно. Даже самовнушение о максимально достигнутом
+				'качестве' не сможет сгладить этого впечатления. Еще раз повторю основную мысль: <i>качество - это
+				то, что мы слышим</i>. Звук проходит много стадий обработки до того, как попасть к слушателю, а разнообразие
+				акустики и ее свойств настолько велико, что последняя стадия обработки непосредственно перед воспроизведением
+				является практически необходимостью.</p>
+    </div>
+			
+    <!-- ---------------------------------------------------------------------- -->
+    <div class="subsubchapter">
+			<h4>7.1.4. Изменение уровня. Переполнение, обрезание и ограничение.</h4>
+			
+			<p>Изменение уровня - это просто умножение амплитуды сигнала на определенное значение, в результате чего
+				изменяется громкость всего сигнала (увеличивается или уменьшается).</p>
+			<div align="center"> <img alt="" src="pic/a_gain.png" height="354" width="448"> </div>
+			<p>В логарифмическом виде умножение на число - это просто прибавление константы. Поэтому если ко всем
+				уровням прибавить одно и то же число, то гистограмма уровней просто сдвинется:</p>
+			<div align="center"> <img alt="" src="pic/h_gain.png" height="409" width="596"> </div>
+			<p>Если мы умножим сигнал на слишком большое число, то возможно переполнение. Если переполнение не отслеживать,
+				то значение амплитуды принимает практически случайные значения (см. рисунок) и это приводит к очень
+				заметным на слух частым щелчкам. Самых простой способ борьбы с этим дефектом - <dfn>обрезание сигнала</dfn> (клиппинг,
+				clipping), т.е. там где амплитуда сигнала выходит за перделы мы 'обрезаем' его (см. рисунок). При небольшом
+				переполнении клиппинг практически незаметен на слух, однако при повышении уровня он проявляется как
+				'песок' в звуке. </p>
+			<div align="center"> <img alt="" src="pic/a_overflow.png" height="356" width="794"> </div>
+			<p>Более сложный, но и более эффективный способ - это <dfn>ограничение сигнала</dfn> (лимитинг, limiting).
+				Суть его состоит в том, чтобы автоматически понижать уровень сигнала так, чтобы переполнения просто
+				не происходило. Для этого необходима система автоматической регулировки усиления (АРУ, Automatic gain
+				control, AGC), которая будет вносить поправку в текущий уровень сигнала. Так, пока переполнения нет
+				АРУ не изменяет сигнал, а как только сигнал превышает максимальный уровень вносится поправка, которая
+				изменяет сигнал так, чтобы его уровень не превышал максимальный. Как видно на рисунке, сигнал полностью
+				сохраняет свою форму! Однако, громкость при этом остается максимальной:</p>
+			<a name="theory_loudness_pic_limiting"></a>
+			<div align="center"> <img alt="" src="pic/l_limiting.png" height="600" width="400"> </div>
+			<p>Необходимо обратить внимание на то, что на предыдущем рисунке приведена амплитуда, а на этом - громкость
+				(определенная по <i>большой группе</i> амплитуд). Поэтому несмотря на то, что график громкости 'обрезан'
+				форма самого сигнала искажается минимально. Этот способ также не лишен недостатков. Изначально звук
+				имел разную громкость, а после ограничения все звуки выходящие за пределы имеют одну и ту же громкость
+				и звук может получиться 'плоский' и невыразительный. Посмотрим на гистограммы (Fight Club):</p>
+			<a name="theory_loudness_pic_gain"></a>
+			<div align="center"> <img alt="" src="pic/h_overflow.png" height="391" width="595"> </div>
+			<p>Здесь приведен пример неудачного усиления. При усилении +10дБ искажения еще мало заметны (мест в фильме
+				где возникает переполнение еще относительно мало), однако с ростом усиления ограничение уровня появляется
+				все чаще и чаще и при уровне +30дБ начинает ограничиваться голос, что крайне заметно. Особенно заметны
+				недостатки ограничения при значительных изменениях громкости за малое время - субъективно громкость
+				начинает прыгать вверх и вниз. Если на фоне разговора (который при усилении +30дБ уже воспроизводится
+				с максимальной громкостью) происходит громкий звук (который громче голоса в оригинале, например, звонок
+				телефона) то уровень усиления уменьшается так, чтобы громкий звук не искажался, но при этом громкость
+				разговора также резко падает. Когда громкий звук заканчивается разговор так же резко возвращается к
+				предыдущей громкости:</p>
+			<div align="center"> <img alt="" src="pic/l_loudness_jump.png" height="800" width="400"> </div>
+			<p>Т.о. относительная громкость разных звуков воспроизводимых одновременно сохраняется, однако уровень
+				усиления постоянно изменяется, что хорошо заметно и очень неприятно. Таким образом при больших уровнях
+				усиления (20-30дБ и больше) ограничение тоже дает <i>плохой</i> результат. </p>
+			<p>При малых уровнях усиления дефекты ограничения сигнала практически незаметны, тогда как обрезание
+				сигнала хорошо слышно практически всегда. Т.е. при прочих равных условиях ограничение дает более качественный
+				результат. Фильтр всегда производит либо ограничение (опция <span class="option">AGC</span> влючена) либо обрезание (опция <span class="option">AGC</span> отключена).
+				В дальнейшем если не оговорено явно будет подразумеваться что включено ограничение. Поэтому рекомендуется
+				всегда держать опцию <span class="option">AGC</span> включенной.</p>
+		</div>
+    <!-- ---------------------------------------------------------------------- -->
+    <div class="subsubchapter">
+			<h4>7.1.5. Нормализация.</h4>
+			<p>Зададимся целью поднять громкость без потери качества вообще. Такое возможно? Да, если есть 'запас'
+				динамического диапазона. Посмотрим снова на <a href="#theory_loudness_pic_movies">гистограммы с фильмами</a>,
+				фильм Cube (желтый график). На гистограмме видно, что громкость не поднимается выше -15дБ (возможно,
+				что за весь фильм и есть один-два таких момента, однако, для целей данного рассмотрения будем считать,
+				что громких звуков нет вообще). А так как громких звуков нет, то можно повысить громкость на 15дБ без
+				потери качества!</p>
+			<div align="center"> <img alt="" src="pic/l_normalize.png" height="402" width="400"> </div>
+			<p>Кроме увеличения громкости никаких изменений в сигнале не происходит. При этом гистограмма не изменяя
+				формы подвинется вплотную к правому краю:</p>
+			<a name="theory_loudness_pic_normalize"></a>
+			<div align="center"> <img alt="" src="pic/h_normalize.png" height="409" width="595"> </div>
+			<p>Таким образом, окажется, что в фильме теперь присутствует звук с максимальной громкостью. Но если
+				мы будем увеличивать громкость дальше возникнут искажения (описанные выше). Такая форма сигнала, где
+				присутствует звук максимальной громкости без внесенных при этом искажений называется <dfn>нормальзованной</dfn>,
+				а процесс - <dfn>нормализацией</dfn>. Нормализация часто производится на стадии подготовки музыкальных
+				записей и к нам звук попадает уже нормализованным (например, AudioCD). Однако для фильмов нормализации
+				не производится. Почему?</p>
+			<p>Вспомним гистограммы для музыки и хаос с громкостью. Для музыки важно воспроизведение с максимальной
+				громкостью, поскольку рассчитана на максимальную целевую аудиторию - CD-плееры, шум на улице, метро,
+				дешевые наушники, хрипящие радиостанции, через которые тихие звуки ниже -40дБ просто не услышать. (Еще
+				раз посмотрим на <a href="#theory_loudness_pic_music">графики для музыки</a> - минимальная громкость
+				примерно равна -40дБ...)</p>
+			<p>Для DVD это не так. Они в первую очередь предназначены для качественных домашних кинотеатров. Воспроизводящая
+				аппаратура должна быть откалибрована так, чтобы всегда воспроизводить диалоги с одной и той же абсолютной
+				громкостью для <i>любого</i> фильма, будь то боевик с его потрясающими стену взрывами или мелодрама
+				с тихим шуршанием травы. При этом воспроизводящая система <i>всегда</i> должна быть готова воспроизвести
+				эти звуки без необходимости изменять уровень усиления вручную. Таким образом на первый план выступает
+				не необходимость сделать запись максимально громкой, а необходимость жесткого опорного уровня, чтобы
+				декодер имел возможность подстроить уровень усиления автоматически. Этот опорный уровень может быть
+				любым (на самом деле это не важно, т.к. если есть опорный уровень то соответствующую коррекцию можно
+				сделать всегда). Стандартом де-факто для DVD является уровень диалогов равный -27дБ. Поэтому даже если
+				фильм громких звуков не содержит то на этапе создания диска проводить нормализацию не следует и динамический
+				диапазон остается неизрасходованным.</p>
+		</div>
+    <!-- ---------------------------------------------------------------------- -->
+    <div class="subsubchapter">
+			<h4>7.1.6. Однопроходная нормализация.</h4>
+			<p>Итак, для целей повышения громкости нормализация это хорошо. Но для того, чтобы провести нормализацию
+				нужно знать максимальный уровень записи и чтобы его найти нужно просмотреть всю запись заранее. Однако
+				это не всегда возможно да и просто неудобно. Есть метод нормализации, для которого не нужно предварительно
+				просматривать всю запись - однопроходная нормализация. Суть метода состоит в том, что при просмотре
+				фильма мы ищем максимум громкости <i>постоянно</i>. В начальный момент времени усиление максимально.
+				В момент, когда возникает переполнение мы уменьшаем усиление:</p>
+			<div align="center"> <img alt="" src="pic/l_onepass.png" height="600" width="400"> </div>
+			<p>Как видно на рисунке первый пик громкости срезается почти также, как и при обычном переполнении, однако
+				продолжительность 'среза' значительно меньше (сравните с <a href="#theory_loudness_pic_limiting">простым
+				ограничением</a>) и впоследствии переполнений не происходит. Таким образом усиление будет корректироваться
+				при нахождении каждого нового максимума и в результате гистограмма автоматически сдвигается в сторону
+				достижения максимальной громкости.</p>
+			<p>Как и все прочие, метод не лишен недостатков. Во-первых - метод не лишен искажений (хотя и малозаметных
+				- нужно точно знать, что слушать, чтобы заметить работу однопроходной нормализации). Во-вторых громкость
+				постоянно снижается во время просмотра фильма (хотя обычно основной процесс снижения громкости заканчивается
+				на первых 10-15 минутах фильма, поэтому практически незаметен). И в-третьих, основная цель - повышение
+				громкости, может быть не достигнута - все зависит от самого фильма (это касается и обычной нормализации).
+				Вот пример гистограмм полученных в случае однопроходной нормализации для фильмов Cube (где нормализация
+				возможна) и Fight Club (где нормализация не даст желаемого эффекта):</p>
+			<div align="center"> <img alt="" src="pic/h_onepass.png" height="409" width="595"> </div>
+			<p>Как видно на этих гистограммах результат отличается разительно. Включение однопроходной нормализации
+				дает существенный положительный эффект для фильма Cube - стало заметно громче (и подтвердилось наше
+				предположение, что звуки громче -15дБ в фильме отсутствуют - сравните с <a href="#theory_loudness_pic_normalize">графиком
+				для нормализации</a>). Но для фильма Fight Club увеличения громкости вообще не произошло - таким образом
+				нужный эффект не был достигнут, но были внесены дополнительные искажения.</p>
+			<p>Необходимо еще раз отметить, что для работы однопроходной нормализации необходимо предварительное
+				(начальное) усиление - без повышения уровня однопроходная нормализация просто бессмсленна. Также как
+				и обычное усиление оно задается уровнем <b>Master</b>. Однако, если оно будет слишком сильным - с начала
+				работы алгоритма падение громкости будет очень заметно.</p>
+		</div>
+    <!-- ---------------------------------------------------------------------- -->
+    <div class="subsubchapter">
+			<h4>7.1.7. Сжатие динамического диапазона.</h4>
+			<p>Задумаемся над вопросом - а зачем нам поднимать громкость? Для того, чтобы слышать тихие звуки, которые
+				не слышны в наших условиях (например, если нельзя слушать громко, если есть посторонние шумы в комнате
+				и т.д.). А можно ли усилить тихие звуки, а громкие не трогать? Оказывается можно. Эта техника называется
+				сжатием динамического диапазона (компрессия, Dynamic Range Compression, DRC). Для этого необходимо
+				изменять текущую громкость постоянно - тихие звуки усиливать, громкие - нет. Самый простой закон изменения
+				громкости - линейный, т.е. громкость изменяется по закону output_loudness = k * input_loudness, где
+				k - коэффициент сжатия динамического диапазона:</p>
+			<div align="center"> <img alt="" src="pic/drc_linear.png" height="405" width="388"> </div>
+			<p>При k = 1 никаких изменений не производится (выходная громкость равна входной). При k &lt; 1 громкость
+				будет увеличиваться а динамический диапазон - сужаться. Посмотрим на график (k=1/2) - тихий звук, имевший
+				громкость -50дБ станет громче на 25дБ, что значительно громче, но при этом громкость диалогов (-27дБ)
+				повысится всего лишь на 13.5дБ, а громкость самых громких звуков (0дБ) вообще не изменится. При k &gt; 1
+				- громкость будет уменьшаться, а динамический диапазон - увеличиваться. </p>
+			<p>Посмотрим на графики громкости (k = 1/2: сжатие ДД в два раза):</p>
+			<div align="center"> <img alt="" src="pic/l_drc.png" height="402" width="400"> </div>
+			<p>Как видно в оригинале присутствовали как очень тихие звуки, на 30дБ ниже уровня диалогов, так и очень
+				громкие - на 30дБ выше уровня диалогов. Т.о. динамический диапазон составлял 60дБ. После компрессии
+				громкие звуки всего лишь на 15дБ выше, а тихие - на 15дБ ниже уровня диалогов (динамический диапазон
+				теперь составляет 30дБ). Таким образом громкие звуки стали значительно тише, а тихие - значительно
+				громче. При этом переполнения не происходит!</p>
+			<p>Теперь обратимся к гистограммам:</p>
+			<a name="theory_loudness_pic_drc"></a>
+			<div align="center"> <img alt="" src="pic/h_drc.png" height="426" width="595"> </div>
+			<p>Как хорошо видно - при усилении до +30дБ форма гистограммы хорошо сохраняется, что означает, что громкие
+				звуки остаются хорошо выраженными (не уходят в максимум и не обрезаются, как это происходит при <a href="#theory_loudness_pic_gain">простом
+				усилении</a>). При этом выделяются тихие звуки. Гистограмма это показывает плохо, однако разница очень
+				заметна на слух. Недостаток метода - те же самые прыжки громкости. Однако механизм их возникновения
+				отличается от скачков громкости возникающих при обрезании а их характер совершенно отличен - они проявляются
+				в основном при очень сильном усилении тихих звуков (а не при обрезании громких, как при обычном усилении).
+				Черезмерный уровень компрессии приводит к уплощению звуковой картины - все звуки стремятся к одинаковой
+				громкости и невыразительности. </p>
+			<p>Сильное усиление тихих звуков может привести к тому, что станут слышимы шумы записи. Поэтому в фильтре
+				применен немного модифицированный алгоритм, чтобы уровень шумов поднимался меньше:</p>
+			<div align="center"> <img alt="" src="pic/drc_bended.png" height="405" width="388"> </div>
+			<p>Т.е. на уровне громкости -50дБ происходит перегиб передаточной функции и шумы будут усиливаться меньше
+				(желтая линия). При отсутствии такого перегиба шумы будут значительно громче (серая линия). Такая простая
+				модификация значительно снижает количество шумов даже при очень сильных уровнях сжатия (на рисунке
+				- сжатие 1:5). Уровень <b>DRC</b> в фильтре задает уровень усиления для тихих звуков (на уровне -50dB),
+				т.о. уровень компрессии 1/5, показанный на рисунке, соответствует уровню +40дБ в настройках фильтра.</p>
+		</div>
+    <!-- ---------------------------------------------------------------------- -->
+    <div class="subsubchapter">
+			<h4>7.1.9. Микширование и громкость</h4>
+			<p>Есть еще одна далеко неочевидная тонкость, которая может сильно повлиять на громкость при проигрывании
+				многоканальных записей на стерео-системе (или в наушниках). Пусть мы имеем исходную запись в формате
+				5.1 а на выходе необходимо получить 2 канала. В каждый из выходных каналов микшируется один фронтальный
+				канал, один тыловой, канал LFE, и часть центрального канала:</p>
+			L' = L + 0.7*C + SL + LFE<br>
+			R' = R + 0.7*C + SR + LFE
+			<p>Допустим, что по всем входным каналам сразу запущен звук максимальной громкости (хотя это и не слишком
+				вероятно). Тогда амплитуда в выходном канале будет превышать максимум в 3.7 раза (на 11дБ), т.е. произойдет
+				сильнейшее переполнение. Чтобы переполнения не допустить формулы микширования должны быть переписаны
+				следующим образом:</p>
+			L' = (L + 0.7*C + SL + LFE) / 3.7<br>
+			R' = (R + 0.7*C + SR + LFE) / 3.7
+			<p>Это нормализованное микширование (не путать с нормализацией самой записи!) - переполнения гарантировано
+				не происходит. Однако, смикшированный таким образом звук на целых 11дБ тише! Можно ли не проводить
+				нормализацию? Можно. Однако в таком случае возможно переполнение и соответствующие искажения. Переполнение
+				происходит только тогда, когда по всем входным каналам одновременно воспроизводится громкий звук. Это
+				не характерно для фильмов (обычно тыловые каналы заметно тише фронтальных, да и канал LFE далеко не
+				всегда задействован), но характерно для многоканальных музыкальных записей. Поэтому для фильмов можно
+				оставить микширование ненормализованным, а для музыки нормализацию лучше включать. (В фильтре за нормализацию
+				микширования отвечает опция <span class="option">Normalize matrix</span>).</p>
+		</div>
+    <!-- ---------------------------------------------------------------------- -->
+    <div class="subsubchapter">
+			<h4>7.1.10. Рекомендации.</h4>
+			<p>Рекомендации по настройке сильно зависят от конкретных условий прослушивания и поставленной цели.
+				Условно можно разделить все условия на следующие категории:</p>
+			<ol>
+				<li>Высококачественные домашние кинотеатры и хорошие условия прослушивания - отсутствуют посторонние
+					шумы (уличный шум, соседи сверху, бегающие вокруг дети) и можно шуметь самим (отсутствие соседей).
+					Для этой категории всю пост-обработку можно отключить (пресет standard).</li>
+				<li>Хорошая акустика, но наличие внешнего шума. Можно применить небольшое усиление и небольшой уровень
+					компрессии.</li>
+				<li>Нельзя шуметь самим (ночь, соседи/дети) или посредственная акустика (дешевые наушники, слабые колонки).
+					Необходимо сильный уровень компрессии плюс повышение уровня или однопроходная нормализация.</li>
+			</ol>
+			<p>Наилучших результатов можно добиться только при комбинировании всех методик. В данном разделе будет
+				рассматриваться только случай просмотра DVD-фильмов. Для других случаев (музыка, MPEG4-фильмы и пр.)
+				характеристики звука слишком отличаются. Однако, освоив настройку фильтра для DVD-фильмов уже несложно
+				будет разобраться и с другими случаями.</p>
+			<p>Усиление (уровень <span class="option">Master</span>). Скачки громкости возникающие при переполнении незаметны только в
+				случае, когда обрезаемый звук намного громче основного: в примере с телефоном звук телефона сравним
+				по громкости со звуком голоса, однако если вместо телефона будет оглушительный взрыв звук голоса
+				в любом случае будет неразличим. Поэтому ограничение самых громких звуков допустимо и практически
+				незаметно. Очень громкими можно считать звуки от +15..+20дБ относительно уровня диалогов. Таким
+				образом, при уровне диалогов равном -27дБ (де-факто для DVD) допустимый уровень усиления равен
+				+7..+12дБ. В качестве еще одного ориентира можно обратиться к <a href="#theory_loudness_pic_gain">гистограммам усиления</a>:
+				усиление до +10дБ не сильно сказывается на форме гистограммы, в то время как при усиленни +20дБ ограниченным
+				оказывается очень большое количество звуков. Т.о. можно считать допустимым усиление до +10дБ. Его можно
+				держать в этом положении практически всегда - на тихих фильмах это заметно поднимет громкость, а на
+				громких - не будет сильно мешать. (Еще раз отметим, что рассуждения приведены только для случая просмотра
+				DVD-фильмов - для музыки и большинства mpeg4-фильмов они неприменимы, т.к. характеристики гистограмм
+				сильно отличаются).</p>
+			<p> Усиление также может применяться для ограничения громкости сигнала (например, для прослушивания ночью).
+				При уровне диалогов равном -27дБ и усилении +17дБ уровень диалогов после усиления будет составлять
+				-10дБ, а самого громкого звука, как всегда, 0дБ, что всего лишь на +10дБ выше уровня диалогов. Т.о.
+				установив в фильтре усиление +17dB, и отрегулировав системную громкость так, чтобы диалоги воспроизводились
+				с приемлемой абсолютной громкостью мы получим гарантию, что самые громкие звуки не будут превышать
+				уровень диалогов больше, чем на 10дБ (хотя, конечно, в этом случае для громких звуков будет применено
+				ограничение сигнала).</p>
+			<p>Компрессия (<span class="option">DRC</span>). Границы применения компрессии определить намного сложнее, поскольку слышимость
+				дефектов компресси сильно зависит от акустической системы, условий прослушивания и самого слушателя.
+				Если подойти к вопросу с точки зрения гистограмм то верхний предел применимости компресси можно
+				оценить как +20..+30дБ (см. <a href="#theory_loudness_pic_drc">гистограммы</a>). В этом случае громкие звуки
+				еще остаются выделенными по громкости от слабых. Таким образом уровень компрессии подбирается только
+				на слух - до тех пор пока не будет достигнута необходимая громкость и дефекты будут оставаться незаметными.</p>
+			<p>Необходимо учитывать, что компрессия и усиление действуют одновременно, поэтому при уровне усиления
+				+20дБ и компресии в два раза (+25дБ) реальный уровень усиления будет составлять +10дБ. Это нормально,
+				посколюку потребность в усилении также уменьшается с увеличением компрессии.</p>
+			<p>Однопроходная нормализация (<span class="option">One-pass normalize</span>). Применима также практически всегда. Для высококачественных
+				систем с небольшим уровнем усиления позволит уменьшить количество переполнений, а в остальных случаях
+				в комбинации с компрессией позволит добиться максимальной громкости опять же с минимумом искажений
+				по переполнению. Начальный уровень усиления (уровень <span class="option">Master</span>) для нормализации выбирается исходя
+				из целей - если большого усиления не нужно - устанавливается желательное, а для достижения максимальной
+				громкости можно установить +20дБ.</p>
+		</div>
+  </div> <!-- <div id="theory_loudness" class="subchapter"> -->
+
+  <!-- ---------------------------------------------------------------------- -->
+  <div id="theory_lfe" class="subchapter">
+    <h3><a name="theory_lfe">7.2. Что такое LFE?</a></h3>
+		
+    <p>Первое, что необходимо отметить - <b><strong>LFE это не то же самое, что сабвуфер</strong></b>! И то, что
+      обозначение '5.1' в случае с AC3 это совсем не те же самые '5.1' акустической системы. Поэтому начнем
+      с рассмотрения этой разницы.</p>
+    <p> Формат AC3 создавался для кинотеатров, а совсем не для компьютера. В кинотеатрах качественная акустика
+      может вполне адекватно воспроизвадить низкие частоты. LFE же был задуман как канал для мощных низкочастотных <i>эффектов</i>,
+      то есть эффектов, с которыми обычная акустика уже не может справиться. Чтобы стены тряслись, народ
+      вопил от ужаса, а слабонервные барышни падали в обморок. Таким образом <i>все</i> каналы ac3-потока
+      содержат низкие частоты, и только иногда (в особо взрывоопасные моменты) в работу вступает канал LFE
+      и только для того, чтобы помочь основной акустике потрясать стены. Вполне может случиться так, что
+      канал LFE вообще не включится ни разу за весь фильм. И это также будет нормальным.</p>
+    <p>У компьютерной же акустики совсем другая специфика. Большинство современной 5.1 акустики просто не
+      в состоянии воспроизвести НЧ через основные колонки (сателлиты) и сабвуфер должен полностью отвечать
+      за их воспроизведение. Поэтому для таких систем необходимо перенаправления басов со всех каналов на
+      сабвуфер. Таким образом если мы подключим 5.1 акустику, и станем смотреть фильм со звуковой дорожкой
+      формата 5.1, назначив канал LFE на сабвуфер (без перенаправления низких частот из основных каналов),
+      то мы рискуем не услышать низких частот вообще!</p>
+    <p>Акустические системы с сабвуфером можно разделить на несколько категорий. Во-первых, акустика может
+      иметь сабвуфер, однако не иметь отдельного входа для сабвуфера. В этом случае акустическая система
+      самостоятельно разделяет входной сигнал на НЧ-сигнал для сабвуфера и сигнал для основных колонок. Для
+      таких систем необходимо, чтобы вся НЧ-информация уже содержалась в сигнале для основных колонок, т.е.
+      необходимо микшировать LFE канал во все основные каналы. Поэтому выходной режим необходимо указывать <i>без</i> сабвуфера.
+      (С точки зрения операционной системы и звуковой карты сабвуфера у акустической системы нет, т.к. акустика
+      не имеет отдельного для него входа).</p>
+    <p>Системы, где сабвуфер управляется отдельно можно разделить на две категории:</p>
+    <ul>
+      <li>Основные колонки не могут воспроизводить НЧ, поэтому за воспроизведение НЧ отвечает <i>только</i> сабвуфер.
+        В этом случае перенаправление басов с основных каналов на сабвуфер необходимо! Частоту среза для
+        сабвуфера можно найти в документации на акустическую систему. Частота среза 120Гц, установленная
+        по умолчанию подхрдит для обьшинства подобных систем.</li>
+      <li>Основные колонки являются широкополосными и способны воспроизводить НЧ самостоятельно, а сабвуфер
+        выполняет только вспомогательную роль. В этом случае перенаправление басов не обязятельно, но может
+        применяться для самых низких частот (~40Гц).</li>
+    </ul>
+    <p>За более подробной информацией о роли канала LFE, сабвуфера и управлением басами можно обратиться
+      на сайт Dolby: <a href="http://www.dolby.com/tech/c.in.0011.LFE.pdf">http://www.dolby.com/tech/c.in.0011.LFE.pdf</a> (англ).</p>
+	</div> <!-- <div id="theory_lfe" class="subchapter"> -->
+	
+  <!-- ---------------------------------------------------------------------- -->
+	
+  <div id="theory_spdif" class="subchapter">
+		<h3><a name="theory_spdif">7.3. SPDIF</a></h3>
+		<p>SPDIF (S/P DIF, Sony/Philips Digital Interface, стандарт IEC958 &quot;Digital audio interface&quot;)
+			- это цифровой интерфейс для передачи звука. </p>
+		<p>При аналоговом подключении акустическая система подключается следующим образом:</p>
+    <div class="image">
+      <img alt="" src="pic/con_analog.png" height="393" width="741">
+    </div>
+		<p>Цифро-аналоговый преобразователь (<dfn>ЦАП</dfn>, <dfn>DAC</dfn>) находится на звуковой
+		  карте и вне компьютера звук передается в аналоговой форме. Подключение требует
+		    три стерео-провода (для шестиканальной системы) от звуковой карты до усилителя и шесть проводов
+		    от усилителя до каждой из колонок.</p>
+		<p>При цифровом используется следующая схема подключения:</p>
+    <div class="image">
+      <img alt="" src="pic/con_spdif.png" height="393" width="741">
+    </div>
+		<p>Здесь подключение ресивера требует всего лишь одного провода и звук до передается в цифровом
+		  виде. ЦАП и усилитель находятся в ресивере. Так как вне компьютера на ЦАП действует меньше
+		  электронных шумов, да и усилитель находится рядом, то ресивер в режиме цифровой передачи может
+	  обеспечивать лучше качество звука.</p>
+		<p>Изначально стандарт SPDIF предусматривал передачу только неупакованного звука (<dfn>PCM</dfn>) в
+		  стерео-режиме. Однако, так как передача осуществляется в цифровом виде, то возможна передача данных
+		  любого формата, лишь бы скорость передачи устраивала. Так появился стандарт на передачу
+		  упакованного многоканального звука - <dfn>режим сквозной передачи</dfn> (режим SPDIF-passthrough).
+		  (В неупакованном виде передавать многоканальный звук нельзя, поскольку скорость передачи ограничена.)</p>
+		<p>Режим сквозной передачи можно проиллюстрировать так:</p>
+		<div class="image">
+      <img alt="" src="pic/con_passthrough.png" height="393" width="741">
+    </div>
+		<p>Таким образом, звук передается <em>без изменений</em> насквозь через всю систему от DVD-диска (или
+			другого источника звука) до ресивера, откуда и название режима. Так как данные передаются без
+		  изменений, то никакие опции по обработке звука на компьютере, включая изменение громкости, недоступны.
+		  Все настройки могут производится <em>только</em> на ресивере. Кроме того, одновременно может воспроизводиться
+	  только один источник звука, поскольку микширование упакованного звука невозможно.</p>
+		<p>Так как звук передается упакованным, то ресивер должен уметь его декодировать. Существует очень
+		  много форматов сжатия звука, и, очевидно, поддерживать все существующие форматы ресивер не может.
+		  Поэтому поддерживаются следующие форматы: AC3 (DolbyDigital), DTS, MPEG Audio (велючая MP3). Но
+		  не все ресиверы поддерживают даже этот набор форматов, обычно поддерживается формат AC3,
+		  реже - DTS, еще реже - MPEG Audio. Формат DTS имеет более качественное звучание, но формат AC3
+		  боле распространен, поскольку является стандартом для DVD.</p>
+		<p>Так как декодер, ЦАП и усилитель находятся в одном устройстве, то также становится возможной автоматическая
+		  регулировка уровня усиления, что снимает проблему громкости </p>
+		<p>Для того, чтобы режим сквозной передачи работал необходимы:</p>
+		<ul>
+			<li>Поддержка формата ресивером.</li>
+			<li>Поддержка со стороны операционной системы (см. <a href="#system_setup_windows">таблицу совместимости</a>).</li>
+			<li>Поддержка драйвером звуковой карты.</li>
+			<li>Поддержка со стороны аудио-декодера (AC3Filter поддерживает такой режим)</li>
+		</ul>
+		<p>Однако, даже при выполнении всех этих требований режим сквозной передачи может
+			работать далеко не всегда. Так, стандартом SPDIF предусматривается всего лишь три частоты дискретизации:
+			48кГц (DVD), 44.1кГц (AudioCD) и 32кГц. Если источник имеет другую частоту дискретизации, то сквозная
+		  передача невозможна. Кроме того, некоторые звуковые карты (например Creative) поддерживают
+		  только частоту 48кГц, т.е.режим будет работать только с DVD, и не будет работать со многими другими
+		  источниками.</p>
+		<p>Некоторые звуковые дорожки формата DTS также не могут передаваться в режиме сквозной передачи. Дело
+		  в том, что этот формат обеспечивает очень высокое качество звучания, однако степень сжатия у этого
+		  формата меньше. Некоторые DTS-записи имеют слишком
+		  низкую степень сжатия и пропускной способности SPDIF уже не хватает.</p>
+		<p>Небольшая сравнительная таблица для аналогового и цифрового соединения:</p>
+		<table border="1" cellspacing="0">
+			<tr>
+				<th bgcolor="#E0E0E0">Аналоговое соединение </th>
+				<th bgcolor="#E0E0E0">Цифровое соединение</th>
+			</tr>
+			<tr>
+				<td bgcolor="#FFE0E0">(-) Усилитель подключается тремя проводами </td>
+				<td bgcolor="#E0FFE0">(+) Усилитель подключается одним проводом </td>
+			</tr>
+			<tr>
+				<td bgcolor="#FFE0E0">(-) ЦАП находится на звуковой карте, и подвержен электронным шумам внутри
+					компьютера</td>
+				<td bgcolor="#E0FFE0">(+) ЦАП находится на внешнем устройстве и может обеспечить лучшее качество звучания</td>
+			</tr>
+			<tr>
+				<td bgcolor="#E0FFE0">(+) Формат фактически не ограничен</td>
+				<td bgcolor="#FFE0E0">(-) Много ограничений на формат передаваемых данных</td>
+			</tr>
+			<tr>
+			  <td bgcolor="#E0FFE0">(+) Можно воспроизводить несколько звуков одновременно</td>
+			  <td bgcolor="#FFE0E0">(-) Допускается только один источник звука</td>
+		  </tr>
+			<tr>
+				<td bgcolor="#E0FFE0">(+) Настройка проще </td>
+				<td bgcolor="#FFE0E0">(-) Настройка сложнее </td>
+			</tr>
+			<tr>
+				<td bgcolor="#E0FFE0">(+) Возможность обработки звука на компьютере</td>
+				<td bgcolor="#FFE0E0">(-) Обработка звука на компьютере невозможна </td>
+			</tr>
+			<tr>
+				<td bgcolor="#E0FFE0">(+) Цена меньше</td>
+				<td bgcolor="#FFE0E0">(-) Цена больше</td>
+			</tr>
+		</table>
+		<p>В некоторых случаях есть возможность передавать многоканальный звук даже если режим сквозной
+			передачи недоступен (формат не поддерживается ресивером). Для этого необходимо преобразовать
+			формат в форму, понятную ресиверу:</p>
+		<p>Такая модель работы позволяет обойти многие ограничения сквозной передачи. Однако необходимо
+			помнить, что кодирование в AC3 - это всегда потеря качества (формат AC3 - это формат кодирования
+			с потерями, также как, например, формат MP3), т.е. главное достоинство цифрового подключения оказывается
+			под вопросом. В таких случаях рекомендуется использовать аналоговое соединение, поскольку оно может
+			обеспечить лучшее качество.</p>
+	</div> <!-- <div id="theory_loudness" class="subchapter"> -->
 </div>
-<br>
-&nbsp;&nbsp;&nbsp; For convenience some controls from Main page are
-placed here.   For its description look at <a href="file:///E:/&amp;USERS/VA/PROJECTS/AC3Filter/AC3Filter/ac3filter_0_67b/ac3filter_eng.html#main_settings">Main
-settings</a>.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Main controls here are mixing matrix. It is in form
-of matrix multiplication: S' = M*S, where S = { L, C, R, SL, SR, LFE } -
-input sample, S'  = { L',    C', R', SL', SR', SW' } - output sample.<br>
-<br>
-&nbsp;&nbsp;&nbsp; More simple it means next rule for each cell: we mix
-channel specified by column to channel specified by row with gain
-specified in cell. So if we want to route left channel to right speaker
-we should set 1 in cell at cross of 'L' column and 'R' row. If we don't
-want to hear left channel from left speakers anymore then we set 0 at
-cross 'L' column and 'L' row. If we make same operation with right and
-surround channel then we fully swap left and right channel. (Note, that
-in this case we fully swap 'L' and 'R' rows).<br>
-<br>
-&nbsp;&nbsp;&nbsp; It is nessesary to clearly distinct concepts of
-input and output channels. Input channel is what was coded in AC3
-stream. Output channel is what we'll hear from speakers.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Row determines what we'll hear from corresponding
-output channel. For matrix shown above from left chanel we'll hear 1
-part of input left channel, part of center channel, lowered left
-surround and LFE.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Column determines where input channel will be mixed.
-For matrix shown above center channel will be routed to left and right
-channel with factor 0.7. So we'll hear center channel in center of left
-and right speakers. If we make it louder in one of speakers then center
-will be 'shifted' toward this speaker.<br>
-<br>
-&nbsp;&nbsp;&nbsp; When <b>Auto matrix</b> is enabled then matrix is
-automatically calculated and changed with parameters change. For example
-if we change <b>Center</b> level we'll see factors change in 'C' column.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Settings description:<br>
-<ul>
-  <li><b>Auto gain control</b> - automatic gain control. It controls
-current gain to prevent overflow. Curent gain is shown at <b>Gain</b>
-level. When this option is disabled high-level signal is clipped on
-overflow what leads to unpleasant distortions. When this option is
-enabled then current gain will be decreased and overflow does not
-happen. System behavior after overflow is defined by <b>One-pass
-normalize</b> option. If <b>One-pass normalize</b> is disabled then
-current gain will be gradually restored up to <b>Master</b> level. In
-this case <b>Master</b> defines mean gain level. If it is many places
-when overflow occurs then this behavior can lead to unpleasant&nbsp;
-'jumps' of audio level. In this case do not set <b>Master</b> level too
-high. This mode is recommended if overflow is not expected. If <b>One-pass
-normalize</b> option is enabled then gain level will not be restored
-after overflow. So each overflow decreases probability and 'strength' of
-next overflow and after some time gain will be stabilized to some mean
-value. Usually it happens after about ~10min of film playback. In this
-case <b>Master</b> level means initial gain for one pass normalization
-algorithm and may be set to maximum. This mode can provide maximum
-loudness with minimal artifacts. (see also <a href="#max_loud">Maximum
-loudness</a>)<br>
-  </li>
-  <li><b>One-pass normalize</b> - one pass normalizaion. See <b>Auto
-gain control</b>.</li>
-  <li><b>Auto matrix</b> - automatic calculation of mixer matrix. When
-this option is enabled matrix editing direct is disabled. Gain levels
-for <b>LFE</b>, <b>Voice</b> and <b>Surround</b> are parameters for
-matrix calculation. When this option is disabled  next controls loose
-influence: gain levels for <b>LFE</b>, <b>Voice</b> and <b>Surround</b>,<b>
-Normalize matrix</b>, <b>Expand stereo</b>, <b>Voice control</b>, <b>Expand
-stereo</b>. Following controls are remain to work: <b>Master</b>, <b>Gain</b>,<b>
-DRC level</b>, <b>DRC power</b>, <b>One-pass  normalize</b>. Direct
-matrix edit is enabled.</li>
-  <li><b>Normalize marix</b> - matrix normalization. When this option is
-enabled matrix is normalized so it is no overflow at output (sum of
-channels at   output &lt; 1). But when one of gain levels (<b>LFE</b>, <b>Voice</b>
-or <b>Surround</b>) changes other   gain level will be also changed
-(for example if we increase level  of LFE all other channels level will
-be decreased). If this option is disabled it allows   to avoid this
-effect. But overflow is possible in this case. So it is better    to
-decrease <b>Master</b> gain when this option is disabled.</li>
-  <li><b>Expand stereo</b> - works only if it is no surround channels in
-AC3 stream. In this case it allows to amplify surround information with <b>Surround</b>
-gain control (that have no effect by default if it is not surround
-channels at input). If it is surround channels at output this option
-will route surround information there, i.e. allows surround upmix.
-Techincally it controls out-of-phase audio components (channel
-differences) and routes it to surround channels if they are exists.<br>
-  </li>
-  <li><b>Voice control</b> - works only if it is no center channel in
-AC3 stream. In this case it allows to control center with <b>Voice</b>
-gain control (that have no effect by default in absence of center
-channel at input). If it is center speaker specified at output
-configuration then this option will route center signal there. With <b>Expand
-stereo</b> option allows full stereo to multichannel upmix. I.e. make
-center and surround speakers to work even if input is just stereo.
-Techincally it controls in-phase audio components (equal in both
-channels) and routes it to center speaker if it is exists.<br>
-  </li>
-  <li><b>B</b><b>ass redir</b> - Bass redirection. Route basses from all
-channels to subwoofer. Works only if it is subwoofer at output speakers.
-Highly recommended for systems with separate subwoofer (look <a href="#lfe">What is LFE?</a>). Basses are routed before mixing so
-basses are shown at LFE input level (although 'real' LFE may be absent).
-Cutoff&nbsp; frequency is 375Hz (for 48000Hz sampling frequency).</li>
-</ul>
-&nbsp;&nbsp;&nbsp; Combo-box allows to save and load saved matrices.<br>
-<br>
-<h3><a name="equalizer"></a>Equalizer and delays.</h3>
-<div align="center"><img src="pic/equalizer.gif" title="" alt="" width="628" height="427"><br>
+
+<!-- ==========================================================================
+                                  Distribution
+=========================================================================== -->
+
+<div id="distribution" class="chapter">
+	<h2><a name="distribution"></a>8. Условия распространения.</h2>
+	
+	<p>Даный программный продукт распространяется под лицензией GNU General Public License
+	v2, текст прилагается в файле GNU_eng.txt - на английском языке и GNU_rus.txt - на русском языке.
+	Вариант на русском языке прилагается исключительно в справочных целях, при всех возможных разночтениях
+	приоритет имеет версия на английском языке.</p>
+	<p>Данный программный продукт может быть использован только в демонстрационных
+	целях и в целях обучения. Любое использование помимо этих целей может быть запрещено в некоторых странах.
+	Этот программный продукт может распространяться свободно, за исключением случаев, запрещенных законом.</p>
+	<p>Даный программный продукт распространяется исключительно в надежде,
+	что он будет полезен, однако <b>безо всяких гарантий</b> работы на конкретном
+	оборудовании, соответствия каким-либо условиям, стандартам или нуждам. Я <b>не
+	обязуюсь</b> обеспечивать круглосуточную (и вообще, какую либо) поддержку, исправление ошибок, восстановление
+	потерянных из-за работы программы данных, отвечать за испорченное железо, а также за потерянное рабочее
+	вермя. Я не несу ответственности за легальность воспроизводимой при помощи данной программы мультимедиа-продукции.</p>
+	<p>Даный программный продукт может распространяться в виде
+	инсталляционного пакета ($download_bin) на CD-сборниках или вместе с другими программами. Разрешение
+	автора на это не требуется. Для кодек-паков допустимо распространение фильтра в виде отдельного модуля.</p>
 </div>
-<br>
-&nbsp;&nbsp;&nbsp; Right part is fully about equalizer. Everything is
-obvious so I will not bother myself with full description ;-).<br>
-<br>
-&nbsp;&nbsp;&nbsp; Left top corner are delay settings to compensate
-different distances to speakers. Ideally all speakers should be at equal
-distance to listener so sound emitted simultaneously from all speakers
-reach listener at the same time. Otherwise sound picture will be
-distorted. But in practice distance to speakers may be different. To
-compensate this difference sound should be delayed.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Delay value may be set directly in ms or samples.
-Negative value means that channel should be reproduced 'earlier' than
-'null time' (if speaker is placed farther then it should start to work
-earlier because sound needs more time to reach listener).<br>
-<br>
-&nbsp;&nbsp;&nbsp; For convenience it is possible to set distance to
-speakers. In this case positive values means negative delay for speaker
-start to work earlier. Negative values means positive delay.<br>
-<br>
-<br>
-<hr width="100%" size="2">
-<h2><a name="lfe"></a>What is LFE?</h2>
-<br>
-&nbsp;&nbsp;&nbsp; First and most important thing is that LFE is not
-the same thing as subwoofer! And 5.1 in case of AC3 is not the same as
-5.1 in case of computer acoustics.<br>
-<br>
-&nbsp;&nbsp;&nbsp; AC3 format was created for cinema rather than
-computer acoustics. In theaters acoustics is well enough to reproduce
-low frequencies. LFE channel was designed for powerful low frequency <i>effects</i>,
-i.e. effects that usual acoustics cannot handle. So all channels in ac3
-stream contains low frequencies and LFE works only in certain moments to
-help main speakers to quake the walls and earth. And it is quite
-possible that LFE will not be enabled during the film. And it is normal.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Computer acoustics is totally different. Most of 5.1
-systems cannot reproduce low frequencies through satellites at all. So
-subwoofer must work all the time.<br>
-<br>
-&nbsp;&nbsp;&nbsp; So if we connect 5.1 acoustics and start to watch
-movie with 5.1 sound track with subwoofer designated only for LFE
-channel we will not hear basses at all!<br>
-<br>
-&nbsp;&nbsp;&nbsp; Threrfore if acoustics have separate subwoofer it is
-highly recommended to route there basses from all channels (since <i>all</i>
-channels have basses). I.e. enable <b>Bass redirection</b> in filter
-properties. Or use analogous option in sound card driver settings (if
-exists) and turn filter option off. Some may ask about 'right' playback.
-This people should read this document: (<a href="http://www.dolby.com/tech/c.in.0011.LFE.pdf">http://www.dolby.com/tech/c.i
-n.0011.LFE.pdf</a>) with explanation about LFE role and how to handle
-it. <br>
-<br>
-<br>
-<hr width="100%" size="2">
-<h2><a name="cookbook"></a>Cookbook.</h2>
-<h3><a name="lfe_mix"></a> LFE mixing.</h3>
-&nbsp;&nbsp;&nbsp; When it is no separate subwoofer at output
-configuration LFE is mixed only to front channels. If rear channels are
-powerful enough we can mix LFE there for louder effects: <br>
-<ul>
-  <li>Start film playback<br>
-  </li>
-  <li>Open filter's properties (note that WMP v7+ does not allow this!).<br>
-  </li>
-  <li>Turn <b>Auto Matrix</b> off.</li>
-  <li>In LFE matrix column set '1' (for example) in SR and SL rows</li>
-  <li>Save this matrix.</li>
-</ul>
-<br>
-<h3><a name="swap_speakers"></a> Swap channels.</h3>
-&nbsp;&nbsp;&nbsp; For better understanding read <a href="#mixer">Mixer
-settings</a> section first (at mixer matrix description).<br>
-<br>
-&nbsp;&nbsp;&nbsp; Do you want real center channel on 4- channel sound
-card? It is possible. Of cource it is impossible to get 5 channels out
-of 4-channel sound card but we can use one of rear speakers as center,
-i.e. make 3/1 (3 front / 1 rear) configuration instead of 2/2 (2 front /
-2 rear).
-<ul>
-  <li>Start film playback.</li>
-  <li>Turn <b>Auto Matrix</b> on. (it will allow to get basis matrix).</li>
-  <li>Set 3/1 output configuration. By now we have no center channel so
-center will be mixed to front channels by drivers. But we'll trick them
-later.<br>
-  </li>
-  <li>Set our favorite settings (gain levels, etc) </li>
-  <li>Turn <b>Auto Matrix</b> off.</li>
-  <li>At this stage we have basis matrix. We will play cener through
-rear right speaker. So copy all values from 'С' row to 'SR' row and then
-fill 'С' row with zeros. Now matrix is ready.<br>
-  </li>
-  <li>Save matrix.<br>
-  </li>
-  <li>Physically move rear right speaker to center.</li>
-  <li>Set 2/2 as output configuration. Now driver thinks that we give
-real 2/2 channels but know nothing about our little trick, that we use
-rear right as center :).</li>
-</ul>
-<br>
-<h3><a name="max_loud"></a>Maximum loudness<br>
-</h3>
-&nbsp;&nbsp;&nbsp; If it seems that standard settings are too silent it
-can be fixed. Actually standard settings produce standard output. And
-any manipulations lead to deviations from standard.<br>
-<br>
-&nbsp;&nbsp;&nbsp; First that should be noted is that most films are
-normalized to avoid overflows. So if we just raise gain level because
-sound is too silent at one moment at some other moment overflow may
-occur.<br>
-<br>
-&nbsp;&nbsp;&nbsp; It is 3 main methods to avoid overflows:<br>
-<ul>
-  <li>Signal clipping. Signal above maximal level is clipped. It leads
-to noticeable distortions.</li>
-  <li>Auto gain control. At overflow gain level automatically
-decreases. It do not produce noticable distortions but big level jumps
-may be noticable and annoying.</li>
-  <li>Dynamic range compression (DRC). It is kind of auto gain control
-controlled by marks in ac3 stream placed by sound producer.</li>
-</ul>
-<br>
-&nbsp;&nbsp;&nbsp; Simplest method to increase loudness is disable <b>Auto
-gain control</b> and raise <b>Master</b> gain level. In this case
-overflows will be clipped. This method increases loudness to the
-prejudice of quality.<br>
-<br>
-&nbsp;&nbsp;&nbsp; More advanced method is to enable <b>Auto gain
-control</b>, enable <b>Normalize</b> and raise <b>Master</b> gain level
-(till maximum level maybe). In this case after overflow gain level will
-be decreased. After some time gain will almost stop changing. In this
-case can get maximum loudness with maximum quality. This methods have
-imperfecttions. First it is some time needed for gain to stabilize.
-Second, our main goal to clearly hear low-level sound may not be
-reached. This method may be recommended as quick way to get maximum
-loudness with minimum artefacts.<br>
-<br>
-&nbsp;&nbsp;&nbsp; As kind of previous method <b>Normalize</b> may be
-turned off. In this case gain level after overflow will&nbsp; be
-gradually restored up to <b>Master</b> level. This method is more
-sensible to choice of <b>Master</b> level. When <b>Master</b> level is
-too high and it is much of overflows (what is the consequence of high <b>Master</b>
-level) frequent and sharp gain changes may be annoying. Previous method
-is devoid of this defect because current gain level is not raising after
-overflow. But now we can hear low-level sounds&nbsp; (speech for
-example) after explosions (after some time after it). But speech in
-between of explosions will be masked agian. This method is recommended
-for insignificant increase of <b>Master</b> level when it is expected
-rare overflows or no overflows at all.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Next method is to use dynamic range compression
-(enable <b>Use DRC</b> option) with <b>Master</b> level raised. Current
-DRC gain level is shown at respective indicator. At silent scenes it
-should raise and at loud scenes it should lower. It is possible that
-effect from DRC is not enough so it is possible to increase effect with <b>DRC
-level</b> control. It is obvious that 'jumps' of loudness are more
-noticable with high DRC level. So it should be choosen carefully to make
-silent sounds clearly audible on the one hand and minimize gain jumps on
-other hand. In this method gain jumps caused by two reasons: DRC itself
-and auto gain control. To avoid some gain jumps auto gain can be
-disabled. But in this case clipping distortions may appear. So it is
-needed to maintain some kind of balance between all this factors.<br>
-<br>
-&nbsp;&nbsp;&nbsp; Next parameters affect loudness: <b>Master</b>, <b>Auto
-gain control</b>, <b>Normalize</b>,<b>Use DRC</b>, <b>DRC Level</b>.
-All this paramteres should be adjusted individually depending on type of
-acoustics, listener, and movie itself (lazy sound producer forgot to set
-DRC marks :-).<br>
-<br>
-<font color="#000000"><br>
-</font>
-<hr width="100%" size="2">
-<h2><font color="#000000"><a name="registry"></a>Registry and
-configuration files.</font></h2>
-<font color="#000000"> &nbsp;&nbsp;&nbsp; Filter saves its state in
-registry key: <b>[HKCU\Software\AC3Filter]</b>. All filter settings are
-divided into 4 parts: general, matrix, equalizer and delay. Each is
-saved in its own registry key. Each have its own presets so we can have
-several equalizers and matrices and load it independently. Special
-meaning have preset named '_default'. At filter startup it loads all
-'_default' presets (for general settings, matrix, equalizer and delay)
-and saves settings there at shutdown.<br>
-</font> <font color="#000000"><br>
-&nbsp;&nbsp;&nbsp; Configuration files are also divided into 4
-sections: general, matrix, equalizer and delay. Each section contains
-exactly the same values as registry presets.<br>
-<br>
-&nbsp;&nbsp;&nbsp; All levels are stored as floating point values in
-factor form (not dB!).<br>
-&nbsp;&nbsp;&nbsp; All floating point values are stored as 'REG_SZ'
-registry values.<br>
-</font> <font color="#000000">&nbsp;&nbsp;&nbsp; Boolean values are
-stored as integers to registry and as 'true'/'false' values to
-configuration files.</font><br>
-<br>
-&nbsp;&nbsp;&nbsp; Channel name abbreviations are as part of some
-values name:<br>
-<table cellpadding="2" cellspacing="2" border="1" align="center">
+
+<!-- ==========================================================================
+                                  Contact author
+=========================================================================== -->
+
+<div id="contact_author" class="chapter">
+	<h2><a name="contact_author"></a>9. Связь с автором</h2>
+  <p>По всем вопросам связанным с работой фильтра, ошибками, новыми идеями, предложениями и прочим обращайтесь
+    по следущему адресу: <script language="JavaScript"><!--
+          function h979(){var et8="@"; et8=et8+"ma"; et8="alex%20%3Cxvalex"+et8; et8=et8+"il.ru%3E"; et8="V"+et8; return et8};
+          function ge(){var d6y="ter"; d6y="AC3Fil"+d6y; return d6y};
+          function xq2nz(){return "?Subject=AC3Filter"};
+          function df(){status="mailto:"+h979()+xq2nz()};
+          function i5p0f(){status=""};
+          function nbx8v(){this.location="mailto:"+h979()+xq2nz(); return false};
+          document.write("<a href='mailto:[antispam_protected]' onMouseOver='df()' onMouseLeave='i5p0f()' onClick='return nbx8v()'>"+ge()+"</a>");
+        //--></script>
+        <noscript>
+        AC3Filter
+        </noscript>. В связи с огромным количеством спама применяется фильтрация, поэтому тема
+    сообщения должна содержать слово <em>&quot;AC3Filter&quot;</em>, а само сообщение не должно превышать <em>20К</em>.
+  Если вы хотите прислать файлы, то пришлите предварительное предупреждение.</p>
+  <p>Если вы обращаетесь с проблемой, то описывайте проблему подробно, вплоть до последовательности нажатых
+    кнопок. Необходимы сведения о конфигурации системы (версия ОС, звуковая карта), используемый плеер,
+    настройки фильтра (желательно приветси поль. Вот пример, как не следует писать (реальное послание):</p>
+    <blockquote>Клёвая у вас прога, но я ни чё непонил. У меня такая лажа
+        есть Topdevice 440D/5.1, а центер не пашет при АС-3 только 5,1? большая прозьба чё надо сделать
+        чтобы центор играл (плэир Winamp). Да ещё прозьба если можно это все по быстрей (уж очень хочется
+    чтобы все работало "OK").</blockquote>
+  <p>Подобные письма будут просто игнорироваться. А вот пример хорошо составленного сообщения, благодаря
+    которому проблема была быстро решена:</p>
+    <blockquote>
+       Здравствуйте!<br>
+        В форуме на IXBT нашел ссылку на твой кодек, скачал его, установил и тут у меня возникла проблема.<br>
+        Для начала сообщу тебе свою конфигурацию.<br>
+        Windows 98SE, карта C-Media 8738 (PCI), режим колонок - 5.1<br>
+        Я использовал 3 разных плеера: WMP 6.01.05.0217, ZoomPlayer 2.5, BsPlayer 0.86.<br>
+        Суть проблемы такова. При проигрывании DivX+AC-3 звук есть, но не AC-3, точнее, не полноценный
+        AC-3. В разделе Output levels свойств кодека изменяется уровень только 3-х каналов: 2-ух фронтальных
+        и центрального (см. картинку). При этом из сабвуфера звук идет, но тихий и очень грязный, а уровня
+        сабвуфера в Output levels нет. В тыловых колонках - тишина.<br>
+        В свойствах Default WaveOut Device стоит следующее:<br>
+        wFormatTag: 65534<br>
+        nChannels: 6<br>
+        Сразу хочу предупредить, что я скачал и установил патч для W98, ссылку на который ты давал на
+        странице проекта .<br>
+      Посылаю вложенными файлами ветку реестра и страницу Main свойств кодека.
+  </blockquote>
+  <p>Перед тем, как писать о наличии проблемы убедитесь, что проблема вызвана именно фильтром: деинсталлируйте
+    фильтр. Если проблема осталась, то фильтр не имеет к ней отношения - при деинсталляции фильтр полностью
+    удаляет себя из системы, не оставляя следов.</p>
+  <p>Я стараюсь рассматривать все поступающие проблемы, но просто не имею физической возможности заниматься
+    каждой проблемой отдельно. Однако, ваши сообщения все равно не пропадают даром - благодаря накопленной
+    статистике зачастую удается удачно решать самые запутанные случаи.</p>
+  <p>Читайте документцию! Многие &quot;проблемы&quot; успешно решаются имеющимися настройками.</p>
+  <p>Кроме того, я рекомендую использовать форум - вам могут встретиться люди с похожими проблемами,
+    которые были успешно разрешены.</p>
+</div>
+
+<!-- ==========================================================================
+                                  Donations
+=========================================================================== -->
+
+<div id="donations" class="chapter">
+<h2><a name="donations"></a>10. Donations</h2>
+	<p>Проекту нужна ваша помощь! Если вам нравится программа, она позволяет решить ваши проблемы, вы используете
+	  ее дома или в своей профессиональной деятельности, у вас есть идеи, как сделать ее лучше, то вы можете
+  поддержать дальнейшее развитие проекта. </p>
+	<p>Финансовая поддержка принимается по этому адресу:</p>
+	
+<div align="center"><a href="http://order.kagi.com/?6CZJZ">Donate!</a></div>
+	  <p>Любая сумма важна - это не только деньги, но и моральная поддержка!</p>
+	<p>Поддержать проект можно не только финансами, я принимаю любую помощь. В первую очередь для тестирования
+	  требуется оборудование. Например, множество проблем с режимом SPDIF вызвано полным отсутстием у меня
+	  SPDIF-техники. </p>
+	<p>Также проекту требуется сайт и его поддержка. И в первую очередь - поддержка форума, где многим новичкам
+	  требуется терпеливая помощь, а также для выявления действительно серьезных проблем.</p>
+	<p>Требуется перевод документации. Для огромного количества пользователей ни русский ни английский
+	  языки не являются родными. К сожалению, перевод интерфейса пока не планируется, но перевод документации
+	  необходим.</p>
+</div>
+
+<div id="changelog" class="chapter">
+<h2><a name="changelog"></a>11. Changelog.</h2>
+<tt>$changelog</tt>
+</div>
+
+<hr size="2" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
   <tbody>
     <tr>
-      <td valign="top" align="center"><b>Abbreviation</b><br>
-      </td>
-      <td valign="top" align="center"><b>Meaning</b><br>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top" align="center">L<br>
-      </td>
-      <td valign="top" align="center">Left front<br>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top" align="center">C<br>
-      </td>
-      <td valign="top" align="center">Center<br>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top" align="center">R<br>
-      </td>
-      <td valign="top" align="center">Right front<br>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top" align="center">SL<br>
-      </td>
-      <td valign="top" align="center">Left surround<br>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top" align="center">SR<br>
-      </td>
-      <td valign="top" align="center">Right surround<br>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top" align="center">LFE<br>
-      </td>
-      <td valign="top" align="center">LFE channel <br>
-or subwoofer<br>
-      </td>
+      <td valign="top"><i><small> Copyright (c) 2002-2004 by
+        <script language="JavaScript"><!--
+          function h979(){var et8="@"; et8=et8+"ma"; et8="alex%20%3Cxvalex"+et8; et8=et8+"il.ru%3E"; et8="V"+et8; return et8};
+          function ge(){var d6y="sky"; d6y="Alexander Vigov"+d6y; return d6y};
+          function xq2nz(){return "?Subject=AC3Filter"};
+          function df(){status="mailto:"+h979()+xq2nz()};
+          function i5p0f(){status=""};
+          function nbx8v(){this.location="mailto:"+h979()+xq2nz(); return false};
+          document.write("<a href='mailto:[antispam_protected]' onMouseOver='df()' onMouseLeave='i5p0f()' onClick='return nbx8v()'>"+ge()+"</a>");
+        //--></script>
+        <noscript>
+        Alexander Vigovsky
+        </noscript>
+        </small></i></td>
+      <td align="right" valign="top"><i><small> Last updated $date</small></i></td>
     </tr>
   </tbody>
 </table>
-<br>
-<h3><a name="reg_presets"></a>Presets</h3>
-Registry values:<br>
-<ul>
-  <li>mode (int) - speaker configuration, set on preset load. This
-value may be absent. In this case speaker configuration will not be
-changed on preset load. Can be one of:<br>
-    <table cellpadding="2" cellspacing="2" align="center" border="1">
-      <tbody>
-        <tr>
-          <td valign="top" align="center"><b>Value </b></td>
-          <td valign="top" align="center"><b>Meaning </b><br>
-          </td>
-        </tr>
-        <tr>
-          <td valign="top" align="center">0<br>
-1<br>
-2<br>
-3<br>
-4<br>
-5<br>
-6<br>
-7<br>
-8<br>
-9<br>
-10<br>
-11<br>
-12<br>
-13<br>
-14<br>
-15<br>
-          </td>
-          <td valign="top">2/0 (stereo)<br>
-1/0 (mono)<br>
-2/0 (stereo)<br>
-3/0<br>
-2/1<br>
-3/1<br>
-2/2 (quadro)<br>
-3/2<br>
-2/0+SW<br>
-1/0+SW<br>
-2/0+SW<br>
-3/0+SW<br>
-2/1+SW<br>
-3/1+SW<br>
-2/2+SW<br>
-3/2+SW (5.1)</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>spdif (int) - turn on SPDIF passthrough.</li>
-  <li>dolby (int) - turn on Dolby downmix:
-    <table cellpadding="2" cellspacing="2" align="center" border="1">
-      <tbody>
-        <tr>
-          <td valign="top" align="center"><b> Value</b><br>
-          </td>
-          <td valign="top" align="center"><b>Meaning </b></td>
-        </tr>
-        <tr>
-          <td valign="top" align="center">0<br>
-1<br>
-2<br>
-          </td>
-          <td valign="top">No Dolby downmix<br>
-Dolby Surround/ProLogic<br>
-Dolby ProLogicII<br>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>format (int) - output sample format:
-    <table cellpadding="2" cellspacing="2" align="center" border="1">
-      <tbody>
-        <tr>
-          <td valign="top" align="center"><b>Value </b></td>
-          <td valign="top" align="center"><b>Meaning<br>
-          </b></td>
-        </tr>
-        <tr>
-          <td valign="top" align="center">0<br>
-1<br>
-2<br>
-3<br>
-          </td>
-          <td valign="top">PCM 16bit<br>
-PCM 24bit<br>
-PCM 32bit<br>
-PCM float</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li><font color="#000000">generate_timestamps (bool) - generate
-timestamps system option.</font></li>
-  <li><font color="#000000">time_shift (int) - time shift in ms</font></li>
-  <li><font color="#000000">config_autoload (bool) - autoload
-configuration files with the same name as media file<br>
-    </font></li>
-  <li>matrix (text) - name of mixing matrix to set on preset load. Make
-no sence when auto_matrix option is set. This value may be absent. In
-this case mixing matrix will not be changed on preset load.</li>
-  <li>master (double) - main gain level</li>
-  <li>clev (double) - central channel gain level</li>
-  <li>slev (double) - surround level gain level</li>
-  <li>lfelev (double) - LFE channel gain level</li>
-  <li>clev_lock (bool) - central gain level lock</li>
-  <li>slev_lock (bool) - surround gain level lock</li>
-  <li>lfelev_lock (bool) - LFE channel gain level lock</li>
-  <li>dynrng (bool) - use dynamic range compression</li>
-  <li>dynrng_power (double) - dynamic range compression power</li>
-  <li>auto_matrix (bool) - use automatic matrix calculation</li>
-  <li>normalize_matrix (bool) - normalize mixing matrix</li>
-  <li>bass_redir (bool) - bass redirection</li>
-  <li>expand_stereo (bool) - extract surround from stero input<br>
-  </li>
-  <li>voice_control (bool) - extract center from stereo signal</li>
-  <li>eq_on (bool) - equalizer on</li>
-  <li>delay_on (bool) - delay adjustments on.</li>
-</ul>
-<br>
-<h3><a name="reg_matrix"></a>Mixing matrices.</h3>
-&nbsp;&nbsp;&nbsp; Matrix values called next  way:
-[from_channel]_[to_channel], where from_channel is mixed to to_channel
-with factor given in value.<br>
-<br>
-<br>
-<hr width="100%" size="2">
-<h2><b><a name="misc"></a>Misc.</b></h2>
-&nbsp;&nbsp;&nbsp; Filter was primarily based on Open Source LibA/52
-library (<a href="http://liba52.sourceforge.net/">http://liba52.sourceforge.net</a>)
-and mainly inherits its characteristics. Much was rewritten     but I
-tried to keep its merits. I want to note high quality of this   lib and
-high compliance with standard (<a class="moz-txt-link-freetext" href="http://www.atsc.org/standards/a_52a.pdf">http://www.atsc.org/standards/a_52a.pdf</a>).
-Thanks to Aaron Holtzman and Michel Lespinasse for it.<br>
-<br>
-&nbsp;&nbsp;&nbsp; I want to say thanks to Marcello Mota for support
-and big help in hard work of debugging and testing.<br>
-&nbsp;&nbsp;&nbsp; Big thaks to Gabest for DVD playback support.<br>
-&nbsp;&nbsp;&nbsp; To Frank (doom9 forum) for Dolby ProLogic II downmix
-matrix.<br>
-&nbsp;&nbsp;&nbsp; Valery Shabaev for installer script.<br>
-&nbsp;&nbsp;&nbsp; IXBT and Doom9 forum members for lots of testing and
-bug reporting and forum owners for these forums.<br>
-&nbsp;&nbsp;&nbsp; And much of other people who made this project
-live.....<br>
-<br>
-<br>
-<hr width="100%" size="2">
-<h2><a name="distribution"></a>Distribution.</h2>
-&nbsp;&nbsp;&nbsp; This program distributed under GNU General  Public
-Licence v2, placed in GNU_eng.txt at english language and GNU_rus.txt at
-russian language. Russain language version is only for information
-purpose only and english version have priority with all variant reading.<br>
-<br>
-&nbsp;&nbsp;&nbsp; This application may solely be used for
-demonstration and educational purposes. Any other use may be prohibited
-by law in some coutries. The author has no liability regarding this
-application whatsoever. This application may be distributed freely
-unless prohibited by law.<br>
-<font color="#000000"><br>
-&nbsp;&nbsp;&nbsp; This product distributed in hope it may be useful, <b>but
-without any warranty</b>;    without even the      implied warranty of
-merchantability or fitness for a particular    purpose      and
-compliance with any standards.    I do not guarantee 24-hour  (and any)
-support, bug correction, repair    of lost data, I am not responsible
-for broken hardware and lost working    time. I am <b>not</b>
-responsible for legality of reproducted   with   this program multimedia
-production.<br>
-</font> <br>
-<br>
-<hr width="100%" size="2">
-<h2><a name="author"></a>Contact author.</h2>
-&nbsp;&nbsp;&nbsp; With all questions about this program please, email
-to this address:&nbsp;<img src="pic/email.gif" title="" alt="" width="111" height="15" align="middle"> with subject <b>'AC3Filter'</b>
-Please, respond about all errors in porgram with following information:<br>
-<ul>
-  <li>Problem description<br>
-  </li>
-  <li>Windows version<br>
-  </li>
-  <li>Sound card</li>
-  <li>Used player and its version<br>
-  </li>
-  <li>Registry key <b>[HKEY_CURRENT_USER\Software\AC3Filter]</b></li>
-  <li>Speaker configuration used (stereo, quadro, 5.1...).</li>
-  <li>Bitstream information from Main property page</li>
-  <li>If you know what Graphedit is, then also screenshot (or just
-description) of graph caused problem.</li>
-  <li>If problem connected with incorrect sound then send a part of ac3
-stream caused problem.<br>
-  </li>
-</ul>
-&nbsp;&nbsp;&nbsp; This will help me a much in bug fixing.<br>
-<br>
-<br>
-<hr width="100%" size="2">
-<h2><a name="changelog"></a>Changelog.</h2><tt> $changelog</tt><br>
-<br>
-<br>
-<hr width="100%" size="2">
-<h2><a name="links"></a>Useful links<br>
-</h2>
-AC3Filter site (<i>rus+eng</i>): (<a href="http://xvalex.hotbox.ru/programs/ac3filter">http://xvalex.hotbox.ru/programs/ac3filter</a>)<br>
-AC3Filter site (<i>rus+eng</i>): (<a href="http://ac3filter.sourceforge.net/">http://ac3filter.sourceforge.net</a>)<br>
-<br>
-A/52a standard (AC3) (<i>eng</i>): (<a class="moz-txt-link-freetext" href="http://www.atsc.org/standards/a_52a.pdf">http://www.atsc.org/standards/a_52a.pdf</a>).<br>
-Dolby explanations about LFE (eng): (<a href="http://www.dolby.com/tech/c.in.0011.LFE.pdf">http://www.dolby.com/tech/c.in.0011.LFE.pdf</a>)<br>
-LibA52 library (was ac3dec) (<i>eng</i>):   (<a href="http://liba52.sourceforge.net/">http://liba52.sourceforge.net</a>).<br>
-Multichannel audio reproduction at Windows (<i>eng</i>):    (<a href="http://www.microsoft.com/hwdev/tech/audio/multichaudP.asp">http://www.microsoft.com/hwdev/tech/audio/multichaudP.asp</a>).<br>
-Just best video-related site (<i>eng</i>): (<a href="http://www.doom9.org">http://www.doom9.org</a>).<br>
-<br>
-<br>
-<hr width="100%" size="2">
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
-  <tbody>
-    <tr>
-      <td valign="top"><i><small>Copyright (c) 2002-2003 by </small></i><i><small>Alexander </small></i><i><small>Vigovsky.<br>
-      </small></i></td>
-      <td valign="top" align="right"><i><small> Last updated $date</small></i></td>
-    </tr>
-  </tbody>
-</table>
-</body></html>
+</body>
+</html>
