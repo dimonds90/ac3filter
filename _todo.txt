@@ -1,14 +1,25 @@
 First order
 ============
 
+* Add donation links to readme, about dialog, and documentation
+* Different settings for different formats
+  [
+   initialize filter with settings set at HKCU\Software\AC3Filter (default preset);
+   presets for different formats should be loaded when input pin connected
+     or input format changes;
+   save settings on 'Apply' and 'Ok' buttons:
+     * to preset according to current format;
+     * to default preset if we're disconnected;
+   load old preset on 'Cancel' button;
+  ]
 * Documentation!!!
-* option to disable AC3 encoding!
+* option to disable AC3 encoding.
 * BUG: DShowSink::process(): chunk buffer is not locked and may become invalid!
 * BUG: set_input(): update of sample rate of output format procedure is incorrect
 * revert jitter correction
 * Reset to defaults button
-* Presets: standard, film (no matrix norm), music (matrix norm), 
-  loud (one-pass norm), very loud (with DRC)
+* Presets: standard, film (+10..+15, no matrix norm), music (+0, matrix norm), 
+  loud (+10, one-pass norm), very loud (with DRC)?
 * AC3-specific options (DRC, equzlizer, clev, slev)
 
 Other
