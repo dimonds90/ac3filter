@@ -784,8 +784,8 @@ AC3FilterDlg::set_controls()
   // DRC
 
   SendDlgItemMessage(m_Dlg, IDC_CHK_DRC, BM_SETCHECK, drc? BST_CHECKED: BST_UNCHECKED, 1);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_SETPOS, TRUE, long(-value2db(drc_power) * ticks));
-  edt_drc_power.update_value(value2db(drc_power));
+  SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_SETPOS, TRUE, long(-drc_power * ticks));
+  edt_drc_power.update_value(drc_power);
 
   /////////////////////////////////////
   // Bass redirection
@@ -1188,7 +1188,7 @@ AC3FilterDlg::command(int control, int message)
     case IDC_SLIDER_DRC_POWER:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        drc_power = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_GETPOS, 0, 0)) / ticks);
+        drc_power = -double(SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_GETPOS, 0, 0)) / ticks;
         proc->set_drc_power(drc_power);
         set_controls();
       }
@@ -1197,7 +1197,7 @@ AC3FilterDlg::command(int control, int message)
     case IDC_EDT_DRC_POWER:
       if (message == CB_ENTER)
       {
-        drc_power = db2value(edt_drc_power.value);
+        drc_power = edt_drc_power.value;
         proc->set_drc_power(drc_power);
         set_controls();
       }
