@@ -238,6 +238,10 @@ SOURCE=.\decss\DeCSSInputPin.h
 # End Group
 # Begin Source File
 
+SOURCE=.\ac3filter.bmp
+# End Source File
+# Begin Source File
+
 SOURCE=.\ac3filter.ico
 # End Source File
 # Begin Source File
@@ -246,23 +250,23 @@ SOURCE=.\ac3filter.rc
 # End Source File
 # Begin Source File
 
-SOURCE=.\ac3filter_ac3.bmp
+SOURCE=.\format_ac3.bmp
 # End Source File
 # Begin Source File
 
-SOURCE=.\ac3filter_dts.bmp
+SOURCE=.\format_dts.bmp
 # End Source File
 # Begin Source File
 
-SOURCE=.\ac3filter_mpa.bmp
+SOURCE=.\format_mpa.bmp
 # End Source File
 # Begin Source File
 
-SOURCE=.\ac3filter_pcm.bmp
+SOURCE=.\format_pcm.bmp
 # End Source File
 # Begin Source File
 
-SOURCE=.\logo256.bmp
+SOURCE=.\format_pes.bmp
 # End Source File
 # End Target
 # End Project

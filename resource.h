@@ -7,6 +7,11 @@
 #define IDB_LOGO_AC3                    121
 #define IDB_LOGO_DTS                    122
 #define IDB_LOGO_MPA                    123
+#define IDB_FORMAT_PCM                  131
+#define IDB_FORMAT_AC3                  132
+#define IDB_FORMAT_DTS                  133
+#define IDB_FORMAT_MPA                  134
+#define IDB_FORMAT_PES                  135
 #define IDC_EDT_BASS_FREQ               1104
 #define IDC_CHK_SPDIF_MPA               3130
 #define IDC_CHK_SPDIF_AC3               3131
@@ -33,7 +38,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        125
+#define _APS_NEXT_RESOURCE_VALUE        136
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         3160
 #define _APS_NEXT_SYMED_VALUE           101

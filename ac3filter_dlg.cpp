@@ -390,21 +390,7 @@ AC3FilterDlg::OnDisconnect()
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::OnDisconnect()"));
 
   if (filter)
-  {
-    filter->get_in_spk(&in_spk);
-
-    RegistryKey reg;
-    reg.create_key(REG_KEY_PRESET"\\Default");
-    filter->save_params(&reg, AC3FILTER_SPK | AC3FILTER_SYS);
-
-    switch (in_spk.format)
-    {
-      case FORMAT_AC3: reg.create_key(REG_KEY_PRESET"\\Default AC3"); break;
-      case FORMAT_DTS: reg.create_key(REG_KEY_PRESET"\\Default DTS"); break;
-      case FORMAT_MPA: reg.create_key(REG_KEY_PRESET"\\Default MPA"); break;
-    }
-    filter->save_params(&reg, AC3FILTER_PRESET);
-  }
+    filter->save_params(0, AC3FILTER_ALL);
 
   SAFE_RELEASE(filter);
   SAFE_RELEASE(proc);
@@ -960,12 +946,13 @@ AC3FilterDlg::set_logo()
     logo = 0;
   }
 
-  int resource = IDB_LOGO_PCM;
+  int resource = IDB_FORMAT_PCM;
   switch (in_spk.format)
   {
-    case FORMAT_AC3: resource = IDB_LOGO_AC3; break;
-    case FORMAT_DTS: resource = IDB_LOGO_DTS; break;
-    case FORMAT_MPA: resource = IDB_LOGO_MPA; break;
+    case FORMAT_AC3: resource = IDB_FORMAT_AC3; break;
+    case FORMAT_DTS: resource = IDB_FORMAT_DTS; break;
+    case FORMAT_MPA: resource = IDB_FORMAT_MPA; break;
+    case FORMAT_PES: resource = IDB_FORMAT_PES; break;
   }
   logo = LoadBitmap(g_hInst, MAKEINTRESOURCE(resource));
   SendDlgItemMessage(m_Dlg, IDC_LOGO, STM_SETIMAGE, IMAGE_BITMAP, (long)logo);

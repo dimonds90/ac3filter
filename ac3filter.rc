@@ -549,8 +549,9 @@ BEGIN
     LTEXT           "0dB",IDC_STATIC,209,46,15,8,0,WS_EX_RIGHT
     LTEXT           "Input:",IDC_STATIC,14,106,19,8
     LTEXT           "input config",IDC_LBL_INPUT,34,106,97,8
-    CONTROL         "",IDC_LOGO,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+    CONTROL         111,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
                     WS_BORDER,141,101,115,84
+    CONTROL         131,IDC_LOGO,"Static",SS_BITMAP,206,143,50,22
 END
 
 IDD_SYS DIALOG DISCARDABLE  0, 0, 397, 201
@@ -808,10 +809,12 @@ IDI_AC3FILTER           ICON    DISCARDABLE     "ac3filter.ico"
 // Bitmap
 //
 
-IDB_LOGO_PCM            BITMAP  DISCARDABLE     "ac3filter_pcm.bmp"
-IDB_LOGO_AC3            BITMAP  DISCARDABLE     "ac3filter_ac3.bmp"
-IDB_LOGO_DTS            BITMAP  DISCARDABLE     "ac3filter_dts.bmp"
-IDB_LOGO_MPA            BITMAP  DISCARDABLE     "ac3filter_mpa.bmp"
+IDB_LOGO                BITMAP  DISCARDABLE     "ac3filter.bmp"
+IDB_FORMAT_PCM          BITMAP  DISCARDABLE     "format_pcm.bmp"
+IDB_FORMAT_AC3          BITMAP  DISCARDABLE     "format_ac3.bmp"
+IDB_FORMAT_DTS          BITMAP  DISCARDABLE     "format_dts.bmp"
+IDB_FORMAT_MPA          BITMAP  DISCARDABLE     "format_mpa.bmp"
+IDB_FORMAT_PES          BITMAP  DISCARDABLE     "format_pes.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
