@@ -29,7 +29,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
 IDD_GAINS DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
                     PBS_SMOOTH,181,115,7,50
@@ -134,7 +134,7 @@ BEGIN
                     56
     EDITTEXT        IDC_EDT_DRC_LEVEL,36,170,23,14,ES_AUTOHSCROLL | 
                     WS_DISABLED
-    LTEXT           "AC3Filter v1.01a Copyright (c) 2002-2004 by Alexander Vigovsky",
+    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
                     IDC_STATIC,183,190,207,8
     LTEXT           "Voice",IDC_STATIC,89,15,19,8
     CONTROL         "Slider3",IDC_SLIDER_VOICE,"msctls_trackbar32",TBS_VERT | 
@@ -165,7 +165,7 @@ END
 
 IDD_MIXER DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     CONTROL         "One-pass norm",IDC_CHK_NORMALIZE,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,99,118,64,8
@@ -304,7 +304,7 @@ BEGIN
     LTEXT           "-20dB",IDC_STATIC,66,65,20,8
     LTEXT           "0dB",IDC_STATIC,64,45,16,8,0,WS_EX_RIGHT
     GROUPBOX        "Gains",IDC_STATIC,7,7,161,90
-    LTEXT           "AC3Filter v1.01a Copyright (c) 2002-2004 by Alexander Vigovsky",
+    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
                     IDC_STATIC,183,190,207,8
     LTEXT           "LFE",IDC_STATIC,144,15,14,8
     CONTROL         "Slider3",IDC_SLIDER_LFE,"msctls_trackbar32",TBS_VERT | 
@@ -408,7 +408,7 @@ BEGIN
     PUSHBUTTON      "Delete",IDC_BTN_EQ_DELETE,59,172,42,10
     PUSHBUTTON      "Save",IDC_BTN_DELAY_SAVE,16,119,42,10
     PUSHBUTTON      "Delete",IDC_BTN_DELAY_DELETE,59,119,42,10
-    LTEXT           "AC3Filter v1.01a Copyright (c) 2002-2004 by Alexander Vigovsky",
+    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
                     IDC_STATIC,183,190,207,8
 END
 
@@ -416,7 +416,7 @@ IDD_ABOUT DIALOG DISCARDABLE  0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
-    LTEXT           "AC3Filter v1.01a Copyright (c) 2002-2004 by Alexander Vigovsky",
+    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
                     IDC_STATIC,183,190,207,8
     LTEXT           "This program is free software and can be distributed according to the terms of GNU General Public License version 2.",
                     IDC_STATIC,13,72,182,24
@@ -451,7 +451,7 @@ END
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "+20dB",IDC_STATIC,110,27,20,8
     LTEXT           "-20dB",IDC_STATIC,112,66,20,8
@@ -517,7 +517,7 @@ BEGIN
     PUSHBUTTON      "Delete",IDC_BTN_PRESET_DELETE,70,81,27,10
     EDITTEXT        IDC_EDT_INFO,15,116,117,53,ES_MULTILINE | ES_AUTOHSCROLL | 
                     ES_READONLY | ES_WANTRETURN | WS_VSCROLL
-    LTEXT           "AC3Filter v1.01a Copyright (c) 2002-2004 by Alexander Vigovsky",
+    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
                     IDC_STATIC,183,190,207,8
     GROUPBOX        "Decoder info",IDC_STATIC,7,97,132,90
     GROUPBOX        "Gain",IDC_STATIC,105,7,92,90
@@ -591,7 +591,7 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,27,
                     161,107,10
     LTEXT           "0ms",IDC_LBL_JITTER,135,162,30,8,WS_DISABLED
-    LTEXT           "AC3Filter v1.01a Copyright (c) 2002-2004 by Alexander Vigovsky",
+    LTEXT           "AC3Filter v1.02a Copyright (c) 2002-2004 by Alexander Vigovsky",
                     IDC_STATIC,183,190,207,8
     CONTROL         "MPEG Audio",IDC_CHK_SPDIF_MPA,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,112,55,57,10

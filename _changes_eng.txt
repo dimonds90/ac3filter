@@ -10,7 +10,7 @@
 <b>1.01a</b> - (unofficial release)
   * First working alfa for new filter generation
   * Totally rewrited
-  * 10%-20% faster
+  * 10%-20% less CPU usage
   * Level meters are now syncronized with playback
   + DTS decoding support (including AVI/DTS and WAV/DTS)
   + MPEG1/2 Audio Layer I/II decoding support
