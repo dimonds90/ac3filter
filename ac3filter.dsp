@@ -250,6 +250,10 @@ SOURCE=.\ac3filter.rc
 # End Source File
 # Begin Source File
 
+SOURCE=..\valib\valib\filters\convert.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\format_ac3.bmp
 # End Source File
 # Begin Source File

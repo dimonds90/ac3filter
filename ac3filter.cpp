@@ -45,8 +45,6 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   config_autoload = false;
   formats = FORMAT_CLASS_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES;
 
-  error   = false;
-
   dec.set_input(in_spk);
   dec.set_output(out_spk);
   dec.proc.set_input_order(win_order);
@@ -70,7 +68,6 @@ AC3Filter::reset()
   dec.reset();
   // sink->send_discontinuity();
   cpu.reset();
-  error = false;
 }
 
 bool        
@@ -179,6 +176,41 @@ AC3Filter::NonDelegatingQueryInterface(REFIID riid, void **ppv)
 ////////////////////////////// DATA FLOW //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
+bool
+AC3Filter::process_chunk(const Chunk *_chunk)
+{
+  cpu.start();
+
+  if (!dec.process(_chunk))
+  {
+    cpu.stop();
+    DbgLog((LOG_TRACE, 3, "Transform(): Processing failed! [ process() ]"));
+    return false;
+  }
+
+  Chunk chunk;
+  while (!dec.is_empty())
+  {
+    cpu.start();
+    if (!dec.get_chunk(&chunk))
+    {
+      cpu.stop();
+      DbgLog((LOG_TRACE, 3, "Transform(): Processing failed! [ get_chunk() ]"));
+      return false;
+    }
+    cpu.stop();
+
+    if (!sink->process(&chunk))
+    {
+      DbgLog((LOG_TRACE, 3, "Transform(): Sending data failed!"));
+      return false;
+    }
+  }
+  return true;
+}
+
+
+
 HRESULT
 AC3Filter::Receive(IMediaSample *in)
 {
@@ -186,8 +218,7 @@ AC3Filter::Receive(IMediaSample *in)
   int buf_size;
   vtime_t time;
 
-  Chunk chunk1;
-  Chunk chunk2;
+  Chunk chunk;
 
   /////////////////////////////////////////////////////////
   // Dynamic input format change
@@ -206,15 +237,7 @@ AC3Filter::Receive(IMediaSample *in)
   if (in->IsDiscontinuity() == S_OK)
   {
     DbgLog((LOG_TRACE, 3, "Transform(): Discontinuity"));
-    reset();
-    error = false;
   }
-
-  /////////////////////////////////////////////////////////
-  // Drop stream on errors
-
-  if (error)
-    return S_FALSE;
 
   /////////////////////////////////////////////////////////
   // Data
@@ -225,7 +248,7 @@ AC3Filter::Receive(IMediaSample *in)
   /////////////////////////////////////////////////////////
   // Fill chunk
 
-  chunk1.set(in_spk, buf, buf_size);
+  chunk.set(in_spk, buf, buf_size);
 
   /////////////////////////////////////////////////////////
   // Timing
@@ -236,7 +259,7 @@ AC3Filter::Receive(IMediaSample *in)
     case S_OK:
     case VFW_S_NO_STOP_TIME:
       time = vtime_t(begin) * in_spk.sample_rate / 10000000;
-      chunk1.set_sync(true, time);
+      chunk.set_sync(true, time);
       DbgLog((LOG_TRACE, 3, "-> > timestamp: %ims\t> %.0fsm", int(begin/10000), time));
       break;
   }
@@ -244,40 +267,7 @@ AC3Filter::Receive(IMediaSample *in)
   /////////////////////////////////////////////////////////
   // Process
 
-  cpu.start();
-//  DbgLog((LOG_TRACE, 3, "process()"));
-  if (!dec.process(&chunk1))
-  {
-    cpu.stop();
-    error = true;
-    DbgLog((LOG_TRACE, 3, "Transform(): Processing failed! [ process() ]"));
-    DbgLog((LOG_TRACE, 3, "Transform(): Processing stopped!"));
-    return E_FAIL;
-  }
-
-  while (!dec.is_empty())
-  {
-    cpu.start();
-//    DbgLog((LOG_TRACE, 3, "get_chunk()"));
-    // Process
-    if (!dec.get_chunk(&chunk2))
-    {
-      cpu.stop();
-      error = true;
-      DbgLog((LOG_TRACE, 3, "Transform(): Processing failed! [ get_chunk() ]"));
-      DbgLog((LOG_TRACE, 3, "Transform(): Processing stopped!"));
-      return E_FAIL;
-    }
-    cpu.stop();
-
-    // Send data downstream
-//    DbgLog((LOG_TRACE, 3, "send"));
-    if (!sink->process(&chunk2))
-    {
-      DbgLog((LOG_TRACE, 3, "Transform(): Sending data failed!"));
-      return E_FAIL;
-    }
-  }
+  process_chunk(&chunk);
 
   return S_OK;
 }
@@ -286,14 +276,18 @@ HRESULT
 AC3Filter::EndOfStream()
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndOfStream", this));
-  reset();
+
+  Chunk chunk;
+  chunk.set(in_spk, 0, 0, false, 0, true);
+  process_chunk(&chunk);
+
   return CTransformFilter::EndOfStream();
 }
 
 HRESULT 
 AC3Filter::NewSegment(REFERENCE_TIME tStart, REFERENCE_TIME tStop, double dRate)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::NewSegment", this));
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::NewSegment(%ims, %ims)", this, int(tStart/10000), int(tStop/10000)));
   reset();
   return CTransformFilter::NewSegment(tStart, tStop, dRate);
 }

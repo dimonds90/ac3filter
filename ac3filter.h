@@ -30,11 +30,10 @@ protected:
   int  formats;         // formats supported by filter
   bool config_autoload; // auto-load configuration files
 
-  bool error;           // erroneous stream
-
   bool set_input(CMediaType &mt);
   bool set_input(Speakers spk);
   bool set_output(Speakers spk, bool spdif);
+  bool process_chunk(const Chunk *chunk);
   void reset();
 
   #ifdef REGISTER_FILTERGRAPH
