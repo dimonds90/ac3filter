@@ -69,6 +69,7 @@ public:
 
   HRESULT GetMediaType(int iPosition, CMediaType *pMediaType);
   HRESULT CheckInputType(const CMediaType *mtIn);
+  HRESULT CheckOutputType(const CMediaType *mtIn);
   HRESULT CheckTransform(const CMediaType *mtIn, const CMediaType *mtOut);
   bool    CheckConnectPin(IPin *pin);
   HRESULT CheckConnect(PIN_DIRECTION dir, IPin *pin);

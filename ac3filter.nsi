@@ -27,7 +27,7 @@ Section "AC3Filter"
   SetOutPath $INSTDIR
 
   ;; Remember where we're installed
-  WriteRegStr HKLM SOFTWARE\AC3Filter "Install_Dir" "$INSTDIR"
+  WriteRegStr HKCU SOFTWARE\AC3Filter "Install_Dir" "$INSTDIR"
 
   ;; Make an uninstaller
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AC3Filter" "DisplayName" "AC3Filter (remove only)"
