@@ -285,10 +285,6 @@ AC3Filter::Receive(IMediaSample *in)
     }
     cpu.stop();
 
-    // Set actual output configuration
-    if (!chunk2.is_empty())
-      out_spk = chunk2.spk;
-
     // Send data downstream
 //    DbgLog((LOG_TRACE, 3, "send"));
     if (!sink->process(&chunk2))
@@ -504,9 +500,6 @@ AC3Filter::CheckTransform(const CMediaType *mt_in, const CMediaType *mt_out)
     // Media Player Classics bug hack: do not check sample rates
     if (*mt_tmp1.FormatType() == FORMAT_WaveFormatEx) ((WAVEFORMATEX *)mt_tmp1.Format())->nSamplesPerSec = 0;
     if (*mt_tmp2.FormatType() == FORMAT_WaveFormatEx) ((WAVEFORMATEX *)mt_tmp2.Format())->nSamplesPerSec = 0;
-
-    WAVEFORMATEX *w1 = (WAVEFORMATEX *)mt_tmp1.Format();
-    WAVEFORMATEX *w2 = (WAVEFORMATEX *)mt_tmp2.Format();
 
     if (mt_tmp1 == mt_tmp2)
       return S_OK;
