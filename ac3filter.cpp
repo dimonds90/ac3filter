@@ -86,8 +86,6 @@ AC3Filter::JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName)
 void 
 AC3Filter::reset()
 {
-  CAutoLock lock(&m_csReceive);
-
   dec.reset();
   // sink->send_discontinuity();
   cpu.reset();
@@ -96,8 +94,6 @@ AC3Filter::reset()
 bool        
 AC3Filter::set_input(CMediaType &_mt)
 {
-  CAutoLock lock(&m_csReceive);
-
   Speakers spk_tmp;
   return mt2spk(_mt, spk_tmp) && set_input(spk_tmp);
 }
@@ -105,8 +101,6 @@ AC3Filter::set_input(CMediaType &_mt)
 bool        
 AC3Filter::set_input(Speakers _spk)
 {
-  CAutoLock lock(&m_csReceive);
-
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz)...", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate));
   if (in_spk == _spk)
     return true;
@@ -145,8 +139,6 @@ AC3Filter::set_input(Speakers _spk)
 bool        
 AC3Filter::set_output(Speakers _spk, bool _spdif)
 {
-  CAutoLock lock(&m_csReceive);
-
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_output(%s %s %iHz%s)...", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate, _spdif? " (spdif if possible)": ""));
   // output sample rate should be equal to the input sample rate
   _spk.sample_rate = in_spk.sample_rate;
@@ -182,8 +174,6 @@ AC3Filter::set_output(Speakers _spk, bool _spdif)
 bool
 AC3Filter::process_chunk(const Chunk *_chunk)
 {
-  CAutoLock lock(&m_csReceive);
-
   // Here we want to measure processor time used by filter only
   // so we cannot use just dec->process_to(_chunk, sink)
   // (time used by downstream filters will be also counted in the last case)
@@ -585,8 +575,8 @@ AC3Filter::CheckTransform(const CMediaType *mt_in, const CMediaType *mt_out)
     CMediaType mt_tmp3;
 
     mt_tmp1 = *mt_out;
-    spk2mt(out_spk, mt_tmp1, false);
-    spk2mt(out_spk, mt_tmp2, true);
+    spk2mt(out_spk, mt_tmp2, false);
+    spk2mt(out_spk, mt_tmp3, true);
 
     // Media Player Classics bug hack: do not check sample rates
     if (*mt_tmp1.FormatType() == FORMAT_WaveFormatEx) ((WAVEFORMATEX *)mt_tmp1.Format())->nSamplesPerSec = 0;
