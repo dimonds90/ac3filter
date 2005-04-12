@@ -228,7 +228,7 @@ int spk2ispk(Speakers spk)
     default:
       switch (spk.mask)
       {
-        case MODE_1_0:     return  0;
+        case MODE_1_0:     return 0;
         case MODE_2_0:     return 1;
         case MODE_3_0:     return 2;
         case MODE_2_1:     return 3;
@@ -621,6 +621,12 @@ AC3FilterDlg::init_controls()
   SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_SETTIC, 0, 0);
 
   /////////////////////////////////////
+  // AGC
+
+  edt_attack.link(m_Dlg, IDC_EDT_ATTACK);
+  edt_release.link(m_Dlg, IDC_EDT_RELEASE);
+
+  /////////////////////////////////////
   // DRC
 
   SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
@@ -796,6 +802,9 @@ AC3FilterDlg::set_controls()
   SendDlgItemMessage(m_Dlg, IDC_CHK_AUTO_GAIN, BM_SETCHECK, auto_gain? BST_CHECKED: BST_UNCHECKED, 1);
   SendDlgItemMessage(m_Dlg, IDC_CHK_NORMALIZE, BM_SETCHECK, normalize? BST_CHECKED: BST_UNCHECKED, 1);
   EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_NORMALIZE), auto_gain);
+
+  edt_attack.update_value(attack);
+  edt_release.update_value(release);
 
   /////////////////////////////////////
   // Gain controls
@@ -1099,6 +1108,25 @@ AC3FilterDlg::command(int control, int message)
       }
       break;
 
+    case IDC_EDT_ATTACK:
+      if (message == CB_ENTER)
+      {
+        attack = edt_attack.value;
+        proc->set_attack(attack);
+        update();
+      }
+      break;
+
+    case IDC_EDT_RELEASE:
+      if (message == CB_ENTER)
+      {
+        release = edt_release.value;
+        proc->set_release(release);
+        update();
+      }
+      break;
+
+
     /////////////////////////////////////
     // Gain controls
 
@@ -1264,6 +1292,7 @@ AC3FilterDlg::command(int control, int message)
       update();
       break;
     }
+
 
     /////////////////////////////////////
     // DRC

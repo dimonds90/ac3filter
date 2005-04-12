@@ -45,6 +45,8 @@ public:
   STDMETHODIMP set_auto_gain    (bool  auto_gain);
   STDMETHODIMP get_normalize    (bool *normalize);
   STDMETHODIMP set_normalize    (bool  normalize);
+  STDMETHODIMP get_attack       (sample_t *attack);
+  STDMETHODIMP set_attack       (sample_t  attack);
   STDMETHODIMP get_release      (sample_t *release);
   STDMETHODIMP set_release      (sample_t  release);
   // Matrix options           

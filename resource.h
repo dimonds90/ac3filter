@@ -36,6 +36,8 @@
 #define IDC_SLIDER_TIME_SHIFT           3160
 #define IDC_EDT_TIME_SHIFT              3161
 #define IDC_VER                         3162
+#define IDC_EDT_ATTACK                  3163
+#define IDC_EDT_RELEASE                 3164
 
 // Next default values for new objects
 // 

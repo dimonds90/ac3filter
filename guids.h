@@ -153,6 +153,7 @@ struct AudioProcessorState
   // AGC options
   bool auto_gain;
   bool normalize;
+  sample_t attack;
   sample_t release;
 
   // Matrix options
@@ -211,6 +212,8 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_auto_gain)    (bool  auto_gain) = 0;
   STDMETHOD (get_normalize)    (bool *normalize) = 0;
   STDMETHOD (set_normalize)    (bool  normalize) = 0;
+  STDMETHOD (get_attack)       (sample_t *attack) = 0;
+  STDMETHOD (set_attack)       (sample_t  attack) = 0;
   STDMETHOD (get_release)      (sample_t *release) = 0;
   STDMETHOD (set_release)      (sample_t  release) = 0;
   // Matrix options

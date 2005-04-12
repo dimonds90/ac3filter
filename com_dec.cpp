@@ -51,6 +51,17 @@ STDMETHODIMP COMDecoder::set_normalize (bool _normalize)
   proc.set_normalize(_normalize);
   return S_OK;
 }
+STDMETHODIMP COMDecoder::get_attack(sample_t *_attack)
+{
+  *_attack = proc.get_attack();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_attack(sample_t _attack)
+{
+  AutoLock config_lock(&config);
+  proc.set_attack(_attack);
+  return S_OK;
+}
 STDMETHODIMP COMDecoder::get_release(sample_t *_release)
 {
   *_release = proc.get_release();
@@ -355,6 +366,7 @@ STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, vtime_t _time)
   // AGC options
   get_auto_gain(&_state->auto_gain);
   get_normalize(&_state->normalize);
+  get_attack(&_state->attack);
   get_release(&_state->release);
 
   // Matrix options
@@ -413,6 +425,7 @@ STDMETHODIMP COMDecoder::set_state     (AudioProcessorState *_state)
   // AGC options
   set_auto_gain(_state->auto_gain);
   set_normalize(_state->normalize);
+  set_attack(_state->attack);
   set_release(_state->release);
 
   // Matrix options

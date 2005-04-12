@@ -49,6 +49,9 @@ private:
 
   // Matrix
   DoubleEdit  edt_matrix[NCHANNELS][NCHANNELS];
+  // AGC
+  DoubleEdit  edt_attack;
+  DoubleEdit  edt_release;
   // Gain control
   DoubleEdit  edt_master;
   DoubleEdit  edt_gain;

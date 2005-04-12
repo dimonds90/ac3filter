@@ -29,7 +29,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
 IDD_GAINS DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
                     PBS_SMOOTH,181,115,7,50
@@ -165,7 +165,7 @@ END
 
 IDD_MIXER DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     CONTROL         "One-pass norm",IDC_CHK_NORMALIZE,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,99,118,64,8
@@ -449,7 +449,7 @@ END
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     LTEXT           "+20dB",IDC_STATIC,110,27,20,8
     LTEXT           "-20dB",IDC_STATIC,112,66,20,8
@@ -582,8 +582,8 @@ BEGIN
     LTEXT           "Time shift (ms):",IDC_STATIC,15,111,49,8
     CONTROL         "Auto load movie configuration files",
                     IDC_CHK_CONFIG_AUTOLOAD,"Button",BS_AUTOCHECKBOX | 
-                    WS_DISABLED | WS_TABSTOP,15,163,123,10
-    GROUPBOX        "System options",IDC_STATIC,7,143,188,44,WS_DISABLED
+                    WS_DISABLED | WS_TABSTOP,15,175,123,10
+    GROUPBOX        "System options",IDC_STATIC,7,166,188,21,WS_DISABLED
     CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,14,127,66,8
     LTEXT           "0",IDC_LBL_JITTER,136,127,14,8
@@ -607,6 +607,10 @@ BEGIN
     LTEXT           "Current jitter (ms):",IDC_STATIC,79,127,55,8
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
+    GROUPBOX        "AGC",IDC_STATIC,7,140,188,26
+    EDITTEXT        IDC_EDT_ATTACK,111,149,38,12,ES_AUTOHSCROLL
+    LTEXT           "Attack/release speed (dB/s):",IDC_STATIC,15,151,94,8
+    EDITTEXT        IDC_EDT_RELEASE,151,149,38,12,ES_AUTOHSCROLL
 END
 
 IDD_FILE DIALOG DISCARDABLE  0, 0, 178, 81
