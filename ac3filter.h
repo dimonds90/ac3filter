@@ -21,27 +21,15 @@ protected:
   DShowSink  *sink;     // sink
   ROTEntry   rot;       // registred objects table entry
 
-/*
   Speakers   in_spk;    // input configuration
   Speakers   out_spk;   // output configuration
   bool       use_spdif; // use spdif if possible
-*/
-
-  // > to delete
-  Speakers in_spk;      // input configuration
-  Speakers out_spk;     // output configuration
-  Speakers out_spdif;   // output configuration (spdif)
-
-  bool spdif;           // use spdif if possible
-  bool spdif_on;        // spdif is on
-  // < to delete
 
   int  formats;         // formats supported by filter
   bool config_autoload; // auto-load configuration files
 
-/*
+
   bool setup_chain(Speakers in_spk, Speakers out_spk, bool use_spdif); 
-*/
   bool set_input(CMediaType &mt);
   bool set_input(Speakers in_spk);
   bool set_output(Speakers out_spk, bool use_spdif);
