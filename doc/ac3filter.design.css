@@ -39,6 +39,16 @@ p
   border-bottom-style: solid;
 }
 
+i
+{
+  color: #FF0000;
+}
+
+b
+{
+  color: #FF0000;
+}
+
 em 
 {
   font-style: italic;
