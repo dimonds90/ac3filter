@@ -4,8 +4,8 @@
 <title>AC3Filter</title>
 <meta name="author" content="Alexander Vigovsky">
 <meta name="keywords" content="AC3Filter AC3 DTS DolbyDigital">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
-<link href="design.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html">
+<link href="ac3filter.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <!-- ==========================================================================
@@ -26,8 +26,8 @@
 
 <table>
   <tr>
-    <td><a href="ac3filter_eng.html"><img src="pic/flag_eng.gif" border="0">English</a>&nbsp;&nbsp;&nbsp;</td>
-    <td><img src="pic/flag_rus.gif" border="0"><b>Russian</b>&nbsp;&nbsp;&nbsp;</td>
+    <td><img src="pic/flag_eng.gif" border="0"><b>English</b>&nbsp;&nbsp;&nbsp;</td>
+    <td><a href="ac3filter_rus.html"><img src="pic/flag_rus.gif" border="0">Russian</a>&nbsp;&nbsp;&nbsp;</td>
     <td><a href="ac3filter_ita.html"><img src="pic/flag_ita.gif" border="0">Italian</a>&nbsp;&nbsp;&nbsp;</td>
   </tr>
 </table>
@@ -247,7 +247,7 @@
     </table>
 
     <div style="font-size:80%"> 
-		  <a name="system_setup_note1"></a>1) refer to <a href="#filter_setup_system"> 6.5. System settings</a> <br>
+      <a name="system_setup_note1"></a>1) refer to <a href="#filter_setup_system"> 6.5. System settings</a> <br>
       <a name="system_setup_note2"></a>2) You can download the patch from here:<br>
       <div style="margin-left: 40px;"> <b>server1:</b><a href="http://ac3filter.sourceforge.net/download/269601USA8.EXE">http://ac3filter.sourceforge.net/download/269601USA8.EXE</a><br>
         <b>server2:</b><a href="ftp://download.intel.com/design/motherbd/bt2/269601USA8.EXE">ftp://download.intel.com/design/motherbd/bt2/269601USA8.EXE</a><br>
@@ -272,7 +272,7 @@
         2.1 stereo</span>, <span class="value">4/0+SW 4.1 quadro</span>) should
         not be used if acoustics has no separate input for subwoofer (refer to <a href="#theory_lfe">7.2.
         What is LFE?</a>).</p>
-			
+      
     <p>Set speakers mode in <span class="action">Control Panel->Sounds and Multimedia->Audio->Sound
         Playback->Advanced</span>. Furthermore, audio card drivers often have
         their own utilities for switching of speakers configuration. It is necessary
@@ -299,7 +299,7 @@
   <div id="system_setup_spdif" class="subchapter">
     <h3><a name="system_setup_spdif">4.3. Setup for digital (SPDIF) output mode </a></h3>
     <small>(It is recommended to read <a href="#theory_spdif">7.3 SPDIF</a> section firstly)</small>
-		
+    
     <p>SPDIF mode is required <em>only</em> if the digital connection and external
       decoder/receiver exist. It is important previously to ensure whether the
     receiver connected correctly (refer to audio card and receiver documentation). </p>
@@ -708,8 +708,8 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
 
     <p>There are two principal rules of configuring: </p>
     <ul>
-      <li>·	If you have no idea what does this setting make – do not change it.</li>
-      <li>·	If something has broken load the 'standard' preset (<span class="action">Main
+      <li>· If you have no idea what does this setting make – do not change it.</li>
+      <li>· If something has broken load the 'standard' preset (<span class="action">Main
       page->Preset->Standard</span>).</li>
     </ul>
   </div>
@@ -848,7 +848,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
       <p> <span class="value">Default</span> preset has special sense – it is
       uploaded during the filter uploading. </p>
     </div> <!-- <div class="subsubchapter"> -->
-		
+    
     <div class="subsubchapter">
       <h4>6.2.3. Gains</h4>
 
@@ -874,7 +874,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
 
     <div class="subsubchapter">
       <h4>6.2.4. Dynamic range compression (DRC)</h4>
-			
+      
       <p> <span class="option">DRC Enabled</span> checkbox switches dynamic range
         compression function. The first level defines compression level of the
         dynamic range. The second level reflects the current gain level. For
@@ -1085,70 +1085,70 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
 
   <div id="filter_setup_gains" class="subchapter">
     <h3><a name="filter_setup_gains">6.4. Gains</a></h3>
-		
+    
     <p> This page contains gain level settings: </p>
-		
+    
     <div class="image">
       <img alt="" src="pic/dlg_gains.png" height="427" width="623">
     </div>
-		
+    
     <div class="subsubchapter">
-			<h4>6.4.1. Gains</h4>
-			
-			<p><span class="option">Master/Gain</span> – desirable and current gain level
-			  (refer to <a href="#filter_setup_main"> 6.2. Main settings</a> ). </p>
-	</div>
-		
+      <h4>6.4.1. Gains</h4>
+      
+      <p><span class="option">Master/Gain</span> – desirable and current gain level
+        (refer to <a href="#filter_setup_main"> 6.2. Main settings</a> ). </p>
+  </div>
+    
     <div class="subsubchapter">
-			<h4>6.4.2. Dynamic range compression (DRC)</h4>
-			
-			<p> <span class="option">DRC Enabled</span> checkbox switches dynamic range
-			  compression function. The first level defines compression level of the dynamic
-			  range. The second level reflects current gain level. For more information,
-			  refer to <a href="#theory_loudness">7.1. Loudness and dynamic range</a>. </p>
+      <h4>6.4.2. Dynamic range compression (DRC)</h4>
+      
+      <p> <span class="option">DRC Enabled</span> checkbox switches dynamic range
+        compression function. The first level defines compression level of the dynamic
+        range. The second level reflects current gain level. For more information,
+        refer to <a href="#theory_loudness">7.1. Loudness and dynamic range</a>. </p>
     </div>
 
     <div class="subsubchapter">
-			<h4>6.4.3. Delays</h4>
-			
-			<p> These are delays for each output channel. Delay values can be set in different
-			  units (<span class="option">Units</span> selection list). Positive values for time
-			  units mean that positive delay will be introduced, i.e. the sound will
-			  be delayed. Conversely, positive values for distance units mean negative
-			  delay, i.e. the sound will be played 'in advance'. In both cases, there
-		  can be negative delay values. There are two main applications of delays: </p>
-			<ul>
-				<li> Compensating of distance difference between speakers. Acoustic wave
-				  needs certain time to reach listener, therefore, ideally all speakers must
-				  be located at equal distance from listener, so as the sound simultaneously
-				  produced by all speakers at a certain time could reach listener simultaneously.
-				  Otherwise, sounds will be in wrong positions. However, the distance to
-				  speakers may differ in practice. The farther the speaker, the earlier sound
-				  produced by it must be played. To compensate this defect you can set distances
-			  to speakers directly. </li>
-				<li> Ambisonic effect creation when decomposing stereo record to multi-channel
-				  system. Introduction of additional delay to rear channels can enhance the
-			  ambisonic effect. </li>
-			</ul>
+      <h4>6.4.3. Delays</h4>
+      
+      <p> These are delays for each output channel. Delay values can be set in different
+        units (<span class="option">Units</span> selection list). Positive values for time
+        units mean that positive delay will be introduced, i.e. the sound will
+        be delayed. Conversely, positive values for distance units mean negative
+        delay, i.e. the sound will be played 'in advance'. In both cases, there
+      can be negative delay values. There are two main applications of delays: </p>
+      <ul>
+        <li> Compensating of distance difference between speakers. Acoustic wave
+          needs certain time to reach listener, therefore, ideally all speakers must
+          be located at equal distance from listener, so as the sound simultaneously
+          produced by all speakers at a certain time could reach listener simultaneously.
+          Otherwise, sounds will be in wrong positions. However, the distance to
+          speakers may differ in practice. The farther the speaker, the earlier sound
+          produced by it must be played. To compensate this defect you can set distances
+        to speakers directly. </li>
+        <li> Ambisonic effect creation when decomposing stereo record to multi-channel
+          system. Introduction of additional delay to rear channels can enhance the
+        ambisonic effect. </li>
+      </ul>
     </div>
-		
+    
     <div class="subsubchapter">
-			<h4>6.4.4. Input gains</h4>
-			
-			<p> Gain levels of input channels. Sometimes it is required to change gain
-			  levels namely of input channels. That's the case when the input signal has
-			  a central channel while the output one has no central channel (the center
-			  is mixed to front channels), and it is required to change dialog level namely.
-		  I.e. these levels are intended for record defects compensation. </p>
+      <h4>6.4.4. Input gains</h4>
+      
+      <p> Gain levels of input channels. Sometimes it is required to change gain
+        levels namely of input channels. That's the case when the input signal has
+        a central channel while the output one has no central channel (the center
+        is mixed to front channels), and it is required to change dialog level namely.
+      I.e. these levels are intended for record defects compensation. </p>
     </div>
 
     <div class="subsubchapter">
-			<h4>6.4.5. Output gains</h4>
-			
-			<p> Gain levels of output channels. These levels serve for speakers loudness
-			  equalization (if speakers are located asymmetrically). In other words, they
-		  serve for compensation of acoustic system defects. </p>
-	</div>
+      <h4>6.4.5. Output gains</h4>
+      
+      <p> Gain levels of output channels. These levels serve for speakers loudness
+        equalization (if speakers are located asymmetrically). In other words, they
+      serve for compensation of acoustic system defects. </p>
+  </div>
 
   </div> <!-- <div id="filter_setup_gains" class="subchapter"> -->
 
@@ -1156,19 +1156,19 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
 
   <div id="filter_setup_system" class="subchapter">
     <h3><a name="filter_setup_system">6.5. System settings </a></h3>
-		
+    
     <p> This page reflects system settings (which have no direct influence on
     sound): </p>
-		
+    
     <div class="image">
       <img alt="" src="pic/dlg_system.png" height="427" width="623">
     </div>
-		
+    
     <div class="subsubchapter">
-			<h4>6.5.1. Use AC3Filter for ...</h4>
-			
-			<p> It defines the cases of AC3Filter use. </p>
-			<ul>
+      <h4>6.5.1. Use AC3Filter for ...</h4>
+      
+      <p> It defines the cases of AC3Filter use. </p>
+      <ul>
         <li> PCM – use AC3Filter for post-processing of all audio streams. To
           use this mode the filter must have high priority (refer to <span class="option">Filter
           merit</span> option further in this section). </li>
@@ -1177,58 +1177,58 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         <li> MPEG Audio – use of AC3Filter for MPEG Audio decoding </li>
         <li>PES (DVD) - use AC3Filter for audio decoding in MPEG1/MPEG2 PES streams.
           This mode is required for DVD/VideoCD playing. </li>
-			</ul>
+      </ul>
     </div>
-		
+    
     <div class="subsubchapter">
-			<h4>6.5.2. SPDIF passthrough</h4>
-			
-			<p> This setting defines formats supported by external decoder and being transferred
-			  without any modifications when digital output is used. It makes sense
-			  only if the <span class="option">SPDIF</span> option is on (refer to <a href="#filter_setup_main"> 6.2.
-		  Main settings</a>). </p>
+      <h4>6.5.2. SPDIF passthrough</h4>
+      
+      <p> This setting defines formats supported by external decoder and being transferred
+        without any modifications when digital output is used. It makes sense
+        only if the <span class="option">SPDIF</span> option is on (refer to <a href="#filter_setup_main"> 6.2.
+      Main settings</a>). </p>
     </div>
-		
+    
     <div class="subsubchapter">
-			<h4>6.5.3. Filter merit</h4>
+      <h4>6.5.3. Filter merit</h4>
 
-			<p> The filter is installed into the system with the highest priority, i.e.
-			  it will be used instead of any other decoders installed. If it is required
-			  to use other decoders by any reasons, the priority can be decreased to minimum
-			  using the <span class="option">Prefer other decoder</span> option. Filter will stay
-			  in system and will be used only if there are no other decoders installed. <span class="option">Prefer
-		  AC3Filter</span> option means the high priority. </p>
+      <p> The filter is installed into the system with the highest priority, i.e.
+        it will be used instead of any other decoders installed. If it is required
+        to use other decoders by any reasons, the priority can be decreased to minimum
+        using the <span class="option">Prefer other decoder</span> option. Filter will stay
+        in system and will be used only if there are no other decoders installed. <span class="option">Prefer
+      AC3Filter</span> option means the high priority. </p>
     </div>
-		
+    
     <div class="subsubchapter">
-			<h4>6.5.4. Default audio renderer</h4>
+      <h4>6.5.4. Default audio renderer</h4>
 
-			<p> Audio card can operate in two modes: DirectSound and WaveOut. If there
-			  are some problems occur when using the filter (e.g. SPDIF is inoperative),
-			  sometimes they can be solved by switching of operating mode. Some players
-			  have settings to change output device (refer to <a href="#player_setup"> 5.
-			  Player setup</a>), others use the default system settings. To switch
-			  the operating mode use <span class="option">Use DirectSound</span> option for DirectSound
-			  interface, and <span class="option">Use WaveOut</span> option for WaveOut interface.
-			  This option changes the system global settings! Thus, it is preferably
-			  to use native settings of player if possible. </p>
-			<p> This option takes effect only if the player uses the default output device
-		  or if it has appropriate settings. </p>
+      <p> Audio card can operate in two modes: DirectSound and WaveOut. If there
+        are some problems occur when using the filter (e.g. SPDIF is inoperative),
+        sometimes they can be solved by switching of operating mode. Some players
+        have settings to change output device (refer to <a href="#player_setup"> 5.
+        Player setup</a>), others use the default system settings. To switch
+        the operating mode use <span class="option">Use DirectSound</span> option for DirectSound
+        interface, and <span class="option">Use WaveOut</span> option for WaveOut interface.
+        This option changes the system global settings! Thus, it is preferably
+        to use native settings of player if possible. </p>
+      <p> This option takes effect only if the player uses the default output device
+      or if it has appropriate settings. </p>
     </div>
-		
+    
     <div class="subsubchapter">
-			<h4>6.5.5. Audio/Video sync</h4>
-			<p> In some cases, audio and video can be non-synchronized. Generally, this
-			  can occur due to incorrect mixing of video file, but the hardware causes
-			  of desynchronization are possible too. This option is intended to solve <em>hardware</em> problems.
-			  It can be used for defect correction of certain file, but do not forget
-			  to change it back! Here shift between audio and video is specified in ms.
-			  If sound is heard <em>before </em>video you should <em>increase</em> this
-			  value. If sound occurs <em>after</em> picture on the screen, you should <em>decrease</em> the
-		  value. This option helps to correct constant time shift only. </p>
-			<p> Option takes effect immediately. When changing the delay value the picture
-		  can freeze or jerk within several seconds. </p>
-	</div>
+      <h4>6.5.5. Audio/Video sync</h4>
+      <p> In some cases, audio and video can be non-synchronized. Generally, this
+        can occur due to incorrect mixing of video file, but the hardware causes
+        of desynchronization are possible too. This option is intended to solve <em>hardware</em> problems.
+        It can be used for defect correction of certain file, but do not forget
+        to change it back! Here shift between audio and video is specified in ms.
+        If sound is heard <em>before </em>video you should <em>increase</em> this
+        value. If sound occurs <em>after</em> picture on the screen, you should <em>decrease</em> the
+      value. This option helps to correct constant time shift only. </p>
+      <p> Option takes effect immediately. When changing the delay value the picture
+      can freeze or jerk within several seconds. </p>
+  </div>
   </div> <!-- <div id="filter_setup_system" class="subchapter"> -->
 </div> <!-- <div id="filter setup" class="chapter"> -->
 
@@ -1259,10 +1259,10 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
 
       <p> This question, which seems to be clear is hard enough to formalize,
       since different cases imply absolutely different things.</p>
-			
+      
       <p> The sense of loudness is most clear when speaking about <dfn>acoustic
       pressure</dfn>, since that is directly perceived by ear. </p>
-			
+      
       <blockquote> <dfn>Acoustic pressure</dfn> is an additional pressure, which
         occurs when the acoustic wave passes through liquid or gaseous medium.
         When propagating through medium acoustic wave forms some compressions
@@ -1285,9 +1285,9 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         6 dB corresponds to the double change in pressure; change by 20 dB corresponds
         to the tenfold change in pressure. Loudness in terms of acoustic pressure
       we will call an <dfn>absolute loudness</dfn>. </p>
-			
+      
       <p> Here are some typical loudness values: </p>
-			
+      
       <table align="center" border="1" cellpadding="2" cellspacing="2" width="80%">
         <tbody>
           <tr>
@@ -1366,7 +1366,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
           </tr>
         </tbody>
       </table>
-			
+      
       <p> Note the perceived pressure range: pain threshold pressure and pressure
         produced by plane differ in million times! Therefore, the logarithmic
         scale is in a better accordance with the ear physiology – the linear
@@ -1377,7 +1377,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         6 dB (in twice) will be perceived as an approximately equal loudness
         change in both cases, though in the first case it will correspond to
       change of pressure by 25 mPa, and in second case – by 10 Pa.</p>
-			
+      
       <p> Another type of loudness is a <dfn>record loudness</dfn> (<dfn>signal
           loudness</dfn>). This loudness is not an acoustic pressure (it can
           be voltage, magnetic polarization, etc.), however acoustic pressure
@@ -1393,7 +1393,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
           (-20 dB is quieter than -3 dB). Positive loudness of the digital signal
           means overflow and results in appearance of digital distortions. (These
       distortions will be considered later).</p>
-			
+      
       <p> Volume controls of amplifier, in system settings, of player do not
         produce any acoustic pressure at all. Without signal even at maximum
         volume settings, we will hear nothing (with the assumption that the playing
@@ -1628,22 +1628,22 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
     </div>
     <!-- ---------------------------------------------------------------------- -->
     <div class="subsubchapter">
-			<h4>7.1.2. Loudness histogram</h4>
-			
-			<div class="image">
-				<img alt="" src="pic/h_fightclub.png" height="444" width="534">
-			</div>
-			<p> This picture illustrates loudness distribution of typical DVD movie (DVD
-			  FightClub, hereinafter we will consider only original audio tracks with
-			  no transformation and no mixing in order not to distort sound pattern).
-			  X axis reflects loudness in decibels, Y-axis reflects occurrence rate of
-			  sound of this loudness. It is better to say that during the movie playing
-			  the current loudness have been continuously controlled. The more often a
-			  loudness occurred during the movie playing the higher the histogram of this
-			  part. I.e. we can say that there are few explosions in the movie but at
-			  the same time, there are many different background sounds. The histogram
-		  is divided into the several conventional areas: </p>
-			<ol>
+      <h4>7.1.2. Loudness histogram</h4>
+      
+      <div class="image">
+        <img alt="" src="pic/h_fightclub.png" height="444" width="534">
+      </div>
+      <p> This picture illustrates loudness distribution of typical DVD movie (DVD
+        FightClub, hereinafter we will consider only original audio tracks with
+        no transformation and no mixing in order not to distort sound pattern).
+        X axis reflects loudness in decibels, Y-axis reflects occurrence rate of
+        sound of this loudness. It is better to say that during the movie playing
+        the current loudness have been continuously controlled. The more often a
+        loudness occurred during the movie playing the higher the histogram of this
+        part. I.e. we can say that there are few explosions in the movie but at
+        the same time, there are many different background sounds. The histogram
+      is divided into the several conventional areas: </p>
+      <ol>
         <li> Voice. A dialogue level for movies is one of most important parameters.
           It is the reference point for all other sounds: sounds with lower level
           are considered as quiet sounds while the sounds with higher level are
@@ -1654,454 +1654,454 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         <li> Extremely quiet sounds – light breeze, grass rustling, etc. </li>
         <li> Loud sounds – phone ringing, impact sounds, and so on </li>
         <li> Explosions and other global crashes </li>
-			  <li>Record noise</li>
-			</ol>
-				    
+        <li>Record noise</li>
+      </ol>
+            
       <p> Boundaries between areas are rather conventional and can be modified
         for different records. In this case, <em>it is known</em> that the dialogue
       level is -27 dB. </p>
-			<p> Looking at the histogram, we can note some interesting moments. Firstly,
-			  the most often sounds in the movie were the ones with loudness of -40 dB.
-			  Let us just note this fact for now. Secondly, the main hump of histogram
-			  is located in area from 0 dB (maximum level) to -70 dB (minimum level).
-			  It is reasonable to assume that all significant sounds are inside of this
-			  hump while the quieter sounds are just a noise. This value is called dynamic
-		  range and will be very important further. </p>
-			<p> This situation is typical enough for DVD movies. Dialogues take much time;
-			  background sounds and music take a little more time; some loudness surges
-			  occur periodically with the following decays. Generally, sound pattern of
-			  this movie is balanced enough and practically full available dynamical range
-		  is used. </p>
-			<p> Let’s look at some other movies: </p>
-			<a name="theory_loudness_pic_movies"></a>
-			<div class="image">
-				<img alt="" src="pic/h_movies.png" height="475" width="612"><br>
-				<small>(Dialogue level for all movies is -27 dB)</small>
-			</div>
-			<p> These examples can be divided into two large groups. First group is characterized
-			  by almost full absence of loud sounds (Cube, Dracula, About Schmidt, Savior).
-			  Loudness range from 0 dB to -15 dB (very loud sounds) is not practically
-			  used here. Otherwise, loud sounds are extremely important for the second
-			  group of movies (Interstate60, Blood (Last Vampire), Pitch Black, Matrix).
-			  It seems that the number of these sounds is relatively small and they play
-			  no special role. However, for instance, the sound of a shot has duration
-			  of a split second (the louder part) but exactly high loudness accentuates
-			  this sound. If this sound was quieter there would be an effect of ‘flatness’
-			  and inexpressiveness of the sound. Even when occurring once during the movie
-			  loud sound has no great sense in movies of the first type ('quiet' movies);
-			  therefore its loudness is not critical so much. Otherwise, in movies of
-			  the second type those sounds (even with the small duration) form the mood
-		  of the movie. </p>
-			<p> Another conspicuous feature – high 'humps' in Cube and Interstate 60 movies.
-			  There is a constant quiet background hum in the Cube movie. This is why
-			  the graph has 'hump' at loudness of approximately -50 dB. The same thing
-			  relates to the Interstate 60 movie – it is car travel and, consequently,
-			  there is a constant sound of moving car. Shapes of both histograms are very
-			  similar; however, the maximum of the histogram for the Interstate 60 movie
-			  is lower by 10 dB. As the voice levels are the same in both movies, one
-			  can immediately conclude that sound in the Cube movie is much quieter. This
-			  conclusion is far from an obvious one. Let us recall hearing adaptation
-			  – if we shift graphs to align their maximums at one level, the Cube movie
-		  will be perceived as 'quiet' all the same. </p>
-			
-			<p> The other movies have no such well-marked background sounds, so their
-		  graphs are more distributed across the dynamic range. </p>
-			<p> About Schmidt movie has 'hump' at the level of -70 dB – -80 dB. These
-			  are recor ding noises; and they are relatively loud in this movie, as compared
-		  with other movies, but quiet enough and do not hinder viewing. </p>
-			<p> So far, we considered solely movies. Now let us have a look at music: </p>
-			<a name="theory_loudness_pic_music"></a>
-			<div class="image">
-				<img alt="" src="pic/h_music.png" height="451" width="623">
-			</div>
-			<p> Right off, it strikes the eye that distribution of loudness is absolutely
-			  different. ( To show a variety, there are histograms of various music styles
-			  having different quality collected. They do not show a real balance of different
-			  types of compositions .) All sounds are very much shifted towards the 'loud'
-			  part of the dynamic range. The difference between middle-level loudness
-			  of movies reaches 40 dB. Besides, a characteristic feature of the movies
-			  is a smooth decrease of the histogram in the loud area, whereas for music
-			  a histogram maximum often reaches the highest level (0 dB). A small number
-		  of such graphs is provided; nevertheless, such situation is very widespread. </p>
-			<p> The dialogue level concept is often inapplicable to music, thus it is
-			  very difficult to separate loud and quiet sounds. Therefore, it is also
-			  difficult to determine a subjective loudness of a composition. So, a subjectively
-			  loud composition may be objectively quieter than a subjectively loud one.
-			  Positive or negative <em>drops</em> of the loudness have a great importance
-		  here; these drops are not visible on the histograms. </p>
-			<p> Absence of a common reference mark results in a chaos – sounds from different
-			  sources have different loudness; difference between maximums of composition
-			  histograms reaches 20 dB. Besides, in general it is very difficult to formalize
-			  a concept of a 'composition's loudness' anyhow. Certainly, many people are
-			  familiar with a situation when there is a variety of music from different
-			  sources and during its successive playback (e.g., if music is recorded on
-			  an audio CD), loudness changes at every passing from one composition to
-			  another. It is unpleasant (the mentioned effect of a mismatch between actual
-			  loudness and subjective loudness may more embarrass a perception). The provided
-		  graphs illustrate this situation very well. </p>
-			<p> Dynamic range of musical compositions (difference between the loudest
-			  and the quietest sounds) is 20-40 dB that is far less than dynamic range
-		  (70 dB) of movies. </p>
-	</div>	
+      <p> Looking at the histogram, we can note some interesting moments. Firstly,
+        the most often sounds in the movie were the ones with loudness of -40 dB.
+        Let us just note this fact for now. Secondly, the main hump of histogram
+        is located in area from 0 dB (maximum level) to -70 dB (minimum level).
+        It is reasonable to assume that all significant sounds are inside of this
+        hump while the quieter sounds are just a noise. This value is called dynamic
+      range and will be very important further. </p>
+      <p> This situation is typical enough for DVD movies. Dialogues take much time;
+        background sounds and music take a little more time; some loudness surges
+        occur periodically with the following decays. Generally, sound pattern of
+        this movie is balanced enough and practically full available dynamical range
+      is used. </p>
+      <p> Let’s look at some other movies: </p>
+      <a name="theory_loudness_pic_movies"></a>
+      <div class="image">
+        <img alt="" src="pic/h_movies.png" height="475" width="612"><br>
+        <small>(Dialogue level for all movies is -27 dB)</small>
+      </div>
+      <p> These examples can be divided into two large groups. First group is characterized
+        by almost full absence of loud sounds (Cube, Dracula, About Schmidt, Savior).
+        Loudness range from 0 dB to -15 dB (very loud sounds) is not practically
+        used here. Otherwise, loud sounds are extremely important for the second
+        group of movies (Interstate60, Blood (Last Vampire), Pitch Black, Matrix).
+        It seems that the number of these sounds is relatively small and they play
+        no special role. However, for instance, the sound of a shot has duration
+        of a split second (the louder part) but exactly high loudness accentuates
+        this sound. If this sound was quieter there would be an effect of ‘flatness’
+        and inexpressiveness of the sound. Even when occurring once during the movie
+        loud sound has no great sense in movies of the first type ('quiet' movies);
+        therefore its loudness is not critical so much. Otherwise, in movies of
+        the second type those sounds (even with the small duration) form the mood
+      of the movie. </p>
+      <p> Another conspicuous feature – high 'humps' in Cube and Interstate 60 movies.
+        There is a constant quiet background hum in the Cube movie. This is why
+        the graph has 'hump' at loudness of approximately -50 dB. The same thing
+        relates to the Interstate 60 movie – it is car travel and, consequently,
+        there is a constant sound of moving car. Shapes of both histograms are very
+        similar; however, the maximum of the histogram for the Interstate 60 movie
+        is lower by 10 dB. As the voice levels are the same in both movies, one
+        can immediately conclude that sound in the Cube movie is much quieter. This
+        conclusion is far from an obvious one. Let us recall hearing adaptation
+        – if we shift graphs to align their maximums at one level, the Cube movie
+      will be perceived as 'quiet' all the same. </p>
+      
+      <p> The other movies have no such well-marked background sounds, so their
+      graphs are more distributed across the dynamic range. </p>
+      <p> About Schmidt movie has 'hump' at the level of -70 dB – -80 dB. These
+        are recor ding noises; and they are relatively loud in this movie, as compared
+      with other movies, but quiet enough and do not hinder viewing. </p>
+      <p> So far, we considered solely movies. Now let us have a look at music: </p>
+      <a name="theory_loudness_pic_music"></a>
+      <div class="image">
+        <img alt="" src="pic/h_music.png" height="451" width="623">
+      </div>
+      <p> Right off, it strikes the eye that distribution of loudness is absolutely
+        different. ( To show a variety, there are histograms of various music styles
+        having different quality collected. They do not show a real balance of different
+        types of compositions .) All sounds are very much shifted towards the 'loud'
+        part of the dynamic range. The difference between middle-level loudness
+        of movies reaches 40 dB. Besides, a characteristic feature of the movies
+        is a smooth decrease of the histogram in the loud area, whereas for music
+        a histogram maximum often reaches the highest level (0 dB). A small number
+      of such graphs is provided; nevertheless, such situation is very widespread. </p>
+      <p> The dialogue level concept is often inapplicable to music, thus it is
+        very difficult to separate loud and quiet sounds. Therefore, it is also
+        difficult to determine a subjective loudness of a composition. So, a subjectively
+        loud composition may be objectively quieter than a subjectively loud one.
+        Positive or negative <em>drops</em> of the loudness have a great importance
+      here; these drops are not visible on the histograms. </p>
+      <p> Absence of a common reference mark results in a chaos – sounds from different
+        sources have different loudness; difference between maximums of composition
+        histograms reaches 20 dB. Besides, in general it is very difficult to formalize
+        a concept of a 'composition's loudness' anyhow. Certainly, many people are
+        familiar with a situation when there is a variety of music from different
+        sources and during its successive playback (e.g., if music is recorded on
+        an audio CD), loudness changes at every passing from one composition to
+        another. It is unpleasant (the mentioned effect of a mismatch between actual
+        loudness and subjective loudness may more embarrass a perception). The provided
+      graphs illustrate this situation very well. </p>
+      <p> Dynamic range of musical compositions (difference between the loudest
+        and the quietest sounds) is 20-40 dB that is far less than dynamic range
+      (70 dB) of movies. </p>
+  </div>  
     <!-- ---------------------------------------------------------------------- -->
     <div class="subsubchapter">
-			<h4>7.1.3. DVD loudness problem</h4>
-			<p> The average loudness level of musical records (as well as of Windows system
-			  sounds) is notably higher than a loudness of DVD movies. Therefore, under
-			  the same settings of the system loudness the absolute loudness of movies
-			  will be significantly lower. In the presence of external noises loudness
-			  may turn out to be insufficient, hearing will be poor (sic!) and it will
-			  seem that the sound is of a poor quality. Gain increase in system settings
-			  and in amplifier, even to a maximum, may fail to resolve the problem: difference
-			  of average loudness reaches 40 dB; it is too high. However, even if an amplifier's
-			  power turns out to be sufficient and a DVD is played with sufficient absolute
-			  loudness it is not always suitable, as sounds of operating system, which
-			  have normal absolute loudness under normal gain settings, will be simply
-		  thundering. </p>
-			<p> This problem is typical mainly for computer playback, as in hardware players
-			  gain level is controlled by the decoder itself. Some program DVD players
-			  are able to control the system loudness, but it is not always suitable,
-			  as in this case loudness of <em>all </em>system sounds will be changed (you
-			  may accidentally deafen your neighbors). Besides, in any case, the program
-			  cannot control loudness at an external amplifier. So, it is just a partial
-		  solution of the problem. </p>
-			<p> A compromise solution is to process the sound immediately before playback.
-			  Such processing can greatly enhance quality of <em>certain</em> record playback
-			  under <em>certain</em> conditions. Many people may object that in doing
-			  so 'quality' will be lost; however, as it has been already mentioned, there
-			  is no absolute quality. We do not set ourselves a goal to <em>cue</em> the
-			  sound; our goal is to ensure a pleasant <em>listening</em> to it under our
-			  conditions. If an acoustic system does not have sufficient power or if you
-			  have nervous neighbors it will be just unpleasant to view a movie with lowered
-			  loudness when you cannot distinguish a half of words and a half of quiet
-			  sounds is not heard. Even self-suggestion that maximum quality is achieved
-			  will not smooth this impression. I should repeat once more the key idea: <em>quality
-			  is estimated by o</em><em>ur ears</em> . The sound passes many processing
-			  stages before it reaches a listener, and a variety of acoustic devices and
-			  their characteristics is so wide that the last processing stage before playback
-		  is actually a necessity. </p>
+      <h4>7.1.3. DVD loudness problem</h4>
+      <p> The average loudness level of musical records (as well as of Windows system
+        sounds) is notably higher than a loudness of DVD movies. Therefore, under
+        the same settings of the system loudness the absolute loudness of movies
+        will be significantly lower. In the presence of external noises loudness
+        may turn out to be insufficient, hearing will be poor (sic!) and it will
+        seem that the sound is of a poor quality. Gain increase in system settings
+        and in amplifier, even to a maximum, may fail to resolve the problem: difference
+        of average loudness reaches 40 dB; it is too high. However, even if an amplifier's
+        power turns out to be sufficient and a DVD is played with sufficient absolute
+        loudness it is not always suitable, as sounds of operating system, which
+        have normal absolute loudness under normal gain settings, will be simply
+      thundering. </p>
+      <p> This problem is typical mainly for computer playback, as in hardware players
+        gain level is controlled by the decoder itself. Some program DVD players
+        are able to control the system loudness, but it is not always suitable,
+        as in this case loudness of <em>all </em>system sounds will be changed (you
+        may accidentally deafen your neighbors). Besides, in any case, the program
+        cannot control loudness at an external amplifier. So, it is just a partial
+      solution of the problem. </p>
+      <p> A compromise solution is to process the sound immediately before playback.
+        Such processing can greatly enhance quality of <em>certain</em> record playback
+        under <em>certain</em> conditions. Many people may object that in doing
+        so 'quality' will be lost; however, as it has been already mentioned, there
+        is no absolute quality. We do not set ourselves a goal to <em>cue</em> the
+        sound; our goal is to ensure a pleasant <em>listening</em> to it under our
+        conditions. If an acoustic system does not have sufficient power or if you
+        have nervous neighbors it will be just unpleasant to view a movie with lowered
+        loudness when you cannot distinguish a half of words and a half of quiet
+        sounds is not heard. Even self-suggestion that maximum quality is achieved
+        will not smooth this impression. I should repeat once more the key idea: <em>quality
+        is estimated by o</em><em>ur ears</em> . The sound passes many processing
+        stages before it reaches a listener, and a variety of acoustic devices and
+        their characteristics is so wide that the last processing stage before playback
+      is actually a necessity. </p>
     </div>
-			
+      
     <!-- ---------------------------------------------------------------------- -->
     <div class="subsubchapter">
-			<h4>7.1.4. Level change. Overflow, clipping and limiting.</h4>
-			
-			<p> Level change is simply multiplication of signal amplitude by a defined
-			  value. It results in a change (increase or decrease) of the entire signal
-		  loudness.</p>
-			<div align="center"> <img alt="" src="pic/a_gain.png" height="354" width="448"> </div>
-			<p> Logarithmically, multiplication by a number is just an addition of a constant.
-			  So, if the same number is added to all levels the levels' histogram will
-		  be simply shifted: </p>
-			<div align="center"> <img alt="" src="pic/h_gain.png" height="409" width="596"> </div>
-			<p> If we multiply the signal by a too big number, it may result in an overflow.
-			  If an overflow is not tracked the amplitude will be equal to virtually
-			  random values (see the figure), and this results in frequent clicks,
-			  which are very noticeable audibly. The easiest way to struggle with this
-			  defect is <dfn>clipping</dfn>. That is, a signal is clipped when
-			  its amplitude goes beyond limits (see the figure). If the overflow is
-			  small, the clipping is almost imperceptible audibly; however, when the
-			  level increased clipping is heard in the sound as 'sand'. </p>
-			<div align="center"> <img alt="" src="pic/a_overflow.png" height="356" width="794"> </div>
-			<p> More complicated, but more efficient way is <dfn>limiting</dfn>. It
-			  consists in an automatic decrease of the signal level to prevent overflow.
-			  To do this, it is necessary to use automatic gain control (AGC), which
-			  will adjust t he current signal level. Thus, when there is no overflowing
-			  AGS does not change a signal, and as soon as a signal exceeds the maximum
-			  level, adjustment is made, which changes the signal to make its level
-			  lower than the maximum one. As it can be seen on the figure, the signal
-			  completely preserves its form! However, at that loudness remains at maximum. </p>
-			<a name="theory_loudness_pic_limiting"></a>
-			<div align="center"> <img alt="" src="pic/l_limiting.png" height="600" width="400"> </div>
-			<p> It is necessary to take into account that the previous picture shows amplitude
-			  and this one shows loudness (defined on the basis of <em>a large
-			  group</em> of amplitudes). Therefore, notwithstanding that loudness graph
-			  is 'cut off', the form of the signal itself is distorted in minimum.
-			  This way is not free from shortcomings also. Initially, loudness of the
-			  signal itself varied, and after the limitation, all sounds that go beyond
-			  the limits have the same loudness. As a result, the sound may become 'flat'
-			  and inexpressive. Let us look at histograms (Fight Club): </p>
-			<a name="theory_loudness_pic_gain"></a>
-			<div align="center"> <img alt="" src="pic/h_overflow.png" height="391" width="595"> </div>
-			<p> An example of unsuccessful gain is shown here. With gain of +10 dB, distortions
-			  are still less noticeable (there is still a relatively small number of scenes
-			  in the movie where overflow takes place). However, with an increase of gain,
-			  the level is limited more and more often, and when the level is equal to
-			  +30 dB voice begins to be limited that is highly noticeable. Shortcomings
-			  of the limitation are especially noticeable when loudness changes significantly
-			  over a short time period – subjectively, loudness begins to jump up and
-			  down. If, against a background conversation (which, at the gain of +30 dB,
-			  is already reproduced with maximum loudness), loud sound is heard (which
-			  is louder than the voice in the original, e.g. a telephone ring) the gain
-			  level is decreased to prevent distortion of loud sound, but at that the
-			  conversation loudness drops abruptly, too. When the loud sound ceases, the
-		  conversation loudness returns to the original level, abruptly as well: </p>
-			<div align="center"> <img alt="" src="pic/l_loudness_jump.png" height="800" width="400"> </div>
-			<p> Thus, relative loudness of various sounds reproduced simultaneously is
-			  preserved, but gain level is continuously varying. It is well noticeable
-			  and very unpleasant. Thus, at high gain levels (20-30 dB and more) the
-		  limitation also produces a <em>bad</em> result.</p>
-			<p> When gain levels are small, the signal limitation defects are practically
-			  unnoticeable, whereas the signal clipping is heard well virtually always.
-			  That is, under otherwise equal conditions, limitation gives more good result.
-			  The filter always performs either limitation (the <span class="option">AGC</span> option is switched
-			  on) or clipping (the <span class="option">AGC</span> option is switched off). Hereafter, unless otherwise
-			  specified explicitly, it will be assumed that the limitation is switched
-		  on. Thus, it is recommended to keep the <span class="option">AGC</span> option active. </p>
-	</div>
+      <h4>7.1.4. Level change. Overflow, clipping and limiting.</h4>
+      
+      <p> Level change is simply multiplication of signal amplitude by a defined
+        value. It results in a change (increase or decrease) of the entire signal
+      loudness.</p>
+      <div align="center"> <img alt="" src="pic/a_gain.png" height="354" width="448"> </div>
+      <p> Logarithmically, multiplication by a number is just an addition of a constant.
+        So, if the same number is added to all levels the levels' histogram will
+      be simply shifted: </p>
+      <div align="center"> <img alt="" src="pic/h_gain.png" height="409" width="596"> </div>
+      <p> If we multiply the signal by a too big number, it may result in an overflow.
+        If an overflow is not tracked the amplitude will be equal to virtually
+        random values (see the figure), and this results in frequent clicks,
+        which are very noticeable audibly. The easiest way to struggle with this
+        defect is <dfn>clipping</dfn>. That is, a signal is clipped when
+        its amplitude goes beyond limits (see the figure). If the overflow is
+        small, the clipping is almost imperceptible audibly; however, when the
+        level increased clipping is heard in the sound as 'sand'. </p>
+      <div align="center"> <img alt="" src="pic/a_overflow.png" height="356" width="794"> </div>
+      <p> More complicated, but more efficient way is <dfn>limiting</dfn>. It
+        consists in an automatic decrease of the signal level to prevent overflow.
+        To do this, it is necessary to use automatic gain control (AGC), which
+        will adjust t he current signal level. Thus, when there is no overflowing
+        AGS does not change a signal, and as soon as a signal exceeds the maximum
+        level, adjustment is made, which changes the signal to make its level
+        lower than the maximum one. As it can be seen on the figure, the signal
+        completely preserves its form! However, at that loudness remains at maximum. </p>
+      <a name="theory_loudness_pic_limiting"></a>
+      <div align="center"> <img alt="" src="pic/l_limiting.png" height="600" width="400"> </div>
+      <p> It is necessary to take into account that the previous picture shows amplitude
+        and this one shows loudness (defined on the basis of <em>a large
+        group</em> of amplitudes). Therefore, notwithstanding that loudness graph
+        is 'cut off', the form of the signal itself is distorted in minimum.
+        This way is not free from shortcomings also. Initially, loudness of the
+        signal itself varied, and after the limitation, all sounds that go beyond
+        the limits have the same loudness. As a result, the sound may become 'flat'
+        and inexpressive. Let us look at histograms (Fight Club): </p>
+      <a name="theory_loudness_pic_gain"></a>
+      <div align="center"> <img alt="" src="pic/h_overflow.png" height="391" width="595"> </div>
+      <p> An example of unsuccessful gain is shown here. With gain of +10 dB, distortions
+        are still less noticeable (there is still a relatively small number of scenes
+        in the movie where overflow takes place). However, with an increase of gain,
+        the level is limited more and more often, and when the level is equal to
+        +30 dB voice begins to be limited that is highly noticeable. Shortcomings
+        of the limitation are especially noticeable when loudness changes significantly
+        over a short time period – subjectively, loudness begins to jump up and
+        down. If, against a background conversation (which, at the gain of +30 dB,
+        is already reproduced with maximum loudness), loud sound is heard (which
+        is louder than the voice in the original, e.g. a telephone ring) the gain
+        level is decreased to prevent distortion of loud sound, but at that the
+        conversation loudness drops abruptly, too. When the loud sound ceases, the
+      conversation loudness returns to the original level, abruptly as well: </p>
+      <div align="center"> <img alt="" src="pic/l_loudness_jump.png" height="800" width="400"> </div>
+      <p> Thus, relative loudness of various sounds reproduced simultaneously is
+        preserved, but gain level is continuously varying. It is well noticeable
+        and very unpleasant. Thus, at high gain levels (20-30 dB and more) the
+      limitation also produces a <em>bad</em> result.</p>
+      <p> When gain levels are small, the signal limitation defects are practically
+        unnoticeable, whereas the signal clipping is heard well virtually always.
+        That is, under otherwise equal conditions, limitation gives more good result.
+        The filter always performs either limitation (the <span class="option">AGC</span> option is switched
+        on) or clipping (the <span class="option">AGC</span> option is switched off). Hereafter, unless otherwise
+        specified explicitly, it will be assumed that the limitation is switched
+      on. Thus, it is recommended to keep the <span class="option">AGC</span> option active. </p>
+  </div>
     <!-- ---------------------------------------------------------------------- -->
     <div class="subsubchapter">
-			<h4>7.1.5. Normalization</h4>
-			
-			<p> Let us set a goal to raise loudness without any loss of quality at all.
-			  Is it possible? Yes, if there is a 'margin' of the dynamic range. Let us
-			  look again at <a href="#theory_loudness_pic_movies">movies'
-			  histograms</a>, Cube movie in particular (the yellow graph). One can see
-			  on the histogram that loudness does not rise higher than -15 dB (it is possible
-			  that in the entire movie there are one-two such occasions; however, for
-			  the purposes of this review we will assume that there are no loud sounds
-			  at all). So, as there are no loud sounds, it is possible to raise loudness
-		  by 15 dB without loss of quality! </p>
-			<div align="center"> <img alt="" src="pic/l_normalize.png" height="402" width="400"> </div>
-			<p> Except for increase of loudness, there are no other changes in the signal.
-			  At that, the histogram will shift close by the right-hand margin without
-		  changing a form:</p>
-			<a name="theory_loudness_pic_normalize"></a>
-			<div align="center"> <img alt="" src="pic/h_normalize.png" height="409" width="595"> </div>
-			<p> Thus, it will turn out that there is now a sound in the movie having maximum
-			  loudness. However, if we continue to increase loudness the distortions (described
-			  above) will appear. Such signal form where there is a sound of maximum loudness
-			  without introduced distortions is called <dfn>normalized</dfn> and the process
-			  is called <dfn>normalization</dfn>. Normalization is often carried out at
-			  the musical records preparation stage, and the sound reaches us already
-			  normalized (e.g. AudioCD). However, the normalization is not carried
-		  out for movies. Why? </p>
-			<p> Let us recall histograms for music and a chaos relating to loudness. For
-			  music, it is important to playback with maximum loudness, as it is meant
-			  for maximum target audience – CD players, a noisy street, underground, cheap
-			  earphones, croaky radio stations where low sounds less than -40 dB are not
-			  hearable. (Let us have a one more look at <a href="#theory_loudness_pic_music">graphs
-		  for music</a> – minimum loudness is approximately equal to - 40 dB.) </p>
-			<p> For DVD it is not so. They are primarily designed for quality home cinema.
-			  Playback equipment should be calibrated to reproduce dialogs always with
-			  the same absolute loudness for <em>any </em>movie, will it be an action
-			  movie with explosions smashing a wall or a melodrama with soft rustle of
-			  grass. At that, playback system should <em>always </em>be ready to playback
-			  these sounds without necessity to change the gain level manually. Thus,
-			  the most important is not a necessity to make a record maximum loud, but
-			  a necessity to have fixed reference level to make it possible for a decoder
-			  to adjust gain level automatically. This reference level may be any (as
-			  a matter of fact, this is not important, i.e. if there is a reference level,
-			  corresponding adjustment may be made at any time). The standard de facto
-			  for DVD is the dialog level equal to -27 dB. Thus, even if a movie does
-			  not contain loud sounds, one should not carry out normalization at the disc
-		  creation stage and the dynamic range remains unspent. </p>
-	</div>
+      <h4>7.1.5. Normalization</h4>
+      
+      <p> Let us set a goal to raise loudness without any loss of quality at all.
+        Is it possible? Yes, if there is a 'margin' of the dynamic range. Let us
+        look again at <a href="#theory_loudness_pic_movies">movies'
+        histograms</a>, Cube movie in particular (the yellow graph). One can see
+        on the histogram that loudness does not rise higher than -15 dB (it is possible
+        that in the entire movie there are one-two such occasions; however, for
+        the purposes of this review we will assume that there are no loud sounds
+        at all). So, as there are no loud sounds, it is possible to raise loudness
+      by 15 dB without loss of quality! </p>
+      <div align="center"> <img alt="" src="pic/l_normalize.png" height="402" width="400"> </div>
+      <p> Except for increase of loudness, there are no other changes in the signal.
+        At that, the histogram will shift close by the right-hand margin without
+      changing a form:</p>
+      <a name="theory_loudness_pic_normalize"></a>
+      <div align="center"> <img alt="" src="pic/h_normalize.png" height="409" width="595"> </div>
+      <p> Thus, it will turn out that there is now a sound in the movie having maximum
+        loudness. However, if we continue to increase loudness the distortions (described
+        above) will appear. Such signal form where there is a sound of maximum loudness
+        without introduced distortions is called <dfn>normalized</dfn> and the process
+        is called <dfn>normalization</dfn>. Normalization is often carried out at
+        the musical records preparation stage, and the sound reaches us already
+        normalized (e.g. AudioCD). However, the normalization is not carried
+      out for movies. Why? </p>
+      <p> Let us recall histograms for music and a chaos relating to loudness. For
+        music, it is important to playback with maximum loudness, as it is meant
+        for maximum target audience – CD players, a noisy street, underground, cheap
+        earphones, croaky radio stations where low sounds less than -40 dB are not
+        hearable. (Let us have a one more look at <a href="#theory_loudness_pic_music">graphs
+      for music</a> – minimum loudness is approximately equal to - 40 dB.) </p>
+      <p> For DVD it is not so. They are primarily designed for quality home cinema.
+        Playback equipment should be calibrated to reproduce dialogs always with
+        the same absolute loudness for <em>any </em>movie, will it be an action
+        movie with explosions smashing a wall or a melodrama with soft rustle of
+        grass. At that, playback system should <em>always </em>be ready to playback
+        these sounds without necessity to change the gain level manually. Thus,
+        the most important is not a necessity to make a record maximum loud, but
+        a necessity to have fixed reference level to make it possible for a decoder
+        to adjust gain level automatically. This reference level may be any (as
+        a matter of fact, this is not important, i.e. if there is a reference level,
+        corresponding adjustment may be made at any time). The standard de facto
+        for DVD is the dialog level equal to -27 dB. Thus, even if a movie does
+        not contain loud sounds, one should not carry out normalization at the disc
+      creation stage and the dynamic range remains unspent. </p>
+  </div>
     <!-- ---------------------------------------------------------------------- -->
     <div class="subsubchapter">
-			<h4>7.1.6. One-pass normalization</h4>
-			<p> So, for the purpose of loudness increasing normalization is useful. However,
-			  to carry out normalization, one needs to know maximum recording level. To
-			  identify it, one needs to review the whole record beforehand. However, it
-			  is not always possible and is inconvenient. There is a normalization method,
-			  which does not need preview of the whole record – the one-pass normalization.
-			  The method consists in a <em>constant </em>search for maximum when we are
-			  watching a movie. At the initial moment, the gain is at maximum. When an
-		  overflow arises, we decrease gain: </p>
-			<div align="center"> <img alt="" src="pic/l_onepass.png" height="600" width="400"> </div>
-			<p> As it shown on the figure, the first loudness peak is clipped almost in
-			  the same way as in the case of usual overflow, but duration of 'clipping'
-			  is significantly shorter (compare with <a href="#theory_loudness_pic_limiting">simple
-			  limitating</a>) and later there will be no overflows. Thus, gain will
-			  be adjusted when every new maximum is found, and, as a result, the histogram
-		  is automatically shifted to achieve maximum loudness. </p>
-			<p> As all other, the method is not free from shortcomings. First, the method
-			  introduces distortions (though they are low observable, it is necessary
-			  to know precisely what to listen to in order to notice the one-pass normalization).
-			  Second, loudness is continuously decreasing during a movie show (though
-			  usually the main loudness decrease process ends during the first 10-15 minutes
-			  of a movie and so it is practically unnoticeable). And third, it may be
-			  that the main goal (loudness increase) will not be achieved – everything
-			  depends upon the movie itself (it relates also to the usual normalization).
-			  Here is an example of histograms obtained in the case of one-pass normalization
-			  of the Cube (where normalization is possible) and Fight Club (where normalization
-		  will not give the desirable effect) movies: </p>
-			<div align="center"> <img alt="" src="pic/h_onepass.png" height="409" width="595"> </div>
-			<p> As it seen on these histograms, the result is drastically different. Activation
-			  of one-pass normalization gives a substantial positive effect for the Cube
-			  movie – sound has become noticeably louder (our assumption that sounds louder
-			  than -15 dB are absent in the movie was confirmed – compare with <a href="#theory_loudness_pic_normalize">normalization
-			  graph</a>). However, in the Fight Club movie no increase of loudness took
-			  place at all – thus the desired effect was not achieved, but additional
-		  distortions were introduced. </p>
-			<p> It is necessary to note once more that for one-pass normalization operation
-			  preliminary (initial) gain is needed – without level rising, the one-way
-			  normalization is senseless. As well as the normal gain, it is set by the <span class="option">Master</span> level.
-			  However, if it is too strong loudness drop from the beginning of the
-		  algorithm operation will be very noticeable. </p>
-	</div>
+      <h4>7.1.6. One-pass normalization</h4>
+      <p> So, for the purpose of loudness increasing normalization is useful. However,
+        to carry out normalization, one needs to know maximum recording level. To
+        identify it, one needs to review the whole record beforehand. However, it
+        is not always possible and is inconvenient. There is a normalization method,
+        which does not need preview of the whole record – the one-pass normalization.
+        The method consists in a <em>constant </em>search for maximum when we are
+        watching a movie. At the initial moment, the gain is at maximum. When an
+      overflow arises, we decrease gain: </p>
+      <div align="center"> <img alt="" src="pic/l_onepass.png" height="600" width="400"> </div>
+      <p> As it shown on the figure, the first loudness peak is clipped almost in
+        the same way as in the case of usual overflow, but duration of 'clipping'
+        is significantly shorter (compare with <a href="#theory_loudness_pic_limiting">simple
+        limitating</a>) and later there will be no overflows. Thus, gain will
+        be adjusted when every new maximum is found, and, as a result, the histogram
+      is automatically shifted to achieve maximum loudness. </p>
+      <p> As all other, the method is not free from shortcomings. First, the method
+        introduces distortions (though they are low observable, it is necessary
+        to know precisely what to listen to in order to notice the one-pass normalization).
+        Second, loudness is continuously decreasing during a movie show (though
+        usually the main loudness decrease process ends during the first 10-15 minutes
+        of a movie and so it is practically unnoticeable). And third, it may be
+        that the main goal (loudness increase) will not be achieved – everything
+        depends upon the movie itself (it relates also to the usual normalization).
+        Here is an example of histograms obtained in the case of one-pass normalization
+        of the Cube (where normalization is possible) and Fight Club (where normalization
+      will not give the desirable effect) movies: </p>
+      <div align="center"> <img alt="" src="pic/h_onepass.png" height="409" width="595"> </div>
+      <p> As it seen on these histograms, the result is drastically different. Activation
+        of one-pass normalization gives a substantial positive effect for the Cube
+        movie – sound has become noticeably louder (our assumption that sounds louder
+        than -15 dB are absent in the movie was confirmed – compare with <a href="#theory_loudness_pic_normalize">normalization
+        graph</a>). However, in the Fight Club movie no increase of loudness took
+        place at all – thus the desired effect was not achieved, but additional
+      distortions were introduced. </p>
+      <p> It is necessary to note once more that for one-pass normalization operation
+        preliminary (initial) gain is needed – without level rising, the one-way
+        normalization is senseless. As well as the normal gain, it is set by the <span class="option">Master</span> level.
+        However, if it is too strong loudness drop from the beginning of the
+      algorithm operation will be very noticeable. </p>
+  </div>
     <!-- ---------------------------------------------------------------------- -->
     <div class="subsubchapter">
-			<h4>7.1.7. Dynamic range compression</h4>
-			<p> Let us think: what for do we need to raise loudness? Is it needed in order
-			  to hear quiet sounds, which are inaudible in our circumstances (e.g., if
-			  it is impossible to listen loud sounds, if there are unwanted noises in
-			  the room, etc.)? Is it possible to amplify quiet sounds without processing
-			  loud sounds? It turns out that it is possible. This technique is called
-			  the Dynamic Range Compression (DRC). For this compression, it is necessary
-			  to change the current loudness constantly: to amplify quiet sounds and not
-			  to amplify loud ones. The simplest law of loudness change is linear, i.e.
-			  loudness is changed according to the law: output_loudness = k * input_loudness,
-		  where k – dynamic range compression coefficient: </p>
-			<div align="center"> <img alt="" src="pic/drc_linear.png" height="405" width="388"> </div>
-			<p> When k = 1, no changes are made (output loudness is equal to input one).
-			  When k &lt; 1, loudness will increase and the dynamic range will be contracted.
-			  Let us have a look at the graph (k=1/2) – quiet sound with loudness equal
-			  to -50 dB will be higher by 25 dB, that is significantly louder. Meanwhile
-			  dialog loudness (-27 dB) will rise only by 13.5 dB, and loudness of the
-			  loudest sounds (0 dB) will not change at all. When k &gt; 1, loudness will
-		  decrease and the dynamic range will increase. </p>
-			<p> Let us look at loudness graphs (k = 1/2: the dynamic range will be compressed
-		  in double): </p>
-			<div align="center"> <img alt="" src="pic/l_drc.png" height="402" width="400"> </div>
-			<p> As it may be seen, there were very quiet sounds in the original that were
-			  lower than dialog level by 30 dB, as well as very loud ones higher than
-			  dialog level by 30 dB. Thus, the dynamic range is 60 dB. After compression,
-			  loud sounds are higher just by 15 dB, and quiet ones are lower than dialog
-			  level by 15 dB (the dynamic range is now equal to 30 dB). Thus, loud sounds
-			  have become significantly quieter, and quiet sounds – significantly louder.
-		  At that, there is no overflow! </p>
-			<p> Let us now consider histograms:</p>
-			<a name="theory_loudness_pic_drc"></a>
-			<div align="center"> <img alt="" src="pic/h_drc.png" height="426" width="595"> </div>
-			<p> As it clearly seen, when gain level is up to +30 dB the histogram form
-			  is well preserved. It means that loud sounds remain well marked (they do
-			  not become maximum and are not clipped as in the process of <a href="#theory_loudness_pic_gain">simple
-			  gain</a>). At that, quiet sounds are identified. The histogram shows it
-			  poorly but the difference is very noticeable by ears. The method's shortcoming:
-			  the same jumps of loudness. However, their generation mechanism differs
-			  from jumps of loudness arising during clipping, and their character is completely
-			  different: they arise generally in the case of very high gain of quiet sounds
-			  (and not during clipping of loud sounds as in the process of the normal
-			  gain). Excessive compression level results in flattening of the sound pattern:
-		  all sounds tend to be equally loud and inexpressive. </p>
-			<p> High gain of quiet sounds may result in audible recording noise. Thus,
-			  the filter uses a somewhat modified algorithm to lessen an increase of
-		  noise level: </p>
-			<div align="center"> <img alt="" src="pic/drc_bended.png" height="405" width="388"> </div>
-			<p> That is, at loudness level equal to -50 dB there is a knee of the transfer
-			  function and noises will be amplified less (yellow line). When there is
-			  no such knee, noises will be significantly louder (grey line). Such simple
-			  modification significantly decreases noise level even at very high compression
-			  levels (on the figure – compression is equal to 1.5). The <span class="option">DRC</span> level
-			  of the filter defines gain level for quiet sounds (-50 dB), thus the
-			  compression level 1/5 shown on the figure corresponds to +40 dB level in
-		  filter settings. </p>
-	</div>
+      <h4>7.1.7. Dynamic range compression</h4>
+      <p> Let us think: what for do we need to raise loudness? Is it needed in order
+        to hear quiet sounds, which are inaudible in our circumstances (e.g., if
+        it is impossible to listen loud sounds, if there are unwanted noises in
+        the room, etc.)? Is it possible to amplify quiet sounds without processing
+        loud sounds? It turns out that it is possible. This technique is called
+        the Dynamic Range Compression (DRC). For this compression, it is necessary
+        to change the current loudness constantly: to amplify quiet sounds and not
+        to amplify loud ones. The simplest law of loudness change is linear, i.e.
+        loudness is changed according to the law: output_loudness = k * input_loudness,
+      where k – dynamic range compression coefficient: </p>
+      <div align="center"> <img alt="" src="pic/drc_linear.png" height="405" width="388"> </div>
+      <p> When k = 1, no changes are made (output loudness is equal to input one).
+        When k &lt; 1, loudness will increase and the dynamic range will be contracted.
+        Let us have a look at the graph (k=1/2) – quiet sound with loudness equal
+        to -50 dB will be higher by 25 dB, that is significantly louder. Meanwhile
+        dialog loudness (-27 dB) will rise only by 13.5 dB, and loudness of the
+        loudest sounds (0 dB) will not change at all. When k &gt; 1, loudness will
+      decrease and the dynamic range will increase. </p>
+      <p> Let us look at loudness graphs (k = 1/2: the dynamic range will be compressed
+      in double): </p>
+      <div align="center"> <img alt="" src="pic/l_drc.png" height="402" width="400"> </div>
+      <p> As it may be seen, there were very quiet sounds in the original that were
+        lower than dialog level by 30 dB, as well as very loud ones higher than
+        dialog level by 30 dB. Thus, the dynamic range is 60 dB. After compression,
+        loud sounds are higher just by 15 dB, and quiet ones are lower than dialog
+        level by 15 dB (the dynamic range is now equal to 30 dB). Thus, loud sounds
+        have become significantly quieter, and quiet sounds – significantly louder.
+      At that, there is no overflow! </p>
+      <p> Let us now consider histograms:</p>
+      <a name="theory_loudness_pic_drc"></a>
+      <div align="center"> <img alt="" src="pic/h_drc.png" height="426" width="595"> </div>
+      <p> As it clearly seen, when gain level is up to +30 dB the histogram form
+        is well preserved. It means that loud sounds remain well marked (they do
+        not become maximum and are not clipped as in the process of <a href="#theory_loudness_pic_gain">simple
+        gain</a>). At that, quiet sounds are identified. The histogram shows it
+        poorly but the difference is very noticeable by ears. The method's shortcoming:
+        the same jumps of loudness. However, their generation mechanism differs
+        from jumps of loudness arising during clipping, and their character is completely
+        different: they arise generally in the case of very high gain of quiet sounds
+        (and not during clipping of loud sounds as in the process of the normal
+        gain). Excessive compression level results in flattening of the sound pattern:
+      all sounds tend to be equally loud and inexpressive. </p>
+      <p> High gain of quiet sounds may result in audible recording noise. Thus,
+        the filter uses a somewhat modified algorithm to lessen an increase of
+      noise level: </p>
+      <div align="center"> <img alt="" src="pic/drc_bended.png" height="405" width="388"> </div>
+      <p> That is, at loudness level equal to -50 dB there is a knee of the transfer
+        function and noises will be amplified less (yellow line). When there is
+        no such knee, noises will be significantly louder (grey line). Such simple
+        modification significantly decreases noise level even at very high compression
+        levels (on the figure – compression is equal to 1.5). The <span class="option">DRC</span> level
+        of the filter defines gain level for quiet sounds (-50 dB), thus the
+        compression level 1/5 shown on the figure corresponds to +40 dB level in
+      filter settings. </p>
+  </div>
     <!-- ---------------------------------------------------------------------- -->
     <div class="subsubchapter">
-			<h4>7.1.9. Mixing and loudness</h4>
-			<p> There is one more detail not obvious, which may highly influence loudness
-			  during playback of multichannel records on a stereo system (or using headphones).
-			  Let us suppose that we have an initial record in the 5.1 format and it is
-			  necessary to obtain two channels at the output. Into each output channel
-			  there are mixed: one front channel, one rear channel, the LFE channel and
-			  part of the central channel: </p>
-			L' = L + 0.7*C + SL + LFE<br>
-			R' = R + 0.7*C + SR + LFE
-			<p> Let us suppose that there is maximum loud sound simultaneously in all input
-				channels (though it is not probable enough). Then the amplitude in the output
-				channel will be 3.7 times more than maximum (by 11 dB), i.e. there will be
-				the highest overflow. To prevent overflow, mixing formulas should be rewritten
-				in the following way: </p>
-			L' = (L + 0.7*C + SL + LFE) / 3.7<br>
-			R' = (R + 0.7*C + SR + LFE) / 3.7
-			<p>This is a normalized mixing (you should not confuse it with normalization
-				of record itself) – this guarantees absence of an overflow. However, sound
-				mixed in this way is quieter by 11 dB! Is it possible not to carry out normalization?
-				Yes. However, in this case there are possible overflow and related distortions.
-				Overflow arises only then when all input channels simultaneously reproduce
-				a loud sound. It is not typical for movies (usually rear channels are noticeably
-				quieter than front ones and the LFE channel is used far from always), but it
-				is usual for multichannel musical records. That is why one may leave the non-normalized
-				mixing for musical records, and for music, it is better to switch the normalization
-				on. (In the filter, normalization of mixing is controlled by the <span class="option">Normalize
-			matrix</span> option).</p>
-	</div>
+      <h4>7.1.9. Mixing and loudness</h4>
+      <p> There is one more detail not obvious, which may highly influence loudness
+        during playback of multichannel records on a stereo system (or using headphones).
+        Let us suppose that we have an initial record in the 5.1 format and it is
+        necessary to obtain two channels at the output. Into each output channel
+        there are mixed: one front channel, one rear channel, the LFE channel and
+        part of the central channel: </p>
+      L' = L + 0.7*C + SL + LFE<br>
+      R' = R + 0.7*C + SR + LFE
+      <p> Let us suppose that there is maximum loud sound simultaneously in all input
+        channels (though it is not probable enough). Then the amplitude in the output
+        channel will be 3.7 times more than maximum (by 11 dB), i.e. there will be
+        the highest overflow. To prevent overflow, mixing formulas should be rewritten
+        in the following way: </p>
+      L' = (L + 0.7*C + SL + LFE) / 3.7<br>
+      R' = (R + 0.7*C + SR + LFE) / 3.7
+      <p>This is a normalized mixing (you should not confuse it with normalization
+        of record itself) – this guarantees absence of an overflow. However, sound
+        mixed in this way is quieter by 11 dB! Is it possible not to carry out normalization?
+        Yes. However, in this case there are possible overflow and related distortions.
+        Overflow arises only then when all input channels simultaneously reproduce
+        a loud sound. It is not typical for movies (usually rear channels are noticeably
+        quieter than front ones and the LFE channel is used far from always), but it
+        is usual for multichannel musical records. That is why one may leave the non-normalized
+        mixing for musical records, and for music, it is better to switch the normalization
+        on. (In the filter, normalization of mixing is controlled by the <span class="option">Normalize
+      matrix</span> option).</p>
+  </div>
     <!-- ---------------------------------------------------------------------- -->
     <div class="subsubchapter">
-			<h4>7.1.10. Recommendations.</h4>
-			<p> Setting recommendations are highly depend on specific conditions of listening
-		  and a goal set. Conditionally, all conditions may be categorized as follows: </p>
-			<ol>
-				<li> High-quality home cinema and good listening conditions – no unwanted
-				  sounds (street noise, neighbors from above, children running about and
-				  a possibility to make noise (neighbors are absent). For this category all
-			  post-processing may be switched off (preset standard). </li>
-				<li> Good acoustics, but there is external noise. It is possible to use small
-			  gain and small compression level. </li>
-				<li> One cannot make noise him(her)self (night, neighbors/children), ordinary
-				  acoustics (cheap headphones, weak speakers). There is necessary high compression
-			  level plus an increase of the level or the one-pass normalization. </li>
-			</ol>
-			<p> The best results may be achieved only by combining all methods. In this
-			  section, we will consider only a case of viewing DVD movies. For other cases
-			  (music, MPEG4 movies, etc.) sound characteristics are very different. However,
-			  after familiarization with the filter's setting for DVD-movies it is not
-		  difficult to study other cases. </p>
-			<p> Gain (<span class="option">Master</span> level). Jumps of loudness arising in the case of overflow
-			  are unnoticeable only then when the sound being clipped is much louder than
-			  the basic one: in the example, relating to a telephone ring loudness of
-			  the telephone sound is comparable with loudness of voice sound. However,
-			  if instead of a telephone there will be a thundering explosion, voice sound
-			  will be indistinguishable in any case. Therefore, a limitation of the loudest
-			  sounds is admissible and practically unnoticeable. As very loud one may
-			  consider sounds from +15...+20 dB as related to dialog level. Thus, when
-			  dialog level is equal to -27 dB (de facto for DVD), the admissible gain
-			  level is equal to +7...+12 dB. As one more reference, one may address <a href="#theory_loudness_pic_gain">gain
-			  histograms</a>: gain up to +10 dB does not highly influence the histogram
-			  form, while at gain equal to +20 dB a very large number of sounds will be
-			  limited. Thus, one may consider gain up to +10 dB as admissible. This value
-			  may be kept practically always: in movies with quiet sound, it will notably
-			  raise loudness, and in loud ones, it will not hinder very much. (We should
-			  note once more that the reasoning is provided only for the case of watching
-			  DVD movies; for music and for most mpeg4 movies it is inapplicable, as histograms'
-		  characteristics are very different). </p>
-			<p>Gain can also be used for limiting signal loudness (e.g. for listening at night).
-				When dialog levels are equal to -27 dB and gain is equal to +17 dB dialog levels
-				after gain will be equal to -10 dB, and level of the loudest sound will be equal,
-				as usual, to 0 dB that is just by +10 dB higher than dialog level. Thus, setting
-				gain in the filter equal to +17 dB and adjusting the system loudness so that
-				dialogs will be reproduced with acceptable absolute loudness, we will get a guarantee
-				that the loudest sounds will not exceed dialog levels by more than 10 dB (though,
-			certainly, in this case signal limitation will be used for loud sounds).</p>
-			<p> Dynamic range compression (DRC). It is much more difficult
-			  to determine bounds of using compression, as audibility of compression
-			  defects is highly dependable on acoustic system, listening conditions
-			  and the listener him(her)self. If histograms are used to solve this issue
-			  the upper limit of compression applicability may be estimated as +20...+30
-			  dB (see <a href="#theory_loudness_pic_drc">histograms</a>).
-			  In this case, loud sounds still remain distinguished from quiet ones
-			  by loudness. Thus, compression level is selected only audibly, until
-			  the necessary loudness is achieved and defects will remain unnoticeable. </p>
-			<p> It is necessary to take into account that compression and gain are applied
-			  simultaneously. Thus, when the gain level is +20 dB and compression is twofold
-			  (+25 dB) the actual gain level will be equal to +10 dB. It is normal, as
-		  a requirement for gain is also decreased with an increase of compression.</p>
-			<p> One-pass normalization. It is also applicable practically always. For
-			  high-quality systems with low gain level it will allow to diminish number
-			  of overflows; and in other cases, combined with compression, it will
-			  allow to achieve maximum loudness, also with minimum of distortions related
-			  to overflow. An initial gain level (<span class="option">Master</span> level) for normalization is selected
-			  on the basis of goals; if a high gain is not needed the desirable gain
-			  is set. To achieve maximum loudness, one may set a level equal to +20 dB. </p>
-	</div>
+      <h4>7.1.10. Recommendations.</h4>
+      <p> Setting recommendations are highly depend on specific conditions of listening
+      and a goal set. Conditionally, all conditions may be categorized as follows: </p>
+      <ol>
+        <li> High-quality home cinema and good listening conditions – no unwanted
+          sounds (street noise, neighbors from above, children running about and
+          a possibility to make noise (neighbors are absent). For this category all
+        post-processing may be switched off (preset standard). </li>
+        <li> Good acoustics, but there is external noise. It is possible to use small
+        gain and small compression level. </li>
+        <li> One cannot make noise him(her)self (night, neighbors/children), ordinary
+          acoustics (cheap headphones, weak speakers). There is necessary high compression
+        level plus an increase of the level or the one-pass normalization. </li>
+      </ol>
+      <p> The best results may be achieved only by combining all methods. In this
+        section, we will consider only a case of viewing DVD movies. For other cases
+        (music, MPEG4 movies, etc.) sound characteristics are very different. However,
+        after familiarization with the filter's setting for DVD-movies it is not
+      difficult to study other cases. </p>
+      <p> Gain (<span class="option">Master</span> level). Jumps of loudness arising in the case of overflow
+        are unnoticeable only then when the sound being clipped is much louder than
+        the basic one: in the example, relating to a telephone ring loudness of
+        the telephone sound is comparable with loudness of voice sound. However,
+        if instead of a telephone there will be a thundering explosion, voice sound
+        will be indistinguishable in any case. Therefore, a limitation of the loudest
+        sounds is admissible and practically unnoticeable. As very loud one may
+        consider sounds from +15...+20 dB as related to dialog level. Thus, when
+        dialog level is equal to -27 dB (de facto for DVD), the admissible gain
+        level is equal to +7...+12 dB. As one more reference, one may address <a href="#theory_loudness_pic_gain">gain
+        histograms</a>: gain up to +10 dB does not highly influence the histogram
+        form, while at gain equal to +20 dB a very large number of sounds will be
+        limited. Thus, one may consider gain up to +10 dB as admissible. This value
+        may be kept practically always: in movies with quiet sound, it will notably
+        raise loudness, and in loud ones, it will not hinder very much. (We should
+        note once more that the reasoning is provided only for the case of watching
+        DVD movies; for music and for most mpeg4 movies it is inapplicable, as histograms'
+      characteristics are very different). </p>
+      <p>Gain can also be used for limiting signal loudness (e.g. for listening at night).
+        When dialog levels are equal to -27 dB and gain is equal to +17 dB dialog levels
+        after gain will be equal to -10 dB, and level of the loudest sound will be equal,
+        as usual, to 0 dB that is just by +10 dB higher than dialog level. Thus, setting
+        gain in the filter equal to +17 dB and adjusting the system loudness so that
+        dialogs will be reproduced with acceptable absolute loudness, we will get a guarantee
+        that the loudest sounds will not exceed dialog levels by more than 10 dB (though,
+      certainly, in this case signal limitation will be used for loud sounds).</p>
+      <p> Dynamic range compression (DRC). It is much more difficult
+        to determine bounds of using compression, as audibility of compression
+        defects is highly dependable on acoustic system, listening conditions
+        and the listener him(her)self. If histograms are used to solve this issue
+        the upper limit of compression applicability may be estimated as +20...+30
+        dB (see <a href="#theory_loudness_pic_drc">histograms</a>).
+        In this case, loud sounds still remain distinguished from quiet ones
+        by loudness. Thus, compression level is selected only audibly, until
+        the necessary loudness is achieved and defects will remain unnoticeable. </p>
+      <p> It is necessary to take into account that compression and gain are applied
+        simultaneously. Thus, when the gain level is +20 dB and compression is twofold
+        (+25 dB) the actual gain level will be equal to +10 dB. It is normal, as
+      a requirement for gain is also decreased with an increase of compression.</p>
+      <p> One-pass normalization. It is also applicable practically always. For
+        high-quality systems with low gain level it will allow to diminish number
+        of overflows; and in other cases, combined with compression, it will
+        allow to achieve maximum loudness, also with minimum of distortions related
+        to overflow. An initial gain level (<span class="option">Master</span> level) for normalization is selected
+        on the basis of goals; if a high gain is not needed the desirable gain
+        is set. To achieve maximum loudness, one may set a level equal to +20 dB. </p>
+  </div>
   </div> <!-- <div id="theory_loudness" class="subchapter"> -->
 
   <!-- ---------------------------------------------------------------------- -->
   <div id="theory_lfe" class="subchapter">
     <h3><a name="theory_lfe">7.2. What is LFE?</a></h3>
-		
+    
     <p> The first that should be noted: <em>LFE is not the same as a subwoofer</em>! In
       addition, the designation '5.1' for AC3 does not coincide with '5.1' for
     an acoustic system. Thus, let us begin from considering this difference. </p>
@@ -2142,133 +2142,133 @@ also will be normal. </p>
         frequency, equal to 120 Hz and set as default, is suitable for most of
       such systems. </li>
       <li>Main columns are broad-banded and are capable to reproduce low frequencies independently,
-				and subwoofer plays a supporting role only. In this case, bass redirection is
-			optional, but it may be used for the lowest frequencies (~40 Hz).</li>
+        and subwoofer plays a supporting role only. In this case, bass redirection is
+      optional, but it may be used for the lowest frequencies (~40 Hz).</li>
     </ul>
     <p> To obtain more detailed information on purposes of channels, subwoofer
     and bass control, address the Dolby site: <a href="http://www.dolby.com/tech/c.in.0011.LFE.pdf">http://www.dolby.com/tech/c.in.0011.LFE.pdf</a> (Eng). </p>
   </div> <!-- <div id="theory_lfe" class="subchapter"> -->
-	
+  
   <!-- ---------------------------------------------------------------------- -->
-	
+  
   <div id="theory_spdif" class="subchapter">
-		<h3><a name="theory_spdif">7.3. SPDIF</a></h3>
-		<p> SPDIF (S/P DIF, Sony/Philips Digital Interface, IEC958 &quot;Digital audio
-	  interface&quot; standard) is digital interface for sound transfer. </p>
-		<p> When the connection is analog, an acoustic system is connected in the following
-	  way: </p>
+    <h3><a name="theory_spdif">7.3. SPDIF</a></h3>
+    <p> SPDIF (S/P DIF, Sony/Philips Digital Interface, IEC958 &quot;Digital audio
+    interface&quot; standard) is digital interface for sound transfer. </p>
+    <p> When the connection is analog, an acoustic system is connected in the following
+    way: </p>
     <div class="image">
       <img alt="" src="pic/con_analog.png" height="393" width="741">
     </div>
-		<p> Digital-to-analog converter (<dfn>DAC</dfn>) is situated on the sound card, and sound
-		  is transferred out of computer in the analog form. For connection, one
-		  needs three stereo wires (for 6-channel system) from sound card to amplifier
-		  and six wires from amplifier to each speaker. </p>
-		<p> When the connection is digital the following connection scheme is us ed: </p>
+    <p> Digital-to-analog converter (<dfn>DAC</dfn>) is situated on the sound card, and sound
+      is transferred out of computer in the analog form. For connection, one
+      needs three stereo wires (for 6-channel system) from sound card to amplifier
+      and six wires from amplifier to each speaker. </p>
+    <p> When the connection is digital the following connection scheme is us ed: </p>
     <div class="image">
       <img alt="" src="pic/con_spdif.png" height="393" width="741">
     </div>
-		<p> Here, to connect a receiver, only one wire is needed, and sound is transferred
-		  in digital form. DAC and amplifier are situated in the receiver. As DAC is
-		  subjected to lesser influence of electronic noises outside computer, and
-		  amplifier is situated nearby, the receiver can provide better sound quality
-	  in the digital transfer mode. </p>
-		<p> Initially, the SPDIF standard enabled transmission only of uncompressed
-		  PCM audio in stereo mode. However, as the transfer is made in digital form,
-		  one may transfer data of any format, if only transmission rate is satisfactory.
-		  So, the standard for transferring of compressed multichannel audio is SPDIF-passthrough
-		  mode. (A multichannel sound cannot be transmitted in uncompressed mode,
-	  as the transmission rate is limited.) </p>
-		<p> The pass-through communication mode may be illustrated in the following
-	  way: </p>
-		<div class="image">
+    <p> Here, to connect a receiver, only one wire is needed, and sound is transferred
+      in digital form. DAC and amplifier are situated in the receiver. As DAC is
+      subjected to lesser influence of electronic noises outside computer, and
+      amplifier is situated nearby, the receiver can provide better sound quality
+    in the digital transfer mode. </p>
+    <p> Initially, the SPDIF standard enabled transmission only of uncompressed
+      PCM audio in stereo mode. However, as the transfer is made in digital form,
+      one may transfer data of any format, if only transmission rate is satisfactory.
+      So, the standard for transferring of compressed multichannel audio is SPDIF-passthrough
+      mode. (A multichannel sound cannot be transmitted in uncompressed mode,
+    as the transmission rate is limited.) </p>
+    <p> The pass-through communication mode may be illustrated in the following
+    way: </p>
+    <div class="image">
       <img alt="" src="pic/con_passthrough.png" height="393" width="741">
     </div>
-		<p> Thus, sound is transmitted <em>unchanged </em>through the entire system
-		  from DVD disc (or other sound source) to receiver; it explains the mode's
-		  name. As the data are transferred without changes, other computer sound processing
-		  options, including change of loudness, are unavailable. All settings may
-		  be made for receiver <em>only</em>. Besides, at the same time only one sound
-	  source may be reproduced, as mixing of compressed sound is impossible. </p>
-		<p> As sound is transmitted in compressed form, receiver should be able to
-		  decode it. There are many sound compression formats, and it is obvious that
-		  receiver cannot support all existing formats. So the following formats are
-		  supported: AC3 (DolbyDigital), DTS, MPEG Audio (including MP3). However,
-		  not all receivers support even this set of formats, usually the AC3 is supported,
-		  rarely – the DTS format and more rarely – the MPEG Audio format. The DTS
-		  format ensures higher quality of sound, but the AC4 format is more widespread,
-	  as it is the standard for DVD. </p>
-		<p> As a decoder, a digital-to-analog converter and an amplifier are in the
-		  same device, it is possible to adjust the gain level automatically. It eliminates
-	  loudness problem. </p>
-		<p> To use the pass-through transfer mode there are necessary: </p>
-		<ul>
+    <p> Thus, sound is transmitted <em>unchanged </em>through the entire system
+      from DVD disc (or other sound source) to receiver; it explains the mode's
+      name. As the data are transferred without changes, other computer sound processing
+      options, including change of loudness, are unavailable. All settings may
+      be made for receiver <em>only</em>. Besides, at the same time only one sound
+    source may be reproduced, as mixing of compressed sound is impossible. </p>
+    <p> As sound is transmitted in compressed form, receiver should be able to
+      decode it. There are many sound compression formats, and it is obvious that
+      receiver cannot support all existing formats. So the following formats are
+      supported: AC3 (DolbyDigital), DTS, MPEG Audio (including MP3). However,
+      not all receivers support even this set of formats, usually the AC3 is supported,
+      rarely – the DTS format and more rarely – the MPEG Audio format. The DTS
+      format ensures higher quality of sound, but the AC4 format is more widespread,
+    as it is the standard for DVD. </p>
+    <p> As a decoder, a digital-to-analog converter and an amplifier are in the
+      same device, it is possible to adjust the gain level automatically. It eliminates
+    loudness problem. </p>
+    <p> To use the pass-through transfer mode there are necessary: </p>
+    <ul>
           <li> Support of the format by receiver. </li>
           <li> Support of operating system (see the <a href="#system_setup_windows">compatibility
               table</a>). </li>
           <li> Support of sound card by driver. </li>
-		  <li>Support by audio decoder (the
+      <li>Support by audio decoder (the
               AC3Filter supports this mode). </li>
-		</ul>
-		<p> However, even when all these requirements are met the pass-through transfer
-		  mode may be used far from always. E.g., the SPDIF standard allows to use
-		  just three sampling rate: 48 kHz (DVD), 44.1 kHz (AudioCD) and 32 kHz. If
-		  the source has another sampling rate, the pass-through transfer is impossible.
-		  Besides, some sound cards (e.g. Creative) support only 48 kHz frequency,
-		  i.e. the mode may be used for DVD only and cannot be used with many other
-	    sources. </p>
-		<p> Some sound tracks of the DTS format also cannot be transmitted in the pass-through
-		  transfer mode. The thing is that this format ensures very good quality of
-		  sound; however, this format has lower compression level. Some DTS records
-	    have too low compression level and SPDIF bandwidth is insufficient. </p>
-		<p> A short comparison table for analog and digital connections: </p>
-		<table border="1" cellspacing="0">
-			<tr>
-				<th bgcolor="#E0E0E0"> <strong> Analog connection </strong> </th>
-				<th bgcolor="#E0E0E0"> <strong> Digital connection</strong> </th>
-			</tr>
-			<tr>
-				<td bgcolor="#FFE0E0">(-) Many wires </td>
-				<td bgcolor="#E0FFE0">(+) One wire </td>
-			</tr>
-			<tr>
-				<td bgcolor="#FFE0E0">(-) DAC is situated on sound card and is subjected
-				  to electronic noises inside computer</td>
-				<td bgcolor="#E0FFE0">(+) DAC is situated in an external device and can ensure
-				  better sound quality</td>
-			</tr>
-			<tr>
-				<td bgcolor="#E0FFE0">(+) The format is practically unrestricted</td>
-				<td bgcolor="#FFE0E0">(-) There are many restrictions on a format of transmitted
-				  data</td>
-			</tr>
-			<tr>
-			  <td bgcolor="#E0FFE0">(+) It is possible to reproduce several sounds simultaneously</td>
-			  <td bgcolor="#FFE0E0">(-) Only one sound source may be used</td>
-		  </tr>
-			<tr>
-				<td bgcolor="#E0FFE0">(+) Setting is more simple</td>
-				<td bgcolor="#FFE0E0">(-) Setting is more difficult</td>
-			</tr>
-			<tr>
-				<td bgcolor="#E0FFE0">(+) Possibility of sound processing on computer</td>
-				<td bgcolor="#FFE0E0">(-) Sound processing on computer is impossible</td>
-			</tr>
-			<tr>
-				<td bgcolor="#E0FFE0">(+) The price is lower</td>
-				<td bgcolor="#FFE0E0">(-) The price is higher</td>
-			</tr>
-		</table>
-		<p> In some cases there is a possibility to transmit multichannel sound even
-		  when the pass-through transfer mode is unavailable (the format is not supported
-		  by receiver). To this effect, it is necessary to convert the format into
-	    a form understood by receiver: </p>
-		<p> Such model of operation enables to bypass many restrictions on the pass-through
-		  transfer mode. However, it is necessary to remember that coding to AC3 always
-		  results in quality loss (the AC3 format is a format of coding with losses,
-		  as well as e.g. the MP3 format), i.e. the main advantage of the digital connection
-		  turns out to be questionable. In these cases, it is recommended to use analog
-	    connection as it may ensure better quality. </p>
+    </ul>
+    <p> However, even when all these requirements are met the pass-through transfer
+      mode may be used far from always. E.g., the SPDIF standard allows to use
+      just three sampling rate: 48 kHz (DVD), 44.1 kHz (AudioCD) and 32 kHz. If
+      the source has another sampling rate, the pass-through transfer is impossible.
+      Besides, some sound cards (e.g. Creative) support only 48 kHz frequency,
+      i.e. the mode may be used for DVD only and cannot be used with many other
+      sources. </p>
+    <p> Some sound tracks of the DTS format also cannot be transmitted in the pass-through
+      transfer mode. The thing is that this format ensures very good quality of
+      sound; however, this format has lower compression level. Some DTS records
+      have too low compression level and SPDIF bandwidth is insufficient. </p>
+    <p> A short comparison table for analog and digital connections: </p>
+    <table border="1" cellspacing="0">
+      <tr>
+        <th bgcolor="#E0E0E0"> <strong> Analog connection </strong> </th>
+        <th bgcolor="#E0E0E0"> <strong> Digital connection</strong> </th>
+      </tr>
+      <tr>
+        <td bgcolor="#FFE0E0">(-) Many wires </td>
+        <td bgcolor="#E0FFE0">(+) One wire </td>
+      </tr>
+      <tr>
+        <td bgcolor="#FFE0E0">(-) DAC is situated on sound card and is subjected
+          to electronic noises inside computer</td>
+        <td bgcolor="#E0FFE0">(+) DAC is situated in an external device and can ensure
+          better sound quality</td>
+      </tr>
+      <tr>
+        <td bgcolor="#E0FFE0">(+) The format is practically unrestricted</td>
+        <td bgcolor="#FFE0E0">(-) There are many restrictions on a format of transmitted
+          data</td>
+      </tr>
+      <tr>
+        <td bgcolor="#E0FFE0">(+) It is possible to reproduce several sounds simultaneously</td>
+        <td bgcolor="#FFE0E0">(-) Only one sound source may be used</td>
+      </tr>
+      <tr>
+        <td bgcolor="#E0FFE0">(+) Setting is more simple</td>
+        <td bgcolor="#FFE0E0">(-) Setting is more difficult</td>
+      </tr>
+      <tr>
+        <td bgcolor="#E0FFE0">(+) Possibility of sound processing on computer</td>
+        <td bgcolor="#FFE0E0">(-) Sound processing on computer is impossible</td>
+      </tr>
+      <tr>
+        <td bgcolor="#E0FFE0">(+) The price is lower</td>
+        <td bgcolor="#FFE0E0">(-) The price is higher</td>
+      </tr>
+    </table>
+    <p> In some cases there is a possibility to transmit multichannel sound even
+      when the pass-through transfer mode is unavailable (the format is not supported
+      by receiver). To this effect, it is necessary to convert the format into
+      a form understood by receiver: </p>
+    <p> Such model of operation enables to bypass many restrictions on the pass-through
+      transfer mode. However, it is necessary to remember that coding to AC3 always
+      results in quality loss (the AC3 format is a format of coding with losses,
+      as well as e.g. the MP3 format), i.e. the main advantage of the digital connection
+      turns out to be questionable. In these cases, it is recommended to use analog
+      connection as it may ensure better quality. </p>
   </div> <!-- <div id="theory_loudness" class="subchapter"> -->
 </div>
 
@@ -2277,25 +2277,25 @@ also will be normal. </p>
 =========================================================================== -->
 
 <div id="distribution" class="chapter">
-	<h2><a name="distribution"></a>8. Distribution </h2>
-	
-	<p> This software product is distributed under the GNU General Public License
-	  v2, the text is appended as the GNU_eng.txt file in English and the GNU_rus.txt
-	  in Russian. The variant in Russian is provided as a reference only; in case
+  <h2><a name="distribution"></a>8. Distribution </h2>
+  
+  <p> This software product is distributed under the GNU General Public License
+    v2, the text is appended as the GNU_eng.txt file in English and the GNU_rus.txt
+    in Russian. The variant in Russian is provided as a reference only; in case
     of any discrepancies, the English version prevails. </p>
-	<p> This software product may be used only for demonstration and training purposes.
-	  Any use for other purposes may be prohibited in some countries. This product
+  <p> This software product may be used only for demonstration and training purposes.
+    Any use for other purposes may be prohibited in some countries. This product
     may be distributed freely, except for cases prohibited by the legislation. </p>
-	<p> This software product is distributed exceptionally with a hope that it will
-	  be useful; however, <strong>without any guarantees</strong> of operation on
-	  a specific equipment, of meeting any conditions, standards or needs. I <strong>do
-	  not undertake</strong> an assurance of twenty-four-hour (or any) support,
-	  of an error correction, of recovery of data lost due to operation of the program,
-	  of liability for spoilt hardware as well as for lost working time. I am not
+  <p> This software product is distributed exceptionally with a hope that it will
+    be useful; however, <strong>without any guarantees</strong> of operation on
+    a specific equipment, of meeting any conditions, standards or needs. I <strong>do
+    not undertake</strong> an assurance of twenty-four-hour (or any) support,
+    of an error correction, of recovery of data lost due to operation of the program,
+    of liability for spoilt hardware as well as for lost working time. I am not
     responsible for legality of multimedia products reproduced by this program. </p>
-	<p> This software product may be distributed in form of installation package
-	  ($download_bin) in CD collections or along with other programs. No author
-	  permission is needed for it. For codec-packs, it is admissible to distribute
+  <p> This software product may be distributed in form of installation package
+    ($download_bin) in CD collections or along with other programs. No author
+    permission is needed for it. For codec-packs, it is admissible to distribute
     the filter as individual module. </p>
 </div>
 
@@ -2304,7 +2304,7 @@ also will be normal. </p>
 =========================================================================== -->
 
 <div id="contact_author" class="chapter">
-	<h2><a name="contact_author"></a>9. Связь с автором</h2>
+  <h2><a name="contact_author"></a>9. Связь с автором</h2>
   <p> All questions relating to the filter operation, errors, new ideas, proposals,
     etc. should be addressed to the following address : <script language="JavaScript"><!--
           function h979(){var et8="@"; et8=et8+"ma"; et8="alex%20%3Cxvalex"+et8; et8=et8+"il.ru%3E"; et8="V"+et8; return et8};
@@ -2377,24 +2377,24 @@ not exceed 20К. If you wish to send files send a preliminary notice. </p>
 
 <div id="donations" class="chapter">
 <h2><a name="donations"></a>10. Donations</h2>
-	<p> The project needs your help! If you like the program, it enables you to
-	  solve your problems, you will use it at home or in your professional activities,
-	  and if you have ideas how to improve it, you may support the further project
+  <p> The project needs your help! If you like the program, it enables you to
+    solve your problems, you will use it at home or in your professional activities,
+    and if you have ideas how to improve it, you may support the further project
     development. </p>
-	<p> A financial support is accepted at this address: </p>
-	
+  <p> A financial support is accepted at this address: </p>
+  
     <div align="center"><a href="http://order.kagi.com/?6CZJZ">Donate!</a></div>
-	  <p> Any sum is important; this is not only money, but a moral support too. </p>
-	<p> You may support the project not only financially, I accept any help. In
-	  the first place, I need equipment for testing. E.g., a large number of problems
-	  relating to the SPDIF mode are caused by fact that I have absolutely no SPDIF
+    <p> Any sum is important; this is not only money, but a moral support too. </p>
+  <p> You may support the project not only financially, I accept any help. In
+    the first place, I need equipment for testing. E.g., a large number of problems
+    relating to the SPDIF mode are caused by fact that I have absolutely no SPDIF
     equipment. </p>
-	<p> Besides, the project needs a site and its maintenance. In addition, first
-	  of all, a support of the forum is needed to provide a patient help to beginners
+  <p> Besides, the project needs a site and its maintenance. In addition, first
+    of all, a support of the forum is needed to provide a patient help to beginners
     as well as to identify really serious problems. </p>
-	<p> It is required to translate the documentation, as for large number of users
-	  neither Russian, nor English languages are the native ones. Unfortunately,
-	  interface translation is not planned yet, but translation of documentation
+  <p> It is required to translate the documentation, as for large number of users
+    neither Russian, nor English languages are the native ones. Unfortunately,
+    interface translation is not planned yet, but translation of documentation
     is necessary. </p>
 </div>
 
