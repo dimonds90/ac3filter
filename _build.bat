@@ -13,16 +13,19 @@ goto endofperl
 #!perl
 #line 15
 use strict;
+use Time::localtime;
 
 
 ###########################################################
 # Version
 
-my $ver = shift || "internal";
+my $tm = localtime;
+my $ver = shift || sprintf "internal %02d/%02d/%02d %02d:%02d", $tm->mday, $tm->mon+1, $tm->year-100, $tm->hour, $tm->min;
 my $ver1 = $ver;
-$ver1 =~ s/[\s\.\\\/]/_/g;
+$ver1 =~ s/[\s\.]/_/g;
+$ver1 =~ s/[\\\/\:]//g;
 
-
+print "Building version $ver\n";
 
 ###########################################################
 # Other vars
@@ -113,6 +116,35 @@ printf "Building package...\n";
 `copy GPL_eng.txt $package`;
 `copy GPL_rus.txt $package`;
 
+
+
+###############################################################################
+##
+## Prepare documentation files
+##
+
+`mkdir $package`;
+print "Prepairing documentaion files...\n";
+
+my $changelog;
+
+$changelog = join("<br>", read_file("_changes_eng.txt"));
+$changelog =~ s/\s(?=(\s))/\&nbsp\;/g;
+write_file("$package\\ac3filter_eng.html", grep { s/(\$\w+)/$1/gee + 1 } read_file("doc\\ac3filter_eng.html"));
+
+$changelog = join("<br>", read_file("_changes_eng.txt"));
+$changelog =~ s/\s(?=(\s))/\&nbsp\;/g;
+write_file("$package\\ac3filter_ita.html", grep { s/(\$\w+)/$1/gee + 1 } read_file("doc\\ac3filter_ita.html"));
+
+$changelog = join("<br>", read_file("_changes_rus.txt"));
+$changelog =~ s/\s(?=(\s))/\&nbsp\;/g;
+write_file("$package\\ac3filter_rus.html", grep { s/(\$\w+)/$1/gee + 1 } read_file("doc\\ac3filter_rus.html"));
+
+`mkdir $package\\pic`;
+`mkdir $package\\pic\\players`;
+`copy doc\\ac3filter.release.css $package\\ac3filter.css`;
+`copy doc\\pic $package\\pic`;
+`copy doc\\pic\\players $package\\pic\\players`;
 
 
 ###############################################################################
