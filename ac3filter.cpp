@@ -176,12 +176,6 @@ AC3Filter::set_input(Speakers _in_spk)
   DbgLog((LOG_TRACE, 3, "> AC3Filter(%x)::set_input(%s %s %iHz)...", this, 
     _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
 
-  if (in_spk == _in_spk)
-  {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(): no change", this));
-    return true;
-  }
-
   if (!setup_chain(_in_spk, out_spk, use_spdif))
   {
     DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(): format refused", this));
@@ -198,12 +192,6 @@ AC3Filter::set_output(Speakers _out_spk, bool _use_spdif)
   DbgLog((LOG_TRACE, 3, "> AC3Filter(%x)::set_output(%s %s %iHz%s)...", this, 
     _out_spk.mode_text(), _out_spk.format_text(), _out_spk.sample_rate, 
     _use_spdif? " use SPDIF": ""));
-
-  if ((out_spk == _out_spk) && (use_spdif == _use_spdif))
-  {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_output(): no change", this));
-    return true;
-  }
 
   if (!setup_chain(in_spk, _out_spk, _use_spdif))
   {
@@ -357,7 +345,7 @@ AC3Filter::StartStreaming()
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StartStreaming()", this));
 
   // switch between spdif/analog
-  set_output(out_spk, use_spdif);
+  setup_chain(in_spk, out_spk, use_spdif);
 
   return CTransformFilter::StartStreaming();
 }
