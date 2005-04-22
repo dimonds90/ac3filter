@@ -19,6 +19,9 @@ const AMOVIESETUP_MEDIATYPE sudInPinTypes[] =
 {&MEDIATYPE_DVD_ENCRYPTED_PACK, &MEDIASUBTYPE_DTS               },
 
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_PCM               },
+{&MEDIATYPE_Audio,              &MEDIASUBTYPE_IEEE_FLOAT        },
+{&MEDIATYPE_Audio,              &MEDIASUBTYPE_DVD_LPCM_AUDIO    },
+
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_AVI_AC3           },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_AVI_DTS           },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_DOLBY_AC3         },
