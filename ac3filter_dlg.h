@@ -67,7 +67,6 @@ private:
   // Bass redirection
   DoubleEdit  edt_bass_freq;
   // Delay
-  int         delay_units;
   DoubleEdit  edt_delay[NCHANNELS];
   DoubleEdit  edt_time_shift;
   // Links
