@@ -34,6 +34,10 @@ protected:
   WNDPROC wndproc;
   bool    editing;
 
+  virtual bool read_value() = 0;
+  virtual void backup_value() = 0;
+  virtual void restore_value() = 0;
+  virtual void write_value() = 0;
 
 public:
   Edit(): dlg(0), hwnd(0), item(0), wndproc(0), editing(false) {};
@@ -42,11 +46,6 @@ public:
   void link(HWND dlg, int item);
   void unlink();
   void enable(bool enabled);
-
-  virtual bool set_value() = 0;
-  virtual void backup_value() = 0;
-  virtual void restore_value() = 0;
-  virtual void print_value() = 0;
 };
 
 class DoubleEdit : public Edit
@@ -54,15 +53,36 @@ class DoubleEdit : public Edit
 protected:
   double old_value;
 
+  bool read_value();
+  void backup_value();
+  void restore_value();
+  void write_value();
+
 public:
   double value;
   DoubleEdit() {};
 
-  bool set_value();
+  void update_value(double _value) { value = _value; write_value(); };
+};
+
+class TextEdit : public Edit
+{
+protected:
+  size_t size;
+  char *old_value;
+  char *value;
+
+  bool read_value();
   void backup_value();
   void restore_value();
-  void print_value();
-  void update_value(double _value) { value = _value; print_value(); };
+  void write_value();
+
+public:
+  TextEdit(size_t size = 256);
+  ~TextEdit();
+
+  void set_text(const char *text);
+  const char *get_text() { return value; };
 };
 
 class LinkButton

@@ -57,16 +57,16 @@ Edit::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_KILLFOCUS:
       if (iam->editing)
       {
-        if (iam->set_value())
+        if (iam->read_value())
         {
-          iam->print_value();
+          iam->write_value();
           SendMessage(iam->dlg, WM_COMMAND, MAKEWPARAM(iam->item, CB_ENTER), 0); 
         }
         else
         {
           iam->restore_value();
-          iam->print_value();
-          MessageBox(0, "Not a floating point value", "Error", MB_ICONEXCLAMATION | MB_OK);
+          iam->write_value();
+          MessageBox(0, "Incorrect value", "Error", MB_ICONEXCLAMATION | MB_OK);
         }
         iam->editing = false;
       }
@@ -81,20 +81,20 @@ Edit::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
       if (iam->editing && wParam == VK_RETURN)
       {
-        if (iam->set_value())
+        if (iam->read_value())
         {
           iam->editing = false;
           SendMessage(iam->dlg, WM_COMMAND, MAKEWPARAM(iam->item, CB_ENTER), 0); 
         }
         else
-          MessageBox(0, "Not a floating point value", "Error", MB_ICONEXCLAMATION | MB_OK);
+          MessageBox(0, "Incorrect value", "Error", MB_ICONEXCLAMATION | MB_OK);
         return 0; 
       }
 
       if (iam->editing && wParam == VK_ESCAPE)
       {
         iam->restore_value();
-        iam->print_value();
+        iam->write_value();
         iam->editing = false;
         return 0;
       }
@@ -118,7 +118,7 @@ Edit::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 }
 
 bool
-DoubleEdit::set_value()
+DoubleEdit::read_value()
 {
   char buf[256];
   char *stop;
@@ -151,11 +151,67 @@ DoubleEdit::restore_value()
 
 
 void 
-DoubleEdit::print_value()
+DoubleEdit::write_value()
 {
   char buf[256];
   sprintf(buf, "%.4g", value);
   SetDlgItemText(dlg, item, buf);
+}
+
+TextEdit::TextEdit(size_t _size)
+{
+  size = 0;
+  value = new char[_size+1];
+  old_value = new char[_size+1];
+  value[0] = 0;
+  old_value[0] = 0;
+
+  if (value && old_value)
+    size = _size;
+}
+
+TextEdit::~TextEdit()
+{
+  if (value) delete value;
+  if (old_value) delete old_value;
+}
+
+bool
+TextEdit::read_value()
+{
+  if (!SendDlgItemMessage(dlg, item, WM_GETTEXT, size, (LONG)value))
+    value[0] = 0;
+  else
+    value[size] = 0;
+
+  return true;
+}
+
+void
+TextEdit::backup_value()
+{
+  strcpy(old_value, value);
+}
+
+void 
+TextEdit::restore_value()
+{
+  strcpy(value, old_value);
+}
+
+
+void 
+TextEdit::write_value()
+{
+  SetDlgItemText(dlg, item, value);
+}
+
+void 
+TextEdit::set_text(const char *_text)
+{
+  strncpy(value, _text, size);
+  value[size] = 0;
+  write_value();
 }
 
 
