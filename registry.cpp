@@ -162,17 +162,11 @@ RegistryKey::get_text(LPCTSTR name, char *value, int size)
   DWORD type;
   DWORD buf_len = size;
 
-  if (RegQueryValueEx(key, name, NULL, &type, (LPBYTE)&value, &buf_len) != ERROR_SUCCESS)
-  {
-    value[0] = 0;
+  if (RegQueryValueEx(key, name, NULL, &type, (LPBYTE)value, &buf_len) != ERROR_SUCCESS)
     return false;
-  }
 
   if (type != REG_SZ)
-  {
-    value[0] = 0;
     return false;
-  }
   
   return true;
 }
@@ -210,7 +204,7 @@ RegistryKey::set_text(LPCTSTR name, const char *_value)
 {
   if (!key) return;
 
-  RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)&_value, strlen(_value)+1);
+  RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)_value, strlen(_value)+1);
 }
 
 
