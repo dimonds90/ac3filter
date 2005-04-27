@@ -875,6 +875,7 @@ AC3Filter::set_config_autoload(bool  _config_autoload)
 
 STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
 {
+  CAutoLock lock(&m_csReceive);
   AutoLock config_lock(&dec.config);
   AudioProcessorState state;
   dec.get_state(&state);
