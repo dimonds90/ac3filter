@@ -63,20 +63,20 @@
     <li> Decoding of AC3/DTS/MPEG1/2 Audio Layer I/II formats </li>
     <li> Support of DVD, AVI/AC3, AVI/DTS, WAV/AC3 and WAV/DTS </li>
     <li> Audio processing for any source </li>
-    <li> 6-channel decomposition of any source </li>
+    <li> Decomposition of any source to 6 channels </li>
     <li> Full information about audio track format </li>
     <li> Support of SPDIF passthrough mode </li>
     <li> Multi-channel audio output from all sources on SPDIF (on-the-fly AC3
       encoding) </li>
-    <li> Channel-by-channel amplification for all input/output channels </li>
-    <li> Channel-by-channel delays (for compensation of distance difference to
+    <li> Per-channel amplification for all input/output channels </li>
+    <li> Per-channel delays (for compensation of distance difference to
       speakers) </li>
     <li> Automatic gain control </li>
     <li> Clipping</li>
     <li> Dynamic Range Compression, DRC</li>
     <li> Level indication for input and output channels </li>
     <li> Matrix mixer and ability of direct modification of mixing matrix </li>
-    <li>Dolby Surround / Pro Logic / Pro Logic II mixing </li>
+    <li> Dolby Surround / Pro Logic / Pro Logic II downmix </li>
   </ul>
 </div>
 
@@ -171,13 +171,13 @@
 <div id="uninstall" class="chapter">
   <h2><a name="uninstall">3. Uninstall.</a></h2>
 
-  <p>Run uninstalling program from the Start menu or from the Control Panel.</p>
+  <p>Run uninstall program from the Start menu or from the Control Panel.</p>
 
-  <p class="warning">All recorded settings of matrices, equalizers, etc. will be deleted!</p>
+  <p class="warning">All saved settings of matrices, equalizers, etc. will be lost!</p>
 
   <p>Filter can be installed together with other programs (codec-packs, players…).
     In this case, filter can be uninstalled only together with that program.
-    If you have no idea about the program installed with the filter or you are
+    If you have no idea about what program filter was installed with or you are
     going to uninstall the filter but not the program you can uninstall the filter
   independently as follows: </p>
 
@@ -264,20 +264,20 @@
     <h3><a name="system_setup_multichannel">4.2. Setup for analog multichannel output mode </a></h3>
 
     <p>Configure speakers in filter settings (refer to <a href="#filter_setup_main">6.2.
-        Main settings</a>). Some audio cards operates incorrectly with <em>odd</em> number
-        of speakers (for instance, <span class="value">2/2+SW 4.1 quadro</span> or <span class="value">3/0
-        3 front</span>). Therefore, such modes should be avoided, if possible. <span class="value">Dolby
-        Surround/ProLogic</span> and <span class="value">Dolby ProLogic2</span> modes <em>are
-        not</em> multi-channel modes. Moreover, modes with subwoofer <span class="value">(2/0+SW
-        2.1 stereo</span>, <span class="value">4/0+SW 4.1 quadro</span>) should
-        not be used if acoustics has no separate input for subwoofer (refer to <a href="#theory_lfe">7.2.
-        What is LFE?</a>).</p>
+      Main settings</a>). Some audio cards operates incorrectly with <em>odd</em> number
+      of channels (for instance, <span class="value">2/2+SW 4.1 quadro</span> or <span class="value">3/0
+      3 front</span>). Therefore, such modes should be avoided, if possible. <span class="value">Dolby
+      Surround/ProLogic</span> and <span class="value">Dolby ProLogic2</span> modes <em>are
+      not</em> multi-channel modes. Moreover, modes with subwoofer <span class="value">(2/0+SW
+      2.1 stereo</span>, <span class="value">4/0+SW 4.1 quadro</span>) should
+      not be used if acoustics has no separate input for subwoofer (refer to <a href="#theory_lfe">7.2.
+      What is LFE?</a>).</p>
       
     <p>Set speakers mode in <span class="action">Control Panel->Sounds and Multimedia->Audio->Sound
-        Playback->Advanced</span>. Furthermore, audio card drivers often have
-        their own utilities for switching of speakers configuration. It is necessary
-        to set the proper configuration at both locations – within audio card
-        driver settings and within the Control Panel.</p>
+      Playback->Advanced</span>. Furthermore, audio card drivers often have
+      their own utilities for switching of speakers configuration. It is necessary
+      to set the proper configuration at both locations - within audio card
+      driver settings and within the Control Panel.</p>
 
     <p>For Creative audio card it is <em>necessary</em> to switch off all sound
     effects and equalizers, otherwise there can be a loss of central/rear channels. </p>
@@ -300,7 +300,7 @@
     <h3><a name="system_setup_spdif">4.3. Setup for digital (SPDIF) output mode </a></h3>
     <small>(It is recommended to read <a href="#theory_spdif">7.3 SPDIF</a> section firstly)</small>
     
-    <p>SPDIF mode is required <em>only</em> if the digital connection and external
+    <p>SPDIF mode is required <em>only</em> in case of digital connection to external
       decoder/receiver exist. It is important previously to ensure whether the
     receiver connected correctly (refer to audio card and receiver documentation). </p>
 
@@ -311,7 +311,7 @@
     <p>Digital connection supports different formats of data transfer (PCM,
       AC3, DTS, MPEG Audio). Refer to receiver documentation to get information
       about the formats supported by receiver. In most cases only AC3 format
-      is supported – if that is the case, there is no need for additional settings
+      is supported - if that is the case, there is no need for additional settings
       (it is active by default). If the receiver supports some other formats,
       they can be indicated in filter settings (refer to <a href="#filter_setup_system"> 6.5.
     System settings</a> ). </p>
@@ -320,7 +320,7 @@
     it should be disabled (refer to audio card manual).</p>
 
     <p> Audio card can operate in two modes: DirectSound and WaveOut. In some
-      cases, the multi-channel mode can operate only in one of those modes and
+      cases, the SPDIF mode can operate only in one of those modes and
       cannot operate in another one. If that is the case, output device should
       be changed in player settings. To get information whether the player supports
       the device changing function, refer to the table of compatibility in <a href="#player_setup"> 5.
@@ -330,9 +330,9 @@
       settings; therefore, it is recommended to use it <em>only</em> if the player
     does not support the mentioned function. </p>
 
-    <p> Some audio cards cannot operate in digital transfer mode with sample
-      rate of 44100 Hz. Therefore, in some cases the digital transfer is impossible
-      at all. Current digital output mode can be checked on the main page of
+    <p> Most of audio cards can operate in digital transfer mode only with 48000 Hz 
+      sample rate. Therefore, in all other cases the digital transfer is impossible
+      at all. Current digital output mode can be checked during playback on the Main page of
       filter settings (refer to <a href="#filter_setup_main"> 6.2.
     Main settings</a>) </p>
   </div>
@@ -350,9 +350,9 @@
     <p> It is recommended to activate bass redirection for the modes with subwoofer.
       In acoustics documentation, information about bandwidth of speakers and
       subwoofer should be found; it is recommended to set the cutoff frequency
-      equal to lower bound for speakers and to upper bound of subwoofer. For
-      instance, if the bandwidth of speakers is 100 Hz – 20 kHz and that of subwoofer
-      is 30 Hz – 100 Hz then the cutoff frequency must be set at 100 Hz. In most
+      equal to lower bound for main speakers and to upper bound of subwoofer. For
+      instance, if the bandwidth of main speakers is 100 Hz - 20 kHz and that of subwoofer
+      is 30 Hz - 100 Hz then the cutoff frequency must be set at 100 Hz. In most
       cases, the default setting is satisfactory, so there is no need to change
     anything. </p>
 
@@ -511,16 +511,16 @@
     </table>
 
     <div style="font-size:80%">
-      Abbr – abbreviated player name.<br>
-      AVI – ability to play AVI files.<br>
+      Abbr - abbreviated player name.<br>
+      AVI - ability to play AVI files.<br>
       DVD - ability to play DVD files.<br>
-      Filters – player supports filter configuring feature.<br>
+      Filters - player supports filter configuring feature.<br>
       Renderer - player supports output device changing feature.<br>
       Decoder - player supports decoder changing feature.<br>
-      Supported – player has an ability to use the AC3Filter.<br>
+      Supported - player has an ability to use the AC3Filter.<br>
     </div>
 
-    <p> It is clear that the table is far from completing, therefore any corrections
+    <p> It is clear that the table is far from being complete, therefore any corrections
     and additions are welcomed. </p>
   </div>
 
@@ -577,7 +577,7 @@
       reliable, has no special requirements for resources and utilizes standard
       playback methods only; therefore, it is essential for detection of different
       problems. Many functions are not available but the player excellently copes
-      with its general task – file playing. If there, any playing problems appear
+      with its general task - file playing. If there, any playing problems appear
     when using other players it is recommended to try this player. </p>
 
     <p> During watching filter settings can be called from <span class="action">File-&gt;Properties-&gt;Advanced</span> menu: </p>
@@ -682,10 +682,10 @@
     <h3><a name="player_setup_pdvd">5.8. PowerDVD/WinDVD</a></h3>
 
     <p>Both players <em>cannot</em> use the AC3Filter to play DVD. <em>It’s concerned
-with the players features</em>, therefore it is impossible to force them to use
-AC3Filter. That is no ways in principle to force those players to operate with
-AC3Filter! So to watch DVD with AC3Filter use it is recommended to use other
-players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
+      with the players features</em>, therefore it is impossible to force them to use
+      AC3Filter. That is no ways in principle to force those players to operate with
+      AC3Filter! So to watch DVD with AC3Filter use it is recommended to use other
+      players - Media Player Classics, LightAlloy or ZoomPlayer. </p>
 
     <p> When playing AVI-files by these players you can use AC3Filter both for
       post-processing and for AC3/DTS audio track decoding. However, the player
@@ -703,13 +703,16 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
   <h2><a name="filter_setup">6. Filter settings.</a></h2>
 
   <div style="font-size:120%;font-style:italic">
-    <p>After installation filter has already all settings and in general, it does not require additional settings. Therefore, if you are not familiar with it, do not make any changes. It is recommended to modify the settings only if there are some problems with sound. However, if you are inquisitive and you like to play with settings, please, refer to <a href="#theory">7.
-    Theory</a> section.</p>
+    <p>After installation filter is already well-configured and in general, it does 
+      not require additional setup. Therefore, if you are not familiar with it, do 
+      not make any changes. It is recommended to modify the settings only if there 
+      are some problems with sound. However, if you are inquisitive and you like to 
+      play with settings, please, refer to <a href="#theory">7. Theory</a> section.</p>
 
     <p>There are two principal rules of configuring: </p>
     <ul>
-      <li>· If you have no idea what does this setting make – do not change it.</li>
-      <li>· If something has broken load the 'standard' preset (<span class="action">Main
+      <li>If you have no idea what does this setting make - do not change it.</li>
+      <li>If something has broken load the 'standard' preset (<span class="action">Main
       page->Preset->Standard</span>).</li>
     </ul>
   </div>
@@ -763,10 +766,10 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         will automatically convert all input formats into defined configuration.
         Speakers' configuration is represented in the form of front/rear+subwoofer.
         There are conventional names for some configurations. For instance, <span class="value">2/0
-        – stereo</span> means 2 front speakers, i.e. stereo. <span class="value">2/2
+        - stereo</span> means 2 front speakers, i.e. stereo. <span class="value">2/2
         - quadro</span> means 2 front and 2 rear speakers, i.e. quadro. <span class="value">3/2+SW
-        5.1 channels</span> – 3 front speakers, 2 rear speakers and subwoofer
-        – 5.1 configuration. It is desirable for defined configuration to be
+        5.1 channels</span> - 3 front speakers, 2 rear speakers and subwoofer
+        - 5.1 configuration. It is desirable for defined configuration to be
         in accordant with the system settings (refer to <a href="#system_setup_multichannel"> 4.2.
         Setup for multichannel mode</a> ), which in turn must match with the
         actual number of speakers. To know the difference for subwoofer and for
@@ -794,7 +797,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         SPDIF</a> ). Current digital output mode status is shown in parentheses:</p>
 
       <ul>
-        <li> <span class="value">disabled</span> – digital output mode is inactive,
+        <li> <span class="value">disabled</span> - digital output mode is inactive,
           there is an ordinary decoded PCM stream transferred to the output.
           When SPDIF is on, the filter always attempts to use digital transfer.
           And only in case when digital transfer is impossible (audio card driver
@@ -845,7 +848,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         <li><span class="value">Loud</span> - maximum loudness.</li>
       </ul>
 
-      <p> <span class="value">Default</span> preset has special sense – it is
+      <p> <span class="value">Default</span> preset has special sense - it is
       uploaded during the filter uploading. </p>
     </div> <!-- <div class="subsubchapter"> -->
     
@@ -893,7 +896,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         <li>speakers - channel configuration of the stream</li>
         <li>sample rate</li>
         <li>bitrate</li>
-        <li>stream – bit stream type (8/14/16 bit big/little endian)</li>
+        <li>stream - bit stream type (8/14/16 bit big/little endian)</li>
         <li>frame size</li>
         <li>nsamples - number of samples per frame</li>
       </ul>
@@ -992,7 +995,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         center. This level is a matrix parameter, so it makes sense only when
         the <span class="option">Auto matrix</span> option is on. When changing
         level the matrix is recalculated. </p>
-      <p><span class="option">Surround</span> – rear gain level. If there are
+      <p><span class="option">Surround</span> - rear gain level. If there are
         rear channels in input signal then this level affects only on them both
         in case of down mixing (in this case level of rear channels mixing into
         front channels is controlled) or without it (i.e. just control channel
@@ -1095,7 +1098,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
     <div class="subsubchapter">
       <h4>6.4.1. Gains</h4>
       
-      <p><span class="option">Master/Gain</span> – desirable and current gain level
+      <p><span class="option">Master/Gain</span> - desirable and current gain level
         (refer to <a href="#filter_setup_main"> 6.2. Main settings</a> ). </p>
   </div>
     
@@ -1169,12 +1172,12 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
       
       <p> It defines the cases of AC3Filter use. </p>
       <ul>
-        <li> PCM – use AC3Filter for post-processing of all audio streams. To
+        <li> PCM - use AC3Filter for post-processing of all audio streams. To
           use this mode the filter must have high priority (refer to <span class="option">Filter
           merit</span> option further in this section). </li>
-        <li> AC3 – use AC3Filter for AC3 decoding </li>
-        <li> DTS – use AC3Filter for DTS decoding </li>
-        <li> MPEG Audio – use of AC3Filter for MPEG Audio decoding </li>
+        <li> AC3 - use AC3Filter for AC3 decoding </li>
+        <li> DTS - use AC3Filter for DTS decoding </li>
+        <li> MPEG Audio - use of AC3Filter for MPEG Audio decoding </li>
         <li>PES (DVD) - use AC3Filter for audio decoding in MPEG1/MPEG2 PES streams.
           This mode is required for DVD/VideoCD playing. </li>
       </ul>
@@ -1272,7 +1275,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         average value with frequency corresponding to acoustic wave frequency.
       (Great Soviet Encyclopedia) </blockquote>
 
-      <p> Thus, we can measure any sound – loud sounds produce high pressure,
+      <p> Thus, we can measure any sound - loud sounds produce high pressure,
         quiet ones produce low pressure. The pressure is measured in Pascals,
         however, in acoustics it is usually measured in <dfn>decibels</dfn> (dB)
         with respect to the <dfn>hearing threshold</dfn>. By definition, the value
@@ -1369,14 +1372,14 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
       
       <p> Note the perceived pressure range: hearing threshold pressure and pressure
         produced by plane differ in million times! Therefore, the logarithmic
-        scale is in a better accordance with the ear physiology – the linear
+        scale is in a better accordance with the ear physiology - the linear
         change of acoustic pressure does not correspond with sense of loudness
         linear change. For instance, change of acoustic pressure by 50 mPa during
         conversation will be extremely sensible; however, it will be absolutely
         insensible during plane taking-off. But change of acoustic pressure by
         6 dB (in twice) will be perceived as an approximately equal loudness
         change in both cases, though in the first case it will correspond to
-      change of pressure by 25 mPa, and in second case – by 10 Pa.</p>
+      change of pressure by 25 mPa, and in second case - by 10 Pa.</p>
       
       <p> Another type of loudness is a <dfn>record loudness</dfn> (<dfn>signal
           loudness</dfn>). This loudness is not an acoustic pressure (it can
@@ -1411,7 +1414,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
       <p> During playing, the recorded signal is converted into acoustic pressure
         using acoustic system. Let the maximum pressure produced by acoustic
         system is 100 dB. Then the record with loudness of 0 dB will produce
-        pressure of 100 dB, the record with loudness of – 30 dB will produce
+        pressure of 100 dB, the record with loudness of - 30 dB will produce
         pressure of 70 dB, etc. When changing the gain level the absolute loudness
         will change too. Therefore, when changing the gain level you can always
         set up a correspondence between the record loudness and the required
@@ -1437,9 +1440,9 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         loudness (with respect to loudness of earphones sound). Otherwise, in
         full silence, people begin to whisper and nevertheless it seems to be
         loud. In conditions of normal city noise, it is difficult to hear ticking
-        of mechanical watches – this sound is perceived as very quiet. But the
+        of mechanical watches - this sound is perceived as very quiet. But the
         same watch ticking in full silence at night can be perceived as clear
-        heard sound. Thus, the third type of loudness appears – <dfn>subjective
+        heard sound. Thus, the third type of loudness appears - <dfn>subjective
         loudness</dfn>. We will not discuss some kinds of subjective loudness
       measuring, just talk about qualitative comparing of sounds (louder-quieter). </p>
       <p> Thus, sound with the same absolute loudness can be perceived as loud
@@ -1460,7 +1463,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         reference level, which can be used for orienting. If sound loudness of
         10 dB is higher than the dialogue level then it is loud, and if loudness
         of 10 dB is lower than the dialogue level then it is quiet. At the same
-        time the dialogue level can be arbitrary and depend on the record – one
+        time the dialogue level can be arbitrary and depend on the record - one
         record may have dialogue level of -10 dB, and the other one may have
         dialogue level of -30 dB. Anyway, all sounds with loudness which is lower
         than the dialogue level will be perceived like quiet sounds, while ones
@@ -1473,7 +1476,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         is approaching dialogue loudness (or even exceeds it). In such a case,
       all sounds played will seem to be quiet. </p>
       <p> Thus, we can introduce one more loudness scale (in addition to the
-        digital signal loudness scale and the absolute loudness scale) – loudness
+        digital signal loudness scale and the absolute loudness scale) - loudness
         with respect to the dialogue level. When comparing different loudness
       we will get the follows: </p>
       <br>
@@ -1650,10 +1653,10 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
           are considered as quiet sounds while the sounds with higher level are
           considered as loud ones. Good audibility of dialogues is one of the
           main setting criteria (we will discuss this setting below). </li>
-        <li> Background sounds – the cars going by, footfall sounds, background
+        <li> Background sounds - the cars going by, footfall sounds, background
           music </li>
-        <li> Extremely quiet sounds – light breeze, grass rustling, etc. </li>
-        <li> Loud sounds – phone ringing, impact sounds, and so on </li>
+        <li> Extremely quiet sounds - light breeze, grass rustling, etc. </li>
+        <li> Loud sounds - phone ringing, impact sounds, and so on </li>
         <li> Explosions and other global crashes </li>
         <li>Record noise</li>
       </ol>
@@ -1693,21 +1696,21 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         therefore its loudness is not critical so much. Otherwise, in movies of
         the second type those sounds (even with the small duration) form the mood
       of the movie. </p>
-      <p> Another conspicuous feature – high 'humps' in Cube and Interstate 60 movies.
+      <p> Another conspicuous feature - high 'humps' in Cube and Interstate 60 movies.
         There is a constant quiet background hum in the Cube movie. This is why
         the graph has 'hump' at loudness of approximately -50 dB. The same thing
-        relates to the Interstate 60 movie – it is car travel and, consequently,
+        relates to the Interstate 60 movie - it is car travel and, consequently,
         there is a constant sound of moving car. Shapes of both histograms are very
         similar; however, the maximum of the histogram for the Interstate 60 movie
         is lower by 10 dB. As the voice levels are the same in both movies, one
         can immediately conclude that sound in the Cube movie is much quieter. This
         conclusion is far from an obvious one. Let us recall hearing adaptation
-        – if we shift graphs to align their maximums at one level, the Cube movie
+        - if we shift graphs to align their maximums at one level, the Cube movie
       will be perceived as 'quiet' all the same. </p>
       
       <p> The other movies have no such well-marked background sounds, so their
       graphs are more distributed across the dynamic range. </p>
-      <p> About Schmidt movie has 'hump' at the level of -70 dB – -80 dB. These
+      <p> About Schmidt movie has 'hump' at the level of -70 dB - -80 dB. These
         are recor ding noises; and they are relatively loud in this movie, as compared
       with other movies, but quiet enough and do not hinder viewing. </p>
       <p> So far, we considered solely movies. Now let us have a look at music: </p>
@@ -1730,7 +1733,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         loud composition may be objectively quieter than a subjectively loud one.
         Positive or negative <em>drops</em> of the loudness have a great importance
       here; these drops are not visible on the histograms. </p>
-      <p> Absence of a common reference mark results in a chaos – sounds from different
+      <p> Absence of a common reference mark results in a chaos - sounds from different
         sources have different loudness; difference between maximums of composition
         histograms reaches 20 dB. Besides, in general it is very difficult to formalize
         a concept of a 'composition's loudness' anyhow. Certainly, many people are
@@ -1830,7 +1833,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         the level is limited more and more often, and when the level is equal to
         +30 dB voice begins to be limited that is highly noticeable. Shortcomings
         of the limitation are especially noticeable when loudness changes significantly
-        over a short time period – subjectively, loudness begins to jump up and
+        over a short time period - subjectively, loudness begins to jump up and
         down. If, against a background conversation (which, at the gain of +30 dB,
         is already reproduced with maximum loudness), loud sound is heard (which
         is louder than the voice in the original, e.g. a telephone ring) the gain
@@ -1879,10 +1882,10 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
       out for movies. Why? </p>
       <p> Let us recall histograms for music and a chaos relating to loudness. For
         music, it is important to playback with maximum loudness, as it is meant
-        for maximum target audience – CD players, a noisy street, underground, cheap
+        for maximum target audience - CD players, a noisy street, underground, cheap
         earphones, croaky radio stations where low sounds less than -40 dB are not
         hearable. (Let us have a one more look at <a href="#theory_loudness_pic_music">graphs
-      for music</a> – minimum loudness is approximately equal to - 40 dB.) </p>
+      for music</a> - minimum loudness is approximately equal to - 40 dB.) </p>
       <p> For DVD it is not so. They are primarily designed for quality home cinema.
         Playback equipment should be calibrated to reproduce dialogs always with
         the same absolute loudness for <em>any </em>movie, will it be an action
@@ -1905,7 +1908,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         to carry out normalization, one needs to know maximum recording level. To
         identify it, one needs to review the whole record beforehand. However, it
         is not always possible and is inconvenient. There is a normalization method,
-        which does not need preview of the whole record – the one-pass normalization.
+        which does not need preview of the whole record - the one-pass normalization.
         The method consists in a <em>constant </em>search for maximum when we are
         watching a movie. At the initial moment, the gain is at maximum. When an
       overflow arises, we decrease gain: </p>
@@ -1922,7 +1925,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         Second, loudness is continuously decreasing during a movie show (though
         usually the main loudness decrease process ends during the first 10-15 minutes
         of a movie and so it is practically unnoticeable). And third, it may be
-        that the main goal (loudness increase) will not be achieved – everything
+        that the main goal (loudness increase) will not be achieved - everything
         depends upon the movie itself (it relates also to the usual normalization).
         Here is an example of histograms obtained in the case of one-pass normalization
         of the Cube (where normalization is possible) and Fight Club (where normalization
@@ -1930,13 +1933,13 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
       <div align="center"> <img alt="" src="pic/h_onepass.png" height="409" width="595"> </div>
       <p> As it seen on these histograms, the result is drastically different. Activation
         of one-pass normalization gives a substantial positive effect for the Cube
-        movie – sound has become noticeably louder (our assumption that sounds louder
-        than -15 dB are absent in the movie was confirmed – compare with <a href="#theory_loudness_pic_normalize">normalization
+        movie - sound has become noticeably louder (our assumption that sounds louder
+        than -15 dB are absent in the movie was confirmed - compare with <a href="#theory_loudness_pic_normalize">normalization
         graph</a>). However, in the Fight Club movie no increase of loudness took
-        place at all – thus the desired effect was not achieved, but additional
+        place at all - thus the desired effect was not achieved, but additional
       distortions were introduced. </p>
       <p> It is necessary to note once more that for one-pass normalization operation
-        preliminary (initial) gain is needed – without level rising, the one-way
+        preliminary (initial) gain is needed - without level rising, the one-way
         normalization is senseless. As well as the normal gain, it is set by the <span class="option">Master</span> level.
         However, if it is too strong loudness drop from the beginning of the
       algorithm operation will be very noticeable. </p>
@@ -1953,11 +1956,11 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         to change the current loudness constantly: to amplify quiet sounds and not
         to amplify loud ones. The simplest law of loudness change is linear, i.e.
         loudness is changed according to the law: output_loudness = k * input_loudness,
-      where k – dynamic range compression coefficient: </p>
+      where k - dynamic range compression coefficient: </p>
       <div align="center"> <img alt="" src="pic/drc_linear.png" height="405" width="388"> </div>
       <p> When k = 1, no changes are made (output loudness is equal to input one).
         When k &lt; 1, loudness will increase and the dynamic range will be contracted.
-        Let us have a look at the graph (k=1/2) – quiet sound with loudness equal
+        Let us have a look at the graph (k=1/2) - quiet sound with loudness equal
         to -50 dB will be higher by 25 dB, that is significantly louder. Meanwhile
         dialog loudness (-27 dB) will rise only by 13.5 dB, and loudness of the
         loudest sounds (0 dB) will not change at all. When k &gt; 1, loudness will
@@ -1970,7 +1973,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         dialog level by 30 dB. Thus, the dynamic range is 60 dB. After compression,
         loud sounds are higher just by 15 dB, and quiet ones are lower than dialog
         level by 15 dB (the dynamic range is now equal to 30 dB). Thus, loud sounds
-        have become significantly quieter, and quiet sounds – significantly louder.
+        have become significantly quieter, and quiet sounds - significantly louder.
       At that, there is no overflow! </p>
       <p> Let us now consider histograms:</p>
       <a name="theory_loudness_pic_drc"></a>
@@ -1994,7 +1997,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
         function and noises will be amplified less (yellow line). When there is
         no such knee, noises will be significantly louder (grey line). Such simple
         modification significantly decreases noise level even at very high compression
-        levels (on the figure – compression is equal to 1.5). The <span class="option">DRC</span> level
+        levels (on the figure - compression is equal to 1.5). The <span class="option">DRC</span> level
         of the filter defines gain level for quiet sounds (-50 dB), thus the
         compression level 1/5 shown on the figure corresponds to +40 dB level in
       filter settings. </p>
@@ -2018,7 +2021,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
       L' = (L + 0.7*C + SL + LFE) / 3.7<br>
       R' = (R + 0.7*C + SR + LFE) / 3.7
       <p>This is a normalized mixing (you should not confuse it with normalization
-        of record itself) – this guarantees absence of an overflow. However, sound
+        of record itself) - this guarantees absence of an overflow. However, sound
         mixed in this way is quieter by 11 dB! Is it possible not to carry out normalization?
         Yes. However, in this case there are possible overflow and related distortions.
         Overflow arises only then when all input channels simultaneously reproduce
@@ -2035,7 +2038,7 @@ players – Media Player Classics, LightAlloy or ZoomPlayer. </p>
       <p> Setting recommendations are highly depend on specific conditions of listening
       and a goal set. Conditionally, all conditions may be categorized as follows: </p>
       <ol>
-        <li> High-quality home cinema and good listening conditions – no unwanted
+        <li> High-quality home cinema and good listening conditions - no unwanted
           sounds (street noise, neighbors from above, children running about and
           a possibility to make noise (neighbors are absent). For this category all
         post-processing may be switched off (preset standard). </li>
@@ -2196,7 +2199,7 @@ also will be normal. </p>
       receiver cannot support all existing formats. So the following formats are
       supported: AC3 (DolbyDigital), DTS, MPEG Audio (including MP3). However,
       not all receivers support even this set of formats, usually the AC3 is supported,
-      rarely – the DTS format and more rarely – the MPEG Audio format. The DTS
+      rarely - the DTS format and more rarely - the MPEG Audio format. The DTS
       format ensures higher quality of sound, but the AC4 format is more widespread,
     as it is the standard for DVD. </p>
     <p> As a decoder, a digital-to-analog converter and an amplifier are in the
@@ -2360,11 +2363,11 @@ not exceed 20Ê. If you wish to send files send a preliminary notice. </p>
     files. </blockquote>
   <p> Before writing on an existence of a problem, make sure that the problem
     is really caused by the filter: uninstall the filter. If the problem remains,
-    the filter has no connection to it – during deinstallation, the filter completely
+    the filter has no connection to it - during deinstallation, the filter completely
   removes itself from the system leaving no traces. </p>
   <p> I try to review all incoming problems, but simply do not have a physical
     capacity to deal with every problem individually. However, in any case, your
-    messages are not lost for nothing – using accumulated statistics often leads
+    messages are not lost for nothing - using accumulated statistics often leads
   to a successful solution of very knotty cases. </p>
   <p> Read the documentation! Many &quot;problems&quot; are successfully solved
   by available settings. </p>
