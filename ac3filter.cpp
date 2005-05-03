@@ -552,6 +552,7 @@ AC3Filter::CheckInputType(const CMediaType *mt)
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType: Ok...", this));
   return S_OK;
 } 
 
@@ -566,23 +567,14 @@ AC3Filter::CheckOutputType(const CMediaType *mt)
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
-  if ((spk_tmp.format == out_spk.format) &&
-      (spk_tmp.sample_rate == out_spk.sample_rate))
+  if (!dec.query_output(spk_tmp))
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType(%s %s %iHz): Ok...", this, spk_tmp.mode_text(), spk_tmp.format_text(), spk_tmp.sample_rate));
-    return S_OK;
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType(%s %s %iHz): format refused by decoder", this, spk_tmp.mode_text(), spk_tmp.format_text(), spk_tmp.sample_rate));
+    return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
-  if (use_spdif && 
-      (spk_tmp.format == FORMAT_SPDIF) && 
-      (spk_tmp.sample_rate == out_spk.sample_rate))
-  {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType(%s %s %iHz): Ok...", this, spk_tmp.mode_text(), spk_tmp.format_text(), spk_tmp.sample_rate));
-    return S_OK;
-  }
-
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType(%s %s %iHz): format refused", this, spk_tmp.mode_text(), spk_tmp.format_text(), spk_tmp.sample_rate));
-  return VFW_E_TYPE_NOT_ACCEPTED;
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: Ok...", this));
+  return S_OK;
 }
 
 HRESULT 
