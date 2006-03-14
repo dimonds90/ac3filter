@@ -45,8 +45,8 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   config_autoload = false;
   formats = FORMAT_CLASS_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES;
   
-  in_spk    = stereo_spk;
-  out_spk   = stereo_spk;
+  in_spk    = Speakers(FORMAT_PCM16, MODE_STEREO, 48000);
+  out_spk   = Speakers(FORMAT_PCM16, MODE_STEREO, 48000);
   use_spdif = false;
 
   setup_chain(in_spk, out_spk, use_spdif);
@@ -312,7 +312,7 @@ AC3Filter::Receive(IMediaSample *in)
   /////////////////////////////////////////////////////////
   // Fill chunk
 
-  chunk.set(in_spk, buf, buf_size);
+  chunk.set_rawdata(in_spk, buf, buf_size);
 
   /////////////////////////////////////////////////////////
   // Timing
@@ -388,7 +388,7 @@ AC3Filter::EndOfStream()
   // processing chain.
 
   Chunk chunk;
-  chunk.set(in_spk, 0, 0, false, 0, true);
+  chunk.set_empty(in_spk, false, 0, true);
   process_chunk(&chunk);
   reset();
 
@@ -891,23 +891,22 @@ STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
 
     switch (spk_tmp.format)
     {
-      case FORMAT_PCM16_LE:
+      case FORMAT_PCM16_BE:
       case FORMAT_PCM16: 
         spk_tmp.level = 32767;
         break;
 
-      case FORMAT_PCM24_LE:
+      case FORMAT_PCM24_BE:
       case FORMAT_PCM24: 
         spk_tmp.level = 8388607;
         break;
 
-      case FORMAT_PCM32_LE:
+      case FORMAT_PCM32_BE:
       case FORMAT_PCM32: 
         spk_tmp.level = 2147483647;      
         break;
 
       case FORMAT_PCMFLOAT:
-      case FORMAT_PCMFLOAT_LE:
         spk_tmp.level = 1.0; 
         break;
 
