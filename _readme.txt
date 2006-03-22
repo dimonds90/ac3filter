@@ -29,7 +29,7 @@ doc/ac3filter_rus.html (russian)
 doc/ac3filter_eng.html (english)
 doc/ac3filter_ita.html (italian)
 
-Copyright (c) 2002-2005 by Alexander Vigovsky (xvalex@mail.ru)
+Copyright (c) 2002-2006 by Alexander Vigovsky (xvalex@mail.ru)
 
 
 License:
@@ -64,6 +64,10 @@ Include path should have this lines first:
 ...\...SDK\Samples\Multimedia\DirectShow\BaseClasses
 ...\...SDK\include
 
+Libraries path should have this lines first:
+
+...\...SDK\lib
+
 Required libraries are strmbase.lib (release) and strmbasd.lib (debug) in
 libraries path. If it is not shipped with SDK you can compile this project:
 ...\...SDK\Samples\Multimedia\DirectShow\BaseClasses\baseclasses.dsw
@@ -75,19 +79,32 @@ http://sourceforge.net/project/showfiles.php?group_id=66022
 AC3Filter project has dependency on the valib library project so 
 by default directories should be configured as follows:
 
-...\AC3Filter     - ac3filter project
-...\VALib
-...\VALib\lib     - valib library project
-...\VALib\valib   - valib include & source files
+...\ac3filter     - ac3filter project
+...\valib         - valib project
+...\valib\lib     - valib library
+...\valib\valib   - valib include & source files
 
 You may simply checkout both modules from CVS to the same root folder.
 CVS root: :pserver:anonymous@cvs.sourceforge.net:/cvsroot/ac3filter
-Modules:  AC3Filter, VALib
+Modules: ac3filter, valib
 
 If you want to alter default layout:
 1) compile valib.lib
 2) specify valib.lib in ac3filter's linked libraries
 3) specify include path to the root of valib includes
+
+
+Debugging:
+==========
+
+If you need filter log complile debug filter version and import 
+ac3filter_reg_debug.reg file into registry. After this filter will produce
+log output to c:\ac3filter.log file (you may change it at reg file).
+
+You may want to comment LOG_TIMING define at ac3filter.cpp because timing
+produces a lots of log output.
+
+ac3filter_reg_nodebug.reg file removes registry changes.
 
 
 Links:
