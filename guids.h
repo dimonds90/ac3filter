@@ -36,9 +36,9 @@
 #define AC3FILTER_ALL    0x7f // all settings
 #define AC3FILTER_PRESET 0x3e // settings that saved into preset (all except system settings & speaker config)
 
-#define SPDIF_MODE_NONE         0    // see dvd_decoder.h
-#define SPDIF_MODE_PASSTHROUGH  1    // see dvd_decoder.h
-#define SPDIF_MODE_ENCODE       2    // see dvd_decoder.h
+#define SPDIF_DISABLED            0  // see dvd_graph.h
+#define SPDIF_PASSTHROUGH         1  // see dvd_graph.h
+#define SPDIF_ENCODE              2  // see dvd_graph.h
 
 ///////////////////////////////////////////////////////////////////////////////
 // Media types
@@ -114,20 +114,30 @@ DEFINE_GUID(CLSID_AC3Filter_about,
 
 DECLARE_INTERFACE_(IAC3Filter, IUnknown)
 {
-  // Speakers
+  // Input/output format
   STDMETHOD (get_in_spk)  (Speakers *spk) = 0;
   STDMETHOD (get_out_spk) (Speakers *spk) = 0;
-  STDMETHOD (set_out_spk) (Speakers  spk) = 0;
 
-  // SPDIF if possible
-  STDMETHOD (get_spdif)   (bool *spdif, int *spdif_mode) = 0;
-  STDMETHOD (set_spdif)   (bool  spdif) = 0;
+  // User format
+  STDMETHOD (get_user_spk) (Speakers *spk) = 0;
+  STDMETHOD (set_user_spk) (Speakers  spk) = 0;
+
+  // Use SPDIF if possible
+  STDMETHOD (get_use_spdif) (bool *use_spdif) = 0;
+  STDMETHOD (set_use_spdif) (bool  use_spdif) = 0;
 
   // SPDIF passthrough (formats bitmask)
   STDMETHOD (get_spdif_pt)(int *spdif_pt) = 0;
   STDMETHOD (set_spdif_pt)(int  spdif_pt) = 0;
 
-  // Formats to accept (formats bitmask)
+  // SPDIF stereo PCM passthrough
+  STDMETHOD (get_spdif_stereo_pt)(bool *spdif_stereo_pt) = 0;
+  STDMETHOD (set_spdif_stereo_pt)(bool  spdif_stereo_pt) = 0;
+
+  // SPDIF status
+  STDMETHOD (get_spdif_status)(int *spdif_status) = 0;
+
+  // Input formats to accept (formats bitmask)
   STDMETHOD (get_formats) (int *formats) = 0;
   STDMETHOD (set_formats) (int  formats) = 0;
 
@@ -204,7 +214,6 @@ struct AudioProcessorState
   vtime_t  jitter;
 };
 
-
 DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
 {
   // AGC options
@@ -279,7 +288,7 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_state)        (AudioProcessorState *state) = 0;
 };
 
-
+/*
 DECLARE_INTERFACE_(IDecoder, IUnknown)
 {
   // Input speakers configuration
@@ -298,5 +307,5 @@ DECLARE_INTERFACE_(IAC3Dec, IUnknown)
   STDMETHOD (get_eq)    (sample_t *eq) = 0;
   STDMETHOD (set_eq)    (sample_t *eq) = 0;
 };
-
+*/
 #endif

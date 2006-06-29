@@ -3,7 +3,7 @@
 #include "decss\DeCSSInputPin.h"
 
 // uncomment this to log timing information into DirectShow log
-#define LOG_TIMING
+//#define LOG_TIMING
 
 // uncomment this to register graph at running objects table
 //#define REGISTER_FILTERGRAPH
@@ -45,12 +45,10 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   config_autoload = false;
   formats = FORMAT_CLASS_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES;
   
-  in_spk    = Speakers(FORMAT_PCM16, MODE_STEREO, 48000);
-  out_spk   = Speakers(FORMAT_PCM16, MODE_STEREO, 48000);
-  use_spdif = false;
+  dec.set_sink(sink);
+  dec.proc.set_input_order(win_order);
+  dec.proc.set_output_order(win_order);
 
-  setup_chain(in_spk, out_spk, use_spdif);
-  
   // load params
   load_params(0, AC3FILTER_ALL);
 }
@@ -67,7 +65,7 @@ AC3Filter::JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName)
 
   // Register graph at running objects table
   #ifdef REGISTER_FILTERGRAPH
-  rot.register_graph(m_pGraph);
+    rot.register_graph(m_pGraph);
   #endif
 
   return CTransformFilter::JoinFilterGraph(pGraph, pName);
@@ -83,87 +81,8 @@ AC3Filter::reset()
   cpu.reset();
 }
 
-bool
-AC3Filter::setup_chain(Speakers _in_spk, Speakers _out_spk, bool _use_spdif)
-{
-  DbgLog((LOG_TRACE, 3, "> AC3Filter(%x)::setup_chain(%s %s %iHz => %s %s %iHz%s)...", this, 
-    _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate,
-    _out_spk.mode_text(), _out_spk.format_text(), _out_spk.sample_rate,
-    _use_spdif? " use SPDIF": ""));
-
-  ///////////////////////////////////////////////////////////////////////////
-  // Now we do not support resampling
-  // so we have to update output sample rate
-
-  _out_spk.sample_rate = _in_spk.sample_rate;
-
-  ///////////////////////////////////////////////////////////////////////////
-  // Query everything
-  // here we may expect that someone refuses the format
-
-  if (!dec.query_input(_in_spk))
-  {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): input format refused", this));
-    return false;
-  }
-
-  bool _spdif_on;
-  Speakers _out_spdif = _out_spk;
-  _out_spdif.format = FORMAT_SPDIF;
-
-  if (_use_spdif && dec.query_output(_out_spdif) && sink->query_input(_out_spdif))
-    _spdif_on = true;
-  else if (dec.query_output(_out_spk) && sink->query_input(_out_spk))
-    _spdif_on = false;
-  else
-  {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): output format refused", this));
-    return false;
-  }
-
-  ///////////////////////////////////////////////////////////////////////////
-  // Setup everything
-
-  if (!dec.set_input(_in_spk))
-  {
-    // we do not expect error here
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): input format setup FAILED!!!", this));
-    return false;
-  }
-
-  if (!sink->set_input(_spdif_on? _out_spdif: _out_spk))
-  {
-    // we do not expect error here
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): sink setup FAILED!!!", this));
-    return false;
-  }
-
-  if (!dec.set_output(_spdif_on? _out_spdif: _out_spk))
-  {
-    // we do not expect error here
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): output format setup FAILED!!!", this));
-    return false;
-  }
-
-  dec.proc.set_input_order(win_order);
-  dec.proc.set_output_order(win_order);
-  dec.reset();
-
-  ///////////////////////////////////////////////////////////////////////////
-  // Update state
-
-  in_spk    = _in_spk;
-  out_spk   = _out_spk;
-  use_spdif = _use_spdif;
-
-  DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::setup_chain(): Ok", this));
-  return true;
-}
-
-
-
 bool        
-AC3Filter::set_input(CMediaType &_mt)
+AC3Filter::set_input(const CMediaType &_mt)
 {
   Speakers spk_tmp;
   return mt2spk(_mt, spk_tmp) && set_input(spk_tmp);
@@ -172,37 +91,24 @@ AC3Filter::set_input(CMediaType &_mt)
 bool        
 AC3Filter::set_input(Speakers _in_spk)
 {
-  DbgLog((LOG_TRACE, 3, "> AC3Filter(%x)::set_input(%s %s %iHz)...", this, 
+  if (!dec.query_input(_in_spk))
+  {
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(%s %s %iHz): format refused", this,
+      _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
+    return false;
+  }
+
+  if (!dec.set_input(_in_spk))
+  {
+    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(%s %s %iHz): failed", this,
+      _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
+    return false;
+  }
+
+  DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(%s %s %iHz): succeeded", this,
     _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
-
-  if (!setup_chain(_in_spk, out_spk, use_spdif))
-  {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(): format refused", this));
-    return false;
-  }
-
-  DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(): Ok", this));
   return true;
 }
-
-bool        
-AC3Filter::set_output(Speakers _out_spk, bool _use_spdif)
-{
-  DbgLog((LOG_TRACE, 3, "> AC3Filter(%x)::set_output(%s %s %iHz%s)...", this, 
-    _out_spk.mode_text(), _out_spk.format_text(), _out_spk.sample_rate, 
-    _use_spdif? " use SPDIF": ""));
-
-  if (!setup_chain(in_spk, _out_spk, _use_spdif))
-  {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_output(): format refused", this));
-    return false;
-  }
-
-  DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_output(): Ok", this));
-  return true;
-}
-
-
 
 bool
 AC3Filter::process_chunk(const Chunk *_chunk)
@@ -257,9 +163,6 @@ AC3Filter::NonDelegatingQueryInterface(REFIID riid, void **ppv)
   if (riid == IID_IAudioProcessor)
     return GetInterface((IAudioProcessor *) &dec, ppv);
 
-  if (riid == IID_IDecoder)
-    return GetInterface((IDecoder *) &dec, ppv);
-
   if (riid == IID_ISpecifyPropertyPages)
     return GetInterface((ISpecifyPropertyPages *) this, ppv);
 
@@ -292,6 +195,8 @@ AC3Filter::Receive(IMediaSample *in)
     if (!set_input(*mt))
       return VFW_E_INVALIDMEDIATYPE;
   }
+
+  Speakers in_spk = dec.get_input();
 
   /////////////////////////////////////////////////////////
   // Discontinuity
@@ -346,10 +251,6 @@ HRESULT
 AC3Filter::StartStreaming()
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StartStreaming()", this));
-
-  // switch between spdif/analog
-  setup_chain(in_spk, out_spk, use_spdif);
-
   return CTransformFilter::StartStreaming();
 }
 
@@ -388,7 +289,7 @@ AC3Filter::EndOfStream()
   // processing chain.
 
   Chunk chunk;
-  chunk.set_empty(in_spk, false, 0, true);
+  chunk.set_empty(dec.get_input(), false, 0, true);
   process_chunk(&chunk);
   reset();
 
@@ -468,13 +369,15 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::GetMediaType #%i", this, i));
 
-  // todo: remove this?
   if (m_pInput->IsConnected() == FALSE)
     return E_UNEXPECTED;
 
   if (i < 0) 
     return E_INVALIDARG;
 
+  if (!i--) return spk2mt(Speakers(FORMAT_PCM16, MODE_STEREO, 48000), *_mt, false)? NOERROR: E_FAIL;
+
+/*
   /////////////////////////////////////////////////////////////////////////////
   // Depending on current settings output formats may be:
   //
@@ -500,31 +403,27 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   //
   // multichannel mt_pcm_wf formats are nessesary for some old sound cards 
   // that do not understand WAVEFORMATEXTENSIBLE format 
-  // (Vortex-based cards, for example).
+  // (Vortex-based cards for example).
 
-  Speakers out_spdif = out_spk;
-  out_spdif.format = FORMAT_SPDIF;
-
-  if (use_spdif)
+  if (dec.use_spdif)
   {
     // mt_spdif_wf
-    if (!i--) return spk2mt(out_spdif, *_mt, false)? NOERROR: E_FAIL;
+    if (!i--) return spk2mt(guess_spdif_output(), *_mt, false)? NOERROR: E_FAIL;
 
     // mt_spdif_wfx
-    if (!i--) return spk2mt(out_spdif, *_mt, true)? NOERROR: E_FAIL;
-
+    if (!i--) return spk2mt(guess_spdif_output(), *_mt, true)? NOERROR: E_FAIL;
   }
 
-  if ((out_spk.mask != MODE_MONO && out_spk.mask != MODE_STEREO) || 
-      out_spk.format != FORMAT_PCM16)
+  Speakers spk = guess_pcm_output();
+  if ((spk.mask != MODE_MONO && spk.mask != MODE_STEREO) || spk.format != FORMAT_PCM16)
   {
     // mt_pcm_wfx
-    if (!i--) return spk2mt(out_spk, *_mt, true)? NOERROR: E_FAIL;
+    if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
   }
 
   // mt_pcm_wf
-  if (!i--) return spk2mt(out_spk, *_mt, false)? NOERROR: E_FAIL;
-
+  if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
+*/
   return VFW_S_NO_MORE_ITEMS;
 }
 
@@ -536,7 +435,7 @@ AC3Filter::CheckInputType(const CMediaType *mt)
 
   if (!mt2spk(*mt, spk_tmp))
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType: cannot determine format", this));
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(): cannot determine format", this));
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
@@ -552,29 +451,25 @@ AC3Filter::CheckInputType(const CMediaType *mt)
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType: Ok...", this));
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(): Ok...", this));
   return S_OK;
 } 
 
 HRESULT 
 AC3Filter::CheckOutputType(const CMediaType *mt)
 {
-  Speakers spk_tmp;
+  CMediaType out_mt;
 
-  if (!mt2spk(*mt, spk_tmp))
-  {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: cannot determine format", this));
-    return VFW_E_TYPE_NOT_ACCEPTED;
-  }
+  int i = 0;
+  while (GetMediaType(i++, &out_mt) == S_OK)
+    if (*mt == out_mt)
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: Ok...", this));
+      return S_OK;
+    }
 
-  if (!dec.query_output(spk_tmp))
-  {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType(%s %s %iHz): format refused by decoder", this, spk_tmp.mode_text(), spk_tmp.format_text(), spk_tmp.sample_rate));
-    return VFW_E_TYPE_NOT_ACCEPTED;
-  }
-
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: Ok...", this));
-  return S_OK;
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType(): Not our type", this));
+  return VFW_E_TYPE_NOT_ACCEPTED;
 }
 
 HRESULT 
@@ -671,8 +566,7 @@ AC3Filter::SetMediaType(PIN_DIRECTION direction, const CMediaType *mt)
     if FAILED(CheckInputType(mt))
       return E_FAIL;
 
-    Speakers spk_tmp;
-    if (!mt2spk(*mt, spk_tmp) || !set_input(spk_tmp))
+    if (!set_input(*mt))
       return E_FAIL;
   }
 
@@ -742,67 +636,77 @@ AC3Filter::GetPages(CAUUID *pPages)
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-// Speakers
-STDMETHODIMP 
+// Input/output format
+STDMETHODIMP
 AC3Filter::get_in_spk(Speakers *_spk)
 {
-  *_spk = in_spk;
+  if (_spk) *_spk = dec.get_input();
   return S_OK;
 }
-STDMETHODIMP 
+STDMETHODIMP
 AC3Filter::get_out_spk(Speakers *_spk)
 {
-  *_spk = out_spk;
-  return S_OK;
-}
-STDMETHODIMP 
-AC3Filter::set_out_spk(Speakers  _spk)
-{
-  CAutoLock lock(&m_csReceive);
-  AutoLock config_lock(&dec.config);
-
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_out_spk(%s %s %iHz)", this, _spk.mode_text(), _spk.format_text(), _spk.sample_rate));
-  if (set_output(_spk, use_spdif))
-  {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_out_spk(): Ok", this));
-    return S_OK;
-  }
-  else
-  {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_out_spk(): Failed!", this));
-    return E_FAIL;
-  }
-}
-
-// SPDIF
-STDMETHODIMP 
-AC3Filter::get_spdif(bool *_use_spdif, int *_spdif_mode)
-{
-  *_use_spdif = use_spdif;
-  *_spdif_mode = dec.get_spdif_mode();
-
-  return S_OK;
-}
-STDMETHODIMP 
-AC3Filter::set_spdif(bool _use_spdif)
-{
-  CAutoLock lock(&m_csReceive);
-  AutoLock config_lock(&dec.config);
-  set_output(out_spk, _use_spdif);
+  if (_spk) *_spk = dec.get_output();
   return S_OK;
 }
 
-STDMETHODIMP 
+// User format
+STDMETHODIMP
+AC3Filter::get_user_spk(Speakers *_spk)
+{
+  if (_spk) *_spk = dec.get_user();
+  return S_OK;
+}
+STDMETHODIMP
+AC3Filter::set_user_spk(Speakers  _spk)
+{
+  return dec.set_user(_spk)? S_OK: E_FAIL;
+}
+
+// Use SPDIF if possible
+STDMETHODIMP
+AC3Filter::get_use_spdif(bool *_use_spdif)
+{
+  if (_use_spdif) *_use_spdif = dec.use_spdif;
+  return S_OK;
+}
+STDMETHODIMP
+AC3Filter::set_use_spdif(bool  _use_spdif)
+{
+  dec.use_spdif = _use_spdif;
+  return S_OK;
+}
+
+// SPDIF passthrough (formats bitmask)
+STDMETHODIMP
 AC3Filter::get_spdif_pt(int *_spdif_pt)
 {
-  *_spdif_pt = dec.get_spdif();
+  if (_spdif_pt) *_spdif_pt = dec.spdif_pt;
   return S_OK;
 }
-STDMETHODIMP 
-AC3Filter::set_spdif_pt(int _spdif_pt)
+STDMETHODIMP
+AC3Filter::set_spdif_pt(int  _spdif_pt)
 {
-  AutoLock config_lock(&dec.config);
-  dec.set_spdif(_spdif_pt);
+  dec.spdif_pt = _spdif_pt;
+  return S_OK;
+}
+
+// SPDIF stereo PCM passthrough
+STDMETHODIMP AC3Filter::get_spdif_stereo_pt(bool *_spdif_stereo_pt)
+{
+  if (_spdif_stereo_pt) *_spdif_stereo_pt = dec.spdif_stereo_pt;
+  return S_OK;
+}
+STDMETHODIMP AC3Filter::set_spdif_stereo_pt(bool  _spdif_stereo_pt)
+{
+  dec.spdif_stereo_pt = _spdif_stereo_pt;
+  return S_OK;
+}
+
+// SPDIF status
+STDMETHODIMP AC3Filter::get_spdif_status(int *_spdif_status)
+{
+  if (_spdif_status) *_spdif_status = dec.get_spdif_status();
   return S_OK;
 }
 
@@ -829,7 +733,7 @@ AC3Filter::get_playback_time(vtime_t *_time)
   {
     REFERENCE_TIME t;
     if SUCCEEDED(m_pClock->GetTime(&t))
-      *_time = vtime_t(double(t - m_tStart) * in_spk.sample_rate / 10000000);
+      *_time = vtime_t(double(t - m_tStart) * dec.get_input().sample_rate / 10000000);
   }
   return S_OK;
 }
@@ -862,8 +766,8 @@ AC3Filter::set_config_autoload(bool  _config_autoload)
   return S_OK;
 }
 
-// Load/save settings
 
+// Load/save settings
 
 STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
 {
@@ -881,42 +785,42 @@ STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SPK)
   {
-    Speakers spk_tmp = out_spk;
-    bool use_spdif_tmp = use_spdif;
+    Speakers user_spk = dec.get_user();
+    bool use_spdif = dec.use_spdif;
 
-    _conf->get_int32("format"           ,spk_tmp.format  );
-    _conf->get_int32("mask"             ,spk_tmp.mask    );
-    _conf->get_int32("relation"         ,spk_tmp.relation);
-    _conf->get_bool ("use_spdif"        ,use_spdif_tmp   );
+    _conf->get_int32("format"           ,user_spk.format  );
+    _conf->get_int32("mask"             ,user_spk.mask    );
+    _conf->get_int32("relation"         ,user_spk.relation);
+    _conf->get_bool ("use_spdif"        ,use_spdif        );
 
-    switch (spk_tmp.format)
+    switch (user_spk.format)
     {
       case FORMAT_PCM16_BE:
       case FORMAT_PCM16: 
-        spk_tmp.level = 32767;
+        user_spk.level = 32767;
         break;
 
       case FORMAT_PCM24_BE:
       case FORMAT_PCM24: 
-        spk_tmp.level = 8388607;
+        user_spk.level = 8388607;
         break;
 
       case FORMAT_PCM32_BE:
       case FORMAT_PCM32: 
-        spk_tmp.level = 2147483647;      
+        user_spk.level = 2147483647;      
         break;
 
       case FORMAT_PCMFLOAT:
-        spk_tmp.level = 1.0; 
+        user_spk.level = 1.0; 
         break;
 
       default: 
-        spk_tmp.level = 1.0; 
+        user_spk.level = 1.0; 
         break;
     }
 
-    set_out_spk(spk_tmp);
-    set_spdif(use_spdif_tmp);
+    dec.set_user(user_spk);
+    dec.use_spdif = use_spdif;
   }
 
   if (_what & AC3FILTER_PROC)
@@ -1032,10 +936,10 @@ STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SYS)
   {
-    int spdif_pt = dec.get_spdif();
+    int spdif_pt = dec.spdif_pt;
     _conf->get_int32("formats"          ,formats         );
     _conf->get_int32("spdif_pt"         ,spdif_pt        );
-    dec.set_spdif(spdif_pt);
+    dec.spdif_pt = spdif_pt;
 //    conf->get_bool   ("generate_timestamps", generate_timestamps);
 //    conf->get_int32  ("time_shift"       ,time_shift      );
 //    conf->get_bool   ("jitter"           ,jitter_on       );
@@ -1050,7 +954,12 @@ STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
 STDMETHODIMP AC3Filter::save_params(Config *_conf, int _what)
 {
   AudioProcessorState state;
+  Speakers user_spk;
+  bool use_spdif;
+
   dec.get_state(&state);
+  user_spk = dec.get_user();
+  use_spdif = dec.use_spdif;
 
   RegistryKey reg;
   if (!_conf)
@@ -1061,10 +970,10 @@ STDMETHODIMP AC3Filter::save_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SPK)
   {
-    _conf->set_int32("format"           ,out_spk.format  );
-    _conf->set_int32("mask"             ,out_spk.mask    );
-    _conf->set_int32("relation"         ,out_spk.relation);
-    _conf->set_bool ("use_spdif"        ,use_spdif       );
+    _conf->set_int32("format"           ,user_spk.format  );
+    _conf->set_int32("mask"             ,user_spk.mask    );
+    _conf->set_int32("relation"         ,user_spk.relation);
+    _conf->set_bool ("use_spdif"        ,use_spdif        );
   }
 
   if (_what & AC3FILTER_PROC)
@@ -1178,7 +1087,7 @@ STDMETHODIMP AC3Filter::save_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SYS)
   {
-    int spdif_pt = dec.get_spdif();
+    int spdif_pt = dec.spdif_pt;
     _conf->set_int32("formats"          ,formats         );
     _conf->set_int32("spdif_pt"         ,spdif_pt        );
 //    conf->set_bool   ("generate_timestamps", generate_timestamps);

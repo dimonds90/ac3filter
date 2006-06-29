@@ -153,6 +153,7 @@ bool set_merit(HKEY hive, LPCSTR key, int merit)
 
 const char *spklist[] = 
 {
+  "AS IS (no change)",
   "1/0 - mono",
   "2/0 - stereo",
   "3/0 - 3 front",
@@ -184,28 +185,29 @@ Speakers list2spk(int ispk, int ifmt, int sample_rate)
   int format = FORMAT_PCM16;
   int mask = MODE_STEREO;
   int relation = NO_RELATION;
-  sample_t level = 1.0;
+  sample_t level = 32767;
 
   switch (ispk)
   {
-    case  0: mask = MODE_1_0; break;
-    case  1: mask = MODE_2_0; break;
-    case  2: mask = MODE_3_0; break;
-    case  3: mask = MODE_2_1; break;
-    case  4: mask = MODE_3_1; break;
-    case  5: mask = MODE_2_2; break;
-    case  6: mask = MODE_3_2; break;
+    case  0: mask = 0;        break;
+    case  1: mask = MODE_1_0; break;
+    case  2: mask = MODE_2_0; break;
+    case  3: mask = MODE_3_0; break;
+    case  4: mask = MODE_2_1; break;
+    case  5: mask = MODE_3_1; break;
+    case  6: mask = MODE_2_2; break;
+    case  7: mask = MODE_3_2; break;
+           
+    case  8: mask = MODE_1_0 | CH_MASK_LFE; break;
+    case  9: mask = MODE_2_0 | CH_MASK_LFE; break;
+    case 10: mask = MODE_3_0 | CH_MASK_LFE; break;
+    case 11: mask = MODE_2_1 | CH_MASK_LFE; break;
+    case 12: mask = MODE_3_1 | CH_MASK_LFE; break;
+    case 13: mask = MODE_2_2 | CH_MASK_LFE; break;
+    case 14: mask = MODE_3_2 | CH_MASK_LFE; break;
 
-    case  7: mask = MODE_1_0 | CH_MASK_LFE; break;
-    case  8: mask = MODE_2_0 | CH_MASK_LFE; break;
-    case  9: mask = MODE_3_0 | CH_MASK_LFE; break;
-    case 10: mask = MODE_2_1 | CH_MASK_LFE; break;
-    case 11: mask = MODE_3_1 | CH_MASK_LFE; break;
-    case 12: mask = MODE_2_2 | CH_MASK_LFE; break;
-    case 13: mask = MODE_3_2 | CH_MASK_LFE; break;
-
-    case 14: mask = MODE_STEREO; relation = RELATION_DOLBY; break;
-    case 15: mask = MODE_STEREO, relation = RELATION_DOLBY2; break;
+    case 15: mask = MODE_STEREO; relation = RELATION_DOLBY; break;
+    case 16: mask = MODE_STEREO, relation = RELATION_DOLBY2; break;
   }
 
   switch (ifmt)
@@ -223,29 +225,30 @@ int spk2ispk(Speakers spk)
 {
   switch (spk.relation)
   {
-    case RELATION_DOLBY:   return 14;
-    case RELATION_DOLBY2:  return 15;
+    case RELATION_DOLBY:   return 15;
+    case RELATION_DOLBY2:  return 16;
     default:
       switch (spk.mask)
       {
-        case MODE_1_0:     return 0;
-        case MODE_2_0:     return 1;
-        case MODE_3_0:     return 2;
-        case MODE_2_1:     return 3;
-        case MODE_3_1:     return 4;
-        case MODE_2_2:     return 5;
-        case MODE_3_2:     return 6;
+        case 0:            return 0;
+        case MODE_1_0:     return 1;
+        case MODE_2_0:     return 2;
+        case MODE_3_0:     return 3;
+        case MODE_2_1:     return 4;
+        case MODE_3_1:     return 5;
+        case MODE_2_2:     return 6;
+        case MODE_3_2:     return 7;
                                   
-        case MODE_1_0 | CH_MASK_LFE: return  7;
-        case MODE_2_0 | CH_MASK_LFE: return  8;
-        case MODE_3_0 | CH_MASK_LFE: return  9;
-        case MODE_2_1 | CH_MASK_LFE: return 10;
-        case MODE_3_1 | CH_MASK_LFE: return 11;
-        case MODE_2_2 | CH_MASK_LFE: return 12;
-        case MODE_3_2 | CH_MASK_LFE: return 13;
+        case MODE_1_0 | CH_MASK_LFE: return  8;
+        case MODE_2_0 | CH_MASK_LFE: return  9;
+        case MODE_3_0 | CH_MASK_LFE: return 10;
+        case MODE_2_1 | CH_MASK_LFE: return 11;
+        case MODE_3_1 | CH_MASK_LFE: return 12;
+        case MODE_2_2 | CH_MASK_LFE: return 13;
+        case MODE_3_2 | CH_MASK_LFE: return 14;
       }
   }
-  return 1;
+  return 0;
 }
 
 int spk2ifmt(Speakers spk)
@@ -355,7 +358,6 @@ AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int Dialo
 
   filter = 0;
   proc   = 0;
-  dec    = 0;
 
   flags  = _flags;
   InitCommonControls();
@@ -369,13 +371,11 @@ AC3FilterDlg::OnConnect(IUnknown *pUnknown)
 
   pUnknown->QueryInterface(IID_IAC3Filter, (void **)&filter);
   pUnknown->QueryInterface(IID_IAudioProcessor, (void **)&proc);
-  pUnknown->QueryInterface(IID_IDecoder, (void **)&dec);
-  if (!filter || !proc || !dec)
+  if (!filter || !proc)
   {
     DbgLog((LOG_TRACE, 3, "AC3FilterDlg::OnConnect() Failed!"));
     SAFE_RELEASE(filter);
     SAFE_RELEASE(proc);
-    SAFE_RELEASE(dec);
     return E_NOINTERFACE; 
   }
 
@@ -396,7 +396,6 @@ AC3FilterDlg::OnDisconnect()
 
   SAFE_RELEASE(filter);
   SAFE_RELEASE(proc);
-  SAFE_RELEASE(dec);
 
   if (logo)
   {
@@ -510,13 +509,17 @@ AC3FilterDlg::reload_state()
   filter->get_in_spk(&in_spk);
   filter->get_out_spk(&out_spk);
 
-  filter->get_spdif(&spdif, &spdif_mode);
+  filter->get_user_spk(&user_spk);
+  filter->get_use_spdif(&use_spdif);
   filter->get_spdif_pt(&spdif_pt);
-  filter->get_formats(&formats);
+  filter->get_spdif_stereo_pt(&spdif_stereo_pt);
+  filter->get_spdif_status(&spdif_status);
 
+  filter->get_formats(&formats);
+/*
   dec->get_spk(&spk);
   dec->get_frames(&frames, &errors);
-
+*/
   vtime_t time;
   filter->get_playback_time(&time);
   proc->get_state(this, time);
@@ -685,20 +688,20 @@ AC3FilterDlg::set_dynamic_controls()
   /////////////////////////////////////
   // SPDIF mode
 
-  if (spdif_mode != old_spdif_mode || refresh)
+  if (spdif_status != old_spdif_status || refresh)
   {
-    old_spdif_mode = spdif_mode;
-    switch (spdif_mode)
+    old_spdif_status = spdif_status;
+    switch (old_spdif_status)
     {
-      case SPDIF_MODE_NONE:
+      case SPDIF_DISABLED:
         SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "SPDIF (disabled)");
         break;
 
-      case SPDIF_MODE_PASSTHROUGH:
+      case SPDIF_PASSTHROUGH:
         SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "SPDIF (passthrough)");
         break;
 
-      case SPDIF_MODE_ENCODE:
+      case SPDIF_ENCODE:
         SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "SPDIF (AC3 encode)");
         break;
     }
@@ -706,7 +709,7 @@ AC3FilterDlg::set_dynamic_controls()
 
   /////////////////////////////////////
   // Stream info
-
+/*
   dec->get_info(buf, sizeof(old_info));
   if (memcmp(buf, old_info, strlen(buf)) || refresh)
   {
@@ -716,7 +719,7 @@ AC3FilterDlg::set_dynamic_controls()
 
   dlg_printf(m_Dlg, IDC_EDT_FRAMES, "%i", frames);
   dlg_printf(m_Dlg, IDC_EDT_ERRORS, "%i", errors);
-
+*/
   /////////////////////////////////////
   // Auto gain control
 
@@ -769,13 +772,13 @@ AC3FilterDlg::set_controls()
   /////////////////////////////////////
   // Speakers
 
-  SendDlgItemMessage(m_Dlg, IDC_CMB_SPK,    CB_SETCURSEL, spk2ispk(out_spk), 0);
-  SendDlgItemMessage(m_Dlg, IDC_CMB_FORMAT, CB_SETCURSEL, spk2ifmt(out_spk), 0);
+  SendDlgItemMessage(m_Dlg, IDC_CMB_SPK,    CB_SETCURSEL, spk2ispk(user_spk), 0);
+  SendDlgItemMessage(m_Dlg, IDC_CMB_FORMAT, CB_SETCURSEL, spk2ifmt(user_spk), 0);
 
   /////////////////////////////////////
   // SPDIF
 
-  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF,    spdif?    BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF, use_spdif? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
   // SPDIF passthrough
@@ -1035,8 +1038,8 @@ AC3FilterDlg::command(int control, int message)
         int ispk = SendDlgItemMessage(m_Dlg, IDC_CMB_SPK, CB_GETCURSEL, 0, 0);
         int ifmt = SendDlgItemMessage(m_Dlg, IDC_CMB_FORMAT, CB_GETCURSEL, 0, 0);
 
-        Speakers spk = list2spk(ispk, ifmt, out_spk.sample_rate);
-        filter->set_out_spk(spk);
+        Speakers spk = list2spk(ispk, ifmt, 0);
+        filter->set_user_spk(spk);
         update();
       }
       break;
@@ -1046,8 +1049,8 @@ AC3FilterDlg::command(int control, int message)
 
     case IDC_CHK_SPDIF:
     {
-      spdif = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF) == BST_CHECKED;
-      filter->set_spdif(spdif);
+      use_spdif = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF) == BST_CHECKED;
+      filter->set_use_spdif(use_spdif);
       update();
       break;
     }

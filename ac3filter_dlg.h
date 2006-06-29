@@ -23,27 +23,27 @@ public:
 private:
   IAC3Filter      *filter;
   IAudioProcessor *proc;
-  IDecoder        *dec;
 
   bool     visible;
   bool     refresh;
   int      refresh_time;
 
-  Speakers spk;
   Speakers in_spk;
   Speakers out_spk;
 
-  bool     spdif;
-  int      spdif_mode;
-
+  Speakers user_spk;
+  bool     use_spdif;
   int      spdif_pt;
+  bool     spdif_stereo_pt;
+  int      spdif_status;
+
   int      formats;
 
   int      frames;
   int      errors;
 
   Speakers old_in_spk;
-  int      old_spdif_mode;
+  int      old_spdif_status;
   matrix_t old_matrix;
   char     old_info[1024];
 

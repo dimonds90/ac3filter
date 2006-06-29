@@ -21,18 +21,17 @@ protected:
   DShowSink  *sink;     // sink
   ROTEntry   rot;       // registred objects table entry
 
-  Speakers   in_spk;    // input configuration
-  Speakers   out_spk;   // output configuration
-  bool       use_spdif; // use spdif if possible
-
   int  formats;         // formats supported by filter
   bool config_autoload; // auto-load configuration files
 
+//  Speakers in_spk;
+//  Speakers out_spk;
 
-  bool setup_chain(Speakers in_spk, Speakers out_spk, bool use_spdif); 
-  bool set_input(CMediaType &mt);
+  bool set_input(const CMediaType &mt);
   bool set_input(Speakers in_spk);
-  bool set_output(Speakers out_spk, bool use_spdif);
+
+  Speakers guess_pcm_output();
+  Speakers guess_spdif_output();
 
   bool process_chunk(const Chunk *chunk);
   void reset();
@@ -86,18 +85,28 @@ public:
   /////////////////////////////////////////////////////////
   // IAC3Filter
 
-  // Speakers
-  STDMETHODIMP get_in_spk(Speakers *spk);
+  // Input/output format
+  STDMETHODIMP get_in_spk (Speakers *spk);
   STDMETHODIMP get_out_spk(Speakers *spk);
-  STDMETHODIMP set_out_spk(Speakers  spk);
 
-  // SPDIF if possible (formats bitmask)
-  STDMETHODIMP get_spdif(bool *spdif, int *spdif_mode);
-  STDMETHODIMP set_spdif(bool  spdif);
+  // User format
+  STDMETHODIMP get_user_spk(Speakers *spk);
+  STDMETHODIMP set_user_spk(Speakers  spk);
+
+  // Use SPDIF if possible
+  STDMETHODIMP get_use_spdif(bool *use_spdif);
+  STDMETHODIMP set_use_spdif(bool  use_spdif);
 
   // SPDIF passthrough (formats bitmask)
   STDMETHODIMP get_spdif_pt(int *spdif_pt);
   STDMETHODIMP set_spdif_pt(int  spdif_pt);
+
+  // SPDIF stereo PCM passthrough
+  STDMETHODIMP get_spdif_stereo_pt(bool *spdif_stereo_pt);
+  STDMETHODIMP set_spdif_stereo_pt(bool  spdif_stereo_pt);
+
+  // SPDIF status
+  STDMETHODIMP get_spdif_status(int *spdif_status);
 
   // Formats to accept
   STDMETHODIMP get_formats(int *formats);

@@ -10,7 +10,7 @@
 #include "win32\thread.h"
 #include "guids.h"
 
-class COMDecoder : public IAudioProcessor, public IDecoder, public DVDGraph
+class COMDecoder : public IAudioProcessor, public DVDGraph
 {
 protected:
   // COM support
