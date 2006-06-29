@@ -7,22 +7,22 @@
 void COMDecoder::reset()
 {
   AutoLock config_lock(&config);
-  DVDDecoder::reset();
+  DVDGraph::reset();
 }
 bool COMDecoder::set_input(Speakers _spk)
 {
   AutoLock config_lock(&config);
-  return DVDDecoder::set_input(_spk);
+  return DVDGraph::set_input(_spk);
 }
 bool COMDecoder::process(const Chunk *_chunk)
 {
   AutoLock config_lock(&config);
-  return DVDDecoder::process(_chunk);
+  return DVDGraph::process(_chunk);
 }
 bool COMDecoder::get_chunk(Chunk *_chunk)
 {
   AutoLock config_lock(&config);
-  return DVDDecoder::get_chunk(_chunk);
+  return DVDGraph::get_chunk(_chunk);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -31,7 +31,7 @@ bool COMDecoder::get_chunk(Chunk *_chunk)
 // AGC options
 STDMETHODIMP COMDecoder::get_auto_gain (bool *_auto_gain)
 {
-  *_auto_gain = proc.get_auto_gain();
+  if (_auto_gain) *_auto_gain = proc.get_auto_gain();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_auto_gain (bool _auto_gain)
@@ -42,7 +42,7 @@ STDMETHODIMP COMDecoder::set_auto_gain (bool _auto_gain)
 }
 STDMETHODIMP COMDecoder::get_normalize (bool *_normalize)
 {
-  *_normalize = proc.get_normalize();
+  if (_normalize) *_normalize = proc.get_normalize();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_normalize (bool _normalize)
@@ -53,7 +53,7 @@ STDMETHODIMP COMDecoder::set_normalize (bool _normalize)
 }
 STDMETHODIMP COMDecoder::get_attack(sample_t *_attack)
 {
-  *_attack = proc.get_attack();
+  if (_attack) *_attack = proc.get_attack();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_attack(sample_t _attack)
@@ -64,7 +64,7 @@ STDMETHODIMP COMDecoder::set_attack(sample_t _attack)
 }
 STDMETHODIMP COMDecoder::get_release(sample_t *_release)
 {
-  *_release = proc.get_release();
+  if (_release) *_release = proc.get_release();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_release(sample_t _release)
@@ -77,7 +77,7 @@ STDMETHODIMP COMDecoder::set_release(sample_t _release)
 // Matrix options
 STDMETHODIMP COMDecoder::get_auto_matrix(bool *_auto_matrix)
 {
-  *_auto_matrix = proc.get_auto_matrix();
+  if (_auto_matrix) *_auto_matrix = proc.get_auto_matrix();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_auto_matrix(bool _auto_matrix)
@@ -88,7 +88,7 @@ STDMETHODIMP COMDecoder::set_auto_matrix(bool _auto_matrix)
 }
 STDMETHODIMP COMDecoder::get_normalize_matrix(bool *_normalize_matrix)
 {
-  *_normalize_matrix = proc.get_normalize_matrix();
+  if (_normalize_matrix) *_normalize_matrix = proc.get_normalize_matrix();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_normalize_matrix(bool _normalize_matrix)
@@ -99,7 +99,7 @@ STDMETHODIMP COMDecoder::set_normalize_matrix(bool _normalize_matrix)
 }
 STDMETHODIMP COMDecoder::get_voice_control(bool *_voice_control)
 {
-  *_voice_control = proc.get_voice_control();
+  if (_voice_control) *_voice_control = proc.get_voice_control();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_voice_control(bool _voice_control)
@@ -110,7 +110,7 @@ STDMETHODIMP COMDecoder::set_voice_control(bool _voice_control)
 }
 STDMETHODIMP COMDecoder::get_expand_stereo(bool *_expand_stereo)
 {
-  *_expand_stereo = proc.get_expand_stereo();
+  if (_expand_stereo) *_expand_stereo = proc.get_expand_stereo();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_expand_stereo(bool _expand_stereo)
@@ -123,7 +123,7 @@ STDMETHODIMP COMDecoder::set_expand_stereo(bool _expand_stereo)
 // Master gain
 STDMETHODIMP COMDecoder::get_master(sample_t *_master)
 {
-  *_master = proc.get_master();
+  if (_master) *_master = proc.get_master();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_master(sample_t _master)
@@ -134,14 +134,14 @@ STDMETHODIMP COMDecoder::set_master(sample_t _master)
 }
 STDMETHODIMP COMDecoder::get_gain(sample_t *_gain)
 {
-  *_gain = proc.get_gain();
+  if (_gain) *_gain = proc.get_gain();
   return S_OK;
 }
 
 // Mix levels
 STDMETHODIMP COMDecoder::get_clev(sample_t *_clev)
 {
-  *_clev = proc.get_clev();
+  if (_clev) *_clev = proc.get_clev();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_clev(sample_t _clev)
@@ -152,7 +152,7 @@ STDMETHODIMP COMDecoder::set_clev(sample_t _clev)
 }
 STDMETHODIMP COMDecoder::get_slev(sample_t *_slev)
 {
-  *_slev = proc.get_slev();
+  if (_slev) *_slev = proc.get_slev();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_slev(sample_t _slev)
@@ -163,7 +163,7 @@ STDMETHODIMP COMDecoder::set_slev(sample_t _slev)
 }
 STDMETHODIMP COMDecoder::get_lfelev(sample_t *_lfelev)
 {
-  *_lfelev = proc.get_lfelev();
+  if (_lfelev) *_lfelev = proc.get_lfelev();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_lfelev(sample_t _lfelev)
@@ -176,7 +176,7 @@ STDMETHODIMP COMDecoder::set_lfelev(sample_t _lfelev)
 // Input/output gains
 STDMETHODIMP COMDecoder::get_input_gains(sample_t *_input_gains)
 {
-  proc.get_input_gains(_input_gains);
+  if (_input_gains) proc.get_input_gains(_input_gains);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_input_gains(sample_t *_input_gains)
@@ -187,7 +187,7 @@ STDMETHODIMP COMDecoder::set_input_gains(sample_t *_input_gains)
 }
 STDMETHODIMP COMDecoder::get_output_gains(sample_t *_output_gains)
 {
-  proc.get_output_gains(_output_gains);
+  if (_output_gains) proc.get_output_gains(_output_gains);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_output_gains(sample_t *_output_gains)
@@ -200,15 +200,15 @@ STDMETHODIMP COMDecoder::set_output_gains(sample_t *_output_gains)
 // Input/output levels
 STDMETHODIMP COMDecoder::get_levels(vtime_t _time, sample_t *_input_levels, sample_t *_output_levels)
 {
-  proc.get_input_levels(_time, _input_levels);
-  proc.get_output_levels(_time, _output_levels);
+  if (_input_levels)  proc.get_input_levels(_time, _input_levels);
+  if (_output_levels) proc.get_output_levels(_time, _output_levels);
   return S_OK;
 }
 
 // Matrix
 STDMETHODIMP COMDecoder::get_matrix(matrix_t *_matrix)
 {
-  proc.get_matrix(_matrix);
+  if (_matrix) proc.get_matrix(_matrix);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_matrix(matrix_t *_matrix)
@@ -221,7 +221,7 @@ STDMETHODIMP COMDecoder::set_matrix(matrix_t *_matrix)
 // DRC
 STDMETHODIMP COMDecoder::get_drc(bool *_drc)
 {
-  *_drc = proc.get_drc();
+  if (_drc) *_drc = proc.get_drc();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_drc(bool _drc)
@@ -232,7 +232,7 @@ STDMETHODIMP COMDecoder::set_drc(bool _drc)
 }
 STDMETHODIMP COMDecoder::get_drc_power(sample_t *_drc_power)
 {
-  *_drc_power = proc.get_drc_power();
+  if (_drc_power) *_drc_power = proc.get_drc_power();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_drc_power(sample_t _drc_power)
@@ -243,14 +243,14 @@ STDMETHODIMP COMDecoder::set_drc_power(sample_t _drc_power)
 }
 STDMETHODIMP COMDecoder::get_drc_level(sample_t *_drc_level)
 {
-  *_drc_level = proc.get_drc_level();
+  if (_drc_level) *_drc_level = proc.get_drc_level();
   return S_OK;
 }
 
 // Bass redirection
 STDMETHODIMP COMDecoder::get_bass_redir(bool *_bass_redir)
 {
-  *_bass_redir = proc.get_bass_redir();
+  if (_bass_redir) *_bass_redir = proc.get_bass_redir();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_bass_redir(bool _bass_redir)
@@ -261,7 +261,7 @@ STDMETHODIMP COMDecoder::set_bass_redir(bool _bass_redir)
 }
 STDMETHODIMP COMDecoder::get_bass_freq(int *_bass_freq)
 {
-  *_bass_freq = proc.get_bass_freq();
+  if (_bass_freq) *_bass_freq = proc.get_bass_freq();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_bass_freq(int bass_freq)
@@ -274,7 +274,7 @@ STDMETHODIMP COMDecoder::set_bass_freq(int bass_freq)
 // Delay
 STDMETHODIMP COMDecoder::get_delay(bool *_delay)
 {
-  *_delay = proc.get_delay();
+  if (_delay) *_delay = proc.get_delay();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_delay(bool _delay)
@@ -285,7 +285,7 @@ STDMETHODIMP COMDecoder::set_delay(bool _delay)
 }
 STDMETHODIMP COMDecoder::get_delay_units(int *_delay_units)
 {
-  *_delay_units = proc.get_delay_units();
+  if (_delay_units) *_delay_units = proc.get_delay_units();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_delay_units(int _delay_units)
@@ -296,7 +296,7 @@ STDMETHODIMP COMDecoder::set_delay_units(int _delay_units)
 }
 STDMETHODIMP COMDecoder::get_delays(float *_delays)
 {
-  proc.get_delays(_delays);
+  if (_delays) proc.get_delays(_delays);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_delays(float *_delays)
@@ -309,7 +309,7 @@ STDMETHODIMP COMDecoder::set_delays(float *_delays)
 // Syncronization
 STDMETHODIMP COMDecoder::get_time_shift(vtime_t *_time_shift)
 {
-  *_time_shift = proc.get_time_shift();
+  if (_time_shift) *_time_shift = proc.get_time_shift();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_time_shift(vtime_t _time_shift)
@@ -320,7 +320,7 @@ STDMETHODIMP COMDecoder::set_time_shift(vtime_t _time_shift)
 }
 STDMETHODIMP COMDecoder::get_time_factor(vtime_t *_time_factor)
 {
-  *_time_factor = proc.get_time_factor();
+  if (_time_factor) *_time_factor = proc.get_time_factor();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_time_factor(vtime_t _time_factor)
@@ -331,7 +331,7 @@ STDMETHODIMP COMDecoder::set_time_factor(vtime_t _time_factor)
 }
 STDMETHODIMP COMDecoder::get_dejitter(bool *_dejitter)
 {
-  *_dejitter = proc.get_dejitter();
+  if (_dejitter) *_dejitter = proc.get_dejitter();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_dejitter(bool _dejitter)
@@ -342,7 +342,7 @@ STDMETHODIMP COMDecoder::set_dejitter(bool _dejitter)
 }
 STDMETHODIMP COMDecoder::get_threshold(vtime_t *_threshold)
 {
-  *_threshold = proc.get_threshold();
+  if (_threshold) *_threshold = proc.get_threshold();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_threshold(vtime_t _threshold)
@@ -353,7 +353,7 @@ STDMETHODIMP COMDecoder::set_threshold(vtime_t _threshold)
 }
 STDMETHODIMP COMDecoder::get_jitter(vtime_t *_jitter)
 {
-  *_jitter = proc.get_jitter();
+  if (_jitter) *_jitter = proc.get_jitter();
   return S_OK;
 }
 
@@ -523,7 +523,7 @@ COMDecoder::get_info(char *_info, int _len)
   return S_OK;
 */
   // windows controls require '\n' to be replaced with '\r\n'
-  DVDDecoder::get_info(_info, _len);
+  DVDGraph::get_info(_info, _len);
 
   int len = strlen(_info);
   int cnt = 0;
@@ -546,6 +546,7 @@ COMDecoder::get_info(char *_info, int _len)
     }
     else
       *dst-- = *src--;
+
   return S_OK;
 }
 

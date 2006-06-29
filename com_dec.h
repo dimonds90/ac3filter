@@ -6,11 +6,11 @@
 #ifndef COM_DEC_H
 #define COM_DEC_H
 
-#include "filters\dvd_decoder.h"
+#include "filters\dvd_graph.h"
 #include "win32\thread.h"
 #include "guids.h"
 
-class COMDecoder : public IAudioProcessor, public IDecoder, public DVDDecoder
+class COMDecoder : public IAudioProcessor, public IDecoder, public DVDGraph
 {
 protected:
   // COM support
