@@ -667,13 +667,13 @@ AC3Filter::set_user_spk(Speakers  _spk)
 STDMETHODIMP
 AC3Filter::get_use_spdif(bool *_use_spdif)
 {
-  if (_use_spdif) *_use_spdif = dec.use_spdif;
+  if (_use_spdif) *_use_spdif = dec.get_use_spdif();
   return S_OK;
 }
 STDMETHODIMP
 AC3Filter::set_use_spdif(bool  _use_spdif)
 {
-  dec.use_spdif = _use_spdif;
+  dec.set_use_spdif(_use_spdif);
   return S_OK;
 }
 
@@ -681,25 +681,25 @@ AC3Filter::set_use_spdif(bool  _use_spdif)
 STDMETHODIMP
 AC3Filter::get_spdif_pt(int *_spdif_pt)
 {
-  if (_spdif_pt) *_spdif_pt = dec.spdif_pt;
+  if (_spdif_pt) *_spdif_pt = dec.get_spdif_pt();
   return S_OK;
 }
 STDMETHODIMP
 AC3Filter::set_spdif_pt(int  _spdif_pt)
 {
-  dec.spdif_pt = _spdif_pt;
+  dec.set_spdif_pt(_spdif_pt);
   return S_OK;
 }
 
 // SPDIF stereo PCM passthrough
 STDMETHODIMP AC3Filter::get_spdif_stereo_pt(bool *_spdif_stereo_pt)
 {
-  if (_spdif_stereo_pt) *_spdif_stereo_pt = dec.spdif_stereo_pt;
+  if (_spdif_stereo_pt) *_spdif_stereo_pt = dec.get_spdif_stereo_pt();
   return S_OK;
 }
 STDMETHODIMP AC3Filter::set_spdif_stereo_pt(bool  _spdif_stereo_pt)
 {
-  dec.spdif_stereo_pt = _spdif_stereo_pt;
+  dec.set_spdif_stereo_pt(_spdif_stereo_pt);
   return S_OK;
 }
 
@@ -786,7 +786,7 @@ STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
   if (_what & AC3FILTER_SPK)
   {
     Speakers user_spk = dec.get_user();
-    bool use_spdif = dec.use_spdif;
+    bool use_spdif = dec.get_use_spdif();
 
     _conf->get_int32("format"           ,user_spk.format  );
     _conf->get_int32("mask"             ,user_spk.mask    );
@@ -820,7 +820,7 @@ STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
     }
 
     dec.set_user(user_spk);
-    dec.use_spdif = use_spdif;
+    dec.set_use_spdif(use_spdif);
   }
 
   if (_what & AC3FILTER_PROC)
@@ -936,10 +936,10 @@ STDMETHODIMP AC3Filter::load_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SYS)
   {
-    int spdif_pt = dec.spdif_pt;
+    int spdif_pt = dec.get_spdif_pt();
     _conf->get_int32("formats"          ,formats         );
     _conf->get_int32("spdif_pt"         ,spdif_pt        );
-    dec.spdif_pt = spdif_pt;
+    dec.set_spdif_pt(spdif_pt);
 //    conf->get_bool   ("generate_timestamps", generate_timestamps);
 //    conf->get_int32  ("time_shift"       ,time_shift      );
 //    conf->get_bool   ("jitter"           ,jitter_on       );
@@ -959,7 +959,7 @@ STDMETHODIMP AC3Filter::save_params(Config *_conf, int _what)
 
   dec.get_state(&state);
   user_spk = dec.get_user();
-  use_spdif = dec.use_spdif;
+  use_spdif = dec.get_use_spdif();
 
   RegistryKey reg;
   if (!_conf)
@@ -1087,7 +1087,7 @@ STDMETHODIMP AC3Filter::save_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SYS)
   {
-    int spdif_pt = dec.spdif_pt;
+    int spdif_pt = dec.get_spdif_pt();
     _conf->set_int32("formats"          ,formats         );
     _conf->set_int32("spdif_pt"         ,spdif_pt        );
 //    conf->set_bool   ("generate_timestamps", generate_timestamps);
