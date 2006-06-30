@@ -147,6 +147,9 @@ DECLARE_INTERFACE_(IAC3Filter, IUnknown)
   // CPU usage
   STDMETHOD (get_cpu_usage)(double *cpu_usage) = 0;
 
+  // Build and environment info
+  STDMETHOD (get_env) (char *buf, int size) = 0;
+
   // Config
   STDMETHOD (get_config_file)    (char *filename, int size) = 0;
   STDMETHOD (get_config_autoload)(bool *config_autoload) = 0;

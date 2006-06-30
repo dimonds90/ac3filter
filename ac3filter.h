@@ -118,6 +118,9 @@ public:
   // CPU usage
   STDMETHODIMP get_cpu_usage(double *cpu_usage);
 
+  // Build and environment info
+  STDMETHODIMP get_env(char *buf, int size);
+
   // Config
   STDMETHODIMP get_config_file(char *filename, int size);
   STDMETHODIMP get_config_autoload(bool *config_autoload);

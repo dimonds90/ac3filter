@@ -3,7 +3,7 @@
 #include "decss\DeCSSInputPin.h"
 
 // uncomment this to log timing information into DirectShow log
-//#define LOG_TIMING
+#define LOG_TIMING
 
 // uncomment this to register graph at running objects table
 //#define REGISTER_FILTERGRAPH
@@ -227,10 +227,10 @@ AC3Filter::Receive(IMediaSample *in)
   {
     case S_OK:
     case VFW_S_NO_STOP_TIME:
-      time = vtime_t(begin) * in_spk.sample_rate / 10000000;
+      time = vtime_t(begin) / 10000000;
       chunk.set_sync(true, time);
 #ifdef LOG_TIMING
-      DbgLog((LOG_TRACE, 3, "-> > timestamp: %ims\t> %.0fsm", int(begin/10000), time));
+      DbgLog((LOG_TRACE, 3, "-> > timestamp: %ims\t> %.0fsm", int(begin/10000), time * 1000));
 #endif
       break;
   }
@@ -733,7 +733,7 @@ AC3Filter::get_playback_time(vtime_t *_time)
   {
     REFERENCE_TIME t;
     if SUCCEEDED(m_pClock->GetTime(&t))
-      *_time = vtime_t(double(t - m_tStart) * dec.get_input().sample_rate / 10000000);
+      *_time = vtime_t(double(t - m_tStart) / 10000000);
   }
   return S_OK;
 }
@@ -743,6 +743,17 @@ STDMETHODIMP
 AC3Filter::get_cpu_usage(double *_cpu_usage)
 {
   *_cpu_usage = cpu.usage();
+  return S_OK;
+}
+
+// Build and environment info
+STDMETHODIMP
+AC3Filter::get_env(char *_buf, int _size)
+{
+  const char *env = valib_build_info();
+  int len = strlen(env) + 1;
+  memcpy(_buf, env, MIN(_size, len));
+  cr2crlf(_buf, _size);
   return S_OK;
 }
 

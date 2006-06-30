@@ -660,6 +660,13 @@ AC3FilterDlg::init_controls()
   lnk_donate.link(m_Dlg, IDC_LNK_DONATE);
 
   /////////////////////////////////////
+  // Build and environment info
+
+  char info[1024];
+  filter->get_env(info, sizeof(info));
+  SetDlgItemText(m_Dlg, IDC_EDT_ENV, info);
+
+  /////////////////////////////////////
   // Version
 
   char ver1[255];

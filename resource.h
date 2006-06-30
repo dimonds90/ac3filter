@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Developer Studio generated include file.
-// Used by AC3Filter.rc
+// Used by ac3filter.rc
 //
 #define IDB_LOGO                        111
 #define IDB_LOGO_PCM                    120
@@ -37,7 +37,8 @@
 #define IDC_EDT_TIME_SHIFT              3161
 #define IDC_VER                         3162
 #define IDC_EDT_ATTACK                  3163
-#define IDC_EDT_RELEASE                 3164
+#define IDC_EDT_ENV                     3164
+#define IDC_EDT_RELEASE                 3165
 
 // Next default values for new objects
 // 
@@ -47,7 +48,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        136
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         3163
+#define _APS_NEXT_CONTROL_VALUE         3166
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
