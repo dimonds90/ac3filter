@@ -1,6 +1,34 @@
 #include "com_dec.h"
 #include <stdio.h>
 
+void cr2crlf(char *_buf, int _size)
+{
+  int cnt = 0;
+
+  char *src;
+  char *dst;
+
+  src = _buf;
+  dst = _buf + _size;
+  while (*src && src < dst)
+  {
+    if (*src == '\n')
+      cnt++;
+    src++;
+  }
+
+  dst = src + cnt;
+  if (dst > _buf + _size)
+    dst = _buf + _size;
+
+  while (src != dst)
+  {
+    *dst-- = *src--;
+    if (src[1] == '\n')
+      *dst-- = '\r';
+  }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Filter interface
 
@@ -522,31 +550,8 @@ COMDecoder::get_info(char *_info, int _len)
   strncpy(_info, hist_buf, _len);
   return S_OK;
 */
-  // windows controls require '\n' to be replaced with '\r\n'
   DVDGraph::get_info(_info, _len);
-
-  int len = strlen(_info);
-  int cnt = 0;
-
-  for (int i = 0; i < len; i++)
-    if (_info[i+1] == '\n')
-      cnt++;
-
-  char *src = _info + len - 1;
-  char *dst = src + cnt + 1;
-  if (dst > _info + _len)
-    dst = _info + len;
-  *dst-- = 0;
-
-  while (src != dst)
-    if (src[0] != '\r' && src[1] == '\n')
-    {
-      *dst-- = '\r';
-      *dst-- = *src--;
-    }
-    else
-      *dst-- = *src--;
-
+  cr2crlf(_info, _len);
   return S_OK;
 }
 

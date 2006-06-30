@@ -10,6 +10,8 @@
 #include "win32\thread.h"
 #include "guids.h"
 
+void cr2crlf(char *buf, int size);
+
 class COMDecoder : public IAudioProcessor, public DVDGraph
 {
 protected:
