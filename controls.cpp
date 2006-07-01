@@ -306,7 +306,7 @@ LinkButton::paint(HDC dc)
   // Draw description text or url
   HFONT old_font = (HFONT)SelectObject(dc, font);
   COLORREF old_color = SetTextColor(dc, RGB(0, 0, 255));
-  DrawText(dc, link_text, link_text_len, &client_rect, DT_SINGLELINE | DT_LEFT | DT_VCENTER);
+  DrawText(dc, link_text, link_text_len, &client_rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
   SetTextColor(dc, old_color);
   SelectObject(dc, old_font);
 //  DeleteObject(font);
