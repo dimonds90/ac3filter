@@ -434,7 +434,7 @@ BEGIN
     GROUPBOX        "Links",IDC_STATIC,7,100,193,58
     CONTROL         "DONATE|http://order.kagi.com/?6CZJZ",IDC_LNK_DONATE,
                     "Button",BS_OWNERDRAW | BS_LEFT | BS_VCENTER | BS_FLAT | 
-                    WS_TABSTOP,170,171,58,16,WS_EX_DLGMODALFRAME
+                    WS_TABSTOP,179,171,39,16,WS_EX_DLGMODALFRAME
     GROUPBOX        "Thanks to",IDC_STATIC,203,73,187,27
     CTEXT           "If you like this and want it to become better please make a donation. Any sum is important!",
                     IDC_STATIC,13,160,372,9
@@ -550,9 +550,9 @@ BEGIN
     LTEXT           "0dB",IDC_STATIC,209,46,15,8,0,WS_EX_RIGHT
     LTEXT           "Input:",IDC_STATIC,14,106,19,8
     LTEXT           "input config",IDC_LBL_INPUT,34,106,97,8
-    CONTROL         111,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+    CONTROL         202,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
                     WS_BORDER,141,101,115,84
-    CONTROL         131,IDC_LOGO,"Static",SS_BITMAP,206,143,50,22
+    CONTROL         19811,IDC_LOGO,"Static",SS_BITMAP,206,143,50,22
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
 END
