@@ -370,11 +370,13 @@ AC3FilterDlg::OnConnect(IUnknown *pUnknown)
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::OnConnect()"));
 
   pUnknown->QueryInterface(IID_IAC3Filter, (void **)&filter);
+  pUnknown->QueryInterface(IID_IDecoder, (void **)&dec);
   pUnknown->QueryInterface(IID_IAudioProcessor, (void **)&proc);
-  if (!filter || !proc)
+  if (!filter || !dec || !proc)
   {
     DbgLog((LOG_TRACE, 3, "AC3FilterDlg::OnConnect() Failed!"));
     SAFE_RELEASE(filter);
+    SAFE_RELEASE(dec);
     SAFE_RELEASE(proc);
     return E_NOINTERFACE; 
   }
@@ -392,9 +394,10 @@ AC3FilterDlg::OnDisconnect()
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::OnDisconnect()"));
 
   if (filter)
-    filter->save_params(0, AC3FILTER_ALL);
+    dec->save_params(0, AC3FILTER_ALL);
 
   SAFE_RELEASE(filter);
+  SAFE_RELEASE(dec);
   SAFE_RELEASE(proc);
 
   if (logo)
@@ -506,16 +509,16 @@ AC3FilterDlg::update()
 void 
 AC3FilterDlg::reload_state()
 {
-  filter->get_in_spk(&in_spk);
-  filter->get_out_spk(&out_spk);
+  dec->get_in_spk(&in_spk);
+  dec->get_out_spk(&out_spk);
 
-  filter->get_user_spk(&user_spk);
-  filter->get_use_spdif(&use_spdif);
-  filter->get_spdif_pt(&spdif_pt);
-  filter->get_spdif_stereo_pt(&spdif_stereo_pt);
-  filter->get_spdif_status(&spdif_status);
+  dec->get_user_spk(&user_spk);
+  dec->get_use_spdif(&use_spdif);
+  dec->get_spdif_pt(&spdif_pt);
+  dec->get_spdif_stereo_pt(&spdif_stereo_pt);
+  dec->get_spdif_status(&spdif_status);
 
-  filter->get_formats(&formats);
+  dec->get_formats(&formats);
 /*
   dec->get_spk(&spk);
   dec->get_frames(&frames, &errors);
@@ -1046,7 +1049,7 @@ AC3FilterDlg::command(int control, int message)
         int ifmt = SendDlgItemMessage(m_Dlg, IDC_CMB_FORMAT, CB_GETCURSEL, 0, 0);
 
         Speakers spk = list2spk(ispk, ifmt, 0);
-        filter->set_user_spk(spk);
+        dec->set_user_spk(spk);
         update();
       }
       break;
@@ -1057,7 +1060,7 @@ AC3FilterDlg::command(int control, int message)
     case IDC_CHK_SPDIF:
     {
       use_spdif = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF) == BST_CHECKED;
-      filter->set_use_spdif(use_spdif);
+      dec->set_use_spdif(use_spdif);
       update();
       break;
     }
@@ -1073,7 +1076,7 @@ AC3FilterDlg::command(int control, int message)
       spdif_pt |= IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_MPA) == BST_CHECKED? FORMAT_MASK_MPA: 0;
       spdif_pt |= IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_AC3) == BST_CHECKED? FORMAT_MASK_AC3: 0;
       spdif_pt |= IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
-      filter->set_spdif_pt(spdif_pt);
+      dec->set_spdif_pt(spdif_pt);
       update();
       break;
     }
@@ -1093,7 +1096,7 @@ AC3FilterDlg::command(int control, int message)
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_AC3) == BST_CHECKED? FORMAT_MASK_AC3: 0;
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_PES) == BST_CHECKED? FORMAT_MASK_PES: 0;
-      filter->set_formats(formats);
+      dec->set_formats(formats);
       update();
       break;
     }
@@ -1420,7 +1423,7 @@ AC3FilterDlg::command(int control, int message)
         sprintf(buf, REG_KEY_PRESET"\\%s", preset);
 
         RegistryKey reg(buf);
-        filter->load_params(&reg, AC3FILTER_ALL);
+        dec->load_params(&reg, AC3FILTER_ALL);
         update();
       }
       if (message == CB_ENTER)
@@ -1432,7 +1435,7 @@ AC3FilterDlg::command(int control, int message)
 
         RegistryKey reg;
         reg.create_key(buf);
-        filter->save_params(&reg, AC3FILTER_PRESET);
+        dec->save_params(&reg, AC3FILTER_PRESET);
         update();
       }
 
@@ -1447,7 +1450,7 @@ AC3FilterDlg::command(int control, int message)
 
       RegistryKey reg;
       reg.create_key(buf);
-      filter->save_params(&reg, AC3FILTER_PRESET);
+      dec->save_params(&reg, AC3FILTER_PRESET);
       update();
       break;
     }
@@ -1473,24 +1476,24 @@ AC3FilterDlg::command(int control, int message)
     {
       char filename[MAX_PATH];
 
-      if FAILED(filter->get_config_file(filename, MAX_PATH))
+      if FAILED(dec->get_config_file(filename, MAX_PATH))
         filename[0] = 0;
 
       FileDlg dlg(m_Dlg, filename);
       switch (dlg.exec())
       {
       case IDC_BTN_FILE_SAVE:
-        if (dlg.preset) filter->save_params(dlg.filename, true);
-        if (dlg.matrix) filter->save_matrix(dlg.filename, true);
-        if (dlg.delay)  filter->save_delay (dlg.filename, true);
-        if (dlg.eq)     filter->save_eq9(dlg.filename, true);
+        if (dlg.preset) dec->save_params(dlg.filename, true);
+        if (dlg.matrix) dec->save_matrix(dlg.filename, true);
+        if (dlg.delay)  dec->save_delay (dlg.filename, true);
+        if (dlg.eq)     dec->save_eq9(dlg.filename, true);
         break;
 
       case IDC_BTN_FILE_LOAD:
-        if (dlg.preset) filter->load_params(dlg.filename, true);
-        if (dlg.matrix) filter->load_matrix(dlg.filename, true);
-        if (dlg.delay)  filter->load_delay (dlg.filename, true);
-        if (dlg.eq)     filter->load_eq9(dlg.filename, true);
+        if (dlg.preset) dec->load_params(dlg.filename, true);
+        if (dlg.matrix) dec->load_matrix(dlg.filename, true);
+        if (dlg.delay)  dec->load_delay (dlg.filename, true);
+        if (dlg.eq)     dec->load_eq9(dlg.filename, true);
         break;
       }
       break;
@@ -1510,7 +1513,7 @@ AC3FilterDlg::command(int control, int message)
 
         proc->set_auto_matrix(false);
         RegistryKey reg(buf);
-        filter->load_params(&reg, AC3FILTER_MATRIX);
+        dec->load_params(&reg, AC3FILTER_MATRIX);
         update();
       }
       if (message == CB_ENTER)
@@ -1522,7 +1525,7 @@ AC3FilterDlg::command(int control, int message)
 
         RegistryKey reg;
         reg.create_key(buf);
-        filter->save_params(&reg, AC3FILTER_MATRIX);
+        dec->save_params(&reg, AC3FILTER_MATRIX);
         update();
       }
       break;
@@ -1536,7 +1539,7 @@ AC3FilterDlg::command(int control, int message)
 
       RegistryKey reg;
       reg.create_key(buf);
-      filter->save_params(&reg, AC3FILTER_MATRIX);
+      dec->save_params(&reg, AC3FILTER_MATRIX);
       update();
       break;
     }

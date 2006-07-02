@@ -12,8 +12,12 @@
 
 void cr2crlf(char *buf, int size);
 
-class COMDecoder : public IAudioProcessor, public DVDGraph
+class COMDecoder : public Filter, public IDecoder, public IAudioProcessor
 {
+protected:
+  int  formats; // formats allowed
+  DVDGraph dvd;
+
 protected:
   // COM support
   IUnknown *outer;
@@ -27,17 +31,76 @@ protected:
 public:
   CritSec config;
 
-  COMDecoder(IUnknown *_outer) 
-  { outer = _outer; };
+  COMDecoder(IUnknown *_outer);
+
+  /////////////////////////////////////////////////////////
+  // DVDGraph interface
+
+  void set_sink(const Sink *sink);
+  const Sink *get_sink() const;
 
   /////////////////////////////////////////////////////////
   // Filter interface
   // (protect state-changing functions)
 
   virtual void reset();
+
+  virtual bool is_ofdd() const;
+  virtual bool query_input(Speakers spk) const;
   virtual bool set_input(Speakers spk);
+  virtual Speakers get_input() const;
+
   virtual bool process(const Chunk *chunk);
+  virtual Speakers get_output() const;
+  virtual bool is_empty() const;
   virtual bool get_chunk(Chunk *chunk);
+
+  /////////////////////////////////////////////////////////
+  // IDecoder
+
+  /////////////////////////////////////
+  // Input/output control
+
+  // Input/output format
+  STDMETHODIMP get_in_spk (Speakers *spk);
+  STDMETHODIMP get_out_spk(Speakers *spk);
+
+  // User format
+  STDMETHODIMP get_user_spk(Speakers *spk);
+  STDMETHODIMP set_user_spk(Speakers  spk);
+
+  // Formats to accept
+  STDMETHODIMP get_formats(int *formats);
+  STDMETHODIMP set_formats(int  formats);
+
+  /////////////////////////////////////
+  // SPDIF options
+
+  // Use SPDIF if possible
+  STDMETHODIMP get_use_spdif(bool *use_spdif);
+  STDMETHODIMP set_use_spdif(bool  use_spdif);
+
+  // SPDIF passthrough (formats bitmask)
+  STDMETHODIMP get_spdif_pt(int *spdif_pt);
+  STDMETHODIMP set_spdif_pt(int  spdif_pt);
+
+  // SPDIF stereo PCM passthrough
+  STDMETHODIMP get_spdif_stereo_pt(bool *spdif_stereo_pt);
+  STDMETHODIMP set_spdif_stereo_pt(bool  spdif_stereo_pt);
+
+  // SPDIF status
+  STDMETHODIMP get_spdif_status(int *spdif_status);
+
+  /////////////////////////////////////
+  // Other
+
+  // Stats
+  STDMETHODIMP get_frames(int  *frames, int *errors);
+  STDMETHODIMP get_info  (char *info, int len);
+
+  // Load/save settings
+  STDMETHODIMP load_params(Config *config, int what);
+  STDMETHODIMP save_params(Config *config, int what);
 
   /////////////////////////////////////////////////////////
   // IAudioProcessor
@@ -113,29 +176,6 @@ public:
                                 
   STDMETHODIMP get_state        (AudioProcessorState *state, vtime_t time = 0);
   STDMETHODIMP set_state        (AudioProcessorState *state);
-                                
-  /////////////////////////////////////////////////////////
-  // IDecoder
-
-  // Input speakers configuration
-  STDMETHODIMP get_spk   (Speakers *spk);
-
-  // Stats
-  STDMETHODIMP get_frames(int  *frames, int *errors);
-  STDMETHODIMP get_info  (char *info, int len);
-
-  // Downmix coefs locks
-  STDMETHODIMP get_locks (bool *clev_lock, bool *slev_lock, bool *lfelev_lock);
-  STDMETHODIMP set_locks (bool  clev_lock, bool  slev_lock, bool  lfelev_lock);
-
-  /////////////////////////////////////////////////////////
-  // IAC3Decoder
-
-  STDMETHODIMP get_eq_on(bool *eq_on);
-  STDMETHODIMP set_eq_on(bool  eq_on);
-
-  STDMETHODIMP get_eq(sample_t *eq);
-  STDMETHODIMP set_eq(sample_t *eq);
 };
 
 

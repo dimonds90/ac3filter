@@ -21,11 +21,7 @@ protected:
   DShowSink  *sink;     // sink
   ROTEntry   rot;       // registred objects table entry
 
-  int  formats;         // formats supported by filter
   bool config_autoload; // auto-load configuration files
-
-//  Speakers in_spk;
-//  Speakers out_spk;
 
   bool set_input(const CMediaType &mt);
   bool set_input(Speakers in_spk);
@@ -85,33 +81,6 @@ public:
   /////////////////////////////////////////////////////////
   // IAC3Filter
 
-  // Input/output format
-  STDMETHODIMP get_in_spk (Speakers *spk);
-  STDMETHODIMP get_out_spk(Speakers *spk);
-
-  // User format
-  STDMETHODIMP get_user_spk(Speakers *spk);
-  STDMETHODIMP set_user_spk(Speakers  spk);
-
-  // Use SPDIF if possible
-  STDMETHODIMP get_use_spdif(bool *use_spdif);
-  STDMETHODIMP set_use_spdif(bool  use_spdif);
-
-  // SPDIF passthrough (formats bitmask)
-  STDMETHODIMP get_spdif_pt(int *spdif_pt);
-  STDMETHODIMP set_spdif_pt(int  spdif_pt);
-
-  // SPDIF stereo PCM passthrough
-  STDMETHODIMP get_spdif_stereo_pt(bool *spdif_stereo_pt);
-  STDMETHODIMP set_spdif_stereo_pt(bool  spdif_stereo_pt);
-
-  // SPDIF status
-  STDMETHODIMP get_spdif_status(int *spdif_status);
-
-  // Formats to accept
-  STDMETHODIMP get_formats(int *formats);
-  STDMETHODIMP set_formats(int  formats);
-
   // Timing
   STDMETHODIMP get_playback_time (vtime_t *time);
 
@@ -120,15 +89,6 @@ public:
 
   // Build and environment info
   STDMETHODIMP get_env(char *buf, int size);
-
-  // Config
-  STDMETHODIMP get_config_file(char *filename, int size);
-  STDMETHODIMP get_config_autoload(bool *config_autoload);
-  STDMETHODIMP set_config_autoload(bool  config_autoload);
-
-  // Load/save settings
-  STDMETHODIMP load_params(Config *config, int what);
-  STDMETHODIMP save_params(Config *config, int what);
 };
 
 #endif

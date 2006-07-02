@@ -22,6 +22,7 @@ public:
 
 private:
   IAC3Filter      *filter;
+  IDecoder        *dec;
   IAudioProcessor *proc;
 
   bool     visible;

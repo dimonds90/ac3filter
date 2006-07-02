@@ -114,6 +114,18 @@ DEFINE_GUID(CLSID_AC3Filter_about,
 
 DECLARE_INTERFACE_(IAC3Filter, IUnknown)
 {
+  // Timing
+  STDMETHOD (get_playback_time)(vtime_t *time) = 0;
+
+  // CPU usage
+  STDMETHOD (get_cpu_usage)(double *cpu_usage) = 0;
+
+  // Build and environment info
+  STDMETHOD (get_env) (char *buf, int size) = 0;
+};
+
+DECLARE_INTERFACE_(IDecoder, IUnknown)
+{
   // Input/output format
   STDMETHOD (get_in_spk)  (Speakers *spk) = 0;
   STDMETHOD (get_out_spk) (Speakers *spk) = 0;
@@ -121,6 +133,10 @@ DECLARE_INTERFACE_(IAC3Filter, IUnknown)
   // User format
   STDMETHOD (get_user_spk) (Speakers *spk) = 0;
   STDMETHOD (set_user_spk) (Speakers  spk) = 0;
+
+  // Input formats to accept (formats bitmask)
+  STDMETHOD (get_formats) (int *formats) = 0;
+  STDMETHOD (set_formats) (int  formats) = 0;
 
   // Use SPDIF if possible
   STDMETHOD (get_use_spdif) (bool *use_spdif) = 0;
@@ -137,23 +153,9 @@ DECLARE_INTERFACE_(IAC3Filter, IUnknown)
   // SPDIF status
   STDMETHOD (get_spdif_status)(int *spdif_status) = 0;
 
-  // Input formats to accept (formats bitmask)
-  STDMETHOD (get_formats) (int *formats) = 0;
-  STDMETHOD (set_formats) (int  formats) = 0;
-
-  // Timing
-  STDMETHOD (get_playback_time)(vtime_t *time) = 0;
-
-  // CPU usage
-  STDMETHOD (get_cpu_usage)(double *cpu_usage) = 0;
-
-  // Build and environment info
-  STDMETHOD (get_env) (char *buf, int size) = 0;
-
-  // Config
-  STDMETHOD (get_config_file)    (char *filename, int size) = 0;
-  STDMETHOD (get_config_autoload)(bool *config_autoload) = 0;
-  STDMETHOD (set_config_autoload)(bool  config_autoload) = 0;
+  // Stats
+  STDMETHOD (get_frames)(int  *frames, int *errors) = 0;
+  STDMETHOD (get_info)  (char *info, int len) = 0;
 
   // Load/save settings
   STDMETHOD (load_params) (Config *config, int what) = 0;
@@ -291,24 +293,5 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_state)        (AudioProcessorState *state) = 0;
 };
 
-/*
-DECLARE_INTERFACE_(IDecoder, IUnknown)
-{
-  // Input speakers configuration
-  STDMETHOD (get_spk)   (Speakers *spk) = 0;
 
-  // Stats
-  STDMETHOD (get_frames)(int  *frames, int *errors) = 0;
-  STDMETHOD (get_info)  (char *info, int len) = 0;
-};
-
-DECLARE_INTERFACE_(IAC3Dec, IUnknown)
-{
-  STDMETHOD (get_eq_on) (bool *eq_on) = 0;
-  STDMETHOD (set_eq_on) (bool  eq_on) = 0;
-
-  STDMETHOD (get_eq)    (sample_t *eq) = 0;
-  STDMETHOD (set_eq)    (sample_t *eq) = 0;
-};
-*/
 #endif
