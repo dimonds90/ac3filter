@@ -519,10 +519,8 @@ AC3FilterDlg::reload_state()
   dec->get_spdif_status(&spdif_status);
 
   dec->get_formats(&formats);
-/*
-  dec->get_spk(&spk);
   dec->get_frames(&frames, &errors);
-*/
+
   vtime_t time;
   filter->get_playback_time(&time);
   proc->get_state(this, time);
@@ -719,7 +717,7 @@ AC3FilterDlg::set_dynamic_controls()
 
   /////////////////////////////////////
   // Stream info
-/*
+
   dec->get_info(buf, sizeof(old_info));
   if (memcmp(buf, old_info, strlen(buf)) || refresh)
   {
@@ -729,7 +727,7 @@ AC3FilterDlg::set_dynamic_controls()
 
   dlg_printf(m_Dlg, IDC_EDT_FRAMES, "%i", frames);
   dlg_printf(m_Dlg, IDC_EDT_ERRORS, "%i", errors);
-*/
+
   /////////////////////////////////////
   // Auto gain control
 
