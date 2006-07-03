@@ -88,19 +88,19 @@ AC3Filter::set_input(Speakers _in_spk)
 {
   if (!dec.query_input(_in_spk))
   {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(%s %s %iHz): format refused", this,
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): format refused", this,
       _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
     return false;
   }
 
   if (!dec.set_input(_in_spk))
   {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(%s %s %iHz): failed", this,
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): failed", this,
       _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
     return false;
   }
 
-  DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::set_input(%s %s %iHz): succeeded", this,
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): succeeded", this,
     _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
   return true;
 }
@@ -450,15 +450,31 @@ AC3Filter::CheckInputType(const CMediaType *mt)
 HRESULT 
 AC3Filter::CheckOutputType(const CMediaType *mt)
 {
-  CMediaType out_mt;
-
-  int i = 0;
-  while (GetMediaType(i++, &out_mt) == S_OK)
+  if (m_pOutput->IsConnected() == TRUE)
+  {
+    // If output is already connected agree 
+    // only with current media type
+    CMediaType out_mt;
+    m_pOutput->ConnectionMediaType(&out_mt);
     if (*mt == out_mt)
     {
       DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: Ok...", this));
       return S_OK;
     }
+  }
+  else
+  {
+    // If output is not connected agree
+    // only with our proposed media types
+    int i = 0;
+    CMediaType out_mt;
+    while (GetMediaType(i++, &out_mt) == S_OK)
+      if (*mt == out_mt)
+      {
+        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: Ok...", this));
+        return S_OK;
+      }
+  }
 
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType(): Not our type", this));
   return VFW_E_TYPE_NOT_ACCEPTED;
