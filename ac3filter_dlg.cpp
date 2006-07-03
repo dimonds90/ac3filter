@@ -680,13 +680,12 @@ AC3FilterDlg::init_controls()
 void 
 AC3FilterDlg::set_dynamic_controls()
 {
-  char buf[sizeof(old_info)];
-
   /////////////////////////////////////////////////////////
   // Input format
 
   if (old_in_spk != in_spk || refresh)
   {
+    char buf[128];
     old_in_spk = in_spk;
     sprintf(buf, "%s %s %iHz", in_spk.format_text(), in_spk.mode_text(), in_spk.sample_rate);
     SetDlgItemText(m_Dlg, IDC_LBL_INPUT, buf);
@@ -718,11 +717,12 @@ AC3FilterDlg::set_dynamic_controls()
   /////////////////////////////////////
   // Stream info
 
-  dec->get_info(buf, sizeof(old_info));
-  if (memcmp(buf, old_info, strlen(buf)) || refresh)
+  char info[sizeof(old_info)];
+  dec->get_info(info, sizeof(old_info));
+  if (memcmp(info, old_info, strlen(info)) || refresh)
   {
-    memcpy(old_info, buf, sizeof(old_info));
-    SendDlgItemMessage(m_Dlg, IDC_EDT_INFO, WM_SETTEXT, 0, (LONG)(LPSTR)buf);
+    memcpy(old_info, info, sizeof(old_info));
+    SendDlgItemMessage(m_Dlg, IDC_EDT_INFO, WM_SETTEXT, 0, (LONG)(LPSTR)info);
   }
 
   dlg_printf(m_Dlg, IDC_EDT_FRAMES, "%i", frames);
@@ -757,7 +757,16 @@ AC3FilterDlg::set_dynamic_controls()
   /////////////////////////////////////
   // Syncronization
 
-  SetDlgItemInt(m_Dlg, IDC_LBL_JITTER, int(jitter * 1000), false);
+  char jitter[sizeof(old_jitter)];
+  sprintf(jitter, "Input\tmean: %ims\tstddev: %ims\r\nOutput\tmean: %ims\tstddev: %ims", 
+    int(input_mean * 1000), int(input_stddev * 1000), 
+    int(output_mean * 1000), int(output_stddev * 1000));
+
+  if (memcmp(jitter, old_jitter, strlen(jitter)) || refresh)
+  {
+    memcpy(old_jitter, jitter, sizeof(old_jitter));
+    SendDlgItemMessage(m_Dlg, IDC_EDT_JITTER, WM_SETTEXT, 0, (LONG)(LPSTR)jitter);
+  }
 
   /////////////////////////////////////
   // Matrix controls
@@ -858,7 +867,7 @@ AC3FilterDlg::set_controls()
   SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_SETPOS, TRUE, int(time_shift * 1000));
 
   SendDlgItemMessage(m_Dlg, IDC_CHK_JITTER, BM_SETCHECK, dejitter? BST_CHECKED: BST_UNCHECKED, 1);
-  SetDlgItemInt(m_Dlg, IDC_LBL_JITTER, int(jitter * 1000), false);
+//  SetDlgItemInt(m_Dlg, IDC_LBL_JITTER, int(jitter * 1000), false);
 
   /////////////////////////////////////
   // DRC

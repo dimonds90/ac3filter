@@ -515,9 +515,12 @@ STDMETHODIMP COMDecoder::set_threshold(vtime_t _threshold)
   dvd.proc.set_threshold(_threshold);
   return S_OK;
 }
-STDMETHODIMP COMDecoder::get_jitter(vtime_t *_jitter)
+STDMETHODIMP COMDecoder::get_jitter(vtime_t *_input_mean, vtime_t *_input_stddev, vtime_t *_output_mean, vtime_t *_output_stddev)
 {
-  if (_jitter) *_jitter = dvd.proc.get_jitter();
+  if (_input_mean)    *_input_mean    = dvd.proc.get_input_mean();
+  if (_input_stddev)  *_input_stddev  = dvd.proc.get_input_stddev();
+  if (_output_mean)   *_output_mean   = dvd.proc.get_output_mean();
+  if (_output_stddev) *_output_stddev = dvd.proc.get_output_stddev();
   return S_OK;
 }
 
@@ -577,7 +580,7 @@ STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, vtime_t _time)
   get_time_factor(&_state->time_factor);
   get_dejitter(&_state->dejitter);
   get_threshold(&_state->threshold);
-  get_jitter(&_state->jitter);
+  get_jitter(&_state->input_mean, &_state->input_stddev, &_state->output_mean, &_state->output_stddev);
 
   return S_OK;
 };

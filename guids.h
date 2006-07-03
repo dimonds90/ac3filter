@@ -216,7 +216,11 @@ struct AudioProcessorState
   vtime_t  time_factor;
   bool     dejitter;
   vtime_t  threshold;
-  vtime_t  jitter;
+
+  vtime_t  input_mean;
+  vtime_t  input_stddev;
+  vtime_t  output_mean;
+  vtime_t  output_stddev;
 };
 
 DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
@@ -278,16 +282,17 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_delay_units)  (int  delay_units) = 0;
   STDMETHOD (get_delays)       (float *delays) = 0;
   STDMETHOD (set_delays)       (float *delays) = 0;
-  // Syncronization
+  // Linear time transform
   STDMETHOD (get_time_shift)   (vtime_t *time_shift) = 0;
   STDMETHOD (set_time_shift)   (vtime_t  time_shift) = 0;
   STDMETHOD (get_time_factor)  (vtime_t *time_factor) = 0;
   STDMETHOD (set_time_factor)  (vtime_t  time_factor) = 0;
+  // Jitter correction
   STDMETHOD (get_dejitter)     (bool *dejitter) = 0;
   STDMETHOD (set_dejitter)     (bool  dejitter) = 0;
   STDMETHOD (get_threshold)    (vtime_t *threshold) = 0;
   STDMETHOD (set_threshold)    (vtime_t  threshold) = 0;
-  STDMETHOD (get_jitter)       (vtime_t *jitter) = 0;
+  STDMETHOD (get_jitter)       (vtime_t *input_mean, vtime_t *input_stddev, vtime_t *output_mean, vtime_t *output_stddev) = 0;
                                
   STDMETHOD (get_state)        (AudioProcessorState *state, vtime_t time = 0) = 0;
   STDMETHOD (set_state)        (AudioProcessorState *state) = 0;

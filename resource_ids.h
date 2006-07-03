@@ -232,7 +232,7 @@
 // Dejitter
 
 #define IDC_CHK_JITTER                 11403
-#define IDC_LBL_JITTER                 11404
+#define IDC_EDT_JITTER                 11404
 
 ///////////////////////////////////////////////////////////
 // Equalizer

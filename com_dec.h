@@ -163,16 +163,17 @@ public:
   STDMETHODIMP set_delay_units  (int  delay_units);
   STDMETHODIMP get_delays       (float *delays);
   STDMETHODIMP set_delays       (float *delays);
-  // Syncronization
+  // Linear time transform
   STDMETHODIMP get_time_shift   (vtime_t *time_shift);
   STDMETHODIMP set_time_shift   (vtime_t  time_shift);
   STDMETHODIMP get_time_factor  (vtime_t *time_factor);
   STDMETHODIMP set_time_factor  (vtime_t  time_factor);
+  // Dejitter
   STDMETHODIMP get_dejitter     (bool *dejitter);
   STDMETHODIMP set_dejitter     (bool  dejitter);
   STDMETHODIMP get_threshold    (vtime_t *threshold);
   STDMETHODIMP set_threshold    (vtime_t  threshold);
-  STDMETHODIMP get_jitter       (vtime_t *jitter);
+  STDMETHODIMP get_jitter       (vtime_t *input_mean, vtime_t *input_stddev, vtime_t *output_mean, vtime_t *output_stddev);
                                 
   STDMETHODIMP get_state        (AudioProcessorState *state, vtime_t time = 0);
   STDMETHODIMP set_state        (AudioProcessorState *state);

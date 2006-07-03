@@ -47,6 +47,7 @@ private:
   int      old_spdif_status;
   matrix_t old_matrix;
   char     old_info[1024];
+  char     old_jitter[128];
 
   // Matrix
   DoubleEdit  edt_matrix[NCHANNELS][NCHANNELS];
