@@ -43,9 +43,15 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
     m_pOutput = sink;
 
   config_autoload = false;
-  
+
+  // init decoder
   dec.set_sink(sink);
   dec.load_params(0, AC3FILTER_ALL);
+
+  // read 'quick hack' of play/pause problem
+  reinit_samples = 0;
+  RegistryKey reg(REG_KEY);
+  reg.get_int32("reinit_samples", reinit_samples);
 }
 
 AC3Filter::~AC3Filter()
@@ -251,7 +257,6 @@ AC3Filter::StartStreaming()
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StartStreaming()", this));
 
   // Reset before starting a new stream
-
   CAutoLock lock(&m_csReceive);
   reset();
 
@@ -358,9 +363,50 @@ STDMETHODIMP
 AC3Filter::Run(REFERENCE_TIME tStart)
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Run(%ims)", this, int(tStart/10000)));
-  return CTransformFilter::Run(tStart);
-}
+  HRESULT hr = CTransformFilter::Run(tStart);
+  if FAILED(hr)
+    return hr;
 
+  if (reinit_samples)
+  {
+    // Quick hack to overcome SPDIF 'play/pause' problem
+    //
+    // Some sound cards (I have found it on AD1985) have a bug with pausing
+    // of SPDIF playback: after pause or seeking SPDIF transmission disappears
+    // at all. The reason is a bug in sound card driver: when Pause() is
+    // called on DirectSound's SPDIF playback buffer sound card switches to
+    // PCM mode and does not switch back to SPDIF when playback is resumed.
+    // The only way to continue playback is to reopen SPDIF output. 
+    // 
+    // To force the renderer to reopen SPDIF output we send a portion of 
+    // PCM data so forcing the renderer to close SPDIF output and open 
+    // PCM playback. After this we may continue normal operation but should
+    // reset DVDGraph's processing chain to force DVDGraph to re-check
+    // possibility of SPDIF output.
+    //
+    // Also discontiniuity flag should be send with next normal output sample
+    // to force the renderer to sync time correctly because excessive PCM
+    // output and format switching may produce desynchronization.
+    //
+    // This method is a 'quick hack' because it breaks normal DirectShow
+    // data flow and produces glitches on seeking and pause.
+
+    CAutoLock lock(&m_csReceive);
+
+    uint8_t *buf = new uint8_t[reinit_samples * 4];
+    memset(buf, 0, reinit_samples * 4);
+
+    Chunk chunk;
+    chunk.set_rawdata(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate), buf, sizeof(buf));
+
+    sink->process(&chunk);
+
+    dec.reset();
+    sink->send_discontinuity();
+  }
+
+  return S_OK;
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -379,7 +425,7 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   if (i < 0) 
     return E_INVALIDARG;
 
-  if (!i--) return spk2mt(Speakers(FORMAT_PCM16, MODE_STEREO, 48000), *_mt, false)? NOERROR: E_FAIL;
+  if (!i--) return spk2mt(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate), *_mt, false)? NOERROR: E_FAIL;
 
 /*
   /////////////////////////////////////////////////////////////////////////////

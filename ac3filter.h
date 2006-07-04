@@ -22,6 +22,8 @@ protected:
   ROTEntry   rot;       // registred objects table entry
 
   bool config_autoload; // auto-load configuration files
+  int reinit_samples;   // force audio renderer to reinit sound card
+                        // the number means number of PCM samples to send
 
   bool set_input(const CMediaType &mt);
   bool set_input(Speakers in_spk);
