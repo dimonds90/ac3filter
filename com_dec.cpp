@@ -822,9 +822,18 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
   if (_what & AC3FILTER_SYS)
   {
     int spdif_pt = dvd.get_spdif_pt();
+    bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+    bool spdif_as_pcm = dvd.get_spdif_as_pcm();
+
     _conf->get_int32("formats"          ,formats         );
     _conf->get_int32("spdif_pt"         ,spdif_pt        );
+    _conf->get_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
+    _conf->get_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
+
     dvd.set_spdif_pt(spdif_pt);
+    dvd.set_spdif_stereo_pt(spdif_stereo_pt);
+    dvd.set_spdif_as_pcm(spdif_as_pcm);
+
 //    conf->get_bool   ("generate_timestamps", generate_timestamps);
 //    conf->get_int32  ("time_shift"       ,time_shift      );
 //    conf->get_bool   ("jitter"           ,jitter_on       );
@@ -973,8 +982,14 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
   if (_what & AC3FILTER_SYS)
   {
     int spdif_pt = dvd.get_spdif_pt();
+    bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+    bool spdif_as_pcm = dvd.get_spdif_as_pcm();
+
     _conf->set_int32("formats"          ,formats         );
     _conf->set_int32("spdif_pt"         ,spdif_pt        );
+    _conf->set_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
+    _conf->set_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
+
 //    conf->set_bool   ("generate_timestamps", generate_timestamps);
 //    conf->set_int32  ("time_shift"       ,time_shift      );
 //    conf->set_bool   ("jitter"           ,jitter_on       );
