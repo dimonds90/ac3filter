@@ -249,6 +249,12 @@ HRESULT
 AC3Filter::StartStreaming()
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StartStreaming()", this));
+
+  // Reset before starting a new stream
+
+  CAutoLock lock(&m_csReceive);
+  reset();
+
   return CTransformFilter::StartStreaming();
 }
 
