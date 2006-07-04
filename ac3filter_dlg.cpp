@@ -516,6 +516,7 @@ AC3FilterDlg::reload_state()
   dec->get_use_spdif(&use_spdif);
   dec->get_spdif_pt(&spdif_pt);
   dec->get_spdif_stereo_pt(&spdif_stereo_pt);
+  dec->get_spdif_as_pcm(&spdif_as_pcm);
   dec->get_spdif_status(&spdif_status);
 
   dec->get_formats(&formats);
@@ -805,6 +806,12 @@ AC3FilterDlg::set_controls()
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_DTS, (spdif_pt & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
+  // SPDIF options
+
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_STEREO_PT, spdif_stereo_pt? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_AS_PCM, spdif_as_pcm? BST_CHECKED: BST_UNCHECKED);
+
+  /////////////////////////////////////
   // Formats
 
   CheckDlgButton(m_Dlg, IDC_CHK_PCM, (formats & FORMAT_CLASS_PCM_LE) != 0? BST_CHECKED: BST_UNCHECKED);
@@ -1084,6 +1091,25 @@ AC3FilterDlg::command(int control, int message)
       spdif_pt |= IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_AC3) == BST_CHECKED? FORMAT_MASK_AC3: 0;
       spdif_pt |= IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
       dec->set_spdif_pt(spdif_pt);
+      update();
+      break;
+    }
+
+    /////////////////////////////////////
+    // SPDIF options
+
+    case IDC_CHK_SPDIF_STEREO_PT:
+    {
+      spdif_stereo_pt = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_STEREO_PT) == BST_CHECKED;
+      dec->set_spdif_stereo_pt(spdif_stereo_pt);
+      update();
+      break;
+    }
+
+    case IDC_CHK_SPDIF_AS_PCM:
+    {
+      spdif_as_pcm = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_AS_PCM) == BST_CHECKED;
+      dec->set_spdif_as_pcm(spdif_as_pcm);
       update();
       break;
     }

@@ -168,6 +168,17 @@ STDMETHODIMP COMDecoder::set_spdif_stereo_pt(bool  _spdif_stereo_pt)
   return S_OK;
 }
 
+STDMETHODIMP COMDecoder::get_spdif_as_pcm(bool *_spdif_as_pcm)
+{
+  if (_spdif_as_pcm) *_spdif_as_pcm = dvd.get_spdif_as_pcm();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_spdif_as_pcm(bool  _spdif_as_pcm)
+{
+  dvd.set_spdif_as_pcm(_spdif_as_pcm);
+  return S_OK;
+}
+
 // SPDIF status
 STDMETHODIMP COMDecoder::get_spdif_status(int *_spdif_status)
 {

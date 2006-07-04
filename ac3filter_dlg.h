@@ -36,6 +36,7 @@ private:
   bool     use_spdif;
   int      spdif_pt;
   bool     spdif_stereo_pt;
+  bool     spdif_as_pcm;
   int      spdif_status;
 
   int      formats;

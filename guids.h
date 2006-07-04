@@ -150,6 +150,10 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
   STDMETHOD (get_spdif_stereo_pt)(bool *spdif_stereo_pt) = 0;
   STDMETHOD (set_spdif_stereo_pt)(bool  spdif_stereo_pt) = 0;
 
+  // SPDIF as PCM output
+  STDMETHOD (get_spdif_as_pcm)(bool *spdif_as_pcm) = 0;
+  STDMETHOD (set_spdif_as_pcm)(bool  spdif_as_pcm) = 0;
+
   // SPDIF status
   STDMETHOD (get_spdif_status)(int *spdif_status) = 0;
 

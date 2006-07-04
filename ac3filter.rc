@@ -563,8 +563,8 @@ FONT 8, "MS Sans Serif"
 BEGIN
     GROUPBOX        "Default audio renderer",IDC_STATIC,200,100,190,87
     GROUPBOX        "Filter merit",IDC_STATIC,200,7,190,93
-    LTEXT           "If you have no sound at all (in analog or spdif mode) try to switch this option. Note that this option changes system default renderer but some players may have its own audio renderer settings. In this case you have to change your player's settings.",
-                    IDC_STATIC,207,111,172,44
+    LTEXT           "   If you have no sound at all (in analog or spdif mode) try to switch this option.",
+                    IDC_STATIC,207,111,175,17
     RADIOBUTTON     "Use Direct Sound as default audio renderer",
                     IDC_RB_RENDER_DS,207,163,152,10
     RADIOBUTTON     "Use Wave Out as default Audio renderer",
@@ -572,9 +572,9 @@ BEGIN
     RADIOBUTTON     "Prefer AC3Filter",IDC_RB_MERIT_PREFERRED,207,76,65,10
     RADIOBUTTON     "Prefer other decoder",IDC_RB_MERIT_UNLIKELY,207,86,81,
                     10
-    LTEXT           "If you want to use this filter as default decoder choose 'Prefer AC3Filter'. If you want to use other decoder choose 'Prefer other decoder'. In this case it will be used only if it is no other decoder installed.",
-                    IDC_STATIC,207,18,175,32
-    GROUPBOX        "SPDIF passthrough",IDC_STATIC,103,7,92,69
+    LTEXT           "   If you want to use this filter as default decoder choose 'Prefer AC3Filter'. If you want to use other decoder choose 'Prefer other decoder'. In this case it will be used only if it is no other decoder installed.",
+                    IDC_STATIC,207,16,175,33
+    GROUPBOX        "SPDIF options",IDC_STATIC,84,7,111,69
     CONTROL         "Slider1",IDC_SLIDER_TIME_SHIFT,"msctls_trackbar32",
                     TBS_NOTICKS | WS_TABSTOP,15,88,174,12
     LTEXT           "+0",IDC_STATIC,98,101,8,8
@@ -585,12 +585,12 @@ BEGIN
     LTEXT           "Time shift (ms):",IDC_STATIC,15,111,49,8
     CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,14,127,66,8
-    CONTROL         "MPEG Audio",IDC_CHK_SPDIF_MPA,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,112,55,57,10
-    CONTROL         "AC3",IDC_CHK_SPDIF_AC3,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,112,23,29,10
-    CONTROL         "DTS",IDC_CHK_SPDIF_DTS,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,112,39,31,10
+    CONTROL         "MPEG Audio passthrough",IDC_CHK_SPDIF_MPA,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,91,37,97,10
+    CONTROL         "AC3 passthrough",IDC_CHK_SPDIF_AC3,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,91,17,70,10
+    CONTROL         "DTS passthrough",IDC_CHK_SPDIF_DTS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,91,27,71,10
     CONTROL         "PCM",IDC_CHK_PCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     15,17,31,10
     CONTROL         "AC3",IDC_CHK_AC3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
@@ -599,7 +599,7 @@ BEGIN
                     15,39,31,10
     CONTROL         "MPEG Audio",IDC_CHK_MPA,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,50,57,10
-    GROUPBOX        "Use AC3Filter for ..",IDC_STATIC,7,7,92,69
+    GROUPBOX        "Use AC3Filter for ..",IDC_STATIC,7,7,74,69
     CONTROL         "PES (DVD)",IDC_CHK_PES,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,60,51,10
     LTEXT           "Current jitter:",IDC_STATIC,79,127,40,8
@@ -611,6 +611,14 @@ BEGIN
     EDITTEXT        IDC_EDT_RELEASE,151,170,38,12,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_JITTER,25,136,164,19,ES_MULTILINE | ES_READONLY | 
                     NOT WS_BORDER
+    LTEXT           "   Note that some players have its own decoder settings. In this case you have to change your player's settings (see documentaion for more details).",
+                    IDC_STATIC,207,48,175,25
+    LTEXT           "   Note that this option changes system default renderer but some players have its own audio renderer settings. In this case you have to change your player's settings (see documentaion for more details).",
+                    IDC_STATIC,207,127,175,33
+    CONTROL         "Do not encode stereo PCM",IDC_CHK_SPDIF_STEREO_PT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,51,102,10
+    CONTROL         "Output SPDIF as PCM",IDC_CHK_SPDIF_AS_PCM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,91,61,87,10
 END
 
 IDD_FILE DIALOG DISCARDABLE  0, 0, 178, 81

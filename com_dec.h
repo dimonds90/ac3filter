@@ -88,6 +88,10 @@ public:
   STDMETHODIMP get_spdif_stereo_pt(bool *spdif_stereo_pt);
   STDMETHODIMP set_spdif_stereo_pt(bool  spdif_stereo_pt);
 
+  // SPDIF as PCM output
+  STDMETHODIMP get_spdif_as_pcm(bool *spdif_as_pcm);
+  STDMETHODIMP set_spdif_as_pcm(bool  spdif_as_pcm);
+
   // SPDIF status
   STDMETHODIMP get_spdif_status(int *spdif_status);
 

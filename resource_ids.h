@@ -362,11 +362,14 @@
 // SPDIF
 
 #define IDC_CHK_SPDIF                  20001
-#define IDC_CHK_SPDIF_ON               20002
+#define IDC_LBL_SPDIF_STATUS           20002
 
 #define IDC_CHK_SPDIF_MPA              20011
 #define IDC_CHK_SPDIF_AC3              20012
 #define IDC_CHK_SPDIF_DTS              20013
+
+#define IDC_CHK_SPDIF_STEREO_PT        20014
+#define IDC_CHK_SPDIF_AS_PCM           20015
 
 // Other
 
