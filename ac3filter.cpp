@@ -384,7 +384,7 @@ AC3Filter::Run(REFERENCE_TIME tStart)
     // reset DVDGraph's processing chain to force DVDGraph to re-check
     // possibility of SPDIF output.
     //
-    // Also discontiniuity flag should be send with next normal output sample
+    // Also discontiniuity flag should be sent with next normal output sample
     // to force the renderer to sync time correctly because excessive PCM
     // output and format switching may produce desynchronization.
     //
