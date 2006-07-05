@@ -47,7 +47,7 @@ private:
   Speakers old_in_spk;
   int      old_spdif_status;
   matrix_t old_matrix;
-  char     old_info[1024];
+  char     old_info[2048];
   char     old_jitter[128];
 
   // Matrix
