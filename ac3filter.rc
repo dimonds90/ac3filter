@@ -531,7 +531,7 @@ BEGIN
                     WS_DISABLED
     CONTROL         "Progress1",IDC_CPU,"msctls_progress32",PBS_VERTICAL | 
                     PBS_SMOOTH | WS_BORDER,271,112,9,50
-    CONTROL         "SPDIF",IDC_CHK_SPDIF,"Button",BS_AUTO3STATE | 
+    CONTROL         "Use SPDIF",IDC_CHK_SPDIF,"Button",BS_AUTO3STATE | 
                     WS_TABSTOP,14,45,82,10
     GROUPBOX        "DRC",IDC_STATIC,199,7,93,90
     CONTROL         "Slider1",IDC_SLIDER_DRC_POWER,"msctls_trackbar32",
@@ -613,7 +613,7 @@ BEGIN
                     88,156,10
     CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,207,98,175,10
-    GROUPBOX        "Static",IDC_STATIC,200,7,190,69
+    GROUPBOX        "SPDIF options",IDC_STATIC,200,7,190,69
     CONTROL         "Restrict SPDIF sample rate",IDC_CHK_SPDIF_CHECK_SR,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,52,101,10
     CONTROL         "48kHz",IDC_CHK_SPDIF_ALLOW_48,"Button",BS_AUTOCHECKBOX | 
