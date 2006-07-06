@@ -35,8 +35,15 @@ private:
   Speakers user_spk;
   bool     use_spdif;
   int      spdif_pt;
-  bool     spdif_stereo_pt;
   bool     spdif_as_pcm;
+  bool     spdif_encode;
+  bool     spdif_stereo_pt;
+
+  bool     spdif_check_sr;
+  bool     spdif_allow_48;
+  bool     spdif_allow_44;
+  bool     spdif_allow_32;
+
   int      spdif_status;
 
   int      formats;

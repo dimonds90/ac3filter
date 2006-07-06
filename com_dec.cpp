@@ -156,6 +156,30 @@ STDMETHODIMP COMDecoder::set_spdif_pt(int  _spdif_pt)
   return S_OK;
 }
 
+// SPDIF as PCM output
+STDMETHODIMP COMDecoder::get_spdif_as_pcm(bool *_spdif_as_pcm)
+{
+  if (_spdif_as_pcm) *_spdif_as_pcm = dvd.get_spdif_as_pcm();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_spdif_as_pcm(bool  _spdif_as_pcm)
+{
+  dvd.set_spdif_as_pcm(_spdif_as_pcm);
+  return S_OK;
+}
+
+// SPDIF encode
+STDMETHODIMP COMDecoder::get_spdif_encode(bool *_spdif_encode)
+{
+  if (_spdif_encode) *_spdif_encode = dvd.get_spdif_encode();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_spdif_encode(bool  _spdif_encode)
+{
+  dvd.set_spdif_encode(_spdif_encode);
+  return S_OK;
+}
+
 // SPDIF stereo PCM passthrough
 STDMETHODIMP COMDecoder::get_spdif_stereo_pt(bool *_spdif_stereo_pt)
 {
@@ -168,14 +192,45 @@ STDMETHODIMP COMDecoder::set_spdif_stereo_pt(bool  _spdif_stereo_pt)
   return S_OK;
 }
 
-STDMETHODIMP COMDecoder::get_spdif_as_pcm(bool *_spdif_as_pcm)
+// SPDIF check sample rate
+STDMETHODIMP COMDecoder::get_spdif_check_sr(bool *_spdif_check_sr)
 {
-  if (_spdif_as_pcm) *_spdif_as_pcm = dvd.get_spdif_as_pcm();
+  if (_spdif_check_sr) *_spdif_check_sr = dvd.get_spdif_check_sr();
   return S_OK;
 }
-STDMETHODIMP COMDecoder::set_spdif_as_pcm(bool  _spdif_as_pcm)
+STDMETHODIMP COMDecoder::set_spdif_check_sr(bool  _spdif_check_sr)
 {
-  dvd.set_spdif_as_pcm(_spdif_as_pcm);
+  dvd.set_spdif_check_sr(_spdif_check_sr);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_spdif_allow_48(bool *_spdif_allow_48)
+{
+  if (_spdif_allow_48) *_spdif_allow_48 = dvd.get_spdif_allow_48();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_spdif_allow_48(bool  _spdif_allow_48)
+{
+  dvd.set_spdif_allow_48(_spdif_allow_48);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_spdif_allow_44(bool *_spdif_allow_44)
+{
+  if (_spdif_allow_44) *_spdif_allow_44 = dvd.get_spdif_allow_44();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_spdif_allow_44(bool  _spdif_allow_44)
+{
+  dvd.set_spdif_allow_44(_spdif_allow_44);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_spdif_allow_32(bool *_spdif_allow_32)
+{
+  if (_spdif_allow_32) *_spdif_allow_32 = dvd.get_spdif_allow_32();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_spdif_allow_32(bool  _spdif_allow_32)
+{
+  dvd.set_spdif_allow_32(_spdif_allow_32);
   return S_OK;
 }
 
@@ -821,18 +876,47 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SYS)
   {
-    int spdif_pt = dvd.get_spdif_pt();
-    bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+    bool query_sink = dvd.get_query_sink();
+
+    int  spdif_pt = dvd.get_spdif_pt();
     bool spdif_as_pcm = dvd.get_spdif_as_pcm();
+    bool spdif_encode = dvd.get_spdif_encode();
+    bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+
+    bool spdif_check_sr = dvd.get_spdif_check_sr();
+    bool spdif_allow_48 = dvd.get_spdif_allow_48();
+    bool spdif_allow_44 = dvd.get_spdif_allow_44();
+    bool spdif_allow_32 = dvd.get_spdif_allow_32();
 
     _conf->get_int32("formats"          ,formats         );
+    _conf->get_bool ("query_sink"       ,query_sink      );
+
     _conf->get_int32("spdif_pt"         ,spdif_pt        );
-    _conf->get_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
     _conf->get_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
+    _conf->get_bool ("spdif_encode"     ,spdif_encode    );
+    _conf->get_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
+
+    _conf->get_bool ("spdif_check_sr"   ,spdif_check_sr  );
+    _conf->get_bool ("spdif_allow_48"   ,spdif_allow_48  );
+    _conf->get_bool ("spdif_allow_44"   ,spdif_allow_44  );
+    _conf->get_bool ("spdif_allow_32"   ,spdif_allow_32  );
+
+    dvd.set_query_sink(query_sink);
 
     dvd.set_spdif_pt(spdif_pt);
     dvd.set_spdif_stereo_pt(spdif_stereo_pt);
+    dvd.set_spdif_encode(spdif_encode);
     dvd.set_spdif_as_pcm(spdif_as_pcm);
+
+    dvd.set_spdif_check_sr(spdif_check_sr);
+    dvd.set_spdif_allow_48(spdif_allow_48);
+    dvd.set_spdif_allow_44(spdif_allow_44);
+    dvd.set_spdif_allow_32(spdif_allow_32);
+
+    dvd.set_spdif_check_sr(spdif_check_sr);
+    dvd.set_spdif_allow_48(spdif_allow_48);
+    dvd.set_spdif_allow_44(spdif_allow_44);
+    dvd.set_spdif_allow_32(spdif_allow_32);
 
 //    conf->get_bool   ("generate_timestamps", generate_timestamps);
 //    conf->get_int32  ("time_shift"       ,time_shift      );
@@ -981,20 +1065,30 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SYS)
   {
-    int spdif_pt = dvd.get_spdif_pt();
-    bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+    bool query_sink = dvd.get_query_sink();
+
+    int  spdif_pt = dvd.get_spdif_pt();
     bool spdif_as_pcm = dvd.get_spdif_as_pcm();
+    bool spdif_encode = dvd.get_spdif_encode();
+    bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+
+    bool spdif_check_sr = dvd.get_spdif_check_sr();
+    bool spdif_allow_48 = dvd.get_spdif_allow_48();
+    bool spdif_allow_44 = dvd.get_spdif_allow_44();
+    bool spdif_allow_32 = dvd.get_spdif_allow_32();
 
     _conf->set_int32("formats"          ,formats         );
-    _conf->set_int32("spdif_pt"         ,spdif_pt        );
-    _conf->set_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
-    _conf->set_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
+    _conf->set_bool ("query_sink"       ,query_sink      );
 
-//    conf->set_bool   ("generate_timestamps", generate_timestamps);
-//    conf->set_int32  ("time_shift"       ,time_shift      );
-//    conf->set_bool   ("jitter"           ,jitter_on       );
-//    conf->set_bool   ("config_autoload"  ,config_autoload );
-                       
+    _conf->set_int32("spdif_pt"         ,spdif_pt        );
+    _conf->set_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
+    _conf->set_bool ("spdif_encode"     ,spdif_encode    );
+    _conf->set_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
+
+    _conf->set_bool ("spdif_check_sr"   ,spdif_check_sr  );
+    _conf->set_bool ("spdif_allow_48"   ,spdif_allow_48  );
+    _conf->set_bool ("spdif_allow_44"   ,spdif_allow_44  );
+    _conf->set_bool ("spdif_allow_32"   ,spdif_allow_32  );
   }
 
   return S_OK;

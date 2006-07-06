@@ -319,7 +319,8 @@
 #define IDC_RB_MERIT_PREFERRED         19403
 #define IDC_RB_MERIT_UNLIKELY          19404
 
-#define IDC_CHK_CONFIG_AUTOLOAD        19405
+#define IDC_CHK_REINIT                 19405
+#define IDC_CHK_QUERY_SINK             19406
 
 // Preset
 
@@ -370,6 +371,12 @@
 
 #define IDC_CHK_SPDIF_STEREO_PT        20014
 #define IDC_CHK_SPDIF_AS_PCM           20015
+#define IDC_CHK_SPDIF_ENCODE           20016
+
+#define IDC_CHK_SPDIF_CHECK_SR         20017
+#define IDC_CHK_SPDIF_ALLOW_48         20018
+#define IDC_CHK_SPDIF_ALLOW_44         20019
+#define IDC_CHK_SPDIF_ALLOW_32         20020
 
 // Other
 

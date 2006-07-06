@@ -515,8 +515,15 @@ AC3FilterDlg::reload_state()
   dec->get_user_spk(&user_spk);
   dec->get_use_spdif(&use_spdif);
   dec->get_spdif_pt(&spdif_pt);
-  dec->get_spdif_stereo_pt(&spdif_stereo_pt);
   dec->get_spdif_as_pcm(&spdif_as_pcm);
+  dec->get_spdif_encode(&spdif_encode);
+  dec->get_spdif_stereo_pt(&spdif_stereo_pt);
+
+  dec->get_spdif_check_sr(&spdif_check_sr);
+  dec->get_spdif_allow_48(&spdif_allow_48);
+  dec->get_spdif_allow_44(&spdif_allow_44);
+  dec->get_spdif_allow_32(&spdif_allow_32);
+
   dec->get_spdif_status(&spdif_status);
 
   dec->get_formats(&formats);
@@ -701,16 +708,24 @@ AC3FilterDlg::set_dynamic_controls()
     old_spdif_status = spdif_status;
     switch (old_spdif_status)
     {
-      case SPDIF_DISABLED:
-        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "SPDIF (disabled)");
+      case SPDIF_MODE_NONE:
+        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF");
         break;
 
-      case SPDIF_PASSTHROUGH:
-        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "SPDIF (passthrough)");
+      case SPDIF_MODE_DISABLED:
+        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF (disabled)");
         break;
 
-      case SPDIF_ENCODE:
-        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "SPDIF (AC3 encode)");
+      case SPDIF_MODE_PASSTHROUGH:
+        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF (passthrough)");
+        break;
+
+      case SPDIF_MODE_ENCODE:
+        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF (AC3 encode)");
+        break;
+
+      default:
+        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF (Unknown)");
         break;
     }
   }
@@ -719,8 +734,9 @@ AC3FilterDlg::set_dynamic_controls()
   // Stream info
 
   char info[sizeof(old_info)];
+  memset(info, 0, sizeof(old_info));
   dec->get_info(info, sizeof(old_info));
-  if (memcmp(info, old_info, strlen(info)) || refresh)
+  if (memcmp(info, old_info, sizeof(old_info)) || refresh)
   {
     memcpy(old_info, info, sizeof(old_info));
     SendDlgItemMessage(m_Dlg, IDC_EDT_INFO, WM_SETTEXT, 0, (LONG)(LPSTR)info);
@@ -808,8 +824,19 @@ AC3FilterDlg::set_controls()
   /////////////////////////////////////
   // SPDIF options
 
-  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_STEREO_PT, spdif_stereo_pt? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_AS_PCM, spdif_as_pcm? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_ENCODE, spdif_encode? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_STEREO_PT, spdif_stereo_pt? BST_CHECKED: BST_UNCHECKED);
+
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_CHECK_SR, spdif_check_sr? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_ALLOW_48, spdif_allow_48? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_ALLOW_44, spdif_allow_44? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_ALLOW_32, spdif_allow_32? BST_CHECKED: BST_UNCHECKED);
+
+  EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_SPDIF_STEREO_PT), spdif_encode);
+  EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_SPDIF_ALLOW_48), spdif_check_sr);
+  EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_SPDIF_ALLOW_44), spdif_check_sr);
+  EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_SPDIF_ALLOW_32), spdif_check_sr);
 
   /////////////////////////////////////
   // Formats
@@ -1098,6 +1125,22 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // SPDIF options
 
+    case IDC_CHK_SPDIF_AS_PCM:
+    {
+      spdif_as_pcm = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_AS_PCM) == BST_CHECKED;
+      dec->set_spdif_as_pcm(spdif_as_pcm);
+      update();
+      break;
+    }
+
+    case IDC_CHK_SPDIF_ENCODE:
+    {
+      spdif_encode = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_ENCODE) == BST_CHECKED;
+      dec->set_spdif_encode(spdif_encode);
+      update();
+      break;
+    }
+
     case IDC_CHK_SPDIF_STEREO_PT:
     {
       spdif_stereo_pt = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_STEREO_PT) == BST_CHECKED;
@@ -1106,10 +1149,34 @@ AC3FilterDlg::command(int control, int message)
       break;
     }
 
-    case IDC_CHK_SPDIF_AS_PCM:
+    case IDC_CHK_SPDIF_CHECK_SR:
     {
-      spdif_as_pcm = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_AS_PCM) == BST_CHECKED;
-      dec->set_spdif_as_pcm(spdif_as_pcm);
+      spdif_check_sr = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_CHECK_SR) == BST_CHECKED;
+      dec->set_spdif_check_sr(spdif_check_sr);
+      update();
+      break;
+    }
+
+    case IDC_CHK_SPDIF_ALLOW_48:
+    {
+      spdif_allow_48 = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_ALLOW_48) == BST_CHECKED;
+      dec->set_spdif_allow_48(spdif_allow_48);
+      update();
+      break;
+    }
+
+    case IDC_CHK_SPDIF_ALLOW_44:
+    {
+      spdif_allow_44 = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_ALLOW_44) == BST_CHECKED;
+      dec->set_spdif_allow_44(spdif_allow_44);
+      update();
+      break;
+    }
+
+    case IDC_CHK_SPDIF_ALLOW_32:
+    {
+      spdif_allow_32 = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_ALLOW_32) == BST_CHECKED;
+      dec->set_spdif_allow_32(spdif_allow_32);
       update();
       break;
     }

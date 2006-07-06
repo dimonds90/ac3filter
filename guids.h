@@ -36,9 +36,10 @@
 #define AC3FILTER_ALL    0x7f // all settings
 #define AC3FILTER_PRESET 0x3e // settings that saved into preset (all except system settings & speaker config)
 
-#define SPDIF_DISABLED            0  // see dvd_graph.h
-#define SPDIF_PASSTHROUGH         1  // see dvd_graph.h
-#define SPDIF_ENCODE              2  // see dvd_graph.h
+#define SPDIF_MODE_NONE                0  // see dvd_graph.h
+#define SPDIF_MODE_DISABLED            1  // see dvd_graph.h
+#define SPDIF_MODE_PASSTHROUGH         2  // see dvd_graph.h
+#define SPDIF_MODE_ENCODE              3  // see dvd_graph.h
 
 ///////////////////////////////////////////////////////////////////////////////
 // Media types
@@ -146,13 +147,27 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
   STDMETHOD (get_spdif_pt)(int *spdif_pt) = 0;
   STDMETHOD (set_spdif_pt)(int  spdif_pt) = 0;
 
+  // SPDIF as PCM output
+  STDMETHOD (get_spdif_as_pcm)(bool *spdif_as_pcm) = 0;
+  STDMETHOD (set_spdif_as_pcm)(bool  spdif_as_pcm) = 0;
+
+  // SPDIF encode
+  STDMETHOD (get_spdif_encode)(bool *spdif_encode) = 0;
+  STDMETHOD (set_spdif_encode)(bool  spdif_encode) = 0;
+
   // SPDIF stereo PCM passthrough
   STDMETHOD (get_spdif_stereo_pt)(bool *spdif_stereo_pt) = 0;
   STDMETHOD (set_spdif_stereo_pt)(bool  spdif_stereo_pt) = 0;
 
-  // SPDIF as PCM output
-  STDMETHOD (get_spdif_as_pcm)(bool *spdif_as_pcm) = 0;
-  STDMETHOD (set_spdif_as_pcm)(bool  spdif_as_pcm) = 0;
+  // SPDIF check sample rate
+  STDMETHOD (get_spdif_check_sr)(bool *spdif_check_sr) = 0;
+  STDMETHOD (set_spdif_check_sr)(bool  spdif_check_sr) = 0;
+  STDMETHOD (get_spdif_allow_48)(bool *spdif_allow_48) = 0;
+  STDMETHOD (set_spdif_allow_48)(bool  spdif_allow_48) = 0;
+  STDMETHOD (get_spdif_allow_44)(bool *spdif_allow_44) = 0;
+  STDMETHOD (set_spdif_allow_44)(bool  spdif_allow_44) = 0;
+  STDMETHOD (get_spdif_allow_32)(bool *spdif_allow_32) = 0;
+  STDMETHOD (set_spdif_allow_32)(bool  spdif_allow_32) = 0;
 
   // SPDIF status
   STDMETHOD (get_spdif_status)(int *spdif_status) = 0;

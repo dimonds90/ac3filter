@@ -159,7 +159,7 @@ BEGIN
     CONTROL         "Slider3",IDC_SLIDER_LFE,"msctls_trackbar32",TBS_VERT | 
                     TBS_BOTH | WS_TABSTOP,137,22,27,56
     EDITTEXT        IDC_EDT_LFE,140,79,23,14,ES_AUTOHSCROLL
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
 END
 
@@ -311,7 +311,7 @@ BEGIN
     CONTROL         "Bass redir:",IDC_CHK_BASS_REDIR,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,90,171,49,10
     EDITTEXT        IDC_EDT_BASS_FREQ,140,169,23,14,ES_AUTOHSCROLL
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
 END
 
@@ -408,7 +408,7 @@ BEGIN
     PUSHBUTTON      "Delete",IDC_BTN_EQ_DELETE,59,172,42,10
     PUSHBUTTON      "Save",IDC_BTN_DELAY_SAVE,16,119,42,10
     PUSHBUTTON      "Delete",IDC_BTN_DELAY_DELETE,59,119,42,10
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
 END
 
@@ -443,11 +443,11 @@ BEGIN
                     WS_TABSTOP,13,110,62,8
     LTEXT           "- documentaion, new versions",IDC_STATIC,77,110,118,9
     LTEXT           "- support, ideas, critics",IDC_STATIC,77,120,118,9
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
     GROUPBOX        "Build info",IDC_STATIC,203,7,187,64
     EDITTEXT        IDC_EDT_ENV,209,17,176,51,ES_MULTILINE | ES_AUTOHSCROLL | 
                     ES_READONLY | NOT WS_BORDER | WS_VSCROLL
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
 END
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202
@@ -495,10 +495,10 @@ BEGIN
     LTEXT           "SR",IDC_STATIC,372,170,11,8
     LTEXT           "SW",IDC_STATIC,320,170,13,8
     CTEXT           "0%",IDC_CPU_LABEL,269,167,15,8
-    LTEXT           "Frames / Errors",IDC_STATIC,15,171,49,8
-    EDITTEXT        IDC_EDT_ERRORS,110,170,23,12,ES_AUTOHSCROLL | 
+    LTEXT           "Frames / Errors",IDC_STATIC,15,174,49,8
+    EDITTEXT        IDC_EDT_ERRORS,110,172,23,12,ES_AUTOHSCROLL | 
                     ES_READONLY
-    EDITTEXT        IDC_EDT_FRAMES,73,170,36,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDT_FRAMES,73,172,36,12,ES_AUTOHSCROLL | ES_READONLY
     LTEXT           "0dB",IDC_STATIC,294,23,22,8,0,WS_EX_RIGHT
     LTEXT           "-50dB",IDC_STATIC,294,72,22,8,0,WS_EX_RIGHT
     LTEXT           "0dB",IDC_STATIC,294,116,22,8,0,WS_EX_RIGHT
@@ -516,7 +516,7 @@ BEGIN
     PUSHBUTTON      "Save",IDC_BTN_PRESET_SAVE,14,81,27,10
     PUSHBUTTON      "File",IDC_BTN_PRESET_FILE,42,81,27,10,WS_DISABLED
     PUSHBUTTON      "Delete",IDC_BTN_PRESET_DELETE,70,81,27,10
-    EDITTEXT        IDC_EDT_INFO,15,116,117,53,ES_MULTILINE | ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDT_INFO,14,107,119,65,ES_MULTILINE | ES_AUTOHSCROLL | 
                     ES_READONLY | ES_WANTRETURN | WS_VSCROLL
     GROUPBOX        "Decoder info",IDC_STATIC,7,97,132,90
     GROUPBOX        "Gain",IDC_STATIC,105,7,92,90
@@ -548,12 +548,10 @@ BEGIN
     LTEXT           "+20dB",IDC_STATIC,203,27,20,8
     LTEXT           "-20dB",IDC_STATIC,205,66,20,8
     LTEXT           "0dB",IDC_STATIC,209,46,15,8,0,WS_EX_RIGHT
-    LTEXT           "Input:",IDC_STATIC,14,106,19,8
-    LTEXT           "input config",IDC_LBL_INPUT,34,106,97,8
     CONTROL         202,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
                     WS_BORDER,141,101,115,84
     CONTROL         19811,IDC_LOGO,"Static",SS_BITMAP,206,143,50,22
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
 END
 
@@ -561,20 +559,16 @@ IDD_SYS DIALOG DISCARDABLE  0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
-    GROUPBOX        "Default audio renderer",IDC_STATIC,200,100,190,87
-    GROUPBOX        "Filter merit",IDC_STATIC,200,7,190,93
-    LTEXT           "   If you have no sound at all (in analog or spdif mode) try to switch this option.",
-                    IDC_STATIC,207,111,175,17
+    GROUPBOX        "Default audio renderer",IDC_STATIC,200,151,190,36
+    GROUPBOX        "Filter merit",IDC_STATIC,200,114,190,35
     RADIOBUTTON     "Use Direct Sound as default audio renderer",
                     IDC_RB_RENDER_DS,207,163,152,10
     RADIOBUTTON     "Use Wave Out as default Audio renderer",
                     IDC_RB_RENDER_WO,207,173,144,10
-    RADIOBUTTON     "Prefer AC3Filter",IDC_RB_MERIT_PREFERRED,207,76,65,10
-    RADIOBUTTON     "Prefer other decoder",IDC_RB_MERIT_UNLIKELY,207,86,81,
+    RADIOBUTTON     "Prefer AC3Filter",IDC_RB_MERIT_PREFERRED,207,125,65,10
+    RADIOBUTTON     "Prefer other decoder",IDC_RB_MERIT_UNLIKELY,207,135,81,
                     10
-    LTEXT           "   If you want to use this filter as default decoder choose 'Prefer AC3Filter'. If you want to use other decoder choose 'Prefer other decoder'. In this case it will be used only if it is no other decoder installed.",
-                    IDC_STATIC,207,16,175,33
-    GROUPBOX        "SPDIF options",IDC_STATIC,84,7,111,69
+    GROUPBOX        "SPDIF passthrough",IDC_STATIC,103,7,92,69
     CONTROL         "Slider1",IDC_SLIDER_TIME_SHIFT,"msctls_trackbar32",
                     TBS_NOTICKS | WS_TABSTOP,15,88,174,12
     LTEXT           "+0",IDC_STATIC,98,101,8,8
@@ -585,12 +579,12 @@ BEGIN
     LTEXT           "Time shift (ms):",IDC_STATIC,15,111,49,8
     CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,14,127,66,8
-    CONTROL         "MPEG Audio passthrough",IDC_CHK_SPDIF_MPA,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,91,37,97,10
-    CONTROL         "AC3 passthrough",IDC_CHK_SPDIF_AC3,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,91,17,70,10
-    CONTROL         "DTS passthrough",IDC_CHK_SPDIF_DTS,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,91,27,71,10
+    CONTROL         "MPEG Audio",IDC_CHK_SPDIF_MPA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,111,51,57,10
+    CONTROL         "AC3",IDC_CHK_SPDIF_AC3,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,111,19,29,10
+    CONTROL         "DTS",IDC_CHK_SPDIF_DTS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,111,35,31,10
     CONTROL         "PCM",IDC_CHK_PCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     15,17,31,10
     CONTROL         "AC3",IDC_CHK_AC3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
@@ -599,26 +593,40 @@ BEGIN
                     15,39,31,10
     CONTROL         "MPEG Audio",IDC_CHK_MPA,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,50,57,10
-    GROUPBOX        "Use AC3Filter for ..",IDC_STATIC,7,7,74,69
+    GROUPBOX        "Use AC3Filter for ..",IDC_STATIC,7,7,92,69
     CONTROL         "PES (DVD)",IDC_CHK_PES,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,60,51,10
     LTEXT           "Current jitter:",IDC_STATIC,79,127,40,8
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2005 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
     GROUPBOX        "AGC",IDC_STATIC,7,161,188,26
     EDITTEXT        IDC_EDT_ATTACK,111,170,38,12,ES_AUTOHSCROLL
     LTEXT           "Attack/release speed (dB/s):",IDC_STATIC,15,172,94,8
     EDITTEXT        IDC_EDT_RELEASE,151,170,38,12,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_JITTER,25,136,164,19,ES_MULTILINE | ES_READONLY | 
                     NOT WS_BORDER
-    LTEXT           "   Note that some players have its own decoder settings. In this case you have to change your player's settings (see documentaion for more details).",
-                    IDC_STATIC,207,48,175,25
-    LTEXT           "   Note that this option changes system default renderer but some players have its own audio renderer settings. In this case you have to change your player's settings (see documentaion for more details).",
-                    IDC_STATIC,207,127,175,33
     CONTROL         "Do not encode stereo PCM",IDC_CHK_SPDIF_STEREO_PT,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,51,102,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,30,102,10
     CONTROL         "Output SPDIF as PCM",IDC_CHK_SPDIF_AS_PCM,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,91,61,87,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,41,87,10
+    GROUPBOX        "Audio output",IDC_STATIC,200,78,190,33
+    CONTROL         "Force sound card to reinit after seek / pause",
+                    IDC_CHK_REINIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,
+                    88,156,10
+    CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,98,175,10
+    GROUPBOX        "Static",IDC_STATIC,200,7,190,69
+    CONTROL         "Restrict SPDIF sample rate",IDC_CHK_SPDIF_CHECK_SR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,52,101,10
+    CONTROL         "48kHz",IDC_CHK_SPDIF_ALLOW_48,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,247,63,37,10
+    CONTROL         "44kHz",IDC_CHK_SPDIF_ALLOW_44,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,294,63,37,10
+    CONTROL         "32kHz",IDC_CHK_SPDIF_ALLOW_32,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,341,63,37,10
+    LTEXT           "Allow:",IDC_STATIC,221,63,20,8
+    CONTROL         "Use AC3 encoder",IDC_CHK_SPDIF_ENCODE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,19,72,10
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
 END
 
 IDD_FILE DIALOG DISCARDABLE  0, 0, 178, 81

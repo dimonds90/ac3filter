@@ -84,13 +84,27 @@ public:
   STDMETHODIMP get_spdif_pt(int *spdif_pt);
   STDMETHODIMP set_spdif_pt(int  spdif_pt);
 
+  // SPDIF as PCM output
+  STDMETHODIMP get_spdif_as_pcm(bool *spdif_as_pcm);
+  STDMETHODIMP set_spdif_as_pcm(bool  spdif_as_pcm);
+
+  // SPDIF encode
+  STDMETHODIMP get_spdif_encode(bool *spdif_encode);
+  STDMETHODIMP set_spdif_encode(bool  spdif_encode);
+
   // SPDIF stereo PCM passthrough
   STDMETHODIMP get_spdif_stereo_pt(bool *spdif_stereo_pt);
   STDMETHODIMP set_spdif_stereo_pt(bool  spdif_stereo_pt);
 
-  // SPDIF as PCM output
-  STDMETHODIMP get_spdif_as_pcm(bool *spdif_as_pcm);
-  STDMETHODIMP set_spdif_as_pcm(bool  spdif_as_pcm);
+  // SPDIF check sample rate
+  STDMETHODIMP get_spdif_check_sr(bool *spdif_check_sr);
+  STDMETHODIMP set_spdif_check_sr(bool  spdif_check_sr);
+  STDMETHODIMP get_spdif_allow_48(bool *spdif_allow_48);
+  STDMETHODIMP set_spdif_allow_48(bool  spdif_allow_48);
+  STDMETHODIMP get_spdif_allow_44(bool *spdif_allow_44);
+  STDMETHODIMP set_spdif_allow_44(bool  spdif_allow_44);
+  STDMETHODIMP get_spdif_allow_32(bool *spdif_allow_32);
+  STDMETHODIMP set_spdif_allow_32(bool  spdif_allow_32);
 
   // SPDIF status
   STDMETHODIMP get_spdif_status(int *spdif_status);
