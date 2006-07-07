@@ -73,6 +73,10 @@ public:
   STDMETHODIMP get_formats(int *formats);
   STDMETHODIMP set_formats(int  formats);
 
+  // Query sink about output format support
+  STDMETHODIMP get_query_sink(bool *query_sink);
+  STDMETHODIMP set_query_sink(bool  query_sink);
+
   /////////////////////////////////////
   // SPDIF options
 

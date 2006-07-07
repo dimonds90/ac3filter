@@ -132,6 +132,18 @@ STDMETHODIMP COMDecoder::set_formats(int  _formats)
   return S_OK;
 }
 
+// Query sink about output format support
+STDMETHODIMP COMDecoder::get_query_sink(bool *_query_sink)
+{
+  if (_query_sink) *_query_sink = dvd.get_query_sink();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_query_sink(bool  _query_sink)
+{
+  dvd.set_query_sink(_query_sink);
+  return S_OK;
+}
+
 // Use SPDIF if possible
 STDMETHODIMP COMDecoder::get_use_spdif(bool *_use_spdif)
 {

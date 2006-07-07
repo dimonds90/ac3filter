@@ -511,8 +511,11 @@ AC3FilterDlg::reload_state()
 {
   dec->get_in_spk(&in_spk);
   dec->get_out_spk(&out_spk);
-
   dec->get_user_spk(&user_spk);
+
+  dec->get_formats(&formats);
+  dec->get_query_sink(&query_sink);
+
   dec->get_use_spdif(&use_spdif);
   dec->get_spdif_pt(&spdif_pt);
   dec->get_spdif_as_pcm(&spdif_as_pcm);
@@ -526,7 +529,6 @@ AC3FilterDlg::reload_state()
 
   dec->get_spdif_status(&spdif_status);
 
-  dec->get_formats(&formats);
   dec->get_frames(&frames, &errors);
 
   vtime_t time;
@@ -846,6 +848,19 @@ AC3FilterDlg::set_controls()
   CheckDlgButton(m_Dlg, IDC_CHK_AC3, (formats & FORMAT_MASK_AC3) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_DTS, (formats & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_PES, (formats & FORMAT_MASK_PES) != 0? BST_CHECKED: BST_UNCHECKED);
+
+  /////////////////////////////////////
+  // Query sink and force reinit
+
+  CheckDlgButton(m_Dlg, IDC_CHK_QUERY_SINK, query_sink? BST_CHECKED: BST_UNCHECKED);
+
+  {
+    RegistryKey reg(REG_KEY);
+    int reinit_samples = 0;
+    reg.get_int32("reinit_samples", reinit_samples);
+    CheckDlgButton(m_Dlg, IDC_CHK_REINIT, reinit_samples > 0? BST_CHECKED: BST_UNCHECKED);
+  }
+
 
   /////////////////////////////////////
   // Auto gain control
@@ -1197,6 +1212,29 @@ AC3FilterDlg::command(int control, int message)
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_PES) == BST_CHECKED? FORMAT_MASK_PES: 0;
       dec->set_formats(formats);
+      update();
+      break;
+    }
+
+    /////////////////////////////////////
+    // Query sink
+
+    case IDC_CHK_QUERY_SINK:
+    {
+      query_sink = IsDlgButtonChecked(m_Dlg, IDC_CHK_QUERY_SINK) == BST_CHECKED;
+      dec->set_query_sink(query_sink);
+      update();
+      break;
+    }
+
+    /////////////////////////////////////
+    // Force reinit
+
+    case IDC_CHK_REINIT:
+    {
+      RegistryKey reg(REG_KEY);
+      int reinit_samples = IsDlgButtonChecked(m_Dlg, IDC_CHK_REINIT) == BST_CHECKED? 128: 0;
+      reg.set_int32("reinit_samples", reinit_samples);
       update();
       break;
     }

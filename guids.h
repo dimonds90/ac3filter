@@ -139,6 +139,10 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
   STDMETHOD (get_formats) (int *formats) = 0;
   STDMETHOD (set_formats) (int  formats) = 0;
 
+  // Query sink about output format support
+  STDMETHOD (get_query_sink) (bool *query_sink) = 0;
+  STDMETHOD (set_query_sink) (bool  query_sink) = 0;
+
   // Use SPDIF if possible
   STDMETHOD (get_use_spdif) (bool *use_spdif) = 0;
   STDMETHOD (set_use_spdif) (bool  use_spdif) = 0;

@@ -31,8 +31,10 @@ private:
 
   Speakers in_spk;
   Speakers out_spk;
-
   Speakers user_spk;
+  int      formats;
+  bool     query_sink;
+
   bool     use_spdif;
   int      spdif_pt;
   bool     spdif_as_pcm;
@@ -45,8 +47,6 @@ private:
   bool     spdif_allow_32;
 
   int      spdif_status;
-
-  int      formats;
 
   int      frames;
   int      errors;
