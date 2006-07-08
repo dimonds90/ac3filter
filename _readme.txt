@@ -73,9 +73,6 @@ libraries path. If it is not shipped with SDK you can compile this project:
 ...\...SDK\Samples\Multimedia\DirectShow\BaseClasses\baseclasses.dsw
 (read MSDN about how to setup environment to use DirectShow Base Classes)
 
-It also require VALib library, available at 
-http://sourceforge.net/project/showfiles.php?group_id=66022
-
 AC3Filter project has dependency on the valib library project so 
 by default directories should be configured as follows:
 
@@ -84,14 +81,9 @@ by default directories should be configured as follows:
 ...\valib\lib     - valib library
 ...\valib\valib   - valib include & source files
 
-You may simply checkout both modules from CVS to the same root folder.
+You may checkout both modules from the CVS:
 CVS root: :pserver:anonymous@cvs.sourceforge.net:/cvsroot/ac3filter
 Modules: ac3filter, valib
-
-If you want to alter default layout:
-1) compile valib.lib
-2) specify valib.lib in ac3filter's linked libraries
-3) specify include path to the root of valib includes
 
 
 Debugging:
@@ -110,9 +102,9 @@ ac3filter_reg_nodebug.reg file removes registry changes.
 Links:
 ======
 
-http://ac3filter.sourceforge.net             - Project home page
+http://ac3filter.net                         - Project home page
+http://ac3filter.net/forum                   - Support forum
 http://sourceforge.net/projects/ac3filter    - Sourceforge project page
-http://sourceforge.net/forum/?group_id=66022 - Forum
 
 
 Donate:
@@ -120,10 +112,11 @@ Donate:
 
 http://order.kagi.com/?6CZJZ&lang=en
 
+
 Contact Author: 
 ===============
 
 mailto:xvalex@mail.ru?Subject=AC3Filter
 
-Please write in English or Russian. Subject should have 'AC3Filter'  word 
+Please write in English or Russian. Subject should have 'AC3Filter' word 
 otherwise it may be accidentally deleted with tons of other junk mail.

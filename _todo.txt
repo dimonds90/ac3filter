@@ -1,15 +1,6 @@
-Documentation
-============
-
-* Add desription of DIVXG400 & VobSub finters (how to reach filter settings)
-* Add link to donation system
-* SPDIF breaks - switch to WaveOut? (AlexK, ICQ conversation)
-
-
 First order
 ============
 
-* Add donation links to readme, about dialog, and documentation
 * Different settings for different formats
   [
    initialize filter with settings set at HKCU\Software\AC3Filter (default preset);
@@ -20,9 +11,6 @@ First order
      * to default preset if we're disconnected;
    load old preset on 'Cancel' button;
   ]
-* option to disable AC3 encoding.
-* BUG: DShowSink::process(): chunk buffer is not locked and may become invalid!
-* BUG: set_input(): update of sample rate of output format procedure is incorrect
 * Reset to defaults button
 * Presets: standard, film (+10..+15, no matrix norm), music (+0, matrix norm), 
   loud (+10, one-pass norm), very loud (with DRC)?
@@ -32,10 +20,7 @@ Other
 =====
 * SPDIF: SPDIF output does not work with USB Audio. But foobar2000 does...
   [https://sourceforge.net/forum/message.php?msg_id=2653711]
-* Take in account dialog flags when updating controls (ac3filter_dlg.cpp)
 ?* HPF for all channels
-* Configuration files
-* Configuration files versioning
 * Slider class; reset to default on right-click
 * Custom mixing matrix for different mixing modes
 * Sync is lost after fast output mode changes
@@ -46,13 +31,6 @@ Other
   (Creative drivers bug?)
 * 90-degree phase shifts for DPL/DPL II downmixes. 
   (90-degree shifted IMDCT function?)
-
-Testing
-=======
-* send test version to AnD (it was some distortions with v0.70b)
-* message from SBN about distortion?
-* SPDIF does not work with 44100Hz
-
 
 Done:
 =====
@@ -73,3 +51,5 @@ Done:
 +* Bass redirection LPF
 +* Documentation!!!
 +* revert jitter correction
++* option to disable AC3 encoding.
++* Take in account dialog flags when updating controls (ac3filter_dlg.cpp)

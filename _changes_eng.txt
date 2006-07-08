@@ -1,3 +1,17 @@
+<b>1.03a</b>
+  + As-is output mode (without change of number of channgels)
+  + SPDIF output options:
+  +   Enable/disable AC3 encoder
+  +   Enable/disable encoding of stereo PCM
+  +   Option to output SPDIF stream as PCM
+  +   Sample rate check
+  + Option to check output format support
+  + Sound card reinit after pause
+  * Extended decoder inforation
+  * SPDIF decline reason indication
+  * Extended jitter statistics
+  * Attack/Release speed adjust
+
 <b>1.02a</b> -
   * Documentation was fully rewrited 
     (much of information about how to setup and tune the filter)
