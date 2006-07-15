@@ -32,6 +32,7 @@ protected:
   Speakers guess_spdif_output();
 
   bool process_chunk(const Chunk *chunk);
+  bool flush();
   void reset();
 
 

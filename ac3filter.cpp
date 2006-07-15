@@ -47,11 +47,6 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   // init decoder
   dec.set_sink(sink);
   dec.load_params(0, AC3FILTER_ALL);
-
-  // read 'quick hack' of play/pause problem
-  reinit_samples = 0;
-  RegistryKey reg(REG_KEY);
-  reg.get_int32("reinit_samples", reinit_samples);
 }
 
 AC3Filter::~AC3Filter()
@@ -150,6 +145,13 @@ AC3Filter::process_chunk(const Chunk *_chunk)
   return true;
 }
 
+bool
+AC3Filter::flush()
+{
+  Chunk chunk;
+  chunk.set_empty(dec.get_input(), false, 0, true);
+  return process_chunk(&chunk);
+}
 
 
 
@@ -196,6 +198,7 @@ AC3Filter::Receive(IMediaSample *in)
   if (in->GetMediaType((_AMMediaType**)&mt) == S_OK)
   {
     DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change", this));
+    flush();
     if (!set_input(*mt))
       return VFW_E_INVALIDMEDIATYPE;
   }
@@ -208,7 +211,9 @@ AC3Filter::Receive(IMediaSample *in)
   if (in->IsDiscontinuity() == S_OK)
   {
     DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Discontinuity", this));
+    sink->send_discontinuity();
     // we have to reset because we may need to drop incomplete frame in the decoder
+    flush();
     reset();
   }
 
@@ -297,9 +302,7 @@ AC3Filter::EndOfStream()
   // Force flushing of internal buffers of 
   // processing chain.
 
-  Chunk chunk;
-  chunk.set_empty(dec.get_input(), false, 0, true);
-  process_chunk(&chunk);
+  flush();
   reset();
 
   // Send end-of-stream downstream to indicate that we have no
@@ -366,6 +369,11 @@ AC3Filter::Run(REFERENCE_TIME tStart)
   HRESULT hr = CTransformFilter::Run(tStart);
   if FAILED(hr)
     return hr;
+
+  // read 'quick hack' of play/pause problem
+  int reinit_samples = 0;
+  RegistryKey reg(REG_KEY);
+  reg.get_int32("reinit_samples", reinit_samples);
 
   if (reinit_samples)
   {
