@@ -37,7 +37,7 @@ my $bin = "..\\ac3filter_$ver1.exe";
 my $src = "..\\ac3filter_${ver1}_src.zip";
 
 my $make_bin = "\"c:\\Devel\\NSIS\\makensis\" /NOCONFIG /DVERSION=\"$ver\" /DSETUP_FILE=$bin /DSOURCE_DIR=$package ac3filter.nsi";
-my $make_src = "pkzip25 -add -rec -dir -lev=9 $src";
+my $make_src = "pkzip25 -add -rec -dir -excl=CVS -lev=9 $src";
 
 
 
@@ -117,6 +117,7 @@ printf "Building package...\n";
 `copy _changes_rus.txt $package`;
 `copy GPL_eng.txt $package`;
 `copy GPL_rus.txt $package`;
+`copy ac3filter_reg_presets.reg $package`;
 
 
 
@@ -153,6 +154,9 @@ write_file("$package\\ac3filter_rus.html", grep { s/(\$\w+)/$1/gee + 1 } read_fi
 ## Make distributive
 
 `del $bin 2> nul`;
+`del $src 2> nul`;
+
+system($make_src);
 system($make_bin);
 
 __END__
