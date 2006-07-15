@@ -1,62 +1,68 @@
 #include <stdio.h>
+#include <string.h>
 
-// Sequence to find:
-// 00 8d 01 c9 00
-// -- -- -- ef --
-
-const int           addr[] = { 0x23768 };
-const unsigned char from[] = { 0xc9    };
-const unsigned char to[]   = { 0xef    };
 const char *filename = "ac3filter.ax";
-const n = sizeof(addr) / sizeof(int);
-
+const unsigned char seq[]   = { 0x00, 0x8d, 0x01, 0xc9, 0x00 };
+const unsigned char patch[] = { 0x00, 0x8d, 0x01, 0xef, 0x00 };
+size_t patch_size = sizeof(seq);
 
 int main()
 {
-  int i;
-  unsigned char b;
-  bool patch = true;
   FILE *f = fopen(filename, "r+b");
+
   if (!f)
   {
-    printf("Cannot open file ac3filter.ax");
-    return 0;
+    printf("Cannot open file %s", filename);
+    return 1;
   }
 
-  for(i = 0; i < n; i++)
+  fseek(f, 0, SEEK_END);
+  size_t file_size = ftell(f);
+  fseek(f, 0, SEEK_SET);
+
+  char *buf = new char[file_size];
+  if (!buf)
   {
-    fseek(f, addr[i], SEEK_SET);
-    fread(&b, 1, 1, f);
-    if (from[i] != b)
+    printf("Not enough memory (%i)", file_size);
+    fclose(f);
+    return 1;
+  }
+
+  if (fread(buf, 1, file_size, f) != file_size)
+  {
+    printf("Cannot load file");
+    fclose(f);
+    return 1;
+  }
+
+  bool patched = true;
+  for (size_t i = 0; i < file_size - patch_size; i++)
+  {
+    if (!memcmp(buf+i, seq, patch_size))
     {
-      patch = false;
-      for (i = 0; i < n; i++)
-      {
-        fseek(f, addr[i], SEEK_SET);
-        fread(&b, 1, 1, f);
-        if (to[i] != b)
-        {
-          printf("Incorrect file");
-          fclose(f);
-          return 0;
-        }
-      }
+      patched = false;
+      break;
+    }
+    if (!memcmp(buf+i, patch, patch_size)) 
+    {
+      patched = true;
       break;
     }
   }
 
-  if (patch)
-    printf("Patching dialog size");
-  else
-    printf("Unpatching dialog size");
-
-  for(i = 0; i < n; i++)
+  if (i >= file_size - patch_size)
   {
-    b = patch? to[i]: from[i];
-    fseek(f, addr[i], SEEK_SET);
-    fwrite(&b, 1, 1, f);
+    printf("Cannot find patch location");
+    fclose(f);
+    return 1;
   }
 
+  printf("Patch location: 0x%x%s\n", i, patched? " (patched)": "");
+
+  fseek(f, i, SEEK_SET);
+  fwrite(patched? seq: patch, 1, patch_size, f);
+  printf(patched? "Unpatch done": "Patch done");
+
   fclose(f);
-  return 1;
+  return 0;
 }
