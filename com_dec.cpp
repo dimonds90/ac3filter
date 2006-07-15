@@ -900,13 +900,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     dvd.set_spdif_check_sr(spdif_check_sr);
     dvd.set_spdif_allow_48(spdif_allow_48);
     dvd.set_spdif_allow_44(spdif_allow_44);
-    dvd.set_spdif_allow_32(spdif_allow_32);
-
-//    conf->get_bool   ("generate_timestamps", generate_timestamps);
-//    conf->get_int32  ("time_shift"       ,time_shift      );
-//    conf->get_bool   ("jitter"           ,jitter_on       );
-//    conf->get_bool   ("config_autoload"  ,config_autoload );
-                       
+    dvd.set_spdif_allow_32(spdif_allow_32);                      
   }
 
 
