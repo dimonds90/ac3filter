@@ -117,7 +117,10 @@ printf "Building package...\n";
 `copy _changes_rus.txt $package`;
 `copy GPL_eng.txt $package`;
 `copy GPL_rus.txt $package`;
+
 `copy ac3filter_reg_presets.reg $package`;
+`copy ac3filter_reg_renderers_win2k.reg $package`;
+`copy ac3filter_reg_renderers_win9x.reg $package`;
 
 
 
