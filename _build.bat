@@ -113,6 +113,8 @@ printf "Building package...\n";
 `copy release\\ac3filter.ax $package`;
 
 `copy _readme.txt $package`;
+`copy _changes_eng.txt $package`;
+`copy _changes_rus.txt $package`;
 `copy GPL_eng.txt $package`;
 `copy GPL_rus.txt $package`;
 
