@@ -674,8 +674,16 @@ AC3FilterDlg::init_controls()
   // Build and environment info
 
   char info[1024];
-  filter->get_env(info, sizeof(info));
+
+  strncpy(info, valib_build_info(), sizeof(info));
+  info[sizeof(info)-1] = 0;
+  cr2crlf(info, sizeof(info));
   SetDlgItemText(m_Dlg, IDC_EDT_ENV, info);
+
+  strncpy(info, valib_credits(), sizeof(info));
+  info[sizeof(info)-1] = 0;
+  cr2crlf(info, sizeof(info));
+  SetDlgItemText(m_Dlg, IDC_EDT_CREDITS, info);
 
   /////////////////////////////////////
   // Version

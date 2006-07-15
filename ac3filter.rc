@@ -414,40 +414,40 @@ END
 
 IDD_ABOUT DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "This program is free software and can be distributed according to the terms of GNU General Public License version 2.",
                     IDC_STATIC,13,72,182,24
     LTEXT           "Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).",
-                    IDC_STATIC,209,110,176,33
+                    IDC_STATIC,13,109,176,33
     CONTROL         "Project forum|http://ac3filter.net/forum/",
                     IDC_LNK_FORUM,"Button",BS_OWNERDRAW | BS_LEFT | 
-                    BS_VCENTER | BS_FLAT | WS_TABSTOP,13,120,49,8
+                    BS_VCENTER | BS_FLAT | WS_TABSTOP,79,143,50,8
     CONTROL         "mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter",
                     IDC_LNK_EMAIL,"Button",BS_OWNERDRAW | BS_LEFT | BS_FLAT | 
-                    WS_TABSTOP,267,146,50,8
+                    WS_TABSTOP,145,143,50,8
     GROUPBOX        "What is it?",IDC_STATIC,7,7,193,56
-    GROUPBOX        "Contact author",IDC_STATIC,203,100,187,58
+    GROUPBOX        "Contact author",IDC_STATIC,7,99,193,58
     LTEXT           "AC3Filter is high quality DirectShow audio decoder and processor filter used to playback multimedia files. Used automatically by most of multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.",
                     IDC_STATIC,13,17,182,42
     GROUPBOX        "License",IDC_STATIC,7,63,193,36
-    GROUPBOX        "Links",IDC_STATIC,7,100,193,58
     CONTROL         "DONATE|http://order.kagi.com/?6CZJZ",IDC_LNK_DONATE,
                     "Button",BS_OWNERDRAW | BS_LEFT | BS_VCENTER | BS_FLAT | 
                     WS_TABSTOP,179,171,39,16,WS_EX_DLGMODALFRAME
-    GROUPBOX        "Thanks to",IDC_STATIC,203,73,187,27
+    GROUPBOX        "Thanks to",IDC_STATIC,203,73,187,84
     CTEXT           "If you like this and want it to become better please make a donation. Any sum is important!",
                     IDC_STATIC,13,160,372,9
-    CONTROL         "Official homepage|http://ac3filter.net/",IDC_LNK_HOME,
-                    "Button",BS_OWNERDRAW | BS_LEFT | BS_VCENTER | BS_FLAT | 
-                    WS_TABSTOP,13,110,62,8
-    LTEXT           "- documentaion, new versions",IDC_STATIC,77,110,118,9
-    LTEXT           "- support, ideas, critics",IDC_STATIC,77,120,118,9
+    CONTROL         "Homepage|http://ac3filter.net/",IDC_LNK_HOME,"Button",
+                    BS_OWNERDRAW | BS_LEFT | BS_VCENTER | BS_FLAT | 
+                    WS_TABSTOP,13,143,50,8
     GROUPBOX        "Build info",IDC_STATIC,203,7,187,64
-    EDITTEXT        IDC_EDT_ENV,209,17,176,51,ES_MULTILINE | ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDT_ENV,209,16,176,52,ES_MULTILINE | ES_AUTOHSCROLL | 
                     ES_READONLY | NOT WS_BORDER | WS_VSCROLL
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
+    EDITTEXT        IDC_EDT_CREDITS,209,82,176,73,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | 
+                    WS_VSCROLL
 END
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202
