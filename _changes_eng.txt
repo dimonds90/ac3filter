@@ -1,4 +1,4 @@
-<b>1.03a</b>
+<b>1.03a</b> - 15.07.06
   + As-is output mode (without change of number of channgels)
   + SPDIF output options:
   +   Enable/disable AC3 encoder
@@ -12,7 +12,7 @@
   * Extended jitter statistics
   * Attack/Release speed adjust
 
-<b>1.02a</b> -
+<b>1.02a</b> (unofficial release)
   * Documentation was fully rewrited 
     (much of information about how to setup and tune the filter)
   * updated DRC algorithm (reduced noise)
