@@ -11,6 +11,8 @@
 #include "spk.h"
 #include "registry.h"
 
+void cr2crlf(char *buf, int size);
+
 // registry key
 #define REG_KEY        "Software\\AC3Filter"
 #define REG_KEY_PRESET "Software\\AC3Filter\\preset"
