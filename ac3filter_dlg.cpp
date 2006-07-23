@@ -516,6 +516,7 @@ AC3FilterDlg::reload_state()
   dec->get_formats(&formats);
   dec->get_query_sink(&query_sink);
 
+  // spdif
   dec->get_use_spdif(&use_spdif);
   dec->get_spdif_pt(&spdif_pt);
   dec->get_spdif_as_pcm(&spdif_as_pcm);
@@ -528,6 +529,14 @@ AC3FilterDlg::reload_state()
   dec->get_spdif_allow_32(&spdif_allow_32);
 
   dec->get_spdif_status(&spdif_status);
+
+  // syncronization
+  dec->get_time_shift(&time_shift);
+  dec->get_time_factor(&time_factor);
+  dec->get_dejitter(&dejitter);
+  dec->get_threshold(&threshold);
+  dec->get_jitter(&input_mean, &input_stddev, &output_mean, &output_stddev);
+
 
   dec->get_frames(&frames, &errors);
 
@@ -1430,7 +1439,7 @@ AC3FilterDlg::command(int control, int message)
       if (message == CB_ENTER)
       {
         time_shift = vtime_t(edt_time_shift.value) / 1000;
-        proc->set_time_shift(time_shift);
+        dec->set_time_shift(time_shift);
         update();
       }
       break;
@@ -1439,7 +1448,7 @@ AC3FilterDlg::command(int control, int message)
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
         time_shift = vtime_t(SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_GETPOS, 0, 0)) / 1000;
-        proc->set_time_shift(time_shift);
+        dec->set_time_shift(time_shift);
         update();
       }
       break;
@@ -1447,7 +1456,7 @@ AC3FilterDlg::command(int control, int message)
     case IDC_CHK_JITTER:
     {
       dejitter = (SendDlgItemMessage(m_Dlg, IDC_CHK_JITTER, BM_GETCHECK, 0, 0) == BST_CHECKED);
-      proc->set_dejitter(dejitter);
+      dec->set_dejitter(dejitter);
       update();
       break;
     }

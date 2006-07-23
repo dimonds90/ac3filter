@@ -35,6 +35,7 @@ private:
   int      formats;
   bool     query_sink;
 
+  // spdif
   bool     use_spdif;
   int      spdif_pt;
   bool     spdif_as_pcm;
@@ -47,6 +48,17 @@ private:
   bool     spdif_allow_32;
 
   int      spdif_status;
+
+  // syncronization
+  vtime_t  time_shift;
+  vtime_t  time_factor;
+  bool     dejitter;
+  vtime_t  threshold;
+
+  vtime_t  input_mean;
+  vtime_t  input_stddev;
+  vtime_t  output_mean;
+  vtime_t  output_stddev;
 
   int      frames;
   int      errors;

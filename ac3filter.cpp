@@ -410,7 +410,7 @@ AC3Filter::Run(REFERENCE_TIME tStart)
     sink->process(&chunk);
 
     dec.reset();
-    sink->send_discontinuity();
+    // sink->send_discontinuity();
   }
 
   return S_OK;

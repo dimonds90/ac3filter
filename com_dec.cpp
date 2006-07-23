@@ -523,54 +523,54 @@ STDMETHODIMP COMDecoder::set_delays(float *_delays)
 // Syncronization
 STDMETHODIMP COMDecoder::get_time_shift(vtime_t *_time_shift)
 {
-  if (_time_shift) *_time_shift = dvd.proc.get_time_shift();
+  if (_time_shift) *_time_shift = dvd.syncer.get_time_shift();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_time_shift(vtime_t _time_shift)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_time_shift(_time_shift);
+  dvd.syncer.set_time_shift(_time_shift);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_time_factor(vtime_t *_time_factor)
 {
-  if (_time_factor) *_time_factor = dvd.proc.get_time_factor();
+  if (_time_factor) *_time_factor = dvd.syncer.get_time_factor();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_time_factor(vtime_t _time_factor)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_time_factor(_time_factor);
+  dvd.syncer.set_time_factor(_time_factor);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_dejitter(bool *_dejitter)
 {
-  if (_dejitter) *_dejitter = dvd.proc.get_dejitter();
+  if (_dejitter) *_dejitter = dvd.syncer.get_dejitter();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_dejitter(bool _dejitter)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_dejitter(_dejitter);
+  dvd.syncer.set_dejitter(_dejitter);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_threshold(vtime_t *_threshold)
 {
-  if (_threshold) *_threshold = dvd.proc.get_threshold();
+  if (_threshold) *_threshold = dvd.syncer.get_threshold();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_threshold(vtime_t _threshold)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_threshold(_threshold);
+  dvd.syncer.set_threshold(_threshold);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_jitter(vtime_t *_input_mean, vtime_t *_input_stddev, vtime_t *_output_mean, vtime_t *_output_stddev)
 {
-  if (_input_mean)    *_input_mean    = dvd.proc.get_input_mean();
-  if (_input_stddev)  *_input_stddev  = dvd.proc.get_input_stddev();
-  if (_output_mean)   *_output_mean   = dvd.proc.get_output_mean();
-  if (_output_stddev) *_output_stddev = dvd.proc.get_output_stddev();
+  if (_input_mean)    *_input_mean    = dvd.syncer.get_input_mean();
+  if (_input_stddev)  *_input_stddev  = dvd.syncer.get_input_stddev();
+  if (_output_mean)   *_output_mean   = dvd.syncer.get_output_mean();
+  if (_output_stddev) *_output_stddev = dvd.syncer.get_output_stddev();
   return S_OK;
 }
 
@@ -624,14 +624,14 @@ STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, vtime_t _time)
   get_delay(&_state->delay);
   get_delay_units(&_state->delay_units);
   get_delays(_state->delays);
-
+/*
   // Syncronization
   get_time_shift(&_state->time_shift);
   get_time_factor(&_state->time_factor);
   get_dejitter(&_state->dejitter);
   get_threshold(&_state->threshold);
   get_jitter(&_state->input_mean, &_state->input_stddev, &_state->output_mean, &_state->output_stddev);
-
+*/
   return S_OK;
 };
 
@@ -678,13 +678,13 @@ STDMETHODIMP COMDecoder::set_state     (AudioProcessorState *_state)
   set_delay(_state->delay);
   set_delay_units(_state->delay_units);
   set_delays(_state->delays);
-
+/*
   // Syncronization
   set_time_shift(_state->time_shift);
   set_time_factor(_state->time_factor);
   set_dejitter(_state->dejitter);
   set_threshold(_state->threshold);
-
+*/
   return S_OK;
 };
 
@@ -804,10 +804,20 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SYNC)
   {
-    _conf->get_float("time_shift"       ,state.time_shift      );
-    _conf->get_float("time_factor"      ,state.time_factor     );
-    _conf->get_bool ("dejitter"         ,state.dejitter        );
-    _conf->get_float("threshold"        ,state.threshold       );
+    vtime_t time_shift  = dvd.syncer.get_time_shift();
+    vtime_t time_factor = dvd.syncer.get_time_factor();
+    bool    dejitter    = dvd.syncer.get_dejitter();
+    vtime_t threshold   = dvd.syncer.get_threshold();
+
+    _conf->get_float("time_shift"       ,time_shift      );
+    _conf->get_float("time_factor"      ,time_factor     );
+    _conf->get_bool ("dejitter"         ,dejitter        );
+    _conf->get_float("threshold"        ,threshold       );
+
+    dvd.syncer.set_time_shift(time_shift);
+    dvd.syncer.set_time_factor(time_factor);
+    dvd.syncer.set_dejitter(dejitter);
+    dvd.syncer.set_threshold(threshold);
   }
 
   if (_what & AC3FILTER_MATRIX)
@@ -989,10 +999,15 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SYNC)
   {
-    _conf->set_float("time_shift"       ,state.time_shift      );
-    _conf->set_float("time_factor"      ,state.time_factor     );
-    _conf->set_bool ("dejitter"         ,state.dejitter        );
-    _conf->set_float("threshold"        ,state.threshold       );
+    vtime_t time_shift  = dvd.syncer.get_time_shift();
+    vtime_t time_factor = dvd.syncer.get_time_factor();
+    bool    dejitter    = dvd.syncer.get_dejitter();
+    vtime_t threshold   = dvd.syncer.get_threshold();
+
+    _conf->set_float("time_shift"       ,time_shift      );
+    _conf->set_float("time_factor"      ,time_factor     );
+    _conf->set_bool ("dejitter"         ,dejitter        );
+    _conf->set_float("threshold"        ,threshold       );
   }
 
   if (_what & AC3FILTER_MATRIX)
