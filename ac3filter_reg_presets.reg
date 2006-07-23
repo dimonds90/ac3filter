@@ -91,7 +91,7 @@ REGEDIT4
 "spdif_as_pcm"=dword:00000000
 "spdif_encode"=dword:00000001
 "spdif_stereo_pt"=dword:00000001
-"spdif_check_sr"=dword:00000000
+"spdif_check_sr"=dword:00000001
 "spdif_allow_48"=dword:00000001
 "spdif_allow_44"=dword:00000000
 "spdif_allow_32"=dword:00000000
@@ -331,7 +331,7 @@ REGEDIT4
 "spdif_as_pcm"=dword:00000000
 "spdif_encode"=dword:00000001
 "spdif_stereo_pt"=dword:00000001
-"spdif_check_sr"=dword:00000000
+"spdif_check_sr"=dword:00000001
 "spdif_allow_48"=dword:00000001
 "spdif_allow_44"=dword:00000000
 "spdif_allow_32"=dword:00000000
