@@ -70,9 +70,11 @@ Section "Uninstall"
   Delete "$SMPROGRAMS\AC3Filter\*.*"
   RMDir  "$SMPROGRAMS\AC3Filter"
 
+  Delete "$INSTDIR\pic\players\*.*"
   Delete "$INSTDIR\pic\*.*"
   Delete "$INSTDIR\*.*"
 
+  RMDir  "$INSTDIR\pic\players"
   RMDir  "$INSTDIR\pic"
   RMDir  "$INSTDIR"
 
