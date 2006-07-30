@@ -1,3 +1,12 @@
+<b>1.04a</b> - 30.07.06
+  > Bugfix release
+  > Valex thanks Alex for a great job with testing ;-)
+
+  * SPDIF passthrough did not work with Program Stream (DVD)
+  * SPDIF had jitter with DVD
+  * Cannot enable SPDIF with some sound cards (found on HDSP 9632)
+  * Uninstall now deletes pis folder
+
 <b>1.03a</b> - 23.07.06
   + As-is output mode (without change of number of channgels)
   + SPDIF output options:
