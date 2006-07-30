@@ -433,9 +433,6 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   if (i < 0) 
     return E_INVALIDARG;
 
-  if (!i--) return spk2mt(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate), *_mt, false)? NOERROR: E_FAIL;
-
-/*
   /////////////////////////////////////////////////////////////////////////////
   // Depending on current settings output formats may be:
   //
@@ -462,17 +459,37 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   // multichannel mt_pcm_wf formats are nessesary for some old sound cards 
   // that do not understand WAVEFORMATEXTENSIBLE format 
   // (Vortex-based cards for example).
+  //
+  // Since v1.04a:
+  //
+  // We must publish SPDIF format first if we suppose to use it. Note that
+  // we cannot determine SPDIF format precisely! Therefore we publish only
+  // the supposed dummy format (that may be wrong).
+  //
+  // Also instead of real PCM format we will publish only dummy PCM 16bit
+  // format.
 
-  if (dec.use_spdif)
+  CMediaType mt;
+  Speakers spk;
+
+  bool use_spdif;
+  dec.get_use_spdif(&use_spdif);
+
+  if (use_spdif)
   {
+    // dummy spdif format
+    spk = Speakers(FORMAT_SPDIF, 0, dec.get_input().sample_rate);
+
     // mt_spdif_wf
-    if (!i--) return spk2mt(guess_spdif_output(), *_mt, false)? NOERROR: E_FAIL;
+    if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
 
     // mt_spdif_wfx
-    if (!i--) return spk2mt(guess_spdif_output(), *_mt, true)? NOERROR: E_FAIL;
+    if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
   }
 
-  Speakers spk = guess_pcm_output();
+  // dummy PCM format
+  spk = Speakers(FORMAT_PCM16, MODE_STEREO, 48000);
+
   if ((spk.mask != MODE_MONO && spk.mask != MODE_STEREO) || spk.format != FORMAT_PCM16)
   {
     // mt_pcm_wfx
@@ -481,7 +498,7 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
 
   // mt_pcm_wf
   if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
-*/
+
   return VFW_S_NO_MORE_ITEMS;
 }
 
