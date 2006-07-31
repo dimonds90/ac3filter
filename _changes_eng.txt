@@ -1,3 +1,7 @@
+<b>1.05a</b> - 31.07.06
+  * Extended AC3 sainty checks disabled
+    How it recognizes AC3 files produced with buggy encoder
+
 <b>1.04a</b> - 30.07.06
   > Bugfix release
   > Valex thanks Alex for a great job with testing ;-)
