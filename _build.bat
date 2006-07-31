@@ -30,15 +30,12 @@ print "Building version $ver\n";
 ###########################################################
 # Other vars
 
-my $download_bin = "http://prdownloads.sourceforge.net/ac3filter/ac3filter_$ver1.exe?download";
-my $download_src = "http://prdownloads.sourceforge.net/ac3filter/ac3filter_${ver1}_src.zip?download";
 my $package = "..\\ac3filter_$ver1";
 my $bin = "..\\ac3filter_$ver1.exe";
-my $src = "..\\ac3filter_${ver1}_src.zip";
+my $src = "ac3filter_${ver1}_src.zip";
 
 my $make_bin = "\"c:\\Devel\\NSIS\\makensis\" /NOCONFIG /DVERSION=\"$ver\" /DSETUP_FILE=$bin /DSOURCE_DIR=$package ac3filter.nsi";
-my $make_src = "pkzip25 -add -rec -dir -excl=CVS -lev=9 $src";
-
+my $make_src = "pkzip25 -add -rec -dir -excl=CVS -excl=pic_psd -lev=9 $src ac3filter\\*.* valib\\*.*";
 
 
 ###########################################################
@@ -129,7 +126,6 @@ printf "Building package...\n";
 ## Prepare documentation files
 ##
 
-`mkdir $package`;
 print "Prepairing documentaion files...\n";
 
 my $changelog;
@@ -159,8 +155,11 @@ write_file("$package\\ac3filter_rus.html", grep { s/(\$\w+)/$1/gee + 1 } read_fi
 `del $bin 2> nul`;
 `del $src 2> nul`;
 
-system($make_src);
 system($make_bin);
+
+chdir("..");
+`valib\\clear.bat`;
+system($make_src);
 
 __END__
 :endofperl
