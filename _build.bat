@@ -157,8 +157,9 @@ write_file("$package\\ac3filter_rus.html", grep { s/(\$\w+)/$1/gee + 1 } read_fi
 
 system($make_bin);
 
+chdir("..\\valib");
+`_clear.bat`;
 chdir("..");
-`valib\\clear.bat`;
 system($make_src);
 
 __END__
