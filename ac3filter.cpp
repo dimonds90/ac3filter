@@ -47,6 +47,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   // init decoder
   dec.set_sink(sink);
   dec.load_params(0, AC3FILTER_ALL);
+  *phr = S_OK;
 }
 
 AC3Filter::~AC3Filter()
@@ -61,7 +62,7 @@ AC3Filter::JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName)
 
   // Register graph at running objects table
   #ifdef REGISTER_FILTERGRAPH
-    rot.register_graph(m_pGraph);
+    rot.register_graph(pGraph);
   #endif
 
   return CTransformFilter::JoinFilterGraph(pGraph, pName);
