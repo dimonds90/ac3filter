@@ -53,6 +53,8 @@ Section "AC3Filter"
   CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter Help (English).lnk" "$INSTDIR\AC3Filter_eng.html"
   CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter Help (Russian).lnk" "$INSTDIR\AC3Filter_rus.html"
   CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter Help (Italian).lnk" "$INSTDIR\AC3Filter_ita.html"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter change log (English).lnk" "$INSTDIR\_changes_eng.txt"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter change log (Russian).lnk" "$INSTDIR\_changes_rus.txt"
   CreateShortCut  "$SMPROGRAMS\AC3Filter\uninstall.lnk"                "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
 
   ;; Delete shit from old versions
