@@ -1,3 +1,6 @@
+<b>1.06a</b> - 01.08.06
+  * AGC fixed: overflow check did not work sometimes
+
 <b>1.05a</b> - 31.07.06
   * Extended AC3 sainty checks disabled
     How it recognizes AC3 files produced with buggy encoder
