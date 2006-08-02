@@ -459,18 +459,12 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   // multichannel mt_pcm_wf formats are nessesary for some old sound cards 
   // that do not understand WAVEFORMATEXTENSIBLE format 
   // (Vortex-based cards for example).
-  //
-  // Since v1.04a:
-  //
-  // We must publish SPDIF format first if we suppose to use it. Note that
-  // we cannot determine SPDIF format precisely! Therefore we publish only
-  // the supposed dummy format (that may be wrong).
-  //
-  // Also instead of real PCM format we will publish only dummy PCM 16bit
-  // format.
 
   CMediaType mt;
   Speakers spk;
+
+  /////////////////////////////////////////////////////////
+  // Publish SPDIF formats
 
   bool use_spdif;
   dec.get_use_spdif(&use_spdif);
@@ -487,8 +481,14 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
     if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
   }
 
-  // dummy PCM format
-  spk = Speakers(FORMAT_PCM16, MODE_STEREO, 48000);
+  /////////////////////////////////////////////////////////
+  // Publish user format
+
+  dec.get_user_spk(&spk);
+  if (!spk.mask)
+    spk.mask = MODE_STEREO;
+  if (!spk.sample_rate)
+    spk.sample_rate = dec.get_input().sample_rate;
 
   if ((spk.mask != MODE_MONO && spk.mask != MODE_STEREO) || spk.format != FORMAT_PCM16)
   {
