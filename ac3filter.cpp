@@ -440,17 +440,15 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   // i | simple    | ext        | spdif/simple | spdif/ext    
   // --|-----------|------------|--------------|--------------
   // 0 | mt_pcm_wf | mt_pcm_wfx | mt_spdif_wf  | mt_spdif_wf  
-  // 1 |           | mt_pcm_wf  | mt_spdif_wfx | mt_spdif_wfx 
-  // 2 |           |            | mt_pcm_wf    | mt_pcm_wfx   
-  // 3 |           |            |              | mt_pcm_wf    
+  // 1 |           | mt_pcm_wf  | mt_pcm_wf    | mt_pcm_wfx   
+  // 2 |           |            |              | mt_pcm_wf    
   //
   // where i - format number
   //
-  //       simple - output is set to mono/stereo PCM16 format
-  //       ext - output is set to any other format (extended formats)
+  //       simple - user set mono/stereo PCM16 format
+  //       ext - user set set to any other format (extended formats)
   //       spdif - 'use spdif if possible' flag set
   //
-  //       mt_spdif_wfx - spdif media type using WAVEFORMATEXTENSIBLE
   //       mt_spdif_wf  - spdif media type using WAVEFORMATEX
   //       mt_pcm_wfx   - PCM media type using WAVEFORMATEXTENSIBLE
   //       mt_pcm_wf    - PCM media type using WAVEFORMATEX
@@ -465,25 +463,20 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   Speakers spk;
 
   /////////////////////////////////////////////////////////
-  // Publish SPDIF formats
+  // Publish SPDIF format
 
   bool use_spdif;
   dec.get_use_spdif(&use_spdif);
 
   if (use_spdif)
   {
-    // dummy spdif format
+    // dummy spdif format mt_spdif_wf
     spk = Speakers(FORMAT_SPDIF, 0, dec.get_input().sample_rate);
-
-    // mt_spdif_wf
     if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
-
-    // mt_spdif_wfx
-    if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
   }
 
   /////////////////////////////////////////////////////////
-  // Publish user format
+  // Publish user formats
 
   dec.get_user_spk(&spk);
   if (!spk.mask)
@@ -530,8 +523,7 @@ AC3Filter::CheckOutputType(const CMediaType *mt)
 {
   if (m_pOutput->IsConnected() == TRUE)
   {
-    // If output is already connected agree 
-    // only with current media type
+    // If output is already connected agree with current media type
     CMediaType out_mt;
     m_pOutput->ConnectionMediaType(&out_mt);
     if (*mt == out_mt)
@@ -540,19 +532,16 @@ AC3Filter::CheckOutputType(const CMediaType *mt)
       return S_OK;
     }
   }
-  else
-  {
-    // If output is not connected agree
-    // only with our proposed media types
-    int i = 0;
-    CMediaType out_mt;
-    while (GetMediaType(i++, &out_mt) == S_OK)
-      if (*mt == out_mt)
-      {
-        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: Ok...", this));
-        return S_OK;
-      }
-  }
+
+  // Agree with our proposed media types
+  int i = 0;
+  CMediaType out_mt;
+  while (GetMediaType(i++, &out_mt) == S_OK)
+    if (*mt == out_mt)
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: Ok...", this));
+      return S_OK;
+    }
 
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType(): Not our type", this));
   return VFW_E_TYPE_NOT_ACCEPTED;
