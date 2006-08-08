@@ -198,10 +198,26 @@ AC3Filter::Receive(IMediaSample *in)
   CMediaType *mt;
   if (in->GetMediaType((_AMMediaType**)&mt) == S_OK)
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change", this));
-    flush();
-    if (!set_input(*mt))
-      return VFW_E_INVALIDMEDIATYPE;
+    if (*mt->FormatType() != FORMAT_WaveFormatEx)
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change to non-audio format", this));
+      return E_FAIL;
+    }
+
+    Speakers in_spk;
+    if (!mt2spk(*mt, in_spk))
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change to unsupported format", this));
+      return E_FAIL;
+    }
+
+    if (dec.get_input() != in_spk)
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change", this));
+      flush();
+      if (!set_input(in_spk))
+        return VFW_E_INVALIDMEDIATYPE;
+    }
   }
 
   Speakers in_spk = dec.get_input();
