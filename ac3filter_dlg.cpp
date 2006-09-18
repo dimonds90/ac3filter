@@ -530,6 +530,8 @@ AC3FilterDlg::reload_state()
 
   dec->get_spdif_status(&spdif_status);
 
+  filter->get_spdif_reinit(&spdif_reinit);
+
   // syncronization
   dec->get_time_shift(&time_shift);
   dec->get_time_factor(&time_factor);
@@ -871,12 +873,7 @@ AC3FilterDlg::set_controls()
 
   CheckDlgButton(m_Dlg, IDC_CHK_QUERY_SINK, query_sink? BST_CHECKED: BST_UNCHECKED);
 
-  {
-    RegistryKey reg(REG_KEY);
-    int reinit_samples = 0;
-    reg.get_int32("reinit_samples", reinit_samples);
-    CheckDlgButton(m_Dlg, IDC_CHK_REINIT, reinit_samples > 0? BST_CHECKED: BST_UNCHECKED);
-  }
+  CheckDlgButton(m_Dlg, IDC_CHK_REINIT, spdif_reinit > 0? BST_CHECKED: BST_UNCHECKED);
 
 
   /////////////////////////////////////
@@ -1249,9 +1246,8 @@ AC3FilterDlg::command(int control, int message)
 
     case IDC_CHK_REINIT:
     {
-      RegistryKey reg(REG_KEY);
-      int reinit_samples = IsDlgButtonChecked(m_Dlg, IDC_CHK_REINIT) == BST_CHECKED? 128: 0;
-      reg.set_int32("reinit_samples", reinit_samples);
+      spdif_reinit = IsDlgButtonChecked(m_Dlg, IDC_CHK_REINIT) == BST_CHECKED? 128: 0;
+      filter->set_spdif_reinit(spdif_reinit);
       update();
       break;
     }

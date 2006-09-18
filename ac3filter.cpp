@@ -44,6 +44,11 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
 
   config_autoload = false;
 
+  // Read SPDIF reinit
+  spdif_reinit = 0;
+  RegistryKey reg(REG_KEY);
+  reg.get_int32("spdif_reinit", spdif_reinit);
+
   // init decoder
   dec.set_sink(sink);
   dec.load_params(0, AC3FILTER_ALL);
@@ -387,12 +392,7 @@ AC3Filter::Run(REFERENCE_TIME tStart)
   if FAILED(hr)
     return hr;
 
-  // read 'quick hack' of play/pause problem
-  int reinit_samples = 0;
-  RegistryKey reg(REG_KEY);
-  reg.get_int32("reinit_samples", reinit_samples);
-
-  if (reinit_samples)
+  if (spdif_reinit)
   {
     // Quick hack to overcome SPDIF 'play/pause' problem
     //
@@ -416,18 +416,23 @@ AC3Filter::Run(REFERENCE_TIME tStart)
     // This method is a 'quick hack' because it breaks normal DirectShow
     // data flow and produces glitches on seeking and pause.
 
-    CAutoLock lock(&m_csReceive);
+    bool use_spdif;
+    dec.get_use_spdif(&use_spdif);
+    if (use_spdif)
+    {
+      CAutoLock lock(&m_csReceive);
 
-    uint8_t *buf = new uint8_t[reinit_samples * 4];
-    memset(buf, 0, reinit_samples * 4);
+      uint8_t *buf = new uint8_t[spdif_reinit * 4];
+      memset(buf, 0, spdif_reinit * 4);
 
-    Chunk chunk;
-    chunk.set_rawdata(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate), buf, sizeof(buf));
+      Chunk chunk;
+      chunk.set_rawdata(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate), buf, sizeof(buf));
 
-    sink->process(&chunk);
+      sink->process(&chunk);
 
-    dec.reset();
-    // sink->send_discontinuity();
+      dec.reset();
+      // sink->send_discontinuity();
+    }
   }
 
   return S_OK;
@@ -726,6 +731,24 @@ AC3Filter::GetPages(CAUUID *pPages)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
+
+// Reinit sound card after seek/pause option
+STDMETHODIMP 
+AC3Filter::get_spdif_reinit(int *_spdif_reinit)
+{
+  if (*_spdif_reinit)
+    *_spdif_reinit = spdif_reinit;
+  return S_OK;
+}
+
+STDMETHODIMP 
+AC3Filter::set_spdif_reinit(int  _spdif_reinit)
+{
+  spdif_reinit = _spdif_reinit;
+  RegistryKey reg(REG_KEY);
+  reg.set_int32("spdif_reinit", spdif_reinit);
+  return S_OK;
+}
 
 STDMETHODIMP 
 AC3Filter::get_playback_time(vtime_t *_time)

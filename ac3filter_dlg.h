@@ -49,6 +49,8 @@ private:
 
   int      spdif_status;
 
+  int      spdif_reinit;
+
   // syncronization
   vtime_t  time_shift;
   vtime_t  time_factor;

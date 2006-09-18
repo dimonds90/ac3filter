@@ -22,7 +22,7 @@ protected:
   ROTEntry   rot;       // registred objects table entry
 
   bool config_autoload; // auto-load configuration files
-  int reinit_samples;   // force audio renderer to reinit sound card
+  int spdif_reinit;     // force audio renderer to reinit sound card
                         // the number means number of PCM samples to send
 
   bool set_input(const CMediaType &mt);
@@ -83,6 +83,10 @@ public:
 
   /////////////////////////////////////////////////////////
   // IAC3Filter
+
+  // Reinit sound card after seek/pause option
+  STDMETHODIMP get_spdif_reinit(int *spdif_reinit);
+  STDMETHODIMP set_spdif_reinit(int  spdif_reinit);
 
   // Timing
   STDMETHODIMP get_playback_time (vtime_t *time);

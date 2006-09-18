@@ -117,6 +117,10 @@ DEFINE_GUID(CLSID_AC3Filter_about,
 
 DECLARE_INTERFACE_(IAC3Filter, IUnknown)
 {
+  // Reinit sound card after seek/pause option
+  STDMETHOD (get_spdif_reinit)(int *spdif_reinit) = 0;
+  STDMETHOD (set_spdif_reinit)(int  spdif_reinit) = 0;
+
   // Timing
   STDMETHOD (get_playback_time)(vtime_t *time) = 0;
 
