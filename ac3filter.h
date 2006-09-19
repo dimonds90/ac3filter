@@ -10,18 +10,21 @@
 #include "win32\cpu.h"
 #include "sink\sink_dshow.h"
 #include "com_dec.h"
+#include "tray.h"
 
 #include "rot.h"
 
 class AC3Filter : public CTransformFilter, public IAC3Filter, public ISpecifyPropertyPages
 {
 protected:
+  bool          tray;     // show tray icon
+  AC3FilterTray tray_ctl; // tray icon control
+
   CPUMeter   cpu;       // CPU usage meter
   COMDecoder dec;       // decoder & processor
   DShowSink  *sink;     // sink
   ROTEntry   rot;       // registred objects table entry
 
-  bool config_autoload; // auto-load configuration files
   int spdif_reinit;     // force audio renderer to reinit sound card
                         // the number means number of PCM samples to send
 
@@ -72,6 +75,7 @@ public:
   bool    CheckConnectPin(IPin *pin);
   HRESULT CheckConnect(PIN_DIRECTION dir, IPin *pin);
   HRESULT SetMediaType(PIN_DIRECTION direction, const CMediaType *mt);
+  HRESULT CompleteConnect(PIN_DIRECTION dir, IPin *pin);
 
   HRESULT DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProperties);
 
@@ -83,6 +87,10 @@ public:
 
   /////////////////////////////////////////////////////////
   // IAC3Filter
+
+  // Tray icon
+  STDMETHODIMP get_tray(bool *tray);
+  STDMETHODIMP set_tray(bool  tray);
 
   // Reinit sound card after seek/pause option
   STDMETHODIMP get_spdif_reinit(int *spdif_reinit);

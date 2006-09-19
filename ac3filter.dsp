@@ -210,6 +210,14 @@ SOURCE=.\rot.cpp
 
 SOURCE=.\rot.h
 # End Source File
+# Begin Source File
+
+SOURCE=.\tray.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\tray.h
+# End Source File
 # End Group
 # Begin Group "decss"
 

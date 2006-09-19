@@ -22,7 +22,7 @@ AC3Filter::CreateInstance(LPUNKNOWN punk, HRESULT *phr)
 
 AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   CTransformFilter(tszName, punk, CLSID_AC3Filter), 
-  dec((IAC3Filter*)this)
+  dec((IAC3Filter*)this), tray_ctl((IAC3Filter*)this)
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x, %s)::AC3Filter", this, tszName));
 
@@ -42,11 +42,12 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   else
     m_pOutput = sink;
 
-  config_autoload = false;
-
-  // Read SPDIF reinit
+  tray = false;
   spdif_reinit = 0;
+
+  // Read filter options (processing options are read by COMDecoder)
   RegistryKey reg(REG_KEY);
+  reg.get_bool("tray", tray);
   reg.get_int32("spdif_reinit", spdif_reinit);
 
   // init decoder
@@ -69,6 +70,26 @@ AC3Filter::JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName)
   #ifdef REGISTER_FILTERGRAPH
     rot.register_graph(pGraph);
   #endif
+
+  /////////////////////////////////////////////////////////
+  // We should not show tray icon when filter is included
+  // into the graph. This may happen during graph building
+  // and then filter may be removed (not used). Because of
+  // this flicking tray icon(s) may appear.
+  //
+  // Instead we should shoy tray icon when filter has
+  // actually connected both input and output pins.
+  //
+  // But when filter is removed from the graph we must
+  // ensure that tray icon is removed and config dialog is
+  // destroyed. Config dialog holds reference to the filter
+  // and therefore filter cannot be destructed normally
+  // while config dialog lives. If filter is removed from
+  // the graph it means that we must prepare it to
+  // destruct.
+
+  if (!pGraph)
+    tray_ctl.hide();
 
   return CTransformFilter::JoinFilterGraph(pGraph, pName);
 }
@@ -675,6 +696,17 @@ AC3Filter::SetMediaType(PIN_DIRECTION direction, const CMediaType *mt)
   return S_OK;
 }
 
+HRESULT 
+AC3Filter::CompleteConnect(PIN_DIRECTION direction, IPin *pin)
+{
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CompleteConnect(%s)", this, direction == PINDIR_INPUT? "input": "output"));
+
+  if (tray && (m_pInput->IsConnected() == TRUE) && (m_pOutput->IsConnected() == TRUE))
+    tray_ctl.show();
+
+  return S_OK;
+}
+
 HRESULT                     
 AC3Filter::DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProperties)
 {
@@ -731,6 +763,32 @@ AC3Filter::GetPages(CAUUID *pPages)
 ///
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
+
+// Reinit sound card after seek/pause option
+STDMETHODIMP 
+AC3Filter::get_tray(bool *_tray)
+{
+  if (*_tray)
+    *_tray = tray;
+  return S_OK;
+}
+
+STDMETHODIMP 
+AC3Filter::set_tray(bool  _tray)
+{
+  tray = _tray;
+  RegistryKey reg(REG_KEY);
+  reg.set_int32("tray", tray);
+
+  // Show/hide tray icon
+  if (!tray)
+    tray_ctl.hide();
+
+  if (tray && (m_pInput->IsConnected() == TRUE) && (m_pOutput->IsConnected() == TRUE))
+    tray_ctl.show();
+
+  return S_OK;
+}
 
 // Reinit sound card after seek/pause option
 STDMETHODIMP 
