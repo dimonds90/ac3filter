@@ -559,14 +559,13 @@ IDD_SYS DIALOG DISCARDABLE  0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
-    GROUPBOX        "Default audio renderer",IDC_STATIC,200,151,190,36
-    GROUPBOX        "Filter merit",IDC_STATIC,200,114,190,35
+    GROUPBOX        "Default audio renderer",IDC_STATIC,200,157,190,30
     RADIOBUTTON     "Use Direct Sound as default audio renderer",
-                    IDC_RB_RENDER_DS,207,163,152,10
+                    IDC_RB_RENDER_DS,207,166,152,10
     RADIOBUTTON     "Use Wave Out as default Audio renderer",
-                    IDC_RB_RENDER_WO,207,173,144,10
-    RADIOBUTTON     "Prefer AC3Filter",IDC_RB_MERIT_PREFERRED,207,125,65,10
-    RADIOBUTTON     "Prefer other decoder",IDC_RB_MERIT_UNLIKELY,207,135,81,
+                    IDC_RB_RENDER_WO,207,175,144,10
+    RADIOBUTTON     "Prefer AC3Filter",IDC_RB_MERIT_PREFERRED,207,134,65,10
+    RADIOBUTTON     "Prefer other decoder",IDC_RB_MERIT_UNLIKELY,207,144,81,
                     10
     GROUPBOX        "SPDIF passthrough",IDC_STATIC,103,7,92,69
     CONTROL         "Slider1",IDC_SLIDER_TIME_SHIFT,"msctls_trackbar32",
@@ -607,13 +606,13 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,30,102,10
     CONTROL         "Output SPDIF as PCM",IDC_CHK_SPDIF_AS_PCM,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,207,41,87,10
-    GROUPBOX        "Audio output",IDC_STATIC,200,78,190,33
+    GROUPBOX        "Other options",IDC_STATIC,200,90,190,33
     CONTROL         "Force SPDIF to reinit after seek / pause",
                     IDC_CHK_REINIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,
-                    98,141,10
+                    74,141,10
     CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,88,175,10
-    GROUPBOX        "SPDIF options",IDC_STATIC,200,7,190,69
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,100,175,10
+    GROUPBOX        "SPDIF options",IDC_STATIC,200,7,190,80
     CONTROL         "Restrict SPDIF sample rate",IDC_CHK_SPDIF_CHECK_SR,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,52,101,10
     CONTROL         "48kHz",IDC_CHK_SPDIF_ALLOW_48,"Button",BS_AUTOCHECKBOX | 
@@ -627,6 +626,9 @@ BEGIN
                     BS_AUTOCHECKBOX | WS_TABSTOP,207,19,72,10
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
+    GROUPBOX        "Filter merit",IDC_STATIC,200,125,190,30
+    CONTROL         "Show tray icon",IDC_CHK_TRAY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,207,111,175,10
 END
 
 IDD_FILE DIALOG DISCARDABLE  0, 0, 178, 81

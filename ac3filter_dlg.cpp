@@ -515,6 +515,7 @@ AC3FilterDlg::reload_state()
 
   dec->get_formats(&formats);
   dec->get_query_sink(&query_sink);
+  filter->get_tray(&tray);
 
   // spdif
   dec->get_use_spdif(&use_spdif);
@@ -875,6 +876,10 @@ AC3FilterDlg::set_controls()
 
   CheckDlgButton(m_Dlg, IDC_CHK_REINIT, spdif_reinit > 0? BST_CHECKED: BST_UNCHECKED);
 
+  /////////////////////////////////////
+  // Tray icon
+
+  CheckDlgButton(m_Dlg, IDC_CHK_TRAY, tray? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
   // Auto gain control
@@ -1248,6 +1253,17 @@ AC3FilterDlg::command(int control, int message)
     {
       spdif_reinit = IsDlgButtonChecked(m_Dlg, IDC_CHK_REINIT) == BST_CHECKED? 128: 0;
       filter->set_spdif_reinit(spdif_reinit);
+      update();
+      break;
+    }
+
+    /////////////////////////////////////
+    // Tray icon
+
+    case IDC_CHK_TRAY:
+    {
+      tray = IsDlgButtonChecked(m_Dlg, IDC_CHK_TRAY) == BST_CHECKED;
+      filter->set_tray(tray);
       update();
       break;
     }

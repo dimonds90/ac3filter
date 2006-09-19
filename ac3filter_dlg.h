@@ -34,6 +34,7 @@ private:
   Speakers user_spk;
   int      formats;
   bool     query_sink;
+  bool     tray;
 
   // spdif
   bool     use_spdif;

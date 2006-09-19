@@ -780,9 +780,14 @@ AC3Filter::set_tray(bool  _tray)
   RegistryKey reg(REG_KEY);
   reg.set_int32("tray", tray);
 
-  // Show/hide tray icon
-  if (!tray)
-    tray_ctl.hide();
+  /////////////////////////////////////////////////////////
+  // Show tray icon if enabled.
+  //
+  // We cannot hide tray icon when user disables this
+  // option because it may be disabled from config dialog
+  // called from tray icon. During hiding config dialog
+  // is destructed and caller of this function became
+  // invalid.
 
   if (tray && (m_pInput->IsConnected() == TRUE) && (m_pOutput->IsConnected() == TRUE))
     tray_ctl.show();

@@ -383,3 +383,4 @@
 #define IDC_VER                        20101
 #define IDC_EDT_ENV                    20102
 #define IDC_EDT_CREDITS                20103
+#define IDC_CHK_TRAY                   20104
