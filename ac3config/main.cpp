@@ -12,8 +12,14 @@ INT APIENTRY WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR pCmdLine,
   HRESULT hr;
 
   CoInitialize(0);
-  hr = CoCreateInstance(CLSID_AC3Filter, NULL, CLSCTX_INPROC_SERVER, IID_ISpecifyPropertyPages, (LPVOID *)&spp);
-  hr = spp->GetPages(&cauuid);
+  if FAILED(CoCreateInstance(CLSID_AC3Filter, NULL, CLSCTX_INPROC_SERVER, IID_ISpecifyPropertyPages, (LPVOID *)&spp))
+  {
+    MessageBox(0, "Cannot create AC3Filter instance (AC3Filter is not installed?)", 
+      "ERROR!", MB_OK | MB_ICONSTOP);
+    return 1;
+  }
+
+  spp->GetPages(&cauuid);
 
   bool warning = true;
   RegistryKey reg(REG_KEY);
