@@ -512,9 +512,11 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
 
   if (use_spdif)
   {
-    // dummy spdif format mt_spdif_wf
+    // dummy spdif formats
+
     spk = Speakers(FORMAT_SPDIF, 0, dec.get_input().sample_rate);
     if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
+    if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
   }
 
   /////////////////////////////////////////////////////////
@@ -542,6 +544,18 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
 HRESULT 
 AC3Filter::CheckInputType(const CMediaType *mt)
 {
+  if (m_pInput->IsConnected() == TRUE)
+  {
+    // If input is already connected agree with current media type
+    CMediaType out_mt;
+    m_pInput->ConnectionMediaType(&out_mt);
+    if (*mt == out_mt)
+    {
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType: No change...", this));
+      return S_OK;
+    }
+  }
+
   Speakers spk_tmp;
 
   if (!mt2spk(*mt, spk_tmp))
@@ -570,7 +584,7 @@ AC3Filter::CheckOutputType(const CMediaType *mt)
     m_pOutput->ConnectionMediaType(&out_mt);
     if (*mt == out_mt)
     {
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: Ok...", this));
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: No change...", this));
       return S_OK;
     }
   }
