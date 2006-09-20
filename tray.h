@@ -10,26 +10,31 @@ class AC3FilterTray
 {
 protected:
   IAC3Filter *filter;
+
   PropThread *dialog;
   bool visible;
 
   HWND  hwnd;
   HICON hicon;
+  HMENU hmenu;
   NOTIFYICONDATA nid;
 
-  void create_window();
+  HMENU create_menu() const;
 
   static LRESULT CALLBACK TrayProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 public:
-  AC3FilterTray(IAC3Filter *_filter);
+  AC3FilterTray(IAC3Filter *filter);
   ~AC3FilterTray();
 
+  // tray icon control
   void show();
   void hide();
 
-  void l_click();
-  void r_click();
+  // control actions
+  void config();
+  void popup_menu();
+  void preset(const char *preset);
 };
 
 #endif

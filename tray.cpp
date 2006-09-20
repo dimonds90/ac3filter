@@ -1,10 +1,18 @@
 #include <windows.h>
 #include <ocidl.h>
 #include <olectl.h>
+#include <stdio.h>
 
+#include "guids.h"
 #include "tray.h"
 #include "win32\thread.h"
 #include "resource_ids.h"
+
+#define WM_TRAY_ICON (WM_USER + 10)
+
+#define CMD_CONFIG       (100)
+#define CMD_FIRST_PRESET (200)
+#define CMD_LAST_PRESET  (300)
 
 ///////////////////////////////////////////////////////////////////////////////
 // PropThread
@@ -90,8 +98,13 @@ public:
 AC3FilterTray::AC3FilterTray(IAC3Filter *_filter)
 {
   filter = _filter;
+
   dialog = new PropThread();
   visible = false;
+
+  hmenu = 0;
+  hicon = 0;
+  hwnd = 0;
 
   /////////////////////////////////////////////////////////
   // Window to receive messages
@@ -139,7 +152,7 @@ AC3FilterTray::AC3FilterTray(IAC3Filter *_filter)
   nid.hWnd = hwnd;
   nid.uID = 1;
   nid.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE;
-  nid.uCallbackMessage = WM_USER;
+  nid.uCallbackMessage = WM_TRAY_ICON;
   nid.hIcon = hicon;
   lstrcpy(nid.szTip, "AC3Filter configuration");
 }
@@ -149,14 +162,44 @@ AC3FilterTray::~AC3FilterTray()
   if (visible)
     hide();
 
-  if (hwnd)
-    DestroyWindow(hwnd);
+  if (hmenu)  DestroyMenu(hmenu);
+  if (hwnd)   DestroyWindow(hwnd);
+  if (hicon)  DestroyIcon(hicon);
+  if (dialog) delete dialog;
+}
 
-  if (hicon)
-    DestroyIcon(hicon);
+HMENU
+AC3FilterTray::create_menu() const
+{
+  HMENU menu = CreatePopupMenu();
+  if (!menu) return 0;
 
-  if (dialog)
-    delete dialog;
+  /////////////////////////////////////////////////////////
+  // Fill presets
+
+  HKEY key;
+  if (RegOpenKeyEx(HKEY_CURRENT_USER, REG_KEY_PRESET, 0, KEY_READ, &key) == ERROR_SUCCESS)
+  {
+    char buf[256];
+    DWORD len = sizeof(buf);
+
+    int i = 0;
+    int npresets = CMD_LAST_PRESET - CMD_FIRST_PRESET;
+    while (i < npresets && RegEnumKeyEx(key, i++, (LPTSTR)buf, &len, 0, 0, 0, 0) == ERROR_SUCCESS)
+    {
+      AppendMenu(menu, MF_BYPOSITION | MF_STRING, CMD_FIRST_PRESET + i, (LPCTSTR)buf);
+      len = sizeof(buf);
+    }
+    RegCloseKey(key);
+    AppendMenu(menu, MF_BYPOSITION | MF_SEPARATOR, 0, 0);
+  }
+
+  /////////////////////////////////////////////////////////
+  // Add 'Config' command (default)
+
+  AppendMenu(menu, MF_BYPOSITION | MF_STRING, CMD_CONFIG, (LPCTSTR)"AC3Filter config");
+  SetMenuDefaultItem(menu, CMD_CONFIG, FALSE);
+  return menu;
 }
 
 void
@@ -183,7 +226,23 @@ AC3FilterTray::hide()
 }
 
 void
-AC3FilterTray::l_click()
+AC3FilterTray::preset(const char *preset)
+{
+  if (!filter) return;
+
+  IDecoder *dec;
+  if FAILED(filter->QueryInterface(IID_IDecoder, (void **)&dec))
+    return;
+
+  char buf[256];
+  sprintf(buf, REG_KEY_PRESET"\\%s", preset);
+  RegistryKey reg(buf);
+  dec->load_params(&reg, AC3FILTER_ALL);
+  dec->Release();
+}
+
+void
+AC3FilterTray::config()
 {
   if (!dialog || !filter)
     return;
@@ -195,25 +254,67 @@ AC3FilterTray::l_click()
 }
 
 void
-AC3FilterTray::r_click()
+AC3FilterTray::popup_menu()
 {
+  POINT mouse;
+
+  if (hmenu) DestroyMenu(hmenu);
+  hmenu = create_menu();
+
+  GetCursorPos(&mouse);
+  SetForegroundWindow(hwnd);
+  TrackPopupMenu(hmenu, TPM_RIGHTALIGN | TPM_BOTTOMALIGN, mouse.x, mouse.y, 0, hwnd, 0);
+  PostMessage(hwnd, WM_NULL, 0, 0);
 }
 
 
 LRESULT CALLBACK 
-AC3FilterTray::TrayProc(HWND _hwnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam)
+AC3FilterTray::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
-  AC3FilterTray *iam = (AC3FilterTray *)GetWindowLong(_hwnd, GWL_USERDATA);
+  AC3FilterTray *iam = (AC3FilterTray *)GetWindowLong(hwnd, GWL_USERDATA);
+  int cmd_id;
 
-  switch (_lParam)
+  switch (Msg)
   {
-    case WM_LBUTTONDOWN:
-      iam->l_click();
-      return 0;
+    ///////////////////////////////////
+    // Tray icon messages
 
-    case WM_RBUTTONDOWN:
-      iam->r_click();
-      return 0;
+    case WM_TRAY_ICON:
+      switch (lParam)
+      {
+        case WM_LBUTTONDOWN:
+          iam->config();
+          return 0;
+
+        case WM_RBUTTONDOWN:
+          iam->popup_menu();
+          return 0;
+      }
+      break;
+
+    ///////////////////////////////////
+    // Menu
+
+    case WM_COMMAND:
+      cmd_id = LOWORD(wParam);
+      if (cmd_id >= CMD_FIRST_PRESET && cmd_id < CMD_LAST_PRESET)
+      {
+        char buf[256];
+        if (!GetMenuString(iam->hmenu, cmd_id, (LPTSTR)buf, sizeof(buf), MF_BYCOMMAND))
+          return 0;
+
+        iam->preset(buf);
+        return 0;
+      }
+
+      switch (cmd_id)
+      {
+        case CMD_CONFIG:
+          iam->config();
+          return 0;
+      }
+      break;
   }
-  return DefWindowProc(_hwnd, _uMsg, _wParam, _lParam);
+
+  return DefWindowProc(hwnd, Msg, wParam, lParam);
 }
