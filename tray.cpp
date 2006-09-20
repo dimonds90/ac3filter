@@ -66,6 +66,20 @@ public:
     create(false);
     return true;
   }
+
+  void stop()
+  {
+    if (thread_exists())
+    {
+      PostThreadMessage(thread_id(), WM_QUIT, 0, 0);
+      terminate();
+    }
+  }
+
+  bool is_visible()
+  {
+    return thread_exists();
+  }
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -162,10 +176,7 @@ AC3FilterTray::hide()
     return;
 
   if (dialog)
-  {
-    PostThreadMessage(dialog->thread_id(), WM_QUIT, 0, 0);
-    dialog->terminate();
-  }
+    dialog->stop();
 
   Shell_NotifyIcon(NIM_DELETE, &nid);
   visible = false;
@@ -174,10 +185,12 @@ AC3FilterTray::hide()
 void
 AC3FilterTray::l_click()
 {
-  if (!dialog)
+  if (!dialog || !filter)
     return;
 
-  if (filter)
+  if (dialog->is_visible())
+    dialog->stop();
+  else
     dialog->start(0, filter);
 }
 
