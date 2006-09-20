@@ -19,7 +19,7 @@ void warning()
                 "WARNING!", MB_OK | MB_ICONEXCLAMATION);
 };
 
-void config()
+extern "C" void config()
 {
   ISpecifyPropertyPages *spp;
   CAUUID cauuid;
