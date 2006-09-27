@@ -532,6 +532,7 @@ AC3FilterDlg::reload_state()
   dec->get_spdif_status(&spdif_status);
 
   filter->get_spdif_reinit(&spdif_reinit);
+  filter->get_spdif_no_pcm(&spdif_no_pcm);
 
   // syncronization
   dec->get_time_shift(&time_shift);
@@ -860,6 +861,9 @@ AC3FilterDlg::set_controls()
   EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_SPDIF_ALLOW_44), spdif_check_sr);
   EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_SPDIF_ALLOW_32), spdif_check_sr);
 
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_REINIT, spdif_reinit > 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_NO_PCM, spdif_no_pcm? BST_CHECKED: BST_UNCHECKED);
+
   /////////////////////////////////////
   // Formats
 
@@ -870,15 +874,9 @@ AC3FilterDlg::set_controls()
   CheckDlgButton(m_Dlg, IDC_CHK_PES, (formats & FORMAT_MASK_PES) != 0? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
-  // Query sink and force reinit
+  // Query sink and tray icon
 
   CheckDlgButton(m_Dlg, IDC_CHK_QUERY_SINK, query_sink? BST_CHECKED: BST_UNCHECKED);
-
-  CheckDlgButton(m_Dlg, IDC_CHK_REINIT, spdif_reinit > 0? BST_CHECKED: BST_UNCHECKED);
-
-  /////////////////////////////////////
-  // Tray icon
-
   CheckDlgButton(m_Dlg, IDC_CHK_TRAY, tray? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
@@ -1247,12 +1245,23 @@ AC3FilterDlg::command(int control, int message)
     }
 
     /////////////////////////////////////
-    // Force reinit
+    // Force SPDIF reinit
 
-    case IDC_CHK_REINIT:
+    case IDC_CHK_SPDIF_REINIT:
     {
-      spdif_reinit = IsDlgButtonChecked(m_Dlg, IDC_CHK_REINIT) == BST_CHECKED? 128: 0;
+      spdif_reinit = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_REINIT) == BST_CHECKED? 128: 0;
       filter->set_spdif_reinit(spdif_reinit);
+      update();
+      break;
+    }
+
+    /////////////////////////////////////
+    // Disallow PCM in SPDIF mode
+
+    case IDC_CHK_SPDIF_NO_PCM:
+    {
+      spdif_no_pcm = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_NO_PCM) == BST_CHECKED;
+      filter->set_spdif_no_pcm(spdif_no_pcm);
       update();
       break;
     }

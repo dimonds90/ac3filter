@@ -121,9 +121,13 @@ DECLARE_INTERFACE_(IAC3Filter, IUnknown)
   STDMETHOD (get_tray)(bool *tray) = 0;
   STDMETHOD (set_tray)(bool  tray) = 0;
 
-  // Reinit sound card after seek/pause option
+  // Reinit SPDIF after seek/pause option
   STDMETHOD (get_spdif_reinit)(int *spdif_reinit) = 0;
   STDMETHOD (set_spdif_reinit)(int  spdif_reinit) = 0;
+
+  // Do not allow PCM in SPDIF mode
+  STDMETHOD (get_spdif_no_pcm)(bool *spdif_no_pcm) = 0;
+  STDMETHOD (set_spdif_no_pcm)(bool  spdif_no_pcm) = 0;
 
   // Timing
   STDMETHOD (get_playback_time)(vtime_t *time) = 0;

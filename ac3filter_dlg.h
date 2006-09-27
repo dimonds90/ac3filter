@@ -51,6 +51,7 @@ private:
   int      spdif_status;
 
   int      spdif_reinit;
+  bool     spdif_no_pcm;
 
   // syncronization
   vtime_t  time_shift;

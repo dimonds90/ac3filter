@@ -44,11 +44,13 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
 
   tray = false;
   spdif_reinit = 0;
+  spdif_no_pcm = false;
 
   // Read filter options (processing options are read by COMDecoder)
   RegistryKey reg(REG_KEY);
   reg.get_bool("tray", tray);
   reg.get_int32("spdif_reinit", spdif_reinit);
+  reg.get_bool ("spdif_no_pcm", spdif_no_pcm);
 
   // init decoder
   dec.set_sink(sink);
@@ -520,22 +522,30 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   }
 
   /////////////////////////////////////////////////////////
-  // Publish user formats
+  // Publish user (PCM) formats
+  //
+  // Do not publish PCM formats when both 'use_spdif' and
+  // 'spdif_no_pcm' options are enabled. This solves the
+  // problem when postprocessing filters that do not
+  // support SPDIF are used.
 
-  dec.get_user_spk(&spk);
-  if (!spk.mask)
-    spk.mask = MODE_STEREO;
-  if (!spk.sample_rate)
-    spk.sample_rate = dec.get_input().sample_rate;
-
-  if ((spk.mask != MODE_MONO && spk.mask != MODE_STEREO) || spk.format != FORMAT_PCM16)
+  if (!use_spdif || !spdif_no_pcm)
   {
-    // mt_pcm_wfx
-    if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
-  }
+    dec.get_user_spk(&spk);
+    if (!spk.mask)
+      spk.mask = MODE_STEREO;
+    if (!spk.sample_rate)
+      spk.sample_rate = dec.get_input().sample_rate;
 
-  // mt_pcm_wf
-  if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
+    if ((spk.mask != MODE_MONO && spk.mask != MODE_STEREO) || spk.format != FORMAT_PCM16)
+    {
+      // mt_pcm_wfx
+      if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
+    }
+
+    // mt_pcm_wf
+    if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
+  }
 
   return VFW_S_NO_MORE_ITEMS;
 }
@@ -827,6 +837,25 @@ AC3Filter::set_spdif_reinit(int  _spdif_reinit)
   return S_OK;
 }
 
+// Reinit sound card after seek/pause option
+STDMETHODIMP 
+AC3Filter::get_spdif_no_pcm(bool *_spdif_no_pcm)
+{
+  if (*_spdif_no_pcm)
+    *_spdif_no_pcm = spdif_no_pcm;
+  return S_OK;
+}
+
+STDMETHODIMP 
+AC3Filter::set_spdif_no_pcm(bool  _spdif_no_pcm)
+{
+  spdif_no_pcm = _spdif_no_pcm;
+  RegistryKey reg(REG_KEY);
+  reg.set_bool("spdif_no_pcm", spdif_no_pcm);
+  return S_OK;
+}
+
+// Playback time
 STDMETHODIMP 
 AC3Filter::get_playback_time(vtime_t *_time)
 {
