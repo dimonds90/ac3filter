@@ -7,6 +7,7 @@
     that do not support spdif output. Now it's an additional option to force
     this problem. Read here for more info: 
     http://ac3filter.net/forum/viewtopic.php?t=10
+    (thanks to LESAGE Aurelien for testing)
   * DivX player now works with SPDIF
   * Tray icon to access filter's settings from players that do not allow to
     configure filters. Also now it's possible to change preset fast from
