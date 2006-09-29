@@ -606,12 +606,12 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,28,102,10
     CONTROL         "Output SPDIF as PCM",IDC_CHK_SPDIF_AS_PCM,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,207,38,87,10
-    CONTROL         "Force SPDIF to reinit after seek / pause",
-                    IDC_CHK_SPDIF_REINIT,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,207,68,141,10
+    CONTROL         "Force sound card to reinit after seek / pause",
+                    IDC_CHK_REINIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,
+                    111,156,10
     CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,102,175,10
-    GROUPBOX        "SPDIF options",IDC_STATIC,200,7,190,84
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,101,175,10
+    GROUPBOX        "SPDIF options",IDC_STATIC,200,7,190,73
     CONTROL         "Restrict SPDIF sample rate",IDC_CHK_SPDIF_CHECK_SR,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,48,101,10
     CONTROL         "48kHz",IDC_CHK_SPDIF_ALLOW_48,"Button",BS_AUTOCHECKBOX | 
@@ -626,11 +626,11 @@ BEGIN
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
     CONTROL         "Show tray icon",IDC_CHK_TRAY,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,207,112,175,10
+                    WS_TABSTOP,207,91,175,10
     GROUPBOX        "Filter merit",IDC_STATIC,200,125,190,30
-    GROUPBOX        "Other options",IDC_STATIC,200,93,190,30
+    GROUPBOX        "Other options",IDC_STATIC,200,82,190,41
     CONTROL         "Disallow PCM output in SPDIF mode",IDC_CHK_SPDIF_NO_PCM,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,78,131,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,68,131,10
 END
 
 IDD_FILE DIALOG DISCARDABLE  0, 0, 178, 81

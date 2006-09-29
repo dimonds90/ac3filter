@@ -26,7 +26,7 @@ protected:
   ROTEntry   rot;       // registred objects table entry
 
   bool spdif_no_pcm;    // do not publish pcm in spdif mode
-  int  spdif_reinit;    // force audio renderer to reinit sound card
+  int  reinit;          // force audio renderer to reinit sound card
                         // the number means number of PCM samples to send
 
   bool set_input(const CMediaType &mt);
@@ -94,8 +94,8 @@ public:
   STDMETHODIMP set_tray(bool  tray);
 
   // Reinit sound card after seek/pause option
-  STDMETHODIMP get_spdif_reinit(int *spdif_reinit);
-  STDMETHODIMP set_spdif_reinit(int  spdif_reinit);
+  STDMETHODIMP get_reinit(int *reinit);
+  STDMETHODIMP set_reinit(int  reinit);
 
   // Do not allow PCM in SPDIF mode
   STDMETHODIMP get_spdif_no_pcm(bool *spdif_no_pcm);

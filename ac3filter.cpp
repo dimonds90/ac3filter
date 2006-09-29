@@ -43,13 +43,13 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
     m_pOutput = sink;
 
   tray = false;
-  spdif_reinit = 0;
+  reinit = 0;
   spdif_no_pcm = false;
 
   // Read filter options (processing options are read by COMDecoder)
   RegistryKey reg(REG_KEY);
   reg.get_bool("tray", tray);
-  reg.get_int32("spdif_reinit", spdif_reinit);
+  reg.get_int32("reinit", reinit);
   reg.get_bool ("spdif_no_pcm", spdif_no_pcm);
 
   // init decoder
@@ -415,22 +415,26 @@ AC3Filter::Run(REFERENCE_TIME tStart)
   if FAILED(hr)
     return hr;
 
-  if (spdif_reinit)
+  if (reinit)
   {
-    // Quick hack to overcome SPDIF 'play/pause' problem
+    // Quick hack to overcome 2 'play/pause' problems:
     //
+    // Some sound cards mess channel mapping after pause: channels are
+    // shifted around: left to center, center ro right, etc.
+    // 
     // Some sound cards (I have found it on AD1985) have a bug with pausing
     // of SPDIF playback: after pause or seeking SPDIF transmission disappears
     // at all. The reason is a bug in sound card driver: when Pause() is
     // called on DirectSound's SPDIF playback buffer sound card switches to
     // PCM mode and does not switch back to SPDIF when playback is resumed.
     // The only way to continue playback is to reopen SPDIF output. 
-    // 
-    // To force the renderer to reopen SPDIF output we send a portion of 
-    // PCM data so forcing the renderer to close SPDIF output and open 
-    // PCM playback. After this we may continue normal operation but should
-    // reset DVDGraph's processing chain to force DVDGraph to re-check
-    // possibility of SPDIF output.
+    //
+    // To force the renderer to reopen audio output we send a portion of 
+    // standard stereo 16bit PCM data (all sound cards can handle it good) so
+    // forcing the renderer to close current audio output and open stereo PCM
+    // playback. After this we may continue normal operation but should reset
+    // DVDGraph's processing chain to force DVDGraph to re-check possibility
+    // of SPDIF output.
     //
     // Also discontiniuity flag should be sent with next normal output sample
     // to force the renderer to sync time correctly because excessive PCM
@@ -439,23 +443,18 @@ AC3Filter::Run(REFERENCE_TIME tStart)
     // This method is a 'quick hack' because it breaks normal DirectShow
     // data flow and produces glitches on seeking and pause.
 
-    bool use_spdif;
-    dec.get_use_spdif(&use_spdif);
-    if (use_spdif)
-    {
-      CAutoLock lock(&m_csReceive);
+    CAutoLock lock(&m_csReceive);
 
-      uint8_t *buf = new uint8_t[spdif_reinit * 4];
-      memset(buf, 0, spdif_reinit * 4);
+    uint8_t *buf = new uint8_t[reinit * 4];
+    memset(buf, 0, reinit * 4);
 
-      Chunk chunk;
-      chunk.set_rawdata(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate), buf, sizeof(buf));
+    Chunk chunk;
+    chunk.set_rawdata(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate), buf, sizeof(buf));
 
-      sink->process(&chunk);
+    sink->process(&chunk);
 
-      dec.reset();
-      // sink->send_discontinuity();
-    }
+    dec.reset();
+    sink->send_discontinuity();
   }
 
   return S_OK;
@@ -821,19 +820,19 @@ AC3Filter::set_tray(bool  _tray)
 
 // Reinit sound card after seek/pause option
 STDMETHODIMP 
-AC3Filter::get_spdif_reinit(int *_spdif_reinit)
+AC3Filter::get_reinit(int *_reinit)
 {
-  if (*_spdif_reinit)
-    *_spdif_reinit = spdif_reinit;
+  if (*_reinit)
+    *_reinit = reinit;
   return S_OK;
 }
 
 STDMETHODIMP 
-AC3Filter::set_spdif_reinit(int  _spdif_reinit)
+AC3Filter::set_reinit(int  _reinit)
 {
-  spdif_reinit = _spdif_reinit;
+  reinit = _reinit;
   RegistryKey reg(REG_KEY);
-  reg.set_int32("spdif_reinit", spdif_reinit);
+  reg.set_int32("reinit", reinit);
   return S_OK;
 }
 

@@ -50,7 +50,7 @@ private:
 
   int      spdif_status;
 
-  int      spdif_reinit;
+  int      reinit;
   bool     spdif_no_pcm;
 
   // syncronization

@@ -1,6 +1,7 @@
 <b>1.10b</b> - 27.09.06
   Work on stability continues. Now filter shows good stability, therefore its
-  status changes to beta and may be recommended to replace any previous version.
+  status changes to beta and it may be recommended to replace any previous
+  version.
 
   Some additional work was done:
   * Sometimes SPDIF mode cannot be set because of post-processing filters
@@ -22,8 +23,6 @@
   + 'Disallow PCM in SPDIF mode' option added
   * Divx Player now works with SPDIF output
   * AC3Config app does not crash, but reports an error when filter is uninstalled.
-  * 'Force reinit' option now works only in SPDIF mode
-    (no need to disable it for PCM mode)
 
 <b>1.09a</b> - 09.08.06
   * DivX Player compatibility

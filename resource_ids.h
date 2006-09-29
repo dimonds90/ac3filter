@@ -319,6 +319,7 @@
 #define IDC_RB_MERIT_PREFERRED         19403
 #define IDC_RB_MERIT_UNLIKELY          19404
 
+#define IDC_CHK_REINIT                 19405
 #define IDC_CHK_QUERY_SINK             19406
 #define IDC_CHK_TRAY                   19407
 
@@ -378,8 +379,7 @@
 #define IDC_CHK_SPDIF_ALLOW_44         20019
 #define IDC_CHK_SPDIF_ALLOW_32         20020
 
-#define IDC_CHK_SPDIF_REINIT           20021
-#define IDC_CHK_SPDIF_NO_PCM           20022
+#define IDC_CHK_SPDIF_NO_PCM           20021
 
 // Other
 
