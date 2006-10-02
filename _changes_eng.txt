@@ -10,9 +10,8 @@
     http://ac3filter.net/forum/viewtopic.php?t=10
     (thanks to LESAGE Aurelien for testing)
   * DivX player now works with SPDIF
-  * Tray icon to access filter's settings from players that do not allow to
-    configure filters. Also now it's possible to change preset fast from
-    tray context menu.
+  * Some players do not allow to configure filters. Now AC3Filter has tray icon
+    to access filter's settings.
 
   Known problems:
   * AC3 encode does not work with some receivers
