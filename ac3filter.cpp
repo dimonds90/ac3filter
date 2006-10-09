@@ -791,7 +791,7 @@ AC3Filter::GetPages(CAUUID *pPages)
 STDMETHODIMP 
 AC3Filter::get_tray(bool *_tray)
 {
-  if (*_tray)
+  if (_tray)
     *_tray = tray;
   return S_OK;
 }
@@ -822,7 +822,7 @@ AC3Filter::set_tray(bool  _tray)
 STDMETHODIMP 
 AC3Filter::get_reinit(int *_reinit)
 {
-  if (*_reinit)
+  if (_reinit)
     *_reinit = reinit;
   return S_OK;
 }
@@ -840,7 +840,7 @@ AC3Filter::set_reinit(int  _reinit)
 STDMETHODIMP 
 AC3Filter::get_spdif_no_pcm(bool *_spdif_no_pcm)
 {
-  if (*_spdif_no_pcm)
+  if (_spdif_no_pcm)
     *_spdif_no_pcm = spdif_no_pcm;
   return S_OK;
 }
