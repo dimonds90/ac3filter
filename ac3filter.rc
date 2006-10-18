@@ -452,7 +452,7 @@ END
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "+20dB",IDC_STATIC,110,27,20,8
     LTEXT           "-20dB",IDC_STATIC,112,66,20,8
@@ -537,8 +537,8 @@ BEGIN
     CONTROL         "Slider1",IDC_SLIDER_DRC_POWER,"msctls_trackbar32",
                     TBS_VERT | TBS_BOTH | WS_TABSTOP,227,23,27,56
     EDITTEXT        IDC_EDT_DRC_POWER,229,79,23,14,ES_AUTOHSCROLL
-    CONTROL         "Enable",IDC_CHK_DRC,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,236,14,38,10
+    CONTROL         "Use DRC",IDC_CHK_DRC,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,236,14,46,10
     CONTROL         "Slider1",IDC_SLIDER_DRC_LEVEL,"msctls_trackbar32",
                     TBS_VERT | TBS_BOTH | WS_DISABLED | WS_TABSTOP,255,23,27,
                     56

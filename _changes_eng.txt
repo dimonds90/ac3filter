@@ -1,4 +1,7 @@
 <b>1.10b</b> - 27.09.06
+  * Tray icon and some other options display fixed
+
+<b>1.10b</b> - 27.09.06
   Work on stability continues. Now filter shows good stability, therefore its
   status changes to beta and it may be recommended to replace any previous
   version.

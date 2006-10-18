@@ -117,7 +117,7 @@ BSC32=bscmake.exe
 LINK32=link.exe
 # ADD BASE LINK32 strmbase.lib msvcrt.lib quartz.lib winmm.lib comctl32.lib kernel32.lib user32.lib advapi32.lib uuid.lib dsound.lib oldnames.lib ole32.lib oleaut32.lib /nologo /dll /pdb:none /machine:I386 /nodefaultlib /out:"Release/ac3filter.ax"
 # SUBTRACT BASE LINK32 /map
-# ADD LINK32 strmbase.lib msvcrt.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /profile /debug /debugtype:both /machine:I386 /nodefaultlib /out:"Perf/ac3filter.ax"
+# ADD LINK32 strmbase.lib msvcrt.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib shell32.lib gdi32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /profile /debug /debugtype:both /machine:I386 /nodefaultlib /out:"Perf/ac3filter.ax"
 # SUBTRACT LINK32 /map
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
