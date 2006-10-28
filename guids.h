@@ -38,7 +38,7 @@ void cr2crlf(char *buf, int size);
                               // formats, spdif, config_autoload, 
 
 #define AC3FILTER_ALL    0x7f // all settings
-#define AC3FILTER_PRESET 0x1e // settings that saved into preset (all except system settings, sync and speaker config)
+#define AC3FILTER_PRESET 0x1f // settings that saved into preset (all except system settings and sync)
 
 #define SPDIF_MODE_NONE                0  // see dvd_graph.h
 #define SPDIF_MODE_DISABLED            1  // see dvd_graph.h
