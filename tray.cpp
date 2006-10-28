@@ -114,7 +114,7 @@ AC3FilterTray::AC3FilterTray(IAC3Filter *_filter)
   wc.lpfnWndProc = TrayProc;
   wc.cbClsExtra  = 0;
   wc.cbWndExtra  = 0;
-  wc.hInstance   = GetModuleHandle(0);
+  wc.hInstance   = ac3filter_instance;
   wc.hIcon       = 0;
   wc.hCursor     = 0;
   wc.hbrBackground = 0;
