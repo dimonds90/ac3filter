@@ -1,0 +1,14 @@
+*.log
+*.exe
+*.dll
+
+*.aps
+*.ncb
+*.plg
+*.opt
+*.dep
+
+Debug
+Release
+Perf
+ChangeLog
