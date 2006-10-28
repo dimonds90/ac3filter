@@ -133,7 +133,7 @@ AC3FilterTray::AC3FilterTray(IAC3Filter *_filter)
     CW_USEDEFAULT,
     0,
     0,
-    GetModuleHandle(0),
+    ac3filter_instance,
     0);
 
   if (hwnd)
@@ -142,7 +142,7 @@ AC3FilterTray::AC3FilterTray(IAC3Filter *_filter)
   /////////////////////////////////////////////////////////
   // Tray icon itself
 
-  hicon = LoadIcon(GetModuleHandle("ac3filter.ax"), MAKEINTRESOURCE(IDI_AC3FILTER));
+  hicon = LoadIcon(ac3filter_instance, MAKEINTRESOURCE(IDI_AC3FILTER));
 
   /////////////////////////////////////////////////////////
   // NOTIFYICONDATA used to control tray icon

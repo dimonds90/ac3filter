@@ -11,6 +11,8 @@
 #include "spk.h"
 #include "registry.h"
 
+extern HINSTANCE ac3filter_instance;
+
 void cr2crlf(char *buf, int size);
 
 // registry key

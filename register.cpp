@@ -107,6 +107,8 @@ int g_cTemplates = sizeof(g_Templates) / sizeof(g_Templates[0]);
 // Handle registration of this filter
 //
 
+HINSTANCE ac3filter_instance = 0;
+
 STDAPI DllRegisterServer()
 {
   return AMovieDllRegisterServer2( TRUE );
@@ -120,5 +122,6 @@ STDAPI DllUnregisterServer()
 extern "C" BOOL WINAPI DllEntryPoint(HINSTANCE, ULONG, LPVOID);
 BOOL WINAPI DllMain(HINSTANCE hinst, DWORD reason, LPVOID reserved)
 {
+  ac3filter_instance = hinst;
   return DllEntryPoint(hinst, reason, reserved);
 }
