@@ -1,5 +1,10 @@
-<b>1.10b</b> - 27.09.06
+<b>1.11</b> - 28.10.06
+  Stable version.
+
+  * Now filter saves output settings to preset 
+    (so now you can create presets with different output configurations)
   * Tray icon and some other options display fixed
+  * Fixed crash with TMPEnc
 
 <b>1.10b</b> - 27.09.06
   Work on stability continues. Now filter shows good stability, therefore its
