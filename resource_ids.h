@@ -360,10 +360,11 @@
 #define IDC_CHK_DTS                    19903
 #define IDC_CHK_MPA                    19904
 #define IDC_CHK_PES                    19905
+#define IDC_CHK_SPDIF                  19906
 
 // SPDIF
 
-#define IDC_CHK_SPDIF                  20001
+#define IDC_CHK_USE_SPDIF              20001
 #define IDC_LBL_SPDIF_STATUS           20002
 
 #define IDC_CHK_SPDIF_MPA              20011

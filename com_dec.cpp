@@ -4,7 +4,7 @@
 COMDecoder::COMDecoder(IUnknown *_outer) 
 { 
   outer = _outer; 
-  formats = FORMAT_CLASS_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES;
+  formats = FORMAT_CLASS_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES |  FORMAT_MASK_SPDIF;
   dvd.proc.set_input_order(win_order);
   dvd.proc.set_output_order(win_order);
 };

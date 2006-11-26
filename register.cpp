@@ -6,34 +6,37 @@
 
 const AMOVIESETUP_MEDIATYPE sudInPinTypes[] =
 {
+// MPEG2 formats
 {&MEDIATYPE_MPEG2_PES,          &MEDIASUBTYPE_DOLBY_AC3         },
 {&MEDIATYPE_MPEG2_PES,          &MEDIASUBTYPE_MPEG1AudioPayload },
 {&MEDIATYPE_MPEG2_PES,          &MEDIASUBTYPE_MPEG2_AUDIO       },
 {&MEDIATYPE_MPEG2_PES,          &MEDIASUBTYPE_DVD_LPCM_AUDIO    },
 {&MEDIATYPE_MPEG2_PES,          &MEDIASUBTYPE_DTS               },
-
+// DVD formats
 {&MEDIATYPE_DVD_ENCRYPTED_PACK, &MEDIASUBTYPE_DOLBY_AC3         },
 {&MEDIATYPE_DVD_ENCRYPTED_PACK, &MEDIASUBTYPE_MPEG1AudioPayload },
 {&MEDIATYPE_DVD_ENCRYPTED_PACK, &MEDIASUBTYPE_MPEG2_AUDIO       },
 {&MEDIATYPE_DVD_ENCRYPTED_PACK, &MEDIASUBTYPE_DVD_LPCM_AUDIO    },
 {&MEDIATYPE_DVD_ENCRYPTED_PACK, &MEDIASUBTYPE_DTS               },
-
+// PCM formats
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_PCM               },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_IEEE_FLOAT        },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_DVD_LPCM_AUDIO    },
-
+// Compressed formats
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_AVI_AC3           },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_AVI_DTS           },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_DOLBY_AC3         },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_DTS               },
 //{&MEDIATYPE_Audio,              &MEDIASUBTYPE_MPEG1AudioPayload },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_MPEG2_AUDIO       },
-
+// SPDIF formats
+{&MEDIATYPE_Audio,              &MEDIASUBTYPE_DOLBY_AC3_SPDIF   },
 };
 
 const AMOVIESETUP_MEDIATYPE sudOutPinTypes[] =
 {
-{&MEDIATYPE_Audio, &MEDIASUBTYPE_PCM }
+{&MEDIATYPE_Audio, &MEDIASUBTYPE_PCM             },
+{&MEDIATYPE_Audio, &MEDIASUBTYPE_DOLBY_AC3_SPDIF },
 };
 
 const AMOVIESETUP_PIN psudPins[] =                 

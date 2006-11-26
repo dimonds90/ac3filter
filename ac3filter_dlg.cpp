@@ -732,23 +732,23 @@ AC3FilterDlg::set_dynamic_controls()
     switch (old_spdif_status)
     {
       case SPDIF_MODE_NONE:
-        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF");
         break;
 
       case SPDIF_MODE_DISABLED:
-        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF (disabled)");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF (disabled)");
         break;
 
       case SPDIF_MODE_PASSTHROUGH:
-        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF (passthrough)");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF (passthrough)");
         break;
 
       case SPDIF_MODE_ENCODE:
-        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF (AC3 encode)");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF (AC3 encode)");
         break;
 
       default:
-        SetDlgItemText(m_Dlg, IDC_CHK_SPDIF, "Use SPDIF (Unknown)");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF (Unknown)");
         break;
     }
   }
@@ -835,7 +835,7 @@ AC3FilterDlg::set_controls()
   /////////////////////////////////////
   // SPDIF
 
-  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF, use_spdif? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_USE_SPDIF, use_spdif? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
   // SPDIF passthrough
@@ -1130,9 +1130,9 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // SPDIF if possible
 
-    case IDC_CHK_SPDIF:
+    case IDC_CHK_USE_SPDIF:
     {
-      use_spdif = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF) == BST_CHECKED;
+      use_spdif = IsDlgButtonChecked(m_Dlg, IDC_CHK_USE_SPDIF) == BST_CHECKED;
       dec->set_use_spdif(use_spdif);
       update();
       break;
@@ -1221,6 +1221,7 @@ AC3FilterDlg::command(int control, int message)
     case IDC_CHK_AC3:
     case IDC_CHK_DTS:
     case IDC_CHK_PES:
+    case IDC_CHK_SPDIF:
     {
       formats = FORMAT_CLASS_PCM_BE; // Always allow DVD LPCM
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_PCM) == BST_CHECKED? FORMAT_CLASS_PCM: 0;
@@ -1228,6 +1229,7 @@ AC3FilterDlg::command(int control, int message)
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_AC3) == BST_CHECKED? FORMAT_MASK_AC3: 0;
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
       formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_PES) == BST_CHECKED? FORMAT_MASK_PES: 0;
+      formats |= IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF) == BST_CHECKED? FORMAT_MASK_SPDIF: 0;
       dec->set_formats(formats);
       update();
       break;
