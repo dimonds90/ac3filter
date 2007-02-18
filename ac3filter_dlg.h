@@ -48,10 +48,14 @@ private:
   bool     spdif_allow_44;
   bool     spdif_allow_32;
 
+  bool     use_dts14;
+  int      dts_mode;
+
   int      spdif_status;
 
   int      reinit;
   bool     spdif_no_pcm;
+  bool     use_detector;
 
   // syncronization
   vtime_t  time_shift;

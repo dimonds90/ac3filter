@@ -381,9 +381,19 @@
 #define IDC_CHK_SPDIF_ALLOW_32         20020
 
 #define IDC_CHK_SPDIF_NO_PCM           20021
+#define IDC_CHK_USE_DETECTOR           20022
+
+// SPDIF/DTS output mode
+
+#define IDC_RB_DTS_MODE_AUTO           20023
+#define IDC_RB_DTS_MODE_WRAPPED        20024
+#define IDC_RB_DTS_MODE_RAW            20025
+#define IDC_CHK_USE_DTS14              20026
+
 
 // Other
 
 #define IDC_VER                        20101
 #define IDC_EDT_ENV                    20102
 #define IDC_EDT_CREDITS                20103
+

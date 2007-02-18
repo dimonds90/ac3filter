@@ -159,7 +159,7 @@ BEGIN
     CONTROL         "Slider3",IDC_SLIDER_LFE,"msctls_trackbar32",TBS_VERT | 
                     TBS_BOTH | WS_TABSTOP,137,22,27,56
     EDITTEXT        IDC_EDT_LFE,140,79,23,14,ES_AUTOHSCROLL
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
 END
 
@@ -311,7 +311,7 @@ BEGIN
     CONTROL         "Bass redir:",IDC_CHK_BASS_REDIR,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,90,171,49,10
     EDITTEXT        IDC_EDT_BASS_FREQ,140,169,23,14,ES_AUTOHSCROLL
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
 END
 
@@ -408,7 +408,7 @@ BEGIN
     PUSHBUTTON      "Delete",IDC_BTN_EQ_DELETE,59,172,42,10
     PUSHBUTTON      "Save",IDC_BTN_DELAY_SAVE,16,119,42,10
     PUSHBUTTON      "Delete",IDC_BTN_DELAY_DELETE,59,119,42,10
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
 END
 
@@ -443,7 +443,7 @@ BEGIN
     GROUPBOX        "Build info",IDC_STATIC,203,7,187,64
     EDITTEXT        IDC_EDT_ENV,209,16,176,52,ES_MULTILINE | ES_AUTOHSCROLL | 
                     ES_READONLY | NOT WS_BORDER | WS_VSCROLL
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
     EDITTEXT        IDC_EDT_CREDITS,209,82,176,73,ES_MULTILINE | 
                     ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | 
@@ -551,7 +551,7 @@ BEGIN
     CONTROL         202,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
                     WS_BORDER,141,101,115,84
     CONTROL         19811,IDC_LOGO,"Static",SS_BITMAP,206,143,50,22
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
 END
 
@@ -559,31 +559,7 @@ IDD_SYS DIALOG DISCARDABLE  0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
-    GROUPBOX        "Default audio renderer",IDC_STATIC,200,157,190,30
-    RADIOBUTTON     "Use Direct Sound as default audio renderer",
-                    IDC_RB_RENDER_DS,207,166,152,10
-    RADIOBUTTON     "Use Wave Out as default Audio renderer",
-                    IDC_RB_RENDER_WO,207,176,144,10
-    RADIOBUTTON     "Prefer AC3Filter",IDC_RB_MERIT_PREFERRED,207,134,65,10
-    RADIOBUTTON     "Prefer other decoder",IDC_RB_MERIT_UNLIKELY,207,144,81,
-                    10
-    GROUPBOX        "SPDIF passthrough",IDC_STATIC,103,7,92,69
-    CONTROL         "Slider1",IDC_SLIDER_TIME_SHIFT,"msctls_trackbar32",
-                    TBS_NOTICKS | WS_TABSTOP,15,88,174,12
-    LTEXT           "+0",IDC_STATIC,98,101,8,8
-    LTEXT           "-0.5s",IDC_STATIC,15,101,16,8
-    LTEXT           "+0.5s",IDC_STATIC,171,101,18,8
-    GROUPBOX        "Audio/Video sync",IDC_STATIC,7,78,188,81
-    EDITTEXT        IDC_EDT_TIME_SHIFT,67,109,25,12,ES_AUTOHSCROLL
-    LTEXT           "Time shift (ms):",IDC_STATIC,15,111,49,8
-    CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,14,127,66,8
-    CONTROL         "MPEG Audio",IDC_CHK_SPDIF_MPA,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,111,51,57,10
-    CONTROL         "AC3",IDC_CHK_SPDIF_AC3,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,111,19,29,10
-    CONTROL         "DTS",IDC_CHK_SPDIF_DTS,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,111,35,31,10
+    GROUPBOX        "Use AC3Filter for ..",IDC_STATIC,7,7,72,69
     CONTROL         "PCM",IDC_CHK_PCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     15,16,31,10
     CONTROL         "AC3",IDC_CHK_AC3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
@@ -592,47 +568,77 @@ BEGIN
                     15,35,31,10
     CONTROL         "MPEG Audio",IDC_CHK_MPA,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,44,57,10
-    GROUPBOX        "Use AC3Filter for ..",IDC_STATIC,7,7,92,69
-    CONTROL         "PES (DVD)",IDC_CHK_PES,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,15,54,51,10
-    LTEXT           "Current jitter:",IDC_STATIC,79,127,40,8
-    GROUPBOX        "AGC",IDC_STATIC,7,161,188,26
-    EDITTEXT        IDC_EDT_ATTACK,111,170,38,12,ES_AUTOHSCROLL
-    LTEXT           "Attack/release speed (dB/s):",IDC_STATIC,15,172,94,8
-    EDITTEXT        IDC_EDT_RELEASE,151,170,38,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_JITTER,25,136,164,19,ES_MULTILINE | ES_READONLY | 
-                    NOT WS_BORDER
-    CONTROL         "Do not encode stereo PCM",IDC_CHK_SPDIF_STEREO_PT,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,28,102,10
-    CONTROL         "Output SPDIF as PCM",IDC_CHK_SPDIF_AS_PCM,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,38,87,10
-    CONTROL         "Force sound card to reinit after seek / pause",
-                    IDC_CHK_REINIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,
-                    111,156,10
-    CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,101,175,10
-    GROUPBOX        "SPDIF options",IDC_STATIC,200,7,190,73
-    CONTROL         "Restrict SPDIF sample rate",IDC_CHK_SPDIF_CHECK_SR,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,48,101,10
-    CONTROL         "48kHz",IDC_CHK_SPDIF_ALLOW_48,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,247,58,37,10
-    CONTROL         "44kHz",IDC_CHK_SPDIF_ALLOW_44,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,294,58,37,10
-    CONTROL         "32kHz",IDC_CHK_SPDIF_ALLOW_32,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,341,58,37,10
-    LTEXT           "Allow:",IDC_STATIC,221,58,20,8
-    CONTROL         "Use AC3 encoder",IDC_CHK_SPDIF_ENCODE,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,18,72,10
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2006 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
-    CONTROL         "Show tray icon",IDC_CHK_TRAY,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,207,91,175,10
-    GROUPBOX        "Filter merit",IDC_STATIC,200,125,190,30
-    GROUPBOX        "Other options",IDC_STATIC,200,82,190,41
-    CONTROL         "Disallow PCM output in SPDIF mode",IDC_CHK_SPDIF_NO_PCM,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,68,131,10
+    CONTROL         "DVD",IDC_CHK_PES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    15,54,31,10
     CONTROL         "SPDIF",IDC_CHK_SPDIF,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,64,37,10
+    GROUPBOX        "Filter merit",IDC_STATIC,84,7,111,34
+    RADIOBUTTON     "Prefer AC3Filter",IDC_RB_MERIT_PREFERRED,88,18,65,10
+    RADIOBUTTON     "Prefer other decoder",IDC_RB_MERIT_UNLIKELY,88,28,81,10
+    GROUPBOX        "Default audio renderer",IDC_STATIC,84,42,111,34
+    RADIOBUTTON     "Use Direct Sound by default",IDC_RB_RENDER_DS,88,52,105,
+                    10
+    RADIOBUTTON     "Use Wave Out by default",IDC_RB_RENDER_WO,88,63,96,10
+    GROUPBOX        "Other options",IDC_STATIC,200,144,190,43
+    GROUPBOX        "Audio/Video sync",IDC_STATIC,7,78,188,81
+    CONTROL         "Slider1",IDC_SLIDER_TIME_SHIFT,"msctls_trackbar32",
+                    TBS_NOTICKS | WS_TABSTOP,15,88,174,12
+    LTEXT           "-0.5s",IDC_STATIC,15,101,16,8
+    LTEXT           "+0",IDC_STATIC,98,101,8,8
+    LTEXT           "+0.5s",IDC_STATIC,171,101,18,8
+    LTEXT           "Time shift (ms):",IDC_STATIC,15,111,49,8
+    EDITTEXT        IDC_EDT_TIME_SHIFT,67,109,25,12,ES_AUTOHSCROLL
+    CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,127,66,8
+    LTEXT           "Current jitter:",IDC_STATIC,79,127,40,8
+    EDITTEXT        IDC_EDT_JITTER,25,136,164,19,ES_MULTILINE | ES_READONLY | 
+                    NOT WS_BORDER
+    GROUPBOX        "AGC",IDC_STATIC,7,161,188,26
+    LTEXT           "Attack/release speed (dB/s):",IDC_STATIC,15,172,94,8
+    EDITTEXT        IDC_EDT_ATTACK,111,170,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_RELEASE,151,170,38,12,ES_AUTOHSCROLL
+    GROUPBOX        "SPDIF passthrough",IDC_STATIC,200,7,93,51
+    CONTROL         "AC3",IDC_CHK_SPDIF_AC3,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,207,18,29,10
+    CONTROL         "DTS",IDC_CHK_SPDIF_DTS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,207,31,31,10
+    CONTROL         "MPEG Audio",IDC_CHK_SPDIF_MPA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,207,43,57,10
+    GROUPBOX        "SPDIF/DTS output",IDC_STATIC,297,7,93,51
+    GROUPBOX        "SPDIF options",IDC_STATIC,200,59,190,84
+    CONTROL         "Detect SPDIF stream in PCM data",IDC_CHK_USE_DETECTOR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,69,123,10
+    CONTROL         "Use AC3 encoder",IDC_CHK_SPDIF_ENCODE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,79,72,10
+    CONTROL         "Do not encode stereo PCM",IDC_CHK_SPDIF_STEREO_PT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,89,102,10
+    CONTROL         "Output SPDIF as PCM",IDC_CHK_SPDIF_AS_PCM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,99,87,10
+    CONTROL         "Restrict SPDIF sample rate",IDC_CHK_SPDIF_CHECK_SR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,109,101,10
+    LTEXT           "Allow:",IDC_STATIC,221,120,20,8
+    CONTROL         "48kHz",IDC_CHK_SPDIF_ALLOW_48,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,247,120,37,10
+    CONTROL         "44kHz",IDC_CHK_SPDIF_ALLOW_44,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,294,120,37,10
+    CONTROL         "32kHz",IDC_CHK_SPDIF_ALLOW_32,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,341,120,37,10
+    CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,165,175,10
+    CONTROL         "Force sound card to reinit after seek / pause",
+                    IDC_CHK_REINIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,
+                    175,156,10
+    CONTROL         "Show tray icon",IDC_CHK_TRAY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,207,155,175,10
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
+    CONTROL         "Disallow PCM output in SPDIF mode",IDC_CHK_SPDIF_NO_PCM,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,130,131,10
+    RADIOBUTTON     "Auto",IDC_RB_DTS_MODE_AUTO,301,16,31,10
+    RADIOBUTTON     "SPDIF wrapped",IDC_RB_DTS_MODE_WRAPPED,301,25,66,10
+    RADIOBUTTON     "Raw DTS",IDC_RB_DTS_MODE_RAW,301,35,47,10
+    CONTROL         "Convert to 14bit",IDC_CHK_USE_DTS14,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,302,46,66,10
 END
 
 IDD_FILE DIALOG DISCARDABLE  0, 0, 178, 81

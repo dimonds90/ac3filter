@@ -40,10 +40,16 @@ void cr2crlf(char *buf, int size);
 #define AC3FILTER_ALL    0x7f // all settings
 #define AC3FILTER_PRESET 0x1f // settings that saved into preset (all except system settings and sync)
 
-#define SPDIF_MODE_NONE                0  // see dvd_graph.h
-#define SPDIF_MODE_DISABLED            1  // see dvd_graph.h
-#define SPDIF_MODE_PASSTHROUGH         2  // see dvd_graph.h
-#define SPDIF_MODE_ENCODE              3  // see dvd_graph.h
+// Constants from dvd_graph.h
+#define SPDIF_MODE_NONE                0
+#define SPDIF_MODE_DISABLED            1
+#define SPDIF_MODE_PASSTHROUGH         2
+#define SPDIF_MODE_ENCODE              3
+
+// Constants from spdif_wrapper.h
+#define SPDIF_DTS_AUTO    0
+#define SPDIF_DTS_WRAPPED 1
+#define SPDIF_DTS_RAW     2
 
 ///////////////////////////////////////////////////////////////////////////////
 // Media types
@@ -159,6 +165,10 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
   STDMETHOD (get_query_sink) (bool *query_sink) = 0;
   STDMETHOD (set_query_sink) (bool  query_sink) = 0;
 
+  // Use detector
+  STDMETHOD (get_use_detector) (bool *use_detector) = 0;
+  STDMETHOD (set_use_detector) (bool  use_detector) = 0;
+
   // Use SPDIF if possible
   STDMETHOD (get_use_spdif) (bool *use_spdif) = 0;
   STDMETHOD (set_use_spdif) (bool  use_spdif) = 0;
@@ -188,6 +198,14 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
   STDMETHOD (set_spdif_allow_44)(bool  spdif_allow_44) = 0;
   STDMETHOD (get_spdif_allow_32)(bool *spdif_allow_32) = 0;
   STDMETHOD (set_spdif_allow_32)(bool  spdif_allow_32) = 0;
+
+  // Convert DTS to 14bit for SPDIF output
+  STDMETHOD (get_use_dts14) (bool *use_dts14) = 0;
+  STDMETHOD (set_use_dts14) (bool  use_dts14) = 0;
+
+  // SPDIF/DTS output mode
+  STDMETHOD (get_dts_mode) (int *dts_mode) = 0;
+  STDMETHOD (set_dts_mode) (int  dts_mode) = 0;
 
   // SPDIF status
   STDMETHOD (get_spdif_status)(int *spdif_status) = 0;

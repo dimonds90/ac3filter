@@ -1,3 +1,10 @@
+<b>1.20b</b> -
+  * Correct work with 14bit DTS
+  + SPDIF input support
+  + Autodetection of SPDIF stream in PCM16 data
+  + Raw SPDIF/DTS passthrough mode support
+  + DTS conversion to 14bit to decrease the level of possible noise
+
 <b>1.11</b> - 28.10.06
   Stable version.
 

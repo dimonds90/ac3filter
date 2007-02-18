@@ -116,6 +116,18 @@ STDMETHODIMP COMDecoder::set_query_sink(bool  _query_sink)
   return S_OK;
 }
 
+// Use detector
+STDMETHODIMP COMDecoder::get_use_detector(bool *_use_detector)
+{
+  if (_use_detector) *_use_detector = dvd.get_use_detector();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_use_detector(bool  _use_detector)
+{
+  dvd.set_use_detector(_use_detector);
+  return S_OK;
+}
+
 // Use SPDIF if possible
 STDMETHODIMP COMDecoder::get_use_spdif(bool *_use_spdif)
 {
@@ -215,6 +227,30 @@ STDMETHODIMP COMDecoder::get_spdif_allow_32(bool *_spdif_allow_32)
 STDMETHODIMP COMDecoder::set_spdif_allow_32(bool  _spdif_allow_32)
 {
   dvd.set_spdif_allow_32(_spdif_allow_32);
+  return S_OK;
+}
+
+// Convert DTS to 14bit for SPDIF output
+STDMETHODIMP COMDecoder::get_use_dts14(bool *_use_dts14)
+{
+  if (_use_dts14) *_use_dts14 = dvd.get_use_dts14();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_use_dts14(bool  _use_dts14)
+{
+  dvd.set_use_dts14(_use_dts14);
+  return S_OK;
+}
+
+// SPDIF/DTS output mode
+STDMETHODIMP COMDecoder::get_dts_mode(int *_dts_mode)
+{
+  if (_dts_mode) *_dts_mode = dvd.get_dts_mode();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_dts_mode(int  _dts_mode)
+{
+  dvd.set_dts_mode(_dts_mode);
   return S_OK;
 }
 
@@ -871,6 +907,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
   if (_what & AC3FILTER_SYS)
   {
     bool query_sink = dvd.get_query_sink();
+    bool use_detector = dvd.get_use_detector();
 
     int  spdif_pt = dvd.get_spdif_pt();
     bool spdif_as_pcm = dvd.get_spdif_as_pcm();
@@ -882,8 +919,12 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     bool spdif_allow_44 = dvd.get_spdif_allow_44();
     bool spdif_allow_32 = dvd.get_spdif_allow_32();
 
+    bool use_dts14 = dvd.get_use_dts14();
+    int  dts_mode = dvd.get_dts_mode();
+
     _conf->get_int32("formats"          ,formats         );
     _conf->get_bool ("query_sink"       ,query_sink      );
+    _conf->get_bool ("use_detector"     ,use_detector    );
 
     _conf->get_int32("spdif_pt"         ,spdif_pt        );
     _conf->get_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
@@ -895,7 +936,11 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     _conf->get_bool ("spdif_allow_44"   ,spdif_allow_44  );
     _conf->get_bool ("spdif_allow_32"   ,spdif_allow_32  );
 
+    _conf->get_bool ("use_dts14"        ,use_dts14       );
+    _conf->get_int32("dts_mode"         ,dts_mode        );
+
     dvd.set_query_sink(query_sink);
+    dvd.set_use_detector(use_detector);
 
     dvd.set_spdif_pt(spdif_pt);
     dvd.set_spdif_stereo_pt(spdif_stereo_pt);
@@ -907,10 +952,8 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     dvd.set_spdif_allow_44(spdif_allow_44);
     dvd.set_spdif_allow_32(spdif_allow_32);
 
-    dvd.set_spdif_check_sr(spdif_check_sr);
-    dvd.set_spdif_allow_48(spdif_allow_48);
-    dvd.set_spdif_allow_44(spdif_allow_44);
-    dvd.set_spdif_allow_32(spdif_allow_32);                      
+    dvd.set_use_dts14(use_dts14);
+    dvd.set_dts_mode(dts_mode);
   }
 
 
@@ -1059,6 +1102,7 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
   if (_what & AC3FILTER_SYS)
   {
     bool query_sink = dvd.get_query_sink();
+    bool use_detector = dvd.get_use_detector();
 
     int  spdif_pt = dvd.get_spdif_pt();
     bool spdif_as_pcm = dvd.get_spdif_as_pcm();
@@ -1070,8 +1114,12 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     bool spdif_allow_44 = dvd.get_spdif_allow_44();
     bool spdif_allow_32 = dvd.get_spdif_allow_32();
 
+    bool use_dts14 = dvd.get_use_dts14();
+    int  dts_mode = dvd.get_dts_mode();
+
     _conf->set_int32("formats"          ,formats         );
     _conf->set_bool ("query_sink"       ,query_sink      );
+    _conf->set_bool ("use_detector"     ,use_detector    );
 
     _conf->set_int32("spdif_pt"         ,spdif_pt        );
     _conf->set_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
@@ -1082,6 +1130,10 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     _conf->set_bool ("spdif_allow_48"   ,spdif_allow_48  );
     _conf->set_bool ("spdif_allow_44"   ,spdif_allow_44  );
     _conf->set_bool ("spdif_allow_32"   ,spdif_allow_32  );
+
+    _conf->set_bool ("use_dts14"        ,use_dts14       );
+    _conf->set_int32("dts_mode"         ,dts_mode        );
+
   }
 
   return S_OK;

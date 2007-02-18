@@ -529,10 +529,14 @@ AC3FilterDlg::reload_state()
   dec->get_spdif_allow_44(&spdif_allow_44);
   dec->get_spdif_allow_32(&spdif_allow_32);
 
+  dec->get_use_dts14(&use_dts14);
+  dec->get_dts_mode(&dts_mode);
+
   dec->get_spdif_status(&spdif_status);
 
   filter->get_reinit(&reinit);
   filter->get_spdif_no_pcm(&spdif_no_pcm);
+  dec->get_use_detector(&use_detector);
 
   // syncronization
   dec->get_time_shift(&time_shift);
@@ -845,6 +849,14 @@ AC3FilterDlg::set_controls()
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_DTS, (spdif_pt & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
+  // SPDIF/DTS output mode
+
+  CheckDlgButton(m_Dlg, IDC_CHK_USE_DTS14, use_dts14? BST_CHECKED: BST_UNCHECKED);
+  SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_AUTO,    BM_SETCHECK, dts_mode == SPDIF_DTS_AUTO? BST_CHECKED: BST_UNCHECKED, 1);
+  SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_WRAPPED, BM_SETCHECK, dts_mode == SPDIF_DTS_WRAPPED? BST_CHECKED: BST_UNCHECKED, 1);
+  SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_RAW,     BM_SETCHECK, dts_mode == SPDIF_DTS_RAW? BST_CHECKED: BST_UNCHECKED, 1);
+
+  /////////////////////////////////////
   // SPDIF options
 
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_AS_PCM, spdif_as_pcm? BST_CHECKED: BST_UNCHECKED);
@@ -861,6 +873,7 @@ AC3FilterDlg::set_controls()
   EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_SPDIF_ALLOW_44), spdif_check_sr);
   EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_SPDIF_ALLOW_32), spdif_check_sr);
 
+  CheckDlgButton(m_Dlg, IDC_CHK_USE_DETECTOR, use_detector? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_NO_PCM, spdif_no_pcm? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
@@ -871,6 +884,7 @@ AC3FilterDlg::set_controls()
   CheckDlgButton(m_Dlg, IDC_CHK_AC3, (formats & FORMAT_MASK_AC3) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_DTS, (formats & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_PES, (formats & FORMAT_MASK_PES) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF, (formats & FORMAT_MASK_SPDIF) != 0? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
   // Query sink and tray icon
@@ -1157,6 +1171,14 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // SPDIF options
 
+    case IDC_CHK_USE_DETECTOR:
+    {
+      use_detector = IsDlgButtonChecked(m_Dlg, IDC_CHK_USE_DETECTOR) == BST_CHECKED;
+      dec->set_use_detector(use_detector);
+      update();
+      break;
+    }
+
     case IDC_CHK_SPDIF_AS_PCM:
     {
       spdif_as_pcm = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_AS_PCM) == BST_CHECKED;
@@ -1264,6 +1286,41 @@ AC3FilterDlg::command(int control, int message)
     {
       spdif_no_pcm = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_NO_PCM) == BST_CHECKED;
       filter->set_spdif_no_pcm(spdif_no_pcm);
+      update();
+      break;
+    }
+
+    /////////////////////////////////////
+    // SPDIF/DTS output mode
+
+    case IDC_CHK_USE_DTS14:
+    {
+      use_dts14 = IsDlgButtonChecked(m_Dlg, IDC_CHK_USE_DTS14) == BST_CHECKED;
+      dec->set_use_dts14(use_dts14);
+      update();
+      break;
+    }
+
+    case IDC_RB_DTS_MODE_AUTO:
+    {
+      dts_mode = SPDIF_DTS_AUTO;
+      dec->set_dts_mode(dts_mode);
+      update();
+      break;
+    }
+
+    case IDC_RB_DTS_MODE_WRAPPED:
+    {
+      dts_mode = SPDIF_DTS_WRAPPED;
+      dec->set_dts_mode(dts_mode);
+      update();
+      break;
+    }
+
+    case IDC_RB_DTS_MODE_RAW:
+    {
+      dts_mode = SPDIF_DTS_RAW;
+      dec->set_dts_mode(dts_mode);
       update();
       break;
     }
