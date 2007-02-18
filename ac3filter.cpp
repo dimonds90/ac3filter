@@ -449,7 +449,7 @@ AC3Filter::Run(REFERENCE_TIME tStart)
     memset(buf, 0, reinit * 4);
 
     Chunk chunk;
-    chunk.set_rawdata(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate), buf, sizeof(buf));
+    chunk.set_rawdata(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate, 32767), buf, sizeof(buf));
 
     sink->process(&chunk);
 
