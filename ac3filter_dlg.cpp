@@ -854,7 +854,7 @@ AC3FilterDlg::set_controls()
   CheckDlgButton(m_Dlg, IDC_CHK_USE_DTS14, use_dts14? BST_CHECKED: BST_UNCHECKED);
   SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_AUTO,    BM_SETCHECK, dts_mode == SPDIF_DTS_AUTO? BST_CHECKED: BST_UNCHECKED, 1);
   SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_WRAPPED, BM_SETCHECK, dts_mode == SPDIF_DTS_WRAPPED? BST_CHECKED: BST_UNCHECKED, 1);
-  SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_RAW,     BM_SETCHECK, dts_mode == SPDIF_DTS_RAW? BST_CHECKED: BST_UNCHECKED, 1);
+  SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_PADDED,  BM_SETCHECK, dts_mode == SPDIF_DTS_PADDED? BST_CHECKED: BST_UNCHECKED, 1);
 
   /////////////////////////////////////
   // SPDIF options
@@ -1317,9 +1317,9 @@ AC3FilterDlg::command(int control, int message)
       break;
     }
 
-    case IDC_RB_DTS_MODE_RAW:
+    case IDC_RB_DTS_MODE_PADDED:
     {
-      dts_mode = SPDIF_DTS_RAW;
+      dts_mode = SPDIF_DTS_PADDED;
       dec->set_dts_mode(dts_mode);
       update();
       break;

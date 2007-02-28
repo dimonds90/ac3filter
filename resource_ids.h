@@ -387,7 +387,7 @@
 
 #define IDC_RB_DTS_MODE_AUTO           20023
 #define IDC_RB_DTS_MODE_WRAPPED        20024
-#define IDC_RB_DTS_MODE_RAW            20025
+#define IDC_RB_DTS_MODE_PADDED         20025
 #define IDC_CHK_USE_DTS14              20026
 
 

@@ -49,7 +49,7 @@ void cr2crlf(char *buf, int size);
 // Constants from spdif_wrapper.h
 #define SPDIF_DTS_AUTO    0
 #define SPDIF_DTS_WRAPPED 1
-#define SPDIF_DTS_RAW     2
+#define SPDIF_DTS_PADDED  2
 
 ///////////////////////////////////////////////////////////////////////////////
 // Media types
