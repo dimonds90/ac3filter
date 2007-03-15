@@ -1,0 +1,20 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+
+\usepackage{ifpdf}           % ifpdf macro
+\usepackage{url}
+\usepackage[usenames]{color} % allows to change text color
+\usepackage{tabularx}        % extended tables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graphics
+
+\ifpdf
+  \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex,unicode]{hyperref}
+  \DeclareGraphicsExtensions{.pdf,.jpg,.png}
+\else
+  \usepackage{graphicx}
+  \usepackage{hyperref}
+  \DeclareGraphicsExtensions{.pdf,.jpg,.png}
+\fi
