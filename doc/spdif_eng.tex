@@ -28,7 +28,6 @@ SPDIF (Sony/Philips Digital Interconnect Format) is a digital audio interface. S
 
 Therefore, when multi-channel sound era came to home theaters, SPDIF was an ideal candidate for digital interface to transmit multi-channel sound. However, it is a problem: current interface implementations work only with stereo sound, but now it is required to transmit up to 6 channels (or 8 channels at present). It was decided not to change the interface but to transmit compressed multi-channel sound \emph{instead} of PCM data (for digital interface it does not matter what to transmit). So receiver must recognize compressed data and decode it. For this purpose a new standard was introduced (IEC 61937) that describes how compressed data must be transmitted and how receivers can distinguish PCM and compressed data.
 
-
 Because compressed data is transmitted in place of PCM data, the bitrate of the compressed stream must be exactly the same as uncompressed stereo 16-bit PCM bitrate. Usually, compressed stream (even multi-channel) has a lower bitrate. Because of this compressed stream must be padded with zeros to match PCM bitrate.
 
 Required bitrate depends on the sample rate:

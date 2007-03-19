@@ -2,9 +2,9 @@
 % Packages
 
 \usepackage{ifpdf}           % ifpdf macro
-\usepackage{url}
 \usepackage[usenames]{color} % allows to change text color
 \usepackage{tabularx}        % extended tables
+\usepackage{indentfirst}     % ident first paragraph
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Graphics
@@ -16,5 +16,11 @@
 \else
   \usepackage{graphicx}
   \usepackage{hyperref}
+
+  % section name reference \nameref
+  % required to include for HTML output
+  % must be included AFTER hyperref package
+  \usepackage{nameref}
+
   \DeclareGraphicsExtensions{.pdf,.jpg,.png}
 \fi
