@@ -16,7 +16,7 @@ goto end
 :build_all
 echo Building all files
 call _clear_output.bat
-for %%f in (*.tex) do call _build %%f 
+for %%f in (*.tex) do call _build_html %%f 
 call _clear.bat
 goto end
 
