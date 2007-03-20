@@ -41,23 +41,6 @@ my $make_src = "pkzip25 -add -rec -dir -excl=CVS -excl=pic_psd -lev=9 $src ac3fi
 ###########################################################
 # Some funcitons
 
-sub read_file
-{
-  my ($filename) = (@_);
-  open (FILE, "< $filename") || die "cannot open file $filename";
-  my @result = <FILE>;
-  close (FILE);
-  return @result;
-}
-
-sub write_file
-{
-  my $filename = shift;
-  open (FILE, "> $filename") || die "cannot open file $filename";
-  print FILE @_;
-  close (FILE);
-}
-
 sub set_ver
 {
   my $ver = shift;
@@ -127,26 +110,16 @@ printf "Building package...\n";
 ##
 
 print "Prepairing documentaion files...\n";
+chdir("doc");
+system("_build_pdf.bat all");
+chdir("..");
 
-my $changelog;
+`mkdir $package\\doc`;
+`copy doc\\*.pdf $package\\doc`;
 
-$changelog = join("<br>", read_file("_changes_eng.txt"));
-$changelog =~ s/\s(?=(\s))/\&nbsp\;/g;
-write_file("$package\\ac3filter_eng.html", grep { s/(\$\w+)/$1/gee + 1 } read_file("doc\\ac3filter_eng.html"));
-
-$changelog = join("<br>", read_file("_changes_eng.txt"));
-$changelog =~ s/\s(?=(\s))/\&nbsp\;/g;
-write_file("$package\\ac3filter_ita.html", grep { s/(\$\w+)/$1/gee + 1 } read_file("doc\\ac3filter_ita.html"));
-
-$changelog = join("<br>", read_file("_changes_rus.txt"));
-$changelog =~ s/\s(?=(\s))/\&nbsp\;/g;
-write_file("$package\\ac3filter_rus.html", grep { s/(\$\w+)/$1/gee + 1 } read_file("doc\\ac3filter_rus.html"));
-
-`mkdir $package\\pic`;
-`mkdir $package\\pic\\players`;
-`copy doc\\ac3filter.release.css $package\\ac3filter.css`;
-`copy doc\\pic $package\\pic`;
-`copy doc\\pic\\players $package\\pic\\players`;
+chdir("doc");
+`_clear_output.bat`;
+chdir("..");
 
 
 ###############################################################################
