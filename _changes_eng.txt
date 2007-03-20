@@ -1,8 +1,8 @@
-<b>1.20b</b> -
-  * Correct work with 14bit DTS
+<b>1.20b</b> - 20.03.07
+  * Fixed bug with some 14bit DTS streams
   + SPDIF input support
   + Autodetection of SPDIF stream in PCM16 data
-  + Raw SPDIF/DTS passthrough mode support
+  + New SPDIF/DTS passthrough mode
   + DTS conversion to 14bit to decrease the level of possible noise
 
 <b>1.11</b> - 28.10.06

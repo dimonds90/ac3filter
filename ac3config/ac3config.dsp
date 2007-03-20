@@ -89,7 +89,15 @@ LINK32=link.exe
 # Name "ac3config - Win32 Debug"
 # Begin Source File
 
+SOURCE=.\ac3config.rc
+# End Source File
+# Begin Source File
+
 SOURCE=..\guids.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\icon1.ico
 # End Source File
 # Begin Source File
 
