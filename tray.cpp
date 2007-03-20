@@ -187,7 +187,8 @@ AC3FilterTray::create_menu() const
     int npresets = CMD_LAST_PRESET - CMD_FIRST_PRESET;
     while (i < npresets && RegEnumKeyEx(key, i++, (LPTSTR)buf, &len, 0, 0, 0, 0) == ERROR_SUCCESS)
     {
-      AppendMenu(menu, MF_BYPOSITION | MF_STRING, CMD_FIRST_PRESET + i, (LPCTSTR)buf);
+      if (strcmp(buf, "Default"))
+        AppendMenu(menu, MF_BYPOSITION | MF_STRING, CMD_FIRST_PRESET + i, (LPCTSTR)buf);
       len = sizeof(buf);
     }
     RegCloseKey(key);

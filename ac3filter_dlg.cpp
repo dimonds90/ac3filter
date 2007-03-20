@@ -1017,7 +1017,8 @@ AC3FilterDlg::set_controls()
       DWORD len = 256;                                                                    \
       while (RegEnumKeyEx(key, i++, (LPTSTR)buf, &len, 0, 0, 0, 0) == ERROR_SUCCESS)      \
       {                                                                                   \
-        SendDlgItemMessage(m_Dlg, control, CB_ADDSTRING, 0, (LONG)buf);                   \
+        if (strcmp(buf, "Default"))                                                       \
+          SendDlgItemMessage(m_Dlg, control, CB_ADDSTRING, 0, (LONG)buf);                 \
         len = 256;                                                                        \
       }                                                                                   \
       RegCloseKey(key);                                                                   \
