@@ -129,6 +129,7 @@ DoubleEdit::read_value()
     return true;
   }
 
+  errno = 0;
   double new_value = strtod(buf, &stop);
   if (*stop || errno == ERANGE) 
     return false;

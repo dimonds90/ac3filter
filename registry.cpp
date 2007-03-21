@@ -146,6 +146,7 @@ RegistryKey::get_float(LPCTSTR name, double &value)
   if (type != REG_SZ)
     return false;
 
+  errno = 0;
   double v = strtod(buf, &stopstr);
   if (buf == stopstr || errno == ERANGE)
     return false;
@@ -263,6 +264,8 @@ FileConfig::get_int32(LPCTSTR name, int32_t &value)
   char *stopstr;
 
   if (!GetPrivateProfileString(section, name, "default", buf, 128, filename)) return false;
+
+  errno = 0;  
   int32_t v = strtol(buf, &stopstr, 10);
   if (buf == stopstr || errno == ERANGE)
     return false;
@@ -279,6 +282,8 @@ FileConfig::get_double(LPCTSTR name, double &value)
   char *stopstr;
 
   if (!GetPrivateProfileString(section, name, "default", buf, 128, filename)) return false;
+
+  errno = 0;
   double v = strtod(buf, &stopstr);
   if (buf == stopstr || errno == ERANGE)
     return false;
