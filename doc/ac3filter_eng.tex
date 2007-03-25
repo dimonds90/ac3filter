@@ -143,7 +143,7 @@ Set speakers mode in \action{Control Panel - Sounds and Multimedia - Audio - Sou
 
 For Creative audio card it is necessary to switch off all sound effects and equalizers, otherwise there can be a loss of central/rear channels.
 
-Audio card can operate in two modes: DirectSound and WaveOut. In some cases, the multi-channel mode can operate only in one of those modes and cannot operate in another one. If that is the case, output device should be changed in player settings. To get information whether the player supports the device changing function, refer to the compatibility table in 5. Player setup section (Renderer column). If the player has no such function, it is possible to change the default system output device (refer to \myref{ss:system-page}). However, this option changes the global system settings; therefore, it is recommended to use it only if the player does not support the mentioned function.
+Audio card can operate in two modes: DirectSound and WaveOut. In some cases, the multi-channel mode can operate only in one of those modes and cannot operate in another one. If that is the case, output device should be changed in player settings. To get information whether the player supports the device changing function, refer to \myref{ss:player-setup-compatibility}. If the player has no such function, it is possible to change the default system output device (refer to \myref{ss:system-page}). However, this option changes the global system settings; therefore, it is recommended to use it only if the player does not support the mentioned function.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Setup for digital (SPDIF) output mode
@@ -161,7 +161,7 @@ Digital connection supports different formats of data transfer (PCM, AC3, DTS, M
 
 Some drivers have an ability of AC3 decoding. If such option is available it should be disabled (refer to audio card manual).
 
-Audio card can operate in two modes: DirectSound and WaveOut. In some cases, the SPDIF mode can operate only in one of those modes and cannot operate in another one. If that is the case, output device should be changed in player settings. To get information whether the player supports the device changing function, refer to the table of compatibility in \myref{sec:player-setup} (Renderer column). If the player has no such function, it is possible to change the default system output device (refer to \myref{ss:system-page}). However, this option changes the global system settings; therefore, it is recommended to use it only if the player does not support the mentioned function.
+Audio card can operate in two modes: DirectSound and WaveOut. In some cases, the SPDIF mode can operate only in one of those modes and cannot operate in another one. If that is the case, output device should be changed in player settings. To get information whether the player supports the device changing function, refer to \myref{ss:player-setup-compatibility}. If the player has no such function, it is possible to change the default system output device (refer to \myref{ss:system-page}). However, this option changes the global system settings; therefore, it is recommended to use it only if the player does not support the mentioned function.
 
 Most of audio cards can operate in digital transfer mode only with 48000 Hz sample rate. Therefore, in all other cases the digital transfer is impossible at all. Current digital output mode can be checked during playback on the Main page of filter settings (refer to \myref{ss:main-page})
 
@@ -199,10 +199,51 @@ This section briefly describes the most known players and possibility of their o
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Compatibility table
 
-\subsection{Compatibility table}
+\subsection{Players compatibility table}
 \label{ss:player-setup-compatibility}
 
-\warning{!!!TODO!!!}
+\begin{tabular}{|l|c|c|c|c|c|c|c|l|}
+  \hline
+    \bf Player &
+    \bf License & \bf AVI & \bf DVD & \bf F & \bf O & \bf D & \bf A & \bf Setup \\
+  \hline
+    \href{http://sourceforge.net/projects/guliverkli}{Media Player Classics} &
+    GPL       & + & + & + & + & + & + & sec. \ref{ss:player-setup-mpc} \\
+  \hline
+    \href{http://download.microsoft.com}{Windows Media Player 6.4} &
+    Freeware  & + & - & + & - & - & + & sec. \ref{ss:player-setup-wmp64} \\
+  \hline
+    \href{http://download.microsoft.com}{Windows Media Player 7+} &
+    Freeware  & + & + & - & - & - & + & sec. \ref{ss:player-setup-wmp} \\
+  \hline
+    \href{http://www.bsplayer.org/}{BSPlayer} &
+    Freeware  & + & - & + & + & + & + & sec. \ref{ss:player-setup-bsp} \\
+  \hline
+    \href{http://www.inmatrix.com/}{ZoomPlayer} &
+    Freeware  & + & - & + & + & + & + & sec. \ref{ss:player-setup-zp} \\
+  \hline
+    \href{http://www.inmatrix.com/}{ZoomPlayer Pro} &
+    Shareware & + & + & + & + & + & + & sec. \ref{ss:player-setup-zp} \\
+  \hline
+    \href{http://www.softella.com/index.en.htm}{LightAlloy} &
+    Freeware  & + & + & + & + & - & + & sec. \ref{ss:player-setup-la} \\
+  \hline
+    \href{http://www.gocyberlink.com}{PowerDVD} &
+    Shareware & + & + & - & - & - & AVI & sec. \ref{ss:player-setup-xdvd} \\
+  \hline
+    \href{http://www.intervideo.com}{WinDVD} &
+    Shareware  & + & + & - & - & - & AVI & sec. \ref{ss:player-setup-xdvd} \\
+  \hline
+\end{tabular}
+
+\begin{footnotesize}\bigskip\noindent
+AVI - ability to play AVI files\\
+DVD - ability to play DVD files\\
+F - player supports filter configuring feature\\
+O - player supports output device changing feature\\
+D - player supports decoder changing feature\\
+A - player has an ability to use AC3Filter\\
+\end{footnotesize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Media Player Classics
@@ -325,7 +366,7 @@ There are two principal rules of configuring:
 
 You should enter the filter property window to configure the filter. There are two ways to do that:
 \begin{itemize}
-\item Directly during playing. Here you can monitor the filter activity and change settings directly during playing. Player must be able to configure the filters. Refer to the table of compatibility in \myref{sec:player-setup} section to know whether the player supports this function or not. The mentioned section also describes actions required to call the settings window. When changing settings, changes take effect immediately (or rather with a little delay of 0.5..2 s depending on player buffer size).
+\item Directly during playing. Here you can monitor the filter activity and change settings directly during playing. Player must be able to configure the filters. Refer to \myref{sec:player-setup} to know whether the player supports this function or not. The mentioned section also describes actions required to call the settings window. When changing settings, changes take effect immediately (or rather with a little delay of 0.5..2 s depending on player buffer size).
 \item If the player has no ability to configure the filter you can adjust settings by configuration utility (from the Start menu):
 
 \img{pic_ac3filter/config.png}
