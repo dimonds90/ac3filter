@@ -3,10 +3,12 @@
 #include "decss\DeCSSInputPin.h"
 
 // uncomment this to log timing information into DirectShow log
-#define LOG_TIMING
+//#define LOG_TIMING
 
 // uncomment this to register graph at running objects table
+//#ifdef _DEBUG
 //#define REGISTER_FILTERGRAPH
+//#endif
 
 #define MAX_NSAMPLES 2048
 #define MAX_BUFFER_SIZE (MAX_NSAMPLES * NCHANNELS * 4)
@@ -309,6 +311,12 @@ AC3Filter::StartStreaming()
   // Reset before starting a new stream
   CAutoLock lock(&m_csReceive);
   reset();
+
+  // It's right time to show the tray icon
+  // Applicaqtion may construct several graphs,
+  // but we're interested only in working graphs...
+  if (tray)
+    tray_ctl.show();
 
   return CTransformFilter::StartStreaming();
 }
@@ -724,8 +732,11 @@ AC3Filter::CompleteConnect(PIN_DIRECTION direction, IPin *pin)
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CompleteConnect(%s)", this, direction == PINDIR_INPUT? "input": "output"));
 
-  if (tray && (m_pInput->IsConnected() == TRUE) && (m_pOutput->IsConnected() == TRUE))
-    tray_ctl.show();
+  // Applicaqtion may construct several graphs,
+  // therefore if we enable the tray icon here we may get several
+  // icons with non-working filters.
+//  if (tray && (m_pInput->IsConnected() == TRUE) && (m_pOutput->IsConnected() == TRUE))
+//    tray_ctl.show();
 
   return S_OK;
 }
