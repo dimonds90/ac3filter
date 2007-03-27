@@ -1,3 +1,10 @@
+<b>1.30b</b> - 27.03.07
+  * AC3 decoding level made louder by +6dB
+
+  * Fixed: sometimes 2 tray icons appear in WMP
+  * Fixed: Matrix editing did not work in Vista
+  * Fixed: Gains was not saved in Vista
+
 <b>1.20b</b> - 20.03.07
   * Fixed bug with some 14bit DTS streams
   + SPDIF input support
