@@ -91,6 +91,9 @@ CFactoryTemplate g_Templates[] = {
     , &CLSID_AC3Filter_eq
     , CAC3Filter_conf::CreateInstanceEq },
 */
+    { L"AC3Filter SPDIF page"
+    , &CLSID_AC3Filter_spdif
+    , AC3FilterDlg::CreateSPDIF },
     { L"AC3Filter System page"
     , &CLSID_AC3Filter_sys
     , AC3FilterDlg::CreateSystem },

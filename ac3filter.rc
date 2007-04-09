@@ -31,24 +31,6 @@ IDD_GAINS DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
-    CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH,181,115,7,50
-    CONTROL         "Progress1",IDC_OUT_C,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH,215,115,7,50
-    CONTROL         "Progress1",IDC_OUT_R,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH,249,115,7,50
-    CONTROL         "Progress1",IDC_OUT_SL,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH,283,115,7,50
-    CONTROL         "Progress1",IDC_OUT_SR,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH,317,115,7,50
-    CONTROL         "Progress1",IDC_OUT_LFE,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH,351,115,7,50
-    LTEXT           "L",IDC_STATIC,197,105,8,8
-    LTEXT           "C",IDC_STATIC,231,105,8,8
-    LTEXT           "R",IDC_STATIC,265,105,8,8
-    LTEXT           "SL",IDC_STATIC,298,105,10,8
-    LTEXT           "SR",IDC_STATIC,332,105,11,8
-    LTEXT           "LFE",IDC_STATIC,364,105,14,8
     CONTROL         "Progress1",IDC_IN_L,"msctls_progress32",PBS_VERTICAL | 
                     PBS_SMOOTH,181,25,7,50
     CONTROL         "Progress1",IDC_IN_C,"msctls_progress32",PBS_VERTICAL | 
@@ -61,50 +43,68 @@ BEGIN
                     PBS_SMOOTH,317,25,7,50
     CONTROL         "Progress1",IDC_IN_LFE,"msctls_progress32",PBS_VERTICAL | 
                     PBS_SMOOTH,351,25,7,50
-    LTEXT           "L",IDC_STATIC,197,15,8,8
-    LTEXT           "C",IDC_STATIC,231,15,8,8
-    LTEXT           "R",IDC_STATIC,265,15,8,8
-    LTEXT           "SL",IDC_STATIC,298,15,10,8
-    LTEXT           "SR",IDC_STATIC,332,15,11,8
-    LTEXT           "LFE",IDC_STATIC,364,15,14,8
-    CONTROL         "Slider3",IDC_SLIDER_IN_L,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,188,22,27,56
-    CONTROL         "Slider3",IDC_SLIDER_IN_C,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,222,22,27,56
-    CONTROL         "Slider3",IDC_SLIDER_IN_R,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,256,22,27,56
-    CONTROL         "Slider3",IDC_SLIDER_IN_SL,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,290,22,27,56
-    CONTROL         "Slider3",IDC_SLIDER_IN_SR,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,324,22,27,56
-    CONTROL         "Slider3",IDC_SLIDER_IN_LFE,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,358,22,27,56
-    GROUPBOX        "Input gains",IDC_STATIC,172,7,218,90
     EDITTEXT        IDC_EDT_IN_L,190,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_IN_C,224,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_IN_R,258,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_IN_SL,292,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_IN_SR,326,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_IN_LFE,360,79,23,14,ES_AUTOHSCROLL
-    CONTROL         "Slider3",IDC_SLIDER_OUT_L,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,187,112,27,56
-    CONTROL         "Slider3",IDC_SLIDER_OUT_C,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,221,112,27,56
-    CONTROL         "Slider3",IDC_SLIDER_OUT_R,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,255,112,27,56
-    CONTROL         "Slider3",IDC_SLIDER_OUT_SL,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,289,112,27,56
-    CONTROL         "Slider3",IDC_SLIDER_OUT_SR,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,323,112,27,56
-    CONTROL         "Slider3",IDC_SLIDER_OUT_LFE,"msctls_trackbar32",
-                    TBS_VERT | TBS_BOTH | WS_TABSTOP,357,112,27,56
+    CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH,181,115,7,50
+    CONTROL         "Progress1",IDC_OUT_C,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH,215,115,7,50
+    CONTROL         "Progress1",IDC_OUT_R,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH,249,115,7,50
+    CONTROL         "Progress1",IDC_OUT_SL,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH,283,115,7,50
+    CONTROL         "Progress1",IDC_OUT_SR,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH,317,115,7,50
+    CONTROL         "Progress1",IDC_OUT_SW,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH,351,115,7,50
     EDITTEXT        IDC_EDT_OUT_L,190,168,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_OUT_C,224,168,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_OUT_R,258,168,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_OUT_SL,292,168,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_OUT_SR,326,168,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_OUT_LFE,360,168,23,14,ES_AUTOHSCROLL
-    GROUPBOX        "Output gains",IDC_STATIC,172,97,218,90
+    LTEXT           "L",IDC_LBL_OUT_L,197,105,8,8
+    LTEXT           "C",IDC_LBL_OUT_C,231,105,8,8
+    LTEXT           "R",IDC_LBL_OUT_R,265,105,8,8
+    LTEXT           "SL",IDC_LBL_OUT_SL,298,105,10,8
+    LTEXT           "SR",IDC_LBL_OUT_SR,332,105,11,8
+    LTEXT           "SW",IDC_LBL_OUT_SW,364,105,13,8
+    LTEXT           "L",IDC_LBL_IN_L,197,15,8,8
+    LTEXT           "C",IDC_LBL_IN_C,231,15,8,8
+    LTEXT           "R",IDC_LBL_IN_R,265,15,8,8
+    LTEXT           "SL",IDC_LBL_IN_SL,298,15,10,8
+    LTEXT           "SR",IDC_LBL_IN_SR,332,15,11,8
+    LTEXT           "LFE",IDC_LBL_IN_LFE,364,15,14,8
+    CONTROL         "Slider3",IDC_SLI_IN_L,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,188,22,27,56
+    CONTROL         "Slider3",IDC_SLI_IN_C,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,222,22,27,56
+    CONTROL         "Slider3",IDC_SLI_IN_R,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,256,22,27,56
+    CONTROL         "Slider3",IDC_SLI_IN_SL,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,290,22,27,56
+    CONTROL         "Slider3",IDC_SLI_IN_SR,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,324,22,27,56
+    CONTROL         "Slider3",IDC_SLI_IN_LFE,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,358,22,27,56
+    GROUPBOX        "Input gains",IDC_GRP_INPUT_GAINS,172,7,218,90
+    CONTROL         "Slider3",IDC_SLI_OUT_L,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,187,112,27,56
+    CONTROL         "Slider3",IDC_SLI_OUT_C,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,221,112,27,56
+    CONTROL         "Slider3",IDC_SLI_OUT_R,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,255,112,27,56
+    CONTROL         "Slider3",IDC_SLI_OUT_SL,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,289,112,27,56
+    CONTROL         "Slider3",IDC_SLI_OUT_SR,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,323,112,27,56
+    CONTROL         "Slider3",IDC_SLI_OUT_LFE,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,357,112,27,56
+    GROUPBOX        "Output gains",IDC_GRP_OUTPUT_GAINS,172,97,218,90
     LTEXT           "L",IDC_STATIC,87,117,8,8
     LTEXT           "C",IDC_STATIC,116,117,8,8
     LTEXT           "R",IDC_STATIC,146,117,8,8
@@ -117,47 +117,46 @@ BEGIN
     EDITTEXT        IDC_EDT_DSL,76,148,27,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_DSR,134,148,27,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_DLFE,105,148,27,14,ES_AUTOHSCROLL
-    GROUPBOX        "Delays",IDC_STATIC,68,97,100,90
-    GROUPBOX        "DRC",IDC_STATIC,7,97,56,90
-    CONTROL         "Slider1",IDC_SLIDER_DRC_POWER,"msctls_trackbar32",
-                    TBS_VERT | TBS_BOTH | WS_TABSTOP,10,114,27,56
+    GROUPBOX        "Delays",IDC_GRP_DELAYS,68,97,100,90
+    GROUPBOX        "DRC",IDC_GRP_DRC,7,97,56,90
+    CONTROL         "Slider1",IDC_SLI_DRC_POWER,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,10,114,27,56
     EDITTEXT        IDC_EDT_DRC_POWER,12,170,23,14,ES_AUTOHSCROLL
     CONTROL         "Enable",IDC_CHK_DRC,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,12,106,38,10
-    CONTROL         "Enable",IDC_CHK_DELAY,"Button",BS_AUTOCHECKBOX | 
+    CONTROL         "Enable",IDC_CHK_DELAYS,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,73,106,38,10
-    LTEXT           "Units:",IDC_STATIC,76,170,19,8
-    COMBOBOX        IDC_CMB_UNITS,101,168,60,87,CBS_DROPDOWN | WS_VSCROLL | 
+    LTEXT           "Units:",IDC_LBL_UNITS,76,170,30,8
+    COMBOBOX        IDC_CMB_UNITS,109,168,52,87,CBS_DROPDOWN | WS_VSCROLL | 
                     WS_TABSTOP
-    CONTROL         "Slider1",IDC_SLIDER_DRC_LEVEL,"msctls_trackbar32",
-                    TBS_VERT | TBS_BOTH | WS_DISABLED | WS_TABSTOP,34,114,27,
-                    56
+    CONTROL         "Slider1",IDC_SLI_DRC_LEVEL,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,34,114,27,56
     EDITTEXT        IDC_EDT_DRC_LEVEL,36,170,23,14,ES_AUTOHSCROLL | 
                     WS_DISABLED
-    LTEXT           "Voice",IDC_STATIC,89,15,19,8
-    CONTROL         "Slider3",IDC_SLIDER_VOICE,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,86,22,27,56
-    LTEXT           "Surround",IDC_STATIC,111,15,30,8
-    CONTROL         "Slider3",IDC_SLIDER_SUR,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,111,22,27,56
-    CONTROL         "Slider1",IDC_SLIDER_GAIN,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,38,22,26,56
-    CONTROL         "Slider1",IDC_SLIDER_MASTER,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,12,22,27,56
-    LTEXT           "Master",IDC_STATIC,15,15,22,8
-    LTEXT           "Gain",IDC_STATIC,44,15,16,8
+    CTEXT           "Voice",IDC_LBL_VOICE,89,15,19,8
+    CONTROL         "Slider3",IDC_SLI_VOICE,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,86,23,27,56
+    CTEXT           "Surround",IDC_LBL_SUR,109,15,30,8
+    CONTROL         "Slider3",IDC_SLI_SUR,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,111,23,27,56
+    CONTROL         "Slider1",IDC_SLI_GAIN,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,38,23,26,56
+    CONTROL         "Slider1",IDC_SLI_MASTER,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,12,23,27,56
+    CTEXT           "Master",IDC_LBL_MASTER,13,15,22,8
+    CTEXT           "Gain",IDC_LBL_GAIN,40,15,22,8
     EDITTEXT        IDC_EDT_MASTER,13,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_GAIN,39,79,23,14,ES_AUTOHSCROLL | ES_READONLY | 
                     WS_DISABLED
     EDITTEXT        IDC_EDT_VOICE,88,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_SUR,114,79,23,14,ES_AUTOHSCROLL
-    LTEXT           "+20dB",IDC_STATIC,65,26,20,8
-    LTEXT           "-20dB",IDC_STATIC,66,65,20,8
-    LTEXT           "0dB",IDC_STATIC,64,45,16,8,0,WS_EX_RIGHT
-    GROUPBOX        "Gains",IDC_STATIC,7,7,161,90
-    LTEXT           "LFE",IDC_STATIC,144,15,14,8
-    CONTROL         "Slider3",IDC_SLIDER_LFE,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,137,22,27,56
+    LTEXT           "+20dB",IDC_STATIC,65,27,20,8
+    LTEXT           "-20dB",IDC_STATIC,66,66,20,8
+    LTEXT           "0dB",IDC_STATIC,64,46,16,8,0,WS_EX_RIGHT
+    GROUPBOX        "Gains",IDC_GRP_GAINS,7,7,161,90
+    CTEXT           "LFE",IDC_LBL_LFE,143,15,14,8
+    CONTROL         "Slider3",IDC_SLI_LFE,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,137,23,27,56
     EDITTEXT        IDC_EDT_LFE,140,79,23,14,ES_AUTOHSCROLL
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
@@ -168,72 +167,32 @@ STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     CONTROL         "One-pass norm",IDC_CHK_NORMALIZE,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,99,118,64,8
+                    BS_AUTOCHECKBOX | WS_TABSTOP,99,118,67,8
     CONTROL         "Normalize matrix",IDC_CHK_NORM_MATRIX,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,100,140,66,8
     CONTROL         "Auto matrix",IDC_CHK_AUTO_MATRIX,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,90,129,51,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,90,129,76,10
     PUSHBUTTON      "Save",IDC_BTN_MATRIX_SAVE,12,172,32,10
-    COMBOBOX        IDC_CMB_MATRIX,12,159,65,77,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CMB_MATRIX_PRESET,12,159,65,77,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "Delete",IDC_BTN_MATRIX_DELETE,44,172,32,10
     CONTROL         "Expand stereo",IDC_CHK_EXPAND_STEREO,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,100,157,61,10
-    GROUPBOX        "Output",IDC_STATIC,7,97,75,50
-    GROUPBOX        "Matrix preset",IDC_STATIC,7,149,75,38
+                    BS_AUTOCHECKBOX | WS_TABSTOP,100,157,66,10
+    GROUPBOX        "Output",IDC_GRP_OUTPUT,7,97,75,50
+    GROUPBOX        "Matrix preset",IDC_GRP_MATRIX_PRESET,7,149,75,38
     CONTROL         "Voice control",IDC_CHK_VOICE_CONTROL,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,100,148,57,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,100,148,66,10
     CONTROL         "Auto gain control",IDC_CHK_AUTO_GAIN,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,90,107,69,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,90,107,76,10
     COMBOBOX        IDC_CMB_FORMAT,12,131,65,77,CBS_DROPDOWNLIST | 
                     WS_VSCROLL | WS_TABSTOP
     COMBOBOX        IDC_CMB_SPK,12,118,65,77,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
-    CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,323,126,9,50
-    CONTROL         "Progress1",IDC_OUT_C,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,333,126,9,50
-    CONTROL         "Progress1",IDC_OUT_R,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,343,126,9,50
-    CONTROL         "Progress1",IDC_OUT_SL,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,353,126,9,50
-    CONTROL         "Progress1",IDC_OUT_SR,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,363,126,9,50
-    CONTROL         "Progress1",IDC_OUT_LFE,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,313,126,9,50
-    LTEXT           "L",IDC_STATIC,327,176,8,8
-    LTEXT           "C",IDC_STATIC,335,176,8,8
-    LTEXT           "R",IDC_STATIC,345,176,8,8
-    LTEXT           "SL",IDC_STATIC,353,176,10,8
-    LTEXT           "SR",IDC_STATIC,363,176,11,8
-    LTEXT           "LFE",IDC_STATIC,311,176,14,8
-    LTEXT           "0dB",IDC_STATIC,297,123,14,8
-    LTEXT           "-50dB",IDC_STATIC,290,170,20,8
-    CONTROL         "Progress1",IDC_IN_L,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,213,126,9,50
-    CONTROL         "Progress1",IDC_IN_C,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,223,126,9,50
-    CONTROL         "Progress1",IDC_IN_R,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,233,126,9,50
-    CONTROL         "Progress1",IDC_IN_SL,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,243,126,9,50
-    CONTROL         "Progress1",IDC_IN_SR,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,253,126,9,50
-    CONTROL         "Progress1",IDC_IN_LFE,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,203,126,9,50
-    LTEXT           "L",IDC_STATIC,217,176,8,8
-    LTEXT           "C",IDC_STATIC,225,176,8,8
-    LTEXT           "R",IDC_STATIC,235,176,8,8
-    LTEXT           "SL",IDC_STATIC,243,176,10,8
-    LTEXT           "SR",IDC_STATIC,253,176,11,8
-    LTEXT           "LFE",IDC_STATIC,201,176,14,8
-    GROUPBOX        "Options",IDC_STATIC,85,97,83,90
+    GROUPBOX        "Options",IDC_GRP_MIXER_OPTIONS,85,97,83,90
     LTEXT           "Input:",IDC_STATIC,12,107,19,8
     LTEXT           "input config",IDC_LBL_INPUT,31,107,38,8
-    LTEXT           "0dB",IDC_STATIC,188,123,14,8
-    LTEXT           "-50dB",IDC_STATIC,181,170,20,8
-    GROUPBOX        "Input levels",IDC_STATIC,171,113,108,74
-    GROUPBOX        "Output levels",IDC_STATIC,282,113,108,74
+    GROUPBOX        "Input levels",IDC_GRP_INPUT_LEVELS,171,113,108,74
+    GROUPBOX        "Output levels",IDC_GRP_OUTPUT_LEVELS,282,113,108,74
     EDITTEXT        IDC_EDT_L_L,178,22,31,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_L_C,178,37,31,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_L_R,178,51,31,14,ES_AUTOHSCROLL
@@ -282,134 +241,85 @@ BEGIN
     LTEXT           "R'",IDC_STATIC,375,55,8,8
     LTEXT           "C'",IDC_STATIC,375,40,8,8
     LTEXT           "L'",IDC_STATIC,375,25,8,8
-    GROUPBOX        "Matrix",IDC_STATIC,171,7,219,106
-    LTEXT           "Voice",IDC_STATIC,89,15,19,8
-    CONTROL         "Slider3",IDC_SLIDER_VOICE,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,86,22,27,56
-    LTEXT           "Surround",IDC_STATIC,111,15,30,8
-    CONTROL         "Slider3",IDC_SLIDER_SUR,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,111,22,27,56
-    CONTROL         "Slider1",IDC_SLIDER_GAIN,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,38,22,26,56
-    CONTROL         "Slider1",IDC_SLIDER_MASTER,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,12,22,27,56
-    LTEXT           "Master",IDC_STATIC,15,15,22,8
-    LTEXT           "Gain",IDC_STATIC,44,15,16,8
+    GROUPBOX        "Matrix",IDC_GRP_MATRIX,171,7,219,106
+    CTEXT           "Voice",IDC_LBL_VOICE,89,15,19,8
+    CONTROL         "Slider3",IDC_SLI_VOICE,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,86,23,27,56
+    CTEXT           "Surround",IDC_LBL_SUR,109,15,30,8
+    CONTROL         "Slider3",IDC_SLI_SUR,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,111,23,27,56
+    CONTROL         "Slider1",IDC_SLI_GAIN,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,38,23,26,56
+    CONTROL         "Slider1",IDC_SLI_MASTER,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,12,23,27,56
+    CTEXT           "Master",IDC_LBL_MASTER,13,15,22,8
+    CTEXT           "Gain",IDC_LBL_GAIN,40,15,22,8
     EDITTEXT        IDC_EDT_MASTER,13,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_GAIN,39,79,23,14,ES_AUTOHSCROLL | ES_READONLY | 
                     WS_DISABLED
     EDITTEXT        IDC_EDT_VOICE,88,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_SUR,114,79,23,14,ES_AUTOHSCROLL
-    LTEXT           "+20dB",IDC_STATIC,65,26,20,8
-    LTEXT           "-20dB",IDC_STATIC,66,65,20,8
-    LTEXT           "0dB",IDC_STATIC,64,45,16,8,0,WS_EX_RIGHT
-    GROUPBOX        "Gains",IDC_STATIC,7,7,161,90
-    LTEXT           "LFE",IDC_STATIC,144,15,14,8
-    CONTROL         "Slider3",IDC_SLIDER_LFE,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,137,22,27,56
+    LTEXT           "+20dB",IDC_STATIC,65,27,20,8
+    LTEXT           "-20dB",IDC_STATIC,66,66,20,8
+    LTEXT           "0dB",IDC_STATIC,64,46,16,8,0,WS_EX_RIGHT
+    GROUPBOX        "Gains",IDC_GRP_GAINS,7,7,161,90
+    CTEXT           "LFE",IDC_LBL_LFE,143,15,14,8
+    CONTROL         "Slider3",IDC_SLI_LFE,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,137,23,27,56
     EDITTEXT        IDC_EDT_LFE,140,79,23,14,ES_AUTOHSCROLL
     CONTROL         "Bass redir:",IDC_CHK_BASS_REDIR,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,90,171,49,10
-    EDITTEXT        IDC_EDT_BASS_FREQ,140,169,23,14,ES_AUTOHSCROLL
+                    BS_AUTOCHECKBOX | WS_TABSTOP,90,170,52,10
+    EDITTEXT        IDC_EDT_BASS_FREQ,145,168,18,14,ES_AUTOHSCROLL
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
-END
-
-IDD_EQ DIALOG DISCARDABLE  0, 0, 397, 201
-STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif"
-BEGIN
-    GROUPBOX        "Equalizer",IDC_STATIC,112,7,278,180
-    LTEXT           "+20dB",IDC_STATIC,118,19,22,8
-    LTEXT           "0dB",IDC_STATIC,126,50,14,8
-    LTEXT           "-20dB",IDC_STATIC,120,79,20,8
-    LTEXT           "0dB",IDC_STATIC,126,121,14,8
-    LTEXT           "-150dB",IDC_STATIC,116,174,24,8
-    LTEXT           "93Hz",IDC_STATIC,146,91,18,8
-    LTEXT           "180Hz",IDC_STATIC,172,91,22,8
-    LTEXT           "375Hz",IDC_STATIC,199,91,22,8
-    LTEXT           "750Hz",IDC_STATIC,226,91,22,8
-    LTEXT           "1.5kHz",IDC_STATIC,252,91,24,8
-    LTEXT           "3kHz",IDC_STATIC,282,91,18,8
-    LTEXT           "6kHz",IDC_STATIC,309,91,18,8
-    LTEXT           "12kHz",IDC_STATIC,334,91,22,8
-    LTEXT           "24kHz",IDC_STATIC,361,91,22,8
-    CONTROL         "Slider1",IDC_EQ1,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,141,14,28,77
-    CONTROL         "Slider1",IDC_EQ2,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,169,14,28,77
-    CONTROL         "Slider1",IDC_EQ3,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,196,14,28,77
-    CONTROL         "Slider1",IDC_EQ4,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,223,14,28,77
-    CONTROL         "Slider1",IDC_EQ5,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,250,14,28,77
-    CONTROL         "Slider1",IDC_EQ6,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,277,14,28,77
-    CONTROL         "Slider1",IDC_EQ7,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,304,14,28,77
-    CONTROL         "Slider1",IDC_EQ8,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,331,14,28,77
-    CONTROL         "Slider1",IDC_EQ9,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,358,14,28,77
-    EDITTEXT        IDC_EDT_EQ1,142,102,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ2,170,102,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ3,197,102,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ4,224,102,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ5,251,102,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ6,278,102,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ7,305,102,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ8,332,102,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ9,359,102,27,14,ES_AUTOHSCROLL
-    CONTROL         "Progress1",IDC_LEVEL_EQ1,"msctls_progress32",
-                    PBS_VERTICAL | PBS_SMOOTH | WS_BORDER,151,121,9,61
-    GROUPBOX        "Delay",IDC_STATIC,7,7,101,127
-    LTEXT           "L",IDC_STATIC,26,32,8,8
-    LTEXT           "C",IDC_STATIC,55,32,8,8
-    LTEXT           "R",IDC_STATIC,85,32,8,8
-    LTEXT           "SL",IDC_STATIC,23,55,10,8
-    LTEXT           "SR",IDC_STATIC,82,55,11,8
-    LTEXT           "LFE",IDC_STATIC,53,55,14,8
-    EDITTEXT        IDC_EDT_DL,15,40,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_DC,44,40,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_DR,73,40,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_DSL,15,63,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_DSR,73,63,27,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_DLFE,44,63,27,14,ES_AUTOHSCROLL
-    CONTROL         "Delay on",IDC_CHK_DELAY,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,16,19,44,10
-    COMBOBOX        IDC_CMB_DELAY,16,106,85,77,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    CONTROL         "Equalizer on",IDC_CHK_EQ,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,16,147,55,10
-    COMBOBOX        IDC_CMB_EQ,16,159,85,77,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    CONTROL         "Progress1",IDC_LEVEL_EQ2,"msctls_progress32",
-                    PBS_VERTICAL | PBS_SMOOTH | WS_BORDER,179,121,9,61
-    CONTROL         "Progress1",IDC_LEVEL_EQ3,"msctls_progress32",
-                    PBS_VERTICAL | PBS_SMOOTH | WS_BORDER,206,121,9,61
-    CONTROL         "Progress1",IDC_LEVEL_EQ4,"msctls_progress32",
-                    PBS_VERTICAL | PBS_SMOOTH | WS_BORDER,233,121,9,61
-    CONTROL         "Progress1",IDC_LEVEL_EQ5,"msctls_progress32",
-                    PBS_VERTICAL | PBS_SMOOTH | WS_BORDER,260,121,9,61
-    CONTROL         "Progress1",IDC_LEVEL_EQ6,"msctls_progress32",
-                    PBS_VERTICAL | PBS_SMOOTH | WS_BORDER,287,121,9,61
-    CONTROL         "Progress1",IDC_LEVEL_EQ7,"msctls_progress32",
-                    PBS_VERTICAL | PBS_SMOOTH | WS_BORDER,314,121,9,61
-    CONTROL         "Progress1",IDC_LEVEL_EQ8,"msctls_progress32",
-                    PBS_VERTICAL | PBS_SMOOTH | WS_BORDER,341,121,9,61
-    CONTROL         "Progress1",IDC_LEVEL_EQ9,"msctls_progress32",
-                    PBS_VERTICAL | PBS_SMOOTH | WS_BORDER,368,121,9,61
-    GROUPBOX        "Equalizer options",IDC_STATIC,7,136,101,51
-    COMBOBOX        IDC_CMB_UNITS,16,82,85,87,CBS_DROPDOWN | WS_VSCROLL | 
-                    WS_TABSTOP
-    LTEXT           "Delay preset",IDC_STATIC,16,96,40,8
-    PUSHBUTTON      "Save",IDC_BTN_EQ_SAVE,16,172,42,10
-    PUSHBUTTON      "Delete",IDC_BTN_EQ_DELETE,59,172,42,10
-    PUSHBUTTON      "Save",IDC_BTN_DELAY_SAVE,16,119,42,10
-    PUSHBUTTON      "Delete",IDC_BTN_DELAY_DELETE,59,119,42,10
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
+    CONTROL         "Progress1",IDC_IN_L,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,211,125,9,50
+    CONTROL         "Progress1",IDC_IN_C,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,223,125,9,50
+    CONTROL         "Progress1",IDC_IN_R,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,235,125,9,50
+    CONTROL         "Progress1",IDC_IN_SL,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,247,125,9,50
+    CONTROL         "Progress1",IDC_IN_SR,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,259,125,9,50
+    CONTROL         "Progress1",IDC_IN_LFE,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,199,125,9,50
+    LTEXT           "0 -",IDC_STATIC,177,122,19,8,0,WS_EX_RIGHT
+    LTEXT           "-10 -",IDC_STATIC,177,131,19,8,0,WS_EX_RIGHT
+    LTEXT           "-20 -",IDC_STATIC,177,140,19,8,0,WS_EX_RIGHT
+    LTEXT           "-30 -",IDC_STATIC,177,149,19,8,0,WS_EX_RIGHT
+    LTEXT           "-40 -",IDC_STATIC,177,159,19,8,0,WS_EX_RIGHT
+    LTEXT           "-50 -",IDC_STATIC,177,168,19,8,0,WS_EX_RIGHT
+    CTEXT           "L",IDC_LBL_IN_L,208,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "C",IDC_LBL_IN_C,219,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "R",IDC_LBL_IN_R,231,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SL",IDC_LBL_IN_SL,244,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SR",IDC_LBL_IN_SR,257,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "LFE",IDC_LBL_IN_LFE,195,176,14,8,0,WS_EX_TRANSPARENT
+    CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,323,125,9,50
+    CONTROL         "Progress1",IDC_OUT_C,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,335,125,9,50
+    CONTROL         "Progress1",IDC_OUT_R,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,347,125,9,50
+    CONTROL         "Progress1",IDC_OUT_SL,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,359,125,9,50
+    CONTROL         "Progress1",IDC_OUT_SR,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,371,125,9,50
+    CONTROL         "Progress1",IDC_OUT_SW,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,311,125,9,50
+    LTEXT           "0 -",IDC_STATIC,290,122,19,8,0,WS_EX_RIGHT
+    LTEXT           "-10 -",IDC_STATIC,290,131,19,8,0,WS_EX_RIGHT
+    LTEXT           "-20 -",IDC_STATIC,290,140,19,8,0,WS_EX_RIGHT
+    LTEXT           "-30 -",IDC_STATIC,290,149,19,8,0,WS_EX_RIGHT
+    LTEXT           "-40 -",IDC_STATIC,290,159,19,8,0,WS_EX_RIGHT
+    LTEXT           "-50 -",IDC_STATIC,290,168,19,8,0,WS_EX_RIGHT
+    CTEXT           "L",IDC_LBL_OUT_L,321,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "C",IDC_LBL_OUT_C,332,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "R",IDC_LBL_OUT_R,345,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SL",IDC_LBL_OUT_SL,356,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SR",IDC_LBL_OUT_SR,369,176,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SW",IDC_LBL_OUT_SW,308,176,13,8,0,WS_EX_TRANSPARENT
 END
 
 IDD_ABOUT DIALOGEX 0, 0, 397, 201
@@ -457,94 +367,99 @@ BEGIN
     LTEXT           "+20dB",IDC_STATIC,110,27,20,8
     LTEXT           "-20dB",IDC_STATIC,112,66,20,8
     LTEXT           "0dB",IDC_STATIC,115,46,15,8,0,WS_EX_RIGHT
-    GROUPBOX        "Output",IDC_STATIC,7,7,96,50
+    GROUPBOX        "Output",IDC_GRP_OUTPUT,7,7,96,50
+    GROUPBOX        "Levels",IDC_GRP_LEVELS,294,7,96,180
+    LTEXT           "Input levels",IDC_LBL_INPUT_LEVELS,332,15,37,8
     CONTROL         "Progress1",IDC_IN_L,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,331,27,9,50
+                    PBS_SMOOTH | WS_BORDER,328,27,9,50
     CONTROL         "Progress1",IDC_IN_C,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,341,27,9,50
+                    PBS_SMOOTH | WS_BORDER,340,27,9,50
     CONTROL         "Progress1",IDC_IN_R,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,351,27,9,50
+                    PBS_SMOOTH | WS_BORDER,352,27,9,50
     CONTROL         "Progress1",IDC_IN_SL,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,361,27,9,50
+                    PBS_SMOOTH | WS_BORDER,364,27,9,50
     CONTROL         "Progress1",IDC_IN_SR,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,371,27,9,50
+                    PBS_SMOOTH | WS_BORDER,376,27,9,50
     CONTROL         "Progress1",IDC_IN_LFE,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,321,27,9,50
-    LTEXT           "L",IDC_STATIC,335,78,8,8
-    LTEXT           "C",IDC_STATIC,343,78,8,8
-    LTEXT           "R",IDC_STATIC,353,78,8,8
-    LTEXT           "SL",IDC_STATIC,361,78,10,8
-    LTEXT           "SR",IDC_STATIC,372,78,11,8
-    LTEXT           "LFE",IDC_STATIC,319,78,14,8
+                    PBS_SMOOTH | WS_BORDER,316,27,9,50
+    LTEXT           "0 -",IDC_STATIC,295,24,19,8,0,WS_EX_RIGHT
+    LTEXT           "-10 -",IDC_STATIC,295,33,19,8,0,WS_EX_RIGHT
+    LTEXT           "-20 -",IDC_STATIC,295,42,19,8,0,WS_EX_RIGHT
+    LTEXT           "-30 -",IDC_STATIC,295,51,19,8,0,WS_EX_RIGHT
+    LTEXT           "-40 -",IDC_STATIC,295,61,19,8,0,WS_EX_RIGHT
+    LTEXT           "-50 -",IDC_STATIC,295,71,19,8,0,WS_EX_RIGHT
+    CTEXT           "L",IDC_LBL_IN_L,325,78,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "C",IDC_LBL_IN_C,337,78,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "R",IDC_LBL_IN_R,349,78,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SL",IDC_LBL_IN_SL,361,78,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SR",IDC_LBL_IN_SR,373,78,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "LFE",IDC_LBL_IN_LFE,313,78,14,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Output levels",IDC_LBL_OUTPUT_LEVELS,330,108,42,8
     CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,332,120,9,50
+                    PBS_SMOOTH | WS_BORDER,328,121,9,50
     CONTROL         "Progress1",IDC_OUT_C,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,342,120,9,50
+                    PBS_SMOOTH | WS_BORDER,340,121,9,50
     CONTROL         "Progress1",IDC_OUT_R,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,352,120,9,50
+                    PBS_SMOOTH | WS_BORDER,352,121,9,50
     CONTROL         "Progress1",IDC_OUT_SL,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,362,120,9,50
+                    PBS_SMOOTH | WS_BORDER,364,121,9,50
     CONTROL         "Progress1",IDC_OUT_SR,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,372,120,9,50
-    CONTROL         "Progress1",IDC_OUT_LFE,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,322,120,9,50
-    LTEXT           "L",IDC_STATIC,335,170,8,8
-    LTEXT           "C",IDC_STATIC,344,170,8,8
-    LTEXT           "R",IDC_STATIC,354,170,8,8
-    LTEXT           "SL",IDC_STATIC,362,170,10,8
-    LTEXT           "SR",IDC_STATIC,372,170,11,8
-    LTEXT           "SW",IDC_STATIC,320,170,13,8
+                    PBS_SMOOTH | WS_BORDER,376,121,9,50
+    CONTROL         "Progress1",IDC_OUT_SW,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,316,121,9,50
+    LTEXT           "0 -",IDC_STATIC,295,119,19,8,0,WS_EX_RIGHT
+    LTEXT           "-10 -",IDC_STATIC,295,128,19,8,0,WS_EX_RIGHT
+    LTEXT           "-20 -",IDC_STATIC,295,137,19,8,0,WS_EX_RIGHT
+    LTEXT           "-30 -",IDC_STATIC,295,146,19,8,0,WS_EX_RIGHT
+    LTEXT           "-40 -",IDC_STATIC,295,155,19,8,0,WS_EX_RIGHT
+    LTEXT           "-50 -",IDC_STATIC,295,165,19,8,0,WS_EX_RIGHT
+    CTEXT           "L",IDC_LBL_OUT_L,325,172,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "C",IDC_LBL_OUT_C,337,172,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "R",IDC_LBL_OUT_R,349,172,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SL",IDC_LBL_OUT_SL,361,172,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SR",IDC_LBL_OUT_SR,373,172,14,8,0,WS_EX_TRANSPARENT
+    CTEXT           "SW",IDC_LBL_OUT_SW,313,172,13,8,0,WS_EX_TRANSPARENT
+    GROUPBOX        "CPU",IDC_GRP_CPU,259,97,33,90
+    CONTROL         "Progress1",IDC_CPU,"msctls_progress32",PBS_VERTICAL | 
+                    PBS_SMOOTH | WS_BORDER,271,112,9,50
     CTEXT           "0%",IDC_CPU_LABEL,269,167,15,8
-    LTEXT           "Frames / Errors",IDC_STATIC,15,174,49,8
+    LTEXT           "Frames / Errors",IDC_LBL_FRAMES_ERRORS,15,174,57,8
     EDITTEXT        IDC_EDT_ERRORS,110,172,23,12,ES_AUTOHSCROLL | 
                     ES_READONLY
     EDITTEXT        IDC_EDT_FRAMES,73,172,36,12,ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "0dB",IDC_STATIC,294,23,22,8,0,WS_EX_RIGHT
-    LTEXT           "-50dB",IDC_STATIC,294,72,22,8,0,WS_EX_RIGHT
-    LTEXT           "0dB",IDC_STATIC,294,116,22,8,0,WS_EX_RIGHT
-    LTEXT           "-50dB",IDC_STATIC,294,165,22,8,0,WS_EX_RIGHT
-    LTEXT           "Input levels",IDC_STATIC,331,15,37,8
-    LTEXT           "Output levels",IDC_STATIC,330,108,42,8
-    GROUPBOX        "CPU",IDC_STATIC,259,97,33,90
-    GROUPBOX        "Levels",IDC_STATIC,294,7,96,180
     COMBOBOX        IDC_CMB_PRESET,14,68,83,64,CBS_DROPDOWN | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
     COMBOBOX        IDC_CMB_SPK,14,17,83,86,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
     COMBOBOX        IDC_CMB_FORMAT,14,30,83,61,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
+    GROUPBOX        "Preset",IDC_GRP_PRESET,7,58,96,39
     PUSHBUTTON      "Save",IDC_BTN_PRESET_SAVE,14,81,27,10
     PUSHBUTTON      "File",IDC_BTN_PRESET_FILE,42,81,27,10,WS_DISABLED
     PUSHBUTTON      "Delete",IDC_BTN_PRESET_DELETE,70,81,27,10
+    GROUPBOX        "Decoder info",IDC_GRP_DECODER_INFO,7,97,132,90
     EDITTEXT        IDC_EDT_INFO,14,107,119,65,ES_MULTILINE | ES_AUTOHSCROLL | 
                     ES_READONLY | ES_WANTRETURN | WS_VSCROLL
-    GROUPBOX        "Decoder info",IDC_STATIC,7,97,132,90
-    GROUPBOX        "Gain",IDC_STATIC,105,7,92,90
-    CONTROL         "Slider1",IDC_SLIDER_GAIN,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,161,22,26,56
-    CONTROL         "Slider1",IDC_SLIDER_MASTER,"msctls_trackbar32",TBS_VERT | 
+    GROUPBOX        "Gain",IDC_GRP_GAIN,105,7,92,90
+    CTEXT           "Master",IDC_LBL_MASTER,135,15,22,8
+    CTEXT           "Gain",IDC_LBL_GAIN,162,15,25,8
+    CONTROL         "Slider1",IDC_SLI_MASTER,"msctls_trackbar32",TBS_VERT | 
                     TBS_BOTH | WS_TABSTOP,133,22,27,56
-    LTEXT           "Master",IDC_STATIC,135,15,22,8
-    LTEXT           "Gain",IDC_STATIC,167,15,16,8
+    CONTROL         "Slider1",IDC_SLI_GAIN,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,161,22,26,56
     EDITTEXT        IDC_EDT_MASTER,134,79,23,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_GAIN,162,79,23,14,ES_AUTOHSCROLL | ES_READONLY | 
                     WS_DISABLED
-    CONTROL         "Progress1",IDC_CPU,"msctls_progress32",PBS_VERTICAL | 
-                    PBS_SMOOTH | WS_BORDER,271,112,9,50
     CONTROL         "Use SPDIF",IDC_CHK_USE_SPDIF,"Button",BS_AUTO3STATE | 
                     WS_TABSTOP,14,45,82,10
-    GROUPBOX        "DRC",IDC_STATIC,199,7,93,90
-    CONTROL         "Slider1",IDC_SLIDER_DRC_POWER,"msctls_trackbar32",
-                    TBS_VERT | TBS_BOTH | WS_TABSTOP,227,23,27,56
+    GROUPBOX        "DRC",IDC_GRP_DRC,199,7,93,90
+    CONTROL         "Slider1",IDC_SLI_DRC_POWER,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_TABSTOP,227,23,27,56
     EDITTEXT        IDC_EDT_DRC_POWER,229,79,23,14,ES_AUTOHSCROLL
-    CONTROL         "Use DRC",IDC_CHK_DRC,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,236,14,46,10
-    CONTROL         "Slider1",IDC_SLIDER_DRC_LEVEL,"msctls_trackbar32",
-                    TBS_VERT | TBS_BOTH | WS_DISABLED | WS_TABSTOP,255,23,27,
-                    56
+    CONTROL         "Slider1",IDC_SLI_DRC_LEVEL,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,255,23,27,56
     EDITTEXT        IDC_EDT_DRC_LEVEL,257,79,23,14,ES_AUTOHSCROLL | 
                     WS_DISABLED
-    GROUPBOX        "Preset",IDC_STATIC,7,58,96,39
     LTEXT           "+20dB",IDC_STATIC,203,27,20,8
     LTEXT           "-20dB",IDC_STATIC,205,66,20,8
     LTEXT           "0dB",IDC_STATIC,209,46,15,8,0,WS_EX_RIGHT
@@ -553,13 +468,15 @@ BEGIN
     CONTROL         19811,IDC_LOGO,"Static",SS_BITMAP,206,143,50,22
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
+    CONTROL         "Enable",IDC_CHK_DRC,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,231,14,38,10
 END
 
 IDD_SYS DIALOG DISCARDABLE  0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
-    GROUPBOX        "Use AC3Filter for ..",IDC_STATIC,7,7,72,69
+    GROUPBOX        "Use AC3Filter for ..",IDC_GRP_FORMATS,7,7,72,69
     CONTROL         "PCM",IDC_CHK_PCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     15,16,31,10
     CONTROL         "AC3",IDC_CHK_AC3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
@@ -572,94 +489,131 @@ BEGIN
                     15,54,31,10
     CONTROL         "SPDIF",IDC_CHK_SPDIF,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,64,37,10
-    GROUPBOX        "Filter merit",IDC_STATIC,84,7,111,34
-    RADIOBUTTON     "Prefer AC3Filter",IDC_RB_MERIT_PREFERRED,88,18,65,10
-    RADIOBUTTON     "Prefer other decoder",IDC_RB_MERIT_UNLIKELY,88,28,81,10
-    GROUPBOX        "Default audio renderer",IDC_STATIC,84,42,111,34
-    RADIOBUTTON     "Use Direct Sound by default",IDC_RB_RENDER_DS,88,52,105,
+    GROUPBOX        "Filter merit",IDC_GRP_MERIT,84,7,111,34
+    RADIOBUTTON     "Prefer AC3Filter",IDC_RBT_MERIT_PREFERRED,88,18,101,10
+    RADIOBUTTON     "Prefer other decoder",IDC_RBT_MERIT_UNLIKELY,88,28,101,
                     10
-    RADIOBUTTON     "Use Wave Out by default",IDC_RB_RENDER_WO,88,63,96,10
+    GROUPBOX        "Default audio renderer",IDC_GRP_RENDERER,84,42,111,34
+    RADIOBUTTON     "Use Direct Sound by default",IDC_RBT_RENDER_DS,88,52,
+                    105,10
+    RADIOBUTTON     "Use Wave Out by default",IDC_RBT_RENDER_WO,88,63,101,10
     GROUPBOX        "Other options",IDC_STATIC,200,144,190,43
-    GROUPBOX        "Audio/Video sync",IDC_STATIC,7,78,188,81
-    CONTROL         "Slider1",IDC_SLIDER_TIME_SHIFT,"msctls_trackbar32",
+    GROUPBOX        "Audio/Video sync",IDC_GRP_SYNC,7,78,188,81
+    CONTROL         "Slider1",IDC_SLI_TIME_SHIFT,"msctls_trackbar32",
                     TBS_NOTICKS | WS_TABSTOP,15,88,174,12
     LTEXT           "-0.5s",IDC_STATIC,15,101,16,8
     LTEXT           "+0",IDC_STATIC,98,101,8,8
     LTEXT           "+0.5s",IDC_STATIC,171,101,18,8
-    LTEXT           "Time shift (ms):",IDC_STATIC,15,111,49,8
-    EDITTEXT        IDC_EDT_TIME_SHIFT,67,109,25,12,ES_AUTOHSCROLL
+    LTEXT           "Time shift (ms):",IDC_LBL_TIME_SHIFT,15,112,72,8
+    EDITTEXT        IDC_EDT_TIME_SHIFT,91,110,25,12,ES_AUTOHSCROLL
     CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,14,127,66,8
-    LTEXT           "Current jitter:",IDC_STATIC,79,127,40,8
+                    BS_AUTOCHECKBOX | WS_TABSTOP,16,125,89,8
+    LTEXT           "Current jitter:",IDC_LBL_JITTER,107,125,82,8
     EDITTEXT        IDC_EDT_JITTER,25,136,164,19,ES_MULTILINE | ES_READONLY | 
                     NOT WS_BORDER
-    GROUPBOX        "AGC",IDC_STATIC,7,161,188,26
-    LTEXT           "Attack/release speed (dB/s):",IDC_STATIC,15,172,94,8
+    GROUPBOX        "AGC",IDC_GRP_AGC,7,161,188,26
+    LTEXT           "Attack/release speed (dB/s):",IDC_LBL_ATTACK_RELEASE,15,
+                    172,94,8
     EDITTEXT        IDC_EDT_ATTACK,111,170,38,12,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_RELEASE,151,170,38,12,ES_AUTOHSCROLL
-    GROUPBOX        "SPDIF passthrough",IDC_STATIC,200,7,93,51
+    GROUPBOX        "SPDIF passthrough",IDC_GRP_SPDIF_PT,200,7,93,51
     CONTROL         "AC3",IDC_CHK_SPDIF_AC3,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,207,18,29,10
     CONTROL         "DTS",IDC_CHK_SPDIF_DTS,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,207,31,31,10
     CONTROL         "MPEG Audio",IDC_CHK_SPDIF_MPA,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,207,43,57,10
-    GROUPBOX        "SPDIF/DTS output",IDC_STATIC,297,7,93,51
-    GROUPBOX        "SPDIF options",IDC_STATIC,200,59,190,84
+    GROUPBOX        "SPDIF/DTS output",IDC_GRP_DTS_MODE,297,7,93,51
+    GROUPBOX        "SPDIF options",IDC_GRP_SPDIF,200,59,190,84
     CONTROL         "Detect SPDIF stream in PCM data",IDC_CHK_USE_DETECTOR,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,69,123,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,69,175,10
     CONTROL         "Use AC3 encoder",IDC_CHK_SPDIF_ENCODE,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,79,72,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,79,175,10
     CONTROL         "Do not encode stereo PCM",IDC_CHK_SPDIF_STEREO_PT,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,89,102,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,89,162,10
     CONTROL         "Output SPDIF as PCM",IDC_CHK_SPDIF_AS_PCM,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,99,87,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,99,175,10
     CONTROL         "Restrict SPDIF sample rate",IDC_CHK_SPDIF_CHECK_SR,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,109,101,10
-    LTEXT           "Allow:",IDC_STATIC,221,120,20,8
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,109,175,10
     CONTROL         "48kHz",IDC_CHK_SPDIF_ALLOW_48,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,247,120,37,10
+                    WS_TABSTOP,220,120,37,10
     CONTROL         "44kHz",IDC_CHK_SPDIF_ALLOW_44,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,294,120,37,10
+                    WS_TABSTOP,267,120,37,10
     CONTROL         "32kHz",IDC_CHK_SPDIF_ALLOW_32,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,341,120,37,10
+                    WS_TABSTOP,314,120,37,10
     CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,207,165,175,10
     CONTROL         "Force sound card to reinit after seek / pause",
                     IDC_CHK_REINIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,
-                    175,156,10
+                    175,175,10
     CONTROL         "Show tray icon",IDC_CHK_TRAY,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,207,155,175,10
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
     CONTROL         "Disallow PCM output in SPDIF mode",IDC_CHK_SPDIF_NO_PCM,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,130,131,10
-    RADIOBUTTON     "Auto",IDC_RB_DTS_MODE_AUTO,301,16,31,10
-    RADIOBUTTON     "SPDIF wrapped",IDC_RB_DTS_MODE_WRAPPED,301,25,66,10
-    RADIOBUTTON     "Padded DTS",IDC_RB_DTS_MODE_PADDED,301,35,57,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,130,175,10
+    RADIOBUTTON     "Auto",IDC_RBT_DTS_MODE_AUTO,301,16,81,10
+    RADIOBUTTON     "SPDIF wrapped",IDC_RBT_DTS_MODE_WRAPPED,301,25,81,10
+    RADIOBUTTON     "Padded DTS",IDC_RBT_DTS_MODE_PADDED,301,35,81,10
     CONTROL         "Convert to 14bit",IDC_CHK_USE_DTS14,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,302,46,66,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,302,46,80,10
 END
 
-IDD_FILE DIALOG DISCARDABLE  0, 0, 178, 81
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Load/Save options"
+IDD_SPDIF DIALOG DISCARDABLE  0, 0, 397, 201
+STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
-    PUSHBUTTON      "Cancel",IDCANCEL,121,60,50,14
-    EDITTEXT        IDC_EDT_FILE_NAME,7,18,145,12,ES_AUTOHSCROLL
-    LTEXT           "File name",IDC_STATIC,7,7,31,8
-    CONTROL         "General options",IDC_CHK_FILE_PRESET,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,7,35,65,10
-    CONTROL         "Matrix",IDC_CHK_FILE_MATRIX,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,7,45,35,10
-    CONTROL         "Equalizer",IDC_CHK_FILE_EQ,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,86,35,45,10
-    CONTROL         "Delay",IDC_CHK_FILE_DELAY,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,86,45,34,10
-    PUSHBUTTON      "&Save",IDC_BTN_FILE_SAVE,7,60,50,14
-    PUSHBUTTON      "&Load",IDC_BTN_FILE_LOAD,63,60,50,14
-    PUSHBUTTON      "...",IDC_BTN_FILE_CHOOSE,153,18,17,12
+    GROUPBOX        "SPDIF passthrough",IDC_GRP_SPDIF_PT,108,7,87,50
+    CONTROL         "AC3",IDC_CHK_SPDIF_AC3,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,18,74,10
+    CONTROL         "DTS",IDC_CHK_SPDIF_DTS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,29,74,10
+    CONTROL         "MPEG Audio",IDC_CHK_SPDIF_MPA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,40,74,10
+    GROUPBOX        "SPDIF/DTS mode",IDC_GRP_DTS_MODE,200,7,93,50
+    GROUPBOX        "SPDIF options",IDC_GRP_SPDIF,200,57,190,130
+    CONTROL         "Detect SPDIF stream in PCM data",IDC_CHK_USE_DETECTOR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,73,179,10
+    CONTROL         "Use AC3 encoder",IDC_CHK_SPDIF_ENCODE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,92,179,10
+    CONTROL         "Do not encode stereo PCM",IDC_CHK_SPDIF_STEREO_PT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,111,166,10
+    CONTROL         "Output SPDIF as PCM",IDC_CHK_SPDIF_AS_PCM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,130,179,10
+    CONTROL         "Restrict SPDIF sample rate",IDC_CHK_SPDIF_CHECK_SR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,149,179,10
+    CONTROL         "48kHz",IDC_CHK_SPDIF_ALLOW_48,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,220,168,37,10
+    CONTROL         "44kHz",IDC_CHK_SPDIF_ALLOW_44,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,267,168,37,10
+    CONTROL         "32kHz",IDC_CHK_SPDIF_ALLOW_32,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,314,168,37,10
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
+                    IDC_VER,7,190,383,8
+    RADIOBUTTON     "Auto",IDC_RBT_DTS_MODE_AUTO,207,18,78,10
+    RADIOBUTTON     "SPDIF wrapped",IDC_RBT_DTS_MODE_WRAPPED,207,28,78,10
+    RADIOBUTTON     "Padded DTS",IDC_RBT_DTS_MODE_PADDED,207,38,78,10
+    GROUPBOX        "Output",IDC_GRP_OUTPUT,7,7,96,50
+    COMBOBOX        IDC_CMB_SPK,14,17,83,86,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_CMB_FORMAT,14,30,83,61,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Use SPDIF",IDC_CHK_USE_SPDIF,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,14,45,82,10
+    LTEXT           "Frames / Errors",IDC_LBL_FRAMES_ERRORS,15,173,57,8
+    EDITTEXT        IDC_EDT_ERRORS,110,171,23,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDT_FRAMES,73,171,36,12,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "Decoder info",IDC_GRP_DECODER_INFO,7,57,188,130
+    EDITTEXT        IDC_EDT_INFO,14,68,175,101,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_WANTRETURN | WS_VSCROLL
+    GROUPBOX        "SPDIF/DTS conversion",IDC_GRP_DTS_CONV,297,7,93,50
+    CONTROL         "Do not convert",IDC_RBT_DTS_CONV_NONE,"Button",
+                    BS_AUTORADIOBUTTON,304,18,82,10
+    CONTROL         "Convert to DTS14",IDC_RBT_DTS_CONV_14BIT,"Button",
+                    BS_AUTORADIOBUTTON,304,28,82,10
+    CONTROL         "Convert to DTS16",IDC_RBT_DTS_CONV_16BIT,"Button",
+                    BS_AUTORADIOBUTTON,304,38,82,10
 END
 
 
@@ -675,6 +629,7 @@ BEGIN
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 390
+        VERTGUIDE, 166
         VERTGUIDE, 177
         VERTGUIDE, 194
         VERTGUIDE, 226
@@ -692,32 +647,7 @@ BEGIN
         HORZGUIDE, 68
         HORZGUIDE, 82
         HORZGUIDE, 97
-        HORZGUIDE, 187
-    END
-
-    IDD_EQ, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 390
-        VERTGUIDE, 16
-        VERTGUIDE, 108
-        VERTGUIDE, 140
-        VERTGUIDE, 155
-        VERTGUIDE, 183
-        VERTGUIDE, 210
-        VERTGUIDE, 237
-        VERTGUIDE, 264
-        VERTGUIDE, 291
-        VERTGUIDE, 318
-        VERTGUIDE, 345
-        VERTGUIDE, 372
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 198
-        HORZGUIDE, 14
-        HORZGUIDE, 91
-        HORZGUIDE, 109
-        HORZGUIDE, 121
-        HORZGUIDE, 182
+        HORZGUIDE, 122
         HORZGUIDE, 187
     END
 
@@ -744,7 +674,7 @@ BEGIN
         VERTGUIDE, 198
         VERTGUIDE, 292
         VERTGUIDE, 294
-        VERTGUIDE, 316
+        VERTGUIDE, 314
         TOPMARGIN, 7
         BOTTOMMARGIN, 199
         HORZGUIDE, 97
@@ -766,14 +696,23 @@ BEGIN
         HORZGUIDE, 187
     END
 
-    IDD_FILE, DIALOG
+    IDD_SPDIF, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 171
-        VERTGUIDE, 86
+        RIGHTMARGIN, 390
+        VERTGUIDE, 15
+        VERTGUIDE, 115
+        VERTGUIDE, 189
+        VERTGUIDE, 195
+        VERTGUIDE, 200
+        VERTGUIDE, 207
+        VERTGUIDE, 220
+        VERTGUIDE, 304
+        VERTGUIDE, 386
         TOPMARGIN, 7
-        BOTTOMMARGIN, 74
-        HORZGUIDE, 45
+        BOTTOMMARGIN, 198
+        HORZGUIDE, 57
+        HORZGUIDE, 187
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -786,8 +725,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,1,0
- PRODUCTVERSION 1,0,1,0
+ FILEVERSION 1,3,1,0
+ PRODUCTVERSION 1,3,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -805,14 +744,14 @@ BEGIN
             VALUE "Comments", "Direct show audio decoder and processor filter\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "ac3filter\0"
-            VALUE "FileVersion", "1.01a\0"
+            VALUE "FileVersion", "1.31b\0"
             VALUE "InternalName", "ac3filter\0"
-            VALUE "LegalCopyright", "Copyright c 2002-2004 by Alexander Vigovsky\0"
+            VALUE "LegalCopyright", "Copyright c 2002-2007 by Alexander Vigovsky\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "ac3filter.ax\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "AC3Filter\0"
-            VALUE "ProductVersion", "1.01a\0"
+            VALUE "ProductVersion", "1.31b\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -840,11 +779,6 @@ IDI_AC3FILTER           ICON    DISCARDABLE     "ac3filter.ico"
 //
 
 IDB_LOGO                BITMAP  DISCARDABLE     "ac3filter.bmp"
-IDB_FORMAT_PCM          BITMAP  DISCARDABLE     "format_pcm.bmp"
-IDB_FORMAT_AC3          BITMAP  DISCARDABLE     "format_ac3.bmp"
-IDB_FORMAT_DTS          BITMAP  DISCARDABLE     "format_dts.bmp"
-IDB_FORMAT_MPA          BITMAP  DISCARDABLE     "format_mpa.bmp"
-IDB_FORMAT_PES          BITMAP  DISCARDABLE     "format_pes.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -853,11 +787,11 @@ IDB_FORMAT_PES          BITMAP  DISCARDABLE     "format_pes.bmp"
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    IDS_AC3FILTER           "AC3 Filter"
+    IDS_AC3FILTER           "AC3Filter"
     IDS_MAIN                "Main"
     IDS_MIXER               "Mixer"
     IDS_GAINS               "Gains"
-    IDS_EQ                  "Equalizer"
+    IDS_SPDIF               "SPDIF"
     IDS_SYS                 "System"
     IDS_ABOUT               "About"
     IDS_DESC                "Configures speaker configuration and other parameters of AC3 decoder filter."

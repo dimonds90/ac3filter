@@ -47,9 +47,13 @@ void cr2crlf(char *buf, int size);
 #define SPDIF_MODE_ENCODE              3
 
 // Constants from spdif_wrapper.h
-#define SPDIF_DTS_AUTO    0
-#define SPDIF_DTS_WRAPPED 1
-#define SPDIF_DTS_PADDED  2
+#define DTS_MODE_AUTO    0
+#define DTS_MODE_WRAPPED 1
+#define DTS_MODE_PADDED  2
+
+#define DTS_CONV_NONE    0
+#define DTS_CONV_16BIT   1
+#define DTS_CONV_14BIT   2
 
 ///////////////////////////////////////////////////////////////////////////////
 // Media types
@@ -100,21 +104,31 @@ DEFINE_GUID(IID_IMatrixMixer,
 // {A753A1EC-973E-4718-AF8E-A3F554D45C44}
 DEFINE_GUID(CLSID_AC3Filter, 
 0xa753a1ec, 0x973e, 0x4718, 0xaf, 0x8e, 0xa3, 0xf5, 0x54, 0xd4, 0x5c, 0x44);
+
 // {FBA5FB05-58C3-45cb-8B0D-C2313EA048CF}
 DEFINE_GUID(CLSID_AC3Filter_main, 
 0xfba5fb05, 0x58c3, 0x45cb, 0x8b, 0xd, 0xc2, 0x31, 0x3e, 0xa0, 0x48, 0xcf);
+
 // {F0B801B1-A239-473b-B6B4-6AE3DB3ABBD3}
 DEFINE_GUID(CLSID_AC3Filter_mixer, 
 0xf0b801b1, 0xa239, 0x473b, 0xb6, 0xb4, 0x6a, 0xe3, 0xdb, 0x3a, 0xbb, 0xd3);
+
 // {02AFA80F-4BEE-41fd-8572-214B58A9EF90}
 DEFINE_GUID(CLSID_AC3Filter_gains, 
 0x2afa80f, 0x4bee, 0x41fd, 0x85, 0x72, 0x21, 0x4b, 0x58, 0xa9, 0xef, 0x90);
+
 // {8643B615-6A76-4060-8A29-C2C6BDF5D70F}
 DEFINE_GUID(CLSID_AC3Filter_eq, 
 0x8643b615, 0x6a76, 0x4060, 0x8a, 0x29, 0xc2, 0xc6, 0xbd, 0xf5, 0xd7, 0xf);
+
+// {A6A695A2-B1AD-49a2-AD6F-FFB82E2A7832}
+DEFINE_GUID(CLSID_AC3Filter_spdif, 
+0xa6a695a2, 0xb1ad, 0x49a2, 0xad, 0x6f, 0xff, 0xb8, 0x2e, 0x2a, 0x78, 0x32);
+
 // {363F46BE-27B4-4c8d-99E7-B1E049B84376}
 DEFINE_GUID(CLSID_AC3Filter_sys, 
 0x363f46be, 0x27b4, 0x4c8d, 0x99, 0xe7, 0xb1, 0xe0, 0x49, 0xb8, 0x43, 0x76);
+
 // {90A9B7D2-3794-45ea-9E23-140E3938D2D9}
 DEFINE_GUID(CLSID_AC3Filter_about, 
 0x90a9b7d2, 0x3794, 0x45ea, 0x9e, 0x23, 0x14, 0xe, 0x39, 0x38, 0xd2, 0xd9);
@@ -199,13 +213,13 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
   STDMETHOD (get_spdif_allow_32)(bool *spdif_allow_32) = 0;
   STDMETHOD (set_spdif_allow_32)(bool  spdif_allow_32) = 0;
 
-  // Convert DTS to 14bit for SPDIF output
-  STDMETHOD (get_use_dts14) (bool *use_dts14) = 0;
-  STDMETHOD (set_use_dts14) (bool  use_dts14) = 0;
-
   // SPDIF/DTS output mode
   STDMETHOD (get_dts_mode) (int *dts_mode) = 0;
   STDMETHOD (set_dts_mode) (int  dts_mode) = 0;
+
+  // SPDIF/DTS conversion
+  STDMETHOD (get_dts_conv) (int *dts_conv) = 0;
+  STDMETHOD (set_dts_conv) (int  dts_conv) = 0;
 
   // SPDIF status
   STDMETHOD (get_spdif_status)(int *spdif_status) = 0;

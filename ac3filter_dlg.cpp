@@ -10,6 +10,7 @@
 #include "registry.h"
 #include "filters\delay.h"
 #include "ac3filter_ver.h"
+#include "translate.h"
 
 
 #define SAFE_RELEASE(p) { if (p) p->Release(); p = 0; }
@@ -30,11 +31,11 @@ const int matrix_controls[6][6] =
   { IDC_EDT_L_LFE, IDC_EDT_C_LFE, IDC_EDT_R_LFE, IDC_EDT_SL_LFE, IDC_EDT_SR_LFE, IDC_EDT_LFE_LFE }
 };
 
-const int idc_level_in[6]   = { IDC_IN_L,  IDC_IN_C,  IDC_IN_R,  IDC_IN_SL,  IDC_IN_SR,  IDC_IN_LFE  };
-const int idc_level_out[6]  = { IDC_OUT_L, IDC_OUT_C, IDC_OUT_R, IDC_OUT_SL, IDC_OUT_SR, IDC_OUT_LFE };
+const int idc_level_in[6]   = { IDC_IN_L,  IDC_IN_C,  IDC_IN_R,  IDC_IN_SL,  IDC_IN_SR,  IDC_IN_LFE };
+const int idc_level_out[6]  = { IDC_OUT_L, IDC_OUT_C, IDC_OUT_R, IDC_OUT_SL, IDC_OUT_SR, IDC_OUT_SW };
 
-const int idc_slider_in[6]  = { IDC_SLIDER_IN_L,  IDC_SLIDER_IN_C,  IDC_SLIDER_IN_R,  IDC_SLIDER_IN_SL,  IDC_SLIDER_IN_SR,  IDC_SLIDER_IN_LFE  };
-const int idc_slider_out[6] = { IDC_SLIDER_OUT_L, IDC_SLIDER_OUT_C, IDC_SLIDER_OUT_R, IDC_SLIDER_OUT_SL, IDC_SLIDER_OUT_SR, IDC_SLIDER_OUT_LFE };
+const int idc_slider_in[6]  = { IDC_SLI_IN_L,  IDC_SLI_IN_C,  IDC_SLI_IN_R,  IDC_SLI_IN_SL,  IDC_SLI_IN_SR,  IDC_SLI_IN_LFE  };
+const int idc_slider_out[6] = { IDC_SLI_OUT_L, IDC_SLI_OUT_C, IDC_SLI_OUT_R, IDC_SLI_OUT_SL, IDC_SLI_OUT_SR, IDC_SLI_OUT_LFE };
 
 const int idc_edt_in[6]     = { IDC_EDT_IN_L,  IDC_EDT_IN_C,  IDC_EDT_IN_R,  IDC_EDT_IN_SL,  IDC_EDT_IN_SR,  IDC_EDT_IN_LFE  };
 const int idc_edt_out[6]    = { IDC_EDT_OUT_L, IDC_EDT_OUT_C, IDC_EDT_OUT_R, IDC_EDT_OUT_SL, IDC_EDT_OUT_SR, IDC_EDT_OUT_LFE };
@@ -333,6 +334,14 @@ CUnknown * WINAPI AC3FilterDlg::CreateGains(LPUNKNOWN lpunk, HRESULT *phr)
     *phr = E_OUTOFMEMORY;
   return punk;
 }
+CUnknown * WINAPI AC3FilterDlg::CreateSPDIF(LPUNKNOWN lpunk, HRESULT *phr)
+{
+  DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter SPDIF property page"));
+  CUnknown *punk = new AC3FilterDlg("AC3Filter SPDIF property page", lpunk, phr, IDD_SPDIF, IDS_SPDIF, 0);
+  if (punk == NULL) 
+    *phr = E_OUTOFMEMORY;
+  return punk;
+}
 CUnknown * WINAPI AC3FilterDlg::CreateSystem(LPUNKNOWN lpunk, HRESULT *phr)
 {
   DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter System property page"));
@@ -345,7 +354,7 @@ CUnknown * WINAPI AC3FilterDlg::CreateSystem(LPUNKNOWN lpunk, HRESULT *phr)
 CUnknown * WINAPI AC3FilterDlg::CreateAbout(LPUNKNOWN lpunk, HRESULT *phr)
 {
   DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter System property page"));
-  CUnknown *punk = new AC3FilterDlg("AC3Filter System property page", lpunk, phr, IDD_ABOUT, IDS_ABOUT, 0);
+  CUnknown *punk = new AC3FilterDlg("AC3Filter About property page", lpunk, phr, IDD_ABOUT, IDS_ABOUT, 0);
   if (punk == NULL) 
     *phr = E_OUTOFMEMORY;
   return punk;
@@ -361,7 +370,6 @@ AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int Dialo
 
   flags  = _flags;
   InitCommonControls();
-  logo   = 0;
 }
 
 HRESULT 
@@ -400,11 +408,6 @@ AC3FilterDlg::OnDisconnect()
   SAFE_RELEASE(dec);
   SAFE_RELEASE(proc);
 
-  if (logo)
-  {
-    DeleteObject(logo);
-    logo = 0;
-  }
   return NOERROR;
 }
 
@@ -421,6 +424,7 @@ AC3FilterDlg::OnActivate()
   set_dynamic_controls();
   set_controls();
   set_cpu_usage();
+  translate();
 
   SetTimer(m_hwnd, 1, refresh_time, 0);  // for all dynamic controls
   SetTimer(m_hwnd, 2, 1000, 0);          // for CPU usage (should be averaged)
@@ -439,6 +443,26 @@ AC3FilterDlg::OnDeactivate()
   return NOERROR;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Handle messages
+///////////////////////////////////////////////////////////////////////////////
+
+void
+AC3FilterDlg::translate()
+{
+  char path[1024];
+  char lang[1024];
+  char controls[1024];
+  char trans[1024];
+
+  RegistryKey reg(REG_KEY);
+  reg.get_text("Install_Dir", path, sizeof(path));
+  reg.get_text("Language", lang, sizeof(lang));
+  sprintf(controls, "%s\\resource_ids.h", path);
+  sprintf(trans, "%s\\lang\\%s.lng", path, lang);
+
+  ::translate(m_Dlg, controls, trans, m_DialogId);
+}
 ///////////////////////////////////////////////////////////////////////////////
 // Handle messages
 ///////////////////////////////////////////////////////////////////////////////
@@ -529,8 +553,8 @@ AC3FilterDlg::reload_state()
   dec->get_spdif_allow_44(&spdif_allow_44);
   dec->get_spdif_allow_32(&spdif_allow_32);
 
-  dec->get_use_dts14(&use_dts14);
   dec->get_dts_mode(&dts_mode);
+  dec->get_dts_conv(&dts_conv);
 
   dec->get_spdif_status(&spdif_status);
 
@@ -565,7 +589,6 @@ AC3FilterDlg::init_controls()
   SendDlgItemMessage(m_Dlg, IDC_CMB_SPK, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < sizeof(spklist) / sizeof(spklist[0]); i++)
     SendDlgItemMessage(m_Dlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LONG)spklist[i]);
-  set_logo();
 
   /////////////////////////////////////
   // CPU usage
@@ -589,17 +612,17 @@ AC3FilterDlg::init_controls()
   /////////////////////////////////////
   // Gains
 
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_MASTER, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_MASTER, TBM_SETTIC, 0, 0);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_GAIN,   TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_GAIN,   TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_MASTER, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_MASTER, TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_GAIN,   TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_GAIN,   TBM_SETTIC, 0, 0);
 
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_LFE,    TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_LFE,    TBM_SETTIC, 0, 0);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_VOICE,  TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_VOICE,  TBM_SETTIC, 0, 0);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_SUR,    TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_SUR,    TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_LFE,    TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_LFE,    TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_VOICE,  TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_VOICE,  TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_SUR,    TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_SUR,    TBM_SETTIC, 0, 0);
 
   edt_master.link(m_Dlg, IDC_EDT_MASTER);
   edt_gain  .link(m_Dlg, IDC_EDT_GAIN);
@@ -648,8 +671,8 @@ AC3FilterDlg::init_controls()
   // Syncronization
 
   edt_time_shift.link(m_Dlg, IDC_EDT_TIME_SHIFT);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_SETRANGE, TRUE, MAKELONG(-500, 500));
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_TIME_SHIFT, TBM_SETRANGE, TRUE, MAKELONG(-500, 500));
+  SendDlgItemMessage(m_Dlg, IDC_SLI_TIME_SHIFT, TBM_SETTIC, 0, 0);
 
   /////////////////////////////////////
   // AGC
@@ -660,10 +683,10 @@ AC3FilterDlg::init_controls()
   /////////////////////////////////////
   // DRC
 
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_SETTIC, 0, 0);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_LEVEL, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_LEVEL, TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_DRC_POWER, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_DRC_POWER, TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_DRC_LEVEL, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_DRC_LEVEL, TBM_SETTIC, 0, 0);
   edt_drc_power.link(m_Dlg, IDC_EDT_DRC_POWER);
   edt_drc_level.link(m_Dlg, IDC_EDT_DRC_LEVEL);
 
@@ -724,7 +747,6 @@ AC3FilterDlg::set_dynamic_controls()
     old_in_spk = in_spk;
     sprintf(buf, "%s %s %iHz", in_spk.format_text(), in_spk.mode_text(), in_spk.sample_rate);
     SetDlgItemText(m_Dlg, IDC_LBL_INPUT, buf);
-    set_logo();
   }
 
   /////////////////////////////////////
@@ -775,7 +797,7 @@ AC3FilterDlg::set_dynamic_controls()
   /////////////////////////////////////
   // Auto gain control
 
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_GAIN, TBM_SETPOS, TRUE, long(-value2db(gain) * ticks));
+  SendDlgItemMessage(m_Dlg, IDC_SLI_GAIN, TBM_SETPOS, TRUE, long(-value2db(gain) * ticks));
   edt_gain.update_value(value2db(gain));
 
   /////////////////////////////////////
@@ -795,7 +817,7 @@ AC3FilterDlg::set_dynamic_controls()
   /////////////////////////////////////
   // DRC
 
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_LEVEL, TBM_SETPOS, TRUE, long(-value2db(drc_level) * ticks));
+  SendDlgItemMessage(m_Dlg, IDC_SLI_DRC_LEVEL, TBM_SETPOS, TRUE, long(-value2db(drc_level) * ticks));
   edt_drc_level.update_value(value2db(drc_level));
 
   /////////////////////////////////////
@@ -851,10 +873,16 @@ AC3FilterDlg::set_controls()
   /////////////////////////////////////
   // SPDIF/DTS output mode
 
-  CheckDlgButton(m_Dlg, IDC_CHK_USE_DTS14, use_dts14? BST_CHECKED: BST_UNCHECKED);
-  SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_AUTO,    BM_SETCHECK, dts_mode == SPDIF_DTS_AUTO? BST_CHECKED: BST_UNCHECKED, 1);
-  SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_WRAPPED, BM_SETCHECK, dts_mode == SPDIF_DTS_WRAPPED? BST_CHECKED: BST_UNCHECKED, 1);
-  SendDlgItemMessage(m_Dlg, IDC_RB_DTS_MODE_PADDED,  BM_SETCHECK, dts_mode == SPDIF_DTS_PADDED? BST_CHECKED: BST_UNCHECKED, 1);
+  SendDlgItemMessage(m_Dlg, IDC_RBT_DTS_MODE_AUTO,    BM_SETCHECK, dts_mode == DTS_MODE_AUTO? BST_CHECKED: BST_UNCHECKED, 1);
+  SendDlgItemMessage(m_Dlg, IDC_RBT_DTS_MODE_WRAPPED, BM_SETCHECK, dts_mode == DTS_MODE_WRAPPED? BST_CHECKED: BST_UNCHECKED, 1);
+  SendDlgItemMessage(m_Dlg, IDC_RBT_DTS_MODE_PADDED,  BM_SETCHECK, dts_mode == DTS_MODE_PADDED? BST_CHECKED: BST_UNCHECKED, 1);
+
+  /////////////////////////////////////
+  // SPDIF/DTS conversion
+
+  SendDlgItemMessage(m_Dlg, IDC_RBT_DTS_CONV_NONE,    BM_SETCHECK, dts_conv == DTS_CONV_NONE? BST_CHECKED: BST_UNCHECKED, 1);
+  SendDlgItemMessage(m_Dlg, IDC_RBT_DTS_CONV_14BIT,   BM_SETCHECK, dts_conv == DTS_CONV_14BIT? BST_CHECKED: BST_UNCHECKED, 1);
+  SendDlgItemMessage(m_Dlg, IDC_RBT_DTS_CONV_16BIT,   BM_SETCHECK, dts_conv == DTS_CONV_16BIT? BST_CHECKED: BST_UNCHECKED, 1);
 
   /////////////////////////////////////
   // SPDIF options
@@ -896,7 +924,7 @@ AC3FilterDlg::set_controls()
   /////////////////////////////////////
   // Auto gain control
 
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_MASTER, TBM_SETPOS, TRUE, long(-value2db(master) * ticks));
+  SendDlgItemMessage(m_Dlg, IDC_SLI_MASTER, TBM_SETPOS, TRUE, long(-value2db(master) * ticks));
   edt_master.update_value(value2db(master));
 
   SendDlgItemMessage(m_Dlg, IDC_CHK_AUTO_GAIN, BM_SETCHECK, auto_gain? BST_CHECKED: BST_UNCHECKED, 1);
@@ -909,9 +937,9 @@ AC3FilterDlg::set_controls()
   /////////////////////////////////////
   // Gain controls
 
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_VOICE, TBM_SETPOS, TRUE, long(-value2db(clev)   * ticks));
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_SUR,   TBM_SETPOS, TRUE, long(-value2db(slev)   * ticks));
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_LFE,   TBM_SETPOS, TRUE, long(-value2db(lfelev) * ticks));
+  SendDlgItemMessage(m_Dlg, IDC_SLI_VOICE, TBM_SETPOS, TRUE, long(-value2db(clev)   * ticks));
+  SendDlgItemMessage(m_Dlg, IDC_SLI_SUR,   TBM_SETPOS, TRUE, long(-value2db(slev)   * ticks));
+  SendDlgItemMessage(m_Dlg, IDC_SLI_LFE,   TBM_SETPOS, TRUE, long(-value2db(lfelev) * ticks));
 
   edt_voice.update_value(value2db(clev));
   edt_sur  .update_value(value2db(slev));
@@ -936,7 +964,7 @@ AC3FilterDlg::set_controls()
     edt_delay[ch].update_value(delays[ch]);
     edt_delay[ch].enable(delay);
   }
-  SendDlgItemMessage(m_Dlg, IDC_CHK_DELAY, BM_SETCHECK, delay? BST_CHECKED: BST_UNCHECKED, 1);
+  SendDlgItemMessage(m_Dlg, IDC_CHK_DELAYS, BM_SETCHECK, delay? BST_CHECKED: BST_UNCHECKED, 1);
   SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_SETCURSEL, units2list(delay_units), 0);
   EnableWindow(GetDlgItem(m_Dlg, IDC_CMB_UNITS), delay);
 
@@ -944,7 +972,7 @@ AC3FilterDlg::set_controls()
   // Syncronization
 
   edt_time_shift.update_value(time_shift * 1000);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_SETPOS, TRUE, int(time_shift * 1000));
+  SendDlgItemMessage(m_Dlg, IDC_SLI_TIME_SHIFT, TBM_SETPOS, TRUE, int(time_shift * 1000));
 
   SendDlgItemMessage(m_Dlg, IDC_CHK_JITTER, BM_SETCHECK, dejitter? BST_CHECKED: BST_UNCHECKED, 1);
 //  SetDlgItemInt(m_Dlg, IDC_LBL_JITTER, int(jitter * 1000), false);
@@ -953,7 +981,7 @@ AC3FilterDlg::set_controls()
   // DRC
 
   SendDlgItemMessage(m_Dlg, IDC_CHK_DRC, BM_SETCHECK, drc? BST_CHECKED: BST_UNCHECKED, 1);
-  SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_SETPOS, TRUE, long(-drc_power * ticks));
+  SendDlgItemMessage(m_Dlg, IDC_SLI_DRC_POWER, TBM_SETPOS, TRUE, long(-drc_power * ticks));
   edt_drc_power.update_value(drc_power);
 
   /////////////////////////////////////
@@ -987,14 +1015,14 @@ AC3FilterDlg::set_controls()
 
   if (filter_merit)
   {
-    SendDlgItemMessage(m_Dlg, IDC_RB_MERIT_PREFERRED, BM_SETCHECK, filter_merit >  MERIT_NORMAL? BST_CHECKED: BST_UNCHECKED, 1);
-    SendDlgItemMessage(m_Dlg, IDC_RB_MERIT_UNLIKELY,  BM_SETCHECK, filter_merit <= MERIT_NORMAL? BST_CHECKED: BST_UNCHECKED, 1);
+    SendDlgItemMessage(m_Dlg, IDC_RBT_MERIT_PREFERRED, BM_SETCHECK, filter_merit >  MERIT_NORMAL? BST_CHECKED: BST_UNCHECKED, 1);
+    SendDlgItemMessage(m_Dlg, IDC_RBT_MERIT_UNLIKELY,  BM_SETCHECK, filter_merit <= MERIT_NORMAL? BST_CHECKED: BST_UNCHECKED, 1);
   }
     
   if (wo_merit && ds_merit)
   {
-    SendDlgItemMessage(m_Dlg, IDC_RB_RENDER_DS, BM_SETCHECK, ds_merit > wo_merit? BST_CHECKED: BST_UNCHECKED, 1);
-    SendDlgItemMessage(m_Dlg, IDC_RB_RENDER_WO, BM_SETCHECK, ds_merit < wo_merit? BST_CHECKED: BST_UNCHECKED, 1);
+    SendDlgItemMessage(m_Dlg, IDC_RBT_RENDER_DS, BM_SETCHECK, ds_merit > wo_merit? BST_CHECKED: BST_UNCHECKED, 1);
+    SendDlgItemMessage(m_Dlg, IDC_RBT_RENDER_WO, BM_SETCHECK, ds_merit < wo_merit? BST_CHECKED: BST_UNCHECKED, 1);
   }
 
   /////////////////////////////////////
@@ -1031,7 +1059,7 @@ AC3FilterDlg::set_controls()
   }
 
   fill_combobox(IDC_CMB_PRESET, REG_KEY_PRESET);
-  fill_combobox(IDC_CMB_MATRIX, REG_KEY_MATRIX);
+  fill_combobox(IDC_CMB_MATRIX_PRESET, REG_KEY_MATRIX);
 
   /////////////////////////////////////
   // Matrix
@@ -1070,27 +1098,6 @@ AC3FilterDlg::set_cpu_usage()
   filter->get_cpu_usage(&cpu_usage);
   dlg_printf(m_Dlg, IDC_CPU_LABEL, "%i%%", int(cpu_usage*100));
   SendDlgItemMessage(m_Dlg, IDC_CPU, PBM_SETPOS, int(cpu_usage * 100),  0);
-}
-
-void 
-AC3FilterDlg::set_logo()
-{
-  if (logo)
-  {
-    DeleteObject(logo);
-    logo = 0;
-  }
-
-  int resource = IDB_FORMAT_PCM;
-  switch (in_spk.format)
-  {
-    case FORMAT_AC3: resource = IDB_FORMAT_AC3; break;
-    case FORMAT_DTS: resource = IDB_FORMAT_DTS; break;
-    case FORMAT_MPA: resource = IDB_FORMAT_MPA; break;
-    case FORMAT_PES: resource = IDB_FORMAT_PES; break;
-  }
-  logo = LoadBitmap(g_hInst, MAKEINTRESOURCE(resource));
-  SendDlgItemMessage(m_Dlg, IDC_LOGO, STM_SETIMAGE, IMAGE_BITMAP, (long)logo);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1294,34 +1301,53 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // SPDIF/DTS output mode
 
-    case IDC_CHK_USE_DTS14:
+    case IDC_RBT_DTS_MODE_AUTO:
     {
-      use_dts14 = IsDlgButtonChecked(m_Dlg, IDC_CHK_USE_DTS14) == BST_CHECKED;
-      dec->set_use_dts14(use_dts14);
-      update();
-      break;
-    }
-
-    case IDC_RB_DTS_MODE_AUTO:
-    {
-      dts_mode = SPDIF_DTS_AUTO;
+      dts_mode = DTS_MODE_AUTO;
       dec->set_dts_mode(dts_mode);
       update();
       break;
     }
 
-    case IDC_RB_DTS_MODE_WRAPPED:
+    case IDC_RBT_DTS_MODE_WRAPPED:
     {
-      dts_mode = SPDIF_DTS_WRAPPED;
+      dts_mode = DTS_MODE_WRAPPED;
       dec->set_dts_mode(dts_mode);
       update();
       break;
     }
 
-    case IDC_RB_DTS_MODE_PADDED:
+    case IDC_RBT_DTS_MODE_PADDED:
     {
-      dts_mode = SPDIF_DTS_PADDED;
+      dts_mode = DTS_MODE_PADDED;
       dec->set_dts_mode(dts_mode);
+      update();
+      break;
+    }
+
+    /////////////////////////////////////
+    // SPDIF/DTS conversion
+
+    case IDC_RBT_DTS_CONV_NONE:
+    {
+      dts_conv = DTS_CONV_NONE;
+      dec->set_dts_conv(dts_conv);
+      update();
+      break;
+    }
+
+    case IDC_RBT_DTS_CONV_14BIT:
+    {
+      dts_conv = DTS_CONV_14BIT;
+      dec->set_dts_conv(dts_conv);
+      update();
+      break;
+    }
+
+    case IDC_RBT_DTS_CONV_16BIT:
+    {
+      dts_conv = DTS_CONV_16BIT;
+      dec->set_dts_conv(dts_conv);
       update();
       break;
     }
@@ -1340,10 +1366,10 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // Auto gain control
 
-    case IDC_SLIDER_MASTER:
+    case IDC_SLI_MASTER:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        master = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLIDER_MASTER,TBM_GETPOS, 0, 0))/ticks);
+        master = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLI_MASTER,TBM_GETPOS, 0, 0))/ticks);
         proc->set_master(master);
         update();
       }
@@ -1379,14 +1405,14 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // Gain controls
 
-    case IDC_SLIDER_VOICE:
-    case IDC_SLIDER_SUR:
-    case IDC_SLIDER_LFE:
+    case IDC_SLI_VOICE:
+    case IDC_SLI_SUR:
+    case IDC_SLI_LFE:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        clev   = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLIDER_VOICE, TBM_GETPOS, 0, 0))/ticks);
-        slev   = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLIDER_SUR,   TBM_GETPOS, 0, 0))/ticks);
-        lfelev = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLIDER_LFE,   TBM_GETPOS, 0, 0))/ticks);
+        clev   = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLI_VOICE, TBM_GETPOS, 0, 0))/ticks);
+        slev   = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLI_SUR,   TBM_GETPOS, 0, 0))/ticks);
+        lfelev = db2value(-double(SendDlgItemMessage(m_Dlg, IDC_SLI_LFE,   TBM_GETPOS, 0, 0))/ticks);
         proc->set_clev(clev);
         proc->set_slev(slev);
         proc->set_lfelev(lfelev);
@@ -1412,12 +1438,12 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // I/O Gains
 
-    case IDC_SLIDER_IN_L:
-    case IDC_SLIDER_IN_C:
-    case IDC_SLIDER_IN_R:
-    case IDC_SLIDER_IN_SL:
-    case IDC_SLIDER_IN_SR:
-    case IDC_SLIDER_IN_LFE:
+    case IDC_SLI_IN_L:
+    case IDC_SLI_IN_C:
+    case IDC_SLI_IN_R:
+    case IDC_SLI_IN_SL:
+    case IDC_SLI_IN_SR:
+    case IDC_SLI_IN_LFE:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
         for (int ch = 0; ch < NCHANNELS; ch++)
@@ -1444,12 +1470,12 @@ AC3FilterDlg::command(int control, int message)
       }
       break;
 
-    case IDC_SLIDER_OUT_L:
-    case IDC_SLIDER_OUT_C:
-    case IDC_SLIDER_OUT_R:
-    case IDC_SLIDER_OUT_SL:
-    case IDC_SLIDER_OUT_SR:
-    case IDC_SLIDER_OUT_LFE:
+    case IDC_SLI_OUT_L:
+    case IDC_SLI_OUT_C:
+    case IDC_SLI_OUT_R:
+    case IDC_SLI_OUT_SL:
+    case IDC_SLI_OUT_SR:
+    case IDC_SLI_OUT_LFE:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
         for (int ch = 0; ch < NCHANNELS; ch++)
@@ -1480,9 +1506,9 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // Delay
 
-    case IDC_CHK_DELAY:
+    case IDC_CHK_DELAYS:
     {
-      delay = (SendDlgItemMessage(m_Dlg, IDC_CHK_DELAY, BM_GETCHECK, 0, 0) == BST_CHECKED);
+      delay = (SendDlgItemMessage(m_Dlg, IDC_CHK_DELAYS, BM_GETCHECK, 0, 0) == BST_CHECKED);
       proc->set_delay(delay);
       update();
       break;
@@ -1525,10 +1551,10 @@ AC3FilterDlg::command(int control, int message)
       }
       break;
 
-    case IDC_SLIDER_TIME_SHIFT:
+    case IDC_SLI_TIME_SHIFT:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        time_shift = vtime_t(SendDlgItemMessage(m_Dlg, IDC_SLIDER_TIME_SHIFT, TBM_GETPOS, 0, 0)) / 1000;
+        time_shift = vtime_t(SendDlgItemMessage(m_Dlg, IDC_SLI_TIME_SHIFT, TBM_GETPOS, 0, 0)) / 1000;
         dec->set_time_shift(time_shift);
         update();
       }
@@ -1554,10 +1580,10 @@ AC3FilterDlg::command(int control, int message)
       break;
     }
 
-    case IDC_SLIDER_DRC_POWER:
+    case IDC_SLI_DRC_POWER:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        drc_power = -double(SendDlgItemMessage(m_Dlg, IDC_SLIDER_DRC_POWER, TBM_GETPOS, 0, 0)) / ticks;
+        drc_power = -double(SendDlgItemMessage(m_Dlg, IDC_SLI_DRC_POWER, TBM_GETPOS, 0, 0)) / ticks;
         proc->set_drc_power(drc_power);
         update();
       }
@@ -1738,13 +1764,13 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // Matrix combo box 
 
-    case IDC_CMB_MATRIX:
+    case IDC_CMB_MATRIX_PRESET:
       if (message == CBN_SELENDOK)
       {
         char buf[256];
         char preset[256];
-        SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, CB_GETLBTEXT, SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, CB_GETCURSEL, 0, 0), (LONG)preset);
-        SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_SETTEXT, 0, (LONG)preset);
+        SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX_PRESET, CB_GETLBTEXT, SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX_PRESET, CB_GETCURSEL, 0, 0), (LONG)preset);
+        SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX_PRESET, WM_SETTEXT, 0, (LONG)preset);
         sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
 
         proc->set_auto_matrix(false);
@@ -1756,7 +1782,7 @@ AC3FilterDlg::command(int control, int message)
       {
         char buf[256];
         char preset[256];
-        SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_GETTEXT, 256, (LONG)preset);
+        SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LONG)preset);
         sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
 
         RegistryKey reg;
@@ -1770,7 +1796,7 @@ AC3FilterDlg::command(int control, int message)
     {
       char buf[256];
       char preset[256];
-      SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_GETTEXT, 256, (LONG)preset);
+      SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LONG)preset);
       sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
 
       RegistryKey reg;
@@ -1784,14 +1810,14 @@ AC3FilterDlg::command(int control, int message)
     {
       char buf[256];
       char preset[256];
-      SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_GETTEXT, 256, (LONG)preset);
+      SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LONG)preset);
 
       sprintf(buf, "Are you sure you want to delete '%s' matrix?", preset);
       if (MessageBox(m_Dlg, buf, "Delete confirmation", MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
       {     
         sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
         delete_reg_key(buf, HKEY_CURRENT_USER);
-        SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX, WM_SETTEXT, 0, (LONG)"");
+        SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX_PRESET, WM_SETTEXT, 0, (LONG)"");
         proc->set_auto_matrix(true);
         update();
       }
@@ -1801,7 +1827,7 @@ AC3FilterDlg::command(int control, int message)
     /////////////////////////////////////
     // Merit 
 
-    case IDC_RB_RENDER_DS:
+    case IDC_RBT_RENDER_DS:
       // DirectSound
       set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default DirectSound Device", 0x800000);
       set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default DirectSound Device", 0x800000); 
@@ -1814,7 +1840,7 @@ AC3FilterDlg::command(int control, int message)
       update();
       break;
 
-    case IDC_RB_RENDER_WO:
+    case IDC_RBT_RENDER_WO:
       // DirectSound
       set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default DirectSound Device", 0x200000);
       set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default DirectSound Device", 0x200000); 
@@ -1827,7 +1853,7 @@ AC3FilterDlg::command(int control, int message)
       update();
       break;
 
-    case IDC_RB_MERIT_PREFERRED:
+    case IDC_RBT_MERIT_PREFERRED:
       set_merit(HKEY_CLASSES_ROOT, "CLSID\\{083863F1-70DE-11d0-BD40-00A0C911CE86}\\Instance\\{A753A1EC-973E-4718-AF8E-A3F554D45C44}", 0x10000000);
       // Clear filter cache
       delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
@@ -1835,7 +1861,7 @@ AC3FilterDlg::command(int control, int message)
       update();
       break;
 
-    case IDC_RB_MERIT_UNLIKELY:
+    case IDC_RBT_MERIT_UNLIKELY:
       set_merit(HKEY_CLASSES_ROOT, "CLSID\\{083863F1-70DE-11d0-BD40-00A0C911CE86}\\Instance\\{A753A1EC-973E-4718-AF8E-A3F554D45C44}", MERIT_UNLIKELY);
       // Clear filter cache
       delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);

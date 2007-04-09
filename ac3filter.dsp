@@ -19,7 +19,6 @@ CFG=ac3filter - Win32 Debug
 !MESSAGE 
 !MESSAGE "ac3filter - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE "ac3filter - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
-!MESSAGE "ac3filter - Win32 Perf" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE 
 
 # Begin Project
@@ -75,7 +74,7 @@ PostBuild_Cmds=_reg.bat release
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "AC3FILTER_EXPORTS" /YX /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /Zi /Od /I "..\valib\valib" /D "WIN32" /D "DEBUG" /D "_DEBUG" /D DBG=1 /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "AC3FILTER_EXPORTS" /Fr /YX /FD /GZ /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /Zi /Od /I "..\valib\valib" /D "WIN32" /D "DEBUG" /D "_DEBUG" /D DBG=1 /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "AC3FILTER_EXPORTS" /Fr /YX /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x419 /d "_DEBUG"
@@ -85,43 +84,10 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 strmbasd.lib msvcrtd.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /debug /machine:I386 /nodefaultlib /out:"Debug/ac3filter.ax" /pdbtype:sept
+# ADD LINK32 strmbasd.lib msvcrtd.lib msvcprtd.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /debug /machine:I386 /nodefaultlib /out:"Debug/ac3filter.ax" /pdbtype:sept
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
 PostBuild_Cmds=_reg.bat debug
-# End Special Build Tool
-
-!ELSEIF  "$(CFG)" == "ac3filter - Win32 Perf"
-
-# PROP BASE Use_MFC 0
-# PROP BASE Use_Debug_Libraries 0
-# PROP BASE Output_Dir "Perf"
-# PROP BASE Intermediate_Dir "Perf"
-# PROP BASE Ignore_Export_Lib 0
-# PROP BASE Target_Dir ""
-# PROP Use_MFC 0
-# PROP Use_Debug_Libraries 0
-# PROP Output_Dir "Perf"
-# PROP Intermediate_Dir "Perf"
-# PROP Ignore_Export_Lib 0
-# PROP Target_Dir ""
-# ADD BASE CPP /nologo /MD /W3 /O2 /Ob2 /I "..\..\valib\valib\valib" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "AC3FILTER_EXPORTS" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /O2 /Ob2 /I "..\valib\valib" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "AC3FILTER_EXPORTS" /YX /FD /c
-# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
-# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
-# ADD BASE RSC /l 0x417 /d "NDEBUG"
-# ADD RSC /l 0x417 /d "NDEBUG"
-BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
-LINK32=link.exe
-# ADD BASE LINK32 strmbase.lib msvcrt.lib quartz.lib winmm.lib comctl32.lib kernel32.lib user32.lib advapi32.lib uuid.lib dsound.lib oldnames.lib ole32.lib oleaut32.lib /nologo /dll /pdb:none /machine:I386 /nodefaultlib /out:"Release/ac3filter.ax"
-# SUBTRACT BASE LINK32 /map
-# ADD LINK32 strmbase.lib msvcrt.lib oldnames.lib quartz.lib winmm.lib comctl32.lib kernel32.lib shell32.lib gdi32.lib user32.lib advapi32.lib uuid.lib dsound.lib ole32.lib oleaut32.lib /nologo /dll /profile /debug /debugtype:both /machine:I386 /nodefaultlib /out:"Perf/ac3filter.ax"
-# SUBTRACT LINK32 /map
-# Begin Special Build Tool
-SOURCE="$(InputPath)"
-PostBuild_Cmds=_reg.bat perf
 # End Special Build Tool
 
 !ENDIF 
@@ -130,7 +96,6 @@ PostBuild_Cmds=_reg.bat perf
 
 # Name "ac3filter - Win32 Release"
 # Name "ac3filter - Win32 Debug"
-# Name "ac3filter - Win32 Perf"
 # Begin Group "ac3filter"
 
 # PROP Default_Filter ""
@@ -212,6 +177,14 @@ SOURCE=.\rot.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\translate.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\translate.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\tray.cpp
 # End Source File
 # Begin Source File
@@ -258,26 +231,6 @@ SOURCE=.\ac3filter.ico
 # Begin Source File
 
 SOURCE=.\ac3filter.rc
-# End Source File
-# Begin Source File
-
-SOURCE=.\format_ac3.bmp
-# End Source File
-# Begin Source File
-
-SOURCE=.\format_dts.bmp
-# End Source File
-# Begin Source File
-
-SOURCE=.\format_mpa.bmp
-# End Source File
-# Begin Source File
-
-SOURCE=.\format_pcm.bmp
-# End Source File
-# Begin Source File
-
-SOURCE=.\format_pes.bmp
 # End Source File
 # End Target
 # End Project

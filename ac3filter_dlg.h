@@ -13,6 +13,7 @@ public:
   static CUnknown * WINAPI CreateMain  (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateMixer (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateGains (LPUNKNOWN lpunk, HRESULT *phr);
+  static CUnknown * WINAPI CreateSPDIF (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateSystem(LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateAbout (LPUNKNOWN lpunk, HRESULT *phr);
 
@@ -48,8 +49,8 @@ private:
   bool     spdif_allow_44;
   bool     spdif_allow_32;
 
-  bool     use_dts14;
   int      dts_mode;
+  int      dts_conv;
 
   int      spdif_status;
 
@@ -104,8 +105,6 @@ private:
   LinkButton  lnk_forum;
   LinkButton  lnk_email;
   LinkButton  lnk_donate;
-  // Images
-  HANDLE      logo;
 
   AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, int TitleId, int flags);
 
@@ -116,13 +115,14 @@ private:
   HRESULT OnActivate();
   HRESULT OnDeactivate();
 
+  void translate();
+
   void update();
   void init_controls();
   void set_dynamic_controls();
   void set_controls();
   void set_matrix_controls();
   void set_cpu_usage();
-  void set_logo();
 
   void command(int control, int message);
 };

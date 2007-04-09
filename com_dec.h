@@ -112,13 +112,13 @@ public:
   STDMETHODIMP get_spdif_allow_32(bool *spdif_allow_32);
   STDMETHODIMP set_spdif_allow_32(bool  spdif_allow_32);
 
-  // Convert DTS to 14bit for SPDIF output
-  STDMETHODIMP get_use_dts14(bool *use_dts14);
-  STDMETHODIMP set_use_dts14(bool  use_dts14);
-
   // SPDIF/DTS output mode
   STDMETHODIMP get_dts_mode(int *dts_mode);
   STDMETHODIMP set_dts_mode(int  dts_mode);
+
+  // SPDIF/DTS conversion
+  STDMETHODIMP get_dts_conv(int *dts_conv);
+  STDMETHODIMP set_dts_conv(int  dts_conv);
 
   // SPDIF status
   STDMETHODIMP get_spdif_status(int *spdif_status);
