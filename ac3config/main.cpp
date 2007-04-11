@@ -32,7 +32,7 @@ INT APIENTRY WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR pCmdLine,
       "currently playing applications and configuration "
       "settings will not affect them. You need to restart "
       "your player for changes take in effect!\n\n" 
-      "Press cancel to skip this dialog in futute",
+      "Press cancel to skip this dialog in future",
       "WARNING!", MB_OKCANCEL | MB_ICONEXCLAMATION) == IDCANCEL)
       reg.set_bool("offline_warning", false);
 
