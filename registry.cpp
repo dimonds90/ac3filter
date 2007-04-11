@@ -205,7 +205,10 @@ RegistryKey::set_text(LPCTSTR name, const char *_value)
 {
   if (!key) return;
 
-  RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)_value, strlen(_value)+1);
+  if (_value)
+    RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)_value, strlen(_value)+1);
+  else
+    RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)"", 1);
 }
 
 
