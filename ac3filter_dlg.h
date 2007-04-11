@@ -3,6 +3,7 @@
 
 #include <streams.h>
 #include "controls.h"
+#include "translate.h"
 #include "guids.h"
 
 
@@ -115,14 +116,52 @@ private:
   HRESULT OnActivate();
   HRESULT OnDeactivate();
 
-  void translate();
+  Translator trans;
+  bool set_lang(const char *lang);
+  void get_lang(char *buf, size_t size);
 
+  /////////////////////////////////////////////////////////////////////////////
+  // Interface update functions
+  // 
+  // * init()
+  //   Top-level function to init the interface.
+  //   Init controls and translate.
+  //
+  // * update()
+  //   Top-level function to update controls.
+  //   Reload state and update static and dynamic controls.
+  //
+  // * init_controls()
+  //   Set initial controls parameters (range, color, ets), bind class members
+  //   to controls, etc.
+  //
+  // * translate_controls()
+  //   Translate control labels, create and translate tips.
+  //
+  // * update_dynamic_controls()
+  //   Update only dynamic controls. Update the matrix if auto_matrix is on.
+  //
+  // * update_static_controls()
+  //   Update only static controls. Update the matrix if auto_matrix is off.
+  //
+  // * update_matrix_controls()
+  //   Update the matrix. It may be called from update_static_controls() and
+  //   from update_dynamic_controls().
+  //
+  // * update_cpu_usage()
+  //   Update CPU usage meter. It is updated independently from other controls
+  //   because it needs more time to gather correct mean statistics.
+
+  void init();
   void update();
+
   void init_controls();
-  void set_dynamic_controls();
-  void set_controls();
-  void set_matrix_controls();
-  void set_cpu_usage();
+  void translate_controls();
+
+  void update_dynamic_controls();
+  void update_static_controls();
+  void update_matrix_controls();
+  void update_cpu_usage();
 
   void command(int control, int message);
 };

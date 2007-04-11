@@ -4,9 +4,10 @@
 #include <commctrl.h>
 #include <math.h>
 #include "ac3filter_dlg.h"
-#include "guids.h"
-#include "resource_ids.h"
 #include "resource.h"
+#include "resource_ids.h"
+#include "dialog_controls.h"
+#include "guids.h"
 #include "registry.h"
 #include "filters\delay.h"
 #include "ac3filter_ver.h"
@@ -419,12 +420,8 @@ AC3FilterDlg::OnActivate()
   visible = false;
   refresh = true;
 
-  reload_state();
-  init_controls();
-  set_dynamic_controls();
-  set_controls();
-  set_cpu_usage();
-  translate();
+  init();
+  update();
 
   SetTimer(m_hwnd, 1, refresh_time, 0);  // for all dynamic controls
   SetTimer(m_hwnd, 2, 1000, 0);          // for CPU usage (should be averaged)
@@ -444,25 +441,27 @@ AC3FilterDlg::OnDeactivate()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Handle messages
+// Translation
 ///////////////////////////////////////////////////////////////////////////////
 
-void
-AC3FilterDlg::translate()
+bool
+AC3FilterDlg::set_lang(const char *_lang)
 {
-  char path[1024];
-  char lang[1024];
-  char controls[1024];
-  char trans[1024];
-
+  // set_lang(0) cancels translation
   RegistryKey reg(REG_KEY);
-  reg.get_text("Install_Dir", path, sizeof(path));
-  reg.get_text("Language", lang, sizeof(lang));
-  sprintf(controls, "%s\\resource_ids.h", path);
-  sprintf(trans, "%s\\lang\\%s.lng", path, lang);
-
-  ::translate(m_Dlg, controls, trans, m_DialogId);
+  reg.set_text("Language", _lang);
+  init();
+  update();
+  return true;
 }
+
+void
+AC3FilterDlg::get_lang(char *buf, size_t size)
+{
+  RegistryKey reg(REG_KEY);
+  reg.get_text("Language", buf, size);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Handle messages
 ///////////////////////////////////////////////////////////////////////////////
@@ -485,25 +484,23 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
       if (IsWindowVisible(hwnd))
         if (visible)
         {
-          reload_state();
-          if (in_spk != old_in_spk)
+          switch (wParam)
           {
-            set_controls();
-            set_dynamic_controls();
-          }
-          else
-            if (wParam == 1) 
-              set_dynamic_controls();
+            case 1:
+              reload_state();
+              if (in_spk != old_in_spk)
+                update_static_controls();
+              update_dynamic_controls();
+              break;
 
-          if (wParam == 2) 
-            set_cpu_usage();
+            case 2:
+              update_cpu_usage();
+              break;
+          }
         }
         else
         {
-          reload_state();
-          set_controls();
-          set_dynamic_controls();
-          set_cpu_usage();
+          update();
           refresh = true;
           visible = true;
         }
@@ -522,13 +519,19 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 ///////////////////////////////////////////////////////////////////////////////
 
 void 
+AC3FilterDlg::init()
+{
+  init_controls();
+  translate_controls();
+}
+
+void 
 AC3FilterDlg::update()
 {
   reload_state();
-  set_dynamic_controls();
-  set_controls();
+  update_dynamic_controls();
+  update_static_controls();
 }
-
 
 void 
 AC3FilterDlg::reload_state()
@@ -735,8 +738,31 @@ AC3FilterDlg::init_controls()
   SetDlgItemText(m_Dlg, IDC_VER, ver2);
 }
 
+void
+AC3FilterDlg::translate_controls()
+{
+  char file[1536];
+  char path[1024];
+  char lang[128];
+
+  RegistryKey reg(REG_KEY);
+  reg.get_text("Install_Dir", path, sizeof(path));
+  reg.get_text("Language", lang, sizeof(lang));
+  sprintf(file, "%s\\lang\\%s.lng", path, lang);
+
+  char buf[1024];
+  Translator t(trans);
+  for (int i = 0; i < array_size(dialog_controls); i++)
+  {
+    t.translate(dialog_controls[i].transid, buf, sizeof(buf), dialog_controls[i].label);
+    if (buf[0] != 0)
+      SetDlgItemText(m_Dlg, dialog_controls[i].id, buf);
+  }
+}
+
+
 void 
-AC3FilterDlg::set_dynamic_controls()
+AC3FilterDlg::update_dynamic_controls()
 {
   /////////////////////////////////////////////////////////
   // Input format
@@ -838,13 +864,13 @@ AC3FilterDlg::set_dynamic_controls()
   // Matrix controls
 
   if (auto_matrix)
-    set_matrix_controls();
+    update_matrix_controls();
 
   refresh = false;
 }
 
 void 
-AC3FilterDlg::set_controls()
+AC3FilterDlg::update_static_controls()
 {
   int ch;
 
@@ -1064,11 +1090,11 @@ AC3FilterDlg::set_controls()
   /////////////////////////////////////
   // Matrix
 
-  set_matrix_controls();
+  update_matrix_controls();
 }
 
 void 
-AC3FilterDlg::set_matrix_controls()
+AC3FilterDlg::update_matrix_controls()
 {
   bool auto_matrix;
   matrix_t matrix;
@@ -1089,7 +1115,7 @@ AC3FilterDlg::set_matrix_controls()
 }
 
 void 
-AC3FilterDlg::set_cpu_usage()
+AC3FilterDlg::update_cpu_usage()
 {
   /////////////////////////////////////
   // CPU usage
@@ -1127,7 +1153,8 @@ AC3FilterDlg::command(int control, int message)
     if (update_matrix)
     {
       proc->set_matrix(&matrix);
-      set_matrix_controls();
+      update_matrix_controls();
+      return;
     }
   }
 

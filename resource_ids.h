@@ -302,18 +302,36 @@
 #define IDC_CHK_SPDIF_ALLOW_48         52207
 #define IDC_CHK_SPDIF_ALLOW_44         52208
 #define IDC_CHK_SPDIF_ALLOW_32         52209
-#define IDC_CHK_SPDIF_NO_PCM           52210
 
 // DirectShow options (523)
-#define IDC_GRP_DSHOW                  53201
-#define IDC_CHK_REINIT                 53202
-#define IDC_CHK_QUERY_SINK             53203
+#define IDC_GRP_DSHOW                  52301
+#define IDC_CHK_REINIT                 52302
+#define IDC_CHK_QUERY_SINK             52303
+#define IDC_CHK_SPDIF_NO_PCM           52304
 
 // Interface options (524)
 #define IDC_GRP_INTERFACE              52401
 #define IDC_CHK_TRAY                   52402
 #define IDC_CHK_SMOOTH_LEVELS          52403
-#define IDC_CMB_LANG                   52404
+#define IDC_CHK_TOOLTIPS               52404
+
+// Translation options (527)
+#define IDC_GRP_TRANS                  52701
+#define IDC_CMB_LANG                   52702
+#define IDC_LBL_LANG                   52703
+#define IDC_EDT_TRANS_INFO             52704
+
+// About dialog (528)
+#define IDC_GRP_ABOUT                  52801
+#define IDC_LBL_ABOUT                  52802
+#define IDC_GRP_LICENSE                52803
+#define IDC_LBL_LICENSE                52804
+#define IDC_GRP_CONTACT                52805
+#define IDC_LBL_CONTACT                52806
+#define IDC_GRP_ENV                    52807
+#define IDC_EDT_ENV                    52808
+#define IDC_GRP_CREDITS                52809
+#define IDC_EDT_CREDITS                52810
 
 // Link controls (525)
 #define IDC_LNK_AC3FILTER              52501
@@ -326,12 +344,9 @@
 #define IDC_LNK_HOME                   52508
 #define IDC_LNK_HOME2                  52509
 
-// Logos (526)
-#define IDC_LOGO                       52601
-#define IDB_LOGO                       200
+// Logos (100)
+#define IDC_LOGO                       10001
+#define IDB_LOGO                       10002
 
 // Other
-
 #define IDC_VER                        20101
-#define IDC_EDT_ENV                    20102
-#define IDC_EDT_CREDITS                20103

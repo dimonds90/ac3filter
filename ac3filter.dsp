@@ -145,6 +145,10 @@ SOURCE=.\controls.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\dialog_controls.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\guids.cpp
 # End Source File
 # Begin Source File

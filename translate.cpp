@@ -1,145 +1,140 @@
+#include <string.h>
 #include "translate.h"
+#include "auto_file.h"
 
-#pragma warning(disable: 4786) // the debugger cannot debug code with symbols longer than 255 characters
+Translator::Translator()
+: data(0), data_size(0), n(0), id(0), text(0), idhash(0), textlen(0)
+{}
 
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <map>
-
-using namespace std;
-
-void compress_str(string &str)
+Translator::Translator(const char *_file)
+: data(0), data_size(0), n(0), id(0), text(0), idhash(0), textlen(0)
 {
-  // replace tabs to spaces and compress white space
-  for (int i = 0, j = 0; i < str.length(); i++)
-  {
-    if (str[i] == ' ' || str[i] == '\t')
-    {
-      if (j && str[j-1] != ' ')
-        str[j++] = ' ';
-    }
-    else
-      str[j++] = str[i];
-  }
-  str.reserve(j);
+  open(_file);
 }
 
-class Translator
+Translator::~Translator()
 {
-protected:
-  typedef map<string, int> map_si;
-  typedef map<int, string> map_is;
+  close();
+}
 
-  map_si controls; // map identifier name => control id
-  map_is trans;    // map control id => translation string
-
-public:
-  Translator()
-  {};
-
-  Translator(const char *_controls, const char *_trans)
-  {
-    add_controls(_controls);
-    add_trans(_trans);
-  };
-
-  bool add_controls(const char *_filename)
-  {
-    ifstream f(_filename);
-    if (!f.is_open())
-      return false;
-
-    string str;
-    string define;
-    string str_id;
-    int    int_id;
-
-    while (!f.eof())
-    {
-      // read file
-      getline(f, str, '\n');
-      compress_str(str);
-
-      // read tokens
-      int_id = 0;
-      stringstream sstr(str);
-      sstr >> define >> str_id >> int_id;
-      if (define != "#define" || int_id == 0)
-        continue;
-
-      // update ids map
-      controls[str_id] = int_id;
-    }
-
-    return true;
-  };
-
-  bool add_trans(const char *_filename)
-  {
-    ifstream f(_filename);
-    if (!f.is_open())
-      return false;
-
-    string str;
-    string strid;
-    string strtrans;
-    int    intid;
-
-    while (!f.eof())
-    {
-      getline(f, str, '\n');
-
-      // read tokens
-      stringstream sstr(str);
-      getline(sstr, strid, '=');
-      getline(sstr, strtrans, '\n');
-
-      // find control identifier by name
-      compress_str(strid);
-      map_si::iterator i = controls.find(strid);
-      if (i == controls.end())
-        continue;
-
-      // update translation map
-      intid = i->second;
-      trans[intid] = strtrans;
-      //cout << """" << strid << """=" << strtrans << "\n";
-    }
-
-    return true;
-  }
-
-  void translate_controls(HWND hwnd)
-  {
-    map_is::iterator i;
-    int id;
-    const char *str;
-    for (i = trans.begin(); i != trans.end(); i++)
-    {
-      id = i->first;
-      str = i->second.c_str();
-      SetDlgItemText(hwnd, id, str);
-    }
-  }
-
-  void translate_title(HWND hwnd, int title_id)
-  {
-    if (hwnd == 0 || title_id == 0) return;
-    map_is::iterator i = trans.find(title_id);
-    if (i == trans.end())
-      return;
-
-    const char *title = i->second.c_str();
-    SetWindowText(hwnd, title);
-  }
-
-};
-
-void translate(HWND hwnd, const char *ids, const char *trans, int window_id)
+bool 
+Translator::open(const char *_file)
 {
-  Translator t(ids, trans);
-  t.translate_controls(hwnd);
-  t.translate_title(hwnd, window_id);
+  close();
+
+  // read the translation file into memory
+
+  AutoFile f(_file);
+  if (!f.is_open())
+    return false;
+
+  data = new char[f.size() + 1];
+  data_size = f.read(data, f.size());
+  f.close();
+
+  char *data_end = data + data_size;
+
+  // count number of strings in the file and allocate buffers
+
+  int count = 0;
+  char *pos = data;
+  while (pos < data_end)
+  {
+    if (*pos == '\n')
+      count++;
+    pos++;
+  }
+
+  id = new char *[count];
+  text = new char *[count];
+  idhash = new int[count];
+  textlen = new size_t[count];
+
+  // parse
+
+  char *str_start = data;
+  char *str_pos = data;
+
+  while (str_start < data_end)
+  {
+    // find where translation id ends
+    str_pos = str_start;
+    while (str_pos < data_end && *str_pos != '=' && *str_pos != '\r' && *str_pos != '\n')
+      str_pos++;
+
+    if (*str_pos == '=')
+    {
+      // translation id found; fill data
+      *str_pos = 0;
+      id[n] = str_start;
+      idhash[n] = hash(str_start);
+
+      // find where translatin string ends
+      str_pos++;
+      str_start = str_pos;
+      while (str_pos < data_end && *str_pos != '\r' && *str_pos != '\n')
+        str_pos++;
+
+      *str_pos = 0;
+      text[n] = str_start;
+      textlen[n] = str_pos - str_start;
+      n++;
+    }
+
+    // seek to a new string
+    while (str_pos < data_end && (*str_pos == '\r' || *str_pos == '\n')) str_pos++;
+    str_start = str_pos;
+
+  }
+
+  return true;
+}
+
+void
+Translator::close()
+{
+  if (data) delete data;
+  if (id) delete id;
+  if (text) delete text;
+  if (idhash) delete idhash;
+  if (textlen) delete textlen;
+
+  data = 0;
+  data_size = 0;
+  n = 0;
+  id = 0;
+  text = 0;
+  idhash = 0;
+  textlen = 0;
+}
+
+bool
+Translator::translate(const char *_id, char *_str, size_t _size, const char *_def)
+{
+  int h = hash(_id);
+  for (int i = 0; i < n; i++)
+    if (idhash[i] == h)
+      if (!strcmp(id[i], _id))
+      {
+        memcpy(_str, text[i], MIN(_size, textlen[i] + 1));
+        return true;
+      }
+
+  if (_def)
+  {
+    size_t len = strlen(_def) + 1;
+    memcpy(_str, _def, MIN(_size, len));
+    return false;
+  }
+
+  return false;
+}
+
+int
+Translator::hash(const char *s)
+{
+  int h = 0;
+  while (*s)
+    h += *s++;
+  return h;
 }
