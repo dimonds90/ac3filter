@@ -1,3 +1,8 @@
+AUTHOR=Александр Виговский
+VER=AC3Filter 1.40b
+DATE=10/04/2007
+COMMENT=Официальный перевод проекта AC3Filter (http://ac3filter.net)
+
 IDC_GRP_OUTPUT=Выходной формат
 TIP_GRP_OUTPUT=В этой группе задается формат звука на выходе фильтра.
 TIP_CMB_SPK=Конфигурация каналов на выходе.\nAS IS - без изменений
@@ -132,7 +137,6 @@ IDC_CHK_SPDIF_ALLOW_48=48кГц
 IDC_CHK_SPDIF_ALLOW_44=44кГц
 IDC_CHK_SPDIF_ALLOW_32=32кГц
 IDC_CHK_SPDIF_NO_PCM=Запретить PCM-вывод в режиме SPDIF
-
 
 IDC_CHK_REINIT=Переиниц. звук. карту после паузы/перемотки
 IDC_CHK_QUERY_SINK=Проверять поддержку выходного формата
