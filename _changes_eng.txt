@@ -1,3 +1,14 @@
+<b>1.40b</b> 
+  ! Fixed a bug in AC3 decoder
+  ! Delay units change works correctly in offline config utility
+  ! Some typos fixed
+
+  + Interface translation support!
+  + Simple translation uitlity allows anybody to translate the filter!
+  + Tooltips help to understand how to configure the filter.
+  + SPDIF page added, all SPDIF-related options are moved there.
+
+
 <b>1.30b</b> - 27.03.07
   * AC3 decoding level made louder by +6dB
 
