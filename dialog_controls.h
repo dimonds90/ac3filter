@@ -14,7 +14,7 @@ struct ControlDesc
 };
 
 // Total groups: 32
-// Total controls: 225
+// Total controls: 227
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -161,6 +161,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_CHK_SMOOTH_LEVELS, "Smooth levels", "", "IDC_CHK_SMOOTH_LEVELS", "IDC_CHK_SMOOTH_LEVELS_TIP" },
   { IDC_CHK_TOOLTIPS, "Show tooltips", "", "IDC_CHK_TOOLTIPS", "IDC_CHK_TOOLTIPS_TIP" },
   { IDC_CHK_TRAY, "Show tray icon", "", "IDC_CHK_TRAY", "IDC_CHK_TRAY_TIP" },
+  { IDC_EDT_REFRESH_TIME, "", "", "IDC_EDT_REFRESH_TIME", "IDC_EDT_REFRESH_TIME_TIP" },
+  { IDC_LBL_REFRESH_TIME, "Interface update rate (ms)", "", "IDC_LBL_REFRESH_TIME", "IDC_LBL_REFRESH_TIME_TIP" },
 
   // License
   { IDC_GRP_LICENSE, "License", "", "IDC_GRP_LICENSE", "IDC_GRP_LICENSE_TIP" },

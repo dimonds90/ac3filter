@@ -14,13 +14,13 @@ Translator::Translator(const char *_file)
 
 Translator::~Translator()
 {
-  close();
+  reset();
 }
 
 bool 
 Translator::open(const char *_file)
 {
-  close();
+  reset();
 
   // read the translation file into memory
 
@@ -77,12 +77,12 @@ Translator::open(const char *_file)
 
       *str_pos = 0;
       text[n] = str_start;
-      textlen[n] = str_pos - str_start;
+      textlen[n] = unescape(str_start);
       n++;
     }
 
     // seek to a new string
-    while (str_pos < data_end && (*str_pos == '\r' || *str_pos == '\n')) str_pos++;
+    while (str_pos < data_end && (*str_pos == '\0' || *str_pos == '\r' || *str_pos == '\n')) str_pos++;
     str_start = str_pos;
 
   }
@@ -91,7 +91,7 @@ Translator::open(const char *_file)
 }
 
 void
-Translator::close()
+Translator::reset()
 {
   if (data) delete data;
   if (id) delete id;
@@ -130,11 +130,53 @@ Translator::translate(const char *_id, char *_str, size_t _size, const char *_de
   return false;
 }
 
+const char *
+Translator::translate(const char *_id, const char *_def) const
+{
+  int h = hash(_id);
+  for (int i = 0; i < n; i++)
+    if (idhash[i] == h)
+      if (!strcmp(id[i], _id))
+        return text[i];
+
+  return _def;
+}
+
 int
-Translator::hash(const char *s)
+Translator::hash(const char *s) const
 {
   int h = 0;
   while (*s)
     h += *s++;
   return h;
+}
+
+size_t
+Translator::unescape(char *str) const
+{
+  char *dst = str;
+  char *src = str;
+  while (*src != 0)
+    if (*src == '\\')
+    {
+      switch (src[1])
+      {
+        case 'a': *dst++ = '\a'; src += 2; break;
+        case 'b': *dst++ = '\b'; src += 2; break;
+        case 'f': *dst++ = '\f'; src += 2; break;
+        case 'n': *dst++ = '\n'; src += 2; break;
+        case 'r': *dst++ = '\r'; src += 2; break;
+        case 't': *dst++ = '\t'; src += 2; break;
+        case 'v': *dst++ = '\v'; src += 2; break;
+        case '\'': *dst++ = '\''; src += 2; break;
+        case '\"': *dst++ = '\"'; src += 2; break;
+        case '\\': *dst++ = '\\'; src += 2; break;
+        case '?': *dst++ = '\?'; src += 2; break;
+        default: *dst++ = *src++;
+      }
+    }
+    else
+      *dst++ = *src++;
+  *dst = 0;
+  return dst - str;
 }

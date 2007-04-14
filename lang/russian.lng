@@ -1,7 +1,10 @@
-AUTHOR=Александр Виговский
-VER=AC3Filter 1.40b
-DATE=10/04/2007
-COMMENT=Официальный перевод проекта AC3Filter (http://ac3filter.net)
+#AUTHOR=Александр Виговский
+#VER=AC3Filter 1.40b
+#DATE=10/04/2007
+#COMMENT=Официальный перевод проекта AC3Filter (http://ac3filter.net)
+
+STR_TRANS_INFO=Автор перевода: %s\r\nВерсия фильтра: %s\r\nДата последнего редактирования: %s\r\n%s
+
 
 IDC_GRP_OUTPUT=Выходной формат
 TIP_GRP_OUTPUT=В этой группе задается формат звука на выходе фильтра.
@@ -118,7 +121,7 @@ IDC_RBT_RENDER_DS=DirectSound
 IDC_RBT_RENDER_WO=WaveOut
 
 IDC_GRP_SYNC=Синхронизация
-IDC_LBL_TIME_SHIFT=Корр. времени (мс):
+IDC_LBL_TIME_SHIFT=Коррекция времени (мс):
 IDC_CHK_JITTER=Коррекция джиттера
 IDC_LBL_JITTER=Текущий джиттер:
 

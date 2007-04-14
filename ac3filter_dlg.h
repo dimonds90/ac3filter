@@ -78,6 +78,7 @@ private:
   matrix_t old_matrix;
   char     old_info[2048];
   char     old_jitter[128];
+  char     old_lang[256];
 
   // Matrix
   DoubleEdit  edt_matrix[NCHANNELS][NCHANNELS];
@@ -116,6 +117,9 @@ private:
   HRESULT OnActivate();
   HRESULT OnDeactivate();
 
+  /////////////////////////////////////////////////////////////////////////////
+  // Translation
+
   Translator trans;
   bool set_lang(const char *lang);
   void get_lang(char *buf, size_t size);
@@ -125,7 +129,7 @@ private:
   // 
   // * init()
   //   Top-level function to init the interface.
-  //   Init controls and translate.
+  //   Translate and init controls.
   //
   // * update()
   //   Top-level function to update controls.
@@ -162,6 +166,9 @@ private:
   void update_static_controls();
   void update_matrix_controls();
   void update_cpu_usage();
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Handle control notifications
 
   void command(int control, int message);
 };

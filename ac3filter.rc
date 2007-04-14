@@ -457,15 +457,14 @@ BEGIN
     RADIOBUTTON     "Use Direct Sound by default",IDC_RBT_RENDER_DS,88,52,
                     105,10
     RADIOBUTTON     "Use Wave Out by default",IDC_RBT_RENDER_WO,88,63,101,10
-    GROUPBOX        "Interface options",IDC_GRP_INTERFACE,200,93,190,47
+    GROUPBOX        "Interface options",IDC_GRP_INTERFACE,200,76,190,64
     GROUPBOX        "Audio/Video sync",IDC_GRP_SYNC,7,76,188,83
     CONTROL         "Slider1",IDC_SLI_TIME_SHIFT,"msctls_trackbar32",
-                    TBS_NOTICKS | WS_TABSTOP,15,88,174,12
-    LTEXT           "-0.5s",IDC_STATIC,15,101,16,8
-    LTEXT           "+0",IDC_STATIC,98,101,8,8
-    LTEXT           "+0.5s",IDC_STATIC,171,101,18,8
-    LTEXT           "Time shift (ms):",IDC_LBL_TIME_SHIFT,15,112,72,8
-    EDITTEXT        IDC_EDT_TIME_SHIFT,91,110,25,12,ES_AUTOHSCROLL
+                    TBS_NOTICKS | WS_TABSTOP,15,97,174,12
+    LTEXT           "-0.5s",IDC_STATIC,15,112,16,8
+    LTEXT           "+0.5s",IDC_STATIC,171,112,18,8
+    LTEXT           "Time shift (ms):",IDC_LBL_TIME_SHIFT,15,87,174,8
+    EDITTEXT        IDC_EDT_TIME_SHIFT,90,110,25,12,ES_AUTOHSCROLL
     CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,16,125,89,8
     LTEXT           "Current jitter:",IDC_LBL_JITTER,107,125,82,8
@@ -477,14 +476,14 @@ BEGIN
     EDITTEXT        IDC_EDT_ATTACK,111,170,38,12,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_RELEASE,151,170,38,12,ES_AUTOHSCROLL
     CONTROL         "Show tray icon",IDC_CHK_TRAY,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,207,104,175,10
+                    WS_TABSTOP,207,87,175,10
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
     CONTROL         "Smooth levels",IDC_CHK_SMOOTH_LEVELS,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,126,175,10
-    COMBOBOX        IDC_CMB_LANG,273,15,109,172,CBS_DROPDOWN | CBS_SORT | 
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,111,175,10
+    COMBOBOX        IDC_CMB_LANG,273,14,109,172,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    GROUPBOX        "Translation",IDC_GRP_TRANS,200,7,190,85
+    GROUPBOX        "Translation",IDC_GRP_TRANS,200,7,190,69
     LTEXT           "Language:",IDC_LBL_LANG,207,17,66,8
     CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,207,151,175,10
@@ -495,9 +494,12 @@ BEGIN
     CONTROL         "Disallow PCM output in SPDIF mode",IDC_CHK_SPDIF_NO_PCM,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,173,175,10
     CONTROL         "Show tooltips",IDC_CHK_TOOLTIPS,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,115,175,10
-    EDITTEXT        IDC_EDT_TRANS_INFO,207,32,175,54,ES_MULTILINE | 
-                    ES_AUTOVSCROLL | ES_READONLY
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,99,175,10
+    EDITTEXT        IDC_EDT_TRANS_INFO,207,28,175,45,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
+    EDITTEXT        IDC_EDT_REFRESH_TIME,207,123,22,12,ES_AUTOHSCROLL
+    LTEXT           "Interface update rate (ms)",IDC_LBL_REFRESH_TIME,233,
+                    124,149,8
 END
 
 IDD_SPDIF DIALOG DISCARDABLE  0, 0, 397, 201
@@ -567,7 +569,7 @@ END
 
 IDD_ABOUT DIALOGEX 0, 0, 397, 201
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     LTEXT           "This program is free software and can be distributed according to the terms of GNU General Public License version 2.",
                     IDC_LBL_LICENSE,13,72,182,24

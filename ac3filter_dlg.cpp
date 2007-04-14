@@ -420,8 +420,14 @@ AC3FilterDlg::OnActivate()
   visible = false;
   refresh = true;
 
+  // Init and update controls
   init();
   update();
+
+  // remember langage
+  // (do not translate on first dialog show)
+  memset(old_lang, 0, sizeof(old_lang));
+  get_lang(old_lang, sizeof(old_lang));
 
   SetTimer(m_hwnd, 1, refresh_time, 0);  // for all dynamic controls
   SetTimer(m_hwnd, 2, 1000, 0);          // for CPU usage (should be averaged)
@@ -456,10 +462,14 @@ AC3FilterDlg::set_lang(const char *_lang)
 }
 
 void
-AC3FilterDlg::get_lang(char *buf, size_t size)
+AC3FilterDlg::get_lang(char *_buf, size_t _size)
 {
-  RegistryKey reg(REG_KEY);
-  reg.get_text("Language", buf, size);
+  if (_buf && _size)
+  {
+    _buf[0] = 0;
+    RegistryKey reg(REG_KEY);
+    reg.get_text("Language", _buf, _size);
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -484,6 +494,7 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
       if (IsWindowVisible(hwnd))
         if (visible)
         {
+          // normal update
           switch (wParam)
           {
             case 1:
@@ -500,11 +511,24 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
         }
         else
         {
-          update();
+          // show window
           refresh = true;
           visible = true;
+
+          char lang[256];
+          memset(lang, 0, sizeof(lang));
+          get_lang(lang, sizeof(lang));
+          if (strcmp(lang, old_lang))
+          {
+            // translate if language was changed
+            // do not do this all time because this update is visible!
+            memcpy(old_lang, lang, sizeof(old_lang));
+            init();
+          }
+          update();
         }
       else
+        // hide
         visible = false;
 
       return 1;
@@ -518,11 +542,14 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 // Controls initalization/update
 ///////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////
+// Top-level
+
 void 
 AC3FilterDlg::init()
 {
-  init_controls();
   translate_controls();
+  init_controls();
 }
 
 void 
@@ -532,6 +559,9 @@ AC3FilterDlg::update()
   update_dynamic_controls();
   update_static_controls();
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// Underground
 
 void 
 AC3FilterDlg::reload_state()
@@ -743,18 +773,18 @@ AC3FilterDlg::translate_controls()
 {
   char file[1536];
   char path[1024];
-  char lang[128];
+  char lang[256];
 
   RegistryKey reg(REG_KEY);
-  reg.get_text("Install_Dir", path, sizeof(path));
-  reg.get_text("Language", lang, sizeof(lang));
+  path[0] = 0; reg.get_text("Install_Dir", path, sizeof(path));
+  lang[0] = 0; reg.get_text("Language", lang, sizeof(lang));
   sprintf(file, "%s\\lang\\%s.lng", path, lang);
 
   char buf[1024];
-  Translator t(trans);
+  trans.open(file);
   for (int i = 0; i < array_size(dialog_controls); i++)
   {
-    t.translate(dialog_controls[i].transid, buf, sizeof(buf), dialog_controls[i].label);
+    trans.translate(dialog_controls[i].transid, buf, sizeof(buf), dialog_controls[i].label);
     if (buf[0] != 0)
       SetDlgItemText(m_Dlg, dialog_controls[i].id, buf);
   }
@@ -1052,6 +1082,48 @@ AC3FilterDlg::update_static_controls()
   }
 
   /////////////////////////////////////
+  // Languages
+  
+  {
+    char file[1536];
+    char path[1024];
+    char lang[256];
+    WIN32_FIND_DATA fd;
+    HANDLE          fh;
+
+    RegistryKey reg(REG_KEY);
+    path[0] = 0; reg.get_text("Install_Dir", path, sizeof(path));
+    lang[0] = 0; reg.get_text("Language", lang, sizeof(lang));
+    sprintf(file, "%s\\lang\\*.lng", path);
+
+    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_RESETCONTENT, 0, 0);
+    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)"--- Original ---");
+    fh = FindFirstFile(file, &fd);
+    if (fh != INVALID_HANDLE_VALUE)
+      do
+      {
+        // cut off .lng extension
+        size_t len = strlen(fd.cFileName);
+        if (len > 4)
+        {
+          len = MIN(sizeof(file) - 1, len - 4);
+          memcpy(file, fd.cFileName, len);
+          file[len] = 0;
+          SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)file);
+        }
+      } while (FindNextFile(fh, &fd));
+
+    int n = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_FINDSTRINGEXACT, 0, (LONG)lang);
+    if (n != CB_ERR)
+      SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETCURSEL, n, 0);
+
+    char buf[1024];
+    sprintf(buf, trans("STR_TRANS_INFO", "Translation author: %s\r\nFilter version: %s\r\nDate of last edit: %s\r\n%s"),
+      trans.author(), trans.ver(), trans.date(), trans.comment());
+    SendDlgItemMessage(m_Dlg, IDC_EDT_TRANS_INFO, WM_SETTEXT, 0, (LONG)buf);
+  }
+
+  /////////////////////////////////////
   // Presets
 
   #define fill_combobox(control, registry)                                                \
@@ -1059,7 +1131,6 @@ AC3FilterDlg::update_static_controls()
     HKEY key;                                                                             \
     char preset[256];                                                                     \
     int  n;                                                                               \
-                                                                                          \
                                                                                           \
     SendDlgItemMessage(m_Dlg, control, WM_GETTEXT, 256, (LONG)preset);                    \
     SendDlgItemMessage(m_Dlg, control, CB_RESETCONTENT, 0, 0);                            \
@@ -1852,48 +1923,76 @@ AC3FilterDlg::command(int control, int message)
     }
 
     /////////////////////////////////////
+    // Language
+
+    case IDC_CMB_LANG:
+      if (message == CBN_SELENDOK)
+      {
+        int ilang;
+        char new_lang[256];
+        new_lang[0] = 0;
+
+        ilang = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETCURSEL, 0, 0);
+        if (ilang != 0)
+          SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETLBTEXT, ilang, (LONG)new_lang);
+        set_lang(new_lang);
+        break;
+      }
+    /////////////////////////////////////
     // Merit 
 
     case IDC_RBT_RENDER_DS:
-      // DirectSound
-      set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default DirectSound Device", 0x800000);
-      set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default DirectSound Device", 0x800000); 
-      // WaveOut
-      set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default WaveOut Device", 0x200000);
-      set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default WaveOut Device", 0x200000);
-      // Clear filter cache
-      delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
+      if (message == BN_CLICKED)
+      {
+        // DirectSound
+        set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default DirectSound Device", 0x800000);
+        set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default DirectSound Device", 0x800000); 
+        // WaveOut
+        set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default WaveOut Device", 0x200000);
+        set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default WaveOut Device", 0x200000);
+        // Clear filter cache
+        delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 
-      update();
+        update();
+      }
       break;
 
     case IDC_RBT_RENDER_WO:
-      // DirectSound
-      set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default DirectSound Device", 0x200000);
-      set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default DirectSound Device", 0x200000); 
-      // WaveOut
-      set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default WaveOut Device", 0x800000);
-      set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default WaveOut Device", 0x800000);
-      // Clear filter cache
-      delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
+      if (message == BN_CLICKED)
+      {
+        // DirectSound
+        set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default DirectSound Device", 0x200000);
+        set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default DirectSound Device", 0x200000); 
+        // WaveOut
+        set_merit(HKEY_CLASSES_ROOT, "{E0F158E1-CB04-11d0-BD4E-00A0C911CE86}\\InstanceCm\\Default WaveOut Device", 0x800000);
+        set_merit(HKEY_CURRENT_USER, "Software\\Microsoft\\ActiveMovie\\devenum\\{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default WaveOut Device", 0x800000);
+        // Clear filter cache
+        delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 
-      update();
+        update();
+      }
       break;
 
     case IDC_RBT_MERIT_PREFERRED:
-      set_merit(HKEY_CLASSES_ROOT, "CLSID\\{083863F1-70DE-11d0-BD40-00A0C911CE86}\\Instance\\{A753A1EC-973E-4718-AF8E-A3F554D45C44}", 0x10000000);
-      // Clear filter cache
-      delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
+      if (message == BN_CLICKED)
+      {
+        set_merit(HKEY_CLASSES_ROOT, "CLSID\\{083863F1-70DE-11d0-BD40-00A0C911CE86}\\Instance\\{A753A1EC-973E-4718-AF8E-A3F554D45C44}", 0x10000000);
+        // Clear filter cache
+        delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 
-      update();
+        update();
+      }
       break;
 
     case IDC_RBT_MERIT_UNLIKELY:
-      set_merit(HKEY_CLASSES_ROOT, "CLSID\\{083863F1-70DE-11d0-BD40-00A0C911CE86}\\Instance\\{A753A1EC-973E-4718-AF8E-A3F554D45C44}", MERIT_UNLIKELY);
-      // Clear filter cache
-      delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
+      if (message == BN_CLICKED)
+      {
+        set_merit(HKEY_CLASSES_ROOT, "CLSID\\{083863F1-70DE-11d0-BD40-00A0C911CE86}\\Instance\\{A753A1EC-973E-4718-AF8E-A3F554D45C44}", MERIT_UNLIKELY);
+        // Clear filter cache
+        delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 
-      update();
+        update();
+      }
       break;
   }
 }
