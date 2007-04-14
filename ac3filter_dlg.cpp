@@ -429,7 +429,7 @@ AC3FilterDlg::OnActivate()
   memset(old_lang, 0, sizeof(old_lang));
   get_lang(old_lang, sizeof(old_lang));
 
-  SetTimer(m_hwnd, 1, refresh_time, 0);  // for all dynamic controls
+  SetTimer(m_hwnd, 1, get_refresh_time(), 0);  // for all dynamic controls
   SetTimer(m_hwnd, 2, 1000, 0);          // for CPU usage (should be averaged)
 
   return NOERROR;
@@ -444,6 +444,59 @@ AC3FilterDlg::OnDeactivate()
   KillTimer(m_hwnd, 2);
 
   return NOERROR;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Translation
+///////////////////////////////////////////////////////////////////////////////
+
+bool
+AC3FilterDlg::get_tooltips()
+{
+  bool result = true;
+  RegistryKey reg(REG_KEY);
+  reg.get_bool("tooltips", result);
+  return result;
+}
+
+void
+AC3FilterDlg::set_tooltips(bool _tooltips)
+{
+  RegistryKey reg(REG_KEY);
+  reg.set_bool("tooltips", _tooltips);
+}
+
+bool
+AC3FilterDlg::get_smooth_levels()
+{
+  bool result = true;
+  RegistryKey reg(REG_KEY);
+  reg.get_bool("smooth_levels", result);
+  return result;
+}
+
+void
+AC3FilterDlg::set_smooth_levels(bool _smooth_levels)
+{
+  RegistryKey reg(REG_KEY);
+  reg.set_bool("smooth_levels", _smooth_levels);
+}
+
+int
+AC3FilterDlg::get_refresh_time()
+{
+  int result = 100;
+  RegistryKey reg(REG_KEY);
+  reg.get_int32("refresh_time", result);
+  return result;
+}
+
+void
+AC3FilterDlg::set_refresh_time(int _refresh_time)
+{
+  RegistryKey reg(REG_KEY);
+  reg.set_int32("refresh_time", _refresh_time);
+  SetTimer(m_hwnd, 1, refresh_time, 0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -515,17 +568,24 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
           refresh = true;
           visible = true;
 
+          // translate if language was changed
+          // do not do this all time because this update is visible!
           char lang[256];
           memset(lang, 0, sizeof(lang));
           get_lang(lang, sizeof(lang));
           if (strcmp(lang, old_lang))
           {
-            // translate if language was changed
-            // do not do this all time because this update is visible!
             memcpy(old_lang, lang, sizeof(old_lang));
             init();
           }
+
+          // update interface
+          SetTimer(m_hwnd, 1, get_refresh_time(), 0);
+          
+          // update all controls
+          // (static controls may be changed at other windows)
           update();
+          update_cpu_usage();
         }
       else
         // hide
@@ -571,8 +631,6 @@ AC3FilterDlg::reload_state()
   dec->get_user_spk(&user_spk);
 
   dec->get_formats(&formats);
-  dec->get_query_sink(&query_sink);
-  filter->get_tray(&tray);
 
   // spdif
   dec->get_use_spdif(&use_spdif);
@@ -590,10 +648,18 @@ AC3FilterDlg::reload_state()
   dec->get_dts_conv(&dts_conv);
 
   dec->get_spdif_status(&spdif_status);
+  dec->get_use_detector(&use_detector);
 
+  // DirectShow
   filter->get_reinit(&reinit);
   filter->get_spdif_no_pcm(&spdif_no_pcm);
-  dec->get_use_detector(&use_detector);
+  dec->get_query_sink(&query_sink);
+
+  // interface
+  filter->get_tray(&tray);
+  tooltips = get_tooltips();
+  smooth_levels = get_smooth_levels();
+  refresh_time = get_refresh_time();
 
   // syncronization
   dec->get_time_shift(&time_shift);
@@ -601,7 +667,6 @@ AC3FilterDlg::reload_state()
   dec->get_dejitter(&dejitter);
   dec->get_threshold(&threshold);
   dec->get_jitter(&input_mean, &input_stddev, &output_mean, &output_stddev);
-
 
   dec->get_frames(&frames, &errors);
 
@@ -734,6 +799,11 @@ AC3FilterDlg::init_controls()
   SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < sizeof(units_list) / sizeof(units_list[0]); i++)
     SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_ADDSTRING, 0, (LONG)units_list[i]);
+
+  /////////////////////////////////////
+  // Interface
+
+  edt_refresh_time.link(m_Dlg, IDC_EDT_REFRESH_TIME);
 
   /////////////////////////////////////
   // Links
@@ -958,7 +1028,6 @@ AC3FilterDlg::update_static_controls()
   EnableWindow(GetDlgItem(m_Dlg, IDC_CHK_SPDIF_ALLOW_32), spdif_check_sr);
 
   CheckDlgButton(m_Dlg, IDC_CHK_USE_DETECTOR, use_detector? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_NO_PCM, spdif_no_pcm? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
   // Formats
@@ -969,13 +1038,6 @@ AC3FilterDlg::update_static_controls()
   CheckDlgButton(m_Dlg, IDC_CHK_DTS, (formats & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_PES, (formats & FORMAT_MASK_PES) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF, (formats & FORMAT_MASK_SPDIF) != 0? BST_CHECKED: BST_UNCHECKED);
-
-  /////////////////////////////////////
-  // Query sink and tray icon
-
-  CheckDlgButton(m_Dlg, IDC_CHK_REINIT, reinit > 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(m_Dlg, IDC_CHK_QUERY_SINK, query_sink? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(m_Dlg, IDC_CHK_TRAY, tray? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
   // Auto gain control
@@ -1023,6 +1085,21 @@ AC3FilterDlg::update_static_controls()
   SendDlgItemMessage(m_Dlg, IDC_CHK_DELAYS, BM_SETCHECK, delay? BST_CHECKED: BST_UNCHECKED, 1);
   SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_SETCURSEL, units2list(delay_units), 0);
   EnableWindow(GetDlgItem(m_Dlg, IDC_CMB_UNITS), delay);
+
+  /////////////////////////////////////
+  // Interface
+
+  CheckDlgButton(m_Dlg, IDC_CHK_TRAY, tray? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_TOOLTIPS, tooltips? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SMOOTH_LEVELS, smooth_levels? BST_CHECKED: BST_UNCHECKED);
+  edt_refresh_time.update_value(refresh_time);
+
+  /////////////////////////////////////
+  // DirectShow
+
+  CheckDlgButton(m_Dlg, IDC_CHK_QUERY_SINK, query_sink? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_REINIT, reinit > 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_NO_PCM, spdif_no_pcm? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
   // Syncronization
@@ -1460,6 +1537,31 @@ AC3FilterDlg::command(int control, int message)
       update();
       break;
     }
+
+    case IDC_CHK_TOOLTIPS:
+    {
+      tooltips = IsDlgButtonChecked(m_Dlg, IDC_CHK_TOOLTIPS) == BST_CHECKED;
+      set_tooltips(tooltips);
+      update();
+      break;
+    }
+
+    case IDC_CHK_SMOOTH_LEVELS:
+    {
+      smooth_levels = IsDlgButtonChecked(m_Dlg, IDC_CHK_SMOOTH_LEVELS) == BST_CHECKED;
+      set_smooth_levels(smooth_levels);
+      update();
+      break;
+    }
+
+    case IDC_EDT_REFRESH_TIME:
+      if (message == CB_ENTER)
+      {
+        refresh_time = int(edt_refresh_time.value);
+        set_refresh_time(refresh_time);
+        update();
+      }
+      break;
 
     /////////////////////////////////////
     // Auto gain control

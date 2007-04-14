@@ -29,14 +29,23 @@ private:
 
   bool     visible;
   bool     refresh;
+
+  // interface options
+  bool     tray;
+  bool     tooltips;
+  bool     smooth_levels;
   int      refresh_time;
 
+  // input-output format
   Speakers in_spk;
   Speakers out_spk;
   Speakers user_spk;
   int      formats;
+
+  // DirectShow
+  int      reinit;
+  bool     spdif_no_pcm;
   bool     query_sink;
-  bool     tray;
 
   // spdif
   bool     use_spdif;
@@ -54,9 +63,6 @@ private:
   int      dts_conv;
 
   int      spdif_status;
-
-  int      reinit;
-  bool     spdif_no_pcm;
   bool     use_detector;
 
   // syncronization
@@ -102,6 +108,8 @@ private:
   // Delay
   DoubleEdit  edt_delay[NCHANNELS];
   DoubleEdit  edt_time_shift;
+  // Interface
+  DoubleEdit  edt_refresh_time;
   // Links
   LinkButton  lnk_home;
   LinkButton  lnk_forum;
@@ -116,6 +124,18 @@ private:
   HRESULT OnDisconnect();
   HRESULT OnActivate();
   HRESULT OnDeactivate();
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Interface options
+
+  bool get_tooltips();
+  void set_tooltips(bool tooltips);
+
+  bool get_smooth_levels();
+  void set_smooth_levels(bool smooth_levels);
+
+  int get_refresh_time();
+  void set_refresh_time(int refresh_time);
 
   /////////////////////////////////////////////////////////////////////////////
   // Translation
