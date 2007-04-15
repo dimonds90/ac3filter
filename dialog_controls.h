@@ -158,7 +158,7 @@ static const ControlDesc dialog_controls[] =
 
   // Interface options
   { IDC_GRP_INTERFACE, "Interface options", "", "IDC_GRP_INTERFACE", "IDC_GRP_INTERFACE_TIP" },
-  { IDC_CHK_SMOOTH_LEVELS, "Smooth levels", "", "IDC_CHK_SMOOTH_LEVELS", "IDC_CHK_SMOOTH_LEVELS_TIP" },
+  { IDC_CHK_INVERT_LEVELS, "Invert levels", "", "IDC_CHK_INVERT_LEVELS", "IDC_CHK_INVERT_LEVELS_TIP" },
   { IDC_CHK_TOOLTIPS, "Show tooltips", "", "IDC_CHK_TOOLTIPS", "IDC_CHK_TOOLTIPS_TIP" },
   { IDC_CHK_TRAY, "Show tray icon", "", "IDC_CHK_TRAY", "IDC_CHK_TRAY_TIP" },
   { IDC_EDT_REFRESH_TIME, "", "", "IDC_EDT_REFRESH_TIME", "IDC_EDT_REFRESH_TIME_TIP" },

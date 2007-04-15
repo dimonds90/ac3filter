@@ -33,7 +33,7 @@ private:
   // interface options
   bool     tray;
   bool     tooltips;
-  bool     smooth_levels;
+  bool     invert_levels;
   int      refresh_time;
 
   // input-output format
@@ -131,8 +131,8 @@ private:
   bool get_tooltips();
   void set_tooltips(bool tooltips);
 
-  bool get_smooth_levels();
-  void set_smooth_levels(bool smooth_levels);
+  bool get_invert_levels();
+  void set_invert_levels(bool invert_levels);
 
   int get_refresh_time();
   void set_refresh_time(int refresh_time);

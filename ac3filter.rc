@@ -29,7 +29,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "+20dB",IDC_STATIC,110,27,20,8
     LTEXT           "-20dB",IDC_STATIC,112,66,20,8
@@ -131,7 +131,7 @@ BEGIN
     CONTROL         10002,IDC_LOGO,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
                     WS_BORDER,141,101,115,84
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
+                    IDC_VER,174,190,216,8
     CONTROL         "Enable",IDC_CHK_DRC,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,231,14,38,10
     GROUPBOX        "Output levels",IDC_GRP_OUTPUT_LEVELS,294,97,96,90
@@ -479,7 +479,7 @@ BEGIN
                     WS_TABSTOP,207,87,175,10
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,7,190,383,8
-    CONTROL         "Smooth levels",IDC_CHK_SMOOTH_LEVELS,"Button",
+    CONTROL         "Invert levels",IDC_CHK_INVERT_LEVELS,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,207,111,175,10
     COMBOBOX        IDC_CMB_LANG,273,14,109,172,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP

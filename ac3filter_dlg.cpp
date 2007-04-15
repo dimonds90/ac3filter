@@ -467,19 +467,19 @@ AC3FilterDlg::set_tooltips(bool _tooltips)
 }
 
 bool
-AC3FilterDlg::get_smooth_levels()
+AC3FilterDlg::get_invert_levels()
 {
-  bool result = true;
+  bool result = false;
   RegistryKey reg(REG_KEY);
-  reg.get_bool("smooth_levels", result);
+  reg.get_bool("invert_levels", result);
   return result;
 }
 
 void
-AC3FilterDlg::set_smooth_levels(bool _smooth_levels)
+AC3FilterDlg::set_invert_levels(bool _invert_levels)
 {
   RegistryKey reg(REG_KEY);
-  reg.set_bool("smooth_levels", _smooth_levels);
+  reg.set_bool("invert_levels", _invert_levels);
 }
 
 int
@@ -658,7 +658,7 @@ AC3FilterDlg::reload_state()
   // interface
   filter->get_tray(&tray);
   tooltips = get_tooltips();
-  smooth_levels = get_smooth_levels();
+  invert_levels = get_invert_levels();
   refresh_time = get_refresh_time();
 
   // syncronization
@@ -751,12 +751,8 @@ AC3FilterDlg::init_controls()
   {
     SendDlgItemMessage(m_Dlg, idc_level_in[ch],  PBM_SETBARCOLOR, 0, RGB(0, 128, 0));
     SendDlgItemMessage(m_Dlg, idc_level_out[ch], PBM_SETBARCOLOR, 0, RGB(0, 128, 0));
-    // log scale
     SendDlgItemMessage(m_Dlg, idc_level_in[ch],  PBM_SETRANGE, 0, MAKELPARAM(0, -min_level * ticks));
     SendDlgItemMessage(m_Dlg, idc_level_out[ch], PBM_SETRANGE, 0, MAKELPARAM(0, -min_level * ticks));
-//    // linear scale
-//    SendDlgItemMessage(m_Dlg, in_ch2control[ch],  PBM_SETRANGE, 0, MAKELPARAM(0, 256));
-//    SendDlgItemMessage(m_Dlg, out_ch2control[ch], PBM_SETRANGE, 0, MAKELPARAM(0, 256));
   }
 
   /////////////////////////////////////
@@ -931,13 +927,20 @@ AC3FilterDlg::update_dynamic_controls()
 
   for (int ch = 0; ch < NCHANNELS; ch++)
   {
-    // log scale
-    SendDlgItemMessage(m_Dlg, idc_level_in[ch],  PBM_SETPOS, input_levels[ch]  > 0? long(-(min_level - value2db(input_levels[ch])) * ticks): -1000 * ticks,  0);
-    SendDlgItemMessage(m_Dlg, idc_level_out[ch], PBM_SETPOS, output_levels[ch] > 0? long(-(min_level - value2db(output_levels[ch])) * ticks): -1000 * ticks,  0);
+    long in, out;
+    if (invert_levels)
+    {
+      in = input_levels[ch]  > 0? long(-value2db(input_levels[ch]) * ticks): long(-min_level * ticks);
+      out = output_levels[ch]  > 0? long(-value2db(output_levels[ch]) * ticks): long(-min_level * ticks);
+    }
+    else
+    {
+      in = input_levels[ch]  > 0? long((value2db(input_levels[ch]) - min_level) * ticks): 0;
+      out = output_levels[ch]  > 0? long((value2db(output_levels[ch]) - min_level) * ticks): 0;
+    }
+    SendDlgItemMessage(m_Dlg, idc_level_in[ch],  PBM_SETPOS, in, 0);
+    SendDlgItemMessage(m_Dlg, idc_level_out[ch], PBM_SETPOS, out, 0);
     SendDlgItemMessage(m_Dlg, idc_level_out[ch], PBM_SETBARCOLOR, 0, (output_levels[ch] > 0.99)? RGB(255, 0, 0): RGB(0, 128, 0));
-//    // linear scale
-//    SendDlgItemMessage(m_Dlg, in_ch2control[ch],  PBM_SETPOS,   long(in_levels[ch] * 256 / in_level),  0);
-//    SendDlgItemMessage(m_Dlg, out_ch2control[ch], PBM_SETPOS,   long(out_levels[ch]* 256 / out_level), 0);
   }
 
   /////////////////////////////////////
@@ -1091,7 +1094,7 @@ AC3FilterDlg::update_static_controls()
 
   CheckDlgButton(m_Dlg, IDC_CHK_TRAY, tray? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_TOOLTIPS, tooltips? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(m_Dlg, IDC_CHK_SMOOTH_LEVELS, smooth_levels? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(m_Dlg, IDC_CHK_INVERT_LEVELS, invert_levels? BST_CHECKED: BST_UNCHECKED);
   edt_refresh_time.update_value(refresh_time);
 
   /////////////////////////////////////
@@ -1271,7 +1274,11 @@ AC3FilterDlg::update_cpu_usage()
   double cpu_usage;
   filter->get_cpu_usage(&cpu_usage);
   dlg_printf(m_Dlg, IDC_CPU_LABEL, "%i%%", int(cpu_usage*100));
-  SendDlgItemMessage(m_Dlg, IDC_CPU, PBM_SETPOS, int(cpu_usage * 100),  0);
+  if (invert_levels)
+    SendDlgItemMessage(m_Dlg, IDC_CPU, PBM_SETPOS, 100 - int(cpu_usage * 100),  0);
+  else
+    SendDlgItemMessage(m_Dlg, IDC_CPU, PBM_SETPOS, int(cpu_usage * 100),  0);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1546,10 +1553,10 @@ AC3FilterDlg::command(int control, int message)
       break;
     }
 
-    case IDC_CHK_SMOOTH_LEVELS:
+    case IDC_CHK_INVERT_LEVELS:
     {
-      smooth_levels = IsDlgButtonChecked(m_Dlg, IDC_CHK_SMOOTH_LEVELS) == BST_CHECKED;
-      set_smooth_levels(smooth_levels);
+      invert_levels = IsDlgButtonChecked(m_Dlg, IDC_CHK_INVERT_LEVELS) == BST_CHECKED;
+      set_invert_levels(invert_levels);
       update();
       break;
     }

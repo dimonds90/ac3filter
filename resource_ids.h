@@ -312,7 +312,7 @@
 // Interface options (524)
 #define IDC_GRP_INTERFACE              52401
 #define IDC_CHK_TRAY                   52402
-#define IDC_CHK_SMOOTH_LEVELS          52403
+#define IDC_CHK_INVERT_LEVELS          52403
 #define IDC_CHK_TOOLTIPS               52404
 #define IDC_LBL_REFRESH_TIME           52405 
 #define IDC_EDT_REFRESH_TIME           52406
