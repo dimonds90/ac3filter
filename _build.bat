@@ -92,6 +92,9 @@ printf "Building package...\n";
 `copy ac3config\\release\\ac3config.exe $package\\ac3config.exe`;
 `copy release\\ac3filter.ax $package`;
 
+`copy ac3filter.ax.manifest $package`;
+`copy ac3config\\ac3config.exe.manifest $package`;
+
 `copy _readme.txt $package`;
 `copy _changes_eng.txt $package`;
 `copy _changes_rus.txt $package`;
