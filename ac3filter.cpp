@@ -522,7 +522,6 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   if (use_spdif)
   {
     // dummy spdif formats
-
     spk = Speakers(FORMAT_SPDIF, 0, dec.get_input().sample_rate);
     if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
     if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
@@ -540,7 +539,7 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   {
     dec.get_user_spk(&spk);
     if (!spk.mask)
-      spk.mask = MODE_STEREO;
+      spk.mask = dec.get_input().mask;
     if (!spk.sample_rate)
       spk.sample_rate = dec.get_input().sample_rate;
 
