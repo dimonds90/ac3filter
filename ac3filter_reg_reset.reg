@@ -60,7 +60,7 @@ REGEDIT4
 "spdif_allow_32"=dword:00000000
 "use_dts14"=dword:00000000
 "format"=dword:00000002
-"mask"=dword:00000000
+"mask"=dword:00000005
 "auto_gain"=dword:00000001
 "expand_stereo"=dword:00000001
 "attack"="100.000000"

@@ -1,5 +1,6 @@
 <b>1.40b</b> 
-  ! Fixed a bug in AC3 decoder
+  ! Fixed a bug in AC3 decoder (decoding of 4.1 and 3.1 AC3 files was affected). Thanks to Dietmar Kleiner for reporting and testing!
+  ! Fixed a bug with fast playback of mono files in WMP
   ! Delay units change works correctly in offline config utility
   ! Some typos fixed
 
@@ -7,7 +8,10 @@
   + Simple translation uitlity allows anybody to translate the filter!
   + Tooltips help to understand how to configure the filter.
   + SPDIF page added, all SPDIF-related options are moved there.
+  + AC3Config utility supports themes
+  + Invert levels option to fix a bug in 3rd-party themes with displaying levels
 
+  * Default output format changed to stereo (Much of people with stereo setup cannot hear center channel with default multichannel output)
 
 <b>1.30b</b> - 27.03.07
   * AC3 decoding level made louder by +6dB
