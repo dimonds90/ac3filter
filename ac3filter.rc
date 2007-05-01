@@ -29,7 +29,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
 IDD_MAIN DIALOGEX 0, 0, 397, 202
 STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     LTEXT           "+20dB",IDC_STATIC,110,27,20,8
     LTEXT           "-20dB",IDC_STATIC,112,66,20,8
@@ -787,7 +787,7 @@ BEGIN
     IDS_MAIN                "Main"
     IDS_MIXER               "Mixer"
     IDS_GAINS               "Gains"
-    IDS_SPDIF               "SPDIF"
+    IDS_SPDIF               "Spdif"
     IDS_SYS                 "System"
     IDS_ABOUT               "About"
     IDS_DESC                "Configures speaker configuration and other parameters of AC3 decoder filter."
