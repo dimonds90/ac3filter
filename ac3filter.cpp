@@ -504,25 +504,31 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   //       mt_pcm_wfx   - PCM media type using WAVEFORMATEXTENSIBLE
   //       mt_pcm_wf    - PCM media type using WAVEFORMATEX
   //
-  // So even if output cannot support some of formats, it can use other.
+  // If downstream filter does not support some format, it can use another.
+  // So automatic switch to lower format is used. But it is possible that
+  // some intermediate filter that does not support spdif format is inserted
+  // into the chain after AC3Filter. In this case spdif cannot be enabled.
+  // To avoid this 'Do not publish PCM format in SPDIF mode' is used.
   //
-  // multichannel mt_pcm_wf formats are nessesary for some old sound cards 
+  // Multichannel mt_pcm_wf formats are nessesary for some old sound cards 
   // that do not understand WAVEFORMATEXTENSIBLE format 
   // (Vortex-based cards for example).
 
   CMediaType mt;
   Speakers spk;
+  Speakers in_spk;
 
   /////////////////////////////////////////////////////////
   // Publish SPDIF format
 
   bool use_spdif;
   dec.get_use_spdif(&use_spdif);
+  dec.get_in_spk(&in_spk);
 
   if (use_spdif)
   {
     // dummy spdif formats
-    spk = Speakers(FORMAT_SPDIF, 0, dec.get_input().sample_rate);
+    spk = Speakers(FORMAT_SPDIF, 0, in_spk.sample_rate);
     if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
     if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
   }
@@ -534,14 +540,18 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   // 'spdif_no_pcm' options are enabled. This solves the
   // problem when postprocessing filters that do not
   // support SPDIF are used.
-
+  //
+  // Input format may be partially specified. For encoded
+  // formats channel mask is not known, thereofre we should
+  // publish stereo format in this case.
+  
   if (!use_spdif || !spdif_no_pcm)
   {
     dec.get_user_spk(&spk);
     if (!spk.mask)
-      spk.mask = dec.get_input().mask;
+      spk.mask = in_spk.mask? in_spk.mask: MODE_STEREO;
     if (!spk.sample_rate)
-      spk.sample_rate = dec.get_input().sample_rate;
+      spk.sample_rate = in_spk.sample_rate;
 
     if ((spk.mask != MODE_MONO && spk.mask != MODE_STEREO) || spk.format != FORMAT_PCM16)
     {
