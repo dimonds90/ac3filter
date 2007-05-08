@@ -566,7 +566,7 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
       if (IsWindowVisible(hwnd))
         if (visible)
         {
-          tooltips_ctl.track();
+          tooltip_ctl.track();
 
           // normal update
           switch (wParam)
@@ -881,15 +881,15 @@ AC3FilterDlg::translate_controls()
 void
 AC3FilterDlg::init_tooltips()
 {
-  tooltips_ctl.destroy();
-  tooltips_ctl.create(ac3filter_instance, m_Dlg);
-  tooltips_ctl.set_width(300);
+  tooltip_ctl.destroy();
+  tooltip_ctl.create(ac3filter_instance, m_Dlg);
+  tooltip_ctl.set_width(300);
   {
     for (int i = 0; i < array_size(dialog_controls); i++)
     {
       const char *text = trans(dialog_controls[i].tipid, dialog_controls[i].tip);
       if (text[0] != 0)
-        tooltips_ctl.add_control(dialog_controls[i].id, text);
+        tooltip_ctl.add_control(dialog_controls[i].id, text);
     }
   }
 }
