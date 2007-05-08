@@ -116,6 +116,9 @@ private:
   LinkButton  lnk_email;
   LinkButton  lnk_donate;
 
+  // Tooltip control
+  Tooltip tooltip_ctl;
+
   AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, int TitleId, int flags);
 
   BOOL OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -159,6 +162,9 @@ private:
   //   Set initial controls parameters (range, color, ets), bind class members
   //   to controls, etc.
   //
+  // * init_tooltips()
+  //   Init and translate tooltips.
+  //
   // * translate_controls()
   //   Translate control labels, create and translate tips.
   //
@@ -180,6 +186,7 @@ private:
   void update();
 
   void init_controls();
+  void init_tooltips();
   void translate_controls();
 
   void update_dynamic_controls();

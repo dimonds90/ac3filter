@@ -544,9 +544,30 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
       return 1;
 
     case WM_TIMER:
+      /////////////////////////////////////////////////////
+      // For some reasons OlePropertyFrame does not send
+      // WM_SHOW message to property pages. But we need it
+      // to update our ststic controls that may be changed
+      // at other pages. Therefore we have to detect show
+      // event based on window visibility. Disadvantage of
+      // this method is that user can see control updates.
+      //
+      // Note: WM_SHOW message is not sent when window has
+      // WS_MAXIMIZEBOX style. For some reasons dialog page
+      // is wrapped in one more dialog page as following:
+      //
+      //   Dialog tab set
+      //     Wrapper page (with WS_MAXIMIZEBOX style)
+      //       Page 1
+      //     Wrapper page (with WS_MAXIMIZEBOX style)
+      //       Page 2
+      //     ...
+
       if (IsWindowVisible(hwnd))
         if (visible)
         {
+          tooltips_ctl.track();
+
           // normal update
           switch (wParam)
           {
@@ -610,6 +631,7 @@ AC3FilterDlg::init()
 {
   translate_controls();
   init_controls();
+  init_tooltips();
 }
 
 void 
@@ -853,6 +875,22 @@ AC3FilterDlg::translate_controls()
     trans.translate(dialog_controls[i].transid, buf, sizeof(buf), dialog_controls[i].label);
     if (buf[0] != 0)
       SetDlgItemText(m_Dlg, dialog_controls[i].id, buf);
+  }
+}
+
+void
+AC3FilterDlg::init_tooltips()
+{
+  tooltips_ctl.destroy();
+  tooltips_ctl.create(ac3filter_instance, m_Dlg);
+  tooltips_ctl.set_width(300);
+  {
+    for (int i = 0; i < array_size(dialog_controls); i++)
+    {
+      const char *text = trans(dialog_controls[i].tipid, dialog_controls[i].tip);
+      if (text[0] != 0)
+        tooltips_ctl.add_control(dialog_controls[i].id, text);
+    }
   }
 }
 
