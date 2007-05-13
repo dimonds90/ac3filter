@@ -44,8 +44,6 @@ Tooltip::create(HINSTANCE _hinstance, HWND _hwnd, bool _enabled)
 
   hwnd = _hwnd;
   hinstance = _hinstance;
-  SetWindowPos(tooltip, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-
   enable(_enabled);
   return true;
 }
@@ -87,6 +85,7 @@ void
 Tooltip::show(bool _visible)
 {
   visible = _visible;
+  SendMessage(tooltip, TTM_TRACKACTIVATE, FALSE, 0);
   if (visible)
   {
     // WindowFromPoint ignores static controls and disabled windows.
@@ -94,32 +93,27 @@ Tooltip::show(bool _visible)
     // static controls and disabled windows.
 
     HWND mouse_hwnd = WindowFromPoint(mouse_pt);
+    HWND temp_hwnd = mouse_hwnd;
     if (mouse_hwnd)
     {
       POINT child_pt = mouse_pt;
-      HWND child_hwnd = 0;
       if (ScreenToClient(mouse_hwnd, &child_pt))
       {
         HWND child_hwnd = ChildWindowFromPoint(mouse_hwnd, child_pt);
         if (child_hwnd)
           mouse_hwnd = child_hwnd;
       }
-    }
 
-    if (mouse_hwnd)
-    {
       TOOLINFO ti;
       memset(&ti, 0, sizeof(ti));
       ti.cbSize = sizeof(ti);
-      ti.hwnd = mouse_hwnd;
+      ti.hwnd = hwnd;
       ti.uId = (UINT)mouse_hwnd;
 
       SendMessage(tooltip, TTM_TRACKPOSITION, 0, MAKELPARAM(mouse_pt.x, mouse_pt.y));
       SendMessage(tooltip, TTM_TRACKACTIVATE, TRUE, (LPARAM)&ti);
     }
   }
-  else
-    SendMessage(tooltip, TTM_TRACKACTIVATE, FALSE, 0);
 }
 
 void
@@ -156,8 +150,8 @@ Tooltip::add_window(HWND window, const char *text)
   TOOLINFO ti;
   memset(&ti, 0, sizeof(ti));
   ti.cbSize = sizeof(ti);
-  ti.uFlags = TTF_IDISHWND;
-  ti.hwnd = window;
+  ti.uFlags = 0;
+  ti.hwnd = hwnd;
   ti.hinst = hinstance;
   ti.uId = (UINT)window;
   ti.lpszText = (LPTSTR)text;
@@ -502,7 +496,6 @@ LinkButton::paint(HDC dc)
   DrawText(dc, link_text, link_text_len, &client_rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
   SetTextColor(dc, old_color);
   SelectObject(dc, old_font);
-//  DeleteObject(font);
 }
 
 void 
@@ -520,10 +513,9 @@ LinkButton::press()
       break;
     }
 
+  // execute url
   if (i < link_text_len)
     ShellExecute(hwnd, 0, link_text + i, 0, 0, SW_SHOWMAXIMIZED);
   else
     ShellExecute(hwnd, 0, link_text, 0, 0, SW_SHOWMAXIMIZED);
-
-  // execute url
 }
