@@ -336,19 +336,14 @@
 #define IDC_EDT_CREDITS                52810
 
 // Link controls (525)
-#define IDC_LNK_AC3FILTER              52501
+#define IDC_LNK_HOME                   52501
 #define IDC_LNK_FORUM                  52502
-#define IDC_LNK_LIBA52                 52503
-#define IDC_LNK_EMAIL                  52504
-#define IDC_LNK_MATRIX_MIXER           52505
-#define IDC_LNK_WINAMPAC3              52506
-#define IDC_LNK_DONATE                 52507
-#define IDC_LNK_HOME                   52508
-#define IDC_LNK_HOME2                  52509
+#define IDC_LNK_EMAIL                  52503
 
 // Logos (100)
 #define IDC_LOGO                       10001
 #define IDB_LOGO                       10002
 
 // Other
-#define IDC_VER                        20101
+#define IDC_VER                        52901
+#define IDC_BTN_DONATE                 52902

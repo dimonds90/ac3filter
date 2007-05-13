@@ -829,7 +829,6 @@ AC3FilterDlg::init_controls()
   lnk_home.link(m_Dlg, IDC_LNK_HOME);
   lnk_forum.link(m_Dlg, IDC_LNK_FORUM);
   lnk_email.link(m_Dlg, IDC_LNK_EMAIL);
-  lnk_donate.link(m_Dlg, IDC_LNK_DONATE);
 
   /////////////////////////////////////
   // Build and environment info
@@ -888,8 +887,9 @@ AC3FilterDlg::init_tooltips()
     for (int i = 0; i < array_size(dialog_controls); i++)
     {
       const char *text = trans(dialog_controls[i].tipid, dialog_controls[i].tip);
-      if (text[0] != 0)
-        tooltip_ctl.add_control(dialog_controls[i].id, text);
+      if (text)
+        if (text[0] != 0)
+          tooltip_ctl.add_control(dialog_controls[i].id, text);
     }
   }
 }
@@ -1573,7 +1573,7 @@ AC3FilterDlg::command(int control, int message)
     }
 
     /////////////////////////////////////
-    // Tray icon
+    // Interface
 
     case IDC_CHK_TRAY:
     {
@@ -2085,6 +2085,14 @@ AC3FilterDlg::command(int control, int message)
         set_lang(new_lang);
         break;
       }
+
+    /////////////////////////////////////
+    // Donate
+
+    case IDC_BTN_DONATE:
+      ShellExecute(0, 0, "http://order.kagi.com/?6CZJZ", 0, 0, SW_SHOWMAXIMIZED);
+      break;
+
     /////////////////////////////////////
     // Merit 
 
@@ -2143,5 +2151,3 @@ AC3FilterDlg::command(int control, int message)
       break;
   }
 }
-
-

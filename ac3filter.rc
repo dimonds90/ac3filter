@@ -27,7 +27,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 // Dialog
 //
 
-IDD_MAIN DIALOGEX 0, 0, 397, 202
+IDD_MAIN DIALOGEX 0, 0, 397, 210
 STYLE WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -134,12 +134,13 @@ BEGIN
     LTEXT           "-50 -",IDC_STATIC,295,165,19,8,0,WS_EX_RIGHT
     GROUPBOX        "Output levels",IDC_GRP_OUTPUT_LEVELS,294,97,96,90
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
-                    IDC_VER,174,190,216,8
+                    IDC_VER,7,191,328,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Donate",IDC_BTN_DONATE,340,191,50,12,BS_FLAT
 END
 
-IDD_MIXER DIALOGEX 0, 0, 397, 201
-STYLE DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+IDD_MIXER DIALOGEX 0, 0, 397, 210
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     CTEXT           "Master",IDC_LBL_MASTER,13,15,22,8
     CONTROL         "Slider1",IDC_SLI_MASTER,"msctls_trackbar32",TBS_VERT | 
@@ -172,12 +173,12 @@ BEGIN
                     WS_TABSTOP
     COMBOBOX        IDC_CMB_FORMAT,12,131,65,77,CBS_DROPDOWNLIST | 
                     WS_VSCROLL | WS_TABSTOP
-    GROUPBOX        "Output format",IDC_GRP_OUTPUT,7,97,75,50
+    GROUPBOX        "Output format",IDC_GRP_OUTPUT,7,97,74,50
     COMBOBOX        IDC_CMB_MATRIX_PRESET,12,159,65,77,CBS_DROPDOWN | 
                     CBS_SORT | WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "Save",IDC_BTN_MATRIX_SAVE,12,172,32,10
     PUSHBUTTON      "Delete",IDC_BTN_MATRIX_DELETE,44,172,32,10
-    GROUPBOX        "Matrix preset",IDC_GRP_MATRIX_PRESET,7,149,75,38
+    GROUPBOX        "Matrix preset",IDC_GRP_MATRIX_PRESET,7,149,74,38
     CONTROL         "Auto gain control",IDC_CHK_AUTO_GAIN,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,90,107,76,10
     CONTROL         "One-pass norm",IDC_CHK_NORMALIZE,"Button",
@@ -242,7 +243,7 @@ BEGIN
     LTEXT           "SL'",IDC_STATIC,374,69,11,8
     LTEXT           "SR'",IDC_STATIC,373,83,12,8
     LTEXT           "LFE'",IDC_STATIC,372,98,15,8
-    GROUPBOX        "Matrix",IDC_GRP_MATRIX,171,7,219,106
+    GROUPBOX        "Matrix",IDC_GRP_MATRIX,172,7,218,106
     CONTROL         "Progress1",IDC_IN_LFE,"msctls_progress32",PBS_VERTICAL | 
                     PBS_SMOOTH | WS_BORDER,199,125,9,50
     CONTROL         "Progress1",IDC_IN_L,"msctls_progress32",PBS_VERTICAL | 
@@ -267,7 +268,7 @@ BEGIN
     LTEXT           "-30 -",IDC_STATIC,177,149,19,8,0,WS_EX_RIGHT
     LTEXT           "-40 -",IDC_STATIC,177,159,19,8,0,WS_EX_RIGHT
     LTEXT           "-50 -",IDC_STATIC,177,168,19,8,0,WS_EX_RIGHT
-    GROUPBOX        "Input levels",IDC_GRP_INPUT_LEVELS,171,113,108,74
+    GROUPBOX        "Input levels",IDC_GRP_INPUT_LEVELS,172,113,107,74
     CONTROL         "Progress1",IDC_OUT_SW,"msctls_progress32",PBS_VERTICAL | 
                     PBS_SMOOTH | WS_BORDER,311,125,9,50
     CONTROL         "Progress1",IDC_OUT_L,"msctls_progress32",PBS_VERTICAL | 
@@ -292,14 +293,15 @@ BEGIN
     LTEXT           "-30 -",IDC_STATIC,290,149,19,8,0,WS_EX_RIGHT
     LTEXT           "-40 -",IDC_STATIC,290,159,19,8,0,WS_EX_RIGHT
     LTEXT           "-50 -",IDC_STATIC,290,168,19,8,0,WS_EX_RIGHT
-    GROUPBOX        "Output levels",IDC_GRP_OUTPUT_LEVELS,282,113,108,74
+    GROUPBOX        "Output levels",IDC_GRP_OUTPUT_LEVELS,283,113,107,74
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
+                    IDC_VER,7,191,328,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Donate",IDC_BTN_DONATE,340,191,50,12,BS_FLAT
 END
 
-IDD_GAINS DIALOGEX 0, 0, 397, 201
-STYLE DS_CONTROL | WS_CHILD
-FONT 8, "MS Sans Serif"
+IDD_GAINS DIALOGEX 0, 0, 397, 210
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     CTEXT           "Master",IDC_LBL_MASTER,13,15,22,8
     CONTROL         "Slider1",IDC_SLI_MASTER,"msctls_trackbar32",TBS_VERT | 
@@ -429,11 +431,12 @@ BEGIN
     EDITTEXT        IDC_EDT_OUT_LFE,360,168,23,14,ES_AUTOHSCROLL
     GROUPBOX        "Output gains",IDC_GRP_OUTPUT_GAINS,172,97,218,90
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
+                    IDC_VER,7,191,328,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Donate",IDC_BTN_DONATE,340,191,50,12,BS_FLAT
 END
 
-IDD_SYS DIALOG DISCARDABLE  0, 0, 397, 201
-STYLE DS_CONTROL | WS_CHILD
+IDD_SYS DIALOG DISCARDABLE  0, 0, 397, 210
+STYLE WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
     CONTROL         "PCM",IDC_CHK_PCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
@@ -457,12 +460,12 @@ BEGIN
                     105,10
     RADIOBUTTON     "Use Wave Out by default",IDC_RBT_RENDER_WO,88,63,101,10
     GROUPBOX        "Default audio renderer",IDC_GRP_RENDERER,84,42,111,34
-    LTEXT           "Language:",IDC_LBL_LANG,207,17,66,8
+    LTEXT           "Language:",IDC_LBL_LANG,207,17,66,8,WS_DISABLED
     COMBOBOX        IDC_CMB_LANG,273,14,109,172,CBS_DROPDOWNLIST | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
     EDITTEXT        IDC_EDT_TRANS_INFO,207,28,175,45,ES_MULTILINE | 
-                    ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
-    GROUPBOX        "Translation",IDC_GRP_TRANS,200,7,190,69
+                    ES_AUTOVSCROLL | ES_READONLY | WS_DISABLED | WS_VSCROLL
+    GROUPBOX        "Translation",IDC_GRP_TRANS,200,7,190,69,WS_DISABLED
     LTEXT           "Time shift (ms):",IDC_LBL_TIME_SHIFT,15,87,174,8
     CONTROL         "Slider1",IDC_SLI_TIME_SHIFT,"msctls_trackbar32",
                     TBS_NOTICKS | WS_TABSTOP,15,97,174,12
@@ -483,13 +486,13 @@ BEGIN
     CONTROL         "Show tray icon",IDC_CHK_TRAY,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,207,87,175,10
     CONTROL         "Show tooltips",IDC_CHK_TOOLTIPS,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,99,175,10
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,207,99,175,10
     CONTROL         "Invert levels",IDC_CHK_INVERT_LEVELS,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,207,111,175,10
     LTEXT           "Interface update rate (ms)",IDC_LBL_REFRESH_TIME,233,
                     124,149,8
     EDITTEXT        IDC_EDT_REFRESH_TIME,207,123,22,12,ES_AUTOHSCROLL
-    GROUPBOX        "Interface options",IDC_GRP_INTERFACE,200,76,190,64
+    GROUPBOX        "Interface options",IDC_GRP_INTERFACE,200,76,190,63
     CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,207,151,175,10
     CONTROL         "Force sound card to reinit after seek / pause",
@@ -499,11 +502,12 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,173,175,10
     GROUPBOX        "DirectShow options",IDC_GRP_DSHOW,200,140,190,47
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
+                    IDC_VER,7,191,328,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Donate",IDC_BTN_DONATE,340,191,50,12,BS_FLAT
 END
 
-IDD_SPDIF DIALOG DISCARDABLE  0, 0, 397, 201
-STYLE DS_CONTROL | WS_CHILD
+IDD_SPDIF DIALOG DISCARDABLE  0, 0, 397, 210
+STYLE WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
     COMBOBOX        IDC_CMB_SPK,14,17,83,86,CBS_DROPDOWNLIST | WS_VSCROLL | 
@@ -564,45 +568,42 @@ BEGIN
                     ES_READONLY
     GROUPBOX        "Decoder info",IDC_GRP_DECODER_INFO,7,57,188,130
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
+                    IDC_VER,7,191,328,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Donate",IDC_BTN_DONATE,340,191,50,12,BS_FLAT
 END
 
-IDD_ABOUT DIALOGEX 0, 0, 397, 201
-STYLE DS_CONTROL | WS_CHILD
+IDD_ABOUT DIALOG DISCARDABLE  0, 0, 397, 210
+STYLE WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "AC3Filter is high quality DirectShow audio decoder and processor filter used to playback multimedia files. Used automatically by most of multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.",
-                    IDC_LBL_ABOUT,13,17,182,42
-    GROUPBOX        "What is it?",IDC_GRP_ABOUT,7,7,193,56
+                    IDC_LBL_ABOUT,13,18,182,42
+    GROUPBOX        "What is it?",IDC_GRP_ABOUT,7,7,193,70
     LTEXT           "This program is free software and can be distributed according to the terms of GNU General Public License version 2.",
-                    IDC_LBL_LICENSE,13,72,182,24
-    GROUPBOX        "License",IDC_GRP_LICENSE,7,63,193,36
+                    IDC_LBL_LICENSE,13,88,182,24
+    GROUPBOX        "License",IDC_GRP_LICENSE,7,77,193,40
     LTEXT           "Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).",
-                    IDC_LBL_CONTACT,13,109,176,33
+                    IDC_LBL_CONTACT,13,128,176,33
     CONTROL         "Homepage|http://ac3filter.net/",IDC_LNK_HOME,"Button",
                     BS_OWNERDRAW | BS_LEFT | BS_VCENTER | BS_FLAT | 
-                    WS_TABSTOP,13,143,50,8
+                    WS_TABSTOP,13,169,50,8
     CONTROL         "Project forum|http://ac3filter.net/forum/",
                     IDC_LNK_FORUM,"Button",BS_OWNERDRAW | BS_LEFT | 
-                    BS_VCENTER | BS_FLAT | WS_TABSTOP,79,143,50,8
+                    BS_VCENTER | BS_FLAT | WS_TABSTOP,79,169,50,8
     CONTROL         "mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter",
                     IDC_LNK_EMAIL,"Button",BS_OWNERDRAW | BS_LEFT | BS_FLAT | 
-                    WS_TABSTOP,145,143,50,8
-    GROUPBOX        "Contact author",IDC_GRP_CONTACT,7,99,193,58
-    EDITTEXT        IDC_EDT_ENV,209,16,176,52,ES_MULTILINE | ES_AUTOHSCROLL | 
-                    ES_READONLY | NOT WS_BORDER | WS_VSCROLL
-    GROUPBOX        "Build info",IDC_GRP_ENV,203,7,187,64
-    EDITTEXT        IDC_EDT_CREDITS,209,82,176,73,ES_MULTILINE | 
-                    ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | 
-                    WS_VSCROLL
-    GROUPBOX        "Thanks to",IDC_GRP_CREDITS,203,73,187,84
-    CTEXT           "If you like this and want it to become better please make a donation. Any sum is important!",
-                    IDC_STATIC,13,160,372,9
-    CONTROL         "DONATE|http://order.kagi.com/?6CZJZ",IDC_LNK_DONATE,
-                    "Button",BS_OWNERDRAW | BS_LEFT | BS_VCENTER | BS_FLAT | 
-                    WS_TABSTOP,179,171,39,16,WS_EX_DLGMODALFRAME
+                    WS_TABSTOP,145,169,50,8
+    GROUPBOX        "Contact author",IDC_GRP_CONTACT,7,117,193,70
+    EDITTEXT        IDC_EDT_ENV,209,17,176,56,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
+    GROUPBOX        "Build info",IDC_GRP_ENV,203,7,187,70
+    EDITTEXT        IDC_EDT_CREDITS,209,87,176,98,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | NOT 
+                    WS_BORDER
+    GROUPBOX        "Thanks to",IDC_GRP_CREDITS,203,77,187,110
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
-                    IDC_VER,7,190,383,8
+                    IDC_VER,7,191,328,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Donate",IDC_BTN_DONATE,340,191,50,12,BS_FLAT
 END
 
 
@@ -624,7 +625,7 @@ BEGIN
         VERTGUIDE, 294
         VERTGUIDE, 314
         TOPMARGIN, 7
-        BOTTOMMARGIN, 199
+        BOTTOMMARGIN, 203
         HORZGUIDE, 97
         HORZGUIDE, 187
     END
@@ -633,7 +634,8 @@ BEGIN
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 390
-        VERTGUIDE, 166
+        VERTGUIDE, 168
+        VERTGUIDE, 172
         VERTGUIDE, 177
         VERTGUIDE, 194
         VERTGUIDE, 226
@@ -643,7 +645,7 @@ BEGIN
         VERTGUIDE, 354
         VERTGUIDE, 380
         TOPMARGIN, 7
-        BOTTOMMARGIN, 198
+        BOTTOMMARGIN, 203
         HORZGUIDE, 12
         HORZGUIDE, 24
         HORZGUIDE, 39
@@ -657,6 +659,10 @@ BEGIN
 
     IDD_GAINS, DIALOG
     BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 390
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
         HORZGUIDE, 97
     END
 
@@ -672,7 +678,7 @@ BEGIN
         VERTGUIDE, 273
         VERTGUIDE, 382
         TOPMARGIN, 7
-        BOTTOMMARGIN, 198
+        BOTTOMMARGIN, 203
         HORZGUIDE, 76
         HORZGUIDE, 187
     END
@@ -691,7 +697,7 @@ BEGIN
         VERTGUIDE, 304
         VERTGUIDE, 386
         TOPMARGIN, 7
-        BOTTOMMARGIN, 198
+        BOTTOMMARGIN, 203
         HORZGUIDE, 57
         HORZGUIDE, 187
     END
@@ -707,7 +713,10 @@ BEGIN
         VERTGUIDE, 209
         VERTGUIDE, 385
         TOPMARGIN, 7
-        BOTTOMMARGIN, 198
+        BOTTOMMARGIN, 203
+        HORZGUIDE, 77
+        HORZGUIDE, 117
+        HORZGUIDE, 173
         HORZGUIDE, 187
     END
 END

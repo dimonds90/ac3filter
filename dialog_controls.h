@@ -18,7 +18,7 @@ struct ControlDesc
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
-  { IDC_LNK_DONATE, "DONATE|http://order.kagi.com/?6CZJZ", "", "IDC_LNK_DONATE", "IDC_LNK_DONATE_TIP" },
+  { IDC_BTN_DONATE, "Donate", "", "IDC_BTN_DONATE", "IDC_BTN_DONATE_TIP" },
   { IDC_VER, "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky", "", "IDC_VER", "IDC_VER_TIP" },
 
   // What is it?
