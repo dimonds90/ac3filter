@@ -39,6 +39,7 @@ Section "AC3Filter"
   	
   ;; Install presets
   ExecWait 'regedit /s "$INSTDIR\ac3filter_reg_presets.reg"'
+  ExecWait 'regedit /s "$INSTDIR\ac3filter_reg_reset.reg"'
 
   ;; Import registry keys for DirectSound/WaveOut
 
