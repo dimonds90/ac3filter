@@ -880,6 +880,7 @@ AC3FilterDlg::translate_controls()
 void
 AC3FilterDlg::init_tooltips()
 {
+/*
   tooltip_ctl.destroy();
   tooltip_ctl.create(ac3filter_instance, m_Dlg);
   tooltip_ctl.set_width(300);
@@ -892,6 +893,7 @@ AC3FilterDlg::init_tooltips()
           tooltip_ctl.add_control(dialog_controls[i].id, text);
     }
   }
+*/
 }
 
 
