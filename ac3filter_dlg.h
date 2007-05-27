@@ -3,7 +3,6 @@
 
 #include <streams.h>
 #include "controls.h"
-#include "translate.h"
 #include "guids.h"
 
 
@@ -84,7 +83,6 @@ private:
   matrix_t old_matrix;
   char     old_info[2048];
   char     old_jitter[128];
-  char     old_lang[256];
 
   // Matrix
   DoubleEdit  edt_matrix[NCHANNELS][NCHANNELS];
@@ -108,6 +106,8 @@ private:
   // Delay
   DoubleEdit  edt_delay[NCHANNELS];
   DoubleEdit  edt_time_shift;
+  // Language
+  char        lang[256];
   // Interface
   DoubleEdit  edt_refresh_time;
   // Links
@@ -140,12 +140,8 @@ private:
   int get_refresh_time();
   void set_refresh_time(int refresh_time);
 
-  /////////////////////////////////////////////////////////////////////////////
-  // Translation
-
-  Translator trans;
   bool set_lang(const char *lang);
-  void get_lang(char *buf, size_t size);
+  void get_lang(char *lang, size_t size);
 
   /////////////////////////////////////////////////////////////////////////////
   // Interface update functions

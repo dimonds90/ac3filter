@@ -6,12 +6,12 @@
 #include "ac3filter_dlg.h"
 #include "resource.h"
 #include "resource_ids.h"
-#include "dialog_controls.h"
 #include "guids.h"
 #include "registry.h"
 #include "filters\delay.h"
 #include "ac3filter_ver.h"
-#include "translate.h"
+#include "ac3filter_intl.h"
+#include "dialog_controls.h"
 
 
 #define SAFE_RELEASE(p) { if (p) p->Release(); p = 0; }
@@ -155,31 +155,31 @@ bool set_merit(HKEY hive, LPCSTR key, int merit)
 
 const char *spklist[] = 
 {
-  "AS IS (no change)",
-  "1/0 - mono",
-  "2/0 - stereo",
-  "3/0 - 3 front",
-  "2/1 - surround",
-  "3/1 - surround",
-  "2/2 - quadro",
-  "3/2 - 5 channels",
-  "1/0+SW 1.1 mono",
-  "2/0+SW 2.1 stereo",
-  "3/0+SW 3.1 front",
-  "2/1+SW 3.1 surround",
-  "3/1+SW 4.1 surround",
-  "2/2+SW 4.1 quadro",
-  "3/2+SW 5.1 channels",
-  "Dolby Surround/ProLogic",
-  "Dolby ProLogic II",
+  N_("AS IS (no change)"),
+  N_("1/0 - mono"),
+  N_("2/0 - stereo"),
+  N_("3/0 - 3 front"),
+  N_("2/1 - surround"),
+  N_("3/1 - surround"),
+  N_("2/2 - quadro"),
+  N_("3/2 - 5 channels"),
+  N_("1/0+SW 1.1 mono"),
+  N_("2/0+SW 2.1 stereo"),
+  N_("3/0+SW 3.1 front"),
+  N_("2/1+SW 3.1 surround"),
+  N_("3/1+SW 4.1 surround"),
+  N_("2/2+SW 4.1 quadro"),
+  N_("3/2+SW 5.1 channels"),
+  N_("Dolby Surround/ProLogic"),
+  N_("Dolby ProLogic II"),
 };
 
 const char *fmtlist[] = 
 {
-  "PCM 16bit",
-  "PCM 24bit",
-  "PCM 32bit",
-  "PCM Float",
+  N_("PCM 16bit"),
+  N_("PCM 24bit"),
+  N_("PCM 32bit"),
+  N_("PCM Float"),
 };
 
 Speakers list2spk(int ispk, int ifmt, int sample_rate)
@@ -271,12 +271,12 @@ int spk2ifmt(Speakers spk)
 
 char *units_list[] =
 {
-  "Samples",
-  "Millisecs",
-  "Meters",
-  "Centimeters",
-  "Feet",
-  "Inches"
+  N_("Samples"),
+  N_("Millisecs"),
+  N_("Meters"),
+  N_("Centimeters"),
+  N_("Feet"),
+  N_("Inches")
 };
 
 int list2units(int list)
@@ -417,17 +417,17 @@ AC3FilterDlg::OnActivate()
 {
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::OnActivate()"));
 
-  visible = false;
+  visible = true;
   refresh = true;
+
+  // select language
+  memset(lang, 0, sizeof(lang));
+  get_lang(lang, sizeof(lang));
+  set_lang(lang);
 
   // Init and update controls
   init();
   update();
-
-  // remember langage
-  // (do not translate on first dialog show)
-  memset(old_lang, 0, sizeof(old_lang));
-  get_lang(old_lang, sizeof(old_lang));
 
   SetTimer(m_hwnd, 1, get_refresh_time(), 0);  // for all dynamic controls
   SetTimer(m_hwnd, 2, 1000, 0);          // for CPU usage (should be averaged)
@@ -506,12 +506,30 @@ AC3FilterDlg::set_refresh_time(int _refresh_time)
 bool
 AC3FilterDlg::set_lang(const char *_lang)
 {
-  // set_lang(0) cancels translation
-  RegistryKey reg(REG_KEY);
-  reg.set_text("Language", _lang);
-  init();
-  update();
-  return true;
+  // set_lang(0) or set_lang("") cancels translation
+
+  if (!_lang)
+    _lang = "";
+
+  if (find_iso6392(_lang) != -1)
+  {
+    char path[MAX_PATH];
+    RegistryKey reg(REG_KEY);
+    reg.set_text("Language", _lang);
+    reg.get_text("Lang_Dir", path, sizeof(path));
+    ::set_lang(_lang, "ac3filter", path);
+    strncpy(lang, _lang, sizeof(lang));
+    return true;
+  }
+  if (_lang[0] == 0)
+  {
+    RegistryKey reg(REG_KEY);
+    reg.set_text("Language", "");
+    ::set_lang("");
+    lang[0] = 0;
+    return true;
+  }
+  return false;
 }
 
 void
@@ -591,12 +609,12 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 
           // translate if language was changed
           // do not do this all time because this update is visible!
-          char lang[256];
-          memset(lang, 0, sizeof(lang));
-          get_lang(lang, sizeof(lang));
-          if (strcmp(lang, old_lang))
+          char lang_temp[256];
+          memset(lang_temp, 0, sizeof(lang));
+          get_lang(lang_temp, sizeof(lang));
+          if (strcmp(lang_temp, lang))
           {
-            memcpy(old_lang, lang, sizeof(old_lang));
+            memcpy(lang, lang_temp, sizeof(lang));
             init();
           }
 
@@ -708,7 +726,7 @@ AC3FilterDlg::init_controls()
 
   SendDlgItemMessage(m_Dlg, IDC_CMB_SPK, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < sizeof(spklist) / sizeof(spklist[0]); i++)
-    SendDlgItemMessage(m_Dlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LONG)spklist[i]);
+    SendDlgItemMessage(m_Dlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LONG) gettext(spklist[i]));
 
   /////////////////////////////////////
   // CPU usage
@@ -720,7 +738,7 @@ AC3FilterDlg::init_controls()
 
   SendDlgItemMessage(m_Dlg, IDC_CMB_FORMAT, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < sizeof(fmtlist) / sizeof(fmtlist[0]); i++)
-    SendDlgItemMessage(m_Dlg, IDC_CMB_FORMAT, CB_ADDSTRING, 0, (LONG)fmtlist[i]);
+    SendDlgItemMessage(m_Dlg, IDC_CMB_FORMAT, CB_ADDSTRING, 0, (LONG) gettext(fmtlist[i]));
 
   /////////////////////////////////////
   // Matrix
@@ -816,12 +834,56 @@ AC3FilterDlg::init_controls()
 
   SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < sizeof(units_list) / sizeof(units_list[0]); i++)
-    SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_ADDSTRING, 0, (LONG)units_list[i]);
+    SendDlgItemMessage(m_Dlg, IDC_CMB_UNITS, CB_ADDSTRING, 0, (LONG) gettext(units_list[i]));
 
   /////////////////////////////////////
   // Interface
 
   edt_refresh_time.link(m_Dlg, IDC_EDT_REFRESH_TIME);
+
+  /////////////////////////////////////
+  // Languages
+  
+# ifdef ENABLE_NLS
+  {
+    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_RESETCONTENT, 0, 0);
+    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)"--- Original ---");
+    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETITEMDATA, 0, 0);
+
+    char path[MAX_PATH - 2];
+    RegistryKey reg(REG_KEY);
+    path[0] = 0; 
+    reg.get_text("Lang_Dir", path, sizeof(path));
+
+    if (path[0] != 0)
+    {
+      char file[MAX_PATH];
+      sprintf(file, "%s\\*", path);
+
+      WIN32_FIND_DATA fd;
+      HANDLE fh = FindFirstFile(file, &fd);
+      if (fh != INVALID_HANDLE_VALUE)
+        do
+        {
+          if (GetFileAttributes(fd.cFileName) && FILE_ATTRIBUTE_DIRECTORY)
+          { 
+            int iso_index = find_iso6392(fd.cFileName);
+            if (iso_index != -1)
+            {
+              int cb_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)iso_langs[iso_index].name);
+              SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETITEMDATA, cb_index, iso_index);
+            }
+          }
+        } while (FindNextFile(fh, &fd));
+    }
+    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETCURSEL, 0, 0);
+  }
+# else
+  {
+    // Disable language selection if NLS is disabled
+    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, WM_ENABLE, 0, 0);
+  }
+# endif
 
   /////////////////////////////////////
   // Links
@@ -858,22 +920,11 @@ AC3FilterDlg::init_controls()
 void
 AC3FilterDlg::translate_controls()
 {
-  char file[1536];
-  char path[1024];
-  char lang[256];
-
-  RegistryKey reg(REG_KEY);
-  path[0] = 0; reg.get_text("Install_Dir", path, sizeof(path));
-  lang[0] = 0; reg.get_text("Language", lang, sizeof(lang));
-  sprintf(file, "%s\\lang\\%s.lng", path, lang);
-
-  char buf[1024];
-  trans.open(file);
   for (int i = 0; i < array_size(dialog_controls); i++)
   {
-    trans.translate(dialog_controls[i].transid, buf, sizeof(buf), dialog_controls[i].label);
-    if (buf[0] != 0)
-      SetDlgItemText(m_Dlg, dialog_controls[i].id, buf);
+    if (dialog_controls[i].label)
+      if (dialog_controls[i].label[0] != 0)
+        SetDlgItemText(m_Dlg, dialog_controls[i].id, gettext(dialog_controls[i].label));
   }
 }
 
@@ -907,7 +958,7 @@ AC3FilterDlg::update_dynamic_controls()
   {
     char buf[128];
     old_in_spk = in_spk;
-    sprintf(buf, "%s %s %iHz", in_spk.format_text(), in_spk.mode_text(), in_spk.sample_rate);
+    sprintf(buf, _("%s %s %iHz"), in_spk.format_text(), in_spk.mode_text(), in_spk.sample_rate);
     SetDlgItemText(m_Dlg, IDC_LBL_INPUT, buf);
   }
 
@@ -917,26 +968,26 @@ AC3FilterDlg::update_dynamic_controls()
   if (spdif_status != old_spdif_status || refresh)
   {
     old_spdif_status = spdif_status;
-    switch (old_spdif_status)
+    switch (spdif_status)
     {
       case SPDIF_MODE_NONE:
-        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, _("Use SPDIF"));
         break;
 
       case SPDIF_MODE_DISABLED:
-        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF (disabled)");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, _("Use SPDIF (disabled)"));
         break;
 
       case SPDIF_MODE_PASSTHROUGH:
-        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF (passthrough)");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, _("Use SPDIF (passthrough)"));
         break;
 
       case SPDIF_MODE_ENCODE:
-        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF (AC3 encode)");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, _("Use SPDIF (AC3 encode)"));
         break;
 
       default:
-        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, "Use SPDIF (Unknown)");
+        SetDlgItemText(m_Dlg, IDC_CHK_USE_SPDIF, _("Use SPDIF (Unknown)"));
         break;
     }
   }
@@ -993,7 +1044,7 @@ AC3FilterDlg::update_dynamic_controls()
   // Syncronization
 
   char jitter[sizeof(old_jitter)];
-  sprintf(jitter, "Input\tmean: %ims\tstddev: %ims\r\nOutput\tmean: %ims\tstddev: %ims", 
+  sprintf(jitter, _("Input\tmean: %ims\tstddev: %ims\r\nOutput\tmean: %ims\tstddev: %ims"),
     int(input_mean * 1000), int(input_stddev * 1000), 
     int(output_mean * 1000), int(output_stddev * 1000));
 
@@ -1202,46 +1253,30 @@ AC3FilterDlg::update_static_controls()
   }
 
   /////////////////////////////////////
-  // Languages
-  
+  // Language
+
+#ifdef ENABLE_NLS
   {
-    char file[1536];
-    char path[1024];
-    char lang[256];
-    WIN32_FIND_DATA fd;
-    HANDLE          fh;
-
-    RegistryKey reg(REG_KEY);
-    path[0] = 0; reg.get_text("Install_Dir", path, sizeof(path));
-    lang[0] = 0; reg.get_text("Language", lang, sizeof(lang));
-    sprintf(file, "%s\\lang\\*.lng", path);
-
-    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_RESETCONTENT, 0, 0);
-    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)"--- Original ---");
-    fh = FindFirstFile(file, &fd);
-    if (fh != INVALID_HANDLE_VALUE)
-      do
+    int current_iso_index = find_iso6392(lang);
+    if (current_iso_index != -1)
+    {
+      int cb_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETCOUNT, 0, 0);
+      if (cb_index != CB_ERR)
       {
-        // cut off .lng extension
-        size_t len = strlen(fd.cFileName);
-        if (len > 4)
+        while (cb_index--)
         {
-          len = MIN(sizeof(file) - 1, len - 4);
-          memcpy(file, fd.cFileName, len);
-          file[len] = 0;
-          SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)file);
+          int iso_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETITEMDATA, cb_index, 0);
+          if (iso_index != CB_ERR && iso_index == current_iso_index)
+          {
+            SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETCURSEL, cb_index, 0);
+            break;
+          }
         }
-      } while (FindNextFile(fh, &fd));
-
-    int n = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_FINDSTRINGEXACT, 0, (LONG)lang);
-    if (n != CB_ERR)
-      SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETCURSEL, n, 0);
-
-    char buf[1024];
-    sprintf(buf, trans("STR_TRANS_INFO", "Translation author: %s\r\nFilter version: %s\r\nDate of last edit: %s\r\n%s"),
-      trans.author(), trans.ver(), trans.date(), trans.comment());
-    SendDlgItemMessage(m_Dlg, IDC_EDT_TRANS_INFO, WM_SETTEXT, 0, (LONG)buf);
+      }
+    }
   }
+#endif
+
 
   /////////////////////////////////////
   // Presets
@@ -1970,8 +2005,8 @@ AC3FilterDlg::command(int control, int message)
       char preset[256];
       SendDlgItemMessage(m_Dlg, IDC_CMB_PRESET, WM_GETTEXT, 256, (LONG)preset);
 
-      sprintf(buf, "Are you sure you want to delete '%s' preset?", preset);
-      if (MessageBox(m_Dlg, buf, "Delete confirmation", MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
+      sprintf(buf, _("Are you sure you want to delete '%s' preset?"), preset);
+      if (MessageBox(m_Dlg, buf, _("Delete confirmation"), MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
       {     
         sprintf(buf, REG_KEY_PRESET"\\%s", preset);
         delete_reg_key(buf, HKEY_CURRENT_USER);
@@ -2059,8 +2094,8 @@ AC3FilterDlg::command(int control, int message)
       char preset[256];
       SendDlgItemMessage(m_Dlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LONG)preset);
 
-      sprintf(buf, "Are you sure you want to delete '%s' matrix?", preset);
-      if (MessageBox(m_Dlg, buf, "Delete confirmation", MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
+      sprintf(buf, _("Are you sure you want to delete '%s' matrix?"), preset);
+      if (MessageBox(m_Dlg, buf, _("Delete confirmation"), MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
       {     
         sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
         delete_reg_key(buf, HKEY_CURRENT_USER);
@@ -2077,22 +2112,27 @@ AC3FilterDlg::command(int control, int message)
     case IDC_CMB_LANG:
       if (message == CBN_SELENDOK)
       {
-        int ilang;
-        char new_lang[256];
-        new_lang[0] = 0;
-
-        ilang = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETCURSEL, 0, 0);
-        if (ilang != 0)
-          SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETLBTEXT, ilang, (LONG)new_lang);
-        set_lang(new_lang);
-        break;
+        int cb_index, iso_index;
+        cb_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETCURSEL, 0, 0);
+        if (cb_index != CB_ERR)
+        {
+          iso_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETITEMDATA, cb_index, 0);
+          if (iso_index != CB_ERR)
+          {
+            set_lang(iso_langs[iso_index].iso6392);
+            init();
+            update();
+          }
+        }
       }
+      break;
 
     /////////////////////////////////////
     // Donate
 
     case IDC_BTN_DONATE:
-      ShellExecute(0, 0, "http://order.kagi.com/?6CZJZ", 0, 0, SW_SHOWMAXIMIZED);
+      if (message == BN_CLICKED)
+        ShellExecute(0, 0, "http://order.kagi.com/?6CZJZ", 0, 0, SW_SHOWMAXIMIZED);
       break;
 
     /////////////////////////////////////

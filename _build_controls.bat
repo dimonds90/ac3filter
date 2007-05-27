@@ -25,8 +25,7 @@ goto endofperl
 # Controls file is used to translate dialog controls, create and translate tips
 # (or revert translation).
 #
-# Later controls file (with strings file) is used to generate default
-# (reference) translation file with build_trans script.
+# Later controls file (with strings file) is used to generate PO Template file
 #
 #      resource script
 #            |
@@ -37,13 +36,10 @@ goto endofperl
 #      controls list <---- tips (manual edit of controls file)
 #            |
 #            V
-#      (build_trans) <---- strings list (created manually)
+#        (gettext) <---- other source code
 #            |
 #            V
-#  default translation file
-#        (english)
-#
-#
+#       PO Template
 #
 #
 # TODO:
@@ -179,10 +175,13 @@ my %ctrl_tip;      # tip text
 open (CTRL, "< $controls_file");
 while (<CTRL>)
 {
-  my ($id, $label, $tip, $transid, $tipid);
+  # Replace N_("sometext") macro to "sometext"
+  s/N_\(("[^"]*")\)/$1/gsx;
 
   # Parse example:
   # { ID , "label text" , "tip text"
+
+  my ($id, $label, $tip);
   (($id, $label, $tip) = /\s*{\s*(\w+)\s*,\s*"([^"]*)"\s*,\s*"([^"]*)"/gsx) || next;
 
   $ctrl_id{$id}++;
@@ -230,8 +229,6 @@ struct ControlDesc
   int id;
   const char *label;
   const char *tip;
-  const char *transid;
-  const char *tipid;
 };
 
 // Total groups: $groups
@@ -243,21 +240,29 @@ EOTEXT
 print CTRL "  // Controls without a group\n";
 foreach my $id (sort grep { !$id_group{$_} && !$groups{$_} } keys %id_type)
 {
-  print CTRL "  { $id, \"$id_label{$id}\", \"$ctrl_tip{$id}\", \"$id\", \"${id}_TIP\" },\n";
+  print CTRL "  { $id, ".quote($id_label{$id}, $id).", ".quote($ctrl_tip{$id}, $id)." },\n";
 }
 
 foreach my $grp (sort keys %groups)
 {
   print CTRL "\n  // $id_label{$grp}\n";
-  print CTRL "  { $grp, \"$id_label{$grp}\", \"$ctrl_tip{$grp}\", \"$grp\", \"${grp}_TIP\" },\n";
+  print CTRL "  { $grp, ".quote($id_label{$grp}, $grp).", ".quote($ctrl_tip{$grp}, $grp)." },\n";
   foreach my $id (sort grep { $id_group{$_} eq $grp } keys %id_type)
   {
-    print CTRL "  { $id, \"$id_label{$id}\", \"$ctrl_tip{$id}\", \"$id\", \"${id}_TIP\" },\n";
+    print CTRL "  { $id, ".quote($id_label{$id}, $id).", ".quote($ctrl_tip{$id}, $id)." },\n";
   }
 }
 print CTRL "};\n\n";
 print CTRL "#endif\n";
 close CTRL;
+
+sub quote
+{
+  my $text = shift;
+  my $context = shift;
+  return '""' if !$text;
+  return "N_(\"$text\")";
+}
 
 __END__
 :endofperl
