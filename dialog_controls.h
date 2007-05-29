@@ -7,6 +7,7 @@
 struct ControlDesc
 {
   int id;
+  const char *strid;
   const char *label;
   const char *tip;
 };
@@ -16,297 +17,412 @@ struct ControlDesc
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
-  { IDC_BTN_DONATE, N_("Donate"), "" },
-  { IDC_VER, N_("AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"), "" },
+  /* TRANSLATORS: Donate */
+  { IDC_BTN_DONATE, N_("IDC_BTN_DONATE"), "Donate", "" },
+  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky */
+  { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky", "" },
 
   // What is it?
-  { IDC_GRP_ABOUT, N_("What is it?"), "" },
-  { IDC_LBL_ABOUT, N_("AC3Filter is high quality DirectShow audio decoder and processor filter used to playback multimedia files. Used automatically by most of multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD."), "" },
+  /* TRANSLATORS: What is it? */
+  { IDC_GRP_ABOUT, N_("IDC_GRP_ABOUT"), "What is it?", "" },
+  /* TRANSLATORS: AC3Filter is high quality DirectShow audio decoder and processor filter used to playback multimedia files. Used automatically by most of multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD. */
+  { IDC_LBL_ABOUT, N_("IDC_LBL_ABOUT"), "AC3Filter is high quality DirectShow audio decoder and processor filter used to playback multimedia files. Used automatically by most of multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.", "" },
 
   // AGC
-  { IDC_GRP_AGC, N_("AGC"), "" },
-  { IDC_EDT_ATTACK, "", "" },
-  { IDC_EDT_RELEASE, "", "" },
-  { IDC_LBL_ATTACK_RELEASE, N_("Attack/release speed (dB/s):"), "" },
+  /* TRANSLATORS: AGC */
+  { IDC_GRP_AGC, N_("IDC_GRP_AGC"), "AGC", "" },
+  { IDC_EDT_ATTACK, "IDC_EDT_ATTACK", "", "" },
+  { IDC_EDT_RELEASE, "IDC_EDT_RELEASE", "", "" },
+  /* TRANSLATORS: Attack/release speed (dB/s): */
+  { IDC_LBL_ATTACK_RELEASE, N_("IDC_LBL_ATTACK_RELEASE"), "Attack/release speed (dB/s):", "" },
 
   // Contact author
-  { IDC_GRP_CONTACT, N_("Contact author"), "" },
-  { IDC_LBL_CONTACT, N_("Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering)."), "" },
-  { IDC_LNK_EMAIL, N_("mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter"), "" },
-  { IDC_LNK_FORUM, N_("Project forum|http://ac3filter.net/forum/"), "" },
-  { IDC_LNK_HOME, N_("Homepage|http://ac3filter.net/"), "" },
+  /* TRANSLATORS: Contact author */
+  { IDC_GRP_CONTACT, N_("IDC_GRP_CONTACT"), "Contact author", "" },
+  /* TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering). */
+  { IDC_LBL_CONTACT, N_("IDC_LBL_CONTACT"), "Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).", "" },
+  /* TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter */
+  { IDC_LNK_EMAIL, N_("IDC_LNK_EMAIL"), "mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter", "" },
+  /* TRANSLATORS: Project forum|http://ac3filter.net/forum/ */
+  { IDC_LNK_FORUM, N_("IDC_LNK_FORUM"), "Project forum|http://ac3filter.net/forum/", "" },
+  /* TRANSLATORS: Homepage|http://ac3filter.net/ */
+  { IDC_LNK_HOME, N_("IDC_LNK_HOME"), "Homepage|http://ac3filter.net/", "" },
 
   // CPU
-  { IDC_GRP_CPU, N_("CPU"), "" },
-  { IDC_CPU, "", "" },
-  { IDC_CPU_LABEL, N_("0%"), "" },
+  /* TRANSLATORS: CPU */
+  { IDC_GRP_CPU, N_("IDC_GRP_CPU"), "CPU", "" },
+  { IDC_CPU, "IDC_CPU", "", "" },
+  /* TRANSLATORS: 0% */
+  { IDC_CPU_LABEL, N_("IDC_CPU_LABEL"), "0%", "" },
 
   // Thanks to
-  { IDC_GRP_CREDITS, N_("Thanks to"), "" },
-  { IDC_EDT_CREDITS, "", "" },
+  /* TRANSLATORS: Thanks to */
+  { IDC_GRP_CREDITS, N_("IDC_GRP_CREDITS"), "Thanks to", "" },
+  { IDC_EDT_CREDITS, "IDC_EDT_CREDITS", "", "" },
 
   // Decoder info
-  { IDC_GRP_DECODER_INFO, N_("Decoder info"), "" },
-  { IDC_EDT_ERRORS, "", "" },
-  { IDC_EDT_FRAMES, "", "" },
-  { IDC_EDT_INFO, "", "" },
-  { IDC_LBL_FRAMES_ERRORS, N_("Frames / Errors"), "" },
+  /* TRANSLATORS: Decoder info */
+  { IDC_GRP_DECODER_INFO, N_("IDC_GRP_DECODER_INFO"), "Decoder info", "" },
+  { IDC_EDT_ERRORS, "IDC_EDT_ERRORS", "", "" },
+  { IDC_EDT_FRAMES, "IDC_EDT_FRAMES", "", "" },
+  { IDC_EDT_INFO, "IDC_EDT_INFO", "", "" },
+  /* TRANSLATORS: Frames / Errors */
+  { IDC_LBL_FRAMES_ERRORS, N_("IDC_LBL_FRAMES_ERRORS"), "Frames / Errors", "" },
 
   // Delays
-  { IDC_GRP_DELAYS, N_("Delays"), "" },
-  { IDC_CHK_DELAYS, N_("Enable"), "" },
-  { IDC_CMB_UNITS, "", "" },
-  { IDC_EDT_DC, "", "" },
-  { IDC_EDT_DL, "", "" },
-  { IDC_EDT_DLFE, "", "" },
-  { IDC_EDT_DR, "", "" },
-  { IDC_EDT_DSL, "", "" },
-  { IDC_EDT_DSR, "", "" },
-  { IDC_LBL_UNITS, N_("Units:"), "" },
+  /* TRANSLATORS: Delays */
+  { IDC_GRP_DELAYS, N_("IDC_GRP_DELAYS"), "Delays", "" },
+  /* TRANSLATORS: Enable */
+  { IDC_CHK_DELAYS, N_("IDC_CHK_DELAYS"), "Enable", "" },
+  { IDC_CMB_UNITS, "IDC_CMB_UNITS", "", "" },
+  { IDC_EDT_DC, "IDC_EDT_DC", "", "" },
+  { IDC_EDT_DL, "IDC_EDT_DL", "", "" },
+  { IDC_EDT_DLFE, "IDC_EDT_DLFE", "", "" },
+  { IDC_EDT_DR, "IDC_EDT_DR", "", "" },
+  { IDC_EDT_DSL, "IDC_EDT_DSL", "", "" },
+  { IDC_EDT_DSR, "IDC_EDT_DSR", "", "" },
+  /* TRANSLATORS: Units: */
+  { IDC_LBL_UNITS, N_("IDC_LBL_UNITS"), "Units:", "" },
 
   // DRC
-  { IDC_GRP_DRC, N_("DRC"), "" },
-  { IDC_CHK_DRC, N_("Enable"), "" },
-  { IDC_EDT_DRC_LEVEL, "", "" },
-  { IDC_EDT_DRC_POWER, "", "" },
-  { IDC_SLI_DRC_LEVEL, "", "" },
-  { IDC_SLI_DRC_POWER, "", "" },
+  /* TRANSLATORS: DRC */
+  { IDC_GRP_DRC, N_("IDC_GRP_DRC"), "DRC", "" },
+  /* TRANSLATORS: Enable */
+  { IDC_CHK_DRC, N_("IDC_CHK_DRC"), "Enable", "" },
+  { IDC_EDT_DRC_LEVEL, "IDC_EDT_DRC_LEVEL", "", "" },
+  { IDC_EDT_DRC_POWER, "IDC_EDT_DRC_POWER", "", "" },
+  { IDC_SLI_DRC_LEVEL, "IDC_SLI_DRC_LEVEL", "", "" },
+  { IDC_SLI_DRC_POWER, "IDC_SLI_DRC_POWER", "", "" },
 
   // DirectShow options
-  { IDC_GRP_DSHOW, N_("DirectShow options"), "" },
-  { IDC_CHK_QUERY_SINK, N_("Check output format support"), "" },
-  { IDC_CHK_REINIT, N_("Force sound card to reinit after seek / pause"), "" },
-  { IDC_CHK_SPDIF_NO_PCM, N_("Disallow PCM output in SPDIF mode"), "" },
+  /* TRANSLATORS: DirectShow options */
+  { IDC_GRP_DSHOW, N_("IDC_GRP_DSHOW"), "DirectShow options", "" },
+  /* TRANSLATORS: Check output format support */
+  { IDC_CHK_QUERY_SINK, N_("IDC_CHK_QUERY_SINK"), "Check output format support", "" },
+  /* TRANSLATORS: Force sound card to reinit after seek / pause */
+  { IDC_CHK_REINIT, N_("IDC_CHK_REINIT"), "Force sound card to reinit after seek / pause", "" },
+  /* TRANSLATORS: Disallow PCM output in SPDIF mode */
+  { IDC_CHK_SPDIF_NO_PCM, N_("IDC_CHK_SPDIF_NO_PCM"), "Disallow PCM output in SPDIF mode", "" },
 
   // SPDIF/DTS conversion
-  { IDC_GRP_DTS_CONV, N_("SPDIF/DTS conversion"), "" },
-  { IDC_RBT_DTS_CONV_14BIT, N_("Convert to DTS14"), "" },
-  { IDC_RBT_DTS_CONV_16BIT, N_("Convert to DTS16"), "" },
-  { IDC_RBT_DTS_CONV_NONE, N_("Do not convert"), "" },
+  /* TRANSLATORS: SPDIF/DTS conversion */
+  { IDC_GRP_DTS_CONV, N_("IDC_GRP_DTS_CONV"), "SPDIF/DTS conversion", "" },
+  /* TRANSLATORS: Convert to DTS14 */
+  { IDC_RBT_DTS_CONV_14BIT, N_("IDC_RBT_DTS_CONV_14BIT"), "Convert to DTS14", "" },
+  /* TRANSLATORS: Convert to DTS16 */
+  { IDC_RBT_DTS_CONV_16BIT, N_("IDC_RBT_DTS_CONV_16BIT"), "Convert to DTS16", "" },
+  /* TRANSLATORS: Do not convert */
+  { IDC_RBT_DTS_CONV_NONE, N_("IDC_RBT_DTS_CONV_NONE"), "Do not convert", "" },
 
   // SPDIF/DTS mode
-  { IDC_GRP_DTS_MODE, N_("SPDIF/DTS mode"), "" },
-  { IDC_RBT_DTS_MODE_AUTO, N_("Auto"), "" },
-  { IDC_RBT_DTS_MODE_PADDED, N_("Padded DTS"), "" },
-  { IDC_RBT_DTS_MODE_WRAPPED, N_("SPDIF wrapped"), "" },
+  /* TRANSLATORS: SPDIF/DTS mode */
+  { IDC_GRP_DTS_MODE, N_("IDC_GRP_DTS_MODE"), "SPDIF/DTS mode", "" },
+  /* TRANSLATORS: Auto */
+  { IDC_RBT_DTS_MODE_AUTO, N_("IDC_RBT_DTS_MODE_AUTO"), "Auto", "" },
+  /* TRANSLATORS: Padded DTS */
+  { IDC_RBT_DTS_MODE_PADDED, N_("IDC_RBT_DTS_MODE_PADDED"), "Padded DTS", "" },
+  /* TRANSLATORS: SPDIF wrapped */
+  { IDC_RBT_DTS_MODE_WRAPPED, N_("IDC_RBT_DTS_MODE_WRAPPED"), "SPDIF wrapped", "" },
 
   // Build info
-  { IDC_GRP_ENV, N_("Build info"), "" },
-  { IDC_EDT_ENV, "", "" },
+  /* TRANSLATORS: Build info */
+  { IDC_GRP_ENV, N_("IDC_GRP_ENV"), "Build info", "" },
+  { IDC_EDT_ENV, "IDC_EDT_ENV", "", "" },
 
   // Use AC3Filter for ..
-  { IDC_GRP_FORMATS, N_("Use AC3Filter for .."), "" },
-  { IDC_CHK_AC3, N_("AC3"), "" },
-  { IDC_CHK_DTS, N_("DTS"), "" },
-  { IDC_CHK_MPA, N_("MPEG Audio"), "" },
-  { IDC_CHK_PCM, N_("PCM"), "" },
-  { IDC_CHK_PES, N_("DVD"), "" },
-  { IDC_CHK_SPDIF, N_("SPDIF"), "" },
+  /* TRANSLATORS: Use AC3Filter for .. */
+  { IDC_GRP_FORMATS, N_("IDC_GRP_FORMATS"), "Use AC3Filter for ..", "" },
+  /* TRANSLATORS: AC3 */
+  { IDC_CHK_AC3, N_("IDC_CHK_AC3"), "AC3", "" },
+  /* TRANSLATORS: DTS */
+  { IDC_CHK_DTS, N_("IDC_CHK_DTS"), "DTS", "" },
+  /* TRANSLATORS: MPEG Audio */
+  { IDC_CHK_MPA, N_("IDC_CHK_MPA"), "MPEG Audio", "" },
+  /* TRANSLATORS: PCM */
+  { IDC_CHK_PCM, N_("IDC_CHK_PCM"), "PCM", "" },
+  /* TRANSLATORS: DVD */
+  { IDC_CHK_PES, N_("IDC_CHK_PES"), "DVD", "" },
+  /* TRANSLATORS: SPDIF */
+  { IDC_CHK_SPDIF, N_("IDC_CHK_SPDIF"), "SPDIF", "" },
 
   // Gain
-  { IDC_GRP_GAIN, N_("Gain"), "" },
-  { IDC_EDT_GAIN, "", "" },
-  { IDC_EDT_MASTER, "", "" },
-  { IDC_LBL_GAIN, N_("Gain"), "" },
-  { IDC_LBL_MASTER, N_("Master"), "" },
-  { IDC_SLI_GAIN, "", "" },
-  { IDC_SLI_MASTER, "", "" },
+  /* TRANSLATORS: Gain */
+  { IDC_GRP_GAIN, N_("IDC_GRP_GAIN"), "Gain", "" },
+  { IDC_EDT_GAIN, "IDC_EDT_GAIN", "", "" },
+  { IDC_EDT_MASTER, "IDC_EDT_MASTER", "", "" },
+  /* TRANSLATORS: Gain */
+  { IDC_LBL_GAIN, N_("IDC_LBL_GAIN"), "Gain", "" },
+  /* TRANSLATORS: Master */
+  { IDC_LBL_MASTER, N_("IDC_LBL_MASTER"), "Master", "" },
+  { IDC_SLI_GAIN, "IDC_SLI_GAIN", "", "" },
+  { IDC_SLI_MASTER, "IDC_SLI_MASTER", "", "" },
 
   // Gains
-  { IDC_GRP_GAINS, N_("Gains"), "" },
-  { IDC_EDT_LFE, "", "" },
-  { IDC_EDT_SUR, "", "" },
-  { IDC_EDT_VOICE, "", "" },
-  { IDC_LBL_LFE, N_("LFE"), "" },
-  { IDC_LBL_SUR, N_("Surround"), "" },
-  { IDC_LBL_VOICE, N_("Voice"), "" },
-  { IDC_SLI_LFE, "", "" },
-  { IDC_SLI_SUR, "", "" },
-  { IDC_SLI_VOICE, "", "" },
+  /* TRANSLATORS: Gains */
+  { IDC_GRP_GAINS, N_("IDC_GRP_GAINS"), "Gains", "" },
+  { IDC_EDT_LFE, "IDC_EDT_LFE", "", "" },
+  { IDC_EDT_SUR, "IDC_EDT_SUR", "", "" },
+  { IDC_EDT_VOICE, "IDC_EDT_VOICE", "", "" },
+  /* TRANSLATORS: LFE */
+  { IDC_LBL_LFE, N_("IDC_LBL_LFE"), "LFE", "" },
+  /* TRANSLATORS: Surround */
+  { IDC_LBL_SUR, N_("IDC_LBL_SUR"), "Surround", "" },
+  /* TRANSLATORS: Voice */
+  { IDC_LBL_VOICE, N_("IDC_LBL_VOICE"), "Voice", "" },
+  { IDC_SLI_LFE, "IDC_SLI_LFE", "", "" },
+  { IDC_SLI_SUR, "IDC_SLI_SUR", "", "" },
+  { IDC_SLI_VOICE, "IDC_SLI_VOICE", "", "" },
 
   // Input gains
-  { IDC_GRP_INPUT_GAINS, N_("Input gains"), "" },
-  { IDC_EDT_IN_C, "", "" },
-  { IDC_EDT_IN_L, "", "" },
-  { IDC_EDT_IN_LFE, "", "" },
-  { IDC_EDT_IN_R, "", "" },
-  { IDC_EDT_IN_SL, "", "" },
-  { IDC_EDT_IN_SR, "", "" },
-  { IDC_SLI_IN_C, "", "" },
-  { IDC_SLI_IN_L, "", "" },
-  { IDC_SLI_IN_LFE, "", "" },
-  { IDC_SLI_IN_R, "", "" },
-  { IDC_SLI_IN_SL, "", "" },
-  { IDC_SLI_IN_SR, "", "" },
+  /* TRANSLATORS: Input gains */
+  { IDC_GRP_INPUT_GAINS, N_("IDC_GRP_INPUT_GAINS"), "Input gains", "" },
+  { IDC_EDT_IN_C, "IDC_EDT_IN_C", "", "" },
+  { IDC_EDT_IN_L, "IDC_EDT_IN_L", "", "" },
+  { IDC_EDT_IN_LFE, "IDC_EDT_IN_LFE", "", "" },
+  { IDC_EDT_IN_R, "IDC_EDT_IN_R", "", "" },
+  { IDC_EDT_IN_SL, "IDC_EDT_IN_SL", "", "" },
+  { IDC_EDT_IN_SR, "IDC_EDT_IN_SR", "", "" },
+  { IDC_SLI_IN_C, "IDC_SLI_IN_C", "", "" },
+  { IDC_SLI_IN_L, "IDC_SLI_IN_L", "", "" },
+  { IDC_SLI_IN_LFE, "IDC_SLI_IN_LFE", "", "" },
+  { IDC_SLI_IN_R, "IDC_SLI_IN_R", "", "" },
+  { IDC_SLI_IN_SL, "IDC_SLI_IN_SL", "", "" },
+  { IDC_SLI_IN_SR, "IDC_SLI_IN_SR", "", "" },
 
   // Input levels
-  { IDC_GRP_INPUT_LEVELS, N_("Input levels"), "" },
-  { IDC_IN_C, "", "" },
-  { IDC_IN_L, "", "" },
-  { IDC_IN_LFE, "", "" },
-  { IDC_IN_R, "", "" },
-  { IDC_IN_SL, "", "" },
-  { IDC_IN_SR, "", "" },
-  { IDC_LBL_IN_C, N_("C"), "" },
-  { IDC_LBL_IN_L, N_("L"), "" },
-  { IDC_LBL_IN_LFE, N_("LFE"), "" },
-  { IDC_LBL_IN_R, N_("R"), "" },
-  { IDC_LBL_IN_SL, N_("SL"), "" },
-  { IDC_LBL_IN_SR, N_("SR"), "" },
+  /* TRANSLATORS: Input levels */
+  { IDC_GRP_INPUT_LEVELS, N_("IDC_GRP_INPUT_LEVELS"), "Input levels", "" },
+  { IDC_IN_C, "IDC_IN_C", "", "" },
+  { IDC_IN_L, "IDC_IN_L", "", "" },
+  { IDC_IN_LFE, "IDC_IN_LFE", "", "" },
+  { IDC_IN_R, "IDC_IN_R", "", "" },
+  { IDC_IN_SL, "IDC_IN_SL", "", "" },
+  { IDC_IN_SR, "IDC_IN_SR", "", "" },
+  /* TRANSLATORS: C */
+  { IDC_LBL_IN_C, N_("IDC_LBL_IN_C"), "C", "" },
+  /* TRANSLATORS: L */
+  { IDC_LBL_IN_L, N_("IDC_LBL_IN_L"), "L", "" },
+  /* TRANSLATORS: LFE */
+  { IDC_LBL_IN_LFE, N_("IDC_LBL_IN_LFE"), "LFE", "" },
+  /* TRANSLATORS: R */
+  { IDC_LBL_IN_R, N_("IDC_LBL_IN_R"), "R", "" },
+  /* TRANSLATORS: SL */
+  { IDC_LBL_IN_SL, N_("IDC_LBL_IN_SL"), "SL", "" },
+  /* TRANSLATORS: SR */
+  { IDC_LBL_IN_SR, N_("IDC_LBL_IN_SR"), "SR", "" },
 
   // Interface options
-  { IDC_GRP_INTERFACE, N_("Interface options"), "" },
-  { IDC_CHK_INVERT_LEVELS, N_("Invert levels"), "" },
-  { IDC_CHK_TOOLTIPS, N_("Show tooltips"), "" },
-  { IDC_CHK_TRAY, N_("Show tray icon"), "" },
-  { IDC_EDT_REFRESH_TIME, "", "" },
-  { IDC_LBL_REFRESH_TIME, N_("Interface update rate (ms)"), "" },
+  /* TRANSLATORS: Interface options */
+  { IDC_GRP_INTERFACE, N_("IDC_GRP_INTERFACE"), "Interface options", "" },
+  /* TRANSLATORS: Invert levels */
+  { IDC_CHK_INVERT_LEVELS, N_("IDC_CHK_INVERT_LEVELS"), "Invert levels", "" },
+  /* TRANSLATORS: Show tooltips */
+  { IDC_CHK_TOOLTIPS, N_("IDC_CHK_TOOLTIPS"), "Show tooltips", "" },
+  /* TRANSLATORS: Show tray icon */
+  { IDC_CHK_TRAY, N_("IDC_CHK_TRAY"), "Show tray icon", "" },
+  { IDC_EDT_REFRESH_TIME, "IDC_EDT_REFRESH_TIME", "", "" },
+  /* TRANSLATORS: Interface update rate (ms) */
+  { IDC_LBL_REFRESH_TIME, N_("IDC_LBL_REFRESH_TIME"), "Interface update rate (ms)", "" },
 
   // License
-  { IDC_GRP_LICENSE, N_("License"), "" },
-  { IDC_LBL_LICENSE, N_("This program is free software and can be distributed according to the terms of GNU General Public License version 2."), "" },
+  /* TRANSLATORS: License */
+  { IDC_GRP_LICENSE, N_("IDC_GRP_LICENSE"), "License", "" },
+  /* TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2. */
+  { IDC_LBL_LICENSE, N_("IDC_LBL_LICENSE"), "This program is free software and can be distributed according to the terms of GNU General Public License version 2.", "" },
 
-  // Matrix
-  { IDC_GRP_MATRIX, N_("Matrix"), "" },
-  { IDC_EDT_C_C, "", "" },
-  { IDC_EDT_C_L, "", "" },
-  { IDC_EDT_C_LFE, "", "" },
-  { IDC_EDT_C_R, "", "" },
-  { IDC_EDT_C_SL, "", "" },
-  { IDC_EDT_C_SR, "", "" },
-  { IDC_EDT_LFE_C, "", "" },
-  { IDC_EDT_LFE_L, "", "" },
-  { IDC_EDT_LFE_LFE, "", "" },
-  { IDC_EDT_LFE_R, "", "" },
-  { IDC_EDT_LFE_SL, "", "" },
-  { IDC_EDT_LFE_SR, "", "" },
-  { IDC_EDT_L_C, "", "" },
-  { IDC_EDT_L_L, "", "" },
-  { IDC_EDT_L_LFE, "", "" },
-  { IDC_EDT_L_R, "", "" },
-  { IDC_EDT_L_SL, "", "" },
-  { IDC_EDT_L_SR, "", "" },
-  { IDC_EDT_R_C, "", "" },
-  { IDC_EDT_R_L, "", "" },
-  { IDC_EDT_R_LFE, "", "" },
-  { IDC_EDT_R_R, "", "" },
-  { IDC_EDT_R_SL, "", "" },
-  { IDC_EDT_R_SR, "", "" },
-  { IDC_EDT_SL_C, "", "" },
-  { IDC_EDT_SL_L, "", "" },
-  { IDC_EDT_SL_LFE, "", "" },
-  { IDC_EDT_SL_R, "", "" },
-  { IDC_EDT_SL_SL, "", "" },
-  { IDC_EDT_SL_SR, "", "" },
-  { IDC_EDT_SR_C, "", "" },
-  { IDC_EDT_SR_L, "", "" },
-  { IDC_EDT_SR_LFE, "", "" },
-  { IDC_EDT_SR_R, "", "" },
-  { IDC_EDT_SR_SL, "", "" },
-  { IDC_EDT_SR_SR, "", "" },
+  // Mixing Matrix
+  /* TRANSLATORS: Mixing Matrix */
+  { IDC_GRP_MATRIX, N_("IDC_GRP_MATRIX"), "Mixing Matrix", "" },
+  { IDC_EDT_C_C, "IDC_EDT_C_C", "", "" },
+  { IDC_EDT_C_L, "IDC_EDT_C_L", "", "" },
+  { IDC_EDT_C_LFE, "IDC_EDT_C_LFE", "", "" },
+  { IDC_EDT_C_R, "IDC_EDT_C_R", "", "" },
+  { IDC_EDT_C_SL, "IDC_EDT_C_SL", "", "" },
+  { IDC_EDT_C_SR, "IDC_EDT_C_SR", "", "" },
+  { IDC_EDT_LFE_C, "IDC_EDT_LFE_C", "", "" },
+  { IDC_EDT_LFE_L, "IDC_EDT_LFE_L", "", "" },
+  { IDC_EDT_LFE_LFE, "IDC_EDT_LFE_LFE", "", "" },
+  { IDC_EDT_LFE_R, "IDC_EDT_LFE_R", "", "" },
+  { IDC_EDT_LFE_SL, "IDC_EDT_LFE_SL", "", "" },
+  { IDC_EDT_LFE_SR, "IDC_EDT_LFE_SR", "", "" },
+  { IDC_EDT_L_C, "IDC_EDT_L_C", "", "" },
+  { IDC_EDT_L_L, "IDC_EDT_L_L", "", "" },
+  { IDC_EDT_L_LFE, "IDC_EDT_L_LFE", "", "" },
+  { IDC_EDT_L_R, "IDC_EDT_L_R", "", "" },
+  { IDC_EDT_L_SL, "IDC_EDT_L_SL", "", "" },
+  { IDC_EDT_L_SR, "IDC_EDT_L_SR", "", "" },
+  { IDC_EDT_R_C, "IDC_EDT_R_C", "", "" },
+  { IDC_EDT_R_L, "IDC_EDT_R_L", "", "" },
+  { IDC_EDT_R_LFE, "IDC_EDT_R_LFE", "", "" },
+  { IDC_EDT_R_R, "IDC_EDT_R_R", "", "" },
+  { IDC_EDT_R_SL, "IDC_EDT_R_SL", "", "" },
+  { IDC_EDT_R_SR, "IDC_EDT_R_SR", "", "" },
+  { IDC_EDT_SL_C, "IDC_EDT_SL_C", "", "" },
+  { IDC_EDT_SL_L, "IDC_EDT_SL_L", "", "" },
+  { IDC_EDT_SL_LFE, "IDC_EDT_SL_LFE", "", "" },
+  { IDC_EDT_SL_R, "IDC_EDT_SL_R", "", "" },
+  { IDC_EDT_SL_SL, "IDC_EDT_SL_SL", "", "" },
+  { IDC_EDT_SL_SR, "IDC_EDT_SL_SR", "", "" },
+  { IDC_EDT_SR_C, "IDC_EDT_SR_C", "", "" },
+  { IDC_EDT_SR_L, "IDC_EDT_SR_L", "", "" },
+  { IDC_EDT_SR_LFE, "IDC_EDT_SR_LFE", "", "" },
+  { IDC_EDT_SR_R, "IDC_EDT_SR_R", "", "" },
+  { IDC_EDT_SR_SL, "IDC_EDT_SR_SL", "", "" },
+  { IDC_EDT_SR_SR, "IDC_EDT_SR_SR", "", "" },
 
   // Matrix preset
-  { IDC_GRP_MATRIX_PRESET, N_("Matrix preset"), "" },
-  { IDC_BTN_MATRIX_DELETE, N_("Delete"), "" },
-  { IDC_BTN_MATRIX_SAVE, N_("Save"), "" },
-  { IDC_CMB_MATRIX_PRESET, "", "" },
+  /* TRANSLATORS: Matrix preset */
+  { IDC_GRP_MATRIX_PRESET, N_("IDC_GRP_MATRIX_PRESET"), "Matrix preset", "" },
+  /* TRANSLATORS: Delete */
+  { IDC_BTN_MATRIX_DELETE, N_("IDC_BTN_MATRIX_DELETE"), "Delete", "" },
+  /* TRANSLATORS: Save */
+  { IDC_BTN_MATRIX_SAVE, N_("IDC_BTN_MATRIX_SAVE"), "Save", "" },
+  { IDC_CMB_MATRIX_PRESET, "IDC_CMB_MATRIX_PRESET", "", "" },
 
   // Filter merit
-  { IDC_GRP_MERIT, N_("Filter merit"), "" },
-  { IDC_RBT_MERIT_PREFERRED, N_("Prefer AC3Filter"), "" },
-  { IDC_RBT_MERIT_UNLIKELY, N_("Prefer other decoder"), "" },
+  /* TRANSLATORS: Filter merit */
+  { IDC_GRP_MERIT, N_("IDC_GRP_MERIT"), "Filter merit", "" },
+  /* TRANSLATORS: Prefer AC3Filter */
+  { IDC_RBT_MERIT_PREFERRED, N_("IDC_RBT_MERIT_PREFERRED"), "Prefer AC3Filter", "" },
+  /* TRANSLATORS: Prefer other decoder */
+  { IDC_RBT_MERIT_UNLIKELY, N_("IDC_RBT_MERIT_UNLIKELY"), "Prefer other decoder", "" },
 
   // Options
-  { IDC_GRP_MIXER_OPTIONS, N_("Options"), "" },
-  { IDC_CHK_AUTO_GAIN, N_("Auto gain control"), "" },
-  { IDC_CHK_AUTO_MATRIX, N_("Auto matrix"), "" },
-  { IDC_CHK_BASS_REDIR, N_("Bass redir:"), "" },
-  { IDC_CHK_EXPAND_STEREO, N_("Expand stereo"), "" },
-  { IDC_CHK_NORMALIZE, N_("One-pass norm"), "" },
-  { IDC_CHK_NORM_MATRIX, N_("Normalize matrix"), "" },
-  { IDC_CHK_VOICE_CONTROL, N_("Voice control"), "" },
-  { IDC_EDT_BASS_FREQ, "", "" },
+  /* TRANSLATORS: Options */
+  { IDC_GRP_MIXER_OPTIONS, N_("IDC_GRP_MIXER_OPTIONS"), "Options", "" },
+  /* TRANSLATORS: Auto gain control */
+  { IDC_CHK_AUTO_GAIN, N_("IDC_CHK_AUTO_GAIN"), "Auto gain control", "" },
+  /* TRANSLATORS: Auto matrix */
+  { IDC_CHK_AUTO_MATRIX, N_("IDC_CHK_AUTO_MATRIX"), "Auto matrix", "" },
+  /* TRANSLATORS: Bass redir: */
+  { IDC_CHK_BASS_REDIR, N_("IDC_CHK_BASS_REDIR"), "Bass redir:", "" },
+  /* TRANSLATORS: Expand stereo */
+  { IDC_CHK_EXPAND_STEREO, N_("IDC_CHK_EXPAND_STEREO"), "Expand stereo", "" },
+  /* TRANSLATORS: One-pass norm */
+  { IDC_CHK_NORMALIZE, N_("IDC_CHK_NORMALIZE"), "One-pass norm", "" },
+  /* TRANSLATORS: Normalize matrix */
+  { IDC_CHK_NORM_MATRIX, N_("IDC_CHK_NORM_MATRIX"), "Normalize matrix", "" },
+  /* TRANSLATORS: Voice control */
+  { IDC_CHK_VOICE_CONTROL, N_("IDC_CHK_VOICE_CONTROL"), "Voice control", "" },
+  { IDC_EDT_BASS_FREQ, "IDC_EDT_BASS_FREQ", "", "" },
 
   // Output format
-  { IDC_GRP_OUTPUT, N_("Output format"), "" },
-  { IDC_CHK_USE_SPDIF, N_("Use SPDIF"), "" },
-  { IDC_CMB_FORMAT, "", "" },
-  { IDC_CMB_SPK, "", "" },
-  { IDC_LBL_INPUT, N_("input config"), "" },
+  /* TRANSLATORS: Output format */
+  { IDC_GRP_OUTPUT, N_("IDC_GRP_OUTPUT"), "Output format", "" },
+  /* TRANSLATORS: Use SPDIF */
+  { IDC_CHK_USE_SPDIF, N_("IDC_CHK_USE_SPDIF"), "Use SPDIF", "" },
+  { IDC_CMB_FORMAT, "IDC_CMB_FORMAT", "", "" },
+  { IDC_CMB_SPK, "IDC_CMB_SPK", "", "" },
+  /* TRANSLATORS: input config */
+  { IDC_LBL_INPUT, N_("IDC_LBL_INPUT"), "input config", "" },
 
   // Output gains
-  { IDC_GRP_OUTPUT_GAINS, N_("Output gains"), "" },
-  { IDC_EDT_OUT_C, "", "" },
-  { IDC_EDT_OUT_L, "", "" },
-  { IDC_EDT_OUT_LFE, "", "" },
-  { IDC_EDT_OUT_R, "", "" },
-  { IDC_EDT_OUT_SL, "", "" },
-  { IDC_EDT_OUT_SR, "", "" },
-  { IDC_SLI_OUT_C, "", "" },
-  { IDC_SLI_OUT_L, "", "" },
-  { IDC_SLI_OUT_LFE, "", "" },
-  { IDC_SLI_OUT_R, "", "" },
-  { IDC_SLI_OUT_SL, "", "" },
-  { IDC_SLI_OUT_SR, "", "" },
+  /* TRANSLATORS: Output gains */
+  { IDC_GRP_OUTPUT_GAINS, N_("IDC_GRP_OUTPUT_GAINS"), "Output gains", "" },
+  { IDC_EDT_OUT_C, "IDC_EDT_OUT_C", "", "" },
+  { IDC_EDT_OUT_L, "IDC_EDT_OUT_L", "", "" },
+  { IDC_EDT_OUT_LFE, "IDC_EDT_OUT_LFE", "", "" },
+  { IDC_EDT_OUT_R, "IDC_EDT_OUT_R", "", "" },
+  { IDC_EDT_OUT_SL, "IDC_EDT_OUT_SL", "", "" },
+  { IDC_EDT_OUT_SR, "IDC_EDT_OUT_SR", "", "" },
+  { IDC_SLI_OUT_C, "IDC_SLI_OUT_C", "", "" },
+  { IDC_SLI_OUT_L, "IDC_SLI_OUT_L", "", "" },
+  { IDC_SLI_OUT_LFE, "IDC_SLI_OUT_LFE", "", "" },
+  { IDC_SLI_OUT_R, "IDC_SLI_OUT_R", "", "" },
+  { IDC_SLI_OUT_SL, "IDC_SLI_OUT_SL", "", "" },
+  { IDC_SLI_OUT_SR, "IDC_SLI_OUT_SR", "", "" },
 
   // Output levels
-  { IDC_GRP_OUTPUT_LEVELS, N_("Output levels"), "" },
-  { IDC_LBL_OUT_C, N_("C"), "" },
-  { IDC_LBL_OUT_L, N_("L"), "" },
-  { IDC_LBL_OUT_R, N_("R"), "" },
-  { IDC_LBL_OUT_SL, N_("SL"), "" },
-  { IDC_LBL_OUT_SR, N_("SR"), "" },
-  { IDC_LBL_OUT_SW, N_("SW"), "" },
-  { IDC_OUT_C, "", "" },
-  { IDC_OUT_L, "", "" },
-  { IDC_OUT_R, "", "" },
-  { IDC_OUT_SL, "", "" },
-  { IDC_OUT_SR, "", "" },
-  { IDC_OUT_SW, "", "" },
+  /* TRANSLATORS: Output levels */
+  { IDC_GRP_OUTPUT_LEVELS, N_("IDC_GRP_OUTPUT_LEVELS"), "Output levels", "" },
+  /* TRANSLATORS: C */
+  { IDC_LBL_OUT_C, N_("IDC_LBL_OUT_C"), "C", "" },
+  /* TRANSLATORS: L */
+  { IDC_LBL_OUT_L, N_("IDC_LBL_OUT_L"), "L", "" },
+  /* TRANSLATORS: R */
+  { IDC_LBL_OUT_R, N_("IDC_LBL_OUT_R"), "R", "" },
+  /* TRANSLATORS: SL */
+  { IDC_LBL_OUT_SL, N_("IDC_LBL_OUT_SL"), "SL", "" },
+  /* TRANSLATORS: SR */
+  { IDC_LBL_OUT_SR, N_("IDC_LBL_OUT_SR"), "SR", "" },
+  /* TRANSLATORS: SW */
+  { IDC_LBL_OUT_SW, N_("IDC_LBL_OUT_SW"), "SW", "" },
+  { IDC_OUT_C, "IDC_OUT_C", "", "" },
+  { IDC_OUT_L, "IDC_OUT_L", "", "" },
+  { IDC_OUT_R, "IDC_OUT_R", "", "" },
+  { IDC_OUT_SL, "IDC_OUT_SL", "", "" },
+  { IDC_OUT_SR, "IDC_OUT_SR", "", "" },
+  { IDC_OUT_SW, "IDC_OUT_SW", "", "" },
 
   // Preset
-  { IDC_GRP_PRESET, N_("Preset"), "" },
-  { IDC_BTN_PRESET_DELETE, N_("Delete"), "" },
-  { IDC_BTN_PRESET_FILE, N_("File"), "" },
-  { IDC_BTN_PRESET_SAVE, N_("Save"), "" },
-  { IDC_CMB_PRESET, "", "" },
+  /* TRANSLATORS: Preset */
+  { IDC_GRP_PRESET, N_("IDC_GRP_PRESET"), "Preset", "" },
+  /* TRANSLATORS: Delete */
+  { IDC_BTN_PRESET_DELETE, N_("IDC_BTN_PRESET_DELETE"), "Delete", "" },
+  /* TRANSLATORS: File */
+  { IDC_BTN_PRESET_FILE, N_("IDC_BTN_PRESET_FILE"), "File", "" },
+  /* TRANSLATORS: Save */
+  { IDC_BTN_PRESET_SAVE, N_("IDC_BTN_PRESET_SAVE"), "Save", "" },
+  { IDC_CMB_PRESET, "IDC_CMB_PRESET", "", "" },
 
   // Default audio renderer
-  { IDC_GRP_RENDERER, N_("Default audio renderer"), "" },
-  { IDC_RBT_RENDER_DS, N_("Use Direct Sound by default"), "" },
-  { IDC_RBT_RENDER_WO, N_("Use Wave Out by default"), "" },
+  /* TRANSLATORS: Default audio renderer */
+  { IDC_GRP_RENDERER, N_("IDC_GRP_RENDERER"), "Default audio renderer", "" },
+  /* TRANSLATORS: Use Direct Sound by default */
+  { IDC_RBT_RENDER_DS, N_("IDC_RBT_RENDER_DS"), "Use Direct Sound by default", "" },
+  /* TRANSLATORS: Use Wave Out by default */
+  { IDC_RBT_RENDER_WO, N_("IDC_RBT_RENDER_WO"), "Use Wave Out by default", "" },
 
   // SPDIF options
-  { IDC_GRP_SPDIF, N_("SPDIF options"), "" },
-  { IDC_CHK_SPDIF_ALLOW_32, N_("32kHz"), "" },
-  { IDC_CHK_SPDIF_ALLOW_44, N_("44kHz"), "" },
-  { IDC_CHK_SPDIF_ALLOW_48, N_("48kHz"), "" },
-  { IDC_CHK_SPDIF_AS_PCM, N_("Output SPDIF as PCM"), "" },
-  { IDC_CHK_SPDIF_CHECK_SR, N_("Restrict SPDIF sample rate"), "" },
-  { IDC_CHK_SPDIF_ENCODE, N_("Use AC3 encoder"), "" },
-  { IDC_CHK_SPDIF_STEREO_PT, N_("Do not encode stereo PCM"), "" },
-  { IDC_CHK_USE_DETECTOR, N_("Detect SPDIF stream in PCM data"), "" },
+  /* TRANSLATORS: SPDIF options */
+  { IDC_GRP_SPDIF, N_("IDC_GRP_SPDIF"), "SPDIF options", "" },
+  /* TRANSLATORS: 32kHz */
+  { IDC_CHK_SPDIF_ALLOW_32, N_("IDC_CHK_SPDIF_ALLOW_32"), "32kHz", "" },
+  /* TRANSLATORS: 44kHz */
+  { IDC_CHK_SPDIF_ALLOW_44, N_("IDC_CHK_SPDIF_ALLOW_44"), "44kHz", "" },
+  /* TRANSLATORS: 48kHz */
+  { IDC_CHK_SPDIF_ALLOW_48, N_("IDC_CHK_SPDIF_ALLOW_48"), "48kHz", "" },
+  /* TRANSLATORS: Output SPDIF as PCM */
+  { IDC_CHK_SPDIF_AS_PCM, N_("IDC_CHK_SPDIF_AS_PCM"), "Output SPDIF as PCM", "" },
+  /* TRANSLATORS: Restrict SPDIF sample rate */
+  { IDC_CHK_SPDIF_CHECK_SR, N_("IDC_CHK_SPDIF_CHECK_SR"), "Restrict SPDIF sample rate", "" },
+  /* TRANSLATORS: Use AC3 encoder */
+  { IDC_CHK_SPDIF_ENCODE, N_("IDC_CHK_SPDIF_ENCODE"), "Use AC3 encoder", "" },
+  /* TRANSLATORS: Do not encode stereo PCM */
+  { IDC_CHK_SPDIF_STEREO_PT, N_("IDC_CHK_SPDIF_STEREO_PT"), "Do not encode stereo PCM", "" },
+  /* TRANSLATORS: Detect SPDIF stream in PCM data */
+  { IDC_CHK_USE_DETECTOR, N_("IDC_CHK_USE_DETECTOR"), "Detect SPDIF stream in PCM data", "" },
 
   // SPDIF passthrough
-  { IDC_GRP_SPDIF_PT, N_("SPDIF passthrough"), "" },
-  { IDC_CHK_SPDIF_AC3, N_("AC3"), "" },
-  { IDC_CHK_SPDIF_DTS, N_("DTS"), "" },
-  { IDC_CHK_SPDIF_MPA, N_("MPEG Audio"), "" },
+  /* TRANSLATORS: SPDIF passthrough */
+  { IDC_GRP_SPDIF_PT, N_("IDC_GRP_SPDIF_PT"), "SPDIF passthrough", "" },
+  /* TRANSLATORS: AC3 */
+  { IDC_CHK_SPDIF_AC3, N_("IDC_CHK_SPDIF_AC3"), "AC3", "" },
+  /* TRANSLATORS: DTS */
+  { IDC_CHK_SPDIF_DTS, N_("IDC_CHK_SPDIF_DTS"), "DTS", "" },
+  /* TRANSLATORS: MPEG Audio */
+  { IDC_CHK_SPDIF_MPA, N_("IDC_CHK_SPDIF_MPA"), "MPEG Audio", "" },
 
   // Audio/Video sync
-  { IDC_GRP_SYNC, N_("Audio/Video sync"), "" },
-  { IDC_CHK_JITTER, N_("Jitter correction."), "" },
-  { IDC_EDT_JITTER, "", "" },
-  { IDC_EDT_TIME_SHIFT, "", "" },
-  { IDC_LBL_JITTER, N_("Current jitter:"), "" },
-  { IDC_LBL_TIME_SHIFT, N_("Time shift (ms):"), "" },
-  { IDC_SLI_TIME_SHIFT, "", "" },
+  /* TRANSLATORS: Audio/Video sync */
+  { IDC_GRP_SYNC, N_("IDC_GRP_SYNC"), "Audio/Video sync", "" },
+  /* TRANSLATORS: Jitter correction. */
+  { IDC_CHK_JITTER, N_("IDC_CHK_JITTER"), "Jitter correction.", "" },
+  { IDC_EDT_JITTER, "IDC_EDT_JITTER", "", "" },
+  { IDC_EDT_TIME_SHIFT, "IDC_EDT_TIME_SHIFT", "", "" },
+  /* TRANSLATORS: Current jitter: */
+  { IDC_LBL_JITTER, N_("IDC_LBL_JITTER"), "Current jitter:", "" },
+  /* TRANSLATORS: Time shift (ms): */
+  { IDC_LBL_TIME_SHIFT, N_("IDC_LBL_TIME_SHIFT"), "Time shift (ms):", "" },
+  { IDC_SLI_TIME_SHIFT, "IDC_SLI_TIME_SHIFT", "", "" },
 
   // Translation
-  { IDC_GRP_TRANS, N_("Translation"), "" },
-  { IDC_CMB_LANG, "", "" },
-  { IDC_EDT_TRANS_INFO, "", "" },
-  { IDC_LBL_LANG, N_("Language:"), "" },
+  /* TRANSLATORS: Translation */
+  { IDC_GRP_TRANS, N_("IDC_GRP_TRANS"), "Translation", "" },
+  { IDC_CMB_LANG, "IDC_CMB_LANG", "", "" },
+  { IDC_EDT_TRANS_INFO, "IDC_EDT_TRANS_INFO", "", "" },
+  /* TRANSLATORS: Language: */
+  { IDC_LBL_LANG, N_("IDC_LBL_LANG"), "Language:", "" },
 };
 
 #endif

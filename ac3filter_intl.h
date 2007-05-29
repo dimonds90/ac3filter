@@ -13,11 +13,19 @@
 #  define _(s) gettext(s)
 #  define gettext_noop(s) s
 #  define N_(s) gettext_noop(s)
+
+inline const char *gettext_id(const char *id, const char *str)
+{
+  const char *translated = gettext(id);
+  return translated == id? str: translated;
+}
+
 #else
 #  define gettext(s) s
 #  define _(s) gettext(s)
 #  define gettext_noop(s) s
 #  define N_(s) gettext_noop(s)
+#  define gettext_id(id, s) s
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////

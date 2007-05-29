@@ -924,7 +924,7 @@ AC3FilterDlg::translate_controls()
   {
     if (dialog_controls[i].label)
       if (dialog_controls[i].label[0] != 0)
-        SetDlgItemText(m_Dlg, dialog_controls[i].id, gettext(dialog_controls[i].label));
+        SetDlgItemText(m_Dlg, dialog_controls[i].id, gettext_id(dialog_controls[i].strid, dialog_controls[i].label));
   }
 }
 

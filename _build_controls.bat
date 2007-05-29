@@ -179,10 +179,10 @@ while (<CTRL>)
   s/N_\(("[^"]*")\)/$1/gsx;
 
   # Parse example:
-  # { ID , "label text" , "tip text"
+  # { ID, "ID" , "label text" , "tip text"
 
   my ($id, $label, $tip);
-  (($id, $label, $tip) = /\s*{\s*(\w+)\s*,\s*"([^"]*)"\s*,\s*"([^"]*)"/gsx) || next;
+  (($id, $label, $tip) = /\s*{\s*(\w+)\s*,\s*"[^"]*"\s*,\s*"([^"]*)"\s*,\s*"([^"]*)"/gsx) || next;
 
   $ctrl_id{$id}++;
   $ctrl_label{$id} = $label;
@@ -227,6 +227,7 @@ print CTRL <<EOTEXT;
 struct ControlDesc
 {
   int id;
+  const char *strid;
   const char *label;
   const char *tip;
 };
@@ -240,28 +241,33 @@ EOTEXT
 print CTRL "  // Controls without a group\n";
 foreach my $id (sort grep { !$id_group{$_} && !$groups{$_} } keys %id_type)
 {
-  print CTRL "  { $id, ".quote($id_label{$id}, $id).", ".quote($ctrl_tip{$id}, $id)." },\n";
+  print CTRL "  /* TRANSLATORS: $id_label{$id} */\n" if ($id_label{$id});
+  print CTRL "  { $id, ".format_trans($id, $id_label{$id}).", \"$ctrl_tip{$id}\" },\n";
 }
 
 foreach my $grp (sort keys %groups)
 {
   print CTRL "\n  // $id_label{$grp}\n";
-  print CTRL "  { $grp, ".quote($id_label{$grp}, $grp).", ".quote($ctrl_tip{$grp}, $grp)." },\n";
+  print CTRL "  /* TRANSLATORS: $id_label{$grp} */\n" if ($id_label{$grp});
+  print CTRL "  { $grp, ".format_trans($grp, $id_label{$grp}).", \"$ctrl_tip{$grp}\" },\n";
   foreach my $id (sort grep { $id_group{$_} eq $grp } keys %id_type)
   {
-    print CTRL "  { $id, ".quote($id_label{$id}, $id).", ".quote($ctrl_tip{$id}, $id)." },\n";
+    print CTRL "  /* TRANSLATORS: $id_label{$id} */\n" if ($id_label{$id});
+    print CTRL "  { $id, ".format_trans($id, $id_label{$id}).", \"$ctrl_tip{$id}\" },\n";
   }
 }
 print CTRL "};\n\n";
 print CTRL "#endif\n";
 close CTRL;
 
-sub quote
+
+sub format_trans
 {
+  my $id = shift;
   my $text = shift;
-  my $context = shift;
-  return '""' if !$text;
-  return "N_(\"$text\")";
+
+  return "N_(\"$id\"), \"$text\"" if $text;
+  return "\"$id\", \"$text\"";
 }
 
 __END__
