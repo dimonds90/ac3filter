@@ -20,6 +20,11 @@ inline const char *gettext_id(const char *id, const char *str)
   return translated == id? str: translated;
 }
 
+inline const char *gettext_meta()
+{
+  return gettext("");
+}
+
 #else
 #  define gettext(s) s
 #  define _(s) gettext(s)

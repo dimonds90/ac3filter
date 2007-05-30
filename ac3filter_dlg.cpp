@@ -1276,7 +1276,7 @@ AC3FilterDlg::update_static_controls()
     }
 
     char info[1024];
-    strncpy(info, gettext(""), sizeof(info));
+    strncpy(info, gettext_meta(), sizeof(info));
     info[sizeof(info)-1] = 0;
     cr2crlf(info, sizeof(info));
     SetDlgItemText(m_Dlg, IDC_EDT_TRANS_INFO, info);
