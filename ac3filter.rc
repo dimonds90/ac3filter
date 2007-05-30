@@ -29,7 +29,7 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
 IDD_MIXER DIALOGEX 0, 0, 400, 224
 STYLE WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     LTEXT           "Input:",IDC_STATIC,13,115,19,8
     LTEXT           "input format",IDC_LBL_INPUT,32,115,47,8
@@ -456,40 +456,40 @@ STYLE WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.",
-                    IDC_LBL_ABOUT2,13,49,182,32
-    GROUPBOX        "What is it?",IDC_GRP_ABOUT,8,8,192,78
+                    IDC_LBL_ABOUT2,13,57,182,32
+    GROUPBOX        "What is it?",IDC_GRP_ABOUT,8,8,192,84
     LTEXT           "This program is free software and can be distributed according to the terms of GNU General Public License version 2.",
-                    IDC_LBL_LICENSE,13,95,182,32
-    GROUPBOX        "License",IDC_GRP_LICENSE,8,86,192,46
+                    IDC_LBL_LICENSE,13,101,182,32
+    GROUPBOX        "License",IDC_GRP_LICENSE,8,92,192,44
     LTEXT           "Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).",
-                    IDC_LBL_CONTACT,13,142,182,32
+                    IDC_LBL_CONTACT,12,146,182,40
     CONTROL         "Homepage|http://ac3filter.net/",IDC_LNK_HOME,"Button",
                     BS_OWNERDRAW | BS_CENTER | BS_VCENTER | BS_FLAT | 
-                    WS_TABSTOP,13,183,58,8
+                    WS_TABSTOP,13,187,58,8
     CONTROL         "Project forum|http://ac3filter.net/forum/",
                     IDC_LNK_FORUM,"Button",BS_OWNERDRAW | BS_CENTER | 
-                    BS_VCENTER | BS_FLAT | WS_TABSTOP,75,183,58,8
+                    BS_VCENTER | BS_FLAT | WS_TABSTOP,75,187,58,8
     CONTROL         "mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter",
                     IDC_LNK_EMAIL,"Button",BS_OWNERDRAW | BS_CENTER | 
-                    BS_FLAT | WS_TABSTOP,137,183,58,8
-    GROUPBOX        "Contact author",IDC_GRP_CONTACT,8,132,192,68
-    EDITTEXT        IDC_EDT_ENV,208,17,179,64,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    BS_FLAT | WS_TABSTOP,137,187,58,8
+    GROUPBOX        "Contact author",IDC_GRP_CONTACT,8,137,192,63
+    EDITTEXT        IDC_EDT_ENV,210,17,177,56,ES_MULTILINE | ES_AUTOVSCROLL | 
                     ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
-    GROUPBOX        "Build info",IDC_GRP_ENV,203,8,189,78
-    EDITTEXT        IDC_EDT_CREDITS,208,95,179,100,ES_MULTILINE | 
+    GROUPBOX        "Build info",IDC_GRP_ENV,204,8,188,68
+    EDITTEXT        IDC_EDT_CREDITS,210,85,177,112,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | NOT 
                     WS_BORDER
-    GROUPBOX        "Thanks to",IDC_GRP_CREDITS,203,86,189,114
+    GROUPBOX        "Thanks to",IDC_GRP_CREDITS,204,76,188,124
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
     LTEXT           "AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.",
-                    IDC_LBL_ABOUT1,13,17,182,32
+                    IDC_LBL_ABOUT1,13,17,182,40
 END
 
 IDD_MAIN DIALOGEX 0, 0, 400, 224
 STYLE WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     COMBOBOX        IDC_CMB_SPK,14,21,86,86,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
@@ -637,15 +637,8 @@ BEGIN
     BEGIN
         LEFTMARGIN, 8
         RIGHTMARGIN, 392
-        VERTGUIDE, 195
-        VERTGUIDE, 200
-        VERTGUIDE, 203
-        VERTGUIDE, 209
-        VERTGUIDE, 385
         TOPMARGIN, 8
         BOTTOMMARGIN, 216
-        HORZGUIDE, 86
-        HORZGUIDE, 116
         HORZGUIDE, 200
     END
 
