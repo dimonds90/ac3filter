@@ -88,25 +88,50 @@ printf "Building package...\n";
 `rmdir /s /q $package 2> nul`;
 `mkdir $package`;
 
+# binaries
 `copy chineese_patch\\release\\chineese_patch.exe $package\\dialog_patch.exe`;
 `copy ac3config\\release\\ac3config.exe $package\\ac3config.exe`;
 `copy release\\ac3filter.ax $package`;
 
+# manifests
 `copy ac3filter.ax.manifest $package`;
 `copy ac3config\\ac3config.exe.manifest $package`;
 
+# info files
 `copy _readme.txt $package`;
 `copy _changes_eng.txt $package`;
 `copy _changes_rus.txt $package`;
 `copy GPL_eng.txt $package`;
 `copy GPL_rus.txt $package`;
 
+# registry files
 `copy ac3filter_reg_presets.reg $package`;
 `copy ac3filter_reg_reset.reg $package`;
 `copy ac3filter_reg_renderers_win2k.reg $package`;
 `copy ac3filter_reg_renderers_win9x.reg $package`;
 
+###############################################################################
+##
+## Language files
+##
 
+print "Prepairing language files...\n";
+
+`mkdir $package\\lang`;
+`_lang_update.bat`;
+`copy lang\\ac3filter.pot $package\\lang`;
+foreach my $lang (`dir /b lang\\*.po`)
+{
+  chomp($lang);
+  $lang = substr($lang, 0, -3); # cut .po extension
+  print "$lang ";
+
+  `mkdir $package\\lang\\$lang`;
+  `mkdir $package\\lang\\$lang\\LC_MESSAGES`;
+  `copy lang\\$lang.mo $package\\lang\\$lang\\LC_MESSAGES\\ac3filter.mo`;
+  `copy lang\\$lang.po $package\\lang`;
+}
+print "\n";
 
 ###############################################################################
 ##
