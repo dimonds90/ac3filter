@@ -132,6 +132,9 @@ foreach my $lang (`dir /b lang\\*.po`)
   `copy lang\\$lang.po $package\\lang`;
 }
 print "\n";
+chdir("lang");
+`_clear.bat`;
+chdir("..");
 
 ###############################################################################
 ##
