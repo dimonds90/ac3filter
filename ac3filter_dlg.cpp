@@ -893,7 +893,7 @@ AC3FilterDlg::init_controls()
   lnk_email.link(m_Dlg, IDC_LNK_EMAIL);
 
   /////////////////////////////////////
-  // Build and environment info
+  // Build credits and environment info
 
   char info[1024];
 
@@ -1274,6 +1274,12 @@ AC3FilterDlg::update_static_controls()
         }
       }
     }
+
+    char info[1024];
+    strncpy(info, gettext(""), sizeof(info));
+    info[sizeof(info)-1] = 0;
+    cr2crlf(info, sizeof(info));
+    SetDlgItemText(m_Dlg, IDC_EDT_TRANS_INFO, info);
   }
 #endif
 

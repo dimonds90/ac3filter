@@ -64,6 +64,7 @@
 #define IDC_BTN_FILE_LOAD              50207
 #define IDC_BTN_FILE_CHOOSE            50208
 
+
 // Decoder info (503)
 #define IDC_GRP_DECODER_INFO           50301
 #define IDC_LBL_INPUT                  50302
@@ -153,6 +154,7 @@
 // Bass redirection (513)
 #define IDC_CHK_BASS_REDIR             51301
 #define IDC_EDT_BASS_FREQ              51302
+#define IDC_LBL_BASS_FREQ              51303
 
 // Matrix preset (510)
 #define IDC_GRP_MATRIX_PRESET          51001
@@ -232,6 +234,12 @@
 #define IDC_CMB_DELAY_PRESET           51402
 #define IDC_BTN_DELAY_SAVE             51403
 #define IDC_BTN_DELAY_DELETE           51404
+#define IDC_LBL_DELAY_L                51411
+#define IDC_LBL_DELAY_C                51412
+#define IDC_LBL_DELAY_R                51413
+#define IDC_LBL_DELAY_SL               51414
+#define IDC_LBL_DELAY_SR               51415
+#define IDC_LBL_DELAY_SW               51416
 
 // Delay (515)
 #define IDC_GRP_DELAYS                 51501
@@ -269,9 +277,11 @@
 #define IDC_SLI_TIME_SHIFT             51902
 #define IDC_LBL_TIME_SHIFT             51903
 #define IDC_EDT_TIME_SHIFT             51904
-#define IDC_CHK_JITTER                 51905
-#define IDC_LBL_JITTER                 51906
-#define IDC_EDT_JITTER                 51907
+#define IDC_LBL_TIME_SHIFT_MINUS       51905
+#define IDC_LBL_TIME_SHIFT_PLUS        51906
+#define IDC_CHK_JITTER                 51907
+#define IDC_LBL_JITTER                 51908
+#define IDC_EDT_JITTER                 51909
 
 // SPDIF passthrough (520)
 #define IDC_GRP_SPDIF_PT               52001
@@ -325,15 +335,16 @@
 
 // About dialog (528)
 #define IDC_GRP_ABOUT                  52801
-#define IDC_LBL_ABOUT                  52802
-#define IDC_GRP_LICENSE                52803
-#define IDC_LBL_LICENSE                52804
-#define IDC_GRP_CONTACT                52805
-#define IDC_LBL_CONTACT                52806
-#define IDC_GRP_ENV                    52807
-#define IDC_EDT_ENV                    52808
-#define IDC_GRP_CREDITS                52809
-#define IDC_EDT_CREDITS                52810
+#define IDC_LBL_ABOUT1                 52802
+#define IDC_LBL_ABOUT2                 52803
+#define IDC_GRP_LICENSE                52804
+#define IDC_LBL_LICENSE                52805
+#define IDC_GRP_CONTACT                52806
+#define IDC_LBL_CONTACT                52807
+#define IDC_GRP_ENV                    52808
+#define IDC_EDT_ENV                    52809
+#define IDC_GRP_CREDITS                52810
+#define IDC_EDT_CREDITS                52811
 
 // Link controls (525)
 #define IDC_LNK_HOME                   52501
