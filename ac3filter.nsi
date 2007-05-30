@@ -29,6 +29,9 @@ Section "AC3Filter"
   ;; Remember where we're installed
   WriteRegStr HKCU SOFTWARE\AC3Filter "Install_Dir" "$INSTDIR"
 
+  ;; Languages repository
+  WriteRegStr HKCU SOFTWARE\AC3Filter "Lang_Dir" "$INSTDIR\Lang"
+
   ;; Make an uninstaller
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AC3Filter" "DisplayName" "AC3Filter (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AC3Filter" "UninstallString" "$INSTDIR\uninstall.exe"
@@ -90,6 +93,8 @@ Section "Uninstall"
 
   RMDir /r "$INSTDIR\lang"
   RMDir /r "$INSTDIR\doc"
+
+  Delete "$INSTDIR\*.*"
   RMDir  "$INSTDIR"
 
   ;; Delete shit from old versions
