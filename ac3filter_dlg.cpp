@@ -517,9 +517,17 @@ AC3FilterDlg::set_lang(const char *_lang)
     RegistryKey reg(REG_KEY);
     reg.set_text("Language", _lang);
     reg.get_text("Lang_Dir", path, sizeof(path));
-    ::set_lang(_lang, "ac3filter", path);
-    strncpy(lang, _lang, sizeof(lang));
-    return true;
+
+    // do not use localization if language repository does not exists
+    DWORD attr = GetFileAttributes(path);
+    if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
+    {
+      ::set_lang(_lang, "ac3filter", path);
+      strncpy(lang, _lang, sizeof(lang));
+      return true;
+    }
+    else
+      return false;
   }
   if (_lang[0] == 0)
   {
@@ -865,7 +873,10 @@ AC3FilterDlg::init_controls()
       if (fh != INVALID_HANDLE_VALUE)
         do
         {
-          if (GetFileAttributes(fd.cFileName) && FILE_ATTRIBUTE_DIRECTORY)
+          char file[MAX_PATH + MAX_PATH + 2];
+          sprintf(file, "%s\\%s", path, fd.cFileName);
+          DWORD attr = GetFileAttributes(file);
+          if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
           { 
             int iso_index = find_iso6392(fd.cFileName);
             if (iso_index != -1)
