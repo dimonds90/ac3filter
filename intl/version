@@ -1,2 +1,6 @@
 gettext 12.1
 libiconv 1.9.2
+
+Utilities in bin folder use dynamic linking (DLL).
+Libraries in lib folder use static linking.
+Libraries in lib_dll folder use dynamic linking (DLL).
