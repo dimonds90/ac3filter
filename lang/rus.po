@@ -1,0 +1,856 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AC3Filter 1.40b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-05-30 18:58+0400\n"
+"PO-Revision-Date: 2007-05-30 18:59+0300\n"
+"Last-Translator: Alexander Vigovsky <xvalex@mail.ru>\n"
+"Language-Team: AC3Filter <xvalex@mail.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#. TRANSLATORS: Donate
+#: dialog_controls.h:21
+msgid "IDC_BTN_DONATE"
+msgstr "Поддержать"
+
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
+#: dialog_controls.h:23
+msgid "IDC_VER"
+msgstr ""
+
+#. TRANSLATORS: What is it?
+#: dialog_controls.h:27
+msgid "IDC_GRP_ABOUT"
+msgstr "Что это?"
+
+#. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
+#: dialog_controls.h:29
+msgid "IDC_LBL_ABOUT1"
+msgstr "AC3Filter - это высококачественный бесплатный DirectShow фильтр, предназначенный для декодирования и обработки звука в реальном времени. Поддерживает многоканальный и цифровой (SPDIF) вывод."
+
+#. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
+#: dialog_controls.h:31
+msgid "IDC_LBL_ABOUT2"
+msgstr "Используется автоматически большинством проигрывателей. Необходим для проигрывания AVI файлов с AC3 и DTS звуком. Может быть использован для проигрывания звука на DVD."
+
+#. TRANSLATORS: AGC
+#: dialog_controls.h:35
+msgid "IDC_GRP_AGC"
+msgstr "АРУ"
+
+#. TRANSLATORS: Attack/release speed (dB/s):
+#: dialog_controls.h:39
+msgid "IDC_LBL_ATTACK_RELEASE"
+msgstr "Скорость атаки/релиза (дБ/с)"
+
+#. TRANSLATORS: Contact author
+#: dialog_controls.h:43
+msgid "IDC_GRP_CONTACT"
+msgstr "Связь с автором"
+
+#. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
+#: dialog_controls.h:45
+msgid "IDC_LBL_CONTACT"
+msgstr ""
+
+#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#: dialog_controls.h:47
+msgid "IDC_LNK_EMAIL"
+msgstr "Письмо автору|mailto:xvalex@mail.ru?Subject=AC3Filter"
+
+#. TRANSLATORS: Project forum|http://ac3filter.net/forum/
+#: dialog_controls.h:49
+msgid "IDC_LNK_FORUM"
+msgstr "Форум проекта|http://ac3filter.net/forum/"
+
+#. TRANSLATORS: Homepage|http://ac3filter.net/
+#: dialog_controls.h:51
+msgid "IDC_LNK_HOME"
+msgstr "Дом. страница|http://ac3filter.net/"
+
+#. TRANSLATORS: CPU
+#: dialog_controls.h:55
+msgid "IDC_GRP_CPU"
+msgstr "Проц."
+
+#. TRANSLATORS: 0%
+#: dialog_controls.h:58
+msgid "IDC_CPU_LABEL"
+msgstr "0%"
+
+#. TRANSLATORS: Thanks to
+#: dialog_controls.h:62
+msgid "IDC_GRP_CREDITS"
+msgstr "Благодарности"
+
+#. TRANSLATORS: Decoder info
+#: dialog_controls.h:67
+msgid "IDC_GRP_DECODER_INFO"
+msgstr "Информация декодера"
+
+#. TRANSLATORS: Frames / Errors
+#: dialog_controls.h:72
+msgid "IDC_LBL_FRAMES_ERRORS"
+msgstr "Фреймы/ошибки"
+
+#. TRANSLATORS: Delays
+#: dialog_controls.h:76
+msgid "IDC_GRP_DELAYS"
+msgstr "Задержки"
+
+#. TRANSLATORS: Enable
+#: dialog_controls.h:78
+msgid "IDC_CHK_DELAYS"
+msgstr "Включить"
+
+#. TRANSLATORS: C
+#: dialog_controls.h:87
+msgid "IDC_LBL_DELAY_C"
+msgstr "Центр"
+
+#. TRANSLATORS: L
+#: dialog_controls.h:89
+msgid "IDC_LBL_DELAY_L"
+msgstr "Левый"
+
+#. TRANSLATORS: R
+#: dialog_controls.h:91
+msgid "IDC_LBL_DELAY_R"
+msgstr "Правый"
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:93
+msgid "IDC_LBL_DELAY_SL"
+msgstr "Лев.тыл"
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:95
+msgid "IDC_LBL_DELAY_SR"
+msgstr "Пр.тыл"
+
+#. TRANSLATORS: Sub
+#: dialog_controls.h:97
+msgid "IDC_LBL_DELAY_SW"
+msgstr "Саб"
+
+#. TRANSLATORS: Units:
+#: dialog_controls.h:99
+msgid "IDC_LBL_UNITS"
+msgstr "Единицы:"
+
+#. TRANSLATORS: DRC
+#: dialog_controls.h:103
+msgid "IDC_GRP_DRC"
+msgstr "Сжатие ДД"
+
+#. TRANSLATORS: Enable
+#: dialog_controls.h:105
+msgid "IDC_CHK_DRC"
+msgstr "Включить"
+
+#. TRANSLATORS: DirectShow options
+#: dialog_controls.h:113
+msgid "IDC_GRP_DSHOW"
+msgstr "Опции DirectShow"
+
+#. TRANSLATORS: Check output format support
+#: dialog_controls.h:115
+msgid "IDC_CHK_QUERY_SINK"
+msgstr "Проверять поддержку выходного формата"
+
+#. TRANSLATORS: Force sound card to reinit after seek / pause
+#: dialog_controls.h:117
+msgid "IDC_CHK_REINIT"
+msgstr ""
+
+#. TRANSLATORS: Disallow PCM output in SPDIF mode
+#: dialog_controls.h:119
+msgid "IDC_CHK_SPDIF_NO_PCM"
+msgstr "Запретить PCM-вывод в режиме SPDIF"
+
+#. TRANSLATORS: SPDIF/DTS conversion
+#: dialog_controls.h:123
+msgid "IDC_GRP_DTS_CONV"
+msgstr "Конверсия SPDIF/DTS"
+
+#. TRANSLATORS: Convert to DTS14
+#: dialog_controls.h:125
+msgid "IDC_RBT_DTS_CONV_14BIT"
+msgstr "Конв. в DTS14"
+
+#. TRANSLATORS: Convert to DTS16
+#: dialog_controls.h:127
+msgid "IDC_RBT_DTS_CONV_16BIT"
+msgstr "Конв. в DTS16"
+
+#. TRANSLATORS: Do not convert
+#: dialog_controls.h:129
+msgid "IDC_RBT_DTS_CONV_NONE"
+msgstr "Не конвертировать"
+
+#. TRANSLATORS: SPDIF/DTS mode
+#: dialog_controls.h:133
+msgid "IDC_GRP_DTS_MODE"
+msgstr "Режим SPDIF/DTS"
+
+#. TRANSLATORS: Auto
+#: dialog_controls.h:135
+msgid "IDC_RBT_DTS_MODE_AUTO"
+msgstr "Авто"
+
+#. TRANSLATORS: Padded DTS
+#: dialog_controls.h:137
+msgid "IDC_RBT_DTS_MODE_PADDED"
+msgstr ""
+
+#. TRANSLATORS: SPDIF wrapped
+#: dialog_controls.h:139
+msgid "IDC_RBT_DTS_MODE_WRAPPED"
+msgstr ""
+
+#. TRANSLATORS: Build info
+#: dialog_controls.h:143
+msgid "IDC_GRP_ENV"
+msgstr "Информация о сборке"
+
+#. TRANSLATORS: Use AC3Filter for:
+#: dialog_controls.h:148
+msgid "IDC_GRP_FORMATS"
+msgstr "Исп. AC3Filter для:"
+
+#. TRANSLATORS: AC3
+#: dialog_controls.h:150
+msgid "IDC_CHK_AC3"
+msgstr "AC3"
+
+#. TRANSLATORS: DTS
+#: dialog_controls.h:152
+msgid "IDC_CHK_DTS"
+msgstr "DTS"
+
+#. TRANSLATORS: MPEG Audio
+#: dialog_controls.h:154
+msgid "IDC_CHK_MPA"
+msgstr "MPEG Audio"
+
+#. TRANSLATORS: PCM
+#: dialog_controls.h:156
+msgid "IDC_CHK_PCM"
+msgstr "PCM"
+
+#. TRANSLATORS: DVD
+#: dialog_controls.h:158
+msgid "IDC_CHK_PES"
+msgstr "DVD"
+
+#. TRANSLATORS: SPDIF
+#: dialog_controls.h:160
+msgid "IDC_CHK_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: Gain
+#: dialog_controls.h:164
+msgid "IDC_GRP_GAIN"
+msgstr "Усиление"
+
+#. TRANSLATORS: Gains
+#: dialog_controls.h:168
+msgid "IDC_GRP_GAINS"
+msgstr "Уровни усиления"
+
+#. TRANSLATORS: Gain
+#: dialog_controls.h:175
+msgid "IDC_LBL_GAIN"
+msgstr "Текущ."
+
+#. TRANSLATORS: LFE
+#: dialog_controls.h:177
+msgid "IDC_LBL_LFE"
+msgstr "НЧ"
+
+#. TRANSLATORS: Master
+#: dialog_controls.h:179
+msgid "IDC_LBL_MASTER"
+msgstr "Главн."
+
+#. TRANSLATORS: Surround
+#: dialog_controls.h:181
+msgid "IDC_LBL_SUR"
+msgstr "Окруж."
+
+#. TRANSLATORS: Voice
+#: dialog_controls.h:183
+msgid "IDC_LBL_VOICE"
+msgstr "Голос"
+
+#. TRANSLATORS: Input gains
+#: dialog_controls.h:192
+msgid "IDC_GRP_INPUT_GAINS"
+msgstr "Входные уровни"
+
+#. TRANSLATORS: Input levels
+#: dialog_controls.h:208
+msgid "IDC_GRP_INPUT_LEVELS"
+msgstr "Входные уровни"
+
+#. TRANSLATORS: C
+#: dialog_controls.h:216
+msgid "IDC_LBL_IN_C"
+msgstr "Ц"
+
+#. TRANSLATORS: L
+#: dialog_controls.h:218
+msgid "IDC_LBL_IN_L"
+msgstr "Л"
+
+#. TRANSLATORS: LFE
+#: dialog_controls.h:220
+msgid "IDC_LBL_IN_LFE"
+msgstr "НЧ"
+
+#. TRANSLATORS: R
+#: dialog_controls.h:222
+msgid "IDC_LBL_IN_R"
+msgstr "П"
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:224
+msgid "IDC_LBL_IN_SL"
+msgstr "Лт"
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:226
+msgid "IDC_LBL_IN_SR"
+msgstr "Пт"
+
+#. TRANSLATORS: Interface options
+#: dialog_controls.h:230
+msgid "IDC_GRP_INTERFACE"
+msgstr "Настройки интерфейса"
+
+#. TRANSLATORS: Invert levels
+#: dialog_controls.h:232
+msgid "IDC_CHK_INVERT_LEVELS"
+msgstr "Перевернуть уровни"
+
+#. TRANSLATORS: Show tooltips
+#: dialog_controls.h:234
+msgid "IDC_CHK_TOOLTIPS"
+msgstr "Показывать подсказки"
+
+#. TRANSLATORS: Show tray icon
+#: dialog_controls.h:236
+msgid "IDC_CHK_TRAY"
+msgstr "Иконка в трее"
+
+#. TRANSLATORS: Interface update rate (ms)
+#: dialog_controls.h:239
+msgid "IDC_LBL_REFRESH_TIME"
+msgstr "Скорость обновления интерфейса (мс)"
+
+#. TRANSLATORS: License
+#: dialog_controls.h:243
+msgid "IDC_GRP_LICENSE"
+msgstr "Лицензия"
+
+#. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
+#: dialog_controls.h:245
+msgid "IDC_LBL_LICENSE"
+msgstr "Эта программа - свободное программное обеспечение и может распространяться свободно, в соответствии с условиями лицензии GNU GPL v2."
+
+#. TRANSLATORS: Mixing matrix
+#: dialog_controls.h:249
+msgid "IDC_GRP_MATRIX"
+msgstr "Матрица микширования"
+
+#. TRANSLATORS: C
+#: dialog_controls.h:287
+msgid "IDC_LBL_MATRIX_IN_C"
+msgstr "Ц"
+
+#. TRANSLATORS: L
+#: dialog_controls.h:289
+msgid "IDC_LBL_MATRIX_IN_L"
+msgstr "Л"
+
+#. TRANSLATORS: LFE
+#: dialog_controls.h:291
+msgid "IDC_LBL_MATRIX_IN_LFE"
+msgstr "НЧ"
+
+#. TRANSLATORS: R
+#: dialog_controls.h:293
+msgid "IDC_LBL_MATRIX_IN_R"
+msgstr "П"
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:295
+msgid "IDC_LBL_MATRIX_IN_SL"
+msgstr "Лт"
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:297
+msgid "IDC_LBL_MATRIX_IN_SR"
+msgstr "Пт"
+
+#. TRANSLATORS: C'
+#: dialog_controls.h:299
+msgid "IDC_LBL_MATRIX_OUT_C"
+msgstr "Ц"
+
+#. TRANSLATORS: L'
+#: dialog_controls.h:301
+msgid "IDC_LBL_MATRIX_OUT_L"
+msgstr "Л"
+
+#. TRANSLATORS: R'
+#: dialog_controls.h:303
+msgid "IDC_LBL_MATRIX_OUT_R"
+msgstr "П"
+
+#. TRANSLATORS: SL'
+#: dialog_controls.h:305
+msgid "IDC_LBL_MATRIX_OUT_SL"
+msgstr "Лт"
+
+#. TRANSLATORS: SR'
+#: dialog_controls.h:307
+msgid "IDC_LBL_MATRIX_OUT_SR"
+msgstr "Пт"
+
+#. TRANSLATORS: Sub
+#: dialog_controls.h:309
+msgid "IDC_LBL_MATRIX_OUT_SW"
+msgstr "Саб"
+
+#. TRANSLATORS: Matrix preset
+#: dialog_controls.h:313
+msgid "IDC_GRP_MATRIX_PRESET"
+msgstr "Матрицы"
+
+#. TRANSLATORS: Delete
+#: dialog_controls.h:315
+msgid "IDC_BTN_MATRIX_DELETE"
+msgstr "Удал."
+
+#. TRANSLATORS: Save
+#: dialog_controls.h:317
+msgid "IDC_BTN_MATRIX_SAVE"
+msgstr "Сохр."
+
+#. TRANSLATORS: Filter merit
+#: dialog_controls.h:322
+msgid "IDC_GRP_MERIT"
+msgstr "Приоритет"
+
+#. TRANSLATORS: Prefer AC3Filter
+#: dialog_controls.h:324
+msgid "IDC_RBT_MERIT_PREFERRED"
+msgstr "Предпочитать AC3Filter"
+
+#. TRANSLATORS: Prefer other decoder
+#: dialog_controls.h:326
+msgid "IDC_RBT_MERIT_UNLIKELY"
+msgstr "Предпочесть другой декодер"
+
+#. TRANSLATORS: Options
+#: dialog_controls.h:330
+msgid "IDC_GRP_MIXER_OPTIONS"
+msgstr "Опции"
+
+#. TRANSLATORS: Auto gain control
+#: dialog_controls.h:332
+msgid "IDC_CHK_AUTO_GAIN"
+msgstr "АРУ"
+
+#. TRANSLATORS: Auto matrix
+#: dialog_controls.h:334
+msgid "IDC_CHK_AUTO_MATRIX"
+msgstr "Автоматрица"
+
+#. TRANSLATORS: Bass redirection
+#: dialog_controls.h:336
+msgid "IDC_CHK_BASS_REDIR"
+msgstr "Упр. басом"
+
+#. TRANSLATORS: Expand stereo
+#: dialog_controls.h:338
+msgid "IDC_CHK_EXPAND_STEREO"
+msgstr "Упр. окруж."
+
+#. TRANSLATORS: One-pass norm
+#: dialog_controls.h:340
+msgid "IDC_CHK_NORMALIZE"
+msgstr "Нормализация"
+
+#. TRANSLATORS: Normalize matrix
+#: dialog_controls.h:342
+msgid "IDC_CHK_NORM_MATRIX"
+msgstr "Норм. матрицу"
+
+#. TRANSLATORS: Voice control
+#: dialog_controls.h:344
+msgid "IDC_CHK_VOICE_CONTROL"
+msgstr "Упр. центром"
+
+#. TRANSLATORS: Cutoff frequency
+#: dialog_controls.h:347
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "Частота среза"
+
+#. TRANSLATORS: Output format
+#: dialog_controls.h:351
+msgid "IDC_GRP_OUTPUT"
+msgstr "Выходной формат"
+
+#. TRANSLATORS: Use SPDIF
+#: dialog_controls.h:353
+msgid "IDC_CHK_USE_SPDIF"
+msgstr "Исп. SPDIF"
+
+#. TRANSLATORS: input format
+#: dialog_controls.h:357
+msgid "IDC_LBL_INPUT"
+msgstr "Входной формат:"
+
+#. TRANSLATORS: Output gains
+#: dialog_controls.h:361
+msgid "IDC_GRP_OUTPUT_GAINS"
+msgstr "Выходные уровни"
+
+#. TRANSLATORS: Output levels
+#: dialog_controls.h:377
+msgid "IDC_GRP_OUTPUT_LEVELS"
+msgstr "Выходные уровни"
+
+#. TRANSLATORS: C
+#: dialog_controls.h:379
+msgid "IDC_LBL_OUT_C"
+msgstr "Ц"
+
+#. TRANSLATORS: L
+#: dialog_controls.h:381
+msgid "IDC_LBL_OUT_L"
+msgstr "Л"
+
+#. TRANSLATORS: R
+#: dialog_controls.h:383
+msgid "IDC_LBL_OUT_R"
+msgstr "П"
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:385
+msgid "IDC_LBL_OUT_SL"
+msgstr "Лт"
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:387
+msgid "IDC_LBL_OUT_SR"
+msgstr "Пт"
+
+#. TRANSLATORS: Sub
+#: dialog_controls.h:389
+msgid "IDC_LBL_OUT_SW"
+msgstr "Саб"
+
+#. TRANSLATORS: Preset
+#: dialog_controls.h:399
+msgid "IDC_GRP_PRESET"
+msgstr "Пресет"
+
+#. TRANSLATORS: Delete
+#: dialog_controls.h:401
+msgid "IDC_BTN_PRESET_DELETE"
+msgstr "Удал."
+
+#. TRANSLATORS: File
+#: dialog_controls.h:403
+msgid "IDC_BTN_PRESET_FILE"
+msgstr "Файл."
+
+#. TRANSLATORS: Save
+#: dialog_controls.h:405
+msgid "IDC_BTN_PRESET_SAVE"
+msgstr "Сохр."
+
+#. TRANSLATORS: Default audio renderer
+#: dialog_controls.h:410
+msgid "IDC_GRP_RENDERER"
+msgstr "Устройство вывода"
+
+#. TRANSLATORS: Use Direct Sound by default
+#: dialog_controls.h:412
+msgid "IDC_RBT_RENDER_DS"
+msgstr "DirectSound по умолчанию"
+
+#. TRANSLATORS: Use Wave Out by default
+#: dialog_controls.h:414
+msgid "IDC_RBT_RENDER_WO"
+msgstr "WaveOut по умолчанию"
+
+#. TRANSLATORS: SPDIF options
+#: dialog_controls.h:418
+msgid "IDC_GRP_SPDIF"
+msgstr "Настройки SPDIF"
+
+#. TRANSLATORS: 32kHz
+#: dialog_controls.h:420
+msgid "IDC_CHK_SPDIF_ALLOW_32"
+msgstr "32кГц"
+
+#. TRANSLATORS: 44kHz
+#: dialog_controls.h:422
+msgid "IDC_CHK_SPDIF_ALLOW_44"
+msgstr "44кГц"
+
+#. TRANSLATORS: 48kHz
+#: dialog_controls.h:424
+msgid "IDC_CHK_SPDIF_ALLOW_48"
+msgstr "48кГц"
+
+#. TRANSLATORS: Output SPDIF as PCM
+#: dialog_controls.h:426
+msgid "IDC_CHK_SPDIF_AS_PCM"
+msgstr "Выводить SPDIF как PCM"
+
+#. TRANSLATORS: Restrict SPDIF sample rate
+#: dialog_controls.h:428
+msgid "IDC_CHK_SPDIF_CHECK_SR"
+msgstr "Проверять частоту дискретизации"
+
+#. TRANSLATORS: Use AC3 encoder
+#: dialog_controls.h:430
+msgid "IDC_CHK_SPDIF_ENCODE"
+msgstr "Использовать AC3 кодер"
+
+#. TRANSLATORS: Do not encode stereo PCM
+#: dialog_controls.h:432
+msgid "IDC_CHK_SPDIF_STEREO_PT"
+msgstr "Не кодировать стерео"
+
+#. TRANSLATORS: Detect SPDIF stream in PCM data
+#: dialog_controls.h:434
+msgid "IDC_CHK_USE_DETECTOR"
+msgstr "Детектировать SPDIF в PCM"
+
+#. TRANSLATORS: SPDIF passthrough
+#: dialog_controls.h:438
+msgid "IDC_GRP_SPDIF_PT"
+msgstr "SPDIF пропуск"
+
+#. TRANSLATORS: AC3
+#: dialog_controls.h:440
+msgid "IDC_CHK_SPDIF_AC3"
+msgstr "AC3"
+
+#. TRANSLATORS: DTS
+#: dialog_controls.h:442
+msgid "IDC_CHK_SPDIF_DTS"
+msgstr "DTS"
+
+#. TRANSLATORS: MPEG Audio
+#: dialog_controls.h:444
+msgid "IDC_CHK_SPDIF_MPA"
+msgstr "MPEG Audio"
+
+#. TRANSLATORS: Audio/Video sync
+#: dialog_controls.h:448
+msgid "IDC_GRP_SYNC"
+msgstr "Синхронизация аудио/видео"
+
+#. TRANSLATORS: Jitter correction.
+#: dialog_controls.h:450
+msgid "IDC_CHK_JITTER"
+msgstr "Коррекция джиттера"
+
+#. TRANSLATORS: Current jitter:
+#: dialog_controls.h:454
+msgid "IDC_LBL_JITTER"
+msgstr "Текущий джиттер:"
+
+#. TRANSLATORS: Time shift (ms):
+#: dialog_controls.h:456
+msgid "IDC_LBL_TIME_SHIFT"
+msgstr "Коррекция времени (мс):"
+
+#. TRANSLATORS: -0.5s
+#: dialog_controls.h:458
+msgid "IDC_LBL_TIME_SHIFT_MINUS"
+msgstr "-0.5сек"
+
+#. TRANSLATORS: +0.5s
+#: dialog_controls.h:460
+msgid "IDC_LBL_TIME_SHIFT_PLUS"
+msgstr "+0.5сек"
+
+#. TRANSLATORS: Localization
+#: dialog_controls.h:465
+msgid "IDC_GRP_TRANS"
+msgstr "Локализация"
+
+#. TRANSLATORS: Language:
+#: dialog_controls.h:469
+msgid "IDC_LBL_LANG"
+msgstr "Язык:"
+
+#: ac3filter_dlg.cpp:158
+msgid "AS IS (no change)"
+msgstr "Как есть (Без изменений)"
+
+#: ac3filter_dlg.cpp:159
+msgid "1/0 - mono"
+msgstr "1/0 - моно"
+
+#: ac3filter_dlg.cpp:160
+msgid "2/0 - stereo"
+msgstr "2/0 - стерео"
+
+#: ac3filter_dlg.cpp:161
+msgid "3/0 - 3 front"
+msgstr "3/0 - 3 канала"
+
+#: ac3filter_dlg.cpp:162
+msgid "2/1 - surround"
+msgstr "2/1 - окружение"
+
+#: ac3filter_dlg.cpp:163
+msgid "3/1 - surround"
+msgstr "3/1 - окружение"
+
+#: ac3filter_dlg.cpp:164
+msgid "2/2 - quadro"
+msgstr "2/2 - квадро"
+
+#: ac3filter_dlg.cpp:165
+msgid "3/2 - 5 channels"
+msgstr "3/2 - 5 каналов"
+
+#: ac3filter_dlg.cpp:166
+msgid "1/0+SW 1.1 mono"
+msgstr "1/0+Саб - 1.1 моно"
+
+#: ac3filter_dlg.cpp:167
+msgid "2/0+SW 2.1 stereo"
+msgstr "2/0+Саб - 2.1 стерео"
+
+#: ac3filter_dlg.cpp:168
+msgid "3/0+SW 3.1 front"
+msgstr "3/0+Саб - 3.1 канала"
+
+#: ac3filter_dlg.cpp:169
+msgid "2/1+SW 3.1 surround"
+msgstr "2/1+Саб - 3.1 окружение"
+
+#: ac3filter_dlg.cpp:170
+msgid "3/1+SW 4.1 surround"
+msgstr "3/1+Саб - 4.1 окружение"
+
+#: ac3filter_dlg.cpp:171
+msgid "2/2+SW 4.1 quadro"
+msgstr "2/2+Саб - 4.1 квадро"
+
+#: ac3filter_dlg.cpp:172
+msgid "3/2+SW 5.1 channels"
+msgstr "3/2+Саб - 5.1 каналов"
+
+#: ac3filter_dlg.cpp:173
+msgid "Dolby Surround/ProLogic"
+msgstr "Dolby Surround/ProLogic"
+
+#: ac3filter_dlg.cpp:174
+msgid "Dolby ProLogic II"
+msgstr "Dolby ProLogic II"
+
+#: ac3filter_dlg.cpp:179
+msgid "PCM 16bit"
+msgstr "PCM 16bit"
+
+#: ac3filter_dlg.cpp:180
+msgid "PCM 24bit"
+msgstr "PCM 24bit"
+
+#: ac3filter_dlg.cpp:181
+msgid "PCM 32bit"
+msgstr "PCM 32bit"
+
+#: ac3filter_dlg.cpp:182
+msgid "PCM Float"
+msgstr "PCM Float"
+
+#: ac3filter_dlg.cpp:274
+msgid "Samples"
+msgstr "Сэмплы"
+
+#: ac3filter_dlg.cpp:275
+msgid "Millisecs"
+msgstr "Миллисекунды"
+
+#: ac3filter_dlg.cpp:276
+msgid "Meters"
+msgstr "Метры"
+
+#: ac3filter_dlg.cpp:277
+msgid "Centimeters"
+msgstr "Сантиметры"
+
+#: ac3filter_dlg.cpp:278
+msgid "Feet"
+msgstr "Футы"
+
+#: ac3filter_dlg.cpp:279
+msgid "Inches"
+msgstr "Дюймы"
+
+#: ac3filter_dlg.cpp:961
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iГц"
+
+#: ac3filter_dlg.cpp:974
+msgid "Use SPDIF"
+msgstr "Исп. SPDIF"
+
+#: ac3filter_dlg.cpp:978
+msgid "Use SPDIF (disabled)"
+msgstr "Исп. SPDIF (выключено)"
+
+#: ac3filter_dlg.cpp:982
+msgid "Use SPDIF (passthrough)"
+msgstr "Исп. SPDIF (пропуск)"
+
+#: ac3filter_dlg.cpp:986
+msgid "Use SPDIF (AC3 encode)"
+msgstr "Исп. SPDIF (AC3-кодирование)"
+
+#: ac3filter_dlg.cpp:990
+msgid "Use SPDIF (Unknown)"
+msgstr "Исп. SPDIF (неизв)"
+
+#: ac3filter_dlg.cpp:1047
+#, c-format
+msgid ""
+"Input\tmean: %ims\tstddev: %ims\r\n"
+"Output\tmean: %ims\tstddev: %ims"
+msgstr ""
+"Вход\tсреднее: %iмс\tдевиация: %iмс\r\n"
+"Выход\tсреднее: %iмс\tдевиация: %iмс"
+
+#: ac3filter_dlg.cpp:2014
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Вы уверены, что хотите удалить пресет %s?"
+
+#: ac3filter_dlg.cpp:2015
+#: ac3filter_dlg.cpp:2104
+msgid "Delete confirmation"
+msgstr "Подтвердите удаление"
+
+#: ac3filter_dlg.cpp:2103
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Вы уверены, что хотите удалить матрицу %s?"
+
