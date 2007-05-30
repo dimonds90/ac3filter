@@ -88,10 +88,8 @@ Section "Uninstall"
   RMDir  "$SMPROGRAMS\AC3Filter\Russian docs"
   RMDir  "$SMPROGRAMS\AC3Filter"
 
-  Delete "$INSTDIR\doc\*.*"
-  Delete "$INSTDIR\*.*"
-
-  RMDir  "$INSTDIR\doc"
+  RMDir /r "$INSTDIR\lang"
+  RMDir /r "$INSTDIR\doc"
   RMDir  "$INSTDIR"
 
   ;; Delete shit from old versions

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-30 18:58+0400\n"
+"POT-Creation-Date: 2007-05-30 21:38+0400\n"
 "PO-Revision-Date: 2007-05-30 18:59+0300\n"
 "Last-Translator: Alexander Vigovsky <xvalex@mail.ru>\n"
 "Language-Team: AC3Filter <xvalex@mail.ru>\n"
@@ -30,12 +30,18 @@ msgstr "Что это?"
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 #: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filter - это высококачественный бесплатный DirectShow фильтр, предназначенный для декодирования и обработки звука в реальном времени. Поддерживает многоканальный и цифровой (SPDIF) вывод."
+msgstr ""
+"AC3Filter - это высококачественный бесплатный DirectShow фильтр, "
+"предназначенный для декодирования и обработки звука в реальном времени. "
+"Поддерживает многоканальный и цифровой (SPDIF) вывод."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 #: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
-msgstr "Используется автоматически большинством проигрывателей. Необходим для проигрывания AVI файлов с AC3 и DTS звуком. Может быть использован для проигрывания звука на DVD."
+msgstr ""
+"Используется автоматически большинством проигрывателей. Необходим для "
+"проигрывания AVI файлов с AC3 и DTS звуком. Может быть использован для "
+"проигрывания звука на DVD."
 
 #. TRANSLATORS: AGC
 #: dialog_controls.h:35
@@ -360,7 +366,9 @@ msgstr "Лицензия"
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 #: dialog_controls.h:245
 msgid "IDC_LBL_LICENSE"
-msgstr "Эта программа - свободное программное обеспечение и может распространяться свободно, в соответствии с условиями лицензии GNU GPL v2."
+msgstr ""
+"Эта программа - свободное программное обеспечение и может распространяться "
+"свободно, в соответствии с условиями лицензии GNU GPL v2."
 
 #. TRANSLATORS: Mixing matrix
 #: dialog_controls.h:249
@@ -805,32 +813,32 @@ msgstr "Футы"
 msgid "Inches"
 msgstr "Дюймы"
 
-#: ac3filter_dlg.cpp:961
+#: ac3filter_dlg.cpp:972
 #, c-format
 msgid "%s %s %iHz"
 msgstr "%s %s %iГц"
 
-#: ac3filter_dlg.cpp:974
+#: ac3filter_dlg.cpp:985
 msgid "Use SPDIF"
 msgstr "Исп. SPDIF"
 
-#: ac3filter_dlg.cpp:978
+#: ac3filter_dlg.cpp:989
 msgid "Use SPDIF (disabled)"
 msgstr "Исп. SPDIF (выключено)"
 
-#: ac3filter_dlg.cpp:982
+#: ac3filter_dlg.cpp:993
 msgid "Use SPDIF (passthrough)"
 msgstr "Исп. SPDIF (пропуск)"
 
-#: ac3filter_dlg.cpp:986
+#: ac3filter_dlg.cpp:997
 msgid "Use SPDIF (AC3 encode)"
 msgstr "Исп. SPDIF (AC3-кодирование)"
 
-#: ac3filter_dlg.cpp:990
+#: ac3filter_dlg.cpp:1001
 msgid "Use SPDIF (Unknown)"
 msgstr "Исп. SPDIF (неизв)"
 
-#: ac3filter_dlg.cpp:1047
+#: ac3filter_dlg.cpp:1058
 #, c-format
 msgid ""
 "Input\tmean: %ims\tstddev: %ims\r\n"
@@ -839,18 +847,16 @@ msgstr ""
 "Вход\tсреднее: %iмс\tдевиация: %iмс\r\n"
 "Выход\tсреднее: %iмс\tдевиация: %iмс"
 
-#: ac3filter_dlg.cpp:2014
+#: ac3filter_dlg.cpp:2025
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Вы уверены, что хотите удалить пресет %s?"
 
-#: ac3filter_dlg.cpp:2015
-#: ac3filter_dlg.cpp:2104
+#: ac3filter_dlg.cpp:2026 ac3filter_dlg.cpp:2115
 msgid "Delete confirmation"
 msgstr "Подтвердите удаление"
 
-#: ac3filter_dlg.cpp:2103
+#: ac3filter_dlg.cpp:2114
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "Вы уверены, что хотите удалить матрицу %s?"
-

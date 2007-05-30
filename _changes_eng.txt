@@ -1,4 +1,16 @@
-v1.35b - 24.04.2007
+v1.40b - 30.05.2007
+  + Localization support!
+  + Localization procedure is easy and can by done by everyone!
+  + Russian translation
+
+  ! Fixed bug in AC3 decoder (audio skips). Thanks to Chris Meadowcroft!
+  ! User manual fixed (broken in v1.35b)
+
+  * Mixing LFE channel into several channels preserves resulting loudness.
+    LFE level now means gain relative to front channles.
+
+
+v1.35b - 24.05.2007
   ! Fixed a bug in AC3 decoder (decoding of 4.1 and 3.1 AC3 files was affected). Thanks to Dietmar Kleiner for reporting and testing!
   ! Fixed a bug with fast playback of mono files in WMP
   ! Delay units works correctly in offline config utility
