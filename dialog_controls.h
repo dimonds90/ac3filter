@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 32
-// Total controls: 237
+// Total controls: 249
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -283,6 +283,30 @@ static const ControlDesc dialog_controls[] =
   { IDC_EDT_SR_R, "IDC_EDT_SR_R", "", "" },
   { IDC_EDT_SR_SL, "IDC_EDT_SR_SL", "", "" },
   { IDC_EDT_SR_SR, "IDC_EDT_SR_SR", "", "" },
+  /* TRANSLATORS: C */
+  { IDC_LBL_MATRIX_IN_C, N_("IDC_LBL_MATRIX_IN_C"), "C", "" },
+  /* TRANSLATORS: L */
+  { IDC_LBL_MATRIX_IN_L, N_("IDC_LBL_MATRIX_IN_L"), "L", "" },
+  /* TRANSLATORS: LFE */
+  { IDC_LBL_MATRIX_IN_LFE, N_("IDC_LBL_MATRIX_IN_LFE"), "LFE", "" },
+  /* TRANSLATORS: R */
+  { IDC_LBL_MATRIX_IN_R, N_("IDC_LBL_MATRIX_IN_R"), "R", "" },
+  /* TRANSLATORS: SL */
+  { IDC_LBL_MATRIX_IN_SL, N_("IDC_LBL_MATRIX_IN_SL"), "SL", "" },
+  /* TRANSLATORS: SR */
+  { IDC_LBL_MATRIX_IN_SR, N_("IDC_LBL_MATRIX_IN_SR"), "SR", "" },
+  /* TRANSLATORS: C' */
+  { IDC_LBL_MATRIX_OUT_C, N_("IDC_LBL_MATRIX_OUT_C"), "C'", "" },
+  /* TRANSLATORS: L' */
+  { IDC_LBL_MATRIX_OUT_L, N_("IDC_LBL_MATRIX_OUT_L"), "L'", "" },
+  /* TRANSLATORS: R' */
+  { IDC_LBL_MATRIX_OUT_R, N_("IDC_LBL_MATRIX_OUT_R"), "R'", "" },
+  /* TRANSLATORS: SL' */
+  { IDC_LBL_MATRIX_OUT_SL, N_("IDC_LBL_MATRIX_OUT_SL"), "SL'", "" },
+  /* TRANSLATORS: SR' */
+  { IDC_LBL_MATRIX_OUT_SR, N_("IDC_LBL_MATRIX_OUT_SR"), "SR'", "" },
+  /* TRANSLATORS: Sub */
+  { IDC_LBL_MATRIX_OUT_SW, N_("IDC_LBL_MATRIX_OUT_SW"), "Sub", "" },
 
   // Matrix preset
   /* TRANSLATORS: Matrix preset */

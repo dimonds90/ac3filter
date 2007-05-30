@@ -200,6 +200,19 @@
 #define IDC_EDT_LFE_SL                 51164
 #define IDC_EDT_LFE_SR                 51165
 #define IDC_EDT_LFE_LFE                51166
+#define IDC_LBL_MATRIX_IN_L            51171  
+#define IDC_LBL_MATRIX_IN_C            51172
+#define IDC_LBL_MATRIX_IN_R            51173
+#define IDC_LBL_MATRIX_IN_SL           51174
+#define IDC_LBL_MATRIX_IN_SR           51175
+#define IDC_LBL_MATRIX_IN_LFE          51176
+#define IDC_LBL_MATRIX_OUT_L           51181
+#define IDC_LBL_MATRIX_OUT_C           51182
+#define IDC_LBL_MATRIX_OUT_R           51183
+#define IDC_LBL_MATRIX_OUT_SL          51184
+#define IDC_LBL_MATRIX_OUT_SR          51185
+#define IDC_LBL_MATRIX_OUT_SW          51186
+
 
 // Input/output gains (512)
 #define IDC_GRP_INPUT_GAINS            51201
