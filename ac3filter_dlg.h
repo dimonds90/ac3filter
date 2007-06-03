@@ -17,11 +17,10 @@ public:
   static CUnknown * WINAPI CreateSystem(LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateAbout (LPUNKNOWN lpunk, HRESULT *phr);
 
-  int flags;
-
   void reload_state();
 
 private:
+  const char      *title;
   IAC3Filter      *filter;
   IDecoder        *dec;
   IAudioProcessor *proc;
@@ -119,10 +118,11 @@ private:
   // Tooltip control
   Tooltip tooltip_ctl;
 
-  AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, int TitleId, int flags);
+  AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def);
 
   BOOL OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+  STDMETHODIMP GetPageInfo(LPPROPPAGEINFO pPageInfo);
   HRESULT OnConnect(IUnknown *pUnknown);
   HRESULT OnDisconnect();
   HRESULT OnActivate();

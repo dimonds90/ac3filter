@@ -23,7 +23,7 @@
 #define IDD_MIXER                       103
 #define IDD_GAINS                       104
 #define IDD_SPDIF                       105
-#define IDD_SYS                         106
+#define IDD_SYSTEM                      106
 #define IDD_ABOUT                       107
 
 #define IDD_FILE                        108

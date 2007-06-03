@@ -313,64 +313,90 @@ int units2list(int units)
 
 CUnknown * WINAPI AC3FilterDlg::CreateMain(LPUNKNOWN lpunk, HRESULT *phr)
 {
-  DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter Main property page"));
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Main property page", lpunk, phr, IDD_MAIN, IDS_MAIN, 0);
-  if (punk == NULL) 
-    *phr = E_OUTOFMEMORY;
+  /* TRANSLATORS: Main */
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Main page", lpunk, phr, IDD_MAIN, N_("IDD_MAIN"), "Main");
+  if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateMixer(LPUNKNOWN lpunk, HRESULT *phr)
 {
-  DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter Mixer property page"));
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Mixer property page", lpunk, phr, IDD_MIXER, IDS_MIXER, 0);
-  if (punk == NULL) 
-    *phr = E_OUTOFMEMORY;
+  /* TRANSLATORS: Mixer */
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Mixer page", lpunk, phr, IDD_MIXER, N_("IDD_MIXER"), "Mixer");
+  if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateGains(LPUNKNOWN lpunk, HRESULT *phr)
 {
-  DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter Gains property page"));
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Gains property page", lpunk, phr, IDD_GAINS, IDS_GAINS, 0);
-  if (punk == NULL) 
-    *phr = E_OUTOFMEMORY;
+  /* TRANSLATORS: Gains */
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Gains page", lpunk, phr, IDD_GAINS, N_("IDD_GAINS"), "Gains");
+  if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateSPDIF(LPUNKNOWN lpunk, HRESULT *phr)
 {
-  DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter SPDIF property page"));
-  CUnknown *punk = new AC3FilterDlg("AC3Filter SPDIF property page", lpunk, phr, IDD_SPDIF, IDS_SPDIF, 0);
-  if (punk == NULL) 
-    *phr = E_OUTOFMEMORY;
+  /* TRANSLATORS: SPDIF */
+  CUnknown *punk = new AC3FilterDlg("AC3Filter SPDIF page", lpunk, phr, IDD_SPDIF, N_("IDD_SPDIF"), "SPDIF");
+  if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateSystem(LPUNKNOWN lpunk, HRESULT *phr)
 {
-  DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter System property page"));
-  CUnknown *punk = new AC3FilterDlg("AC3Filter System property page", lpunk, phr, IDD_SYS, IDS_SYS, 0);
-  if (punk == NULL) 
-    *phr = E_OUTOFMEMORY;
+  /* TRANSLATORS: System */
+  CUnknown *punk = new AC3FilterDlg("AC3Filter System page", lpunk, phr, IDD_SYSTEM, N_("IDD_SYSTEM"), "System");
+  if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 
 CUnknown * WINAPI AC3FilterDlg::CreateAbout(LPUNKNOWN lpunk, HRESULT *phr)
 {
-  DbgLog((LOG_TRACE, 3, "CreateInstance of AC3Filter System property page"));
-  CUnknown *punk = new AC3FilterDlg("AC3Filter About property page", lpunk, phr, IDD_ABOUT, IDS_ABOUT, 0);
-  if (punk == NULL) 
-    *phr = E_OUTOFMEMORY;
+  /* TRANSLATORS: About */
+  CUnknown *punk = new AC3FilterDlg("AC3Filter About property page", lpunk, phr, IDD_ABOUT, N_("IDD_ABOUT"), "About");
+  if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 
-AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int DialogId, int TitleId, int _flags) 
-:CBasePropertyPage(pName, pUnk, DialogId, TitleId)
+AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def)
+:CBasePropertyPage(pName, pUnk, DialogId, 0)
 {
-  DbgLog((LOG_TRACE, 3, "AC3FilterDlg::AC3FilterDlg()"));
+  DbgLog((LOG_TRACE, 3, "AC3FilterDlg::AC3FilterDlg(%s)", pName));
 
+  memset(lang, 0, sizeof(lang));
+  get_lang(lang, sizeof(lang));
+  set_lang(lang);
+
+  title = gettext_id(title_id, title_def);
   filter = 0;
   proc   = 0;
-
-  flags  = _flags;
   InitCommonControls();
+}
+
+STDMETHODIMP
+AC3FilterDlg::GetPageInfo(LPPROPPAGEINFO pPageInfo)
+{
+  CheckPointer(pPageInfo,E_POINTER);
+  WCHAR wszTitle[STR_MAX_LENGTH];
+  MultiByteToWideChar(CP_ACP, 0, title, -1, wszTitle, STR_MAX_LENGTH);
+
+  // Allocate dynamic memory for the property page title
+  LPOLESTR pszTitle;
+  HRESULT hr = AMGetWideString(wszTitle, &pszTitle);
+  if (FAILED(hr)) {
+      NOTE("No caption memory");
+      return hr;
+  }
+
+  pPageInfo->cb               = sizeof(PROPPAGEINFO);
+  pPageInfo->pszTitle         = pszTitle;
+  pPageInfo->pszDocString     = NULL;
+  pPageInfo->pszHelpFile      = NULL;
+  pPageInfo->dwHelpContext    = 0;
+
+  // Set defaults in case GetDialogSize fails
+  pPageInfo->size.cx          = 340;
+  pPageInfo->size.cy          = 150;
+
+  GetDialogSize(m_DialogId, DialogProc, 0L, &pPageInfo->size);
+  return NOERROR;
 }
 
 HRESULT 
