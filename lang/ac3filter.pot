@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-30 22:10+0400\n"
+"POT-Creation-Date: 2007-06-04 03:22+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -809,48 +809,94 @@ msgstr ""
 msgid "Inches"
 msgstr ""
 
-#: ac3filter_dlg.cpp:972
+#. TRANSLATORS: Main
+#: ac3filter_dlg.cpp:317
+msgid "IDD_MAIN"
+msgstr ""
+
+#. TRANSLATORS: Mixer
+#: ac3filter_dlg.cpp:324
+msgid "IDD_MIXER"
+msgstr ""
+
+#. TRANSLATORS: Gains
+#: ac3filter_dlg.cpp:331
+msgid "IDD_GAINS"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+#: ac3filter_dlg.cpp:338
+msgid "IDD_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: System
+#: ac3filter_dlg.cpp:345
+msgid "IDD_SYSTEM"
+msgstr ""
+
+#. TRANSLATORS: About
+#: ac3filter_dlg.cpp:353
+msgid "IDD_ABOUT"
+msgstr ""
+
+#: ac3filter_dlg.cpp:998
 #, c-format
 msgid "%s %s %iHz"
 msgstr ""
 
-#: ac3filter_dlg.cpp:985
+#: ac3filter_dlg.cpp:1011
 msgid "Use SPDIF"
 msgstr ""
 
-#: ac3filter_dlg.cpp:989
+#: ac3filter_dlg.cpp:1015
 msgid "Use SPDIF (disabled)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:993
+#: ac3filter_dlg.cpp:1019
 msgid "Use SPDIF (passthrough)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:997
+#: ac3filter_dlg.cpp:1023
 msgid "Use SPDIF (AC3 encode)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1001
+#: ac3filter_dlg.cpp:1027
 msgid "Use SPDIF (Unknown)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1058
+#: ac3filter_dlg.cpp:1084
 #, c-format
 msgid ""
-"Input\tmean: %ims\tstddev: %ims\r\n"
+"Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
 
-#: ac3filter_dlg.cpp:2025
+#: ac3filter_dlg.cpp:1495
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:1495 ac3filter_dlg.cpp:1589
+msgid "Dangerous option!"
+msgstr ""
+
+#: ac3filter_dlg.cpp:1589
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:2056
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr ""
 
-#: ac3filter_dlg.cpp:2026 ac3filter_dlg.cpp:2115
+#: ac3filter_dlg.cpp:2057 ac3filter_dlg.cpp:2146
 msgid "Delete confirmation"
 msgstr ""
 
-#: ac3filter_dlg.cpp:2114
+#: ac3filter_dlg.cpp:2145
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr ""
