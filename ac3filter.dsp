@@ -189,14 +189,6 @@ SOURCE=.\rot.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\translate.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\translate.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\tray.cpp
 # End Source File
 # Begin Source File
