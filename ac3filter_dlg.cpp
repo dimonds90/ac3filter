@@ -1080,10 +1080,11 @@ AC3FilterDlg::update_dynamic_controls()
   /////////////////////////////////////
   // Syncronization
 
-  char jitter[sizeof(old_jitter)];
-  sprintf(jitter, _("Input\tmean: %ims\tstddev: %ims\r\nOutput\tmean: %ims\tstddev: %ims"),
+  char jitter[array_size(old_jitter)];
+  sprintf(jitter, _("Input\tmean: %ims\tstddev: %ims\nOutput\tmean: %ims\tstddev: %ims"),
     int(input_mean * 1000), int(input_stddev * 1000), 
     int(output_mean * 1000), int(output_stddev * 1000));
+  cr2crlf(jitter, array_size(jitter));
 
   if (memcmp(jitter, old_jitter, strlen(jitter)) || refresh)
   {
@@ -1490,6 +1491,8 @@ AC3FilterDlg::command(int control, int message)
     case IDC_CHK_SPDIF_AS_PCM:
     {
       spdif_as_pcm = IsDlgButtonChecked(m_Dlg, IDC_CHK_SPDIF_AS_PCM) == BST_CHECKED;
+      if (spdif_as_pcm)
+        spdif_as_pcm = MessageBox(m_Dlg, _("This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."), _("Dangerous option!"), MB_YESNO | MB_ICONWARNING) == IDNO;
       dec->set_spdif_as_pcm(spdif_as_pcm);
       update();
       break;
@@ -1582,6 +1585,8 @@ AC3FilterDlg::command(int control, int message)
     case IDC_CHK_REINIT:
     {
       reinit = IsDlgButtonChecked(m_Dlg, IDC_CHK_REINIT) == BST_CHECKED? 128: 0;
+      if (reinit)
+        reinit = MessageBox(m_Dlg, _("This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."), _("Dangerous option!"), MB_YESNO | MB_ICONWARNING) == IDNO;
       filter->set_reinit(reinit);
       update();
       break;
