@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-04 03:22+0400\n"
+"POT-Creation-Date: 2007-06-05 01:58+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -681,12 +681,12 @@ msgstr ""
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr ""
 
-#. TRANSLATORS: -0.5s
+#. TRANSLATORS: <- fix sound lag
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr ""
 
-#. TRANSLATORS: +0.5s
+#. TRANSLATORS: fix sound haste ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr ""
@@ -839,64 +839,64 @@ msgstr ""
 msgid "IDD_ABOUT"
 msgstr ""
 
-#: ac3filter_dlg.cpp:998
+#: ac3filter_dlg.cpp:999
 #, c-format
 msgid "%s %s %iHz"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1011
+#: ac3filter_dlg.cpp:1012
 msgid "Use SPDIF"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1015
+#: ac3filter_dlg.cpp:1016
 msgid "Use SPDIF (disabled)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1019
+#: ac3filter_dlg.cpp:1020
 msgid "Use SPDIF (passthrough)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1023
+#: ac3filter_dlg.cpp:1024
 msgid "Use SPDIF (AC3 encode)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1027
+#: ac3filter_dlg.cpp:1028
 msgid "Use SPDIF (Unknown)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1084
+#: ac3filter_dlg.cpp:1085
 #, c-format
 msgid ""
 "Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1495
+#: ac3filter_dlg.cpp:1496
 msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
 "enabled. Press 'No' to enable this option."
 msgstr ""
 
-#: ac3filter_dlg.cpp:1495 ac3filter_dlg.cpp:1589
+#: ac3filter_dlg.cpp:1496 ac3filter_dlg.cpp:1590
 msgid "Dangerous option!"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1589
+#: ac3filter_dlg.cpp:1590
 msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
 
-#: ac3filter_dlg.cpp:2056
+#: ac3filter_dlg.cpp:2057
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr ""
 
-#: ac3filter_dlg.cpp:2057 ac3filter_dlg.cpp:2146
+#: ac3filter_dlg.cpp:2058 ac3filter_dlg.cpp:2147
 msgid "Delete confirmation"
 msgstr ""
 
-#: ac3filter_dlg.cpp:2145
+#: ac3filter_dlg.cpp:2146
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr ""

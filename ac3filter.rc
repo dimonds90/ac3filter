@@ -346,10 +346,10 @@ BEGIN
     GROUPBOX        "Localization",IDC_GRP_TRANS,200,8,192,84
     LTEXT           "Time shift (ms):",IDC_LBL_TIME_SHIFT,15,103,174,8
     CONTROL         "Slider1",IDC_SLI_TIME_SHIFT,"msctls_trackbar32",
-                    TBS_NOTICKS | WS_TABSTOP,15,112,174,12
+                    WS_TABSTOP,15,112,174,12
     EDITTEXT        IDC_EDT_TIME_SHIFT,90,124,25,12,ES_AUTOHSCROLL
-    LTEXT           "-0.5s",IDC_LBL_TIME_SHIFT_MINUS,15,126,24,8
-    RTEXT           "+0.5s",IDC_LBL_TIME_SHIFT_PLUS,165,126,24,8
+    LTEXT           "<- sound lags",IDC_LBL_TIME_SHIFT_MINUS,15,126,73,8
+    RTEXT           "sound hastes ->",IDC_LBL_TIME_SHIFT_PLUS,117,126,72,8
     CONTROL         "Jitter correction.",IDC_CHK_JITTER,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,16,140,89,8
     LTEXT           "Current jitter:",IDC_LBL_JITTER,107,140,82,8
@@ -489,7 +489,7 @@ END
 
 IDD_MAIN DIALOGEX 0, 0, 400, 224
 STYLE WS_CHILD
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     COMBOBOX        IDC_CMB_SPK,14,21,86,86,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP

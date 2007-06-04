@@ -841,6 +841,7 @@ AC3FilterDlg::init_controls()
   edt_time_shift.link(m_Dlg, IDC_EDT_TIME_SHIFT);
   SendDlgItemMessage(m_Dlg, IDC_SLI_TIME_SHIFT, TBM_SETRANGE, TRUE, MAKELONG(-500, 500));
   SendDlgItemMessage(m_Dlg, IDC_SLI_TIME_SHIFT, TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(m_Dlg, IDC_SLI_TIME_SHIFT, TBM_SETPAGESIZE, 0, 100);
 
   /////////////////////////////////////
   // AGC
