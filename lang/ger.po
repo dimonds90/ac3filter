@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-06-03 21:59+0100\n"
+"PO-Revision-Date: 2007-06-05 00:12+0100\n"
 "Last-Translator: Filico <findme@dvbviewer.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -564,17 +564,17 @@ msgstr "Voreinstellung"
 #. TRANSLATORS: Delete
 #: dialog_controls.h:401
 msgid "IDC_BTN_PRESET_DELETE"
-msgstr "Löschen"
+msgstr "Delete"
 
 #. TRANSLATORS: File
 #: dialog_controls.h:403
 msgid "IDC_BTN_PRESET_FILE"
-msgstr "Datei"
+msgstr "File"
 
 #. TRANSLATORS: Save
 #: dialog_controls.h:405
 msgid "IDC_BTN_PRESET_SAVE"
-msgstr "Speichern"
+msgstr "Save"
 
 #. TRANSLATORS: Default audio renderer
 #: dialog_controls.h:410
@@ -659,7 +659,7 @@ msgstr "MPEG Audio"
 #. TRANSLATORS: Audio/Video sync
 #: dialog_controls.h:448
 msgid "IDC_GRP_SYNC"
-msgstr "Audio/Video-Syncronisation"
+msgstr "Audio/Video-Synchronisation"
 
 #. TRANSLATORS: Jitter correction.
 #: dialog_controls.h:450
