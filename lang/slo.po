@@ -1,0 +1,855 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AC3Filter 1.40b\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-05-31 13:18+0100\n"
+"Last-Translator: Artam <peterki@hotmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Slovak\n"
+"X-Poedit-Country: SLOVAKIA\n"
+
+#. TRANSLATORS: Donate
+#: dialog_controls.h:21
+msgid "IDC_BTN_DONATE"
+msgstr "Peňažný dar"
+
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
+#: dialog_controls.h:23
+msgid "IDC_VER"
+msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"
+
+#. TRANSLATORS: What is it?
+#: dialog_controls.h:27
+msgid "IDC_GRP_ABOUT"
+msgstr "Čo je to?"
+
+#. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
+#: dialog_controls.h:29
+msgid "IDC_LBL_ABOUT1"
+msgstr "AC3Filter je free DirectShow filter vysokej kvality pre dekódovanie a spracovanie zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita a jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
+
+#. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
+#: dialog_controls.h:31
+msgid "IDC_LBL_ABOUT2"
+msgstr "Používa ho automaticky väčšina multimediálnych prehrávačov. Je potrebný pre prehrávanie AVI súborov s AC3 alebo DTS zvukovými stopami. Môže byť použitý tiež na prehrávanie DVD."
+
+#. TRANSLATORS: AGC
+#: dialog_controls.h:35
+msgid "IDC_GRP_AGC"
+msgstr "AGC"
+
+#. TRANSLATORS: Attack/release speed (dB/s):
+#: dialog_controls.h:39
+msgid "IDC_LBL_ATTACK_RELEASE"
+msgstr "Rýchlosť nábehu/dobehu (dB/s):"
+
+#. TRANSLATORS: Contact author
+#: dialog_controls.h:43
+msgid "IDC_GRP_CONTACT"
+msgstr "Kontakt na autora"
+
+#. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
+#: dialog_controls.h:45
+msgid "IDC_LBL_CONTACT"
+msgstr "Prosím, dajte vedieť o všetkých nájdených chybách. Kedykoľvek zašlite autorovi vaše nápady, kritiku atď. Píšte len po anglicky a po rusky. Subjekt by mal obsahovať slovo 'AC3Filter' (kvôli automatickému filtrovaniu)."
+
+#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#: dialog_controls.h:47
+msgid "IDC_LNK_EMAIL"
+msgstr "Pošta autorovi|mailto:xvalex@mail.ru?Subject=AC3Filter"
+
+#. TRANSLATORS: Project forum|http://ac3filter.net/forum/
+#: dialog_controls.h:49
+msgid "IDC_LNK_FORUM"
+msgstr "Fórum projektu|http://ac3filter.net/forum/"
+
+#. TRANSLATORS: Homepage|http://ac3filter.net/
+#: dialog_controls.h:51
+msgid "IDC_LNK_HOME"
+msgstr "Stránka domov|http://ac3filter.net/"
+
+#. TRANSLATORS: CPU
+#: dialog_controls.h:55
+msgid "IDC_GRP_CPU"
+msgstr "CPU"
+
+#. TRANSLATORS: 0%
+#: dialog_controls.h:58
+msgid "IDC_CPU_LABEL"
+msgstr "0%"
+
+#. TRANSLATORS: Thanks to
+#: dialog_controls.h:62
+msgid "IDC_GRP_CREDITS"
+msgstr "Poďakovanie pre"
+
+#. TRANSLATORS: Decoder info
+#: dialog_controls.h:67
+msgid "IDC_GRP_DECODER_INFO"
+msgstr "Dekóder info"
+
+#. TRANSLATORS: Frames / Errors
+#: dialog_controls.h:72
+msgid "IDC_LBL_FRAMES_ERRORS"
+msgstr "Rámce / Chyby"
+
+#. TRANSLATORS: Delays
+#: dialog_controls.h:76
+msgid "IDC_GRP_DELAYS"
+msgstr "Oneskorenia"
+
+#. TRANSLATORS: Enable
+#: dialog_controls.h:78
+msgid "IDC_CHK_DELAYS"
+msgstr "Zapnúť"
+
+#. TRANSLATORS: C
+#: dialog_controls.h:87
+msgid "IDC_LBL_DELAY_C"
+msgstr "C"
+
+#. TRANSLATORS: L
+#: dialog_controls.h:89
+msgid "IDC_LBL_DELAY_L"
+msgstr "L"
+
+#. TRANSLATORS: R
+#: dialog_controls.h:91
+msgid "IDC_LBL_DELAY_R"
+msgstr "R"
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:93
+msgid "IDC_LBL_DELAY_SL"
+msgstr "SL"
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:95
+msgid "IDC_LBL_DELAY_SR"
+msgstr "SR"
+
+#. TRANSLATORS: Sub
+#: dialog_controls.h:97
+msgid "IDC_LBL_DELAY_SW"
+msgstr "Sub"
+
+#. TRANSLATORS: Units:
+#: dialog_controls.h:99
+msgid "IDC_LBL_UNITS"
+msgstr "Jednotky:"
+
+#. TRANSLATORS: DRC
+#: dialog_controls.h:103
+msgid "IDC_GRP_DRC"
+msgstr "DRC"
+
+#. TRANSLATORS: Enable
+#: dialog_controls.h:105
+msgid "IDC_CHK_DRC"
+msgstr "Zapnúť"
+
+#. TRANSLATORS: DirectShow options
+#: dialog_controls.h:113
+msgid "IDC_GRP_DSHOW"
+msgstr "DirectShow možnosti"
+
+#. TRANSLATORS: Check output format support
+#: dialog_controls.h:115
+msgid "IDC_CHK_QUERY_SINK"
+msgstr "Kontrola podpory výstupného formátu"
+
+#. TRANSLATORS: Force sound card to reinit after seek / pause
+#: dialog_controls.h:117
+msgid "IDC_CHK_REINIT"
+msgstr "Reinicializovať zvukovú kartu po posune/pauze"
+
+#. TRANSLATORS: Disallow PCM output in SPDIF mode
+#: dialog_controls.h:119
+msgid "IDC_CHK_SPDIF_NO_PCM"
+msgstr "Nepovoliť PCM výstup v SPDIF móde"
+
+#. TRANSLATORS: SPDIF/DTS conversion
+#: dialog_controls.h:123
+msgid "IDC_GRP_DTS_CONV"
+msgstr "SPDIF/DTS konverzia"
+
+#. TRANSLATORS: Convert to DTS14
+#: dialog_controls.h:125
+msgid "IDC_RBT_DTS_CONV_14BIT"
+msgstr "Konverzia do DTS14"
+
+#. TRANSLATORS: Convert to DTS16
+#: dialog_controls.h:127
+msgid "IDC_RBT_DTS_CONV_16BIT"
+msgstr "Konverzia do DTS16"
+
+#. TRANSLATORS: Do not convert
+#: dialog_controls.h:129
+msgid "IDC_RBT_DTS_CONV_NONE"
+msgstr "Bez konverzie"
+
+#. TRANSLATORS: SPDIF/DTS mode
+#: dialog_controls.h:133
+msgid "IDC_GRP_DTS_MODE"
+msgstr "SPDIF/DTS mód"
+
+#. TRANSLATORS: Auto
+#: dialog_controls.h:135
+msgid "IDC_RBT_DTS_MODE_AUTO"
+msgstr "Auto"
+
+#. TRANSLATORS: Padded DTS
+#: dialog_controls.h:137
+msgid "IDC_RBT_DTS_MODE_PADDED"
+msgstr "Padded DTS"
+
+#. TRANSLATORS: SPDIF wrapped
+#: dialog_controls.h:139
+msgid "IDC_RBT_DTS_MODE_WRAPPED"
+msgstr "SPDIF wrapped"
+
+#. TRANSLATORS: Build info
+#: dialog_controls.h:143
+msgid "IDC_GRP_ENV"
+msgstr "Build info"
+
+#. TRANSLATORS: Use AC3Filter for:
+#: dialog_controls.h:148
+msgid "IDC_GRP_FORMATS"
+msgstr "Použiť pre:"
+
+#. TRANSLATORS: AC3
+#: dialog_controls.h:150
+msgid "IDC_CHK_AC3"
+msgstr "AC3"
+
+#. TRANSLATORS: DTS
+#: dialog_controls.h:152
+msgid "IDC_CHK_DTS"
+msgstr "DTS"
+
+#. TRANSLATORS: MPEG Audio
+#: dialog_controls.h:154
+msgid "IDC_CHK_MPA"
+msgstr "MPEG Audio"
+
+#. TRANSLATORS: PCM
+#: dialog_controls.h:156
+msgid "IDC_CHK_PCM"
+msgstr "PCM"
+
+#. TRANSLATORS: DVD
+#: dialog_controls.h:158
+msgid "IDC_CHK_PES"
+msgstr "DVD"
+
+#. TRANSLATORS: SPDIF
+#: dialog_controls.h:160
+msgid "IDC_CHK_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: Gain
+#: dialog_controls.h:164
+msgid "IDC_GRP_GAIN"
+msgstr "Zisk"
+
+#. TRANSLATORS: Gains
+#: dialog_controls.h:168
+msgid "IDC_GRP_GAINS"
+msgstr "Zisky"
+
+#. TRANSLATORS: Gain
+#: dialog_controls.h:175
+msgid "IDC_LBL_GAIN"
+msgstr "Zisk"
+
+#. TRANSLATORS: LFE
+#: dialog_controls.h:177
+msgid "IDC_LBL_LFE"
+msgstr "LFE"
+
+#. TRANSLATORS: Master
+#: dialog_controls.h:179
+msgid "IDC_LBL_MASTER"
+msgstr "Master"
+
+#. TRANSLATORS: Surround
+#: dialog_controls.h:181
+msgid "IDC_LBL_SUR"
+msgstr "Surround"
+
+#. TRANSLATORS: Voice
+#: dialog_controls.h:183
+msgid "IDC_LBL_VOICE"
+msgstr "Center"
+
+#. TRANSLATORS: Input gains
+#: dialog_controls.h:192
+msgid "IDC_GRP_INPUT_GAINS"
+msgstr "Vstupný zisk"
+
+#. TRANSLATORS: Input levels
+#: dialog_controls.h:208
+msgid "IDC_GRP_INPUT_LEVELS"
+msgstr "Vstupná úroveň"
+
+#. TRANSLATORS: C
+#: dialog_controls.h:216
+msgid "IDC_LBL_IN_C"
+msgstr "C"
+
+#. TRANSLATORS: L
+#: dialog_controls.h:218
+msgid "IDC_LBL_IN_L"
+msgstr "L"
+
+#. TRANSLATORS: LFE
+#: dialog_controls.h:220
+msgid "IDC_LBL_IN_LFE"
+msgstr "LFE"
+
+#. TRANSLATORS: R
+#: dialog_controls.h:222
+msgid "IDC_LBL_IN_R"
+msgstr "R"
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:224
+msgid "IDC_LBL_IN_SL"
+msgstr "SL"
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:226
+msgid "IDC_LBL_IN_SR"
+msgstr "SR"
+
+#. TRANSLATORS: Interface options
+#: dialog_controls.h:230
+msgid "IDC_GRP_INTERFACE"
+msgstr "Nastavenie grafického rozhrania"
+
+#. TRANSLATORS: Invert levels
+#: dialog_controls.h:232
+msgid "IDC_CHK_INVERT_LEVELS"
+msgstr "Invertovať úrovne"
+
+#. TRANSLATORS: Show tooltips
+#: dialog_controls.h:234
+msgid "IDC_CHK_TOOLTIPS"
+msgstr "Zobraziť tooltipy"
+
+#. TRANSLATORS: Show tray icon
+#: dialog_controls.h:236
+msgid "IDC_CHK_TRAY"
+msgstr "Zobraziť ikonu v sys lište"
+
+#. TRANSLATORS: Interface update rate (ms)
+#: dialog_controls.h:239
+msgid "IDC_LBL_REFRESH_TIME"
+msgstr "Rýchlosť obnovy zobrazovania údajov (ms)"
+
+#. TRANSLATORS: License
+#: dialog_controls.h:243
+msgid "IDC_GRP_LICENSE"
+msgstr "Licencia"
+
+#. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
+#: dialog_controls.h:245
+msgid "IDC_LBL_LICENSE"
+msgstr "Tento program je slobodný (free) software a môže byť šírený v súlade s podmienkami GNU General Public License version 2."
+
+#. TRANSLATORS: Mixing matrix
+#: dialog_controls.h:249
+msgid "IDC_GRP_MATRIX"
+msgstr "Mixovacia matica"
+
+#. TRANSLATORS: C
+#: dialog_controls.h:287
+msgid "IDC_LBL_MATRIX_IN_C"
+msgstr "C"
+
+#. TRANSLATORS: L
+#: dialog_controls.h:289
+msgid "IDC_LBL_MATRIX_IN_L"
+msgstr "L"
+
+#. TRANSLATORS: LFE
+#: dialog_controls.h:291
+msgid "IDC_LBL_MATRIX_IN_LFE"
+msgstr "LFE"
+
+#. TRANSLATORS: R
+#: dialog_controls.h:293
+msgid "IDC_LBL_MATRIX_IN_R"
+msgstr "R"
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:295
+msgid "IDC_LBL_MATRIX_IN_SL"
+msgstr "SL"
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:297
+msgid "IDC_LBL_MATRIX_IN_SR"
+msgstr "SR"
+
+#. TRANSLATORS: C'
+#: dialog_controls.h:299
+msgid "IDC_LBL_MATRIX_OUT_C"
+msgstr "C'"
+
+#. TRANSLATORS: L'
+#: dialog_controls.h:301
+msgid "IDC_LBL_MATRIX_OUT_L"
+msgstr " L'"
+
+#. TRANSLATORS: R'
+#: dialog_controls.h:303
+msgid "IDC_LBL_MATRIX_OUT_R"
+msgstr "R'"
+
+#. TRANSLATORS: SL'
+#: dialog_controls.h:305
+msgid "IDC_LBL_MATRIX_OUT_SL"
+msgstr " SL'"
+
+#. TRANSLATORS: SR'
+#: dialog_controls.h:307
+msgid "IDC_LBL_MATRIX_OUT_SR"
+msgstr "SR'"
+
+#. TRANSLATORS: Sub
+#: dialog_controls.h:309
+msgid "IDC_LBL_MATRIX_OUT_SW"
+msgstr "Sub"
+
+#. TRANSLATORS: Matrix preset
+#: dialog_controls.h:313
+msgid "IDC_GRP_MATRIX_PRESET"
+msgstr "Nastavenie matice"
+
+#. TRANSLATORS: Delete
+#: dialog_controls.h:315
+msgid "IDC_BTN_MATRIX_DELETE"
+msgstr "Zmazať"
+
+#. TRANSLATORS: Save
+#: dialog_controls.h:317
+msgid "IDC_BTN_MATRIX_SAVE"
+msgstr "Uložiť"
+
+#. TRANSLATORS: Filter merit
+#: dialog_controls.h:322
+msgid "IDC_GRP_MERIT"
+msgstr "Filter merit"
+
+#. TRANSLATORS: Prefer AC3Filter
+#: dialog_controls.h:324
+msgid "IDC_RBT_MERIT_PREFERRED"
+msgstr "Uprednostniť AC3Filter"
+
+#. TRANSLATORS: Prefer other decoder
+#: dialog_controls.h:326
+msgid "IDC_RBT_MERIT_UNLIKELY"
+msgstr "Uprednostniť iný dekóder"
+
+#. TRANSLATORS: Options
+#: dialog_controls.h:330
+msgid "IDC_GRP_MIXER_OPTIONS"
+msgstr "Možnosti"
+
+#. TRANSLATORS: Auto gain control
+#: dialog_controls.h:332
+msgid "IDC_CHK_AUTO_GAIN"
+msgstr "Auto riadenie zisku"
+
+#. TRANSLATORS: Auto matrix
+#: dialog_controls.h:334
+msgid "IDC_CHK_AUTO_MATRIX"
+msgstr "Auto matica"
+
+#. TRANSLATORS: Bass redirection
+#: dialog_controls.h:336
+msgid "IDC_CHK_BASS_REDIR"
+msgstr "Presmerovať basy"
+
+#. TRANSLATORS: Expand stereo
+#: dialog_controls.h:338
+msgid "IDC_CHK_EXPAND_STEREO"
+msgstr "Rozšíriť stereo"
+
+#. TRANSLATORS: One-pass norm
+#: dialog_controls.h:340
+msgid "IDC_CHK_NORMALIZE"
+msgstr "1-prechodová norm."
+
+#. TRANSLATORS: Normalize matrix
+#: dialog_controls.h:342
+msgid "IDC_CHK_NORM_MATRIX"
+msgstr "Normalizácia matice"
+
+#. TRANSLATORS: Voice control
+#: dialog_controls.h:344
+msgid "IDC_CHK_VOICE_CONTROL"
+msgstr "Dialógový kanál"
+
+#. TRANSLATORS: Cutoff frequency
+#: dialog_controls.h:347
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "Horná frekvencia"
+
+#. TRANSLATORS: Output format
+#: dialog_controls.h:351
+msgid "IDC_GRP_OUTPUT"
+msgstr "Výstupný formát"
+
+#. TRANSLATORS: Use SPDIF
+#: dialog_controls.h:353
+msgid "IDC_CHK_USE_SPDIF"
+msgstr "Použiť SPDIF"
+
+#. TRANSLATORS: input format
+#: dialog_controls.h:357
+msgid "IDC_LBL_INPUT"
+msgstr "vstupný formát"
+
+#. TRANSLATORS: Output gains
+#: dialog_controls.h:361
+msgid "IDC_GRP_OUTPUT_GAINS"
+msgstr "Výstupný zisk"
+
+#. TRANSLATORS: Output levels
+#: dialog_controls.h:377
+msgid "IDC_GRP_OUTPUT_LEVELS"
+msgstr "Výstupná úroveň"
+
+#. TRANSLATORS: C
+#: dialog_controls.h:379
+msgid "IDC_LBL_OUT_C"
+msgstr "C"
+
+#. TRANSLATORS: L
+#: dialog_controls.h:381
+msgid "IDC_LBL_OUT_L"
+msgstr "L"
+
+#. TRANSLATORS: R
+#: dialog_controls.h:383
+msgid "IDC_LBL_OUT_R"
+msgstr "R"
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:385
+msgid "IDC_LBL_OUT_SL"
+msgstr "SL"
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:387
+msgid "IDC_LBL_OUT_SR"
+msgstr "SR"
+
+#. TRANSLATORS: Sub
+#: dialog_controls.h:389
+msgid "IDC_LBL_OUT_SW"
+msgstr "Sub"
+
+#. TRANSLATORS: Preset
+#: dialog_controls.h:399
+msgid "IDC_GRP_PRESET"
+msgstr "Nastavenie"
+
+#. TRANSLATORS: Delete
+#: dialog_controls.h:401
+msgid "IDC_BTN_PRESET_DELETE"
+msgstr "Zmazať"
+
+#. TRANSLATORS: File
+#: dialog_controls.h:403
+msgid "IDC_BTN_PRESET_FILE"
+msgstr "Súbor"
+
+#. TRANSLATORS: Save
+#: dialog_controls.h:405
+msgid "IDC_BTN_PRESET_SAVE"
+msgstr "Uložiť"
+
+#. TRANSLATORS: Default audio renderer
+#: dialog_controls.h:410
+msgid "IDC_GRP_RENDERER"
+msgstr "Základný audio renderer"
+
+#. TRANSLATORS: Use Direct Sound by default
+#: dialog_controls.h:412
+msgid "IDC_RBT_RENDER_DS"
+msgstr "Direct Sound"
+
+#. TRANSLATORS: Use Wave Out by default
+#: dialog_controls.h:414
+msgid "IDC_RBT_RENDER_WO"
+msgstr "Wave Out"
+
+#. TRANSLATORS: SPDIF options
+#: dialog_controls.h:418
+msgid "IDC_GRP_SPDIF"
+msgstr "SPDIF možnosti"
+
+#. TRANSLATORS: 32kHz
+#: dialog_controls.h:420
+msgid "IDC_CHK_SPDIF_ALLOW_32"
+msgstr "32kHz"
+
+#. TRANSLATORS: 44kHz
+#: dialog_controls.h:422
+msgid "IDC_CHK_SPDIF_ALLOW_44"
+msgstr "44kHz"
+
+#. TRANSLATORS: 48kHz
+#: dialog_controls.h:424
+msgid "IDC_CHK_SPDIF_ALLOW_48"
+msgstr "48kHz"
+
+#. TRANSLATORS: Output SPDIF as PCM
+#: dialog_controls.h:426
+msgid "IDC_CHK_SPDIF_AS_PCM"
+msgstr "Výstup SPDIF ako PCM"
+
+#. TRANSLATORS: Restrict SPDIF sample rate
+#: dialog_controls.h:428
+msgid "IDC_CHK_SPDIF_CHECK_SR"
+msgstr "Obmedziť SPDIF vzorkovaciu frekvenciu"
+
+#. TRANSLATORS: Use AC3 encoder
+#: dialog_controls.h:430
+msgid "IDC_CHK_SPDIF_ENCODE"
+msgstr "Použiť AC3 kódovanie"
+
+#. TRANSLATORS: Do not encode stereo PCM
+#: dialog_controls.h:432
+msgid "IDC_CHK_SPDIF_STEREO_PT"
+msgstr "Nekódovať stereo PCM"
+
+#. TRANSLATORS: Detect SPDIF stream in PCM data
+#: dialog_controls.h:434
+msgid "IDC_CHK_USE_DETECTOR"
+msgstr "Detekcia SPDIF streamu v PCM dátach"
+
+#. TRANSLATORS: SPDIF passthrough
+#: dialog_controls.h:438
+msgid "IDC_GRP_SPDIF_PT"
+msgstr "SPDIF priebežný"
+
+#. TRANSLATORS: AC3
+#: dialog_controls.h:440
+msgid "IDC_CHK_SPDIF_AC3"
+msgstr "AC3"
+
+#. TRANSLATORS: DTS
+#: dialog_controls.h:442
+msgid "IDC_CHK_SPDIF_DTS"
+msgstr "DTS"
+
+#. TRANSLATORS: MPEG Audio
+#: dialog_controls.h:444
+msgid "IDC_CHK_SPDIF_MPA"
+msgstr "MPEG Audio"
+
+#. TRANSLATORS: Audio/Video sync
+#: dialog_controls.h:448
+msgid "IDC_GRP_SYNC"
+msgstr "Audio/Video synchronizácia"
+
+#. TRANSLATORS: Jitter correction.
+#: dialog_controls.h:450
+msgid "IDC_CHK_JITTER"
+msgstr "Jitter korekcia."
+
+#. TRANSLATORS: Current jitter:
+#: dialog_controls.h:454
+msgid "IDC_LBL_JITTER"
+msgstr "Aktuálny jitter:"
+
+#. TRANSLATORS: Time shift (ms):
+#: dialog_controls.h:456
+msgid "IDC_LBL_TIME_SHIFT"
+msgstr "Časový posun (ms):"
+
+#. TRANSLATORS: -0.5s
+#: dialog_controls.h:458
+msgid "IDC_LBL_TIME_SHIFT_MINUS"
+msgstr "-0.5s"
+
+#. TRANSLATORS: +0.5s
+#: dialog_controls.h:460
+msgid "IDC_LBL_TIME_SHIFT_PLUS"
+msgstr "+0.5s"
+
+#. TRANSLATORS: Localization
+#: dialog_controls.h:465
+msgid "IDC_GRP_TRANS"
+msgstr "Jazyková verzia"
+
+#. TRANSLATORS: Language:
+#: dialog_controls.h:469
+msgid "IDC_LBL_LANG"
+msgstr "Jazyk:"
+
+#: ac3filter_dlg.cpp:158
+msgid "AS IS (no change)"
+msgstr "AS IS (bez zmeny)"
+
+#: ac3filter_dlg.cpp:159
+msgid "1/0 - mono"
+msgstr "1/0 - mono"
+
+#: ac3filter_dlg.cpp:160
+msgid "2/0 - stereo"
+msgstr "2/0 - stereo"
+
+#: ac3filter_dlg.cpp:161
+msgid "3/0 - 3 front"
+msgstr "3/0 - 3 predné"
+
+#: ac3filter_dlg.cpp:162
+msgid "2/1 - surround"
+msgstr "2/1 - surround"
+
+#: ac3filter_dlg.cpp:163
+msgid "3/1 - surround"
+msgstr "3/1 - surround"
+
+#: ac3filter_dlg.cpp:164
+msgid "2/2 - quadro"
+msgstr "2/2 - quadro"
+
+#: ac3filter_dlg.cpp:165
+msgid "3/2 - 5 channels"
+msgstr "3/2 - 5 kanálov"
+
+#: ac3filter_dlg.cpp:166
+msgid "1/0+SW 1.1 mono"
+msgstr "1/0+SW 1.1 mono"
+
+#: ac3filter_dlg.cpp:167
+msgid "2/0+SW 2.1 stereo"
+msgstr "2/0+SW 2.1 stereo"
+
+#: ac3filter_dlg.cpp:168
+msgid "3/0+SW 3.1 front"
+msgstr "3/0+SW 3.1 predné"
+
+#: ac3filter_dlg.cpp:169
+msgid "2/1+SW 3.1 surround"
+msgstr "2/1+SW 3.1 surround"
+
+#: ac3filter_dlg.cpp:170
+msgid "3/1+SW 4.1 surround"
+msgstr "3/1+SW 4.1 surround"
+
+#: ac3filter_dlg.cpp:171
+msgid "2/2+SW 4.1 quadro"
+msgstr "2/2+SW 4.1 quadro"
+
+#: ac3filter_dlg.cpp:172
+msgid "3/2+SW 5.1 channels"
+msgstr "3/2+SW 5.1 kanálov"
+
+#: ac3filter_dlg.cpp:173
+msgid "Dolby Surround/ProLogic"
+msgstr "Dolby Surround/ProLogic"
+
+#: ac3filter_dlg.cpp:174
+msgid "Dolby ProLogic II"
+msgstr "Dolby ProLogic II"
+
+#: ac3filter_dlg.cpp:179
+msgid "PCM 16bit"
+msgstr "PCM 16bit"
+
+#: ac3filter_dlg.cpp:180
+msgid "PCM 24bit"
+msgstr "PCM 24bit"
+
+#: ac3filter_dlg.cpp:181
+msgid "PCM 32bit"
+msgstr "PCM 32bit"
+
+#: ac3filter_dlg.cpp:182
+msgid "PCM Float"
+msgstr "PCM Float"
+
+#: ac3filter_dlg.cpp:274
+msgid "Samples"
+msgstr "Vzorky"
+
+#: ac3filter_dlg.cpp:275
+msgid "Millisecs"
+msgstr "Milisekundy"
+
+#: ac3filter_dlg.cpp:276
+msgid "Meters"
+msgstr "Metre"
+
+#: ac3filter_dlg.cpp:277
+msgid "Centimeters"
+msgstr "Centimetre"
+
+#: ac3filter_dlg.cpp:278
+msgid "Feet"
+msgstr "Stopy"
+
+#: ac3filter_dlg.cpp:279
+msgid "Inches"
+msgstr "Palce"
+
+#: ac3filter_dlg.cpp:972
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
+
+#: ac3filter_dlg.cpp:985
+msgid "Use SPDIF"
+msgstr "Použiť SPDIF"
+
+#: ac3filter_dlg.cpp:989
+msgid "Use SPDIF (disabled)"
+msgstr "Použiť SPDIF (vypnutý)"
+
+#: ac3filter_dlg.cpp:993
+msgid "Use SPDIF (passthrough)"
+msgstr "Použiť SPDIF (priebežný)"
+
+#: ac3filter_dlg.cpp:997
+msgid "Use SPDIF (AC3 encode)"
+msgstr "Použiť SPDIF (AC3 výstup)"
+
+#: ac3filter_dlg.cpp:1001
+msgid "Use SPDIF (Unknown)"
+msgstr "Použiť SPDIF (neznámy)"
+
+#: ac3filter_dlg.cpp:1058
+#, c-format
+msgid ""
+"Input\tmean: %ims\tstddev: %ims\r\n"
+"Output\tmean: %ims\tstddev: %ims"
+msgstr ""
+"Vstup\tmean: %ims\tstddev: %ims\r\n"
+"Výstup\tmean: %ims\tstddev: %ims"
+
+#: ac3filter_dlg.cpp:2025
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Naozaj chcete zmazať '%s' nastavenie?"
+
+#: ac3filter_dlg.cpp:2026
+#: ac3filter_dlg.cpp:2115
+msgid "Delete confirmation"
+msgstr "Potvrdiť zmazanie"
+
+#: ac3filter_dlg.cpp:2114
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Naozaj chcete zmazať '%s' maticu?"
+

@@ -1,0 +1,853 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AC3Filter 1.40b\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-06-04 16:05+0700\n"
+"Last-Translator: Nicholas N.E <blank2k@yahoo.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Indonesian\n"
+"X-Poedit-Country: INDONESIA\n"
+
+#. TRANSLATORS: Donate
+#: dialog_controls.h:21
+msgid "IDC_BTN_DONATE"
+msgstr "Donasi"
+
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
+#: dialog_controls.h:23
+msgid "IDC_VER"
+msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"
+
+#. TRANSLATORS: What is it?
+#: dialog_controls.h:27
+msgid "IDC_GRP_ABOUT"
+msgstr "Apakah AC3Filter itu ?"
+
+#. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
+#: dialog_controls.h:29
+msgid "IDC_LBL_ABOUT1"
+msgstr "AC3Filter adalah filter DirectShow berkualitas tinggi yang di desain untuk pemrosesan dan pen-dekode-an suara / audio.Diprioritaskan pada keluasan fungsinya dan pengaturan yang mudah. Mendukung multi-channel dan SPDIF Output."
+
+#. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
+#: dialog_controls.h:31
+msgid "IDC_LBL_ABOUT2"
+msgstr "Filter ini dapat digunakan secara automatis oleh kebanyakan media player. Dibutuhkan untuk memainkan file - file AVI dengan audio track format AC3 atau DTS. Dapat juga digunakan untuk memainkan DVD."
+
+#. TRANSLATORS: AGC
+#: dialog_controls.h:35
+msgid "IDC_GRP_AGC"
+msgstr ""
+
+#. TRANSLATORS: Attack/release speed (dB/s):
+#: dialog_controls.h:39
+msgid "IDC_LBL_ATTACK_RELEASE"
+msgstr "Kecepatan Attack/release"
+
+#. TRANSLATORS: Contact author
+#: dialog_controls.h:43
+msgid "IDC_GRP_CONTACT"
+msgstr "Mengontak Pembuat"
+
+#. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
+#: dialog_controls.h:45
+msgid "IDC_LBL_CONTACT"
+msgstr "Mohon laporkan semua bug. Anda dipersilahkan mengirim email pada pembuat dengan segala ide, kritik anda.Mohon kirim email hanya dalam bahasa Inggris atau Russia saja. Subject email harus mengandung kata \"AC3Filter\".  ( diterima dengan filter otomatis )"
+
+#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#: dialog_controls.h:47
+msgid "IDC_LNK_EMAIL"
+msgstr ""
+
+#. TRANSLATORS: Project forum|http://ac3filter.net/forum/
+#: dialog_controls.h:49
+msgid "IDC_LNK_FORUM"
+msgstr "Forum AC3Filter|http://ac3filter.net/forum/"
+
+#. TRANSLATORS: Homepage|http://ac3filter.net/
+#: dialog_controls.h:51
+msgid "IDC_LNK_HOME"
+msgstr "Website AC3Filter|http://ac3filter.net/"
+
+#. TRANSLATORS: CPU
+#: dialog_controls.h:55
+msgid "IDC_GRP_CPU"
+msgstr ""
+
+#. TRANSLATORS: 0%
+#: dialog_controls.h:58
+msgid "IDC_CPU_LABEL"
+msgstr ""
+
+#. TRANSLATORS: Thanks to
+#: dialog_controls.h:62
+msgid "IDC_GRP_CREDITS"
+msgstr "Terima Kasih Kepada "
+
+#. TRANSLATORS: Decoder info
+#: dialog_controls.h:67
+msgid "IDC_GRP_DECODER_INFO"
+msgstr "Info dekoder "
+
+#. TRANSLATORS: Frames / Errors
+#: dialog_controls.h:72
+msgid "IDC_LBL_FRAMES_ERRORS"
+msgstr ""
+
+#. TRANSLATORS: Delays
+#: dialog_controls.h:76
+msgid "IDC_GRP_DELAYS"
+msgstr ""
+
+#. TRANSLATORS: Enable
+#: dialog_controls.h:78
+msgid "IDC_CHK_DELAYS"
+msgstr ""
+
+#. TRANSLATORS: C
+#: dialog_controls.h:87
+msgid "IDC_LBL_DELAY_C"
+msgstr ""
+
+#. TRANSLATORS: L
+#: dialog_controls.h:89
+msgid "IDC_LBL_DELAY_L"
+msgstr ""
+
+#. TRANSLATORS: R
+#: dialog_controls.h:91
+msgid "IDC_LBL_DELAY_R"
+msgstr ""
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:93
+msgid "IDC_LBL_DELAY_SL"
+msgstr ""
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:95
+msgid "IDC_LBL_DELAY_SR"
+msgstr ""
+
+#. TRANSLATORS: Sub
+#: dialog_controls.h:97
+msgid "IDC_LBL_DELAY_SW"
+msgstr ""
+
+#. TRANSLATORS: Units:
+#: dialog_controls.h:99
+msgid "IDC_LBL_UNITS"
+msgstr ""
+
+#. TRANSLATORS: DRC
+#: dialog_controls.h:103
+msgid "IDC_GRP_DRC"
+msgstr ""
+
+#. TRANSLATORS: Enable
+#: dialog_controls.h:105
+msgid "IDC_CHK_DRC"
+msgstr "Fungsikan"
+
+#. TRANSLATORS: DirectShow options
+#: dialog_controls.h:113
+msgid "IDC_GRP_DSHOW"
+msgstr ""
+
+#. TRANSLATORS: Check output format support
+#: dialog_controls.h:115
+msgid "IDC_CHK_QUERY_SINK"
+msgstr "Check Dukungan Format Output"
+
+#. TRANSLATORS: Force sound card to reinit after seek / pause
+#: dialog_controls.h:117
+msgid "IDC_CHK_REINIT"
+msgstr "Paksa inisialisasi soundcard setelah seek / pause"
+
+#. TRANSLATORS: Disallow PCM output in SPDIF mode
+#: dialog_controls.h:119
+msgid "IDC_CHK_SPDIF_NO_PCM"
+msgstr "Jgn Output PCM bila dlm mode SPDIF"
+
+#. TRANSLATORS: SPDIF/DTS conversion
+#: dialog_controls.h:123
+msgid "IDC_GRP_DTS_CONV"
+msgstr "Konversi SPDIF/DTS"
+
+#. TRANSLATORS: Convert to DTS14
+#: dialog_controls.h:125
+msgid "IDC_RBT_DTS_CONV_14BIT"
+msgstr "konversi ke 14bit"
+
+#. TRANSLATORS: Convert to DTS16
+#: dialog_controls.h:127
+msgid "IDC_RBT_DTS_CONV_16BIT"
+msgstr "konversi ke 16bit"
+
+#. TRANSLATORS: Do not convert
+#: dialog_controls.h:129
+msgid "IDC_RBT_DTS_CONV_NONE"
+msgstr "Jangan di konversi"
+
+#. TRANSLATORS: SPDIF/DTS mode
+#: dialog_controls.h:133
+msgid "IDC_GRP_DTS_MODE"
+msgstr "Mode SPDIF/DTS"
+
+#. TRANSLATORS: Auto
+#: dialog_controls.h:135
+msgid "IDC_RBT_DTS_MODE_AUTO"
+msgstr "Mode Otomatis"
+
+#. TRANSLATORS: Padded DTS
+#: dialog_controls.h:137
+msgid "IDC_RBT_DTS_MODE_PADDED"
+msgstr ""
+
+#. TRANSLATORS: SPDIF wrapped
+#: dialog_controls.h:139
+msgid "IDC_RBT_DTS_MODE_WRAPPED"
+msgstr ""
+
+#. TRANSLATORS: Build info
+#: dialog_controls.h:143
+msgid "IDC_GRP_ENV"
+msgstr ""
+
+#. TRANSLATORS: Use AC3Filter for:
+#: dialog_controls.h:148
+msgid "IDC_GRP_FORMATS"
+msgstr "Pakai AC3Filter untuk :"
+
+#. TRANSLATORS: AC3
+#: dialog_controls.h:150
+msgid "IDC_CHK_AC3"
+msgstr ""
+
+#. TRANSLATORS: DTS
+#: dialog_controls.h:152
+msgid "IDC_CHK_DTS"
+msgstr ""
+
+#. TRANSLATORS: MPEG Audio
+#: dialog_controls.h:154
+msgid "IDC_CHK_MPA"
+msgstr ""
+
+#. TRANSLATORS: PCM
+#: dialog_controls.h:156
+msgid "IDC_CHK_PCM"
+msgstr ""
+
+#. TRANSLATORS: DVD
+#: dialog_controls.h:158
+msgid "IDC_CHK_PES"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+#: dialog_controls.h:160
+msgid "IDC_CHK_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: Gain
+#: dialog_controls.h:164
+msgid "IDC_GRP_GAIN"
+msgstr ""
+
+#. TRANSLATORS: Gains
+#: dialog_controls.h:168
+msgid "IDC_GRP_GAINS"
+msgstr ""
+
+#. TRANSLATORS: Gain
+#: dialog_controls.h:175
+msgid "IDC_LBL_GAIN"
+msgstr ""
+
+#. TRANSLATORS: LFE
+#: dialog_controls.h:177
+msgid "IDC_LBL_LFE"
+msgstr ""
+
+#. TRANSLATORS: Master
+#: dialog_controls.h:179
+msgid "IDC_LBL_MASTER"
+msgstr ""
+
+#. TRANSLATORS: Surround
+#: dialog_controls.h:181
+msgid "IDC_LBL_SUR"
+msgstr ""
+
+#. TRANSLATORS: Voice
+#: dialog_controls.h:183
+msgid "IDC_LBL_VOICE"
+msgstr ""
+
+#. TRANSLATORS: Input gains
+#: dialog_controls.h:192
+msgid "IDC_GRP_INPUT_GAINS"
+msgstr ""
+
+#. TRANSLATORS: Input levels
+#: dialog_controls.h:208
+msgid "IDC_GRP_INPUT_LEVELS"
+msgstr ""
+
+#. TRANSLATORS: C
+#: dialog_controls.h:216
+msgid "IDC_LBL_IN_C"
+msgstr ""
+
+#. TRANSLATORS: L
+#: dialog_controls.h:218
+msgid "IDC_LBL_IN_L"
+msgstr ""
+
+#. TRANSLATORS: LFE
+#: dialog_controls.h:220
+msgid "IDC_LBL_IN_LFE"
+msgstr ""
+
+#. TRANSLATORS: R
+#: dialog_controls.h:222
+msgid "IDC_LBL_IN_R"
+msgstr ""
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:224
+msgid "IDC_LBL_IN_SL"
+msgstr ""
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:226
+msgid "IDC_LBL_IN_SR"
+msgstr ""
+
+#. TRANSLATORS: Interface options
+#: dialog_controls.h:230
+msgid "IDC_GRP_INTERFACE"
+msgstr ""
+
+#. TRANSLATORS: Invert levels
+#: dialog_controls.h:232
+msgid "IDC_CHK_INVERT_LEVELS"
+msgstr ""
+
+#. TRANSLATORS: Show tooltips
+#: dialog_controls.h:234
+msgid "IDC_CHK_TOOLTIPS"
+msgstr "Tampilkan tips singkat"
+
+#. TRANSLATORS: Show tray icon
+#: dialog_controls.h:236
+msgid "IDC_CHK_TRAY"
+msgstr "Tampilkan Tray Icon"
+
+#. TRANSLATORS: Interface update rate (ms)
+#: dialog_controls.h:239
+msgid "IDC_LBL_REFRESH_TIME"
+msgstr ""
+
+#. TRANSLATORS: License
+#: dialog_controls.h:243
+msgid "IDC_GRP_LICENSE"
+msgstr "Lisensi"
+
+#. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
+#: dialog_controls.h:245
+msgid "IDC_LBL_LICENSE"
+msgstr "Program ini adalah program gratis, dan boleh didistribusikan berdasarkan ketentuan dari GNU General Public License versi 2."
+
+#. TRANSLATORS: Mixing matrix
+#: dialog_controls.h:249
+msgid "IDC_GRP_MATRIX"
+msgstr ""
+
+#. TRANSLATORS: C
+#: dialog_controls.h:287
+msgid "IDC_LBL_MATRIX_IN_C"
+msgstr ""
+
+#. TRANSLATORS: L
+#: dialog_controls.h:289
+msgid "IDC_LBL_MATRIX_IN_L"
+msgstr ""
+
+#. TRANSLATORS: LFE
+#: dialog_controls.h:291
+msgid "IDC_LBL_MATRIX_IN_LFE"
+msgstr ""
+
+#. TRANSLATORS: R
+#: dialog_controls.h:293
+msgid "IDC_LBL_MATRIX_IN_R"
+msgstr ""
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:295
+msgid "IDC_LBL_MATRIX_IN_SL"
+msgstr ""
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:297
+msgid "IDC_LBL_MATRIX_IN_SR"
+msgstr ""
+
+#. TRANSLATORS: C'
+#: dialog_controls.h:299
+msgid "IDC_LBL_MATRIX_OUT_C"
+msgstr ""
+
+#. TRANSLATORS: L'
+#: dialog_controls.h:301
+msgid "IDC_LBL_MATRIX_OUT_L"
+msgstr ""
+
+#. TRANSLATORS: R'
+#: dialog_controls.h:303
+msgid "IDC_LBL_MATRIX_OUT_R"
+msgstr ""
+
+#. TRANSLATORS: SL'
+#: dialog_controls.h:305
+msgid "IDC_LBL_MATRIX_OUT_SL"
+msgstr ""
+
+#. TRANSLATORS: SR'
+#: dialog_controls.h:307
+msgid "IDC_LBL_MATRIX_OUT_SR"
+msgstr ""
+
+#. TRANSLATORS: Sub
+#: dialog_controls.h:309
+msgid "IDC_LBL_MATRIX_OUT_SW"
+msgstr ""
+
+#. TRANSLATORS: Matrix preset
+#: dialog_controls.h:313
+msgid "IDC_GRP_MATRIX_PRESET"
+msgstr ""
+
+#. TRANSLATORS: Delete
+#: dialog_controls.h:315
+msgid "IDC_BTN_MATRIX_DELETE"
+msgstr "Hapus"
+
+#. TRANSLATORS: Save
+#: dialog_controls.h:317
+msgid "IDC_BTN_MATRIX_SAVE"
+msgstr "Simpan"
+
+#. TRANSLATORS: Filter merit
+#: dialog_controls.h:322
+msgid "IDC_GRP_MERIT"
+msgstr ""
+
+#. TRANSLATORS: Prefer AC3Filter
+#: dialog_controls.h:324
+msgid "IDC_RBT_MERIT_PREFERRED"
+msgstr "Gunakan AC3Filter"
+
+#. TRANSLATORS: Prefer other decoder
+#: dialog_controls.h:326
+msgid "IDC_RBT_MERIT_UNLIKELY"
+msgstr "Gunakan dekoder lain"
+
+#. TRANSLATORS: Options
+#: dialog_controls.h:330
+msgid "IDC_GRP_MIXER_OPTIONS"
+msgstr "Pilihan"
+
+#. TRANSLATORS: Auto gain control
+#: dialog_controls.h:332
+msgid "IDC_CHK_AUTO_GAIN"
+msgstr ""
+
+#. TRANSLATORS: Auto matrix
+#: dialog_controls.h:334
+msgid "IDC_CHK_AUTO_MATRIX"
+msgstr ""
+
+#. TRANSLATORS: Bass redirection
+#: dialog_controls.h:336
+msgid "IDC_CHK_BASS_REDIR"
+msgstr ""
+
+#. TRANSLATORS: Expand stereo
+#: dialog_controls.h:338
+msgid "IDC_CHK_EXPAND_STEREO"
+msgstr ""
+
+#. TRANSLATORS: One-pass norm
+#: dialog_controls.h:340
+msgid "IDC_CHK_NORMALIZE"
+msgstr ""
+
+#. TRANSLATORS: Normalize matrix
+#: dialog_controls.h:342
+msgid "IDC_CHK_NORM_MATRIX"
+msgstr ""
+
+#. TRANSLATORS: Voice control
+#: dialog_controls.h:344
+msgid "IDC_CHK_VOICE_CONTROL"
+msgstr ""
+
+#. TRANSLATORS: Cutoff frequency
+#: dialog_controls.h:347
+msgid "IDC_LBL_BASS_FREQ"
+msgstr ""
+
+#. TRANSLATORS: Output format
+#: dialog_controls.h:351
+msgid "IDC_GRP_OUTPUT"
+msgstr "Format Output"
+
+#. TRANSLATORS: Use SPDIF
+#: dialog_controls.h:353
+msgid "IDC_CHK_USE_SPDIF"
+msgstr "Gunakan SPDIF"
+
+#. TRANSLATORS: input format
+#: dialog_controls.h:357
+msgid "IDC_LBL_INPUT"
+msgstr "Format Input"
+
+#. TRANSLATORS: Output gains
+#: dialog_controls.h:361
+msgid "IDC_GRP_OUTPUT_GAINS"
+msgstr ""
+
+#. TRANSLATORS: Output levels
+#: dialog_controls.h:377
+msgid "IDC_GRP_OUTPUT_LEVELS"
+msgstr ""
+
+#. TRANSLATORS: C
+#: dialog_controls.h:379
+msgid "IDC_LBL_OUT_C"
+msgstr ""
+
+#. TRANSLATORS: L
+#: dialog_controls.h:381
+msgid "IDC_LBL_OUT_L"
+msgstr ""
+
+#. TRANSLATORS: R
+#: dialog_controls.h:383
+msgid "IDC_LBL_OUT_R"
+msgstr ""
+
+#. TRANSLATORS: SL
+#: dialog_controls.h:385
+msgid "IDC_LBL_OUT_SL"
+msgstr ""
+
+#. TRANSLATORS: SR
+#: dialog_controls.h:387
+msgid "IDC_LBL_OUT_SR"
+msgstr ""
+
+#. TRANSLATORS: Sub
+#: dialog_controls.h:389
+msgid "IDC_LBL_OUT_SW"
+msgstr ""
+
+#. TRANSLATORS: Preset
+#: dialog_controls.h:399
+msgid "IDC_GRP_PRESET"
+msgstr ""
+
+#. TRANSLATORS: Delete
+#: dialog_controls.h:401
+msgid "IDC_BTN_PRESET_DELETE"
+msgstr "Hapus"
+
+#. TRANSLATORS: File
+#: dialog_controls.h:403
+msgid "IDC_BTN_PRESET_FILE"
+msgstr ""
+
+#. TRANSLATORS: Save
+#: dialog_controls.h:405
+msgid "IDC_BTN_PRESET_SAVE"
+msgstr "Simpan"
+
+#. TRANSLATORS: Default audio renderer
+#: dialog_controls.h:410
+msgid "IDC_GRP_RENDERER"
+msgstr ""
+
+#. TRANSLATORS: Use Direct Sound by default
+#: dialog_controls.h:412
+msgid "IDC_RBT_RENDER_DS"
+msgstr "Gunakan Direct Sound"
+
+#. TRANSLATORS: Use Wave Out by default
+#: dialog_controls.h:414
+msgid "IDC_RBT_RENDER_WO"
+msgstr "Gunakan Wave Out"
+
+#. TRANSLATORS: SPDIF options
+#: dialog_controls.h:418
+msgid "IDC_GRP_SPDIF"
+msgstr "Pilihan dalam mode SPDIF"
+
+#. TRANSLATORS: 32kHz
+#: dialog_controls.h:420
+msgid "IDC_CHK_SPDIF_ALLOW_32"
+msgstr ""
+
+#. TRANSLATORS: 44kHz
+#: dialog_controls.h:422
+msgid "IDC_CHK_SPDIF_ALLOW_44"
+msgstr ""
+
+#. TRANSLATORS: 48kHz
+#: dialog_controls.h:424
+msgid "IDC_CHK_SPDIF_ALLOW_48"
+msgstr ""
+
+#. TRANSLATORS: Output SPDIF as PCM
+#: dialog_controls.h:426
+msgid "IDC_CHK_SPDIF_AS_PCM"
+msgstr "Output SPDIF dalam format PCM"
+
+#. TRANSLATORS: Restrict SPDIF sample rate
+#: dialog_controls.h:428
+msgid "IDC_CHK_SPDIF_CHECK_SR"
+msgstr "Batasi sampe rate untuk SPDIF"
+
+#. TRANSLATORS: Use AC3 encoder
+#: dialog_controls.h:430
+msgid "IDC_CHK_SPDIF_ENCODE"
+msgstr "Gunakan AC3 Encoder"
+
+#. TRANSLATORS: Do not encode stereo PCM
+#: dialog_controls.h:432
+msgid "IDC_CHK_SPDIF_STEREO_PT"
+msgstr "Stereo PCM tidak di-encode"
+
+#. TRANSLATORS: Detect SPDIF stream in PCM data
+#: dialog_controls.h:434
+msgid "IDC_CHK_USE_DETECTOR"
+msgstr "Deteksi Stream SPDIF dalam data PCM"
+
+#. TRANSLATORS: SPDIF passthrough
+#: dialog_controls.h:438
+msgid "IDC_GRP_SPDIF_PT"
+msgstr ""
+
+#. TRANSLATORS: AC3
+#: dialog_controls.h:440
+msgid "IDC_CHK_SPDIF_AC3"
+msgstr ""
+
+#. TRANSLATORS: DTS
+#: dialog_controls.h:442
+msgid "IDC_CHK_SPDIF_DTS"
+msgstr ""
+
+#. TRANSLATORS: MPEG Audio
+#: dialog_controls.h:444
+msgid "IDC_CHK_SPDIF_MPA"
+msgstr ""
+
+#. TRANSLATORS: Audio/Video sync
+#: dialog_controls.h:448
+msgid "IDC_GRP_SYNC"
+msgstr "Sinkronisasi Suara / Gambar"
+
+#. TRANSLATORS: Jitter correction.
+#: dialog_controls.h:450
+msgid "IDC_CHK_JITTER"
+msgstr ""
+
+#. TRANSLATORS: Current jitter:
+#: dialog_controls.h:454
+msgid "IDC_LBL_JITTER"
+msgstr ""
+
+#. TRANSLATORS: Time shift (ms):
+#: dialog_controls.h:456
+msgid "IDC_LBL_TIME_SHIFT"
+msgstr ""
+
+#. TRANSLATORS: -0.5s
+#: dialog_controls.h:458
+msgid "IDC_LBL_TIME_SHIFT_MINUS"
+msgstr ""
+
+#. TRANSLATORS: +0.5s
+#: dialog_controls.h:460
+msgid "IDC_LBL_TIME_SHIFT_PLUS"
+msgstr ""
+
+#. TRANSLATORS: Localization
+#: dialog_controls.h:465
+msgid "IDC_GRP_TRANS"
+msgstr ""
+
+#. TRANSLATORS: Language:
+#: dialog_controls.h:469
+msgid "IDC_LBL_LANG"
+msgstr "Bahasa: "
+
+#: ac3filter_dlg.cpp:158
+msgid "AS IS (no change)"
+msgstr "Tidak diubah"
+
+#: ac3filter_dlg.cpp:159
+msgid "1/0 - mono"
+msgstr ""
+
+#: ac3filter_dlg.cpp:160
+msgid "2/0 - stereo"
+msgstr ""
+
+#: ac3filter_dlg.cpp:161
+msgid "3/0 - 3 front"
+msgstr ""
+
+#: ac3filter_dlg.cpp:162
+msgid "2/1 - surround"
+msgstr ""
+
+#: ac3filter_dlg.cpp:163
+msgid "3/1 - surround"
+msgstr ""
+
+#: ac3filter_dlg.cpp:164
+msgid "2/2 - quadro"
+msgstr ""
+
+#: ac3filter_dlg.cpp:165
+msgid "3/2 - 5 channels"
+msgstr ""
+
+#: ac3filter_dlg.cpp:166
+msgid "1/0+SW 1.1 mono"
+msgstr ""
+
+#: ac3filter_dlg.cpp:167
+msgid "2/0+SW 2.1 stereo"
+msgstr ""
+
+#: ac3filter_dlg.cpp:168
+msgid "3/0+SW 3.1 front"
+msgstr ""
+
+#: ac3filter_dlg.cpp:169
+msgid "2/1+SW 3.1 surround"
+msgstr ""
+
+#: ac3filter_dlg.cpp:170
+msgid "3/1+SW 4.1 surround"
+msgstr ""
+
+#: ac3filter_dlg.cpp:171
+msgid "2/2+SW 4.1 quadro"
+msgstr ""
+
+#: ac3filter_dlg.cpp:172
+msgid "3/2+SW 5.1 channels"
+msgstr ""
+
+#: ac3filter_dlg.cpp:173
+msgid "Dolby Surround/ProLogic"
+msgstr ""
+
+#: ac3filter_dlg.cpp:174
+msgid "Dolby ProLogic II"
+msgstr ""
+
+#: ac3filter_dlg.cpp:179
+msgid "PCM 16bit"
+msgstr ""
+
+#: ac3filter_dlg.cpp:180
+msgid "PCM 24bit"
+msgstr ""
+
+#: ac3filter_dlg.cpp:181
+msgid "PCM 32bit"
+msgstr ""
+
+#: ac3filter_dlg.cpp:182
+msgid "PCM Float"
+msgstr ""
+
+#: ac3filter_dlg.cpp:274
+msgid "Samples"
+msgstr ""
+
+#: ac3filter_dlg.cpp:275
+msgid "Millisecs"
+msgstr ""
+
+#: ac3filter_dlg.cpp:276
+msgid "Meters"
+msgstr ""
+
+#: ac3filter_dlg.cpp:277
+msgid "Centimeters"
+msgstr ""
+
+#: ac3filter_dlg.cpp:278
+msgid "Feet"
+msgstr ""
+
+#: ac3filter_dlg.cpp:279
+msgid "Inches"
+msgstr ""
+
+#: ac3filter_dlg.cpp:972
+#, c-format
+msgid "%s %s %iHz"
+msgstr ""
+
+#: ac3filter_dlg.cpp:985
+msgid "Use SPDIF"
+msgstr ""
+
+#: ac3filter_dlg.cpp:989
+msgid "Use SPDIF (disabled)"
+msgstr ""
+
+#: ac3filter_dlg.cpp:993
+msgid "Use SPDIF (passthrough)"
+msgstr ""
+
+#: ac3filter_dlg.cpp:997
+msgid "Use SPDIF (AC3 encode)"
+msgstr ""
+
+#: ac3filter_dlg.cpp:1001
+msgid "Use SPDIF (Unknown)"
+msgstr ""
+
+#: ac3filter_dlg.cpp:1058
+#, c-format
+msgid ""
+"Input\tmean: %ims\tstddev: %ims\r\n"
+"Output\tmean: %ims\tstddev: %ims"
+msgstr ""
+
+#: ac3filter_dlg.cpp:2025
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Anda yakin ingin menghapus '%s' preset?"
+
+#: ac3filter_dlg.cpp:2026
+#: ac3filter_dlg.cpp:2115
+msgid "Delete confirmation"
+msgstr ""
+
+#: ac3filter_dlg.cpp:2114
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Anda yakin ingin menghapus '%s' matrix?"
+
