@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-06 00:49+0400\n"
 "PO-Revision-Date: 2007-06-03 01:05+0100\n"
 "Last-Translator: Gioxy <FindMe@DVBViewer.forum>\n"
 "Language-Team: \n"
@@ -29,12 +30,19 @@ msgstr "Cos'è AC3Filter?"
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 #: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filter è un filtro DirectShow di alta qualità creato per la decodifica e il processamento audio in tempo reale. I suoi obiettivi sono ampie funzionalità e regolazioni comode. Supporta uscite audio multicanali e digitali (S/PDIF)."
+msgstr ""
+"AC3Filter è un filtro DirectShow di alta qualità creato per la decodifica e "
+"il processamento audio in tempo reale. I suoi obiettivi sono ampie "
+"funzionalità e regolazioni comode. Supporta uscite audio multicanali e "
+"digitali (S/PDIF)."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 #: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
-msgstr "È utilizzato automaticamente dalla maggior parte dei Player multimediali. È necessario per la riproduzione dei file AVI contenenti tracce Audio AC3 o DTS. Può essere utilizzato anche per la decodifica Audio dei DVD."
+msgstr ""
+"È utilizzato automaticamente dalla maggior parte dei Player multimediali. È "
+"necessario per la riproduzione dei file AVI contenenti tracce Audio AC3 o "
+"DTS. Può essere utilizzato anche per la decodifica Audio dei DVD."
 
 #. TRANSLATORS: AGC
 #: dialog_controls.h:35
@@ -54,7 +62,11 @@ msgstr "Conatatta l'autore"
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 #: dialog_controls.h:45
 msgid "IDC_LBL_CONTACT"
-msgstr "È gradita la segnalazione di qualsiasi bug. Non esitare a scrivere all'autore qualsiasi tua idea, critica, ecc., ma solo in inglese o in russo. L'oggetto deve contenere la parola 'AC3Filter' (altrimenti viene cestinata automaticamente)."
+msgstr ""
+"È gradita la segnalazione di qualsiasi bug. Non esitare a scrivere "
+"all'autore qualsiasi tua idea, critica, ecc., ma solo in inglese o in russo. "
+"L'oggetto deve contenere la parola 'AC3Filter' (altrimenti viene cestinata "
+"automaticamente)."
 
 #. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
 #: dialog_controls.h:47
@@ -359,7 +371,9 @@ msgstr "Licenza"
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 #: dialog_controls.h:245
 msgid "IDC_LBL_LICENSE"
-msgstr "Questo programma è freeware e può essere distribuito secondo i termini della Licenza Pubblica Generale GNU versione 2."
+msgstr ""
+"Questo programma è freeware e può essere distribuito secondo i termini della "
+"Licenza Pubblica Generale GNU versione 2."
 
 #. TRANSLATORS: Mixing matrix
 #: dialog_controls.h:249
@@ -676,12 +690,12 @@ msgstr "Jitter corrente:"
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "Scarto temporale (ms):"
 
-#. TRANSLATORS: -0.5s
+#. TRANSLATORS: <- fix sound lag
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr "-0.5s"
 
-#. TRANSLATORS: +0.5s
+#. TRANSLATORS: fix sound haste ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr "+0.5s"
@@ -804,52 +818,101 @@ msgstr "Piedi"
 msgid "Inches"
 msgstr "Pollici"
 
-#: ac3filter_dlg.cpp:972
+#. TRANSLATORS: Main
+#: ac3filter_dlg.cpp:317
+msgid "IDD_MAIN"
+msgstr ""
+
+#. TRANSLATORS: Mixer
+#: ac3filter_dlg.cpp:324
+msgid "IDD_MIXER"
+msgstr ""
+
+#. TRANSLATORS: Gains
+#: ac3filter_dlg.cpp:331
+msgid "IDD_GAINS"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+#: ac3filter_dlg.cpp:338
+msgid "IDD_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: System
+#: ac3filter_dlg.cpp:345
+msgid "IDD_SYSTEM"
+msgstr ""
+
+#. TRANSLATORS: About
+#: ac3filter_dlg.cpp:353
+msgid "IDD_ABOUT"
+msgstr ""
+
+#: ac3filter_dlg.cpp:999
 #, c-format
 msgid "%s %s %iHz"
 msgstr "%s %s %iHz"
 
-#: ac3filter_dlg.cpp:985
+#: ac3filter_dlg.cpp:1012
 msgid "Use SPDIF"
 msgstr "Usa S/PDIF"
 
-#: ac3filter_dlg.cpp:989
+#: ac3filter_dlg.cpp:1016
 msgid "Use SPDIF (disabled)"
 msgstr "Usa S/PDIF (disabilitato)"
 
-#: ac3filter_dlg.cpp:993
+#: ac3filter_dlg.cpp:1020
 msgid "Use SPDIF (passthrough)"
 msgstr "Usa S/PDIF (passthrourgh)"
 
-#: ac3filter_dlg.cpp:997
+#: ac3filter_dlg.cpp:1024
 msgid "Use SPDIF (AC3 encode)"
 msgstr "Usa S/PDIF (codifica AC3)"
 
-#: ac3filter_dlg.cpp:1001
+#: ac3filter_dlg.cpp:1028
 msgid "Use SPDIF (Unknown)"
 msgstr "Usa S/PDIF (sconosciuto)"
 
-#: ac3filter_dlg.cpp:1058
+#: ac3filter_dlg.cpp:1085
 #, c-format
 msgid ""
-"Input\tmean: %ims\tstddev: %ims\r\n"
+"Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
-"Input\tmedia: %ims\tdev std: %ims\r\n"
-"Output\tmedia: %ims\tdev std: %ims"
 
-#: ac3filter_dlg.cpp:2025
+#: ac3filter_dlg.cpp:1496
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:1496 ac3filter_dlg.cpp:1590
+msgid "Dangerous option!"
+msgstr ""
+
+#: ac3filter_dlg.cpp:1590
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:2057
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Eliminare la preimpostazione '%s'?"
 
-#: ac3filter_dlg.cpp:2026
-#: ac3filter_dlg.cpp:2115
+#: ac3filter_dlg.cpp:2058 ac3filter_dlg.cpp:2147
 msgid "Delete confirmation"
 msgstr "Conferma l'eliminazione"
 
-#: ac3filter_dlg.cpp:2114
+#: ac3filter_dlg.cpp:2146
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "Eliminare la martice '%s'?"
 
+#~ msgid ""
+#~ "Input\tmean: %ims\tstddev: %ims\n"
+#~ "Output\tmean: %ims\tstddev: %ims"
+#~ msgstr ""
+#~ "Input\tmedia: %ims\tdev std: %ims\n"
+#~ "Output\tmedia: %ims\tdev std: %ims"

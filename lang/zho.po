@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-31 01:41+0400\n"
+"POT-Creation-Date: 2007-06-06 00:49+0400\n"
 "PO-Revision-Date: 2007-06-02 12:54+0800\n"
 "Last-Translator: FSYX <fsyx@cq172.com>\n"
 "Language-Team: \n"
@@ -35,12 +35,16 @@ msgstr "这是个用来干什么的软件?"
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 #: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filter 是一个高质量且免费的用来实时解码和处理音频的 DirectShow 过滤器.它具有强大的功能和友好的设置界面,支持多声道音频和数字 (SPDIF) 输出."
+msgstr ""
+"AC3Filter 是一个高质量且免费的用来实时解码和处理音频的 DirectShow 过滤器.它具"
+"有强大的功能和友好的设置界面,支持多声道音频和数字 (SPDIF) 输出."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 #: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
-msgstr "AC3Filter 可以被绝大多数多媒体播放器自动调用.通过本程序,你可以播放 AVI 容器或其它容器中的 AC3 和 DTS 音轨,同时还可以用来播放 DVD."
+msgstr ""
+"AC3Filter 可以被绝大多数多媒体播放器自动调用.通过本程序,你可以播放 AVI 容器或"
+"其它容器中的 AC3 和 DTS 音轨,同时还可以用来播放 DVD."
 
 #. TRANSLATORS: AGC
 #: dialog_controls.h:35
@@ -60,7 +64,10 @@ msgstr "联系作者"
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 #: dialog_controls.h:45
 msgid "IDC_LBL_CONTACT"
-msgstr "请反馈本程序存在的所有问题.你可以随意地向作者提建议,意见以及其它想法,但是只能够使用英语或者俄语.由于电子邮箱设置了垃圾过滤,在邮件主题中须包含关键字'AC3Filter'."
+msgstr ""
+"请反馈本程序存在的所有问题.你可以随意地向作者提建议,意见以及其它想法,但是只能"
+"够使用英语或者俄语.由于电子邮箱设置了垃圾过滤,在邮件主题中须包含关键"
+"字'AC3Filter'."
 
 #. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
 #: dialog_controls.h:47
@@ -682,12 +689,12 @@ msgstr "当前 jitter:"
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "变速时间(毫秒):"
 
-#. TRANSLATORS: -0.5s
+#. TRANSLATORS: <- fix sound lag
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr ""
 
-#. TRANSLATORS: +0.5s
+#. TRANSLATORS: fix sound haste ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr ""
@@ -810,52 +817,101 @@ msgstr "英尺"
 msgid "Inches"
 msgstr "英寸"
 
-#: ac3filter_dlg.cpp:972
+#. TRANSLATORS: Main
+#: ac3filter_dlg.cpp:317
+msgid "IDD_MAIN"
+msgstr ""
+
+#. TRANSLATORS: Mixer
+#: ac3filter_dlg.cpp:324
+msgid "IDD_MIXER"
+msgstr ""
+
+#. TRANSLATORS: Gains
+#: ac3filter_dlg.cpp:331
+msgid "IDD_GAINS"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+#: ac3filter_dlg.cpp:338
+msgid "IDD_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: System
+#: ac3filter_dlg.cpp:345
+msgid "IDD_SYSTEM"
+msgstr ""
+
+#. TRANSLATORS: About
+#: ac3filter_dlg.cpp:353
+msgid "IDD_ABOUT"
+msgstr ""
+
+#: ac3filter_dlg.cpp:999
 #, c-format
 msgid "%s %s %iHz"
 msgstr ""
 
-#: ac3filter_dlg.cpp:985
+#: ac3filter_dlg.cpp:1012
 msgid "Use SPDIF"
 msgstr "启用 SPDIF"
 
-#: ac3filter_dlg.cpp:989
+#: ac3filter_dlg.cpp:1016
 msgid "Use SPDIF (disabled)"
 msgstr "启用 SPDIF (禁止)"
 
-#: ac3filter_dlg.cpp:993
+#: ac3filter_dlg.cpp:1020
 msgid "Use SPDIF (passthrough)"
 msgstr "启用 SPDIF (传输)"
 
-#: ac3filter_dlg.cpp:997
+#: ac3filter_dlg.cpp:1024
 msgid "Use SPDIF (AC3 encode)"
 msgstr "启用 SPDIF (AC3 编码)"
 
-#: ac3filter_dlg.cpp:1001
+#: ac3filter_dlg.cpp:1028
 msgid "Use SPDIF (Unknown)"
 msgstr "启用 SPDIF (未知)"
 
-#: ac3filter_dlg.cpp:1058
+#: ac3filter_dlg.cpp:1085
 #, c-format
 msgid ""
-"Input\tmean: %ims\tstddev: %ims\r\n"
+"Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
-"输入\tmean: %i毫秒\tstddev: %i毫秒\r\n"
-"输出\tmean: %i毫秒\tstddev: %i毫秒"
 
-#: ac3filter_dlg.cpp:2025
+#: ac3filter_dlg.cpp:1496
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:1496 ac3filter_dlg.cpp:1590
+msgid "Dangerous option!"
+msgstr ""
+
+#: ac3filter_dlg.cpp:1590
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:2057
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "你确定要删除方案 '%s' 吗?"
 
-#: ac3filter_dlg.cpp:2026
-#: ac3filter_dlg.cpp:2115
+#: ac3filter_dlg.cpp:2058 ac3filter_dlg.cpp:2147
 msgid "Delete confirmation"
 msgstr "删除确认"
 
-#: ac3filter_dlg.cpp:2114
+#: ac3filter_dlg.cpp:2146
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "你确认要删除矩阵方案 '%s' 吗?"
 
+#~ msgid ""
+#~ "Input\tmean: %ims\tstddev: %ims\n"
+#~ "Output\tmean: %ims\tstddev: %ims"
+#~ msgstr ""
+#~ "输入\tmean: %i毫秒\tstddev: %i毫秒\n"
+#~ "输出\tmean: %i毫秒\tstddev: %i毫秒"

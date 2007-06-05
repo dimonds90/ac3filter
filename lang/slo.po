@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-06 00:49+0400\n"
 "PO-Revision-Date: 2007-05-31 13:18+0100\n"
 "Last-Translator: Artam <peterki@hotmail.com>\n"
 "Language-Team: \n"
@@ -29,12 +30,18 @@ msgstr "Čo je to?"
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 #: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filter je free DirectShow filter vysokej kvality pre dekódovanie a spracovanie zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita a jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
+msgstr ""
+"AC3Filter je free DirectShow filter vysokej kvality pre dekódovanie a "
+"spracovanie zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita "
+"a jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 #: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
-msgstr "Používa ho automaticky väčšina multimediálnych prehrávačov. Je potrebný pre prehrávanie AVI súborov s AC3 alebo DTS zvukovými stopami. Môže byť použitý tiež na prehrávanie DVD."
+msgstr ""
+"Používa ho automaticky väčšina multimediálnych prehrávačov. Je potrebný pre "
+"prehrávanie AVI súborov s AC3 alebo DTS zvukovými stopami. Môže byť použitý "
+"tiež na prehrávanie DVD."
 
 #. TRANSLATORS: AGC
 #: dialog_controls.h:35
@@ -54,7 +61,10 @@ msgstr "Kontakt na autora"
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 #: dialog_controls.h:45
 msgid "IDC_LBL_CONTACT"
-msgstr "Prosím, dajte vedieť o všetkých nájdených chybách. Kedykoľvek zašlite autorovi vaše nápady, kritiku atď. Píšte len po anglicky a po rusky. Subjekt by mal obsahovať slovo 'AC3Filter' (kvôli automatickému filtrovaniu)."
+msgstr ""
+"Prosím, dajte vedieť o všetkých nájdených chybách. Kedykoľvek zašlite "
+"autorovi vaše nápady, kritiku atď. Píšte len po anglicky a po rusky. Subjekt "
+"by mal obsahovať slovo 'AC3Filter' (kvôli automatickému filtrovaniu)."
 
 #. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
 #: dialog_controls.h:47
@@ -359,7 +369,9 @@ msgstr "Licencia"
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 #: dialog_controls.h:245
 msgid "IDC_LBL_LICENSE"
-msgstr "Tento program je slobodný (free) software a môže byť šírený v súlade s podmienkami GNU General Public License version 2."
+msgstr ""
+"Tento program je slobodný (free) software a môže byť šírený v súlade s "
+"podmienkami GNU General Public License version 2."
 
 #. TRANSLATORS: Mixing matrix
 #: dialog_controls.h:249
@@ -676,12 +688,12 @@ msgstr "Aktuálny jitter:"
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "Časový posun (ms):"
 
-#. TRANSLATORS: -0.5s
+#. TRANSLATORS: <- fix sound lag
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr "-0.5s"
 
-#. TRANSLATORS: +0.5s
+#. TRANSLATORS: fix sound haste ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr "+0.5s"
@@ -804,52 +816,101 @@ msgstr "Stopy"
 msgid "Inches"
 msgstr "Palce"
 
-#: ac3filter_dlg.cpp:972
+#. TRANSLATORS: Main
+#: ac3filter_dlg.cpp:317
+msgid "IDD_MAIN"
+msgstr ""
+
+#. TRANSLATORS: Mixer
+#: ac3filter_dlg.cpp:324
+msgid "IDD_MIXER"
+msgstr ""
+
+#. TRANSLATORS: Gains
+#: ac3filter_dlg.cpp:331
+msgid "IDD_GAINS"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+#: ac3filter_dlg.cpp:338
+msgid "IDD_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: System
+#: ac3filter_dlg.cpp:345
+msgid "IDD_SYSTEM"
+msgstr ""
+
+#. TRANSLATORS: About
+#: ac3filter_dlg.cpp:353
+msgid "IDD_ABOUT"
+msgstr ""
+
+#: ac3filter_dlg.cpp:999
 #, c-format
 msgid "%s %s %iHz"
 msgstr "%s %s %iHz"
 
-#: ac3filter_dlg.cpp:985
+#: ac3filter_dlg.cpp:1012
 msgid "Use SPDIF"
 msgstr "Použiť SPDIF"
 
-#: ac3filter_dlg.cpp:989
+#: ac3filter_dlg.cpp:1016
 msgid "Use SPDIF (disabled)"
 msgstr "Použiť SPDIF (vypnutý)"
 
-#: ac3filter_dlg.cpp:993
+#: ac3filter_dlg.cpp:1020
 msgid "Use SPDIF (passthrough)"
 msgstr "Použiť SPDIF (priebežný)"
 
-#: ac3filter_dlg.cpp:997
+#: ac3filter_dlg.cpp:1024
 msgid "Use SPDIF (AC3 encode)"
 msgstr "Použiť SPDIF (AC3 výstup)"
 
-#: ac3filter_dlg.cpp:1001
+#: ac3filter_dlg.cpp:1028
 msgid "Use SPDIF (Unknown)"
 msgstr "Použiť SPDIF (neznámy)"
 
-#: ac3filter_dlg.cpp:1058
+#: ac3filter_dlg.cpp:1085
 #, c-format
 msgid ""
-"Input\tmean: %ims\tstddev: %ims\r\n"
+"Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
-"Vstup\tmean: %ims\tstddev: %ims\r\n"
-"Výstup\tmean: %ims\tstddev: %ims"
 
-#: ac3filter_dlg.cpp:2025
+#: ac3filter_dlg.cpp:1496
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:1496 ac3filter_dlg.cpp:1590
+msgid "Dangerous option!"
+msgstr ""
+
+#: ac3filter_dlg.cpp:1590
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:2057
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Naozaj chcete zmazať '%s' nastavenie?"
 
-#: ac3filter_dlg.cpp:2026
-#: ac3filter_dlg.cpp:2115
+#: ac3filter_dlg.cpp:2058 ac3filter_dlg.cpp:2147
 msgid "Delete confirmation"
 msgstr "Potvrdiť zmazanie"
 
-#: ac3filter_dlg.cpp:2114
+#: ac3filter_dlg.cpp:2146
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "Naozaj chcete zmazať '%s' maticu?"
 
+#~ msgid ""
+#~ "Input\tmean: %ims\tstddev: %ims\n"
+#~ "Output\tmean: %ims\tstddev: %ims"
+#~ msgstr ""
+#~ "Vstup\tmean: %ims\tstddev: %ims\n"
+#~ "Výstup\tmean: %ims\tstddev: %ims"

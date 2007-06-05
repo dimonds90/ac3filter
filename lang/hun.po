@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-06 00:49+0400\n"
 "PO-Revision-Date: 2007-06-01 16:03+0100\n"
 "Last-Translator: Sziládi Zsolt <sadistzs@freemail.hu>\n"
 "Language-Team: \n"
@@ -29,12 +30,19 @@ msgstr "Mi ez?"
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 #: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
-msgstr "Az AC3Filter egy magas minőségű ingyenes DirectShow szűrő a valós idejű hang dekódolásához és feldolgozásához. Széles funkcionalitás és beállítási lehetőségek jellemzik. Többcsatornás és digitális (SPDIF) kimeneteket támogat."
+msgstr ""
+"Az AC3Filter egy magas minőségű ingyenes DirectShow szűrő a valós idejű hang "
+"dekódolásához és feldolgozásához. Széles funkcionalitás és beállítási "
+"lehetőségek jellemzik. Többcsatornás és digitális (SPDIF) kimeneteket "
+"támogat."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 #: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
-msgstr "A legtöbb multimédiás lejátszó automatikusan használja. Az AC3 vagy DTS hangsávokkal rendelkező AVI fájlok lejátszásához szükséges. DVD lejátszásához is használható."
+msgstr ""
+"A legtöbb multimédiás lejátszó automatikusan használja. Az AC3 vagy DTS "
+"hangsávokkal rendelkező AVI fájlok lejátszásához szükséges. DVD "
+"lejátszásához is használható."
 
 #. TRANSLATORS: AGC
 #: dialog_controls.h:35
@@ -54,7 +62,11 @@ msgstr "Kapcsolat a szerzővel"
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 #: dialog_controls.h:45
 msgid "IDC_LBL_CONTACT"
-msgstr "Kérlek, jelentsd az összes programhibát. Ne habozz e-mail-t írni a szerzőnek ötletekkel, kritikával, stb. kapcsolatban. Kérlek, használj angol vagy orosz nyelvet. A tárgy tartalmazza az 'AC3Filter' szót (az automatikus szűrés miatt)."
+msgstr ""
+"Kérlek, jelentsd az összes programhibát. Ne habozz e-mail-t írni a szerzőnek "
+"ötletekkel, kritikával, stb. kapcsolatban. Kérlek, használj angol vagy orosz "
+"nyelvet. A tárgy tartalmazza az 'AC3Filter' szót (az automatikus szűrés "
+"miatt)."
 
 #. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
 #: dialog_controls.h:47
@@ -359,7 +371,9 @@ msgstr "Licenc"
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 #: dialog_controls.h:245
 msgid "IDC_LBL_LICENSE"
-msgstr "Ez a program egy ingyenes szoftver és a GNU Általános Nyilvános Licenc 2-es verziójának kikötései szerint terjeszthető."
+msgstr ""
+"Ez a program egy ingyenes szoftver és a GNU Általános Nyilvános Licenc 2-es "
+"verziójának kikötései szerint terjeszthető."
 
 #. TRANSLATORS: Mixing matrix
 #: dialog_controls.h:249
@@ -676,12 +690,12 @@ msgstr "Aktuális vibrálás:"
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "Időeltolás (ms):"
 
-#. TRANSLATORS: -0.5s
+#. TRANSLATORS: <- fix sound lag
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr "-0.5s"
 
-#. TRANSLATORS: +0.5s
+#. TRANSLATORS: fix sound haste ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr "+0.5s"
@@ -804,52 +818,101 @@ msgstr "Láb"
 msgid "Inches"
 msgstr "Hüvelyk"
 
-#: ac3filter_dlg.cpp:972
+#. TRANSLATORS: Main
+#: ac3filter_dlg.cpp:317
+msgid "IDD_MAIN"
+msgstr ""
+
+#. TRANSLATORS: Mixer
+#: ac3filter_dlg.cpp:324
+msgid "IDD_MIXER"
+msgstr ""
+
+#. TRANSLATORS: Gains
+#: ac3filter_dlg.cpp:331
+msgid "IDD_GAINS"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+#: ac3filter_dlg.cpp:338
+msgid "IDD_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: System
+#: ac3filter_dlg.cpp:345
+msgid "IDD_SYSTEM"
+msgstr ""
+
+#. TRANSLATORS: About
+#: ac3filter_dlg.cpp:353
+msgid "IDD_ABOUT"
+msgstr ""
+
+#: ac3filter_dlg.cpp:999
 #, c-format
 msgid "%s %s %iHz"
 msgstr "%s %s %iHz"
 
-#: ac3filter_dlg.cpp:985
+#: ac3filter_dlg.cpp:1012
 msgid "Use SPDIF"
 msgstr "SPDIF használata"
 
-#: ac3filter_dlg.cpp:989
+#: ac3filter_dlg.cpp:1016
 msgid "Use SPDIF (disabled)"
 msgstr "SPDIF (letiltott) használata"
 
-#: ac3filter_dlg.cpp:993
+#: ac3filter_dlg.cpp:1020
 msgid "Use SPDIF (passthrough)"
 msgstr "SPDIF (átviteles) használata"
 
-#: ac3filter_dlg.cpp:997
+#: ac3filter_dlg.cpp:1024
 msgid "Use SPDIF (AC3 encode)"
 msgstr "SPDIF (AC3 kódolás) használata"
 
-#: ac3filter_dlg.cpp:1001
+#: ac3filter_dlg.cpp:1028
 msgid "Use SPDIF (Unknown)"
 msgstr "SPDIF (Ismeretlen) használata"
 
-#: ac3filter_dlg.cpp:1058
+#: ac3filter_dlg.cpp:1085
 #, c-format
 msgid ""
-"Input\tmean: %ims\tstddev: %ims\r\n"
+"Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
-"Bemeneti\tátlag: %ims\tstddev: %ims\r\n"
-"Kimeneti\tátlag: %ims\tstddev: %ims"
 
-#: ac3filter_dlg.cpp:2025
+#: ac3filter_dlg.cpp:1496
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:1496 ac3filter_dlg.cpp:1590
+msgid "Dangerous option!"
+msgstr ""
+
+#: ac3filter_dlg.cpp:1590
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:2057
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Biztos, hogy törlöd a(z) '%s' előbeállítást?"
 
-#: ac3filter_dlg.cpp:2026
-#: ac3filter_dlg.cpp:2115
+#: ac3filter_dlg.cpp:2058 ac3filter_dlg.cpp:2147
 msgid "Delete confirmation"
 msgstr "Törlés megerősítése"
 
-#: ac3filter_dlg.cpp:2114
+#: ac3filter_dlg.cpp:2146
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "Biztos, hogy törlöd a(z) '%s' mátrixot?"
 
+#~ msgid ""
+#~ "Input\tmean: %ims\tstddev: %ims\n"
+#~ "Output\tmean: %ims\tstddev: %ims"
+#~ msgstr ""
+#~ "Bemeneti\tátlag: %ims\tstddev: %ims\n"
+#~ "Kimeneti\tátlag: %ims\tstddev: %ims"
