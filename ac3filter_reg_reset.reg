@@ -70,7 +70,7 @@ REGEDIT4
 "drc"=dword:00000000
 "drc_power"="0.000000"
 "bass_redir"=dword:00000000
-"bass_freq"=dword:00000000
+"bass_freq"=dword:00000078
 "gain_input_L"="1.000000"
 "gain_input_C"="1.000000"
 "gain_input_R"="1.000000"
@@ -115,7 +115,7 @@ REGEDIT4
 "drc"=dword:00000000
 "drc_power"="0.000000"
 "bass_redir"=dword:00000000
-"bass_freq"=dword:00000000
+"bass_freq"=dword:00000078
 "gain_input_L"="1.000000"
 "gain_input_C"="1.000000"
 "gain_input_R"="1.000000"
