@@ -454,10 +454,10 @@ static const ControlDesc dialog_controls[] =
   { IDC_LBL_JITTER, N_("IDC_LBL_JITTER"), "Current jitter:", "" },
   /* TRANSLATORS: Time shift (ms): */
   { IDC_LBL_TIME_SHIFT, N_("IDC_LBL_TIME_SHIFT"), "Time shift (ms):", "" },
-  /* TRANSLATORS: <- fix sound lag */
-  { IDC_LBL_TIME_SHIFT_MINUS, N_("IDC_LBL_TIME_SHIFT_MINUS"), "<- fix sound lag", "" },
-  /* TRANSLATORS: fix sound haste -> */
-  { IDC_LBL_TIME_SHIFT_PLUS, N_("IDC_LBL_TIME_SHIFT_PLUS"), "fix sound haste ->", "" },
+  /* TRANSLATORS: <- sound lags */
+  { IDC_LBL_TIME_SHIFT_MINUS, N_("IDC_LBL_TIME_SHIFT_MINUS"), "<- sound lags", "" },
+  /* TRANSLATORS: sound hastes -> */
+  { IDC_LBL_TIME_SHIFT_PLUS, N_("IDC_LBL_TIME_SHIFT_PLUS"), "sound hastes ->", "" },
   { IDC_SLI_TIME_SHIFT, "IDC_SLI_TIME_SHIFT", "", "" },
 
   // Localization
