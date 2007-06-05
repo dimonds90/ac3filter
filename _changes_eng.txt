@@ -1,3 +1,12 @@
+v1.41b - 06.06.2007
+  + Tab labels are now translatable
+  + All languages available so far integrated
+  * Avoid poEdit '\r' warning when creating a translation file
+  + Warning messages about dangerous options
+  ! Loud noise was possible after output format switch or SPDIF state change
+  ! Audio skips problem fixed once more
+
+
 v1.40b - 30.05.2007
   + Localization support!
   + Localization procedure is easy and can by done by everyone!
