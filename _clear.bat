@@ -26,3 +26,7 @@ cd ..
 cd ac3config
 call _clear.bat
 cd ..
+
+cd ACM
+call _clear.bat
+cd ..

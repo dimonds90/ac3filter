@@ -16,46 +16,50 @@ InstallColors {000000 C0C0C0}
 InstProgressFlags "smooth"
 ShowInstDetails "show"
 
-
 Page directory
+Page components
 Page instfiles
 UninstPage uninstConfirm
 UninstPage instfiles
 
 
-Section "AC3Filter"
+
+Section "-Install"
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Installer stuff
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
   SetOutPath $INSTDIR
 
   ;; Remember where we're installed
   WriteRegStr HKCU SOFTWARE\AC3Filter "Install_Dir" "$INSTDIR"
-
-  ;; Languages repository
-  WriteRegStr HKCU SOFTWARE\AC3Filter "Lang_Dir" "$INSTDIR\Lang"
 
   ;; Make an uninstaller
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AC3Filter" "DisplayName" "AC3Filter (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AC3Filter" "UninstallString" "$INSTDIR\uninstall.exe"
   WriteUninstaller "uninstall.exe"
 
+  ;; Delete shit from old versions
+  DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls" "AC3Filter"
+  Delete "$SYSDIR\ac3filter.ax"
+  Delete "$SYSDIR\ac3filter.cpl"
+
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Common stuff
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Languages repository
+  WriteRegStr HKCU SOFTWARE\AC3Filter "Lang_Dir" "$INSTDIR\Lang"
+
   ;; Copy Files
   File /r "${SOURCE_DIR}\*.*"
-  	
-  ;; Install presets
-  ExecWait 'regedit /s "$INSTDIR\ac3filter_reg_presets.reg"'
-  ExecWait 'regedit /s "$INSTDIR\ac3filter_reg_reset.reg"'
-
-  ;; Import registry keys for DirectSound/WaveOut
-
-  ;; Register filter
-  UnRegDLL "$INSTDIR\ac3filter.ax"
-  RegDll   "$INSTDIR\ac3filter.ax"
 
   ;; Create Start Menu shortcuts
   CreateDirectory "$SMPROGRAMS\AC3Filter"
-
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter Config.lnk"     "$INSTDIR\ac3config.exe"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\Reset to Defaults.lnk"    "$INSTDIR\ac3filter_reg_reset.reg"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\Online Documentation.lnk" "http://ac3filter.net"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter home.lnk" "http://ac3filter.net"
 
   CreateDirectory "$SMPROGRAMS\AC3Filter\English docs"
   CreateShortCut  "$SMPROGRAMS\AC3Filter\English docs\AC3Filter User's Manual.lnk"    "$INSTDIR\doc\ac3filter_eng.pdf"
@@ -71,17 +75,109 @@ Section "AC3Filter"
   CreateShortCut  "$SMPROGRAMS\AC3Filter\Change Log (Russian).lnk" "$INSTDIR\_changes_rus.txt"
   CreateShortCut  "$SMPROGRAMS\AC3Filter\Uninstall.lnk"            "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
 
+SectionEnd
+
+
+
+Section "AC3Filter DirectShow"
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Install DirectShow filter
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Register filter
+  UnRegDLL "$INSTDIR\ac3filter.ax"
+  RegDll   "$INSTDIR\ac3filter.ax"
+
+  ;; Install presets
+  ExecWait 'regedit /s "$INSTDIR\ac3filter_reg_presets.reg"'
+  ExecWait 'regedit /s "$INSTDIR\ac3filter_reg_reset.reg"'
+
+  ;; Import registry keys for DirectSound/WaveOut
+
+  ;; Start Menu shortcuts
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter Config.lnk"     "$INSTDIR\ac3config.exe"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\Reset to Defaults.lnk"    "$INSTDIR\ac3filter_reg_reset.reg"
+
+SectionEnd
+
+
+
+Section "AC3Filter ACM"
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Install ACM codec
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Copy binary to sysdir
+  CopyFiles /SILENT "$INSTDIR\ac3filter.acm" "$SYSDIR\ac3filter.acm"
+
+  ;; Register ACM codec
+  ReadEnvStr $1 "OS"
+  StrCmp $1 "Windows_NT" RegNT Reg9x
+
+RegNT:
+  DetailPrint "Registering for Windows NT/2k/XP"
+  WriteRegStr HKLM "Software\Microsoft\Windows NT\CurrentVersion\Drivers32" "msacm.ac3filter" "ac3filter.acm"
+  WriteRegStr HKLM "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc" "ac3filter.acm" "AC3Filter ACM codec"
+  goto Finish
+
+Reg9x:
+  DetailPrint "Registering for Windows 9x"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\Control\MediaResources\msacm\msacm.ac3filter" "Description"  "AC3Filter ACM codec"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\Control\MediaResources\msacm\msacm.ac3filter" "Driver"       "ac3filter.acm"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\Control\MediaResources\msacm\msacm.ac3filter" "FriendlyName" "AC3Filter ACM codec"
+  goto Finish
+
+Finish:
+
+SectionEnd
+
+
+
+Section "Uninstall"
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Installer stuff
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  DeleteRegKey   HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AC3Filter"
+  DeleteRegKey   HKCU "Software\AC3Filter"
+
   ;; Delete shit from old versions
   DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls" "AC3Filter"
   Delete "$SYSDIR\ac3filter.ax"
   Delete "$SYSDIR\ac3filter.cpl"
-SectionEnd
 
-Section "Uninstall"
-  DeleteRegKey   HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AC3Filter"
-  DeleteRegKey   HKCU "Software\AC3Filter"
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Uninstall DirectShow filter
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   UnRegDLL "$INSTDIR\ac3filter.ax"
+
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Uninstall ACM codec
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Delete binary from sysdir (may require rebooting)
+  Delete /REBOOTOK "$SYSDIR\ac3filter.acm"
+
+  ;; Unregister for Win9x
+  DeleteRegKey   HKLM "SYSTEM\CurrentControlSet\Control\MediaResources\msacm\msacm.ac3filter"
+
+  ;; Unregister for WinNT 
+  DeleteRegValue HKLM "Software\Microsoft\Windows NT\CurrentVersion\Drivers32"    "msacm.ac3filter"
+  DeleteRegValue HKLM "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc" "ac3filter.acm"
+
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Uninstall common stuff
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   Delete "$SMPROGRAMS\AC3Filter\English docs\*.*"
   Delete "$SMPROGRAMS\AC3Filter\Russian docs\*.*"
@@ -97,8 +193,5 @@ Section "Uninstall"
   Delete "$INSTDIR\*.*"
   RMDir  "$INSTDIR"
 
-  ;; Delete shit from old versions
-  DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls" "AC3Filter"
-  Delete "$SYSDIR\ac3filter.ax"
-  Delete "$SYSDIR\ac3filter.cpl"
+
 SectionEnd

@@ -46,11 +46,8 @@ sub set_ver
   my $ver = shift;
   open VER, "> ac3filter_ver.h";
   printf VER <<EOVER;
-#ifndef AC3FILTER_VER_H
-#define AC3FILTER_VER_H
-
+#ifndef AC3FILTER_VER
 #define AC3FILTER_VER "$ver"
-
 #endif
 EOVER
   close VER;
@@ -60,7 +57,8 @@ sub build_project
 {
   my $dir = shift;
   my $project = shift;
-  system("msdev $dir\\$project.dsp /MAKE \"$project - Win32 Release\" /REBUILD")
+  my $build = shift | 'Release';
+  system("msdev $dir\\$project.dsp /MAKE \"$project - Win32 $build\" /REBUILD")
     && die "failed!!!";
   `_clear.bat`;
 }
@@ -73,8 +71,9 @@ sub build_project
 print "Building project...\n";
 
 set_ver($ver);
-build_project('chineese_patch', 'chineese_patch');
-build_project('ac3config', 'ac3config');
+build_project('chineese_patch', 'chineese_patch', 'Release');
+build_project('ac3config', 'ac3config', 'Release');
+build_project('ACM', 'ac3filter_acm', 'Release Libc');
 build_project('.', 'ac3filter');
 `_clear.bat`;
 set_ver("internal");
@@ -91,6 +90,7 @@ printf "Building package...\n";
 # binaries
 `copy chineese_patch\\release\\chineese_patch.exe $package\\dialog_patch.exe`;
 `copy ac3config\\release\\ac3config.exe $package\\ac3config.exe`;
+`copy ACM\\release_libc\\ac3filter.acm $package`;
 `copy release\\ac3filter.ax $package`;
 
 # manifests

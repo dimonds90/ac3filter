@@ -1,4 +1,5 @@
-v1.41b - 06.06.2007
+v1.45b - 07.06.2007
+  + ACM codec is now included into the package
   + Tab labels are now translatable
   + All languages available so far integrated
   * Avoid poEdit '\r' warning when creating a translation file
