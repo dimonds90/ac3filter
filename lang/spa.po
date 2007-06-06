@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-06 00:49+0400\n"
+"POT-Creation-Date: 2007-06-07 02:48+0400\n"
 "PO-Revision-Date: 2007-06-04 20:24+0100\n"
 "Last-Translator: Ferny <mundodivx@gmail.com>\n"
 "Language-Team: MundoDivX.com <mundodivx@gmail.com>\n"
@@ -689,12 +689,12 @@ msgstr "Desviación actual:"
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "Desplazamiento temporal (ms):"
 
-#. TRANSLATORS: <- fix sound lag
+#. TRANSLATORS: <- sound lags
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr "-0.5s"
 
-#. TRANSLATORS: fix sound haste ->
+#. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr "+0.5s"
@@ -824,18 +824,21 @@ msgstr ""
 
 #. TRANSLATORS: Mixer
 #: ac3filter_dlg.cpp:324
+#, fuzzy
 msgid "IDD_MIXER"
-msgstr ""
+msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 por Alexander Vigovsky"
 
 #. TRANSLATORS: Gains
 #: ac3filter_dlg.cpp:331
+#, fuzzy
 msgid "IDD_GAINS"
-msgstr ""
+msgstr "Ganancias"
 
 #. TRANSLATORS: SPDIF
 #: ac3filter_dlg.cpp:338
+#, fuzzy
 msgid "IDD_SPDIF"
-msgstr ""
+msgstr "SPDIF"
 
 #. TRANSLATORS: System
 #: ac3filter_dlg.cpp:345
@@ -844,8 +847,9 @@ msgstr ""
 
 #. TRANSLATORS: About
 #: ac3filter_dlg.cpp:353
+#, fuzzy
 msgid "IDD_ABOUT"
-msgstr ""
+msgstr "¿Qué es?"
 
 #: ac3filter_dlg.cpp:999
 #, c-format
@@ -878,6 +882,8 @@ msgid ""
 "Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
+"Entrada\tmedia: %ims\tdesv. típica: %ims\n"
+"Salida\tmedia: %ims\tdesv. típica: %ims"
 
 #: ac3filter_dlg.cpp:1496
 msgid ""
@@ -908,10 +914,3 @@ msgstr "Confirmar eliminación"
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "¿Realmente desea borrar la matriz '%s'?"
-
-#~ msgid ""
-#~ "Input\tmean: %ims\tstddev: %ims\n"
-#~ "Output\tmean: %ims\tstddev: %ims"
-#~ msgstr ""
-#~ "Entrada\tmedia: %ims\tdesv. típica: %ims\n"
-#~ "Salida\tmedia: %ims\tdesv. típica: %ims"

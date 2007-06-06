@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-06 00:49+0400\n"
+"POT-Creation-Date: 2007-06-07 02:48+0400\n"
 "PO-Revision-Date: 2007-06-02 12:54+0800\n"
 "Last-Translator: FSYX <fsyx@cq172.com>\n"
 "Language-Team: \n"
@@ -689,12 +689,12 @@ msgstr "当前 jitter:"
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "变速时间(毫秒):"
 
-#. TRANSLATORS: <- fix sound lag
+#. TRANSLATORS: <- sound lags
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr ""
 
-#. TRANSLATORS: fix sound haste ->
+#. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr ""
@@ -829,13 +829,15 @@ msgstr ""
 
 #. TRANSLATORS: Gains
 #: ac3filter_dlg.cpp:331
+#, fuzzy
 msgid "IDD_GAINS"
-msgstr ""
+msgstr "放大"
 
 #. TRANSLATORS: SPDIF
 #: ac3filter_dlg.cpp:338
+#, fuzzy
 msgid "IDD_SPDIF"
-msgstr ""
+msgstr "SPDIF 选项"
 
 #. TRANSLATORS: System
 #: ac3filter_dlg.cpp:345
@@ -844,8 +846,9 @@ msgstr ""
 
 #. TRANSLATORS: About
 #: ac3filter_dlg.cpp:353
+#, fuzzy
 msgid "IDD_ABOUT"
-msgstr ""
+msgstr "这是个用来干什么的软件?"
 
 #: ac3filter_dlg.cpp:999
 #, c-format
@@ -878,6 +881,8 @@ msgid ""
 "Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
+"输入\tmean: %i毫秒\tstddev: %i毫秒\n"
+"输出\tmean: %i毫秒\tstddev: %i毫秒"
 
 #: ac3filter_dlg.cpp:1496
 msgid ""
@@ -908,10 +913,3 @@ msgstr "删除确认"
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "你确认要删除矩阵方案 '%s' 吗?"
-
-#~ msgid ""
-#~ "Input\tmean: %ims\tstddev: %ims\n"
-#~ "Output\tmean: %ims\tstddev: %ims"
-#~ msgstr ""
-#~ "输入\tmean: %i毫秒\tstddev: %i毫秒\n"
-#~ "输出\tmean: %i毫秒\tstddev: %i毫秒"

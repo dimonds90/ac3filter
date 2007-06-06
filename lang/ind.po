@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-06 01:53+0400\n"
+"POT-Creation-Date: 2007-06-07 02:48+0400\n"
 "PO-Revision-Date: 2007-06-04 16:05+0700\n"
 "Last-Translator: Nicholas N.E <blank2k@yahoo.com>\n"
 "Language-Team: \n"
@@ -825,8 +825,9 @@ msgstr ""
 
 #. TRANSLATORS: Mixer
 #: ac3filter_dlg.cpp:324
+#, fuzzy
 msgid "IDD_MIXER"
-msgstr ""
+msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"
 
 #. TRANSLATORS: Gains
 #: ac3filter_dlg.cpp:331
@@ -835,8 +836,9 @@ msgstr ""
 
 #. TRANSLATORS: SPDIF
 #: ac3filter_dlg.cpp:338
+#, fuzzy
 msgid "IDD_SPDIF"
-msgstr ""
+msgstr "Pilihan dalam mode SPDIF"
 
 #. TRANSLATORS: System
 #: ac3filter_dlg.cpp:345
@@ -845,8 +847,9 @@ msgstr ""
 
 #. TRANSLATORS: About
 #: ac3filter_dlg.cpp:353
+#, fuzzy
 msgid "IDD_ABOUT"
-msgstr ""
+msgstr "Apakah AC3Filter itu ?"
 
 #: ac3filter_dlg.cpp:999
 #, c-format

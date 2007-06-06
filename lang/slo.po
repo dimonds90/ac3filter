@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-06 00:49+0400\n"
+"POT-Creation-Date: 2007-06-07 02:48+0400\n"
 "PO-Revision-Date: 2007-05-31 13:18+0100\n"
 "Last-Translator: Artam <peterki@hotmail.com>\n"
 "Language-Team: \n"
@@ -688,12 +688,12 @@ msgstr "Aktuálny jitter:"
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "Časový posun (ms):"
 
-#. TRANSLATORS: <- fix sound lag
+#. TRANSLATORS: <- sound lags
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr "-0.5s"
 
-#. TRANSLATORS: fix sound haste ->
+#. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr "+0.5s"
@@ -823,18 +823,21 @@ msgstr ""
 
 #. TRANSLATORS: Mixer
 #: ac3filter_dlg.cpp:324
+#, fuzzy
 msgid "IDD_MIXER"
-msgstr ""
+msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"
 
 #. TRANSLATORS: Gains
 #: ac3filter_dlg.cpp:331
+#, fuzzy
 msgid "IDD_GAINS"
-msgstr ""
+msgstr "Zisky"
 
 #. TRANSLATORS: SPDIF
 #: ac3filter_dlg.cpp:338
+#, fuzzy
 msgid "IDD_SPDIF"
-msgstr ""
+msgstr "SPDIF"
 
 #. TRANSLATORS: System
 #: ac3filter_dlg.cpp:345
@@ -843,8 +846,9 @@ msgstr ""
 
 #. TRANSLATORS: About
 #: ac3filter_dlg.cpp:353
+#, fuzzy
 msgid "IDD_ABOUT"
-msgstr ""
+msgstr "Čo je to?"
 
 #: ac3filter_dlg.cpp:999
 #, c-format
@@ -877,6 +881,8 @@ msgid ""
 "Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
+"Vstup\tmean: %ims\tstddev: %ims\n"
+"Výstup\tmean: %ims\tstddev: %ims"
 
 #: ac3filter_dlg.cpp:1496
 msgid ""
@@ -907,10 +913,3 @@ msgstr "Potvrdiť zmazanie"
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "Naozaj chcete zmazať '%s' maticu?"
-
-#~ msgid ""
-#~ "Input\tmean: %ims\tstddev: %ims\n"
-#~ "Output\tmean: %ims\tstddev: %ims"
-#~ msgstr ""
-#~ "Vstup\tmean: %ims\tstddev: %ims\n"
-#~ "Výstup\tmean: %ims\tstddev: %ims"
