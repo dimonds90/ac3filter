@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-07 04:21+0400\n"
 "PO-Revision-Date: 2007-06-06 23:21+0100\n"
 "Last-Translator: GEKA2\n"
 "Language-Team: \n"
@@ -29,12 +30,18 @@ msgstr "A Propos..."
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 #: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filterest un filtre DirectShow de haute qualité, créé pour le décodage et la gestion en temps réel du son. Il intègre de nombreux paramètres et fonctionalités. Il supporte les sorties multi-canaux digital (SPDIF)."
+msgstr ""
+"AC3Filterest un filtre DirectShow de haute qualité, créé pour le décodage et "
+"la gestion en temps réel du son. Il intègre de nombreux paramètres et "
+"fonctionalités. Il supporte les sorties multi-canaux digital (SPDIF)."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 #: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
-msgstr "Il est utilisé automatiquement par la majorité des applications multimedia. Requis pour jouer les AVI contenant des pistes audios AC3 ou DTS. Il peut aussi être utilisé pour jouer les DVD."
+msgstr ""
+"Il est utilisé automatiquement par la majorité des applications multimedia. "
+"Requis pour jouer les AVI contenant des pistes audios AC3 ou DTS. Il peut "
+"aussi être utilisé pour jouer les DVD."
 
 #. TRANSLATORS: AGC
 #: dialog_controls.h:35
@@ -54,7 +61,11 @@ msgstr "Contacter l'auteur"
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 #: dialog_controls.h:45
 msgid "IDC_LBL_CONTACT"
-msgstr "Merci de faire un rapport en cas de bogues. N'hésitez pas à contacter l'auteur avec vos idées, critiques, etc. Merci de rédiger vos emails en Anglais ou en Russe uniquement. Le sujet devra contenir le mot 'AC3Filter' (requis pour le filtrage automatique)."
+msgstr ""
+"Merci de faire un rapport en cas de bogues. N'hésitez pas à contacter "
+"l'auteur avec vos idées, critiques, etc. Merci de rédiger vos emails en "
+"Anglais ou en Russe uniquement. Le sujet devra contenir le mot "
+"'AC3Filter' (requis pour le filtrage automatique)."
 
 #. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
 #: dialog_controls.h:47
@@ -359,7 +370,9 @@ msgstr "License"
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 #: dialog_controls.h:245
 msgid "IDC_LBL_LICENSE"
-msgstr "Ce Logiciel est gratuit et peut être distribué selon les termes de la licence GNU General Public License version 2."
+msgstr ""
+"Ce Logiciel est gratuit et peut être distribué selon les termes de la "
+"licence GNU General Public License version 2."
 
 #. TRANSLATORS: Mixing matrix
 #: dialog_controls.h:249
@@ -676,12 +689,12 @@ msgstr "Jitter courant:"
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "Time shift (ms):"
 
-#. TRANSLATORS: -0.5s
+#. TRANSLATORS: <- sound lags
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr "-0,5s"
 
-#. TRANSLATORS: +0.5s
+#. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr "+0,5s"
@@ -804,50 +817,98 @@ msgstr ""
 msgid "Inches"
 msgstr ""
 
-#: ac3filter_dlg.cpp:972
+#. TRANSLATORS: Main
+#: ac3filter_dlg.cpp:317
+msgid "IDD_MAIN"
+msgstr ""
+
+#. TRANSLATORS: Mixer
+#: ac3filter_dlg.cpp:324
+#, fuzzy
+msgid "IDD_MIXER"
+msgstr "AC3Filter version %s Copyright (c) 2002-2007 par Alexander Vigovsky"
+
+#. TRANSLATORS: Gains
+#: ac3filter_dlg.cpp:331
+#, fuzzy
+msgid "IDD_GAINS"
+msgstr "Gains"
+
+#. TRANSLATORS: SPDIF
+#: ac3filter_dlg.cpp:338
+#, fuzzy
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+#: ac3filter_dlg.cpp:345
+msgid "IDD_SYSTEM"
+msgstr ""
+
+#. TRANSLATORS: About
+#: ac3filter_dlg.cpp:353
+#, fuzzy
+msgid "IDD_ABOUT"
+msgstr "A Propos..."
+
+#: ac3filter_dlg.cpp:999
 #, c-format
 msgid "%s %s %iHz"
 msgstr ""
 
-#: ac3filter_dlg.cpp:985
+#: ac3filter_dlg.cpp:1012
 msgid "Use SPDIF"
 msgstr ""
 
-#: ac3filter_dlg.cpp:989
+#: ac3filter_dlg.cpp:1016
 msgid "Use SPDIF (disabled)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:993
+#: ac3filter_dlg.cpp:1020
 msgid "Use SPDIF (passthrough)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:997
+#: ac3filter_dlg.cpp:1024
 msgid "Use SPDIF (AC3 encode)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1001
+#: ac3filter_dlg.cpp:1028
 msgid "Use SPDIF (Unknown)"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1058
+#: ac3filter_dlg.cpp:1085
 #, c-format
 msgid ""
-"Input\tmean: %ims\tstddev: %ims\r\n"
+"Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
 
-#: ac3filter_dlg.cpp:2025
+#: ac3filter_dlg.cpp:1496
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:1496 ac3filter_dlg.cpp:1590
+msgid "Dangerous option!"
+msgstr ""
+
+#: ac3filter_dlg.cpp:1590
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+
+#: ac3filter_dlg.cpp:2057
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr ""
 
-#: ac3filter_dlg.cpp:2026
-#: ac3filter_dlg.cpp:2115
+#: ac3filter_dlg.cpp:2058 ac3filter_dlg.cpp:2147
 msgid "Delete confirmation"
 msgstr ""
 
-#: ac3filter_dlg.cpp:2114
+#: ac3filter_dlg.cpp:2146
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr ""
-
