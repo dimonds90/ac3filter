@@ -11,7 +11,7 @@ SetCompressor lzma
 Icon "ac3filter.ico"
 UninstallIcon "ac3filter.ico"
 
-InstallDir $PROGRAMFILES\AC3Filter
+InstallDir $PROGRAMFILES
 InstallDirRegKey HKLM "Software\AC3Filter" "Install_Dir"
 
 InstallColors {000000 C0C0C0}
