@@ -692,12 +692,12 @@ msgstr "Time shift (ms):"
 #. TRANSLATORS: <- sound lags
 #: dialog_controls.h:458
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
-msgstr "-0,5s"
+msgstr ""
 
 #. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:460
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
-msgstr "+0,5s"
+msgstr ""
 
 #. TRANSLATORS: Localization
 #: dialog_controls.h:465
