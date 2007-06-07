@@ -5,6 +5,8 @@
 OutFile "${SETUP_FILE}"
 Name "AC3Filter"
 CRCCheck on
+SetCompressor lzma
+
 
 Icon "ac3filter.ico"
 UninstallIcon "ac3filter.ico"
@@ -30,15 +32,14 @@ Section "-Install"
   ;; Installer stuff
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  SetOutPath $INSTDIR
-
   ;; Remember where we're installed
   WriteRegStr HKCU SOFTWARE\AC3Filter "Install_Dir" "$INSTDIR"
 
   ;; Make an uninstaller
+  SetOutPath $INSTDIR
+  WriteUninstaller "uninstall.exe"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AC3Filter" "DisplayName" "AC3Filter (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\AC3Filter" "UninstallString" "$INSTDIR\uninstall.exe"
-  WriteUninstaller "uninstall.exe"
 
   ;; Delete shit from old versions
   DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls" "AC3Filter"
@@ -54,31 +55,40 @@ Section "-Install"
   ;; Languages repository
   WriteRegStr HKCU SOFTWARE\AC3Filter "Lang_Dir" "$INSTDIR\Lang"
 
-  ;; Copy Files
-  File /r "${SOURCE_DIR}\*.*"
+  ;; Base Files
+  SetOutPath $INSTDIR
+  File "${SOURCE_DIR}\*.*"
 
   ;; Create Start Menu shortcuts
   CreateDirectory "$SMPROGRAMS\AC3Filter"
   CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter home.lnk" "http://ac3filter.net"
 
-  CreateDirectory "$SMPROGRAMS\AC3Filter\English docs"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\English docs\AC3Filter User's Manual.lnk"    "$INSTDIR\doc\ac3filter_eng.pdf"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\English docs\AC3Filter & SPDIF.lnk"          "$INSTDIR\doc\spdif_eng.pdf"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\English docs\Loudness and dynamic range.lnk" "$INSTDIR\doc\loudness_eng.pdf"
-
-  CreateDirectory "$SMPROGRAMS\AC3Filter\Russian docs"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\Russian docs\AC3Filter Руководство пользователя.lnk" "$INSTDIR\doc\ac3filter_rus.pdf"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\Russian docs\AC3Filter & SPDIF.lnk"                  "$INSTDIR\doc\spdif_rus.pdf"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\Russian docs\Громкость и динамический диапазон.lnk"  "$INSTDIR\doc\loudness_rus.pdf"
-
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\Change Log (English).lnk" "$INSTDIR\_changes_eng.txt"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\Change Log (Russian).lnk" "$INSTDIR\_changes_rus.txt"
-  CreateShortCut  "$SMPROGRAMS\AC3Filter\Uninstall.lnk"            "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
-
 SectionEnd
 
 
 
+SectionGroup "Documentation"
+Section "English"
+  SetOutPath $INSTDIR\doc
+  File "${SOURCE_DIR}\doc\*eng.*"
+  CreateDirectory "$SMPROGRAMS\AC3Filter\English docs"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\English docs\AC3Filter User's Manual.lnk"    "$INSTDIR\doc\ac3filter_eng.pdf"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\English docs\AC3Filter & SPDIF.lnk"          "$INSTDIR\doc\spdif_eng.pdf"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\English docs\Loudness and dynamic range.lnk" "$INSTDIR\doc\loudness_eng.pdf"
+SectionEnd
+Section "Russian"
+  SetOutPath $INSTDIR\doc
+  File "${SOURCE_DIR}\doc\*rus.*"
+  CreateDirectory "$SMPROGRAMS\AC3Filter\Russian docs"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\Russian docs\AC3Filter Руководство пользователя.lnk" "$INSTDIR\doc\ac3filter_rus.pdf"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\Russian docs\AC3Filter & SPDIF.lnk"                  "$INSTDIR\doc\spdif_rus.pdf"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\Russian docs\Громкость и динамический диапазон.lnk"  "$INSTDIR\doc\loudness_rus.pdf"
+SectionEnd
+SectionGroupEnd
+
+
+
+SectionGroup /e "Program"
 Section "AC3Filter DirectShow"
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -110,6 +120,7 @@ Section "AC3Filter ACM"
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; Copy binary to sysdir
+  SetOutPath $INSTDIR
   CopyFiles /SILENT "$INSTDIR\ac3filter.acm" "$SYSDIR\ac3filter.acm"
 
   ;; Register ACM codec
@@ -131,6 +142,22 @@ Reg9x:
 
 Finish:
 
+SectionEnd
+SectionGroupEnd
+
+
+
+Section "Translations"
+  SetOutPath $INSTDIR\lang
+  File /r "${SOURCE_DIR}\lang\*.*"
+SectionEnd
+
+
+
+Section "-Last links"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\Change Log (English).lnk" "$INSTDIR\_changes_eng.txt"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\Change Log (Russian).lnk" "$INSTDIR\_changes_rus.txt"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\Uninstall.lnk"            "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
 SectionEnd
 
 
