@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-07 02:48+0400\n"
+"POT-Creation-Date: 2007-06-24 15:52+0400\n"
 "PO-Revision-Date: 2007-06-05 00:12+0100\n"
 "Last-Translator: Filico <findme@dvbviewer.com>\n"
 "Language-Team: \n"
@@ -650,63 +650,69 @@ msgstr "Kein Stereo-PCM kodieren"
 msgid "IDC_CHK_USE_DETECTOR"
 msgstr "SPDIF-Signal im PCM-Datenstrom erkennen"
 
+#. TRANSLATORS: AC3 encoder bitrate (kbps)
+#: dialog_controls.h:437
+#, fuzzy
+msgid "IDC_LBL_SPDIF_BITRATE"
+msgstr "Aktueller Jitter-Wert:"
+
 #. TRANSLATORS: SPDIF passthrough
-#: dialog_controls.h:438
+#: dialog_controls.h:441
 msgid "IDC_GRP_SPDIF_PT"
 msgstr "SPDIF-Durchleitung"
 
 #. TRANSLATORS: AC3
-#: dialog_controls.h:440
+#: dialog_controls.h:443
 msgid "IDC_CHK_SPDIF_AC3"
 msgstr "AC3"
 
 #. TRANSLATORS: DTS
-#: dialog_controls.h:442
+#: dialog_controls.h:445
 msgid "IDC_CHK_SPDIF_DTS"
 msgstr "DTS"
 
 #. TRANSLATORS: MPEG Audio
-#: dialog_controls.h:444
+#: dialog_controls.h:447
 msgid "IDC_CHK_SPDIF_MPA"
 msgstr "MPEG Audio"
 
 #. TRANSLATORS: Audio/Video sync
-#: dialog_controls.h:448
+#: dialog_controls.h:451
 msgid "IDC_GRP_SYNC"
 msgstr "Audio/Video-Synchronisation"
 
 #. TRANSLATORS: Jitter correction.
-#: dialog_controls.h:450
+#: dialog_controls.h:453
 msgid "IDC_CHK_JITTER"
 msgstr "Jitter-Korrektur"
 
 #. TRANSLATORS: Current jitter:
-#: dialog_controls.h:454
+#: dialog_controls.h:457
 msgid "IDC_LBL_JITTER"
 msgstr "Aktueller Jitter-Wert:"
 
 #. TRANSLATORS: Time shift (ms):
-#: dialog_controls.h:456
+#: dialog_controls.h:459
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "Timeshift (ms):"
 
 #. TRANSLATORS: <- sound lags
-#: dialog_controls.h:458
+#: dialog_controls.h:461
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr ""
 
 #. TRANSLATORS: sound hastes ->
-#: dialog_controls.h:460
+#: dialog_controls.h:463
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr ""
 
 #. TRANSLATORS: Localization
-#: dialog_controls.h:465
+#: dialog_controls.h:468
 msgid "IDC_GRP_TRANS"
 msgstr "Lokalisierung"
 
 #. TRANSLATORS: Language:
-#: dialog_controls.h:469
+#: dialog_controls.h:472
 msgid "IDC_LBL_LANG"
 msgstr "Sprache"
 
@@ -819,65 +825,65 @@ msgid "Inches"
 msgstr "Inches"
 
 #. TRANSLATORS: Main
-#: ac3filter_dlg.cpp:317
+#: ac3filter_dlg.cpp:345
 msgid "IDD_MAIN"
 msgstr ""
 
 #. TRANSLATORS: Mixer
-#: ac3filter_dlg.cpp:324
+#: ac3filter_dlg.cpp:352
 #, fuzzy
 msgid "IDD_MIXER"
 msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 von Alexander Vigovsky"
 
 #. TRANSLATORS: Gains
-#: ac3filter_dlg.cpp:331
+#: ac3filter_dlg.cpp:359
 #, fuzzy
 msgid "IDD_GAINS"
 msgstr "Verstärkungen"
 
 #. TRANSLATORS: SPDIF
-#: ac3filter_dlg.cpp:338
+#: ac3filter_dlg.cpp:366
 #, fuzzy
 msgid "IDD_SPDIF"
 msgstr "SPDIF"
 
 #. TRANSLATORS: System
-#: ac3filter_dlg.cpp:345
+#: ac3filter_dlg.cpp:373
 msgid "IDD_SYSTEM"
 msgstr ""
 
 #. TRANSLATORS: About
-#: ac3filter_dlg.cpp:353
+#: ac3filter_dlg.cpp:381
 #, fuzzy
 msgid "IDD_ABOUT"
 msgstr "Was ist der AC3Filter?"
 
-#: ac3filter_dlg.cpp:999
+#: ac3filter_dlg.cpp:1040
 #, c-format
 msgid "%s %s %iHz"
 msgstr "%s %s %iHz"
 
-#: ac3filter_dlg.cpp:1012
+#: ac3filter_dlg.cpp:1053
 msgid "Use SPDIF"
 msgstr "Nutze SPDIF"
 
-#: ac3filter_dlg.cpp:1016
+#: ac3filter_dlg.cpp:1057
 msgid "Use SPDIF (disabled)"
 msgstr "Nutze SPDIF (deaktiviert)"
 
-#: ac3filter_dlg.cpp:1020
+#: ac3filter_dlg.cpp:1061
 msgid "Use SPDIF (passthrough)"
 msgstr "Nutze SPDIF (Durchleitung)"
 
-#: ac3filter_dlg.cpp:1024
+#: ac3filter_dlg.cpp:1065
 msgid "Use SPDIF (AC3 encode)"
 msgstr "Nutze SPDIF (AC3 kodieren)"
 
-#: ac3filter_dlg.cpp:1028
+#: ac3filter_dlg.cpp:1069
 msgid "Use SPDIF (Unknown)"
 msgstr "Nutze SPDIF (unbekannt)"
 
-#: ac3filter_dlg.cpp:1085
+#: ac3filter_dlg.cpp:1126
 #, c-format
 msgid ""
 "Input\tmean: %ims\tstddev: %ims\n"
@@ -886,32 +892,32 @@ msgstr ""
 "Eingang\tmean: %ims\tstddev: %ims\n"
 "Ausgang\tmean: %ims\tstddev: %ims"
 
-#: ac3filter_dlg.cpp:1496
+#: ac3filter_dlg.cpp:1539
 msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
 "enabled. Press 'No' to enable this option."
 msgstr ""
 
-#: ac3filter_dlg.cpp:1496 ac3filter_dlg.cpp:1590
+#: ac3filter_dlg.cpp:1539 ac3filter_dlg.cpp:1646
 msgid "Dangerous option!"
 msgstr ""
 
-#: ac3filter_dlg.cpp:1590
+#: ac3filter_dlg.cpp:1646
 msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
 
-#: ac3filter_dlg.cpp:2057
+#: ac3filter_dlg.cpp:2113
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Möchten Sie wirklich die Voreinstellung '%s' löschen?"
 
-#: ac3filter_dlg.cpp:2058 ac3filter_dlg.cpp:2147
+#: ac3filter_dlg.cpp:2114 ac3filter_dlg.cpp:2203
 msgid "Delete confirmation"
 msgstr ""
 
-#: ac3filter_dlg.cpp:2146
+#: ac3filter_dlg.cpp:2202
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "Möchten Sie wirklich die Matrix '%s' löschen?"

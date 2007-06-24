@@ -51,6 +51,7 @@ private:
   bool     spdif_as_pcm;
   bool     spdif_encode;
   bool     spdif_stereo_pt;
+  int      spdif_bitrate;
 
   bool     spdif_check_sr;
   bool     spdif_allow_48;

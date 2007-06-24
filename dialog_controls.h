@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 32
-// Total controls: 249
+// Total controls: 251
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -432,6 +432,9 @@ static const ControlDesc dialog_controls[] =
   { IDC_CHK_SPDIF_STEREO_PT, N_("IDC_CHK_SPDIF_STEREO_PT"), "Do not encode stereo PCM", "" },
   /* TRANSLATORS: Detect SPDIF stream in PCM data */
   { IDC_CHK_USE_DETECTOR, N_("IDC_CHK_USE_DETECTOR"), "Detect SPDIF stream in PCM data", "" },
+  { IDC_CMB_SPDIF_BITRATE, "IDC_CMB_SPDIF_BITRATE", "", "" },
+  /* TRANSLATORS: AC3 encoder bitrate (kbps) */
+  { IDC_LBL_SPDIF_BITRATE, N_("IDC_LBL_SPDIF_BITRATE"), "AC3 encoder bitrate (kbps)", "" },
 
   // SPDIF passthrough
   /* TRANSLATORS: SPDIF passthrough */

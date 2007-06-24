@@ -907,5 +907,3 @@ AC3Filter::get_env(char *_buf, int _size)
   cr2crlf(_buf, _size);
   return S_OK;
 }
-
-

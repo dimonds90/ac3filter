@@ -54,11 +54,11 @@ REGEDIT4
 "spdif_as_pcm"=dword:00000000
 "spdif_encode"=dword:00000001
 "spdif_stereo_pt"=dword:00000001
+"spdif_bitrate"=dword:0006d600
 "spdif_check_sr"=dword:00000001
 "spdif_allow_48"=dword:00000001
 "spdif_allow_44"=dword:00000000
 "spdif_allow_32"=dword:00000000
-"use_dts14"=dword:00000000
 "format"=dword:00000002
 "mask"=dword:00000005
 "auto_gain"=dword:00000001
@@ -94,6 +94,7 @@ REGEDIT4
 "dejitter"=dword:00000001
 "formats"=dword:00007dfc
 "dts_mode"=dword:00000002
+"dts_conv"=dword:00000000
 
 [HKEY_CURRENT_USER\Software\AC3Filter\preset\Standard]
 "format"=dword:00000002

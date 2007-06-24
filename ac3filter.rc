@@ -409,19 +409,19 @@ BEGIN
     CONTROL         "Detect SPDIF stream in PCM data",IDC_CHK_USE_DETECTOR,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,77,182,8
     CONTROL         "Use AC3 encoder",IDC_CHK_SPDIF_ENCODE,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,89,182,8
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,87,182,8
     CONTROL         "Do not encode stereo PCM",IDC_CHK_SPDIF_STEREO_PT,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,101,169,8
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,220,97,169,8
     CONTROL         "Output SPDIF as PCM",IDC_CHK_SPDIF_AS_PCM,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,207,113,182,8
+                    BS_AUTOCHECKBOX | WS_TABSTOP,207,121,182,8
     CONTROL         "Restrict SPDIF sample rate",IDC_CHK_SPDIF_CHECK_SR,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,125,182,8
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,131,182,8
     CONTROL         "48kHz",IDC_CHK_SPDIF_ALLOW_48,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,220,137,37,8
+                    WS_TABSTOP,220,141,37,8
     CONTROL         "44kHz",IDC_CHK_SPDIF_ALLOW_44,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,267,137,37,8
+                    WS_TABSTOP,267,141,37,8
     CONTROL         "32kHz",IDC_CHK_SPDIF_ALLOW_32,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,314,137,37,8
+                    WS_TABSTOP,314,141,37,8
     GROUPBOX        "SPDIF options",IDC_GRP_SPDIF,200,64,192,92
     EDITTEXT        IDC_EDT_INFO,13,75,178,108,ES_MULTILINE | ES_READONLY | 
                     WS_VSCROLL
@@ -449,6 +449,10 @@ BEGIN
     CONTROL         "Disallow PCM output in SPDIF mode",IDC_CHK_SPDIF_NO_PCM,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,187,182,8
     GROUPBOX        "DirectShow options",IDC_GRP_DSHOW,200,156,192,44
+    COMBOBOX        IDC_CMB_SPDIF_BITRATE,220,107,30,115,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "AC3 encoder bitrate (kbps)",IDC_LBL_SPDIF_BITRATE,252,
+                    107,137,12,SS_CENTERIMAGE
 END
 
 IDD_ABOUT DIALOG DISCARDABLE  0, 0, 400, 224

@@ -102,6 +102,10 @@ public:
   STDMETHODIMP get_spdif_stereo_pt(bool *spdif_stereo_pt);
   STDMETHODIMP set_spdif_stereo_pt(bool  spdif_stereo_pt);
 
+  // SPDIF bitrate
+  STDMETHODIMP get_spdif_bitrate(int *spdif_bitrate);
+  STDMETHODIMP set_spdif_bitrate(int  spdif_bitrate);
+
   // SPDIF check sample rate
   STDMETHODIMP get_spdif_check_sr(bool *spdif_check_sr);
   STDMETHODIMP set_spdif_check_sr(bool  spdif_check_sr);

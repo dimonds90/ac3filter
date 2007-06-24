@@ -308,6 +308,34 @@ int units2list(int units)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+// Encoder bitrate
+///////////////////////////////////////////////////////////////////////////////
+
+const int bitrate_tbl[19] =
+{
+   32,  40,  48,  56,  64,  80,  96, 112, 128, 
+  160, 192, 224, 256, 320, 384, 448, 512, 576, 640 
+};
+
+int bitrate2list(int bitrate)
+{
+  bitrate /= 1000;
+  for (int i = 0; i < array_size(bitrate_tbl); i++)
+    if (bitrate_tbl[i] >= bitrate)
+      return i;
+
+  return array_size(bitrate_tbl) - 1;
+}
+
+int list2bitrate(int index)
+{
+  if (index >= 0 && index < array_size(bitrate_tbl))
+    return bitrate_tbl[index] * 1000;
+  else
+    return 448000; // default bitrate
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // Initialization / Deinitialization
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -712,6 +740,7 @@ AC3FilterDlg::reload_state()
   dec->get_spdif_as_pcm(&spdif_as_pcm);
   dec->get_spdif_encode(&spdif_encode);
   dec->get_spdif_stereo_pt(&spdif_stereo_pt);
+  dec->get_spdif_bitrate(&spdif_bitrate);
 
   dec->get_spdif_check_sr(&spdif_check_sr);
   dec->get_spdif_allow_48(&spdif_allow_48);
@@ -875,6 +904,18 @@ AC3FilterDlg::init_controls()
   // Interface
 
   edt_refresh_time.link(m_Dlg, IDC_EDT_REFRESH_TIME);
+
+  /////////////////////////////////////
+  // SPDIF bitrates
+
+  {
+    char buf[128];
+    for (i = 0; i < array_size(bitrate_tbl); i++)
+    {
+      int cb_index = SendDlgItemMessage(m_Dlg, IDC_CMB_SPDIF_BITRATE, CB_ADDSTRING, 0, (LONG)itoa(bitrate_tbl[i], buf, 10));
+      SendDlgItemMessage(m_Dlg, IDC_CMB_SPDIF_BITRATE, CB_SETITEMDATA, cb_index, bitrate_tbl[i]);
+    }
+  }
 
   /////////////////////////////////////
   // Languages
@@ -1149,6 +1190,8 @@ AC3FilterDlg::update_static_controls()
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_AS_PCM, spdif_as_pcm? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_ENCODE, spdif_encode? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_STEREO_PT, spdif_stereo_pt? BST_CHECKED: BST_UNCHECKED);
+
+  SendDlgItemMessage(m_Dlg, IDC_CMB_SPDIF_BITRATE, CB_SETCURSEL, bitrate2list(spdif_bitrate), 0);
 
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_CHECK_SR, spdif_check_sr? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_SPDIF_ALLOW_48, spdif_allow_48? BST_CHECKED: BST_UNCHECKED);
@@ -1514,6 +1557,19 @@ AC3FilterDlg::command(int control, int message)
       update();
       break;
     }
+
+    case IDC_CMB_SPDIF_BITRATE:
+      if (message == CBN_SELENDOK)
+      {
+        int ibitrate = SendDlgItemMessage(m_Dlg, IDC_CMB_SPDIF_BITRATE, CB_GETCURSEL, 0, 0);
+        if (ibitrate != CB_ERR)
+        {
+          spdif_bitrate = list2bitrate(ibitrate);
+          dec->set_spdif_bitrate(spdif_bitrate);
+        }
+        update();
+        break;
+      }
 
     case IDC_CHK_SPDIF_CHECK_SR:
     {

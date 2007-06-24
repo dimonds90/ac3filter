@@ -188,6 +188,18 @@ STDMETHODIMP COMDecoder::set_spdif_stereo_pt(bool  _spdif_stereo_pt)
   return S_OK;
 }
 
+// SPDIF bitrate
+STDMETHODIMP COMDecoder::get_spdif_bitrate(int *_spdif_bitrate)
+{
+  if (_spdif_bitrate) *_spdif_bitrate = dvd.get_spdif_bitrate();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_spdif_bitrate(int  _spdif_bitrate)
+{
+  dvd.set_spdif_bitrate(_spdif_bitrate);
+  return S_OK;
+}
+
 // SPDIF check sample rate
 STDMETHODIMP COMDecoder::get_spdif_check_sr(bool *_spdif_check_sr)
 {
@@ -913,6 +925,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     bool spdif_as_pcm = dvd.get_spdif_as_pcm();
     bool spdif_encode = dvd.get_spdif_encode();
     bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+    int  spdif_bitrate = dvd.get_spdif_bitrate();
 
     bool spdif_check_sr = dvd.get_spdif_check_sr();
     bool spdif_allow_48 = dvd.get_spdif_allow_48();
@@ -930,6 +943,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     _conf->get_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
     _conf->get_bool ("spdif_encode"     ,spdif_encode    );
     _conf->get_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
+    _conf->get_int32("spdif_bitrate"    ,spdif_bitrate   );
 
     _conf->get_bool ("spdif_check_sr"   ,spdif_check_sr  );
     _conf->get_bool ("spdif_allow_48"   ,spdif_allow_48  );
@@ -943,9 +957,10 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     dvd.set_use_detector(use_detector);
 
     dvd.set_spdif_pt(spdif_pt);
-    dvd.set_spdif_stereo_pt(spdif_stereo_pt);
-    dvd.set_spdif_encode(spdif_encode);
     dvd.set_spdif_as_pcm(spdif_as_pcm);
+    dvd.set_spdif_encode(spdif_encode);
+    dvd.set_spdif_stereo_pt(spdif_stereo_pt);
+    dvd.set_spdif_bitrate(spdif_bitrate);
 
     dvd.set_spdif_check_sr(spdif_check_sr);
     dvd.set_spdif_allow_48(spdif_allow_48);
@@ -1108,6 +1123,7 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     bool spdif_as_pcm = dvd.get_spdif_as_pcm();
     bool spdif_encode = dvd.get_spdif_encode();
     bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+    int  spdif_bitrate = dvd.get_spdif_bitrate();
 
     bool spdif_check_sr = dvd.get_spdif_check_sr();
     bool spdif_allow_48 = dvd.get_spdif_allow_48();
@@ -1125,6 +1141,7 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     _conf->set_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
     _conf->set_bool ("spdif_encode"     ,spdif_encode    );
     _conf->set_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
+    _conf->set_int32("spdif_bitrate"    ,spdif_bitrate   );
 
     _conf->set_bool ("spdif_check_sr"   ,spdif_check_sr  );
     _conf->set_bool ("spdif_allow_48"   ,spdif_allow_48  );

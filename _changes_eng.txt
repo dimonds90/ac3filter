@@ -1,3 +1,9 @@
+v1.46b -
+  + AC3 encoder bitrate is now ajustable
+  ! Upmixing of Dolby Surround files works now (thanks to Stefan Schott)
+  ! MPEG Audio Joint stereo playback fixed (thanks to Daniel Bechter)
+
+
 v1.45b - 07.06.2007
   + ACM codec is now included into the package
   + Tab labels are now translatable

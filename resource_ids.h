@@ -307,7 +307,6 @@
 #define IDC_RBT_DTS_MODE_AUTO          52102
 #define IDC_RBT_DTS_MODE_WRAPPED       52103
 #define IDC_RBT_DTS_MODE_PADDED        52104
-#define IDC_CHK_USE_DTS14              52105
 
 // SPDIF/DTS conversion (526)
 #define IDC_GRP_DTS_CONV               52601
@@ -319,12 +318,14 @@
 #define IDC_GRP_SPDIF                  52201
 #define IDC_CHK_USE_DETECTOR           52202
 #define IDC_CHK_SPDIF_ENCODE           52203
-#define IDC_CHK_SPDIF_STEREO_PT        52204
-#define IDC_CHK_SPDIF_AS_PCM           52205
-#define IDC_CHK_SPDIF_CHECK_SR         52206
-#define IDC_CHK_SPDIF_ALLOW_48         52207
-#define IDC_CHK_SPDIF_ALLOW_44         52208
-#define IDC_CHK_SPDIF_ALLOW_32         52209
+#define IDC_CMB_SPDIF_BITRATE          52204
+#define IDC_LBL_SPDIF_BITRATE          52205
+#define IDC_CHK_SPDIF_STEREO_PT        52206
+#define IDC_CHK_SPDIF_AS_PCM           52207
+#define IDC_CHK_SPDIF_CHECK_SR         52208
+#define IDC_CHK_SPDIF_ALLOW_48         52209
+#define IDC_CHK_SPDIF_ALLOW_44         52210
+#define IDC_CHK_SPDIF_ALLOW_32         52211
 
 // DirectShow options (523)
 #define IDC_GRP_DSHOW                  52301

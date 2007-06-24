@@ -203,6 +203,10 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
   STDMETHOD (get_spdif_stereo_pt)(bool *spdif_stereo_pt) = 0;
   STDMETHOD (set_spdif_stereo_pt)(bool  spdif_stereo_pt) = 0;
 
+  // SPDIF bitrate
+  STDMETHOD (get_spdif_bitrate)(int *spdif_bitrate) = 0;
+  STDMETHOD (set_spdif_bitrate)(int  spdif_bitrate) = 0;
+
   // SPDIF check sample rate
   STDMETHOD (get_spdif_check_sr)(bool *spdif_check_sr) = 0;
   STDMETHOD (set_spdif_check_sr)(bool  spdif_check_sr) = 0;
