@@ -92,6 +92,7 @@ printf "Building package...\n";
 `copy ac3config\\release\\ac3config.exe $package\\ac3config.exe`;
 `copy ACM\\release_libc\\ac3filter.acm $package`;
 `copy release\\ac3filter.ax $package`;
+`copy intl\\bin\\iconv.dll $package`;
 
 # manifests
 `copy ac3filter.ax.manifest $package`;
