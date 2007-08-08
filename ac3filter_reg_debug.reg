@@ -1,7 +1,7 @@
 REGEDIT4
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Debug\ac3filter.ax]
-"LogToFile"="c:\\ac3fitler.log"
+"LogToFile"="c:\\ac3filter.log"
 "TIMING"=dword:00000010
 "TRACE"=dword:ffffffff
 "MEMORY"=dword:00000000
