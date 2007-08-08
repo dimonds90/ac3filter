@@ -97,10 +97,6 @@ SOURCE=..\guids.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\icon1.ico
-# End Source File
-# Begin Source File
-
 SOURCE=.\main.cpp
 # End Source File
 # Begin Source File
