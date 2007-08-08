@@ -307,7 +307,6 @@ bool
 DoubleEdit::read_value()
 {
   char buf[256];
-  char *stop;
 
   if (!SendDlgItemMessage(dlg, item, WM_GETTEXT, 256, (LONG)buf))
   {
@@ -315,9 +314,9 @@ DoubleEdit::read_value()
     return true;
   }
 
-  errno = 0;
-  double new_value = strtod(buf, &stop);
-  if (*stop || errno == ERANGE) 
+  double new_value = 0.0;
+  char tmp;
+  if (sscanf(buf, "%lg%c", &new_value, &tmp) != 1)
     return false;
 
   value = new_value;

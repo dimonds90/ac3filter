@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <memory.h>
 #include <math.h>
+#include <streams.h>
 #include "registry.h"
+
 
 RegistryKey::RegistryKey()
 {
@@ -108,6 +110,7 @@ RegistryKey::get_bool(LPCTSTR name, bool &value)
     return false;
 
   value = v != 0;
+  DbgLog((LOG_TRACE, 3, "RegistryKey::get_bool(\"%s\") = %s", name, value? "true": "false"));
   return true;
 }
 
@@ -127,6 +130,7 @@ RegistryKey::get_int32(LPCTSTR name, int32_t &value)
     return false;
 
   value = v;
+  DbgLog((LOG_TRACE, 3, "RegistryKey::get_int32(\"%s\") = %i", name, value));
   return true;
 }
 
@@ -137,7 +141,6 @@ RegistryKey::get_float(LPCTSTR name, double &value)
 
   DWORD type, buf_len;
   char buf[256];
-  char *stopstr;
   buf_len = 256;
 
   if (RegQueryValueEx(key, name, NULL, &type, (LPBYTE)&buf, &buf_len) != ERROR_SUCCESS)
@@ -146,12 +149,16 @@ RegistryKey::get_float(LPCTSTR name, double &value)
   if (type != REG_SZ)
     return false;
 
-  errno = 0;
-  double v = strtod(buf, &stopstr);
-  if (buf == stopstr || errno == ERANGE)
+  double v = 0.0;
+  char tmp;
+  if (sscanf(buf, "%lg%c", &v, &tmp) != 1)
+  {
+    DbgLog((LOG_TRACE, 3, "RegistryKey::get_float(\"%s\"): cannot convert \"%s\" to float!", name, buf));
     return false;
+  }
 
   value = v;
+  DbgLog((LOG_TRACE, 3, "RegistryKey::get_float(\"%s\") = %lg", name, value));
   return true;
 }
 
@@ -169,6 +176,7 @@ RegistryKey::get_text(LPCTSTR name, char *value, int size)
   if (type != REG_SZ)
     return false;
   
+  DbgLog((LOG_TRACE, 3, "RegistryKey::get_text(\"%s\") = \"%s\"", name, value));
   return true;
 }
 
@@ -179,6 +187,7 @@ RegistryKey::set_bool(LPCTSTR name, bool _value)
 
   DWORD value = _value;
   RegSetValueEx(key, name, NULL, REG_DWORD, (LPBYTE)&value, 4);
+//  DbgLog((LOG_TRACE, 3, "RegistryKey::set_bool(\"%s\", %s", name, _value? "true": "false"));
 }
 
 void
@@ -188,6 +197,7 @@ RegistryKey::set_int32(LPCTSTR name, int32_t _value)
 
   DWORD value = _value;
   RegSetValueEx(key, name, NULL, REG_DWORD, (LPBYTE)&value, 4);
+//  DbgLog((LOG_TRACE, 3, "RegistryKey::set_int32(\"%s\", %i)", name, _value));
 }
 
 void
@@ -196,8 +206,9 @@ RegistryKey::set_float(LPCTSTR name, double _value)
   if (!key) return;
 
   char buf[256];
-  sprintf(buf, "%f", _value);
+  sprintf(buf, "%lg", _value);
   RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)&buf, strlen(buf)+1);
+//  DbgLog((LOG_TRACE, 3, "RegistryKey::set_float(\"%s\", %lg = \"%s\")", name, _value, buf));
 }
 
 void
@@ -209,6 +220,7 @@ RegistryKey::set_text(LPCTSTR name, const char *_value)
     RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)_value, strlen(_value)+1);
   else
     RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)"", 1);
+//  DbgLog((LOG_TRACE, 3, "RegistryKey::set_text(\"%s\", \"%s\")", name, _value? _value: ""));
 }
 
 
@@ -264,14 +276,16 @@ FileConfig::get_int32(LPCTSTR name, int32_t &value)
 {
   if (!ok) return false;
   char buf[256];
-  char *stopstr;
 
   if (!GetPrivateProfileString(section, name, "default", buf, 128, filename)) return false;
 
-  errno = 0;  
-  int32_t v = strtol(buf, &stopstr, 10);
-  if (buf == stopstr || errno == ERANGE)
+  int v = 0;
+  char tmp;
+  if (sscanf(buf, "%i%c", &v, &tmp) != 1)
+  {
+    DbgLog((LOG_TRACE, 3, "FileConfig::get_int32(\"%s\"): cannot convert \"%s\" to integer!", name, buf));
     return false;
+  }
 
   value = v;
   return true;
@@ -282,14 +296,16 @@ FileConfig::get_double(LPCTSTR name, double &value)
 {
   if (!ok) return false;
   char buf[256];
-  char *stopstr;
 
   if (!GetPrivateProfileString(section, name, "default", buf, 128, filename)) return false;
 
-  errno = 0;
-  double v = strtod(buf, &stopstr);
-  if (buf == stopstr || errno == ERANGE)
+  double v = 0.0;
+  char tmp;
+  if (sscanf(buf, "%lg%c", &v, &tmp) != 1)
+  {
+    DbgLog((LOG_TRACE, 3, "FileConfig::get_float(\"%s\"): cannot convert \"%s\" to float!", name, buf));
     return false;
+  }
 
   value = v;
   return true;
