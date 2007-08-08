@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.40b\n"
+"Project-Id-Version: AC3Filter 1.45b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-24 15:52+0400\n"
-"PO-Revision-Date: 2007-06-04 20:24+0100\n"
+"POT-Creation-Date: 2007-08-08 21:08+0400\n"
+"PO-Revision-Date: 2007-06-10 11:49+0100\n"
 "Last-Translator: Ferny <mundodivx@gmail.com>\n"
 "Language-Team: MundoDivX.com <mundodivx@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -698,12 +698,12 @@ msgstr "Desplazamiento temporal (ms):"
 #. TRANSLATORS: <- sound lags
 #: dialog_controls.h:461
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
-msgstr ""
+msgstr "<- retrasar audio"
 
 #. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:463
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
-msgstr ""
+msgstr "acelerar audio ->"
 
 #. TRANSLATORS: Localization
 #: dialog_controls.h:468
@@ -826,36 +826,32 @@ msgstr "Pulgadas"
 #. TRANSLATORS: Main
 #: ac3filter_dlg.cpp:345
 msgid "IDD_MAIN"
-msgstr ""
+msgstr "Principal"
 
 #. TRANSLATORS: Mixer
 #: ac3filter_dlg.cpp:352
-#, fuzzy
 msgid "IDD_MIXER"
-msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 por Alexander Vigovsky"
+msgstr "Mezclador"
 
 #. TRANSLATORS: Gains
 #: ac3filter_dlg.cpp:359
-#, fuzzy
 msgid "IDD_GAINS"
 msgstr "Ganancias"
 
 #. TRANSLATORS: SPDIF
 #: ac3filter_dlg.cpp:366
-#, fuzzy
 msgid "IDD_SPDIF"
 msgstr "SPDIF"
 
 #. TRANSLATORS: System
 #: ac3filter_dlg.cpp:373
 msgid "IDD_SYSTEM"
-msgstr ""
+msgstr "Sistema"
 
 #. TRANSLATORS: About
 #: ac3filter_dlg.cpp:381
-#, fuzzy
 msgid "IDD_ABOUT"
-msgstr "¿Qué es?"
+msgstr "Acerca de"
 
 #: ac3filter_dlg.cpp:1040
 #, c-format
@@ -896,16 +892,20 @@ msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
 "enabled. Press 'No' to enable this option."
 msgstr ""
+"¡Esta opción es PELIGROSA! El filtro puede producir ruido muy fuerte con "
+"esta opción habilitada. Presione 'No' para habilitar esta opción."
 
 #: ac3filter_dlg.cpp:1539 ac3filter_dlg.cpp:1646
 msgid "Dangerous option!"
-msgstr ""
+msgstr "¡Opción peligrosa!"
 
 #: ac3filter_dlg.cpp:1646
 msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
+"¡Esta opción es PELIGROSA! El vídeo puede desincronizarse con esta opción "
+"habilitada. Presione 'No' para habilitar esta opción."
 
 #: ac3filter_dlg.cpp:2113
 #, c-format

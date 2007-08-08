@@ -1,922 +1,920 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.45b\n"
+"Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-08 21:08+0400\n"
-"PO-Revision-Date: 2007-06-08 20:33+0800\n"
-"Last-Translator: FSYX <fsyx@qq.com>\n"
-"Language-Team: ChongQing Mobile\n"
+"PO-Revision-Date: 2007-06-08 19:23+0900\n"
+"Last-Translator: starcodec <starcodec@gmail.com>\n"
+"Language-Team: starcodec <starcodec@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Chinese\n"
-"X-Poedit-Country: CHINA\n"
+"X-Poedit-Language: Korean\n"
+"X-Poedit-Country: KOREA, REPUBLIC OF\n"
 
 #. TRANSLATORS: Donate
 #: dialog_controls.h:21
 msgid "IDC_BTN_DONATE"
-msgstr "捐助"
+msgstr "기부하기"
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
 #: dialog_controls.h:23
 msgid "IDC_VER"
-msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"
+msgstr ""
 
 #. TRANSLATORS: What is it?
 #: dialog_controls.h:27
 msgid "IDC_GRP_ABOUT"
-msgstr "这是个用来干什么的软件?"
+msgstr "무엇인가요?"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 #: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
 msgstr ""
-"AC3Filter 是一个高质量且免费的用来实时解码和处理音频的 DirectShow 过滤器.它具"
-"有强大的功能和友好的设置界面,支持多声道音频和数字 (SPDIF) 输出."
+"AC3Filter는 실시간 오디오 디코딩과 프로세싱을 위한 고품질의 무료 다이렉트쇼 "
+"필터입니다. 이 필터는 다양한 기능과 편리한 설정에 우선 순위를 두고 있습니다. "
+"다중 채널과 디지털(SPDIF) 출력을 지원합니다."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 #: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
 msgstr ""
-"AC3Filter 可以被绝大多数多媒体播放器自动调用.通过本程序,你可以播放 AVI 容器或"
-"其它容器中的 AC3 和 DTS 音轨,同时还可以用来播放 DVD."
+"이 필터는 대부분의 미디어플레이어에서 자동으로 사용됩니다. AC3나 DTS 오디오 "
+"트랙을 가진 AVI 파일을 재생하는데 필요합니다. DVD 재생에도 사용할 수 있습니"
+"다."
 
 #. TRANSLATORS: AGC
 #: dialog_controls.h:35
 msgid "IDC_GRP_AGC"
-msgstr "自动增益控制(AGC)"
+msgstr ""
 
 #. TRANSLATORS: Attack/release speed (dB/s):
 #: dialog_controls.h:39
 msgid "IDC_LBL_ATTACK_RELEASE"
-msgstr "突发/释放速度 (dB/秒):"
+msgstr "수행/해제 속도 (dB/s):"
 
 #. TRANSLATORS: Contact author
 #: dialog_controls.h:43
 msgid "IDC_GRP_CONTACT"
-msgstr "联系作者"
+msgstr "제작자 연락처"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 #: dialog_controls.h:45
 msgid "IDC_LBL_CONTACT"
 msgstr ""
-"请反馈本程序存在的所有问题.你可以随意地向作者提建议,意见以及其它想法,但是只能"
-"够使用英语或者俄语.由于电子邮箱设置了垃圾过滤,在邮件主题中须包含关键"
-"字'AC3Filter'."
+"모든 버그 정보를 보내주세요. 아이디어나 비판 등을 마음대로 이메일로 보내주세"
+"요. 단, 영어나 러시아어로만 쓰세요. 제목에는 반드시 'AC3Filter'라는 단어가 들"
+"어가야 합니다 (스팸 메일 필터링)."
 
 #. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
-msgstr "电子邮件|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "이메일|mailto:xvalex@mail.ru?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 #: dialog_controls.h:49
 msgid "IDC_LNK_FORUM"
-msgstr "工程论坛|http://ac3filter.net/forum/"
+msgstr "프로젝트 포럼|http://ac3filter.net/forum/"
 
 #. TRANSLATORS: Homepage|http://ac3filter.net/
 #: dialog_controls.h:51
 msgid "IDC_LNK_HOME"
-msgstr "主页|http://ac3filter.net/"
+msgstr "홈페이지|http://ac3filter.net/"
 
 #. TRANSLATORS: CPU
 #: dialog_controls.h:55
 msgid "IDC_GRP_CPU"
-msgstr "CPU"
+msgstr ""
 
 #. TRANSLATORS: 0%
 #: dialog_controls.h:58
 msgid "IDC_CPU_LABEL"
-msgstr "0%"
+msgstr ""
 
 #. TRANSLATORS: Thanks to
 #: dialog_controls.h:62
 msgid "IDC_GRP_CREDITS"
-msgstr "感谢"
+msgstr "감사"
 
 #. TRANSLATORS: Decoder info
 #: dialog_controls.h:67
 msgid "IDC_GRP_DECODER_INFO"
-msgstr "解码器信息"
+msgstr "디코더 정보"
 
 #. TRANSLATORS: Frames / Errors
 #: dialog_controls.h:72
 msgid "IDC_LBL_FRAMES_ERRORS"
-msgstr "帧 / 错误"
+msgstr "프레임 / 에러"
 
 #. TRANSLATORS: Delays
 #: dialog_controls.h:76
 msgid "IDC_GRP_DELAYS"
-msgstr "延迟"
+msgstr "딜레이"
 
 #. TRANSLATORS: Enable
 #: dialog_controls.h:78
 msgid "IDC_CHK_DELAYS"
-msgstr "启用"
+msgstr "사용"
 
 #. TRANSLATORS: C
 #: dialog_controls.h:87
 msgid "IDC_LBL_DELAY_C"
-msgstr "C"
+msgstr ""
 
 #. TRANSLATORS: L
 #: dialog_controls.h:89
 msgid "IDC_LBL_DELAY_L"
-msgstr "L"
+msgstr ""
 
 #. TRANSLATORS: R
 #: dialog_controls.h:91
 msgid "IDC_LBL_DELAY_R"
-msgstr "R"
+msgstr ""
 
 #. TRANSLATORS: SL
 #: dialog_controls.h:93
 msgid "IDC_LBL_DELAY_SL"
-msgstr "SL"
+msgstr ""
 
 #. TRANSLATORS: SR
 #: dialog_controls.h:95
 msgid "IDC_LBL_DELAY_SR"
-msgstr "SR"
+msgstr ""
 
 #. TRANSLATORS: Sub
 #: dialog_controls.h:97
 msgid "IDC_LBL_DELAY_SW"
-msgstr "Sub"
+msgstr ""
 
 #. TRANSLATORS: Units:
 #: dialog_controls.h:99
 msgid "IDC_LBL_UNITS"
-msgstr "单位:"
+msgstr "단위:"
 
 #. TRANSLATORS: DRC
 #: dialog_controls.h:103
 msgid "IDC_GRP_DRC"
-msgstr "动态范围压缩"
+msgstr ""
 
 #. TRANSLATORS: Enable
 #: dialog_controls.h:105
 msgid "IDC_CHK_DRC"
-msgstr "启用"
+msgstr "사용"
 
 #. TRANSLATORS: DirectShow options
 #: dialog_controls.h:113
 msgid "IDC_GRP_DSHOW"
-msgstr "DirectShow 选项"
+msgstr "다이렉트쇼 옵션"
 
 #. TRANSLATORS: Check output format support
 #: dialog_controls.h:115
 msgid "IDC_CHK_QUERY_SINK"
-msgstr "检测输出格式支持"
+msgstr "지원하는 출력 포맷 확인"
 
 #. TRANSLATORS: Force sound card to reinit after seek / pause
 #: dialog_controls.h:117
 msgid "IDC_CHK_REINIT"
-msgstr "搜索或暂停后强制声卡重新初始化"
+msgstr "탐색/일시 정지 후 사운드카드 강제 초기화"
 
 #. TRANSLATORS: Disallow PCM output in SPDIF mode
 #: dialog_controls.h:119
 msgid "IDC_CHK_SPDIF_NO_PCM"
-msgstr "SPDIF 模式中禁止 PCM 输出"
+msgstr "SPDIF 모드에서 PCM 출력 사용 안 함"
 
 #. TRANSLATORS: SPDIF/DTS conversion
 #: dialog_controls.h:123
 msgid "IDC_GRP_DTS_CONV"
-msgstr "SPDIF/DTS 转换"
+msgstr "SPDIF/DTS 변환"
 
 #. TRANSLATORS: Convert to DTS14
 #: dialog_controls.h:125
 msgid "IDC_RBT_DTS_CONV_14BIT"
-msgstr "转换为 DTS14"
+msgstr "DTS14로 변환"
 
 #. TRANSLATORS: Convert to DTS16
 #: dialog_controls.h:127
 msgid "IDC_RBT_DTS_CONV_16BIT"
-msgstr "转换为 DTS16"
+msgstr "DTS16으로 변환"
 
 #. TRANSLATORS: Do not convert
 #: dialog_controls.h:129
 msgid "IDC_RBT_DTS_CONV_NONE"
-msgstr "不转换"
+msgstr "변환하지 않음"
 
 #. TRANSLATORS: SPDIF/DTS mode
 #: dialog_controls.h:133
 msgid "IDC_GRP_DTS_MODE"
-msgstr "SPDIF/DTS 模式"
+msgstr "SPDIF/DTS 모드"
 
 #. TRANSLATORS: Auto
 #: dialog_controls.h:135
 msgid "IDC_RBT_DTS_MODE_AUTO"
-msgstr "自动"
+msgstr "자동"
 
 #. TRANSLATORS: Padded DTS
 #: dialog_controls.h:137
 msgid "IDC_RBT_DTS_MODE_PADDED"
-msgstr "填补 DTS"
+msgstr "패딩된 DTS"
 
 #. TRANSLATORS: SPDIF wrapped
 #: dialog_controls.h:139
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
-msgstr "SPDIF 封包"
+msgstr "SPDIF 랩핑함"
 
 #. TRANSLATORS: Build info
 #: dialog_controls.h:143
 msgid "IDC_GRP_ENV"
-msgstr "编译信息"
+msgstr "빌드 정보"
 
 #. TRANSLATORS: Use AC3Filter for:
 #: dialog_controls.h:148
 msgid "IDC_GRP_FORMATS"
-msgstr "AC3Filter 解码对象:"
+msgstr "AC3Filter 사용:"
 
 #. TRANSLATORS: AC3
 #: dialog_controls.h:150
 msgid "IDC_CHK_AC3"
-msgstr "AC3"
+msgstr ""
 
 #. TRANSLATORS: DTS
 #: dialog_controls.h:152
 msgid "IDC_CHK_DTS"
-msgstr "DTS"
+msgstr ""
 
 #. TRANSLATORS: MPEG Audio
 #: dialog_controls.h:154
 msgid "IDC_CHK_MPA"
-msgstr "MPEG 音频"
+msgstr "MPEG 오디오"
 
 #. TRANSLATORS: PCM
 #: dialog_controls.h:156
 msgid "IDC_CHK_PCM"
-msgstr "PCM"
+msgstr ""
 
 #. TRANSLATORS: DVD
 #: dialog_controls.h:158
 msgid "IDC_CHK_PES"
-msgstr "DVD"
+msgstr ""
 
 #. TRANSLATORS: SPDIF
 #: dialog_controls.h:160
 msgid "IDC_CHK_SPDIF"
-msgstr "SPDIF"
+msgstr ""
 
 #. TRANSLATORS: Gain
 #: dialog_controls.h:164
 msgid "IDC_GRP_GAIN"
-msgstr "放大"
+msgstr "증폭"
 
 #. TRANSLATORS: Gains
 #: dialog_controls.h:168
 msgid "IDC_GRP_GAINS"
-msgstr "放大"
+msgstr "증폭"
 
 #. TRANSLATORS: Gain
 #: dialog_controls.h:175
 msgid "IDC_LBL_GAIN"
-msgstr "放大"
+msgstr "증폭"
 
 #. TRANSLATORS: LFE
 #: dialog_controls.h:177
 msgid "IDC_LBL_LFE"
-msgstr "LFE"
+msgstr ""
 
 #. TRANSLATORS: Master
 #: dialog_controls.h:179
 msgid "IDC_LBL_MASTER"
-msgstr "主声道"
+msgstr "마스터"
 
 #. TRANSLATORS: Surround
 #: dialog_controls.h:181
 msgid "IDC_LBL_SUR"
-msgstr "环绕"
+msgstr ""
 
 #. TRANSLATORS: Voice
 #: dialog_controls.h:183
 msgid "IDC_LBL_VOICE"
-msgstr "语音"
+msgstr "음성"
 
 #. TRANSLATORS: Input gains
 #: dialog_controls.h:192
 msgid "IDC_GRP_INPUT_GAINS"
-msgstr "输入放大"
+msgstr "입력 증폭"
 
 #. TRANSLATORS: Input levels
 #: dialog_controls.h:208
 msgid "IDC_GRP_INPUT_LEVELS"
-msgstr "输入电平"
+msgstr "입력 레벨"
 
 #. TRANSLATORS: C
 #: dialog_controls.h:216
 msgid "IDC_LBL_IN_C"
-msgstr "C"
+msgstr ""
 
 #. TRANSLATORS: L
 #: dialog_controls.h:218
 msgid "IDC_LBL_IN_L"
-msgstr "L"
+msgstr ""
 
 #. TRANSLATORS: LFE
 #: dialog_controls.h:220
 msgid "IDC_LBL_IN_LFE"
-msgstr "LFE"
+msgstr ""
 
 #. TRANSLATORS: R
 #: dialog_controls.h:222
 msgid "IDC_LBL_IN_R"
-msgstr "R"
+msgstr ""
 
 #. TRANSLATORS: SL
 #: dialog_controls.h:224
 msgid "IDC_LBL_IN_SL"
-msgstr "SL"
+msgstr ""
 
 #. TRANSLATORS: SR
 #: dialog_controls.h:226
 msgid "IDC_LBL_IN_SR"
-msgstr "SR"
+msgstr ""
 
 #. TRANSLATORS: Interface options
 #: dialog_controls.h:230
 msgid "IDC_GRP_INTERFACE"
-msgstr "界面选项"
+msgstr "인터페이스 옵션"
 
 #. TRANSLATORS: Invert levels
 #: dialog_controls.h:232
 msgid "IDC_CHK_INVERT_LEVELS"
-msgstr "反转电平显示"
+msgstr "레벨 역으로 표시"
 
 #. TRANSLATORS: Show tooltips
 #: dialog_controls.h:234
 msgid "IDC_CHK_TOOLTIPS"
-msgstr "显示提示"
+msgstr "툴팁 표시"
 
 #. TRANSLATORS: Show tray icon
 #: dialog_controls.h:236
 msgid "IDC_CHK_TRAY"
-msgstr "显示托盘图标"
+msgstr "트레이 아이콘 표시"
 
 #. TRANSLATORS: Interface update rate (ms)
 #: dialog_controls.h:239
 msgid "IDC_LBL_REFRESH_TIME"
-msgstr "界面刷新率(单位毫秒)"
+msgstr "인터페이스 갱신 주기 (ms)"
 
 #. TRANSLATORS: License
 #: dialog_controls.h:243
 msgid "IDC_GRP_LICENSE"
-msgstr "授权"
+msgstr "사용 허가서"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 #: dialog_controls.h:245
 msgid "IDC_LBL_LICENSE"
-msgstr "本程序为免费软件,可以依照 GNU 通用公共许可证第二版中的条款进行传播."
+msgstr ""
+"이 프로그램은 자유 소프트웨어로 GNU 일반 공중 사용 허가서 버전 2에 따라 배포"
+"할 수 있습니다."
 
 #. TRANSLATORS: Mixing matrix
 #: dialog_controls.h:249
 msgid "IDC_GRP_MATRIX"
-msgstr "矩阵混音"
+msgstr "믹싱 매트릭스"
 
 #. TRANSLATORS: C
 #: dialog_controls.h:287
 msgid "IDC_LBL_MATRIX_IN_C"
-msgstr "C"
+msgstr ""
 
 #. TRANSLATORS: L
 #: dialog_controls.h:289
 msgid "IDC_LBL_MATRIX_IN_L"
-msgstr "L"
+msgstr ""
 
 #. TRANSLATORS: LFE
 #: dialog_controls.h:291
 msgid "IDC_LBL_MATRIX_IN_LFE"
-msgstr "LFE"
+msgstr ""
 
 #. TRANSLATORS: R
 #: dialog_controls.h:293
 msgid "IDC_LBL_MATRIX_IN_R"
-msgstr "R"
+msgstr ""
 
 #. TRANSLATORS: SL
 #: dialog_controls.h:295
 msgid "IDC_LBL_MATRIX_IN_SL"
-msgstr "SL"
+msgstr ""
 
 #. TRANSLATORS: SR
 #: dialog_controls.h:297
 msgid "IDC_LBL_MATRIX_IN_SR"
-msgstr "SR"
+msgstr ""
 
 #. TRANSLATORS: C'
 #: dialog_controls.h:299
 msgid "IDC_LBL_MATRIX_OUT_C"
-msgstr "C'"
+msgstr ""
 
 #. TRANSLATORS: L'
 #: dialog_controls.h:301
 msgid "IDC_LBL_MATRIX_OUT_L"
-msgstr "L'"
+msgstr ""
 
 #. TRANSLATORS: R'
 #: dialog_controls.h:303
 msgid "IDC_LBL_MATRIX_OUT_R"
-msgstr "R'"
+msgstr ""
 
 #. TRANSLATORS: SL'
 #: dialog_controls.h:305
 msgid "IDC_LBL_MATRIX_OUT_SL"
-msgstr "SL'"
+msgstr ""
 
 #. TRANSLATORS: SR'
 #: dialog_controls.h:307
 msgid "IDC_LBL_MATRIX_OUT_SR"
-msgstr "SR'"
+msgstr ""
 
 #. TRANSLATORS: Sub
 #: dialog_controls.h:309
 msgid "IDC_LBL_MATRIX_OUT_SW"
-msgstr "Sub"
+msgstr ""
 
 #. TRANSLATORS: Matrix preset
 #: dialog_controls.h:313
 msgid "IDC_GRP_MATRIX_PRESET"
-msgstr "矩阵方案"
+msgstr "매트릭스 프리셋"
 
 #. TRANSLATORS: Delete
 #: dialog_controls.h:315
 msgid "IDC_BTN_MATRIX_DELETE"
-msgstr "删除"
+msgstr "삭제"
 
 #. TRANSLATORS: Save
 #: dialog_controls.h:317
 msgid "IDC_BTN_MATRIX_SAVE"
-msgstr "保存"
+msgstr "저장"
 
 #. TRANSLATORS: Filter merit
 #: dialog_controls.h:322
 msgid "IDC_GRP_MERIT"
-msgstr "解码器优先级"
+msgstr "필터 선호도"
 
 #. TRANSLATORS: Prefer AC3Filter
 #: dialog_controls.h:324
 msgid "IDC_RBT_MERIT_PREFERRED"
-msgstr "优先使用 AC3Filter"
+msgstr "AC3Filter 선호"
 
 #. TRANSLATORS: Prefer other decoder
 #: dialog_controls.h:326
 msgid "IDC_RBT_MERIT_UNLIKELY"
-msgstr "优先使用其他解码器"
+msgstr "다른 디코더 선호"
 
 #. TRANSLATORS: Options
 #: dialog_controls.h:330
 msgid "IDC_GRP_MIXER_OPTIONS"
-msgstr "选项"
+msgstr "옵션"
 
 #. TRANSLATORS: Auto gain control
 #: dialog_controls.h:332
 msgid "IDC_CHK_AUTO_GAIN"
-msgstr "自动放大控制"
+msgstr "자동 증폭 조절"
 
 #. TRANSLATORS: Auto matrix
 #: dialog_controls.h:334
 msgid "IDC_CHK_AUTO_MATRIX"
-msgstr "自动矩阵"
+msgstr "자동 매트릭스"
 
 #. TRANSLATORS: Bass redirection
 #: dialog_controls.h:336
 msgid "IDC_CHK_BASS_REDIR"
-msgstr "低音改向"
+msgstr "베이스 리다이렉션"
 
 #. TRANSLATORS: Expand stereo
 #: dialog_controls.h:338
 msgid "IDC_CHK_EXPAND_STEREO"
-msgstr "扩展立体声"
+msgstr "스테레오 확장"
 
 #. TRANSLATORS: One-pass norm
 #: dialog_controls.h:340
 msgid "IDC_CHK_NORMALIZE"
-msgstr "单重标准化"
+msgstr "원패스 정규화"
 
 #. TRANSLATORS: Normalize matrix
 #: dialog_controls.h:342
 msgid "IDC_CHK_NORM_MATRIX"
-msgstr "标准化矩阵"
+msgstr "매트릭스 정규화"
 
 #. TRANSLATORS: Voice control
 #: dialog_controls.h:344
 msgid "IDC_CHK_VOICE_CONTROL"
-msgstr "语音控制"
+msgstr "음성 조절"
 
 #. TRANSLATORS: Cutoff frequency
 #: dialog_controls.h:347
 msgid "IDC_LBL_BASS_FREQ"
-msgstr "截断频率"
+msgstr "설정 주파수"
 
 #. TRANSLATORS: Output format
 #: dialog_controls.h:351
 msgid "IDC_GRP_OUTPUT"
-msgstr "输出方式"
+msgstr "출력 포맷"
 
 #. TRANSLATORS: Use SPDIF
 #: dialog_controls.h:353
 msgid "IDC_CHK_USE_SPDIF"
-msgstr "启用 SPDIF"
+msgstr "SPDIF 사용"
 
 #. TRANSLATORS: input format
 #: dialog_controls.h:357
 msgid "IDC_LBL_INPUT"
-msgstr "输入方式"
+msgstr "입력 포맷"
 
 #. TRANSLATORS: Output gains
 #: dialog_controls.h:361
 msgid "IDC_GRP_OUTPUT_GAINS"
-msgstr "输出放大"
+msgstr "출력 증폭"
 
 #. TRANSLATORS: Output levels
 #: dialog_controls.h:377
 msgid "IDC_GRP_OUTPUT_LEVELS"
-msgstr "输出电平"
+msgstr "출력 레벨"
 
 #. TRANSLATORS: C
 #: dialog_controls.h:379
 msgid "IDC_LBL_OUT_C"
-msgstr "C"
+msgstr ""
 
 #. TRANSLATORS: L
 #: dialog_controls.h:381
 msgid "IDC_LBL_OUT_L"
-msgstr "L"
+msgstr ""
 
 #. TRANSLATORS: R
 #: dialog_controls.h:383
 msgid "IDC_LBL_OUT_R"
-msgstr "R"
+msgstr ""
 
 #. TRANSLATORS: SL
 #: dialog_controls.h:385
 msgid "IDC_LBL_OUT_SL"
-msgstr "SL"
+msgstr ""
 
 #. TRANSLATORS: SR
 #: dialog_controls.h:387
 msgid "IDC_LBL_OUT_SR"
-msgstr "SR"
+msgstr ""
 
 #. TRANSLATORS: Sub
 #: dialog_controls.h:389
 msgid "IDC_LBL_OUT_SW"
-msgstr "Sub"
+msgstr ""
 
 #. TRANSLATORS: Preset
 #: dialog_controls.h:399
 msgid "IDC_GRP_PRESET"
-msgstr "方案"
+msgstr "프리셋"
 
 #. TRANSLATORS: Delete
 #: dialog_controls.h:401
 msgid "IDC_BTN_PRESET_DELETE"
-msgstr "删除"
+msgstr "삭제"
 
 #. TRANSLATORS: File
 #: dialog_controls.h:403
 msgid "IDC_BTN_PRESET_FILE"
-msgstr "文件"
+msgstr "파일"
 
 #. TRANSLATORS: Save
 #: dialog_controls.h:405
 msgid "IDC_BTN_PRESET_SAVE"
-msgstr "保存"
+msgstr "저장"
 
 #. TRANSLATORS: Default audio renderer
 #: dialog_controls.h:410
 msgid "IDC_GRP_RENDERER"
-msgstr "默认音频渲染器"
+msgstr "기본 오디오 렌더러"
 
 #. TRANSLATORS: Use Direct Sound by default
 #: dialog_controls.h:412
 msgid "IDC_RBT_RENDER_DS"
-msgstr "默认使用 Direct Sound"
+msgstr "다이렉트사운드"
 
 #. TRANSLATORS: Use Wave Out by default
 #: dialog_controls.h:414
 msgid "IDC_RBT_RENDER_WO"
-msgstr "默认使用波形输出"
+msgstr "웨이브 출력"
 
 #. TRANSLATORS: SPDIF options
 #: dialog_controls.h:418
 msgid "IDC_GRP_SPDIF"
-msgstr "SPDIF 选项"
+msgstr "SPDIF 옵션"
 
 #. TRANSLATORS: 32kHz
 #: dialog_controls.h:420
 msgid "IDC_CHK_SPDIF_ALLOW_32"
-msgstr "32kHz"
+msgstr ""
 
 #. TRANSLATORS: 44kHz
 #: dialog_controls.h:422
 msgid "IDC_CHK_SPDIF_ALLOW_44"
-msgstr "44kHz"
+msgstr ""
 
 #. TRANSLATORS: 48kHz
 #: dialog_controls.h:424
 msgid "IDC_CHK_SPDIF_ALLOW_48"
-msgstr "48kHz"
+msgstr ""
 
 #. TRANSLATORS: Output SPDIF as PCM
 #: dialog_controls.h:426
 msgid "IDC_CHK_SPDIF_AS_PCM"
-msgstr "输出 SPDIF 为 PCM"
+msgstr "PCM으로 SPDIF 출력"
 
 #. TRANSLATORS: Restrict SPDIF sample rate
 #: dialog_controls.h:428
 msgid "IDC_CHK_SPDIF_CHECK_SR"
-msgstr "限定 SPDIF 采样率"
+msgstr "SPDIF 샘플레이트 제한"
 
 #. TRANSLATORS: Use AC3 encoder
 #: dialog_controls.h:430
 msgid "IDC_CHK_SPDIF_ENCODE"
-msgstr "使用 AC3 编码器"
+msgstr "AC3 인코더 사용"
 
 #. TRANSLATORS: Do not encode stereo PCM
 #: dialog_controls.h:432
 msgid "IDC_CHK_SPDIF_STEREO_PT"
-msgstr "不允许编码立体声 PCM"
+msgstr "스테레오 PCM은 인코딩 안 함"
 
 #. TRANSLATORS: Detect SPDIF stream in PCM data
 #: dialog_controls.h:434
 msgid "IDC_CHK_USE_DETECTOR"
-msgstr "在 PCM 数据中检测 SPDIF 流"
+msgstr "PCM 데이터에서 SPDIF 스트림 탐색"
 
 #. TRANSLATORS: AC3 encoder bitrate (kbps)
 #: dialog_controls.h:437
 #, fuzzy
 msgid "IDC_LBL_SPDIF_BITRATE"
-msgstr "当前 jitter:"
+msgstr "현재 지터:"
 
 #. TRANSLATORS: SPDIF passthrough
 #: dialog_controls.h:441
 msgid "IDC_GRP_SPDIF_PT"
-msgstr "SPDIF 传输对象"
+msgstr "SPDIF 패스쓰루"
 
 #. TRANSLATORS: AC3
 #: dialog_controls.h:443
 msgid "IDC_CHK_SPDIF_AC3"
-msgstr "AC3"
+msgstr ""
 
 #. TRANSLATORS: DTS
 #: dialog_controls.h:445
 msgid "IDC_CHK_SPDIF_DTS"
-msgstr "DTS"
+msgstr ""
 
 #. TRANSLATORS: MPEG Audio
 #: dialog_controls.h:447
 msgid "IDC_CHK_SPDIF_MPA"
-msgstr "MPEG 音频"
+msgstr "MPEG 오디오"
 
 #. TRANSLATORS: Audio/Video sync
 #: dialog_controls.h:451
 msgid "IDC_GRP_SYNC"
-msgstr "音频/视频同步"
+msgstr "오디오/비디오 동기화"
 
 #. TRANSLATORS: Jitter correction.
 #: dialog_controls.h:453
 msgid "IDC_CHK_JITTER"
-msgstr "Jitter 校正."
+msgstr "지터 보정."
 
 #. TRANSLATORS: Current jitter:
 #: dialog_controls.h:457
 msgid "IDC_LBL_JITTER"
-msgstr "当前 jitter:"
+msgstr "현재 지터:"
 
 #. TRANSLATORS: Time shift (ms):
 #: dialog_controls.h:459
 msgid "IDC_LBL_TIME_SHIFT"
-msgstr "变速时间(毫秒):"
+msgstr "타임 시프트 (ms):"
 
 #. TRANSLATORS: <- sound lags
 #: dialog_controls.h:461
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
-msgstr "-0.5s"
+msgstr ""
 
 #. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:463
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
-msgstr "+0.5s"
+msgstr ""
 
 #. TRANSLATORS: Localization
 #: dialog_controls.h:468
 msgid "IDC_GRP_TRANS"
-msgstr "本地化"
+msgstr "번역"
 
 #. TRANSLATORS: Language:
 #: dialog_controls.h:472
 msgid "IDC_LBL_LANG"
-msgstr "语言:"
+msgstr "언어:"
 
 #: ac3filter_dlg.cpp:158
 msgid "AS IS (no change)"
-msgstr "AS IS (无转换)"
+msgstr "그대로 (변경 없음)"
 
 #: ac3filter_dlg.cpp:159
 msgid "1/0 - mono"
-msgstr "1/0 - 单声道"
+msgstr "1/0 - 모노"
 
 #: ac3filter_dlg.cpp:160
 msgid "2/0 - stereo"
-msgstr "2/0 - 立体声"
+msgstr "2/0 - 스테레오"
 
 #: ac3filter_dlg.cpp:161
 msgid "3/0 - 3 front"
-msgstr "3/0 - 3 前置"
+msgstr "3/0 - 3 프론트"
 
 #: ac3filter_dlg.cpp:162
 msgid "2/1 - surround"
-msgstr "2/1 - 环绕"
+msgstr "2/1 - 서라운드"
 
 #: ac3filter_dlg.cpp:163
 msgid "3/1 - surround"
-msgstr "3/1 - 环绕"
+msgstr "3/1 - 서라운드"
 
 #: ac3filter_dlg.cpp:164
 msgid "2/2 - quadro"
-msgstr "2/2 - 矩阵"
+msgstr "2/2 - 쿼드로"
 
 #: ac3filter_dlg.cpp:165
 msgid "3/2 - 5 channels"
-msgstr "3/2 - 5 声道"
+msgstr "3/2 - 5 채널"
 
 #: ac3filter_dlg.cpp:166
 msgid "1/0+SW 1.1 mono"
-msgstr "1/0+SW 1.1 单声道"
+msgstr "1/0+SW 1.1 모노"
 
 #: ac3filter_dlg.cpp:167
 msgid "2/0+SW 2.1 stereo"
-msgstr "2/0+SW 2.1 立体声"
+msgstr "2/0+SW 2.1 스테레오"
 
 #: ac3filter_dlg.cpp:168
 msgid "3/0+SW 3.1 front"
-msgstr "3/0+SW 3.1 前置"
+msgstr "3/0+SW 3.1 프론트"
 
 #: ac3filter_dlg.cpp:169
 msgid "2/1+SW 3.1 surround"
-msgstr "2/1+SW 3.1 环绕"
+msgstr "2/1+SW 3.1 서라운드"
 
 #: ac3filter_dlg.cpp:170
 msgid "3/1+SW 4.1 surround"
-msgstr "3/1+SW 4.1 环绕"
+msgstr "3/1+SW 4.1 서라운드"
 
 #: ac3filter_dlg.cpp:171
 msgid "2/2+SW 4.1 quadro"
-msgstr "2/2+SW 4.1 矩阵"
+msgstr "2/2+SW 4.1 쿼드로"
 
 #: ac3filter_dlg.cpp:172
 msgid "3/2+SW 5.1 channels"
-msgstr "3/2+SW 5.1 声道"
+msgstr "3/2+SW 5.1 채널"
 
 #: ac3filter_dlg.cpp:173
 msgid "Dolby Surround/ProLogic"
-msgstr "杜比环绕 / 定向逻辑"
+msgstr "돌비 Surround/ProLogic"
 
 #: ac3filter_dlg.cpp:174
 msgid "Dolby ProLogic II"
-msgstr "杜比定向逻辑 II"
+msgstr "돌비 ProLogic II"
 
 #: ac3filter_dlg.cpp:179
 msgid "PCM 16bit"
-msgstr "PCM 16位"
+msgstr ""
 
 #: ac3filter_dlg.cpp:180
 msgid "PCM 24bit"
-msgstr "PCM 24位"
+msgstr ""
 
 #: ac3filter_dlg.cpp:181
 msgid "PCM 32bit"
-msgstr "PCM 32位"
+msgstr ""
 
 #: ac3filter_dlg.cpp:182
 msgid "PCM Float"
-msgstr "PCM 浮点"
+msgstr ""
 
 #: ac3filter_dlg.cpp:274
 msgid "Samples"
-msgstr "采样"
+msgstr "샘플"
 
 #: ac3filter_dlg.cpp:275
 msgid "Millisecs"
-msgstr "毫秒"
+msgstr "밀리초"
 
 #: ac3filter_dlg.cpp:276
 msgid "Meters"
-msgstr "米"
+msgstr "미터"
 
 #: ac3filter_dlg.cpp:277
 msgid "Centimeters"
-msgstr "厘米"
+msgstr "센티미터"
 
 #: ac3filter_dlg.cpp:278
 msgid "Feet"
-msgstr "英尺"
+msgstr "피트"
 
 #: ac3filter_dlg.cpp:279
 msgid "Inches"
-msgstr "英寸"
+msgstr "인치"
 
 #. TRANSLATORS: Main
 #: ac3filter_dlg.cpp:345
 msgid "IDD_MAIN"
-msgstr "主体"
+msgstr ""
 
 #. TRANSLATORS: Mixer
 #: ac3filter_dlg.cpp:352
 msgid "IDD_MIXER"
-msgstr "混音"
+msgstr ""
 
 #. TRANSLATORS: Gains
 #: ac3filter_dlg.cpp:359
+#, fuzzy
 msgid "IDD_GAINS"
-msgstr "放大"
+msgstr "증폭"
 
 #. TRANSLATORS: SPDIF
 #: ac3filter_dlg.cpp:366
+#, fuzzy
 msgid "IDD_SPDIF"
-msgstr "SPDIF"
+msgstr "SPDIF 옵션"
 
 #. TRANSLATORS: System
 #: ac3filter_dlg.cpp:373
 msgid "IDD_SYSTEM"
-msgstr "系统"
+msgstr ""
 
 #. TRANSLATORS: About
 #: ac3filter_dlg.cpp:381
+#, fuzzy
 msgid "IDD_ABOUT"
-msgstr "关于"
+msgstr "무엇인가요?"
 
 #: ac3filter_dlg.cpp:1040
 #, c-format
 msgid "%s %s %iHz"
-msgstr "%s %s %iHz"
+msgstr ""
 
 #: ac3filter_dlg.cpp:1053
 msgid "Use SPDIF"
-msgstr "启用 SPDIF"
+msgstr "SPDIF 사용"
 
 #: ac3filter_dlg.cpp:1057
 msgid "Use SPDIF (disabled)"
-msgstr "启用 SPDIF (禁止)"
+msgstr "SPDIF 사용 (비활성)"
 
 #: ac3filter_dlg.cpp:1061
 msgid "Use SPDIF (passthrough)"
-msgstr "启用 SPDIF (传输)"
+msgstr "SPDIF 사용 (패스쓰루)"
 
 #: ac3filter_dlg.cpp:1065
 msgid "Use SPDIF (AC3 encode)"
-msgstr "启用 SPDIF (AC3 编码)"
+msgstr "SPDIF 사용 (AC3 인코드)"
 
 #: ac3filter_dlg.cpp:1069
 msgid "Use SPDIF (Unknown)"
-msgstr "启用 SPDIF (未知)"
+msgstr "SPDIF 사용 (알 수 없음)"
 
 #: ac3filter_dlg.cpp:1126
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
-"输入\tmean: %i 毫秒\tstddev: %i 毫秒\n"
-"输出\tmean: %i 毫秒\tstddev: %i 毫秒"
+"입력\t평균: %ims\t표준편차: %ims\n"
+"출력\t평균: %ims\t표준편차: %ims"
 
 #: ac3filter_dlg.cpp:1539
 msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
 "enabled. Press 'No' to enable this option."
 msgstr ""
-"这个选项存在风险! 启用后过滤器可能会使扬声器发出非常大的噪音.要启用该选项,请"
-"点击按钮\"否\"."
 
 #: ac3filter_dlg.cpp:1539 ac3filter_dlg.cpp:1646
 msgid "Dangerous option!"
-msgstr "存在风险!"
+msgstr ""
 
 #: ac3filter_dlg.cpp:1646
 msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
-"这个选项存在风险! 启用后可能造成音频和视频不同步.要启用该选项,请点击按钮\"否"
-"\"."
 
 #: ac3filter_dlg.cpp:2113
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
-msgstr "你确定要删除方案 '%s' 吗?"
+msgstr "'%s' 프리셋를 지우시겠습니까?"
 
 #: ac3filter_dlg.cpp:2114 ac3filter_dlg.cpp:2203
 msgid "Delete confirmation"
-msgstr "删除确认"
+msgstr "삭제 확인"
 
 #: ac3filter_dlg.cpp:2202
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
-msgstr "你确认要删除矩阵方案 '%s' 吗?"
+msgstr "'%s' 매트릭스를 지우시겠습니까?"

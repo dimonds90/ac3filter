@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.40b\n"
+"Project-Id-Version: AC3Filter 1.45b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-24 15:52+0400\n"
-"PO-Revision-Date: 2007-05-31 13:18+0100\n"
+"POT-Creation-Date: 2007-08-08 21:08+0400\n"
+"PO-Revision-Date: 2007-06-08 17:26+0100\n"
 "Last-Translator: Artam <peterki@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,17 +31,17 @@ msgstr "Čo je to?"
 #: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
 msgstr ""
-"AC3Filter je free DirectShow filter vysokej kvality pre dekódovanie a "
-"spracovanie zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita "
-"a jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
+"AC3Filter je DirectShow filter vysokej kvality pre dekódovanie a spracovanie "
+"zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita a "
+"jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 #: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
 msgstr ""
-"Používa ho automaticky väčšina multimediálnych prehrávačov. Je potrebný pre "
-"prehrávanie AVI súborov s AC3 alebo DTS zvukovými stopami. Môže byť použitý "
-"tiež na prehrávanie DVD."
+"Väčšina multimediálnych prehrávačov ho používa automaticky. Je nevyhnutný na "
+"prehrávanie AVI súborov s AC3 alebo DTS zvukovými stopami. Môže sa tiež "
+"použiť na prehrávanie DVD."
 
 #. TRANSLATORS: AGC
 #: dialog_controls.h:35
@@ -264,12 +264,12 @@ msgstr "SPDIF"
 #. TRANSLATORS: Gain
 #: dialog_controls.h:164
 msgid "IDC_GRP_GAIN"
-msgstr "Zisk"
+msgstr "Úroveň hlasitosti"
 
 #. TRANSLATORS: Gains
 #: dialog_controls.h:168
 msgid "IDC_GRP_GAINS"
-msgstr "Zisky"
+msgstr "Úrovne hlasitosti"
 
 #. TRANSLATORS: Gain
 #: dialog_controls.h:175
@@ -299,12 +299,12 @@ msgstr "Center"
 #. TRANSLATORS: Input gains
 #: dialog_controls.h:192
 msgid "IDC_GRP_INPUT_GAINS"
-msgstr "Vstupný zisk"
+msgstr "Úroveň zisku na vstupoch"
 
 #. TRANSLATORS: Input levels
 #: dialog_controls.h:208
 msgid "IDC_GRP_INPUT_LEVELS"
-msgstr "Vstupná úroveň"
+msgstr "Vstupné úrovne"
 
 #. TRANSLATORS: C
 #: dialog_controls.h:216
@@ -416,7 +416,7 @@ msgstr "C'"
 #. TRANSLATORS: L'
 #: dialog_controls.h:301
 msgid "IDC_LBL_MATRIX_OUT_L"
-msgstr " L'"
+msgstr "L'"
 
 #. TRANSLATORS: R'
 #: dialog_controls.h:303
@@ -426,7 +426,7 @@ msgstr "R'"
 #. TRANSLATORS: SL'
 #: dialog_controls.h:305
 msgid "IDC_LBL_MATRIX_OUT_SL"
-msgstr " SL'"
+msgstr "SL'"
 
 #. TRANSLATORS: SR'
 #: dialog_controls.h:307
@@ -456,7 +456,7 @@ msgstr "Uložiť"
 #. TRANSLATORS: Filter merit
 #: dialog_controls.h:322
 msgid "IDC_GRP_MERIT"
-msgstr "Filter merit"
+msgstr "Priorita filtra"
 
 #. TRANSLATORS: Prefer AC3Filter
 #: dialog_controls.h:324
@@ -496,7 +496,7 @@ msgstr "Rozšíriť stereo"
 #. TRANSLATORS: One-pass norm
 #: dialog_controls.h:340
 msgid "IDC_CHK_NORMALIZE"
-msgstr "1-prechodová norm."
+msgstr "1-prechod. normaliz."
 
 #. TRANSLATORS: Normalize matrix
 #: dialog_controls.h:342
@@ -511,7 +511,7 @@ msgstr "Dialógový kanál"
 #. TRANSLATORS: Cutoff frequency
 #: dialog_controls.h:347
 msgid "IDC_LBL_BASS_FREQ"
-msgstr "Horná frekvencia"
+msgstr "Horná hranica (Hz)"
 
 #. TRANSLATORS: Output format
 #: dialog_controls.h:351
@@ -531,12 +531,12 @@ msgstr "vstupný formát"
 #. TRANSLATORS: Output gains
 #: dialog_controls.h:361
 msgid "IDC_GRP_OUTPUT_GAINS"
-msgstr "Výstupný zisk"
+msgstr "Úroveň zisku na výstupoch"
 
 #. TRANSLATORS: Output levels
 #: dialog_controls.h:377
 msgid "IDC_GRP_OUTPUT_LEVELS"
-msgstr "Výstupná úroveň"
+msgstr "Výstupné úrovne"
 
 #. TRANSLATORS: C
 #: dialog_controls.h:379
@@ -682,7 +682,7 @@ msgstr "Audio/Video synchronizácia"
 #. TRANSLATORS: Jitter correction.
 #: dialog_controls.h:453
 msgid "IDC_CHK_JITTER"
-msgstr "Jitter korekcia."
+msgstr "Jitter korekcia"
 
 #. TRANSLATORS: Current jitter:
 #: dialog_controls.h:457
@@ -697,12 +697,12 @@ msgstr "Časový posun (ms):"
 #. TRANSLATORS: <- sound lags
 #: dialog_controls.h:461
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
-msgstr ""
+msgstr "<- zvuk mešká"
 
 #. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:463
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
-msgstr ""
+msgstr "zvuk predbieha ->"
 
 #. TRANSLATORS: Localization
 #: dialog_controls.h:468
@@ -825,36 +825,32 @@ msgstr "Palce"
 #. TRANSLATORS: Main
 #: ac3filter_dlg.cpp:345
 msgid "IDD_MAIN"
-msgstr ""
+msgstr "Hlavný panel"
 
 #. TRANSLATORS: Mixer
 #: ac3filter_dlg.cpp:352
-#, fuzzy
 msgid "IDD_MIXER"
-msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"
+msgstr "Mixer"
 
 #. TRANSLATORS: Gains
 #: ac3filter_dlg.cpp:359
-#, fuzzy
 msgid "IDD_GAINS"
-msgstr "Zisky"
+msgstr "Hlasitosti"
 
 #. TRANSLATORS: SPDIF
 #: ac3filter_dlg.cpp:366
-#, fuzzy
 msgid "IDD_SPDIF"
 msgstr "SPDIF"
 
 #. TRANSLATORS: System
 #: ac3filter_dlg.cpp:373
 msgid "IDD_SYSTEM"
-msgstr ""
+msgstr "Systém"
 
 #. TRANSLATORS: About
 #: ac3filter_dlg.cpp:381
-#, fuzzy
 msgid "IDD_ABOUT"
-msgstr "Čo je to?"
+msgstr "O programe"
 
 #: ac3filter_dlg.cpp:1040
 #, c-format
@@ -895,16 +891,24 @@ msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
 "enabled. Press 'No' to enable this option."
 msgstr ""
+"Táto voľba je NEBEZPEČNÁ! Ak je zapnutá, filter môže vydávať veľmi hlasité "
+"pazvuky.\n"
+"\n"
+"Na zapnutie tejto voľby stlačte 'Nie."
 
 #: ac3filter_dlg.cpp:1539 ac3filter_dlg.cpp:1646
 msgid "Dangerous option!"
-msgstr ""
+msgstr "Nebezpečná voľba!"
 
 #: ac3filter_dlg.cpp:1646
 msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
+"Táto voľba je NEBEZPEČNÁ! Ak ju zapnete, zvuk a obraz môžu stratiť "
+"synchronizáciu.\n"
+"\n"
+"Na zapnutie tejto voľby stlačte 'Nie'."
 
 #: ac3filter_dlg.cpp:2113
 #, c-format

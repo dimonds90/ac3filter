@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.40b\n"
+"Project-Id-Version: AC3Filter 1.45b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-24 15:52+0400\n"
-"PO-Revision-Date: 2007-06-01 16:03+0100\n"
+"POT-Creation-Date: 2007-08-08 21:08+0400\n"
+"PO-Revision-Date: 2007-06-08 12:31+0100\n"
 "Last-Translator: Sziládi Zsolt <sadistzs@freemail.hu>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -699,12 +699,12 @@ msgstr "Időeltolás (ms):"
 #. TRANSLATORS: <- sound lags
 #: dialog_controls.h:461
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
-msgstr ""
+msgstr "<- hangkésleltetés"
 
 #. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:463
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
-msgstr ""
+msgstr "hangsiettetés ->"
 
 #. TRANSLATORS: Localization
 #: dialog_controls.h:468
@@ -827,36 +827,32 @@ msgstr "Hüvelyk"
 #. TRANSLATORS: Main
 #: ac3filter_dlg.cpp:345
 msgid "IDD_MAIN"
-msgstr ""
+msgstr "Fő"
 
 #. TRANSLATORS: Mixer
 #: ac3filter_dlg.cpp:352
-#, fuzzy
 msgid "IDD_MIXER"
-msgstr "AC3Filter %s verzió Copyright (c) 2002-2007 Alexander Vigovsky"
+msgstr "Keverő"
 
 #. TRANSLATORS: Gains
 #: ac3filter_dlg.cpp:359
-#, fuzzy
 msgid "IDD_GAINS"
 msgstr "Erősítések"
 
 #. TRANSLATORS: SPDIF
 #: ac3filter_dlg.cpp:366
-#, fuzzy
 msgid "IDD_SPDIF"
 msgstr "SPDIF"
 
 #. TRANSLATORS: System
 #: ac3filter_dlg.cpp:373
 msgid "IDD_SYSTEM"
-msgstr ""
+msgstr "Rendszer"
 
 #. TRANSLATORS: About
 #: ac3filter_dlg.cpp:381
-#, fuzzy
 msgid "IDD_ABOUT"
-msgstr "Mi ez?"
+msgstr "Névjegy"
 
 #: ac3filter_dlg.cpp:1040
 #, c-format
@@ -897,16 +893,20 @@ msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
 "enabled. Press 'No' to enable this option."
 msgstr ""
+"Ez a beállítás VESZÉLYES! A szűrő nagyon hangos hangot hozhat létre a "
+"beállítás engedélyezésével. Nyomj 'Nem'-et a beállítás engedélyezéséhez."
 
 #: ac3filter_dlg.cpp:1539 ac3filter_dlg.cpp:1646
 msgid "Dangerous option!"
-msgstr ""
+msgstr "Veszélyes beállítás!"
 
 #: ac3filter_dlg.cpp:1646
 msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
+"Ez a beállítás VESZÉLYES! A video elvesztheti a szinkronizációt a hanggal a "
+"beállítás engedélyezésével. Nyomj 'Nem'-et a beállítás engedélyezéséhez."
 
 #: ac3filter_dlg.cpp:2113
 #, c-format

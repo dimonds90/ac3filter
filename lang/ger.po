@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.40b\n"
+"Project-Id-Version: AC3Filter 1.45b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-24 15:52+0400\n"
-"PO-Revision-Date: 2007-06-05 00:12+0100\n"
-"Last-Translator: Filico <findme@dvbviewer.com>\n"
+"POT-Creation-Date: 2007-08-08 21:08+0400\n"
+"PO-Revision-Date: 2007-06-09 10:28+0100\n"
+"Last-Translator: Filico <findme@dvbviewer.forum>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -699,12 +699,12 @@ msgstr "Timeshift (ms):"
 #. TRANSLATORS: <- sound lags
 #: dialog_controls.h:461
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
-msgstr ""
+msgstr "<- Ton verzögern"
 
 #. TRANSLATORS: sound hastes ->
 #: dialog_controls.h:463
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
-msgstr ""
+msgstr "Ton beschleunigen ->"
 
 #. TRANSLATORS: Localization
 #: dialog_controls.h:468
@@ -827,36 +827,32 @@ msgstr "Inches"
 #. TRANSLATORS: Main
 #: ac3filter_dlg.cpp:345
 msgid "IDD_MAIN"
-msgstr ""
+msgstr "Übersicht"
 
 #. TRANSLATORS: Mixer
 #: ac3filter_dlg.cpp:352
-#, fuzzy
 msgid "IDD_MIXER"
-msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 von Alexander Vigovsky"
+msgstr "Mixer"
 
 #. TRANSLATORS: Gains
 #: ac3filter_dlg.cpp:359
-#, fuzzy
 msgid "IDD_GAINS"
-msgstr "Verstärkungen"
+msgstr "Lautstärkeregelung"
 
 #. TRANSLATORS: SPDIF
 #: ac3filter_dlg.cpp:366
-#, fuzzy
 msgid "IDD_SPDIF"
 msgstr "SPDIF"
 
 #. TRANSLATORS: System
 #: ac3filter_dlg.cpp:373
 msgid "IDD_SYSTEM"
-msgstr ""
+msgstr "Einstellungen"
 
 #. TRANSLATORS: About
 #: ac3filter_dlg.cpp:381
-#, fuzzy
 msgid "IDD_ABOUT"
-msgstr "Was ist der AC3Filter?"
+msgstr "Über"
 
 #: ac3filter_dlg.cpp:1040
 #, c-format
@@ -897,16 +893,20 @@ msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
 "enabled. Press 'No' to enable this option."
 msgstr ""
+"ACHTUNG! Der Filter kann eine erhöhte Lautstärke produzieren, wenn diese "
+"Option aktiviert ist. Klicken Sie auf 'Nein', um diese Option zu aktivieren."
 
 #: ac3filter_dlg.cpp:1539 ac3filter_dlg.cpp:1646
 msgid "Dangerous option!"
-msgstr ""
+msgstr "Hinweis"
 
 #: ac3filter_dlg.cpp:1646
 msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
+"ACHTUNG! Das Video kann asynchron laufen, wenn diese Option aktiviert ist. "
+"Klicken Sie auf 'Nein', um diese Option zu aktivieren."
 
 #: ac3filter_dlg.cpp:2113
 #, c-format
