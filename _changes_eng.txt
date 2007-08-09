@@ -1,7 +1,9 @@
-v1.46b -
+v1.46 stable - 09.08.2007
   + AC3 encoder bitrate is now ajustable
+  + Korean translation added (thanks to starcodec)
   ! Upmixing of Dolby Surround files works now (thanks to Stefan Schott)
   ! MPEG Audio Joint stereo playback fixed (thanks to Daniel Bechter)
+  ! Problem with decimal point in mixing matrix on some non-english Windows (thanks to Marcin Hencz)
 
 
 v1.45b - 07.06.2007
