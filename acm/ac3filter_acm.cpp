@@ -478,10 +478,6 @@ ACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
     dst->nBlockAlign,
     dst->wBitsPerSample);
   
-  if (src->wFormatTag != WAVE_FORMAT_AC3 && // We can do only decompression
-      src->wFormatTag != WAVE_FORMAT_DTS)
-    return ACMERR_NOTPOSSIBLE;
-
   switch (src->wFormatTag)
   {
     ///////////////////////////////////////////////////////
