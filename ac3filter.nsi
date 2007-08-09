@@ -2,7 +2,7 @@
 ; AC3Filter installation script
 ;
 
-OutFile "${SETUP_FILE}\AC3Filter"
+OutFile "${SETUP_FILE}"
 Name "AC3Filter"
 CRCCheck on
 SetCompressor lzma
@@ -11,7 +11,7 @@ SetCompressor lzma
 Icon "ac3filter.ico"
 UninstallIcon "ac3filter.ico"
 
-InstallDir $PROGRAMFILES
+InstallDir $PROGRAMFILES\AC3Filter
 InstallDirRegKey HKLM "Software\AC3Filter" "Install_Dir"
 
 InstallColors {000000 C0C0C0}
