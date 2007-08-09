@@ -2,7 +2,7 @@
 ; AC3Filter installation script
 ;
 
-OutFile "${SETUP_FILE}"
+OutFile "${SETUP_FILE}\AC3Filter"
 Name "AC3Filter"
 CRCCheck on
 SetCompressor lzma
