@@ -162,16 +162,24 @@ static const int pcm_sample_rate[] =
 
 static const int ac3_channels[] =
 { 
-  0, // support undefined mode 
-  MODE_1_0,     MODE_2_0,     MODE_3_0,     MODE_2_1,     MODE_3_1,     MODE_2_2,     MODE_3_2,     
-  MODE_1_0_LFE, MODE_2_0_LFE, MODE_3_0_LFE, MODE_2_1_LFE, MODE_3_1_LFE, MODE_2_2_LFE, MODE_3_2_LFE, 
+  0,            // support undefined mode (0 channels)
+  MODE_1_0,     // 1 channel
+  MODE_2_0,     // 2 channels
+  MODE_2_1,     // 3 channels
+  MODE_2_2,     // 4 channels
+  MODE_3_2,     // 5 channels
+  MODE_3_2_LFE, // 6 channels
 };
 
 static const int dts_channels[] =
 { 
-  0, // support undefined mode 
-  MODE_1_0,     MODE_2_0,     MODE_3_0,     MODE_2_1,     MODE_3_1,     MODE_2_2,     MODE_3_2,     
-  MODE_1_0_LFE, MODE_2_0_LFE, MODE_3_0_LFE, MODE_2_1_LFE, MODE_3_1_LFE, MODE_2_2_LFE, MODE_3_2_LFE, 
+  0,            // support undefined mode (0 channels)
+  MODE_1_0,     // 1 channel
+  MODE_2_0,     // 2 channels
+  MODE_2_1,     // 3 channels
+  MODE_2_2,     // 4 channels
+  MODE_3_2,     // 5 channels
+  MODE_3_2_LFE, // 6 channels
 };
 
 static const int ac3_bitrate[] =
@@ -194,8 +202,8 @@ static const int dts_bitrate[] =
 
 static const int pcm_channels[] =
 {
-  MODE_STEREO,
-  MODE_MONO
+  MODE_STEREO,  // 1 channel
+  MODE_MONO,    // 2 channel
 };
 
 static const int pcm_bps[] =
@@ -203,7 +211,7 @@ static const int pcm_bps[] =
   16
 };
 
-const FormatTag formats[] =
+const FormatTag tags[] =
 {
   { 
     0, L"AC3", WAVE_FORMAT_AC3, 
@@ -228,7 +236,7 @@ const FormatTag formats[] =
   },
 };
 
-const int nformats = array_size(formats);
+const int ntags = array_size(tags);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -302,7 +310,7 @@ ACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
   driver_details->vdwACM      = VERSION_ACM;
   driver_details->vdwDriver   = VERSION_DRIVER;
   driver_details->fdwSupport  = ACMDRIVERDETAILS_SUPPORTF_CODEC;
-  driver_details->cFormatTags = nformats;
+  driver_details->cFormatTags = ntags;
   driver_details->cFilterTags = 0;
 
   lstrcpyW(driver_details->szShortName, L"AC3Filter ACM AC3/DTS codec");
@@ -327,20 +335,20 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
   // Find format tag index
   // Check parameters
 
-  int iformat = -1;
+  int itag = -1;
   switch (flags & ACM_FORMATTAGDETAILSF_QUERYMASK)
   {
     case ACM_FORMATTAGDETAILSF_INDEX:
       // formattag_details->dwFormatTagIndex is given
       dbglog("ACM::on_formattag_details(): Details for format tag index = %i", formattag_details->dwFormatTagIndex);
 
-      if (formattag_details->dwFormatTagIndex >= nformats)
+      if (formattag_details->dwFormatTagIndex >= ntags)
       {
         dbglog("ACM::on_formattag_details() warning: unsupported format tag index #%i", formattag_details->dwFormatTagIndex);
         return ACMERR_NOTPOSSIBLE;
       }
 
-      iformat = formattag_details->dwFormatTagIndex;
+      itag = formattag_details->dwFormatTagIndex;
 
       break; // case ACM_FORMATTAGDETAILSF_INDEX:
 
@@ -348,11 +356,11 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
       // formattag_details->dwFormatTag is given
       dbglog("ACM::on_formattag_details(): Details for format tag = 0x%04X", formattag_details->dwFormatTag);
 
-      for (iformat = 0; iformat < nformats; iformat++)
-        if (formats[iformat].format_tag == formattag_details->dwFormatTag)
+      for (itag = 0; itag < ntags; itag++)
+        if (tags[itag].format_tag == formattag_details->dwFormatTag)
           break;
 
-      if (iformat >= nformats)
+      if (itag >= ntags)
       {
         dbglog("ACM::on_formattag_details() warning: unsupported format tag 0x%04X", formattag_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
@@ -361,7 +369,7 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
       break; // case ACM_FORMATTAGDETAILSF_FORMATTAG:
 
     case ACM_FORMATTAGDETAILSF_LARGESTSIZE:
-      iformat = 0;
+      itag = 0;
       break; // case ACM_FORMATTAGDETAILSF_FORMATTAG:
 
     default:
@@ -373,7 +381,7 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
   /////////////////////////////////////////////////////////
   // Fill format tag details
 
-  formats[iformat].formattag_details(formattag_details);
+  tags[itag].formattag_details(formattag_details);
   return MMSYSERR_NOERROR;
 }
 
@@ -396,7 +404,7 @@ ACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
   // Find format tag index
   // Check parameters
 
-  int iformat = -1;
+  int itag = -1;
   switch (flags & ACM_FORMATDETAILSF_QUERYMASK)
   {
     ///////////////////////////////////////////////////////
@@ -407,23 +415,23 @@ ACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
     case ACM_FORMATDETAILSF_INDEX:
       dbglog("ACM::on_format_details() details for format tag 0x%04X index %i", format_details->dwFormatTag, format_details->dwFormatIndex);
 
-      for (iformat = 0; iformat < nformats; iformat++)
-        if (formats[iformat].format_tag == format_details->dwFormatTag)
+      for (itag = 0; itag < ntags; itag++)
+        if (tags[itag].format_tag == format_details->dwFormatTag)
           break;
 
-      if (iformat >= nformats)
+      if (itag >= ntags)
       {
         dbglog("ACM::on_format_details() warning: unsupported format tag 0x%04X", format_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
-      if (format_details->dwFormatIndex > formats[iformat].nformats())
+      if (format_details->dwFormatIndex > tags[itag].nformats())
       {
         dbglog("ACM::on_format_details() error: unknown index %i for format tag %i", format_details->dwFormatIndex, format_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
-      formats[iformat].format_details(format_details);
+      tags[itag].format_details(format_details);
       return MMSYSERR_NOERROR;
 
     case ACM_FORMATDETAILSF_FORMAT:
@@ -473,42 +481,61 @@ ACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
   if (src->wFormatTag != WAVE_FORMAT_AC3 && // We can do only decompression
       src->wFormatTag != WAVE_FORMAT_DTS)
     return ACMERR_NOTPOSSIBLE;
+
+  switch (src->wFormatTag)
+  {
+    ///////////////////////////////////////////////////////
+    // Suggest decompression format
+
+    case WAVE_FORMAT_AC3:
+    case WAVE_FORMAT_DTS:
+      if (suggest & ACM_FORMATSUGGESTF_WFORMATTAG)
+      {
+        if (dst->wFormatTag != WAVE_FORMAT_PCM)
+          return ACMERR_NOTPOSSIBLE;
+      }
+      else
+        dst->wFormatTag = WAVE_FORMAT_PCM;
+
+      if (suggest & ACM_FORMATSUGGESTF_NCHANNELS)
+      {
+        if (dst->nChannels != 1 && dst->nChannels != 2)
+          return ACMERR_NOTPOSSIBLE;
+      }
+      else
+        dst->nChannels = src->nChannels > 1? 2: 1;
+
+      if (suggest & ACM_FORMATSUGGESTF_NSAMPLESPERSEC)
+      {
+        if (src->nSamplesPerSec != dst->nSamplesPerSec)
+          return ACMERR_NOTPOSSIBLE;
+      }
+      else
+        dst->nSamplesPerSec = src->nSamplesPerSec;
+
+      if (suggest & ACM_FORMATSUGGESTF_WBITSPERSAMPLE)
+      {
+        if (dst->wBitsPerSample != 16)
+          return ACMERR_NOTPOSSIBLE;
+      }
+      else
+        dst->wBitsPerSample = 16;
+
+      dst->nBlockAlign = dst->nChannels * dst->wBitsPerSample / 8;
+      dst->nAvgBytesPerSec = dst->nSamplesPerSec * dst->nBlockAlign;
+      dst->cbSize = 0;
+      break;
+
+    ///////////////////////////////////////////////////////
+    // Suggest compression format
+
+    case WAVE_FORMAT_PCM:
+      return ACMERR_NOTPOSSIBLE;
+
+    default:
+      return ACMERR_NOTPOSSIBLE;
+  }
  
-  if (suggest & ACM_FORMATSUGGESTF_WFORMATTAG)
-  {
-    if (dst->wFormatTag != WAVE_FORMAT_PCM)
-      return ACMERR_NOTPOSSIBLE;
-  }
-  else
-    dst->wFormatTag = WAVE_FORMAT_PCM;
-
-  if (suggest & ACM_FORMATSUGGESTF_NCHANNELS)
-  {
-    if (dst->nChannels != 1 && dst->nChannels != 2)
-      return ACMERR_NOTPOSSIBLE;
-  }
-  else
-    dst->nChannels = src->nChannels > 1? 2: 1;
-
-  if (suggest & ACM_FORMATSUGGESTF_NSAMPLESPERSEC)
-  {
-    if (src->nSamplesPerSec != dst->nSamplesPerSec)
-      return ACMERR_NOTPOSSIBLE;
-  }
-  else
-    dst->nSamplesPerSec = src->nSamplesPerSec;
-
-  if (suggest & ACM_FORMATSUGGESTF_WBITSPERSAMPLE)
-  {
-    if (dst->wBitsPerSample != 16)
-      return ACMERR_NOTPOSSIBLE;
-  }
-  else
-    dst->wBitsPerSample = 16;
-
-  dst->nBlockAlign = dst->nChannels * dst->wBitsPerSample / 8;
-  dst->nAvgBytesPerSec = dst->nSamplesPerSec * dst->nBlockAlign;
-  dst->cbSize = 0;
 
   dbglog("Suggested destination format = 0x%04X, channels = %d, Samples/s = %d, AvgB/s = %d, BlockAlign = %d, b/sample = %d",
     dst->wFormatTag,
