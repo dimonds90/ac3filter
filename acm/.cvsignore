@@ -9,7 +9,7 @@
 *.dep
 
 Debug
-Debig_libc
+Debug_libc
 Release
 Release_libc
 Perf
