@@ -1,0 +1,3 @@
+Details about how to make a translation to your language you can read at 
+
+http://ac3filter.net/guides/how_to_translate
