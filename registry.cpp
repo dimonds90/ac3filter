@@ -49,7 +49,7 @@ RegistryKey::create_key(LPCTSTR name, HKEY hive)
     key = 0;
 
   // split path and subkey name
-  const buf_size = 255;
+  const int buf_size = 255;
   CHAR path[buf_size];
   CHAR subkey[buf_size];
   LPCTSTR name_end = name + strlen(name) - 1;
