@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.45b\n"
+"Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 21:08+0400\n"
-"PO-Revision-Date: 2007-06-08 17:26+0100\n"
+"POT-Creation-Date: 2007-09-27 15:30+0100\n"
+"PO-Revision-Date: 2007-09-27 15:33+0100\n"
 "Last-Translator: Artam <peterki@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,18 +30,12 @@ msgstr "Čo je to?"
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 #: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
-msgstr ""
-"AC3Filter je DirectShow filter vysokej kvality pre dekódovanie a spracovanie "
-"zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita a "
-"jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
+msgstr "AC3Filter je DirectShow filter vysokej kvality pre dekódovanie a spracovanie zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita a jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 #: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
-msgstr ""
-"Väčšina multimediálnych prehrávačov ho používa automaticky. Je nevyhnutný na "
-"prehrávanie AVI súborov s AC3 alebo DTS zvukovými stopami. Môže sa tiež "
-"použiť na prehrávanie DVD."
+msgstr "Väčšina multimediálnych prehrávačov ho používa automaticky. Je nevyhnutný na prehrávanie AVI súborov s AC3 alebo DTS zvukovými stopami. Môže sa tiež použiť na prehrávanie DVD."
 
 #. TRANSLATORS: AGC
 #: dialog_controls.h:35
@@ -61,10 +55,7 @@ msgstr "Kontakt na autora"
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 #: dialog_controls.h:45
 msgid "IDC_LBL_CONTACT"
-msgstr ""
-"Prosím, dajte vedieť o všetkých nájdených chybách. Kedykoľvek zašlite "
-"autorovi vaše nápady, kritiku atď. Píšte len po anglicky a po rusky. Subjekt "
-"by mal obsahovať slovo 'AC3Filter' (kvôli automatickému filtrovaniu)."
+msgstr "Prosím, dajte vedieť o všetkých nájdených chybách. Kedykoľvek zašlite autorovi vaše nápady, kritiku atď. Píšte len po anglicky a po rusky. Subjekt by mal obsahovať slovo 'AC3Filter' (kvôli automatickému filtrovaniu)."
 
 #. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
 #: dialog_controls.h:47
@@ -369,9 +360,7 @@ msgstr "Licencia"
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 #: dialog_controls.h:245
 msgid "IDC_LBL_LICENSE"
-msgstr ""
-"Tento program je slobodný (free) software a môže byť šírený v súlade s "
-"podmienkami GNU General Public License version 2."
+msgstr "Tento program je slobodný (free) software a môže byť šírený v súlade s podmienkami GNU General Public License version 2."
 
 #. TRANSLATORS: Mixing matrix
 #: dialog_controls.h:249
@@ -650,9 +639,8 @@ msgstr "Detekcia SPDIF streamu v PCM dátach"
 
 #. TRANSLATORS: AC3 encoder bitrate (kbps)
 #: dialog_controls.h:437
-#, fuzzy
 msgid "IDC_LBL_SPDIF_BITRATE"
-msgstr "Aktuálny jitter:"
+msgstr "AC3 kódovanie (kbps)"
 
 #. TRANSLATORS: SPDIF passthrough
 #: dialog_controls.h:441
@@ -887,26 +875,21 @@ msgstr ""
 "Výstup\tmean: %ims\tstddev: %ims"
 
 #: ac3filter_dlg.cpp:1539
-msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
+msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
 msgstr ""
-"Táto voľba je NEBEZPEČNÁ! Ak je zapnutá, filter môže vydávať veľmi hlasité "
-"pazvuky.\n"
+"Táto voľba je NEBEZPEČNÁ! Ak je zapnutá, filter môže vydávať veľmi hlasité pazvuky.\n"
 "\n"
 "Na zapnutie tejto voľby stlačte 'Nie."
 
-#: ac3filter_dlg.cpp:1539 ac3filter_dlg.cpp:1646
+#: ac3filter_dlg.cpp:1539
+#: ac3filter_dlg.cpp:1646
 msgid "Dangerous option!"
 msgstr "Nebezpečná voľba!"
 
 #: ac3filter_dlg.cpp:1646
-msgid ""
-"This option is DANGEROUS! Video may go out of sync with this option enabled. "
-"Press 'No' to enable this option."
+msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
 msgstr ""
-"Táto voľba je NEBEZPEČNÁ! Ak ju zapnete, zvuk a obraz môžu stratiť "
-"synchronizáciu.\n"
+"Táto voľba je NEBEZPEČNÁ! Ak ju zapnete, zvuk a obraz môžu stratiť synchronizáciu.\n"
 "\n"
 "Na zapnutie tejto voľby stlačte 'Nie'."
 
@@ -915,7 +898,8 @@ msgstr ""
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Naozaj chcete zmazať '%s' nastavenie?"
 
-#: ac3filter_dlg.cpp:2114 ac3filter_dlg.cpp:2203
+#: ac3filter_dlg.cpp:2114
+#: ac3filter_dlg.cpp:2203
 msgid "Delete confirmation"
 msgstr "Potvrdiť zmazanie"
 
@@ -923,3 +907,4 @@ msgstr "Potvrdiť zmazanie"
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "Naozaj chcete zmazať '%s' maticu?"
+
