@@ -29,7 +29,7 @@ protected:
 public:
   CritSec config;
 
-  COMDecoder(IUnknown *_outer);
+  COMDecoder(IUnknown *_outer, int nsamples);
 
   /////////////////////////////////////////////////////////
   // DVDGraph interface

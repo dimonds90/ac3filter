@@ -1,7 +1,7 @@
 #include "com_dec.h"
 #include <stdio.h>
 
-COMDecoder::COMDecoder(IUnknown *_outer) 
+COMDecoder::COMDecoder(IUnknown *_outer, int _nsamples): dvd(_nsamples)
 { 
   outer = _outer; 
   formats = FORMAT_CLASS_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES |  FORMAT_MASK_SPDIF;
