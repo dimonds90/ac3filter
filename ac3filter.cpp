@@ -2,16 +2,27 @@
 #include "ac3filter.h"
 #include "decss\DeCSSInputPin.h"
 
+///////////////////////////////////////////////////////////////////////////////
+// Define number of buffers and max buffer size sent to downstream.
+// So these numbers define total buffer length. For buffer with 2048 samples:
+// 2048 [samples] / 48000 [samples/sec] * 30 [buffers] = 1.28 [sec]
+//
+// In SPDIF mode (48kHz AC3):
+// 1536 [samples] / 48000 [samples/sec] * 30 [buffers] = 960 [ms]
+
+#define DSHOW_BUFFERS 30
+#define BUF_SAMPLES 2048
+#define MAX_BUFFER_SIZE (BUF_SAMPLES * NCHANNELS * 4)
+
+
 // uncomment this to log timing information into DirectShow log
 //#define LOG_TIMING
 
-// uncomment this to register graph at running objects table
+// uncomment this to register the graph at running objects table
 //#ifdef _DEBUG
 //#define REGISTER_FILTERGRAPH
 //#endif
 
-#define MAX_NSAMPLES 2048
-#define MAX_BUFFER_SIZE (MAX_NSAMPLES * NCHANNELS * 4)
 
 CUnknown * WINAPI 
 AC3Filter::CreateInstance(LPUNKNOWN punk, HRESULT *phr)
@@ -24,7 +35,7 @@ AC3Filter::CreateInstance(LPUNKNOWN punk, HRESULT *phr)
 
 AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   CTransformFilter(tszName, punk, CLSID_AC3Filter), 
-  dec((IAC3Filter*)this), tray_ctl((IAC3Filter*)this)
+  dec((IAC3Filter*)this, BUF_SAMPLES), tray_ctl((IAC3Filter*)this)
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x, %s)::AC3Filter", this, tszName));
 
@@ -423,6 +434,24 @@ AC3Filter::Run(REFERENCE_TIME tStart)
   if FAILED(hr)
     return hr;
 
+#if _DEBUG
+  char clock_name[255];
+  clock_name[0] = 0;
+  if (m_pClock)
+  {
+    FILTER_INFO info;
+    IBaseFilter *filter;
+    if SUCCEEDED(m_pClock->QueryInterface(IID_IBaseFilter, (void **)&filter))
+    {
+      filter->QueryFilterInfo(&info);
+      filter->Release();
+      WideCharToMultiByte(CP_ACP, 0, info.achName, -1, clock_name, array_size(clock_name), 0, false);
+    }
+
+  }
+  DbgLog((LOG_TRACE, 3, "Default clock: %s", clock_name));
+#endif
+
   if (reinit)
   {
     // Quick hack to overcome 2 'play/pause' problems:
@@ -459,10 +488,11 @@ AC3Filter::Run(REFERENCE_TIME tStart)
     Chunk chunk;
     chunk.set_rawdata(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate, 32767), buf, reinit * 4);
 
+    BeginFlush();
+    EndFlush();
     sink->process(&chunk);
-
-    dec.reset();
-    sink->send_discontinuity();
+    BeginFlush();
+    EndFlush();
   }
 
   return S_OK;
@@ -759,7 +789,7 @@ AC3Filter::DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProper
   ASSERT(pProperties);
   HRESULT hr = NOERROR;
 
-  pProperties->cBuffers = 10;
+  pProperties->cBuffers = DSHOW_BUFFERS;
   pProperties->cbBuffer = MAX_BUFFER_SIZE;
 
   ALLOCATOR_PROPERTIES Actual;
