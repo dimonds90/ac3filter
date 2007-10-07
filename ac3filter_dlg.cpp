@@ -970,6 +970,7 @@ AC3FilterDlg::init_controls()
   lnk_home.link(m_Dlg, IDC_LNK_HOME);
   lnk_forum.link(m_Dlg, IDC_LNK_FORUM);
   lnk_email.link(m_Dlg, IDC_LNK_EMAIL);
+  lnk_translate.link(m_Dlg, IDC_LNK_TRANSLATE);
 
   /////////////////////////////////////
   // Build credits and environment info

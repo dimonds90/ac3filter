@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 32
-// Total controls: 251
+// Total controls: 252
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -43,8 +43,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_GRP_CONTACT, N_("IDC_GRP_CONTACT"), "Contact author", "" },
   /* TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering). */
   { IDC_LBL_CONTACT, N_("IDC_LBL_CONTACT"), "Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).", "" },
-  /* TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter */
-  { IDC_LNK_EMAIL, N_("IDC_LNK_EMAIL"), "mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter", "" },
+  /* TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter */
+  { IDC_LNK_EMAIL, N_("IDC_LNK_EMAIL"), "mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter", "" },
   /* TRANSLATORS: Project forum|http://ac3filter.net/forum/ */
   { IDC_LNK_FORUM, N_("IDC_LNK_FORUM"), "Project forum|http://ac3filter.net/forum/", "" },
   /* TRANSLATORS: Homepage|http://ac3filter.net/ */
@@ -470,6 +470,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_EDT_TRANS_INFO, "IDC_EDT_TRANS_INFO", "", "" },
   /* TRANSLATORS: Language: */
   { IDC_LBL_LANG, N_("IDC_LBL_LANG"), "Language:", "" },
+  /* TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate */
+  { IDC_LNK_TRANSLATE, N_("IDC_LNK_TRANSLATE"), "How to translate?|http://ac3filter.net/guides/how_to_translate", "" },
 };
 
 #endif

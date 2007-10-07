@@ -338,10 +338,10 @@ BEGIN
                     108,8
     RADIOBUTTON     "Use Wave Out by default",IDC_RBT_RENDER_WO,85,77,108,8
     GROUPBOX        "Default audio renderer",IDC_GRP_RENDERER,80,52,116,40
-    LTEXT           "Language:",IDC_LBL_LANG,207,19,66,8
-    COMBOBOX        IDC_CMB_LANG,273,17,114,172,CBS_DROPDOWNLIST | CBS_SORT | 
+    LTEXT           "Language:",IDC_LBL_LANG,207,19,63,8
+    COMBOBOX        IDC_CMB_LANG,274,17,113,172,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    EDITTEXT        IDC_EDT_TRANS_INFO,207,33,180,54,ES_MULTILINE | 
+    EDITTEXT        IDC_EDT_TRANS_INFO,207,32,180,44,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
     GROUPBOX        "Localization",IDC_GRP_TRANS,200,8,192,84
     LTEXT           "Time shift (ms):",IDC_LBL_TIME_SHIFT,15,103,174,8
@@ -382,6 +382,9 @@ BEGIN
     CONTROL         "Disallow PCM output in SPDIF mode",IDC_CHK_SPDIF_NO_PCM,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,187,182,8
     GROUPBOX        "DirectShow options",IDC_GRP_DSHOW,200,156,192,44
+    CONTROL         "How to translate?|http://ac3filter.net/guides/how_to_translate",
+                    IDC_LNK_TRANSLATE,"Button",BS_OWNERDRAW | BS_LEFT | 
+                    BS_VCENTER | BS_FLAT | WS_TABSTOP,207,79,180,8
 END
 
 IDD_SPDIF DIALOG DISCARDABLE  0, 0, 400, 224
@@ -473,7 +476,7 @@ BEGIN
     CONTROL         "Project forum|http://ac3filter.net/forum/",
                     IDC_LNK_FORUM,"Button",BS_OWNERDRAW | BS_CENTER | 
                     BS_VCENTER | BS_FLAT | WS_TABSTOP,75,187,58,8
-    CONTROL         "mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter",
+    CONTROL         "mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter",
                     IDC_LNK_EMAIL,"Button",BS_OWNERDRAW | BS_CENTER | 
                     BS_FLAT | WS_TABSTOP,137,187,58,8
     GROUPBOX        "Contact author",IDC_GRP_CONTACT,8,137,192,63

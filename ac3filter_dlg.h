@@ -115,6 +115,7 @@ private:
   LinkButton  lnk_forum;
   LinkButton  lnk_email;
   LinkButton  lnk_donate;
+  LinkButton  lnk_translate;
 
   // Tooltip control
   Tooltip tooltip_ctl;

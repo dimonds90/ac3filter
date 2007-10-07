@@ -346,6 +346,7 @@
 #define IDC_CMB_LANG                   52702
 #define IDC_LBL_LANG                   52703
 #define IDC_EDT_TRANS_INFO             52704
+#define IDC_LNK_TRANSLATE              52705
 
 // About dialog (528)
 #define IDC_GRP_ABOUT                  52801
