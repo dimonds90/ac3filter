@@ -57,10 +57,10 @@ msgstr "Kapcsolat a szerzővel"
 msgid "IDC_LBL_CONTACT"
 msgstr "Kérlek, jelentsd az összes programhibát. Ne habozz e-mail-t írni a szerzőnek ötletekkel, kritikával, stb. kapcsolatban. Kérlek, használj angol vagy orosz nyelvet. A tárgy tartalmazza az 'AC3Filter' szót (az automatikus szűrés miatt)."
 
-#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
-msgstr "E-mail a szerzőnek|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "E-mail a szerzőnek|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 #: dialog_controls.h:49

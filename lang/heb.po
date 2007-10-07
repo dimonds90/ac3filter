@@ -60,10 +60,10 @@ msgstr "צור קשר עם היוצר"
 msgid "IDC_LBL_CONTACT"
 msgstr "בבקשה, דווחו לגבי כל התקלות. הרגישו חופשי לשלוח דואר אלקטרוני ליוצר עם רעיונות שלכם, ביקורת וכולי. בבקשה כתבו באנגלית או ברוסית בלבד. נושא ההודעה צריך להכיל את המילה 'AC3Filter' (עקב סינון אוטומטי)."
 
-#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
-msgstr "דואר אלקטורני ליוצר|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "דואר אלקטורני ליוצר|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 #: dialog_controls.h:49

@@ -67,10 +67,10 @@ msgstr ""
 "autorem poprzez e-mail ze swoimi pomysłami lub słowani krytyki. Tylko "
 "polski. W tytule \"AC3Filter\" w celu ułatwienia segregacji poczty."
 
-#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
-msgstr "mail to author|mailto:lukas12p@yahool.com?Subject=AC3Filter"
+msgstr "mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 #: dialog_controls.h:49

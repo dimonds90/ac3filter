@@ -66,10 +66,10 @@ msgstr ""
 "요. 단, 영어나 러시아어로만 쓰세요. 제목에는 반드시 'AC3Filter'라는 단어가 들"
 "어가야 합니다 (스팸 메일 필터링)."
 
-#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
-msgstr "이메일|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "이메일|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 #: dialog_controls.h:49

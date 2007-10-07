@@ -61,7 +61,7 @@ msgstr ""
 msgid "IDC_LBL_CONTACT"
 msgstr ""
 
-#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
 msgstr ""

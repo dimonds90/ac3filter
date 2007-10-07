@@ -69,10 +69,10 @@ msgstr ""
 "够使用英语或者俄语.由于电子邮箱设置了垃圾过滤,在邮件主题中须包含关键"
 "字'AC3Filter'."
 
-#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
-msgstr "电子邮件|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "电子邮件|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 #: dialog_controls.h:49

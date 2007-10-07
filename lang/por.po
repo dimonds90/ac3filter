@@ -68,10 +68,10 @@ msgstr ""
 "Russo. O assunto deve ter a palavra 'AC3Filter' (devido ao filtro "
 "automático)."
 
-#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
-msgstr "escrever para o autor|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "escrever para o autor|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 #: dialog_controls.h:49

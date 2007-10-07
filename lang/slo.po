@@ -57,10 +57,10 @@ msgstr "Kontakt na autora"
 msgid "IDC_LBL_CONTACT"
 msgstr "Prosím, dajte vedieť o všetkých nájdených chybách. Kedykoľvek zašlite autorovi vaše nápady, kritiku atď. Píšte len po anglicky a po rusky. Subjekt by mal obsahovať slovo 'AC3Filter' (kvôli automatickému filtrovaniu)."
 
-#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
-msgstr "Pošta autorovi|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "Pošta autorovi|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 #: dialog_controls.h:49

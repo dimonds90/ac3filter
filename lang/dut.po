@@ -67,10 +67,10 @@ msgstr ""
 "emailen met uw ideeën, kritiek, etc. Schrijf aub in het Engels of Russisch. "
 "Gebruik als onderwerp het woord 'AC3Filter' (vanwege automatische filtering)"
 
-#. TRANSLATORS: mail to author|mailto:xvalex@mail.ru?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 #: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
-msgstr "Mail de auteur|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "Mail de auteur|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 #: dialog_controls.h:49
