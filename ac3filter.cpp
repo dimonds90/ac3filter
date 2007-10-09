@@ -157,6 +157,23 @@ AC3Filter::process_chunk(const Chunk *_chunk)
   // and we have to write full processing cycle.
   // It's also useful because of extended error reporting.
 
+#ifdef LOG_TIMING
+  static vtime_t time_start = local_time();
+  if (_chunk->sync)
+  {
+    vtime_t time = local_time() - time_start;
+    REFERENCE_TIME clock = 0;
+    vtime_t latency = 0;
+    if (m_pClock)
+      if SUCCEEDED(m_pClock->GetTime(&clock))
+      {
+        clock -= m_tStart;
+        latency =  _chunk->time - vtime_t(clock) / 10000000;
+      }
+    DbgLog((LOG_TRACE, 3, "-> time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims", int(time * 1000), int(clock / 10000), int(_chunk->time * 1000), int(latency * 1000)));
+  }
+#endif
+
   cpu.start();
   if (!dec.process(_chunk))
   {
@@ -177,6 +194,22 @@ AC3Filter::process_chunk(const Chunk *_chunk)
       return false;
     }
     cpu.stop();
+
+#ifdef LOG_TIMING
+    if (chunk.sync)
+    {
+      vtime_t time = local_time() - time_start;
+      REFERENCE_TIME clock = 0;
+      vtime_t latency = 0;
+      if (m_pClock)
+        if SUCCEEDED(m_pClock->GetTime(&clock))
+        {
+          clock -= m_tStart;
+          latency = chunk.time - vtime_t(clock) / 10000000;
+        }
+      DbgLog((LOG_TRACE, 3, "<- time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims", int(time * 1000), int(clock / 10000), int(chunk.time * 1000), int(latency * 1000)));
+    }
+#endif
 
     if (!sink->process(&chunk))
     {
@@ -296,9 +329,6 @@ AC3Filter::Receive(IMediaSample *in)
     case VFW_S_NO_STOP_TIME:
       time = vtime_t(begin) / 10000000;
       chunk.set_sync(true, time);
-#ifdef LOG_TIMING
-      DbgLog((LOG_TRACE, 3, "-> > timestamp: %ims\t> %.0fsm", int(begin/10000), time * 1000));
-#endif
       break;
   }
 
@@ -433,24 +463,6 @@ AC3Filter::Run(REFERENCE_TIME tStart)
   HRESULT hr = CTransformFilter::Run(tStart);
   if FAILED(hr)
     return hr;
-
-#if _DEBUG
-  char clock_name[255];
-  clock_name[0] = 0;
-  if (m_pClock)
-  {
-    FILTER_INFO info;
-    IBaseFilter *filter;
-    if SUCCEEDED(m_pClock->QueryInterface(IID_IBaseFilter, (void **)&filter))
-    {
-      filter->QueryFilterInfo(&info);
-      filter->Release();
-      WideCharToMultiByte(CP_ACP, 0, info.achName, -1, clock_name, array_size(clock_name), 0, false);
-    }
-
-  }
-  DbgLog((LOG_TRACE, 3, "Default clock: %s", clock_name));
-#endif
 
   if (reinit)
   {
