@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 21:08+0400\n"
+"POT-Creation-Date: 2008-02-25 22:58+0300\n"
 "PO-Revision-Date: 2007-08-18 23:10+0100\n"
 "Last-Translator: Sziládi Zsolt <sadistzs@freemail.hu>\n"
 "Language-Team: \n"
@@ -13,859 +13,698 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 
 #. TRANSLATORS: Donate
-#: dialog_controls.h:21
 msgid "IDC_BTN_DONATE"
 msgstr "Adomány"
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
-#: dialog_controls.h:23
 msgid "IDC_VER"
 msgstr "AC3Filter %s verzió Copyright (c) 2002-2007 Alexander Vigovsky"
 
 #. TRANSLATORS: What is it?
-#: dialog_controls.h:27
 msgid "IDC_GRP_ABOUT"
 msgstr "Mi ez?"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
-#: dialog_controls.h:29
 msgid "IDC_LBL_ABOUT1"
-msgstr "Az AC3Filter egy magas minőségű ingyenes DirectShow szűrő a valós idejű hang dekódolásához és feldolgozásához. Széles funkcionalitás és beállítási lehetőségek jellemzik. Többcsatornás és digitális (SPDIF) kimeneteket támogat."
+msgstr ""
+"Az AC3Filter egy magas minőségű ingyenes DirectShow szűrő a valós idejű hang "
+"dekódolásához és feldolgozásához. Széles funkcionalitás és beállítási "
+"lehetőségek jellemzik. Többcsatornás és digitális (SPDIF) kimeneteket "
+"támogat."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
-#: dialog_controls.h:31
 msgid "IDC_LBL_ABOUT2"
-msgstr "A legtöbb multimédiás lejátszó automatikusan használja. Az AC3 vagy DTS hangsávokkal rendelkező AVI fájlok lejátszásához szükséges. DVD lejátszásához is használható."
+msgstr ""
+"A legtöbb multimédiás lejátszó automatikusan használja. Az AC3 vagy DTS "
+"hangsávokkal rendelkező AVI fájlok lejátszásához szükséges. DVD "
+"lejátszásához is használható."
 
 #. TRANSLATORS: AGC
-#: dialog_controls.h:35
 msgid "IDC_GRP_AGC"
 msgstr "AGC"
 
 #. TRANSLATORS: Attack/release speed (dB/s):
-#: dialog_controls.h:39
 msgid "IDC_LBL_ATTACK_RELEASE"
 msgstr "Kezdő/befejező seb. (dB/mp):"
 
 #. TRANSLATORS: Contact author
-#: dialog_controls.h:43
 msgid "IDC_GRP_CONTACT"
 msgstr "Kapcsolat a szerzővel"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
-#: dialog_controls.h:45
 msgid "IDC_LBL_CONTACT"
-msgstr "Kérlek, jelentsd az összes programhibát. Ne habozz e-mail-t írni a szerzőnek ötletekkel, kritikával, stb. kapcsolatban. Kérlek, használj angol vagy orosz nyelvet. A tárgy tartalmazza az 'AC3Filter' szót (az automatikus szűrés miatt)."
+msgstr ""
+"Kérlek, jelentsd az összes programhibát. Ne habozz e-mail-t írni a szerzőnek "
+"ötletekkel, kritikával, stb. kapcsolatban. Kérlek, használj angol vagy orosz "
+"nyelvet. A tárgy tartalmazza az 'AC3Filter' szót (az automatikus szűrés "
+"miatt)."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
-#: dialog_controls.h:47
 msgid "IDC_LNK_EMAIL"
 msgstr "E-mail a szerzőnek|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
-#: dialog_controls.h:49
 msgid "IDC_LNK_FORUM"
 msgstr "Projekt fóruma|http://ac3filter.net/forum/"
 
 #. TRANSLATORS: Homepage|http://ac3filter.net/
-#: dialog_controls.h:51
 msgid "IDC_LNK_HOME"
 msgstr "Honlap|http://ac3filter.net/"
 
 #. TRANSLATORS: CPU
-#: dialog_controls.h:55
 msgid "IDC_GRP_CPU"
 msgstr "CPU"
 
 #. TRANSLATORS: 0%
-#: dialog_controls.h:58
 msgid "IDC_CPU_LABEL"
 msgstr "0%"
 
 #. TRANSLATORS: Thanks to
-#: dialog_controls.h:62
 msgid "IDC_GRP_CREDITS"
 msgstr "Köszönet"
 
 #. TRANSLATORS: Decoder info
-#: dialog_controls.h:67
 msgid "IDC_GRP_DECODER_INFO"
 msgstr "Dekódoló információ"
 
 #. TRANSLATORS: Frames / Errors
-#: dialog_controls.h:72
 msgid "IDC_LBL_FRAMES_ERRORS"
 msgstr "Adatkeret / Hiba"
 
 #. TRANSLATORS: Delays
-#: dialog_controls.h:76
 msgid "IDC_GRP_DELAYS"
 msgstr "Késleltetések"
 
 #. TRANSLATORS: Enable
-#: dialog_controls.h:78
 msgid "IDC_CHK_DELAYS"
 msgstr "Engedélyezés"
 
 #. TRANSLATORS: C
-#: dialog_controls.h:87
 msgid "IDC_LBL_DELAY_C"
 msgstr "C"
 
 #. TRANSLATORS: L
-#: dialog_controls.h:89
 msgid "IDC_LBL_DELAY_L"
 msgstr "B"
 
 #. TRANSLATORS: R
-#: dialog_controls.h:91
 msgid "IDC_LBL_DELAY_R"
 msgstr "J"
 
 #. TRANSLATORS: SL
-#: dialog_controls.h:93
 msgid "IDC_LBL_DELAY_SL"
 msgstr "BH"
 
 #. TRANSLATORS: SR
-#: dialog_controls.h:95
 msgid "IDC_LBL_DELAY_SR"
 msgstr "JH"
 
 #. TRANSLATORS: Sub
-#: dialog_controls.h:97
 msgid "IDC_LBL_DELAY_SW"
 msgstr "Mély"
 
 #. TRANSLATORS: Units:
-#: dialog_controls.h:99
 msgid "IDC_LBL_UNITS"
 msgstr "Egység:"
 
 #. TRANSLATORS: DRC
-#: dialog_controls.h:103
 msgid "IDC_GRP_DRC"
 msgstr "DRC"
 
 #. TRANSLATORS: Enable
-#: dialog_controls.h:105
 msgid "IDC_CHK_DRC"
 msgstr "Engedélyezés"
 
 #. TRANSLATORS: DirectShow options
-#: dialog_controls.h:113
 msgid "IDC_GRP_DSHOW"
 msgstr "DirectShow beállítások"
 
 #. TRANSLATORS: Check output format support
-#: dialog_controls.h:115
 msgid "IDC_CHK_QUERY_SINK"
 msgstr "Kimeneti formátum támogatásának ellenőrzése"
 
 #. TRANSLATORS: Force sound card to reinit after seek / pause
-#: dialog_controls.h:117
 msgid "IDC_CHK_REINIT"
 msgstr "Hangkártya újrainicializálása keresés / szünet után"
 
 #. TRANSLATORS: Disallow PCM output in SPDIF mode
-#: dialog_controls.h:119
 msgid "IDC_CHK_SPDIF_NO_PCM"
 msgstr "PCM kimenet letiltása SPDIF módban"
 
 #. TRANSLATORS: SPDIF/DTS conversion
-#: dialog_controls.h:123
 msgid "IDC_GRP_DTS_CONV"
 msgstr "SPDIF/DTS konvertálás"
 
 #. TRANSLATORS: Convert to DTS14
-#: dialog_controls.h:125
 msgid "IDC_RBT_DTS_CONV_14BIT"
 msgstr "Konvertálás -> DTS14"
 
 #. TRANSLATORS: Convert to DTS16
-#: dialog_controls.h:127
 msgid "IDC_RBT_DTS_CONV_16BIT"
 msgstr "Konvertálás -> DTS16"
 
 #. TRANSLATORS: Do not convert
-#: dialog_controls.h:129
 msgid "IDC_RBT_DTS_CONV_NONE"
 msgstr "Nincs konvertálás"
 
 #. TRANSLATORS: SPDIF/DTS mode
-#: dialog_controls.h:133
 msgid "IDC_GRP_DTS_MODE"
 msgstr "SPDIF/DTS mód"
 
 #. TRANSLATORS: Auto
-#: dialog_controls.h:135
 msgid "IDC_RBT_DTS_MODE_AUTO"
 msgstr "Automatikus"
 
 #. TRANSLATORS: Padded DTS
-#: dialog_controls.h:137
 msgid "IDC_RBT_DTS_MODE_PADDED"
 msgstr "DTS-kiegészítés"
 
 #. TRANSLATORS: SPDIF wrapped
-#: dialog_controls.h:139
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
 msgstr "SPDIF-csomagolás"
 
 #. TRANSLATORS: Build info
-#: dialog_controls.h:143
 msgid "IDC_GRP_ENV"
 msgstr "Fejlesztési információ"
 
 #. TRANSLATORS: Use AC3Filter for:
-#: dialog_controls.h:148
 msgid "IDC_GRP_FORMATS"
 msgstr "AC3Filter használata:"
 
 #. TRANSLATORS: AC3
-#: dialog_controls.h:150
 msgid "IDC_CHK_AC3"
 msgstr "AC3"
 
 #. TRANSLATORS: DTS
-#: dialog_controls.h:152
 msgid "IDC_CHK_DTS"
 msgstr "DTS"
 
 #. TRANSLATORS: MPEG Audio
-#: dialog_controls.h:154
 msgid "IDC_CHK_MPA"
 msgstr "MPEG Hang"
 
 #. TRANSLATORS: PCM
-#: dialog_controls.h:156
 msgid "IDC_CHK_PCM"
 msgstr "PCM"
 
 #. TRANSLATORS: DVD
-#: dialog_controls.h:158
 msgid "IDC_CHK_PES"
 msgstr "DVD"
 
 #. TRANSLATORS: SPDIF
-#: dialog_controls.h:160
 msgid "IDC_CHK_SPDIF"
 msgstr "SPDIF"
 
 #. TRANSLATORS: Gain
-#: dialog_controls.h:164
 msgid "IDC_GRP_GAIN"
 msgstr "Erősítés"
 
 #. TRANSLATORS: Gains
-#: dialog_controls.h:168
 msgid "IDC_GRP_GAINS"
 msgstr "Erősítések"
 
 #. TRANSLATORS: Gain
-#: dialog_controls.h:175
 msgid "IDC_LBL_GAIN"
 msgstr "Erősítés"
 
 #. TRANSLATORS: LFE
-#: dialog_controls.h:177
 msgid "IDC_LBL_LFE"
 msgstr "LFE"
 
 #. TRANSLATORS: Master
-#: dialog_controls.h:179
 msgid "IDC_LBL_MASTER"
 msgstr "Fő"
 
 #. TRANSLATORS: Surround
-#: dialog_controls.h:181
 msgid "IDC_LBL_SUR"
 msgstr "Térhatás"
 
 #. TRANSLATORS: Voice
-#: dialog_controls.h:183
 msgid "IDC_LBL_VOICE"
 msgstr "Hang"
 
 #. TRANSLATORS: Input gains
-#: dialog_controls.h:192
 msgid "IDC_GRP_INPUT_GAINS"
 msgstr "Bemeneti erősítések"
 
 #. TRANSLATORS: Input levels
-#: dialog_controls.h:208
 msgid "IDC_GRP_INPUT_LEVELS"
 msgstr "Bemeneti szintek"
 
 #. TRANSLATORS: C
-#: dialog_controls.h:216
 msgid "IDC_LBL_IN_C"
 msgstr "C"
 
 #. TRANSLATORS: L
-#: dialog_controls.h:218
 msgid "IDC_LBL_IN_L"
 msgstr "B"
 
 #. TRANSLATORS: LFE
-#: dialog_controls.h:220
 msgid "IDC_LBL_IN_LFE"
 msgstr "LFE"
 
 #. TRANSLATORS: R
-#: dialog_controls.h:222
 msgid "IDC_LBL_IN_R"
 msgstr "J"
 
 #. TRANSLATORS: SL
-#: dialog_controls.h:224
 msgid "IDC_LBL_IN_SL"
 msgstr "BH"
 
 #. TRANSLATORS: SR
-#: dialog_controls.h:226
 msgid "IDC_LBL_IN_SR"
 msgstr "JH"
 
 #. TRANSLATORS: Interface options
-#: dialog_controls.h:230
 msgid "IDC_GRP_INTERFACE"
 msgstr "Interfész beállítások"
 
 #. TRANSLATORS: Invert levels
-#: dialog_controls.h:232
 msgid "IDC_CHK_INVERT_LEVELS"
 msgstr "Szintek megfordítása"
 
 #. TRANSLATORS: Show tooltips
-#: dialog_controls.h:234
 msgid "IDC_CHK_TOOLTIPS"
 msgstr "Eszköztippek mutatása"
 
 #. TRANSLATORS: Show tray icon
-#: dialog_controls.h:236
 msgid "IDC_CHK_TRAY"
 msgstr "Tálca ikon mutatása"
 
 #. TRANSLATORS: Interface update rate (ms)
-#: dialog_controls.h:239
 msgid "IDC_LBL_REFRESH_TIME"
 msgstr "Interfész frissítési gyakorisága (ms)"
 
 #. TRANSLATORS: License
-#: dialog_controls.h:243
 msgid "IDC_GRP_LICENSE"
 msgstr "Licenc"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
-#: dialog_controls.h:245
 msgid "IDC_LBL_LICENSE"
-msgstr "Ez a program egy ingyenes szoftver és a GNU Általános Nyilvános Licenc 2-es verziójának kikötései szerint terjeszthető."
+msgstr ""
+"Ez a program egy ingyenes szoftver és a GNU Általános Nyilvános Licenc 2-es "
+"verziójának kikötései szerint terjeszthető."
 
 #. TRANSLATORS: Mixing matrix
-#: dialog_controls.h:249
 msgid "IDC_GRP_MATRIX"
 msgstr "Keverő mátrix"
 
 #. TRANSLATORS: C
-#: dialog_controls.h:287
 msgid "IDC_LBL_MATRIX_IN_C"
 msgstr "C"
 
 #. TRANSLATORS: L
-#: dialog_controls.h:289
 msgid "IDC_LBL_MATRIX_IN_L"
 msgstr "B"
 
 #. TRANSLATORS: LFE
-#: dialog_controls.h:291
 msgid "IDC_LBL_MATRIX_IN_LFE"
 msgstr "LFE"
 
 #. TRANSLATORS: R
-#: dialog_controls.h:293
 msgid "IDC_LBL_MATRIX_IN_R"
 msgstr "J"
 
 #. TRANSLATORS: SL
-#: dialog_controls.h:295
 msgid "IDC_LBL_MATRIX_IN_SL"
 msgstr "BH"
 
 #. TRANSLATORS: SR
-#: dialog_controls.h:297
 msgid "IDC_LBL_MATRIX_IN_SR"
 msgstr "JH"
 
 #. TRANSLATORS: C'
-#: dialog_controls.h:299
 msgid "IDC_LBL_MATRIX_OUT_C"
 msgstr "C'"
 
 #. TRANSLATORS: L'
-#: dialog_controls.h:301
 msgid "IDC_LBL_MATRIX_OUT_L"
 msgstr "B'"
 
 #. TRANSLATORS: R'
-#: dialog_controls.h:303
 msgid "IDC_LBL_MATRIX_OUT_R"
 msgstr "J'"
 
 #. TRANSLATORS: SL'
-#: dialog_controls.h:305
 msgid "IDC_LBL_MATRIX_OUT_SL"
 msgstr "BH'"
 
 #. TRANSLATORS: SR'
-#: dialog_controls.h:307
 msgid "IDC_LBL_MATRIX_OUT_SR"
 msgstr "JH'"
 
 #. TRANSLATORS: Sub
-#: dialog_controls.h:309
 msgid "IDC_LBL_MATRIX_OUT_SW"
 msgstr "Mély"
 
 #. TRANSLATORS: Matrix preset
-#: dialog_controls.h:313
 msgid "IDC_GRP_MATRIX_PRESET"
 msgstr "Mátrix előbeállítás"
 
 #. TRANSLATORS: Delete
-#: dialog_controls.h:315
 msgid "IDC_BTN_MATRIX_DELETE"
 msgstr "Törlés"
 
 #. TRANSLATORS: Save
-#: dialog_controls.h:317
 msgid "IDC_BTN_MATRIX_SAVE"
 msgstr "Mentés"
 
 #. TRANSLATORS: Filter merit
-#: dialog_controls.h:322
 msgid "IDC_GRP_MERIT"
 msgstr "Szűrőhasználat"
 
 #. TRANSLATORS: Prefer AC3Filter
-#: dialog_controls.h:324
 msgid "IDC_RBT_MERIT_PREFERRED"
 msgstr "AC3Filter használata"
 
 #. TRANSLATORS: Prefer other decoder
-#: dialog_controls.h:326
 msgid "IDC_RBT_MERIT_UNLIKELY"
 msgstr "Másik dekódoló használata"
 
 #. TRANSLATORS: Options
-#: dialog_controls.h:330
 msgid "IDC_GRP_MIXER_OPTIONS"
 msgstr "Beállítások"
 
 #. TRANSLATORS: Auto gain control
-#: dialog_controls.h:332
 msgid "IDC_CHK_AUTO_GAIN"
 msgstr "Auto-erősítésvezérlés"
 
 #. TRANSLATORS: Auto matrix
-#: dialog_controls.h:334
 msgid "IDC_CHK_AUTO_MATRIX"
 msgstr "Automatikus mátrix"
 
 #. TRANSLATORS: Bass redirection
-#: dialog_controls.h:336
 msgid "IDC_CHK_BASS_REDIR"
 msgstr "Basszus átirányítása"
 
 #. TRANSLATORS: Expand stereo
-#: dialog_controls.h:338
 msgid "IDC_CHK_EXPAND_STEREO"
 msgstr "Sztereó bővítése"
 
 #. TRANSLATORS: One-pass norm
-#: dialog_controls.h:340
 msgid "IDC_CHK_NORMALIZE"
 msgstr "1-menetes normálás"
 
 #. TRANSLATORS: Normalize matrix
-#: dialog_controls.h:342
 msgid "IDC_CHK_NORM_MATRIX"
 msgstr "Mátrix normalizálása"
 
 #. TRANSLATORS: Voice control
-#: dialog_controls.h:344
 msgid "IDC_CHK_VOICE_CONTROL"
 msgstr "Hangvezérlés"
 
 #. TRANSLATORS: Cutoff frequency
-#: dialog_controls.h:347
 msgid "IDC_LBL_BASS_FREQ"
 msgstr "Levágott frekv."
 
 #. TRANSLATORS: Output format
-#: dialog_controls.h:351
 msgid "IDC_GRP_OUTPUT"
 msgstr "Kimeneti formátum"
 
 #. TRANSLATORS: Use SPDIF
-#: dialog_controls.h:353
 msgid "IDC_CHK_USE_SPDIF"
 msgstr "SPDIF használata"
 
 #. TRANSLATORS: input format
-#: dialog_controls.h:357
 msgid "IDC_LBL_INPUT"
 msgstr "bemeneti formátum"
 
 #. TRANSLATORS: Output gains
-#: dialog_controls.h:361
 msgid "IDC_GRP_OUTPUT_GAINS"
 msgstr "Kimeneti erősítések"
 
 #. TRANSLATORS: Output levels
-#: dialog_controls.h:377
 msgid "IDC_GRP_OUTPUT_LEVELS"
 msgstr "Kimeneti szintek"
 
 #. TRANSLATORS: C
-#: dialog_controls.h:379
 msgid "IDC_LBL_OUT_C"
 msgstr "C"
 
 #. TRANSLATORS: L
-#: dialog_controls.h:381
 msgid "IDC_LBL_OUT_L"
 msgstr "B"
 
 #. TRANSLATORS: R
-#: dialog_controls.h:383
 msgid "IDC_LBL_OUT_R"
 msgstr "J"
 
 #. TRANSLATORS: SL
-#: dialog_controls.h:385
 msgid "IDC_LBL_OUT_SL"
 msgstr "BH"
 
 #. TRANSLATORS: SR
-#: dialog_controls.h:387
 msgid "IDC_LBL_OUT_SR"
 msgstr "JH"
 
 #. TRANSLATORS: Sub
-#: dialog_controls.h:389
 msgid "IDC_LBL_OUT_SW"
 msgstr "Mély"
 
 #. TRANSLATORS: Preset
-#: dialog_controls.h:399
 msgid "IDC_GRP_PRESET"
 msgstr "Előbeállítás"
 
 #. TRANSLATORS: Delete
-#: dialog_controls.h:401
 msgid "IDC_BTN_PRESET_DELETE"
 msgstr "Törlés"
 
 #. TRANSLATORS: File
-#: dialog_controls.h:403
 msgid "IDC_BTN_PRESET_FILE"
 msgstr "Fájl"
 
 #. TRANSLATORS: Save
-#: dialog_controls.h:405
 msgid "IDC_BTN_PRESET_SAVE"
 msgstr "Mentés"
 
 #. TRANSLATORS: Default audio renderer
-#: dialog_controls.h:410
 msgid "IDC_GRP_RENDERER"
 msgstr "Alapértelmezett hanglejátszó"
 
 #. TRANSLATORS: Use Direct Sound by default
-#: dialog_controls.h:412
 msgid "IDC_RBT_RENDER_DS"
 msgstr "Direct Sound használata"
 
 #. TRANSLATORS: Use Wave Out by default
-#: dialog_controls.h:414
 msgid "IDC_RBT_RENDER_WO"
 msgstr "Wave Out használata"
 
 #. TRANSLATORS: SPDIF options
-#: dialog_controls.h:418
 msgid "IDC_GRP_SPDIF"
 msgstr "SPDIF beállítások"
 
 #. TRANSLATORS: 32kHz
-#: dialog_controls.h:420
 msgid "IDC_CHK_SPDIF_ALLOW_32"
 msgstr "32kHz"
 
 #. TRANSLATORS: 44kHz
-#: dialog_controls.h:422
 msgid "IDC_CHK_SPDIF_ALLOW_44"
 msgstr "44kHz"
 
 #. TRANSLATORS: 48kHz
-#: dialog_controls.h:424
 msgid "IDC_CHK_SPDIF_ALLOW_48"
 msgstr "48kHz"
 
 #. TRANSLATORS: Output SPDIF as PCM
-#: dialog_controls.h:426
 msgid "IDC_CHK_SPDIF_AS_PCM"
 msgstr "SPDIF kimenete PCM formátumban"
 
 #. TRANSLATORS: Restrict SPDIF sample rate
-#: dialog_controls.h:428
 msgid "IDC_CHK_SPDIF_CHECK_SR"
 msgstr "SPDIF mintavételezés korlátozása"
 
 #. TRANSLATORS: Use AC3 encoder
-#: dialog_controls.h:430
 msgid "IDC_CHK_SPDIF_ENCODE"
 msgstr "AC3 kódoló használata"
 
 #. TRANSLATORS: Do not encode stereo PCM
-#: dialog_controls.h:432
 msgid "IDC_CHK_SPDIF_STEREO_PT"
 msgstr "Ne kódolja át a sztereó PCM formátumot"
 
 #. TRANSLATORS: Detect SPDIF stream in PCM data
-#: dialog_controls.h:434
 msgid "IDC_CHK_USE_DETECTOR"
 msgstr "SPDIF-folyam észlelése a PCM adatban"
 
 #. TRANSLATORS: AC3 encoder bitrate (kbps)
-#: dialog_controls.h:437
 msgid "IDC_LBL_SPDIF_BITRATE"
 msgstr "AC3 kódoló bitráta (kb/mp)"
 
 #. TRANSLATORS: SPDIF passthrough
-#: dialog_controls.h:441
 msgid "IDC_GRP_SPDIF_PT"
 msgstr "SPDIF átvitele"
 
 #. TRANSLATORS: AC3
-#: dialog_controls.h:443
 msgid "IDC_CHK_SPDIF_AC3"
 msgstr "AC3"
 
 #. TRANSLATORS: DTS
-#: dialog_controls.h:445
 msgid "IDC_CHK_SPDIF_DTS"
 msgstr "DTS"
 
 #. TRANSLATORS: MPEG Audio
-#: dialog_controls.h:447
 msgid "IDC_CHK_SPDIF_MPA"
 msgstr "MPEG Hang"
 
 #. TRANSLATORS: Audio/Video sync
-#: dialog_controls.h:451
 msgid "IDC_GRP_SYNC"
 msgstr "Hang/Video szinkronizáció"
 
 #. TRANSLATORS: Jitter correction.
-#: dialog_controls.h:453
 msgid "IDC_CHK_JITTER"
 msgstr "Vibráláskorrekció."
 
 #. TRANSLATORS: Current jitter:
-#: dialog_controls.h:457
 msgid "IDC_LBL_JITTER"
 msgstr "Aktuális vibrálás:"
 
 #. TRANSLATORS: Time shift (ms):
-#: dialog_controls.h:459
 msgid "IDC_LBL_TIME_SHIFT"
 msgstr "Időeltolás (ms):"
 
 #. TRANSLATORS: <- sound lags
-#: dialog_controls.h:461
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
 msgstr "<- hangkésleltetés"
 
 #. TRANSLATORS: sound hastes ->
-#: dialog_controls.h:463
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
 msgstr "hangsiettetés ->"
 
 #. TRANSLATORS: Localization
-#: dialog_controls.h:468
 msgid "IDC_GRP_TRANS"
 msgstr "Fordítás"
 
 #. TRANSLATORS: Language:
-#: dialog_controls.h:472
 msgid "IDC_LBL_LANG"
 msgstr "Nyelv:"
 
-#: ac3filter_dlg.cpp:158
+#. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
+msgid "IDC_LNK_TRANSLATE"
+msgstr ""
+
 msgid "AS IS (no change)"
 msgstr "AHOGY VAN (változatlan)"
 
-#: ac3filter_dlg.cpp:159
 msgid "1/0 - mono"
 msgstr "1/0 - mono"
 
-#: ac3filter_dlg.cpp:160
 msgid "2/0 - stereo"
 msgstr "2/0 - sztereó"
 
-#: ac3filter_dlg.cpp:161
 msgid "3/0 - 3 front"
 msgstr "3/0 - 3 elülső"
 
-#: ac3filter_dlg.cpp:162
 msgid "2/1 - surround"
 msgstr "2/1 - térhatás"
 
-#: ac3filter_dlg.cpp:163
 msgid "3/1 - surround"
 msgstr "3/1 - térhatás"
 
-#: ac3filter_dlg.cpp:164
 msgid "2/2 - quadro"
 msgstr "2/2 - quadro"
 
-#: ac3filter_dlg.cpp:165
 msgid "3/2 - 5 channels"
 msgstr "3/2 - 5 csatorna"
 
-#: ac3filter_dlg.cpp:166
 msgid "1/0+SW 1.1 mono"
 msgstr "1/0+SW 1.1 mono"
 
-#: ac3filter_dlg.cpp:167
 msgid "2/0+SW 2.1 stereo"
 msgstr "2/0+SW 2.1 sztereó"
 
-#: ac3filter_dlg.cpp:168
 msgid "3/0+SW 3.1 front"
 msgstr "3/0+SW 3.1 elülső"
 
-#: ac3filter_dlg.cpp:169
 msgid "2/1+SW 3.1 surround"
 msgstr "2/1+SW 3.1 térhatás"
 
-#: ac3filter_dlg.cpp:170
 msgid "3/1+SW 4.1 surround"
 msgstr "3/1+SW 4.1 térhatás"
 
-#: ac3filter_dlg.cpp:171
 msgid "2/2+SW 4.1 quadro"
 msgstr "2/2+SW 4.1 quadro"
 
-#: ac3filter_dlg.cpp:172
 msgid "3/2+SW 5.1 channels"
 msgstr "3/2+SW 5.1 csatorna"
 
-#: ac3filter_dlg.cpp:173
 msgid "Dolby Surround/ProLogic"
 msgstr "Dolby Surround/ProLogic"
 
-#: ac3filter_dlg.cpp:174
 msgid "Dolby ProLogic II"
 msgstr "Dolby ProLogic II"
 
-#: ac3filter_dlg.cpp:179
 msgid "PCM 16bit"
 msgstr "16 bites PCM"
 
-#: ac3filter_dlg.cpp:180
 msgid "PCM 24bit"
 msgstr "24 bites PCM"
 
-#: ac3filter_dlg.cpp:181
 msgid "PCM 32bit"
 msgstr "32 bites PCM"
 
-#: ac3filter_dlg.cpp:182
 msgid "PCM Float"
 msgstr "Lebegőpontos PCM"
 
-#: ac3filter_dlg.cpp:274
 msgid "Samples"
 msgstr "Mintavétel"
 
-#: ac3filter_dlg.cpp:275
 msgid "Millisecs"
 msgstr "Ezredmásodperc"
 
-#: ac3filter_dlg.cpp:276
 msgid "Meters"
 msgstr "Méter"
 
-#: ac3filter_dlg.cpp:277
 msgid "Centimeters"
 msgstr "Centiméter"
 
-#: ac3filter_dlg.cpp:278
 msgid "Feet"
 msgstr "Láb"
 
-#: ac3filter_dlg.cpp:279
 msgid "Inches"
 msgstr "Hüvelyk"
 
 #. TRANSLATORS: Main
-#: ac3filter_dlg.cpp:345
 msgid "IDD_MAIN"
 msgstr "Fő"
 
 #. TRANSLATORS: Mixer
-#: ac3filter_dlg.cpp:352
 msgid "IDD_MIXER"
 msgstr "Keverő"
 
 #. TRANSLATORS: Gains
-#: ac3filter_dlg.cpp:359
 msgid "IDD_GAINS"
 msgstr "Erősítések"
 
 #. TRANSLATORS: SPDIF
-#: ac3filter_dlg.cpp:366
 msgid "IDD_SPDIF"
 msgstr "SPDIF"
 
 #. TRANSLATORS: System
-#: ac3filter_dlg.cpp:373
 msgid "IDD_SYSTEM"
 msgstr "Rendszer"
 
 #. TRANSLATORS: About
-#: ac3filter_dlg.cpp:381
 msgid "IDD_ABOUT"
 msgstr "Névjegy"
 
-#: ac3filter_dlg.cpp:1040
 #, c-format
 msgid "%s %s %iHz"
 msgstr "%s %s %iHz"
 
-#: ac3filter_dlg.cpp:1053
 msgid "Use SPDIF"
 msgstr "SPDIF használata"
 
-#: ac3filter_dlg.cpp:1057
 msgid "Use SPDIF (disabled)"
 msgstr "SPDIF (letiltott) használata"
 
-#: ac3filter_dlg.cpp:1061
 msgid "Use SPDIF (passthrough)"
 msgstr "SPDIF (átviteles) használata"
 
-#: ac3filter_dlg.cpp:1065
 msgid "Use SPDIF (AC3 encode)"
 msgstr "SPDIF (AC3 kódolás) használata"
 
-#: ac3filter_dlg.cpp:1069
 msgid "Use SPDIF (Unknown)"
 msgstr "SPDIF (Ismeretlen) használata"
 
-#: ac3filter_dlg.cpp:1126
 #, c-format
 msgid ""
 "Input\tmean: %ims\tstddev: %ims\n"
@@ -874,31 +713,30 @@ msgstr ""
 "Bemeneti\tátlag: %ims\tstddev: %ims\n"
 "Kimeneti\tátlag: %ims\tstddev: %ims"
 
-#: ac3filter_dlg.cpp:1539
-msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
-msgstr "Ez a beállítás VESZÉLYES! A szűrő nagyon hangos hangot hozhat létre a beállítás engedélyezésével. Nyomj 'Nem'-et a beállítás engedélyezéséhez."
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Ez a beállítás VESZÉLYES! A szűrő nagyon hangos hangot hozhat létre a "
+"beállítás engedélyezésével. Nyomj 'Nem'-et a beállítás engedélyezéséhez."
 
-#: ac3filter_dlg.cpp:1539
-#: ac3filter_dlg.cpp:1646
 msgid "Dangerous option!"
 msgstr "Veszélyes beállítás!"
 
-#: ac3filter_dlg.cpp:1646
-msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
-msgstr "Ez a beállítás VESZÉLYES! A video elvesztheti a szinkronizációt a hanggal a beállítás engedélyezésével. Nyomj 'Nem'-et a beállítás engedélyezéséhez."
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+"Ez a beállítás VESZÉLYES! A video elvesztheti a szinkronizációt a hanggal a "
+"beállítás engedélyezésével. Nyomj 'Nem'-et a beállítás engedélyezéséhez."
 
-#: ac3filter_dlg.cpp:2113
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Biztos, hogy törlöd a(z) '%s' előbeállítást?"
 
-#: ac3filter_dlg.cpp:2114
-#: ac3filter_dlg.cpp:2203
 msgid "Delete confirmation"
 msgstr "Törlés megerősítése"
 
-#: ac3filter_dlg.cpp:2202
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
 msgstr "Biztos, hogy törlöd a(z) '%s' mátrixot?"
-
