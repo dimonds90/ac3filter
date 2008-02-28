@@ -1,54 +1,7 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
 #include "ac3filter_intl.h"
-/*
-LangCat::LangCat()
-{
-}
 
-LangCat::LangCat(const char *path)
-{
-  set_path(path);
-}
-
-LangCat::~LangCat()
-{
-  reset();
-}
-
-int
-LangCat::set_path(const char *path)
-{
-  char file[MAX_PATH];
-  WIN32_FIND_DATA fd;
-  HANDLE fh;
-  int count;
-
-  reset();
-
-  if (!path) return 0;
-  if (path[0] == 0) return 0;
-
-  count = 0;
-  sprintf(file, "%s\\*", path);
-  fh = FindFirstFile(file, &fd);
-  if (fh != INVALID_HANDLE_VALUE)
-    do
-    {
-      if (GetFileAttributes(fd.cFileName) && FILE_ATTRIBUTE_DIRECTORY)
-      {
-        if (lang_from_iso(fd.cFileName))
-          count++;
-      }
-    } while (FindNextFile(fh, &fd));
-
-  langs = new char[MAX_LANG * count];
-  if (!langs) return 0;
-  memset(langs, 0, sizeof(const char *) * count);
-}
-*/
 // Global language code
 // Only 2 or 3-character codes allowed
 static const int lang_size = 4;
