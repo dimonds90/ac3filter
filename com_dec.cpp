@@ -760,10 +760,11 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     Speakers user_spk = dvd.get_user();
     bool use_spdif = dvd.get_use_spdif();
 
-    _conf->get_int32("format"           ,user_spk.format  );
-    _conf->get_int32("mask"             ,user_spk.mask    );
-    _conf->get_int32("relation"         ,user_spk.relation);
-    _conf->get_bool ("use_spdif"        ,use_spdif        );
+    _conf->get_int32("format"           ,user_spk.format     );
+    _conf->get_int32("mask"             ,user_spk.mask       );
+    _conf->get_int32("sample_rate"      ,user_spk.sample_rate);
+    _conf->get_int32("relation"         ,user_spk.relation   );
+    _conf->get_bool ("use_spdif"        ,use_spdif           );
 
     switch (user_spk.format)
     {
@@ -996,6 +997,7 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
   {
     _conf->set_int32("format"           ,user_spk.format  );
     _conf->set_int32("mask"             ,user_spk.mask    );
+    _conf->set_int32("sample_rate"      ,user_spk.sample_rate);
     _conf->set_int32("relation"         ,user_spk.relation);
     _conf->set_bool ("use_spdif"        ,use_spdif        );
   }
