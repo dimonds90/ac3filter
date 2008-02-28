@@ -48,6 +48,37 @@
 
 #define CB_ENTER (WM_USER+1)
 
+
+class Controller
+{
+protected:
+  HWND hdlg;
+  const int *controls;
+
+public:
+  enum cmd_result { cmd_ok, cmd_fail, cmd_not_processed, cmd_update };
+
+  Controller(HWND _hdlg, const int *_controls): hdlg(_hdlg), controls(_controls) {}
+  virtual ~Controller() {}
+
+  virtual void init() {};
+  virtual void update() {};
+  virtual void update_dynamic() {};
+
+  virtual bool own_control(int control)
+  {
+    int i = 0;
+    if (controls)
+      while (controls[i] != 0)
+        if (control == controls[i++])
+          return true;
+    return false;
+  }
+
+  virtual cmd_result command(int control, int message) { return cmd_not_processed; }
+};
+
+
 class Tooltip
 {
 protected:
@@ -164,40 +195,5 @@ public:
   virtual void paint(HDC dc);
   virtual void press();
 };
-
-/*
-class Slider
-{
-public:
-  Slider();
-  ~Slider();
-
-
-  void link(HWND dlg, int item);
-  void unlink();
-};
-*/
-
-/*
-class ComboBox
-{
-protected:
-  static LRESULT CALLBACK SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-  HWND    dlg;
-  HWND    hwnd;
-  int     item;
-  WNDPROC wndproc;
-
-
-public:
-  COMBOBOXINFO info;
-  ComboBox(): dlg(0), hwnd(0), item(0), wndproc(0) {};
-  ~ComboBox();
-
-  void link(HWND dlg, int item);
-  void unlink();
-};
-*/
-
 
 #endif

@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 32
-// Total controls: 252
+// Total controls: 253
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -76,13 +76,13 @@ static const ControlDesc dialog_controls[] =
   { IDC_GRP_DELAYS, N_("IDC_GRP_DELAYS"), "Delays", "" },
   /* TRANSLATORS: Enable */
   { IDC_CHK_DELAYS, N_("IDC_CHK_DELAYS"), "Enable", "" },
-  { IDC_CMB_UNITS, "IDC_CMB_UNITS", "", "" },
-  { IDC_EDT_DC, "IDC_EDT_DC", "", "" },
-  { IDC_EDT_DL, "IDC_EDT_DL", "", "" },
-  { IDC_EDT_DLFE, "IDC_EDT_DLFE", "", "" },
-  { IDC_EDT_DR, "IDC_EDT_DR", "", "" },
-  { IDC_EDT_DSL, "IDC_EDT_DSL", "", "" },
-  { IDC_EDT_DSR, "IDC_EDT_DSR", "", "" },
+  { IDC_CMB_DELAY_UNITS, "IDC_CMB_DELAY_UNITS", "", "" },
+  { IDC_EDT_DELAY_C, "IDC_EDT_DELAY_C", "", "" },
+  { IDC_EDT_DELAY_L, "IDC_EDT_DELAY_L", "", "" },
+  { IDC_EDT_DELAY_LFE, "IDC_EDT_DELAY_LFE", "", "" },
+  { IDC_EDT_DELAY_R, "IDC_EDT_DELAY_R", "", "" },
+  { IDC_EDT_DELAY_SL, "IDC_EDT_DELAY_SL", "", "" },
+  { IDC_EDT_DELAY_SR, "IDC_EDT_DELAY_SR", "", "" },
   /* TRANSLATORS: C */
   { IDC_LBL_DELAY_C, N_("IDC_LBL_DELAY_C"), "C", "" },
   /* TRANSLATORS: L */
@@ -96,7 +96,7 @@ static const ControlDesc dialog_controls[] =
   /* TRANSLATORS: Sub */
   { IDC_LBL_DELAY_SW, N_("IDC_LBL_DELAY_SW"), "Sub", "" },
   /* TRANSLATORS: Units: */
-  { IDC_LBL_UNITS, N_("IDC_LBL_UNITS"), "Units:", "" },
+  { IDC_LBL_DELAY_UNITS, N_("IDC_LBL_DELAY_UNITS"), "Units:", "" },
 
   // DRC
   /* TRANSLATORS: DRC */
@@ -352,6 +352,7 @@ static const ControlDesc dialog_controls[] =
   /* TRANSLATORS: Use SPDIF */
   { IDC_CHK_USE_SPDIF, N_("IDC_CHK_USE_SPDIF"), "Use SPDIF", "" },
   { IDC_CMB_FORMAT, "IDC_CMB_FORMAT", "", "" },
+  { IDC_CMB_RATE, "IDC_CMB_RATE", "", "" },
   { IDC_CMB_SPK, "IDC_CMB_SPK", "", "" },
   /* TRANSLATORS: input format */
   { IDC_LBL_INPUT, N_("IDC_LBL_INPUT"), "input format", "" },

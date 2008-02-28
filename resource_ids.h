@@ -44,8 +44,9 @@
 #define IDC_GRP_OUTPUT                 50001
 #define IDC_CMB_SPK                    50002
 #define IDC_CMB_FORMAT                 50003
-#define IDC_CHK_USE_SPDIF              50004
-#define IDC_LBL_SPDIF_STATUS           50005
+#define IDC_CMB_RATE                   50004
+#define IDC_CHK_USE_SPDIF              50005
+#define IDC_LBL_SPDIF_STATUS           50006
 
 // Preset (501)
 #define IDC_GRP_PRESET                 50101
@@ -247,24 +248,24 @@
 #define IDC_CMB_DELAY_PRESET           51402
 #define IDC_BTN_DELAY_SAVE             51403
 #define IDC_BTN_DELAY_DELETE           51404
-#define IDC_LBL_DELAY_L                51411
-#define IDC_LBL_DELAY_C                51412
-#define IDC_LBL_DELAY_R                51413
-#define IDC_LBL_DELAY_SL               51414
-#define IDC_LBL_DELAY_SR               51415
-#define IDC_LBL_DELAY_SW               51416
 
 // Delay (515)
 #define IDC_GRP_DELAYS                 51501
 #define IDC_CHK_DELAYS                 51502
-#define IDC_LBL_UNITS                  51503
-#define IDC_CMB_UNITS                  51504
-#define IDC_EDT_DL                     51511
-#define IDC_EDT_DC                     51512
-#define IDC_EDT_DR                     51513
-#define IDC_EDT_DSL                    51514
-#define IDC_EDT_DSR                    51515
-#define IDC_EDT_DLFE                   51516
+#define IDC_LBL_DELAY_UNITS            51503
+#define IDC_CMB_DELAY_UNITS            51504
+#define IDC_LBL_DELAY_L                51511
+#define IDC_LBL_DELAY_C                51512
+#define IDC_LBL_DELAY_R                51513
+#define IDC_LBL_DELAY_SL               51514
+#define IDC_LBL_DELAY_SR               51515
+#define IDC_LBL_DELAY_SW               51516
+#define IDC_EDT_DELAY_L                51521
+#define IDC_EDT_DELAY_C                51522
+#define IDC_EDT_DELAY_R                51523
+#define IDC_EDT_DELAY_SL               51524
+#define IDC_EDT_DELAY_SR               51525
+#define IDC_EDT_DELAY_LFE              51526
 
 // Allowed formats (516)
 #define IDC_GRP_FORMATS                51601

@@ -43,7 +43,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "AC3FILTER_EXPORTS" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /O2 /Ob2 /I "..\valib\valib" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "AC3FILTER_EXPORTS" /D "ENABLE_NLS" /YX /FD /c
+# ADD CPP /nologo /MD /W3 /GX /O2 /Ob2 /I "..\valib\valib" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "AC3FILTER_EXPORTS" /D "ENABLE_NLS" /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x419 /d "NDEBUG"
@@ -117,14 +117,6 @@ SOURCE=.\ac3filter.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\ac3filter_dlg.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\ac3filter_dlg.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\ac3filter_intl.cpp
 # End Source File
 # Begin Source File
@@ -142,14 +134,6 @@ SOURCE=.\com_dec.cpp
 # Begin Source File
 
 SOURCE=.\com_dec.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\controls.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\controls.h
 # End Source File
 # Begin Source File
 
@@ -222,6 +206,154 @@ SOURCE=.\decss\DeCSSInputPin.cpp
 # Begin Source File
 
 SOURCE=.\decss\DeCSSInputPin.h
+# End Source File
+# End Group
+# Begin Group "dialog"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\ac3filter_dlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ac3filter_dlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_about.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_about.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_agc.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_agc.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_all.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_all.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_bass.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_bass.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_cpu.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_cpu.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_delay.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_delay.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_info.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_info.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_iogains.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_iogains.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_levels.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_levels.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_matrix.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_matrix.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_preset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_preset.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_spdif.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_spdif.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_spk.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_spk.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_sync.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_sync.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_system.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_system.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_ver.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_ver.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\controls.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\controls.h
 # End Source File
 # End Group
 # Begin Source File
