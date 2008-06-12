@@ -12,6 +12,7 @@ public:
   static CUnknown * WINAPI CreateMain  (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateMixer (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateGains (LPUNKNOWN lpunk, HRESULT *phr);
+  static CUnknown * WINAPI CreateEq    (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateSPDIF (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateSystem(LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateAbout (LPUNKNOWN lpunk, HRESULT *phr);

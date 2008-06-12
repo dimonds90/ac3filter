@@ -533,6 +533,46 @@ STDMETHODIMP COMDecoder::set_bass_freq(int bass_freq)
   return S_OK;
 }
 
+// Equalizer
+STDMETHODIMP COMDecoder::get_eq(int *freq, double *gain)
+{
+  int i;
+
+  if (!freq || !gain) return E_FAIL;
+
+  for (i = 0; i < EQ_BANDS; i++)
+    freq[i] = 0, gain[i] = 0.0;
+
+  size_t bands = dvd.proc.get_eq_bands();
+
+  if (bands > EQ_BANDS)
+  {
+    int *freq_proc = new int[bands];
+    double *gain_proc = new double[bands];
+
+    if (!freq_proc || !gain_proc)
+    {
+      safe_delete(freq_proc);
+      safe_delete(gain_proc);
+      return E_FAIL;
+    }
+    dvd.proc.get_eq(freq_proc, gain_proc);
+    for (i = 0; i < EQ_BANDS; i++)
+      freq[i] = freq_proc[i], gain[i] = gain_proc[i];
+  }
+  else
+    dvd.proc.get_eq(freq, gain);
+
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_eq(const int *freq, const double *gain)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_eq(EQ_BANDS, freq, gain);
+  return S_OK;
+}
+
+
 // Delay
 STDMETHODIMP COMDecoder::get_delay(bool *_delay)
 {
@@ -668,18 +708,14 @@ STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, vtime_t _time)
   get_bass_redir(&_state->bass_redir);
   get_bass_freq(&_state->bass_freq);
 
+  // Equalizer
+  get_eq(_state->eq_freq, _state->eq_gain);
+
   // Delay
   get_delay(&_state->delay);
   get_delay_units(&_state->delay_units);
   get_delays(_state->delays);
-/*
-  // Syncronization
-  get_time_shift(&_state->time_shift);
-  get_time_factor(&_state->time_factor);
-  get_dejitter(&_state->dejitter);
-  get_threshold(&_state->threshold);
-  get_jitter(&_state->input_mean, &_state->input_stddev, &_state->output_mean, &_state->output_stddev);
-*/
+
   return S_OK;
 };
 
@@ -722,17 +758,14 @@ STDMETHODIMP COMDecoder::set_state     (AudioProcessorState *_state)
   set_bass_redir(_state->bass_redir);
   set_bass_freq(_state->bass_freq);
 
+  // Equalizer
+  set_eq(_state->eq_freq, _state->eq_gain);
+
   // Delay
   set_delay(_state->delay);
   set_delay_units(_state->delay_units);
   set_delays(_state->delays);
-/*
-  // Syncronization
-  set_time_shift(_state->time_shift);
-  set_time_factor(_state->time_factor);
-  set_dejitter(_state->dejitter);
-  set_threshold(_state->threshold);
-*/
+
   return S_OK;
 };
 

@@ -22,16 +22,15 @@
 #define IDD_MAIN                        102
 #define IDD_MIXER                       103
 #define IDD_GAINS                       104
-#define IDD_SPDIF                       105
-#define IDD_SYSTEM                      106
-#define IDD_ABOUT                       107
+#define IDD_EQ                          105
+#define IDD_SPDIF                       106
+#define IDD_SYSTEM                      107
+#define IDD_ABOUT                       108
 
-#define IDD_FILE                        108
+#define IDD_FILE                        109
 
-#define IDD_SIMPLE                      109
-#define IDD_TEMPL                       110
-
-
+#define IDD_SIMPLE                      110
+#define IDD_TEMPL                       111
 
 
 
@@ -366,6 +365,40 @@
 #define IDC_LNK_HOME                   52501
 #define IDC_LNK_FORUM                  52502
 #define IDC_LNK_EMAIL                  52503
+
+// Equalizer controls (530)
+#define IDC_GRP_EQ                     53001
+#define IDC_EDT_EQ1                    53010
+#define IDC_EDT_EQ2                    53011
+#define IDC_EDT_EQ3                    53012
+#define IDC_EDT_EQ4                    53013
+#define IDC_EDT_EQ5                    53014
+#define IDC_EDT_EQ6                    53015
+#define IDC_EDT_EQ7                    53016
+#define IDC_EDT_EQ8                    53017
+#define IDC_EDT_EQ9                    53018
+#define IDC_EDT_EQ10                   53019
+#define IDC_SLI_EQ1                    53020
+#define IDC_SLI_EQ2                    53021
+#define IDC_SLI_EQ3                    53022
+#define IDC_SLI_EQ4                    53023
+#define IDC_SLI_EQ5                    53024
+#define IDC_SLI_EQ6                    53025
+#define IDC_SLI_EQ7                    53026
+#define IDC_SLI_EQ8                    53027
+#define IDC_SLI_EQ9                    53028
+#define IDC_SLI_EQ10                   53029
+#define IDC_LBL_EQ1                    53030
+#define IDC_LBL_EQ2                    53031
+#define IDC_LBL_EQ3                    53032
+#define IDC_LBL_EQ4                    53033
+#define IDC_LBL_EQ5                    53034
+#define IDC_LBL_EQ6                    53035
+#define IDC_LBL_EQ7                    53036
+#define IDC_LBL_EQ8                    53037
+#define IDC_LBL_EQ9                    53038
+#define IDC_LBL_EQ10                   53039
+
 
 // Logos (100)
 #define IDC_LOGO                       10001

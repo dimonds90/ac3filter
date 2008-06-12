@@ -192,6 +192,9 @@ public:
   STDMETHODIMP set_bass_redir   (bool  bass_redir);
   STDMETHODIMP get_bass_freq    (int  *bass_freq);
   STDMETHODIMP set_bass_freq    (int   bass_freq);
+  // Eqalizer
+  STDMETHODIMP get_eq           (int *freq, double *gain);
+  STDMETHODIMP set_eq           (const int *freq, const double *gain);
   // Delay
   STDMETHODIMP get_delay        (bool *delay);
   STDMETHODIMP set_delay        (bool  delay);

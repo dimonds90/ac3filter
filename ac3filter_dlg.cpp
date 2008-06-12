@@ -49,6 +49,13 @@ CUnknown * WINAPI AC3FilterDlg::CreateGains(LPUNKNOWN lpunk, HRESULT *phr)
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
+CUnknown * WINAPI AC3FilterDlg::CreateEq(LPUNKNOWN lpunk, HRESULT *phr)
+{
+  /* TRANSLATORS: Equalizer */
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Equzlizer page", lpunk, phr, IDD_EQ, N_("IDD_EQ"), "Equalizer");
+  if (punk == NULL) *phr = E_OUTOFMEMORY;
+  return punk;
+}
 CUnknown * WINAPI AC3FilterDlg::CreateSPDIF(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: SPDIF */

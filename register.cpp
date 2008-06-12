@@ -86,11 +86,9 @@ CFactoryTemplate g_Templates[] = {
     { L"AC3Filter Gains page"
     , &CLSID_AC3Filter_gains
     , AC3FilterDlg::CreateGains },
-/*
     { L"AC3Filter Equalizer page"
     , &CLSID_AC3Filter_eq
-    , CAC3Filter_conf::CreateInstanceEq },
-*/
+    , AC3FilterDlg::CreateEq },
     { L"AC3Filter SPDIF page"
     , &CLSID_AC3Filter_spdif
     , AC3FilterDlg::CreateSPDIF },

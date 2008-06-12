@@ -55,6 +55,8 @@ void cr2crlf(char *buf, int size);
 #define DTS_CONV_16BIT   1
 #define DTS_CONV_14BIT   2
 
+#define EQ_BANDS 10
+
 ///////////////////////////////////////////////////////////////////////////////
 // Media types
 ///////////////////////////////////////////////////////////////////////////////
@@ -249,31 +251,7 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
   STDMETHOD (load_params) (Config *config, int what) = 0;
   STDMETHOD (save_params) (Config *config, int what) = 0;
 };
-/*
-struct DVDGraphState
-{
-  Speakers in_spk;
-  Speakers out_spk;
-  Speakers user_spk;
 
-  int formats;
-
-  bool query_sink;
-
-  bool use_spdif;
-  int  spdif_pt;
-  bool spdif_as_pcm;
-  bool spdif_encode;
-  bool spdif_stereo_pt;
-
-  bool spdif_check_sr;
-  bool spdif_allow_48;
-  bool spdif_allow_44;
-  bool spdif_allow_32;
-
-  int spdif_status;
-};
-*/
 struct AudioProcessorState
 {
   // AGC options
@@ -305,6 +283,10 @@ struct AudioProcessorState
   sample_t input_levels[NCHANNELS];
   sample_t output_levels[NCHANNELS];
 
+  // Equalizer
+  int      eq_freq[EQ_BANDS];
+  double   eq_gain[EQ_BANDS];
+
   // Matrix
   matrix_t matrix;
 
@@ -321,18 +303,6 @@ struct AudioProcessorState
   bool     delay;
   int      delay_units;
   float    delays[NCHANNELS];
-/*
-  // Syncronization
-  vtime_t  time_shift;
-  vtime_t  time_factor;
-  bool     dejitter;
-  vtime_t  threshold;
-
-  vtime_t  input_mean;
-  vtime_t  input_stddev;
-  vtime_t  output_mean;
-  vtime_t  output_stddev;
-*/
 };
 
 DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
@@ -387,6 +357,9 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_bass_redir)   (bool  bass_redir) = 0;
   STDMETHOD (get_bass_freq)    (int  *bass_freq) = 0;
   STDMETHOD (set_bass_freq)    (int   bass_freq) = 0;
+  // Eqalizer
+  STDMETHOD (get_eq)           (int *freqs, double *gains) = 0;
+  STDMETHOD (set_eq)           (const int *freqs, const double *gains) = 0;
   // Delay
   STDMETHOD (get_delay)        (bool *delay) = 0;
   STDMETHOD (set_delay)        (bool  delay) = 0;

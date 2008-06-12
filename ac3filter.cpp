@@ -827,7 +827,7 @@ AC3Filter::DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProper
 STDMETHODIMP 
 AC3Filter::GetPages(CAUUID *pPages)
 {
-  pPages->cElems = 6;
+  pPages->cElems = 7;
   pPages->pElems = (GUID *) CoTaskMemAlloc(sizeof(GUID) * pPages->cElems);
   if (pPages->pElems == NULL)
     return E_OUTOFMEMORY;
@@ -835,9 +835,10 @@ AC3Filter::GetPages(CAUUID *pPages)
   (pPages->pElems)[0] = CLSID_AC3Filter_main;
   (pPages->pElems)[1] = CLSID_AC3Filter_mixer;
   (pPages->pElems)[2] = CLSID_AC3Filter_gains;
-  (pPages->pElems)[3] = CLSID_AC3Filter_spdif;
-  (pPages->pElems)[4] = CLSID_AC3Filter_sys;
-  (pPages->pElems)[5] = CLSID_AC3Filter_about;
+  (pPages->pElems)[3] = CLSID_AC3Filter_eq;
+  (pPages->pElems)[4] = CLSID_AC3Filter_spdif;
+  (pPages->pElems)[5] = CLSID_AC3Filter_sys;
+  (pPages->pElems)[6] = CLSID_AC3Filter_about;
   return NOERROR;
 }
 
