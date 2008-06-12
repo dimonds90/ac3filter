@@ -541,7 +541,7 @@ STDMETHODIMP COMDecoder::get_eq(int *freq, double *gain)
   if (!freq || !gain) return E_FAIL;
 
   for (i = 0; i < EQ_BANDS; i++)
-    freq[i] = 0, gain[i] = 0.0;
+    freq[i] = 0, gain[i] = 1.0;
 
   size_t bands = dvd.proc.get_eq_bands();
 
