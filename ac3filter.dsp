@@ -269,6 +269,14 @@ SOURCE=.\dlg\control_delay.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\dlg\control_eq.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_eq.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\dlg\control_info.cpp
 # End Source File
 # Begin Source File
