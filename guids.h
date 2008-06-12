@@ -284,6 +284,7 @@ struct AudioProcessorState
   sample_t output_levels[NCHANNELS];
 
   // Equalizer
+  bool     eq;
   int      eq_freq[EQ_BANDS];
   double   eq_gain[EQ_BANDS];
 
@@ -358,8 +359,10 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (get_bass_freq)    (int  *bass_freq) = 0;
   STDMETHOD (set_bass_freq)    (int   bass_freq) = 0;
   // Eqalizer
-  STDMETHOD (get_eq)           (int *freqs, double *gains) = 0;
-  STDMETHOD (set_eq)           (const int *freqs, const double *gains) = 0;
+  STDMETHOD (get_eq)           (bool *eq) = 0;
+  STDMETHOD (set_eq)           (bool  eq) = 0;
+  STDMETHOD (get_eq_bands)     (int *freqs, double *gains) = 0;
+  STDMETHOD (set_eq_bands)     (const int *freqs, const double *gains) = 0;
   // Delay
   STDMETHOD (get_delay)        (bool *delay) = 0;
   STDMETHOD (set_delay)        (bool  delay) = 0;

@@ -368,6 +368,7 @@
 
 // Equalizer controls (530)
 #define IDC_GRP_EQ                     53001
+#define IDC_CHK_EQ                     53002
 #define IDC_EDT_EQ1                    53010
 #define IDC_EDT_EQ2                    53011
 #define IDC_EDT_EQ3                    53012

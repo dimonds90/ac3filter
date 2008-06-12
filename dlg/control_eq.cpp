@@ -7,6 +7,7 @@
 static const int controls[] =
 {
   IDC_GRP_EQ,
+  IDC_CHK_EQ,
   IDC_SLI_EQ1, IDC_SLI_EQ2, IDC_SLI_EQ3, IDC_SLI_EQ4, IDC_SLI_EQ5, IDC_SLI_EQ6, IDC_SLI_EQ7, IDC_SLI_EQ8, IDC_SLI_EQ9, IDC_SLI_EQ10,
   IDC_EDT_EQ1, IDC_EDT_EQ2, IDC_EDT_EQ3, IDC_EDT_EQ4, IDC_EDT_EQ5, IDC_EDT_EQ6, IDC_EDT_EQ7, IDC_EDT_EQ8, IDC_EDT_EQ9, IDC_EDT_EQ10,
   0
@@ -57,7 +58,10 @@ void ControlEq::init()
 
 void ControlEq::update()
 {
-  proc->get_eq(freq, gain);
+  proc->get_eq(&eq);
+  proc->get_eq_bands(freq, gain);
+
+  CheckDlgButton(hdlg, IDC_CHK_EQ, eq? BST_CHECKED: BST_UNCHECKED);
   for (size_t band = 0; band < EQ_BANDS; band++)
   {
     edt_gain[band].update_value(value2db(gain[band]));
@@ -70,26 +74,36 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
   size_t band;
 
   if (message == CB_ENTER)
-    for (size_t band = 0; band < EQ_BANDS; band++)
+    for (band = 0; band < EQ_BANDS; band++)
       if (control == idc_edt_eq[band])
       {
-        proc->get_eq(freq, gain);
+        proc->get_eq_bands(freq, gain);
         gain[band] = db2value(edt_gain[band].value);
-        proc->set_eq(band_freq, gain);
+        proc->set_eq_bands(band_freq, gain);
         update();
         return cmd_ok;
       }
 
   if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
-    for (size_t band = 0; band < EQ_BANDS; band++)
+    for (band = 0; band < EQ_BANDS; band++)
       if (control == idc_sli_eq[band])
       {
-        proc->get_eq(freq, gain);
+        proc->get_eq_bands(freq, gain);
         gain[band] = db2value(-double(SendDlgItemMessage(hdlg, idc_sli_eq[band],TBM_GETPOS, 0, 0))/ticks);
-        proc->set_eq(band_freq, gain);
+        proc->set_eq_bands(band_freq, gain);
         update();
         return cmd_ok;
       }
+
+  switch (control)
+  {
+    case IDC_CHK_EQ:
+    {
+      eq = IsDlgButtonChecked(hdlg, IDC_CHK_EQ) == BST_CHECKED;
+      proc->set_eq(eq);
+      break;
+    }
+  }
 
   return cmd_not_processed;
 }

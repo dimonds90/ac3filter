@@ -603,49 +603,52 @@ STYLE WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
     CONTROL         "Slider3",IDC_SLI_EQ1,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,60,24,27,60
-    EDITTEXT        IDC_EDT_EQ1,61,86,23,12,ES_AUTOHSCROLL
+                    TBS_BOTH | WS_TABSTOP,113,25,27,60
+    EDITTEXT        IDC_EDT_EQ1,115,86,23,12,ES_AUTOHSCROLL
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
-    GROUPBOX        "Equalizer",IDC_GRP_EQ,8,8,384,96
+    GROUPBOX        "Equalizer",IDC_GRP_EQ,105,8,287,96
     CONTROL         "Slider3",IDC_SLI_EQ2,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,93,24,27,60
+                    TBS_BOTH | WS_TABSTOP,141,25,27,60
     CONTROL         "Slider3",IDC_SLI_EQ3,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,126,24,27,60
+                    TBS_BOTH | WS_TABSTOP,168,25,27,60
     CONTROL         "Slider3",IDC_SLI_EQ4,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,159,24,27,60
+                    TBS_BOTH | WS_TABSTOP,195,25,27,60
     CONTROL         "Slider3",IDC_SLI_EQ5,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,192,24,27,60
+                    TBS_BOTH | WS_TABSTOP,222,25,27,60
     CONTROL         "Slider3",IDC_SLI_EQ6,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,225,24,27,60
+                    TBS_BOTH | WS_TABSTOP,249,25,27,60
     CONTROL         "Slider3",IDC_SLI_EQ7,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,258,24,27,60
+                    TBS_BOTH | WS_TABSTOP,275,25,27,60
     CONTROL         "Slider3",IDC_SLI_EQ8,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,291,24,27,60
+                    TBS_BOTH | WS_TABSTOP,303,25,27,60
     CONTROL         "Slider3",IDC_SLI_EQ9,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,324,24,27,60
+                    TBS_BOTH | WS_TABSTOP,330,25,27,60
     CONTROL         "Slider3",IDC_SLI_EQ10,"msctls_trackbar32",TBS_VERT | 
-                    TBS_BOTH | WS_TABSTOP,357,24,27,60
-    EDITTEXT        IDC_EDT_EQ2,94,86,23,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ3,127,86,23,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ4,160,86,23,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ5,193,86,23,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ6,226,86,23,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ7,259,86,23,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ8,292,86,23,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ9,325,86,23,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDT_EQ10,358,86,23,12,ES_AUTOHSCROLL
-    LTEXT           "30Hz",IDC_LBL_EQ1,63,17,18,8
-    LTEXT           "60Hz",IDC_LBL_EQ2,97,17,18,8
-    LTEXT           "125Hz",IDC_LBL_EQ3,128,17,22,8
-    LTEXT           "250Hz",IDC_LBL_EQ4,162,17,22,8
-    LTEXT           "500Hz",IDC_LBL_EQ5,194,17,22,8
-    LTEXT           "1kHz",IDC_LBL_EQ6,229,17,18,8
-    LTEXT           "2kHz",IDC_LBL_EQ7,261,17,18,8
-    LTEXT           "4kHz",IDC_LBL_EQ8,295,17,18,8
-    LTEXT           "8kHz",IDC_LBL_EQ9,328,17,18,8
+                    TBS_BOTH | WS_TABSTOP,357,25,27,60
+    EDITTEXT        IDC_EDT_EQ2,142,86,23,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_EQ3,169,86,23,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_EQ4,197,86,23,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_EQ5,223,86,23,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_EQ6,250,86,23,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_EQ7,277,86,23,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_EQ8,304,86,23,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_EQ9,331,86,23,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_EQ10,359,86,23,12,ES_AUTOHSCROLL
+    LTEXT           "30Hz",IDC_LBL_EQ1,117,17,18,8
+    LTEXT           "60Hz",IDC_LBL_EQ2,145,17,18,8
+    LTEXT           "125Hz",IDC_LBL_EQ3,170,17,22,8
+    LTEXT           "250Hz",IDC_LBL_EQ4,198,17,22,8
+    LTEXT           "500Hz",IDC_LBL_EQ5,224,17,22,8
+    LTEXT           "1kHz",IDC_LBL_EQ6,253,17,18,8
+    LTEXT           "2kHz",IDC_LBL_EQ7,279,17,18,8
+    LTEXT           "4kHz",IDC_LBL_EQ8,307,17,18,8
+    LTEXT           "8kHz",IDC_LBL_EQ9,334,17,18,8
     LTEXT           "16kHz",IDC_LBL_EQ10,360,17,22,8
+    GROUPBOX        "Options",IDC_STATIC,8,8,93,96
+    CONTROL         "Enable equalizer",IDC_CHK_EQ,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,21,24,68,10
 END
 
 

@@ -199,8 +199,8 @@ AC3FilterDlg::OnDeactivate()
   KillTimer(m_hwnd, 2);
 
   // Destroy controllers
-  delete ctrl;
-  delete cpu;
+  safe_delete(ctrl);
+  safe_delete(cpu);
 
   return NOERROR;
 }
@@ -618,13 +618,14 @@ AC3FilterDlg::command(int control, int message)
   /////////////////////////////////////
   // Dispatch message to controllers
 
-  if (ctrl->own_control(control))
-  {
-    Controller::cmd_result result = ctrl->command(control, message);
-    if (result == Controller::cmd_update)
-      update();
-    return;
-  }
+  if (ctrl)
+    if (ctrl->own_control(control))
+    {
+      Controller::cmd_result result = ctrl->command(control, message);
+      if (result == Controller::cmd_update)
+        update();
+      return;
+    }
 
   switch (control)
   {

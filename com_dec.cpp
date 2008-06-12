@@ -534,7 +534,18 @@ STDMETHODIMP COMDecoder::set_bass_freq(int bass_freq)
 }
 
 // Equalizer
-STDMETHODIMP COMDecoder::get_eq(int *freq, double *gain)
+STDMETHODIMP COMDecoder::get_eq(bool *_eq)
+{
+  if (_eq) *_eq = dvd.proc.get_eq();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_eq(bool _eq)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_eq(_eq);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_eq_bands(int *freq, double *gain)
 {
   int i;
 
@@ -543,7 +554,7 @@ STDMETHODIMP COMDecoder::get_eq(int *freq, double *gain)
   for (i = 0; i < EQ_BANDS; i++)
     freq[i] = 0, gain[i] = 1.0;
 
-  size_t bands = dvd.proc.get_eq_bands();
+  size_t bands = dvd.proc.get_eq_nbands();
 
   if (bands > EQ_BANDS)
   {
@@ -556,19 +567,19 @@ STDMETHODIMP COMDecoder::get_eq(int *freq, double *gain)
       safe_delete(gain_proc);
       return E_FAIL;
     }
-    dvd.proc.get_eq(freq_proc, gain_proc);
+    dvd.proc.get_eq_bands(freq_proc, gain_proc);
     for (i = 0; i < EQ_BANDS; i++)
       freq[i] = freq_proc[i], gain[i] = gain_proc[i];
   }
   else
-    dvd.proc.get_eq(freq, gain);
+    dvd.proc.get_eq_bands(freq, gain);
 
   return S_OK;
 }
-STDMETHODIMP COMDecoder::set_eq(const int *freq, const double *gain)
+STDMETHODIMP COMDecoder::set_eq_bands(const int *freq, const double *gain)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_eq(EQ_BANDS, freq, gain);
+  dvd.proc.set_eq_bands(EQ_BANDS, freq, gain);
   return S_OK;
 }
 
@@ -709,7 +720,8 @@ STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, vtime_t _time)
   get_bass_freq(&_state->bass_freq);
 
   // Equalizer
-  get_eq(_state->eq_freq, _state->eq_gain);
+  get_eq(&_state->eq);
+  get_eq_bands(_state->eq_freq, _state->eq_gain);
 
   // Delay
   get_delay(&_state->delay);
@@ -759,7 +771,8 @@ STDMETHODIMP COMDecoder::set_state     (AudioProcessorState *_state)
   set_bass_freq(_state->bass_freq);
 
   // Equalizer
-  set_eq(_state->eq_freq, _state->eq_gain);
+  set_eq(_state->eq);
+  set_eq_bands(_state->eq_freq, _state->eq_gain);
 
   // Delay
   set_delay(_state->delay);

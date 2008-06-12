@@ -13,6 +13,7 @@ class ControlEq : public Controller
 protected:
   IAudioProcessor *proc;
 
+  bool eq;
   int freq[EQ_BANDS];
   double gain[EQ_BANDS];
   DoubleEdit edt_gain[EQ_BANDS];
