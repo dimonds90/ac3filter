@@ -32,13 +32,14 @@ void cr2crlf(char *buf, int size);
                               // matrix
 #define AC3FILTER_DELAY  0x10 // Delay settings:
                               // delay, delay_units, delays
-#define AC3FILTER_SYNC   0x20 // Syncronization settings:
+#define AC3FILTER_EQ     0x20 // Equalizer
+#define AC3FILTER_SYNC   0x40 // Syncronization settings:
                               // time_shift, time_factor, dejitter, threshold
-#define AC3FILTER_SYS    0x40 // System settings: 
+#define AC3FILTER_SYS    0x80 // System settings: 
                               // formats, spdif, config_autoload, 
 
-#define AC3FILTER_ALL    0x7f // all settings
-#define AC3FILTER_PRESET 0x1f // settings that saved into preset (all except system settings and sync)
+#define AC3FILTER_ALL    0xff // all settings
+#define AC3FILTER_PRESET 0x3f // settings that saved into preset (all except system settings and sync)
 
 // Constants from dvd_graph.h
 #define SPDIF_MODE_NONE                0

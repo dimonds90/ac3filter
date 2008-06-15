@@ -897,6 +897,20 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     _conf->get_float("delay_LFE"        ,state.delays[CH_LFE]  );
   }
 
+  if (_what & AC3FILTER_EQ)
+  {
+    // Equalizer
+    _conf->get_bool("eq"                ,state.eq              );
+    for (int i = 0; i < EQ_BANDS; i++)
+    {
+      char freq_str[32], gain_str[32];
+      sprintf(freq_str, "eq_freq_%i", i);
+      sprintf(gain_str, "eq_gain_%i", i);
+      _conf->get_int32(freq_str         ,state.eq_freq[i]      );
+      _conf->get_float(gain_str         ,state.eq_gain[i]      );
+    }
+  }
+
   if (_what & AC3FILTER_SYNC)
   {
     vtime_t time_shift  = dvd.syncer.get_time_shift();
@@ -1101,6 +1115,20 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     _conf->set_float("delay_SL"         ,state.delays[CH_SL]   );
     _conf->set_float("delay_SR"         ,state.delays[CH_SR]   );
     _conf->set_float("delay_LFE"        ,state.delays[CH_LFE]  );
+  }
+
+  if (_what & AC3FILTER_EQ)
+  {
+    // Equalizer
+    _conf->set_bool("eq"                ,state.eq              );
+    for (int i = 0; i < EQ_BANDS; i++)
+    {
+      char freq_str[32], gain_str[32];
+      sprintf(freq_str, "eq_freq_%i", i);
+      sprintf(gain_str, "eq_gain_%i", i);
+      _conf->set_int32(freq_str         ,state.eq_freq[i]      );
+      _conf->set_float(gain_str         ,state.eq_gain[i]      );
+    }
   }
 
   if (_what & AC3FILTER_SYNC)
