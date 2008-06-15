@@ -15,6 +15,11 @@ static const int controls[] =
   IDC_BTN_MATRIX_SAVE,
   IDC_BTN_MATRIX_DELETE,
 
+  IDC_GRP_EQ_PRESET,
+  IDC_CMB_EQ_PRESET,
+  IDC_BTN_EQ_SAVE,
+  IDC_BTN_EQ_DELETE,
+
   0
 };
 
@@ -106,6 +111,7 @@ void ControlPreset::update()
 
   fill_combobox(IDC_CMB_PRESET, REG_KEY_PRESET);
   fill_combobox(IDC_CMB_MATRIX_PRESET, REG_KEY_MATRIX);
+  fill_combobox(IDC_CMB_EQ_PRESET, REG_KEY_EQ);
 };
 
 ControlPreset::cmd_result ControlPreset::command(int control, int message)
@@ -260,6 +266,69 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
         delete_reg_key(buf, HKEY_CURRENT_USER);
         SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_SETTEXT, 0, (LONG)"");
         proc->set_auto_matrix(true);
+        update();
+      }
+      return cmd_ok;
+    }
+
+    /////////////////////////////////////
+    // Equalizer preset
+
+    case IDC_CMB_EQ_PRESET:
+      if (message == CBN_SELENDOK)
+      {
+        char buf[256];
+        char preset[256];
+        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, CB_GETLBTEXT, SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, CB_GETCURSEL, 0, 0), (LONG)preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_SETTEXT, 0, (LONG)preset);
+        sprintf(buf, REG_KEY_EQ"\\%s", preset);
+
+        RegistryKey reg(buf);
+        dec->load_params(&reg, AC3FILTER_EQ);
+        proc->set_eq(true);
+        return cmd_update;
+      }
+      if (message == CB_ENTER)
+      {
+        char buf[256];
+        char preset[256];
+        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_GETTEXT, 256, (LONG)preset);
+        sprintf(buf, REG_KEY_EQ"\\%s", preset);
+
+        RegistryKey reg;
+        reg.create_key(buf);
+        dec->save_params(&reg, AC3FILTER_EQ);
+        update();
+        return cmd_ok;
+      }
+      return cmd_not_processed;
+
+    case IDC_BTN_EQ_SAVE:
+    {
+      char buf[256];
+      char preset[256];
+      SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_GETTEXT, 256, (LONG)preset);
+      sprintf(buf, REG_KEY_EQ"\\%s", preset);
+
+      RegistryKey reg;
+      reg.create_key(buf);
+      dec->save_params(&reg, AC3FILTER_EQ);
+      update();
+      return cmd_ok;
+    }
+
+    case IDC_BTN_EQ_DELETE:
+    {
+      char buf[256];
+      char preset[256];
+      SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_GETTEXT, 256, (LONG)preset);
+
+      sprintf(buf, _("Are you sure you want to delete '%s' equalizer preset?"), preset);
+      if (MessageBox(hdlg, buf, _("Delete confirmation"), MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
+      {     
+        sprintf(buf, REG_KEY_EQ"\\%s", preset);
+        delete_reg_key(buf, HKEY_CURRENT_USER);
+        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_SETTEXT, 0, (LONG)"");
         update();
       }
       return cmd_ok;

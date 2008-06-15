@@ -8,6 +8,8 @@ static const int controls[] =
 {
   IDC_GRP_EQ,
   IDC_CHK_EQ,
+  IDC_BTN_EQ_RESET,
+
   IDC_SLI_EQ1, IDC_SLI_EQ2, IDC_SLI_EQ3, IDC_SLI_EQ4, IDC_SLI_EQ5, IDC_SLI_EQ6, IDC_SLI_EQ7, IDC_SLI_EQ8, IDC_SLI_EQ9, IDC_SLI_EQ10,
   IDC_EDT_EQ1, IDC_EDT_EQ2, IDC_EDT_EQ3, IDC_EDT_EQ4, IDC_EDT_EQ5, IDC_EDT_EQ6, IDC_EDT_EQ7, IDC_EDT_EQ8, IDC_EDT_EQ9, IDC_EDT_EQ10,
   0
@@ -25,6 +27,9 @@ static const int idc_sli_eq[EQ_BANDS] =
 
 static const int band_freq[EQ_BANDS] =
 { 30, 60, 125, 250, 500, 1000, 2000, 4000, 8000, 16000 };
+
+static const double band_gain[EQ_BANDS] =
+{ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
 
 static const double min_gain_level = -12.0;
 static const double max_gain_level = +12.0;
@@ -101,7 +106,14 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
     {
       eq = IsDlgButtonChecked(hdlg, IDC_CHK_EQ) == BST_CHECKED;
       proc->set_eq(eq);
-      break;
+      return cmd_ok;
+    }
+
+    case IDC_BTN_EQ_RESET:
+    {
+      proc->set_eq_bands(band_freq, band_gain);
+      update();
+      return cmd_ok;
     }
   }
 

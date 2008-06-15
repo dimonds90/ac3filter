@@ -19,6 +19,7 @@ void cr2crlf(char *buf, int size);
 #define REG_KEY        "Software\\AC3Filter"
 #define REG_KEY_PRESET "Software\\AC3Filter\\preset"
 #define REG_KEY_MATRIX "Software\\AC3Filter\\matrix"
+#define REG_KEY_EQ     "Software\\AC3Filter\\equalizer"
 
 // preset settings
 #define AC3FILTER_SPK    0x01 // Speakers configuration: 

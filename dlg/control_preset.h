@@ -2,6 +2,7 @@
   Preset handling
   * Global presets
   * Matrix presets
+  * Equalizer preset
 */
 
 #ifndef CONTROL_PRESET_H

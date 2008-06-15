@@ -592,7 +592,7 @@ BEGIN
     CTEXT           "R",IDC_LBL_IN_R,342,91,16,8,0,WS_EX_TRANSPARENT
     CTEXT           "SL",IDC_LBL_IN_SL,356,91,16,8,0,WS_EX_TRANSPARENT
     CTEXT           "SR",IDC_LBL_IN_SR,370,91,16,8,0,WS_EX_TRANSPARENT
-    COMBOBOX        IDC_CMB_RATE,48,30,54,170,CBS_DROPDOWN | WS_VSCROLL | 
+    COMBOBOX        IDC_CMB_RATE,48,30,54,170,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
     LTEXT           "Format",IDC_STATIC,14,44,22,8
     LTEXT           "Rate",IDC_STATIC,14,32,16,8
@@ -608,7 +608,7 @@ BEGIN
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
-    GROUPBOX        "Equalizer",IDC_GRP_EQ,105,8,287,96
+    GROUPBOX        "Equalizer",IDC_GRP_EQ,106,8,286,96
     CONTROL         "Slider3",IDC_SLI_EQ2,"msctls_trackbar32",TBS_VERT | 
                     TBS_BOTH | WS_TABSTOP,141,25,27,60
     CONTROL         "Slider3",IDC_SLI_EQ3,"msctls_trackbar32",TBS_VERT | 
@@ -646,9 +646,16 @@ BEGIN
     LTEXT           "4kHz",IDC_LBL_EQ8,307,17,18,8
     LTEXT           "8kHz",IDC_LBL_EQ9,334,17,18,8
     LTEXT           "16kHz",IDC_LBL_EQ10,360,17,22,8
-    GROUPBOX        "Options",IDC_STATIC,8,8,93,96
-    CONTROL         "Enable equalizer",IDC_CHK_EQ,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,21,24,68,10
+    GROUPBOX        "Equalizer options",IDC_GRP_EQ_OPTIONS,8,8,94,59
+    CONTROL         "Enable equalizer",IDC_CHK_EQ,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,18,22,68,10
+    GROUPBOX        "Spectrum",IDC_GRP_SPECTRUM,8,104,384,96
+    COMBOBOX        IDC_CMB_EQ_PRESET,14,78,83,122,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Save",IDC_BTN_EQ_SAVE,14,91,41,10
+    GROUPBOX        "Equalizer preset",IDC_GRP_EQ_PRESET,8,69,94,35
+    PUSHBUTTON      "Delete",IDC_BTN_EQ_DELETE,56,91,41,10
+    PUSHBUTTON      "Reset equalizer",IDC_BTN_EQ_RESET,18,33,69,12,BS_FLAT
 END
 
 
