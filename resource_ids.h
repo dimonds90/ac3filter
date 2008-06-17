@@ -27,9 +27,6 @@
 #define IDD_SYSTEM                      107
 #define IDD_ABOUT                       108
 
-#define IDD_FILE                        109
-#define IDD_EQ_BANDS                    110
-
 #define IDD_SIMPLE                      200
 #define IDD_TEMPL                       201
 
@@ -367,7 +364,7 @@
 #define IDC_LNK_FORUM                  52502
 #define IDC_LNK_EMAIL                  52503
 
-// Equalizer controls (530)
+// Equalizer preset (530)
 #define IDC_GRP_EQ_PRESET              53001
 #define IDC_CMB_EQ_PRESET              53002
 #define IDC_BTN_EQ_SAVE                53003
@@ -378,8 +375,7 @@
 #define IDC_GRP_EQ_OPTIONS             53102
 #define IDC_CHK_EQ                     53103
 #define IDC_BTN_EQ_RESET               53104
-#define IDC_BTN_EQ_CUSTOM              53105
-#define IDC_SPECTRUM                   53106
+#define IDC_SPECTRUM                   53105
 #define IDC_EDT_EQ1                    53110
 #define IDC_EDT_EQ2                    53111
 #define IDC_EDT_EQ3                    53112
@@ -410,17 +406,6 @@
 #define IDC_LBL_EQ8                    53137
 #define IDC_LBL_EQ9                    53138
 #define IDC_LBL_EQ10                   53139
-#define IDC_EDT_EQ_FREQ1               53140
-#define IDC_EDT_EQ_FREQ2               53141
-#define IDC_EDT_EQ_FREQ3               53142
-#define IDC_EDT_EQ_FREQ4               53143
-#define IDC_EDT_EQ_FREQ5               53144
-#define IDC_EDT_EQ_FREQ6               53145
-#define IDC_EDT_EQ_FREQ7               53146
-#define IDC_EDT_EQ_FREQ8               53147
-#define IDC_EDT_EQ_FREQ9               53148
-#define IDC_EDT_EQ_FREQ10              53149
-
 
 // Logos (100)
 #define IDC_LOGO                       10001

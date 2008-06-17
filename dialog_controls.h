@@ -13,29 +13,15 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 305
+// Total controls: 292
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
-  /* TRANSLATORS: Cancel */
-  { IDCANCEL, N_("IDCANCEL"), "Cancel", "" },
   /* TRANSLATORS: Donate */
   { IDC_BTN_DONATE, N_("IDC_BTN_DONATE"), "Donate", "" },
-  { IDC_EDT_EQ_FREQ1, "IDC_EDT_EQ_FREQ1", "", "" },
-  { IDC_EDT_EQ_FREQ10, "IDC_EDT_EQ_FREQ10", "", "" },
-  { IDC_EDT_EQ_FREQ2, "IDC_EDT_EQ_FREQ2", "", "" },
-  { IDC_EDT_EQ_FREQ3, "IDC_EDT_EQ_FREQ3", "", "" },
-  { IDC_EDT_EQ_FREQ4, "IDC_EDT_EQ_FREQ4", "", "" },
-  { IDC_EDT_EQ_FREQ5, "IDC_EDT_EQ_FREQ5", "", "" },
-  { IDC_EDT_EQ_FREQ6, "IDC_EDT_EQ_FREQ6", "", "" },
-  { IDC_EDT_EQ_FREQ7, "IDC_EDT_EQ_FREQ7", "", "" },
-  { IDC_EDT_EQ_FREQ8, "IDC_EDT_EQ_FREQ8", "", "" },
-  { IDC_EDT_EQ_FREQ9, "IDC_EDT_EQ_FREQ9", "", "" },
   { IDC_SPECTRUM, "IDC_SPECTRUM", "", "" },
   /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky */
   { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky", "" },
-  /* TRANSLATORS: OK */
-  { IDOK, N_("IDOK"), "OK", "" },
 
   // What is it?
   /* TRANSLATORS: What is it? */
@@ -205,8 +191,6 @@ static const ControlDesc dialog_controls[] =
   // Equalizer options
   /* TRANSLATORS: Equalizer options */
   { IDC_GRP_EQ_OPTIONS, N_("IDC_GRP_EQ_OPTIONS"), "Equalizer options", "" },
-  /* TRANSLATORS: Customize */
-  { IDC_BTN_EQ_CUSTOM, N_("IDC_BTN_EQ_CUSTOM"), "Customize", "" },
   /* TRANSLATORS: Reset equalizer */
   { IDC_BTN_EQ_RESET, N_("IDC_BTN_EQ_RESET"), "Reset equalizer", "" },
   /* TRANSLATORS: Enable equalizer */
