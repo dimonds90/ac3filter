@@ -200,7 +200,7 @@ public:
   // Spectrum
   STDMETHODIMP get_spectrum_length (size_t *length);
   STDMETHODIMP set_spectrum_length (size_t  length);
-  STDMETHODIMP get_spectrum      (sample_t *data);
+  STDMETHODIMP get_spectrum      (sample_t *data, double *bin2hz);
   // Delay
   STDMETHODIMP get_delay        (bool *delay);
   STDMETHODIMP set_delay        (bool  delay);

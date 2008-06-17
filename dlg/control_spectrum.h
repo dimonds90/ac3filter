@@ -24,9 +24,13 @@ protected:
   HBRUSH bkg_brush;
   HPEN   signal_pen;
   HPEN   grid_pen;
+  HPEN   major_pen;
+
+  HFONT  grid_font;
 
   size_t spectrum_length;
   sample_t *spectrum;
+  double bin2hz;
 
 public:
   ControlSpectrum(HWND dlg, IAudioProcessor *proc);
@@ -35,7 +39,8 @@ public:
   virtual void init();
   virtual void update();
   virtual void update_dynamic();
-  void paint();
+  void paint_linear();
+  void paint_log();
 
   virtual cmd_result command(int control, int message);
 };

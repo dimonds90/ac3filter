@@ -369,7 +369,7 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   // Spectrum
   STDMETHOD (get_spectrum_length) (size_t *length) = 0;
   STDMETHOD (set_spectrum_length) (size_t  length) = 0;
-  STDMETHOD (get_spectrum)     (sample_t *data) = 0;
+  STDMETHOD (get_spectrum)     (sample_t *data, double *bin2hz) = 0;
   // Delay
   STDMETHOD (get_delay)        (bool *delay) = 0;
   STDMETHOD (set_delay)        (bool  delay) = 0;
