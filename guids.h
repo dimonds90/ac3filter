@@ -289,6 +289,7 @@ struct AudioProcessorState
   bool     eq;
   int      eq_freq[EQ_BANDS];
   double   eq_gain[EQ_BANDS];
+  size_t   spectrum_length;
 
   // Matrix
   matrix_t matrix;
@@ -365,6 +366,10 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_eq)           (bool  eq) = 0;
   STDMETHOD (get_eq_bands)     (int *freqs, double *gains) = 0;
   STDMETHOD (set_eq_bands)     (const int *freqs, const double *gains) = 0;
+  // Spectrum
+  STDMETHOD (get_spectrum_length) (size_t *length) = 0;
+  STDMETHOD (set_spectrum_length) (size_t  length) = 0;
+  STDMETHOD (get_spectrum)     (sample_t *data) = 0;
   // Delay
   STDMETHOD (get_delay)        (bool *delay) = 0;
   STDMETHOD (set_delay)        (bool  delay) = 0;

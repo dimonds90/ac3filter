@@ -1,3 +1,9 @@
+v1.50a
+  + Equalizer
+  + Spectrum analyzer
+  + Sample rate conversion
+
+
 v1.46 stable - 09.08.2007
   + AC3 encoder bitrate is now ajustable
   + Korean translation added (thanks to starcodec)

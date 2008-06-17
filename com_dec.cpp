@@ -583,6 +583,25 @@ STDMETHODIMP COMDecoder::set_eq_bands(const int *freq, const double *gain)
   return S_OK;
 }
 
+// Spectrum
+STDMETHODIMP COMDecoder::get_spectrum_length(size_t *spectrum_length)
+{
+  if (spectrum_length) *spectrum_length = dvd.proc.get_spectrum_length();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_spectrum_length(size_t spectrum_length)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_spectrum_length(spectrum_length);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_spectrum(sample_t *data)
+{
+  AutoLock config_lock(&config);
+  if (data) dvd.proc.get_spectrum(data);
+  return S_OK;
+}
+
 
 // Delay
 STDMETHODIMP COMDecoder::get_delay(bool *_delay)
@@ -722,6 +741,7 @@ STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, vtime_t _time)
   // Equalizer
   get_eq(&_state->eq);
   get_eq_bands(_state->eq_freq, _state->eq_gain);
+  get_spectrum_length(&_state->spectrum_length);
 
   // Delay
   get_delay(&_state->delay);
@@ -773,6 +793,7 @@ STDMETHODIMP COMDecoder::set_state     (AudioProcessorState *_state)
   // Equalizer
   set_eq(_state->eq);
   set_eq_bands(_state->eq_freq, _state->eq_gain);
+  set_spectrum_length(_state->spectrum_length);
 
   // Delay
   set_delay(_state->delay);
@@ -900,7 +921,8 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
   if (_what & AC3FILTER_EQ)
   {
     // Equalizer
-    _conf->get_bool("eq"                ,state.eq              );
+    _conf->get_bool ("eq"               ,state.eq              );
+    _conf->get_int32("spectrum_length"  ,(int&)state.spectrum_length );
     for (int i = 0; i < EQ_BANDS; i++)
     {
       char freq_str[32], gain_str[32];
@@ -1120,7 +1142,8 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
   if (_what & AC3FILTER_EQ)
   {
     // Equalizer
-    _conf->set_bool("eq"                ,state.eq              );
+    _conf->set_bool ("eq"               ,state.eq              );
+    _conf->set_int32("spectrum_length"  ,state.spectrum_length );
     for (int i = 0; i < EQ_BANDS; i++)
     {
       char freq_str[32], gain_str[32];

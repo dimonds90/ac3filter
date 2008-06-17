@@ -325,6 +325,14 @@ SOURCE=.\dlg\control_spdif.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\dlg\control_spectrum.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_spectrum.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\dlg\control_spk.cpp
 # End Source File
 # Begin Source File

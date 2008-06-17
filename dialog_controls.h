@@ -12,15 +12,30 @@ struct ControlDesc
   const char *tip;
 };
 
-// Total groups: 32
-// Total controls: 253
+// Total groups: 35
+// Total controls: 305
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
+  /* TRANSLATORS: Cancel */
+  { IDCANCEL, N_("IDCANCEL"), "Cancel", "" },
   /* TRANSLATORS: Donate */
   { IDC_BTN_DONATE, N_("IDC_BTN_DONATE"), "Donate", "" },
-  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky */
-  { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky", "" },
+  { IDC_EDT_EQ_FREQ1, "IDC_EDT_EQ_FREQ1", "", "" },
+  { IDC_EDT_EQ_FREQ10, "IDC_EDT_EQ_FREQ10", "", "" },
+  { IDC_EDT_EQ_FREQ2, "IDC_EDT_EQ_FREQ2", "", "" },
+  { IDC_EDT_EQ_FREQ3, "IDC_EDT_EQ_FREQ3", "", "" },
+  { IDC_EDT_EQ_FREQ4, "IDC_EDT_EQ_FREQ4", "", "" },
+  { IDC_EDT_EQ_FREQ5, "IDC_EDT_EQ_FREQ5", "", "" },
+  { IDC_EDT_EQ_FREQ6, "IDC_EDT_EQ_FREQ6", "", "" },
+  { IDC_EDT_EQ_FREQ7, "IDC_EDT_EQ_FREQ7", "", "" },
+  { IDC_EDT_EQ_FREQ8, "IDC_EDT_EQ_FREQ8", "", "" },
+  { IDC_EDT_EQ_FREQ9, "IDC_EDT_EQ_FREQ9", "", "" },
+  { IDC_SPECTRUM, "IDC_SPECTRUM", "", "" },
+  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky */
+  { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky", "" },
+  /* TRANSLATORS: OK */
+  { IDOK, N_("IDOK"), "OK", "" },
 
   // What is it?
   /* TRANSLATORS: What is it? */
@@ -142,6 +157,69 @@ static const ControlDesc dialog_controls[] =
   /* TRANSLATORS: Build info */
   { IDC_GRP_ENV, N_("IDC_GRP_ENV"), "Build info", "" },
   { IDC_EDT_ENV, "IDC_EDT_ENV", "", "" },
+
+  // Equalizer
+  /* TRANSLATORS: Equalizer */
+  { IDC_GRP_EQ, N_("IDC_GRP_EQ"), "Equalizer", "" },
+  { IDC_EDT_EQ1, "IDC_EDT_EQ1", "", "" },
+  { IDC_EDT_EQ10, "IDC_EDT_EQ10", "", "" },
+  { IDC_EDT_EQ2, "IDC_EDT_EQ2", "", "" },
+  { IDC_EDT_EQ3, "IDC_EDT_EQ3", "", "" },
+  { IDC_EDT_EQ4, "IDC_EDT_EQ4", "", "" },
+  { IDC_EDT_EQ5, "IDC_EDT_EQ5", "", "" },
+  { IDC_EDT_EQ6, "IDC_EDT_EQ6", "", "" },
+  { IDC_EDT_EQ7, "IDC_EDT_EQ7", "", "" },
+  { IDC_EDT_EQ8, "IDC_EDT_EQ8", "", "" },
+  { IDC_EDT_EQ9, "IDC_EDT_EQ9", "", "" },
+  /* TRANSLATORS: 30Hz */
+  { IDC_LBL_EQ1, N_("IDC_LBL_EQ1"), "30Hz", "" },
+  /* TRANSLATORS: 16kHz */
+  { IDC_LBL_EQ10, N_("IDC_LBL_EQ10"), "16kHz", "" },
+  /* TRANSLATORS: 60Hz */
+  { IDC_LBL_EQ2, N_("IDC_LBL_EQ2"), "60Hz", "" },
+  /* TRANSLATORS: 125Hz */
+  { IDC_LBL_EQ3, N_("IDC_LBL_EQ3"), "125Hz", "" },
+  /* TRANSLATORS: 250Hz */
+  { IDC_LBL_EQ4, N_("IDC_LBL_EQ4"), "250Hz", "" },
+  /* TRANSLATORS: 500Hz */
+  { IDC_LBL_EQ5, N_("IDC_LBL_EQ5"), "500Hz", "" },
+  /* TRANSLATORS: 1kHz */
+  { IDC_LBL_EQ6, N_("IDC_LBL_EQ6"), "1kHz", "" },
+  /* TRANSLATORS: 2kHz */
+  { IDC_LBL_EQ7, N_("IDC_LBL_EQ7"), "2kHz", "" },
+  /* TRANSLATORS: 4kHz */
+  { IDC_LBL_EQ8, N_("IDC_LBL_EQ8"), "4kHz", "" },
+  /* TRANSLATORS: 8kHz */
+  { IDC_LBL_EQ9, N_("IDC_LBL_EQ9"), "8kHz", "" },
+  { IDC_SLI_EQ1, "IDC_SLI_EQ1", "", "" },
+  { IDC_SLI_EQ10, "IDC_SLI_EQ10", "", "" },
+  { IDC_SLI_EQ2, "IDC_SLI_EQ2", "", "" },
+  { IDC_SLI_EQ3, "IDC_SLI_EQ3", "", "" },
+  { IDC_SLI_EQ4, "IDC_SLI_EQ4", "", "" },
+  { IDC_SLI_EQ5, "IDC_SLI_EQ5", "", "" },
+  { IDC_SLI_EQ6, "IDC_SLI_EQ6", "", "" },
+  { IDC_SLI_EQ7, "IDC_SLI_EQ7", "", "" },
+  { IDC_SLI_EQ8, "IDC_SLI_EQ8", "", "" },
+  { IDC_SLI_EQ9, "IDC_SLI_EQ9", "", "" },
+
+  // Equalizer options
+  /* TRANSLATORS: Equalizer options */
+  { IDC_GRP_EQ_OPTIONS, N_("IDC_GRP_EQ_OPTIONS"), "Equalizer options", "" },
+  /* TRANSLATORS: Customize */
+  { IDC_BTN_EQ_CUSTOM, N_("IDC_BTN_EQ_CUSTOM"), "Customize", "" },
+  /* TRANSLATORS: Reset equalizer */
+  { IDC_BTN_EQ_RESET, N_("IDC_BTN_EQ_RESET"), "Reset equalizer", "" },
+  /* TRANSLATORS: Enable equalizer */
+  { IDC_CHK_EQ, N_("IDC_CHK_EQ"), "Enable equalizer", "" },
+
+  // Equalizer preset
+  /* TRANSLATORS: Equalizer preset */
+  { IDC_GRP_EQ_PRESET, N_("IDC_GRP_EQ_PRESET"), "Equalizer preset", "" },
+  /* TRANSLATORS: Delete */
+  { IDC_BTN_EQ_DELETE, N_("IDC_BTN_EQ_DELETE"), "Delete", "" },
+  /* TRANSLATORS: Save */
+  { IDC_BTN_EQ_SAVE, N_("IDC_BTN_EQ_SAVE"), "Save", "" },
+  { IDC_CMB_EQ_PRESET, "IDC_CMB_EQ_PRESET", "", "" },
 
   // Use AC3Filter for:
   /* TRANSLATORS: Use AC3Filter for: */

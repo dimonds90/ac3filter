@@ -3,6 +3,7 @@
 #include "control_matrix.h"
 #include "control_delay.h"
 #include "control_eq.h"
+#include "control_spectrum.h"
 #include "control_agc.h"
 #include "control_spdif.h"
 #include "control_iogains.h"
@@ -28,6 +29,7 @@ Controller(_dlg, 0)
   ctrl.push_back(PCtrl(new ControlLevels(hdlg, filter, proc, invert_levels)));
   ctrl.push_back(PCtrl(new ControlAGC(hdlg, proc)));
   ctrl.push_back(PCtrl(new ControlEq(hdlg, proc)));
+  ctrl.push_back(PCtrl(new ControlSpectrum(hdlg, proc)));
   ctrl.push_back(PCtrl(new ControlSPDIF(hdlg, dec)));
   ctrl.push_back(PCtrl(new ControlSystem(hdlg, filter, dec)));
   ctrl.push_back(PCtrl(new ControlSync(hdlg, dec)));

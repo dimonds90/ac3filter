@@ -2,6 +2,7 @@
 // Microsoft Developer Studio generated include file.
 // Used by ac3filter.rc
 //
+#define IDC_GRP_EQ_BANDS                3171
 
 // Next default values for new objects
 // 
@@ -11,7 +12,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        136
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         3171
+#define _APS_NEXT_CONTROL_VALUE         3172
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

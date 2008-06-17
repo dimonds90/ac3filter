@@ -197,6 +197,10 @@ public:
   STDMETHODIMP set_eq           (bool  eq);
   STDMETHODIMP get_eq_bands     (int *freq, double *gain);
   STDMETHODIMP set_eq_bands     (const int *freq, const double *gain);
+  // Spectrum
+  STDMETHODIMP get_spectrum_length (size_t *length);
+  STDMETHODIMP set_spectrum_length (size_t  length);
+  STDMETHODIMP get_spectrum      (sample_t *data);
   // Delay
   STDMETHODIMP get_delay        (bool *delay);
   STDMETHODIMP set_delay        (bool  delay);
