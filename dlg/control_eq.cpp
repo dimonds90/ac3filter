@@ -1,6 +1,8 @@
 #include <math.h>
 #include <windows.h>
 #include <commctrl.h>
+#include <stdio.h>
+#include "../ac3filter_intl.h"
 #include "../resource_ids.h"
 #include "control_eq.h"
 
@@ -12,6 +14,7 @@ static const int controls[] =
 
   IDC_SLI_EQ1, IDC_SLI_EQ2, IDC_SLI_EQ3, IDC_SLI_EQ4, IDC_SLI_EQ5, IDC_SLI_EQ6, IDC_SLI_EQ7, IDC_SLI_EQ8, IDC_SLI_EQ9, IDC_SLI_EQ10,
   IDC_EDT_EQ1, IDC_EDT_EQ2, IDC_EDT_EQ3, IDC_EDT_EQ4, IDC_EDT_EQ5, IDC_EDT_EQ6, IDC_EDT_EQ7, IDC_EDT_EQ8, IDC_EDT_EQ9, IDC_EDT_EQ10,
+  IDC_LBL_EQ1, IDC_LBL_EQ2, IDC_LBL_EQ3, IDC_LBL_EQ4, IDC_LBL_EQ5, IDC_LBL_EQ6, IDC_LBL_EQ7, IDC_LBL_EQ8, IDC_LBL_EQ9, IDC_LBL_EQ10,
   0
 };
 
@@ -23,6 +26,11 @@ static const int idc_edt_eq[EQ_BANDS] =
 static const int idc_sli_eq[EQ_BANDS] =
 {
   IDC_SLI_EQ1, IDC_SLI_EQ2, IDC_SLI_EQ3, IDC_SLI_EQ4, IDC_SLI_EQ5, IDC_SLI_EQ6, IDC_SLI_EQ7, IDC_SLI_EQ8, IDC_SLI_EQ9, IDC_SLI_EQ10,
+};
+
+static const int idc_lbl_eq[EQ_BANDS] =
+{
+  IDC_LBL_EQ1, IDC_LBL_EQ2, IDC_LBL_EQ3, IDC_LBL_EQ4, IDC_LBL_EQ5, IDC_LBL_EQ6, IDC_LBL_EQ7, IDC_LBL_EQ8, IDC_LBL_EQ9, IDC_LBL_EQ10,
 };
 
 static const int band_freq[EQ_BANDS] =
@@ -66,8 +74,28 @@ void ControlEq::update()
   CheckDlgButton(hdlg, IDC_CHK_EQ, eq? BST_CHECKED: BST_UNCHECKED);
   for (size_t band = 0; band < EQ_BANDS; band++)
   {
-    edt_gain[band].update_value(value2db(gain[band]));
-    SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETPOS, TRUE, long(-value2db(gain[band]) * ticks));
+    if (freq[band] > 0)
+    {
+      char buf[32];
+      if (freq[band] >= 1000)
+        sprintf(buf, _("%ikHz"), freq[band] / 1000);
+      else
+        sprintf(buf, _("%iHz"), freq[band]);
+
+      ShowWindow(GetDlgItem(hdlg, idc_edt_eq[band]), SW_SHOW);
+      ShowWindow(GetDlgItem(hdlg, idc_sli_eq[band]), SW_SHOW);
+      ShowWindow(GetDlgItem(hdlg, idc_lbl_eq[band]), SW_SHOW);
+
+      edt_gain[band].update_value(value2db(gain[band]));
+      SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETPOS, TRUE, long(-value2db(gain[band]) * ticks));
+      SetDlgItemText(hdlg, idc_lbl_eq[band], buf);
+    }
+    else
+    {
+      ShowWindow(GetDlgItem(hdlg, idc_edt_eq[band]), SW_HIDE);
+      ShowWindow(GetDlgItem(hdlg, idc_sli_eq[band]), SW_HIDE);
+      ShowWindow(GetDlgItem(hdlg, idc_lbl_eq[band]), SW_HIDE);
+    }
   }
 };
 

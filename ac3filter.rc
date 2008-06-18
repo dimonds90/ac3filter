@@ -636,16 +636,16 @@ BEGIN
     EDITTEXT        IDC_EDT_EQ8,304,86,23,12,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_EQ9,331,86,23,12,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDT_EQ10,358,86,23,12,ES_AUTOHSCROLL
-    CTEXT           "30Hz",IDC_LBL_EQ1,115,17,22,8
-    CTEXT           "60Hz",IDC_LBL_EQ2,142,17,22,8
-    CTEXT           "125Hz",IDC_LBL_EQ3,169,17,22,8
-    CTEXT           "250Hz",IDC_LBL_EQ4,196,17,22,8
-    CTEXT           "500Hz",IDC_LBL_EQ5,223,17,22,8
-    CTEXT           "1kHz",IDC_LBL_EQ6,250,17,22,8
-    CTEXT           "2kHz",IDC_LBL_EQ7,277,17,22,8
-    CTEXT           "4kHz",IDC_LBL_EQ8,304,17,22,8
-    CTEXT           "8kHz",IDC_LBL_EQ9,331,17,22,8
-    CTEXT           "16kHz",IDC_LBL_EQ10,358,17,22,8
+    CTEXT           "",IDC_LBL_EQ1,115,17,22,8
+    CTEXT           "",IDC_LBL_EQ2,142,17,22,8
+    CTEXT           "",IDC_LBL_EQ3,169,17,22,8
+    CTEXT           "",IDC_LBL_EQ4,196,17,22,8
+    CTEXT           "",IDC_LBL_EQ5,223,17,22,8
+    CTEXT           "",IDC_LBL_EQ6,250,17,22,8
+    CTEXT           "",IDC_LBL_EQ7,277,17,22,8
+    CTEXT           "",IDC_LBL_EQ8,304,17,22,8
+    CTEXT           "",IDC_LBL_EQ9,331,17,22,8
+    CTEXT           "",IDC_LBL_EQ10,358,17,22,8
     GROUPBOX        "Equalizer options",IDC_GRP_EQ_OPTIONS,8,8,94,59
     CONTROL         "Enable equalizer",IDC_CHK_EQ,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,15,20,80,10
