@@ -41,9 +41,11 @@
 #define IDC_GRP_OUTPUT                 50001
 #define IDC_CMB_SPK                    50002
 #define IDC_CMB_FORMAT                 50003
-#define IDC_CMB_RATE                   50004
-#define IDC_CHK_USE_SPDIF              50005
-#define IDC_LBL_SPDIF_STATUS           50006
+#define IDC_LBL_FORMAT                 50004
+#define IDC_CMB_RATE                   50005
+#define IDC_LBL_RATE                   50006
+#define IDC_CHK_USE_SPDIF              50007
+#define IDC_LBL_SPDIF_STATUS           50008
 
 // Preset (501)
 #define IDC_GRP_PRESET                 50101

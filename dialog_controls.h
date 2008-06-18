@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 292
+// Total controls: 295
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -157,26 +157,16 @@ static const ControlDesc dialog_controls[] =
   { IDC_EDT_EQ7, "IDC_EDT_EQ7", "", "" },
   { IDC_EDT_EQ8, "IDC_EDT_EQ8", "", "" },
   { IDC_EDT_EQ9, "IDC_EDT_EQ9", "", "" },
-  /* TRANSLATORS: 30Hz */
-  { IDC_LBL_EQ1, N_("IDC_LBL_EQ1"), "30Hz", "" },
-  /* TRANSLATORS: 16kHz */
-  { IDC_LBL_EQ10, N_("IDC_LBL_EQ10"), "16kHz", "" },
-  /* TRANSLATORS: 60Hz */
-  { IDC_LBL_EQ2, N_("IDC_LBL_EQ2"), "60Hz", "" },
-  /* TRANSLATORS: 125Hz */
-  { IDC_LBL_EQ3, N_("IDC_LBL_EQ3"), "125Hz", "" },
-  /* TRANSLATORS: 250Hz */
-  { IDC_LBL_EQ4, N_("IDC_LBL_EQ4"), "250Hz", "" },
-  /* TRANSLATORS: 500Hz */
-  { IDC_LBL_EQ5, N_("IDC_LBL_EQ5"), "500Hz", "" },
-  /* TRANSLATORS: 1kHz */
-  { IDC_LBL_EQ6, N_("IDC_LBL_EQ6"), "1kHz", "" },
-  /* TRANSLATORS: 2kHz */
-  { IDC_LBL_EQ7, N_("IDC_LBL_EQ7"), "2kHz", "" },
-  /* TRANSLATORS: 4kHz */
-  { IDC_LBL_EQ8, N_("IDC_LBL_EQ8"), "4kHz", "" },
-  /* TRANSLATORS: 8kHz */
-  { IDC_LBL_EQ9, N_("IDC_LBL_EQ9"), "8kHz", "" },
+  { IDC_LBL_EQ1, "IDC_LBL_EQ1", "", "" },
+  { IDC_LBL_EQ10, "IDC_LBL_EQ10", "", "" },
+  { IDC_LBL_EQ2, "IDC_LBL_EQ2", "", "" },
+  { IDC_LBL_EQ3, "IDC_LBL_EQ3", "", "" },
+  { IDC_LBL_EQ4, "IDC_LBL_EQ4", "", "" },
+  { IDC_LBL_EQ5, "IDC_LBL_EQ5", "", "" },
+  { IDC_LBL_EQ6, "IDC_LBL_EQ6", "", "" },
+  { IDC_LBL_EQ7, "IDC_LBL_EQ7", "", "" },
+  { IDC_LBL_EQ8, "IDC_LBL_EQ8", "", "" },
+  { IDC_LBL_EQ9, "IDC_LBL_EQ9", "", "" },
   { IDC_SLI_EQ1, "IDC_SLI_EQ1", "", "" },
   { IDC_SLI_EQ10, "IDC_SLI_EQ10", "", "" },
   { IDC_SLI_EQ2, "IDC_SLI_EQ2", "", "" },
@@ -195,6 +185,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_BTN_EQ_RESET, N_("IDC_BTN_EQ_RESET"), "Reset equalizer", "" },
   /* TRANSLATORS: Enable equalizer */
   { IDC_CHK_EQ, N_("IDC_CHK_EQ"), "Enable equalizer", "" },
+  /* TRANSLATORS: Log scale spectrum */
+  { IDC_CHK_EQ_LOG, N_("IDC_CHK_EQ_LOG"), "Log scale spectrum", "" },
 
   // Equalizer preset
   /* TRANSLATORS: Equalizer preset */
@@ -416,8 +408,12 @@ static const ControlDesc dialog_controls[] =
   { IDC_CMB_FORMAT, "IDC_CMB_FORMAT", "", "" },
   { IDC_CMB_RATE, "IDC_CMB_RATE", "", "" },
   { IDC_CMB_SPK, "IDC_CMB_SPK", "", "" },
+  /* TRANSLATORS: Format */
+  { IDC_LBL_FORMAT, N_("IDC_LBL_FORMAT"), "Format", "" },
   /* TRANSLATORS: input format */
   { IDC_LBL_INPUT, N_("IDC_LBL_INPUT"), "input format", "" },
+  /* TRANSLATORS: Rate */
+  { IDC_LBL_RATE, N_("IDC_LBL_RATE"), "Rate", "" },
 
   // Output gains
   /* TRANSLATORS: Output gains */
