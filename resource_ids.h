@@ -374,8 +374,9 @@
 #define IDC_GRP_EQ                     53101
 #define IDC_GRP_EQ_OPTIONS             53102
 #define IDC_CHK_EQ                     53103
-#define IDC_BTN_EQ_RESET               53104
-#define IDC_SPECTRUM                   53105
+#define IDC_CHK_EQ_LOG                 53104
+#define IDC_BTN_EQ_RESET               53105
+#define IDC_SPECTRUM                   53106
 #define IDC_EDT_EQ1                    53110
 #define IDC_EDT_EQ2                    53111
 #define IDC_EDT_EQ3                    53112

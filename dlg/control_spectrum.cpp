@@ -8,6 +8,7 @@
 static const int controls[] =
 {
   IDC_SPECTRUM,
+  IDC_CHK_EQ_LOG,
   0
 };
 
@@ -45,7 +46,11 @@ Controller(_dlg, ::controls), proc(_proc), spectrum_length(0), spectrum(0)
     major_pen = CreatePen(PS_SOLID, 1, major_color);
     grid_font = CreateFont(12, 0, 0, 0, FW_THIN, FALSE, FALSE, FALSE, OEM_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, "Serif");
 
-    proc->set_spectrum_length(2048);
+    log_scale = false;
+    RegistryKey reg(REG_KEY);
+    reg.get_bool("log_scale", log_scale);
+
+    proc->set_spectrum_length(1024);
   }
 
   proc->AddRef();
@@ -64,12 +69,16 @@ ControlSpectrum::~ControlSpectrum()
     SelectObject(mem_dc, old_bitmap);
     DeleteObject(mem_bitmap);
     DeleteDC(mem_dc);
+
+    proc->set_spectrum_length(0);
   }
+
   proc->Release();
 }
 
 void ControlSpectrum::init()
 {
+  CheckDlgButton(hdlg, IDC_CHK_EQ_LOG, log_scale? BST_CHECKED: BST_UNCHECKED);
 }
 
 void ControlSpectrum::update()
@@ -96,7 +105,11 @@ void ControlSpectrum::update_dynamic()
     proc->get_spectrum(spectrum, &bin2hz);
     for (size_t i = 0; i < spectrum_length; i++)
       spectrum[i] = value2db(spectrum[i]);
-    paint_linear();
+
+    if (log_scale)
+      paint_log();
+    else
+      paint_linear();
   }
 }
 
@@ -200,7 +213,7 @@ void ControlSpectrum::paint_linear()
   ReleaseDC(hctrl, ctrl_dc);
 }
 
-int log_scale(int pos, int max, int width)
+int scale(int pos, int max, int width)
 {
   return int(width + log10(double(pos)/double(max)) * width / 3);
 }
@@ -231,10 +244,10 @@ void ControlSpectrum::paint_log()
   delta_hz = 1;
   while (delta_hz < 100000)
   {
-    if (log_scale(delta_hz * 9, nyquist, width) > 0)
+    if (scale(delta_hz * 9, nyquist, width) > 0)
       for (int i = 1; i < 10; i++)
       {
-        int pos = log_scale(i * delta_hz, nyquist, width);
+        int pos = scale(i * delta_hz, nyquist, width);
         MoveToEx(mem_dc, pos, 0, 0);
         LineTo(mem_dc, pos, height);
       }
@@ -254,9 +267,9 @@ void ControlSpectrum::paint_log()
   delta_hz = 1;
   while (delta_hz < 100000)
   {
-    if (log_scale(delta_hz, nyquist, width) > 0)
+    if (scale(delta_hz, nyquist, width) > 0)
     {
-      int pos = log_scale(delta_hz, nyquist, width);
+      int pos = scale(delta_hz, nyquist, width);
       MoveToEx(mem_dc, pos, 0, 0);
       LineTo(mem_dc, pos, height);
     }
@@ -277,9 +290,9 @@ void ControlSpectrum::paint_log()
   delta_hz = 1;
   while (delta_hz < 100000)
   {
-    if (log_scale(delta_hz, nyquist, width) > 0)
+    if (scale(delta_hz, nyquist, width) > 0)
     {
-      int pos = log_scale(delta_hz, nyquist, width);
+      int pos = scale(delta_hz, nyquist, width);
       if (delta_hz >= 1000)
         sprintf(label, "%ikHz", delta_hz / 1000);
       else
@@ -310,7 +323,7 @@ void ControlSpectrum::paint_log()
 
   MoveToEx(mem_dc, -1, int(-spectrum[0] * yfactor), 0);
   for (size_t i = 1; i < spectrum_length; i++)
-    LineTo(mem_dc, log_scale(i, spectrum_length, width), int(-spectrum[i] * yfactor));
+    LineTo(mem_dc, scale(i, spectrum_length, width), int(-spectrum[i] * yfactor));
 
   SelectObject(mem_dc, old_pen);
 
@@ -324,5 +337,16 @@ void ControlSpectrum::paint_log()
 
 ControlSpectrum::cmd_result ControlSpectrum::command(int control, int message)
 {
+  switch (control)
+  {
+    case IDC_CHK_EQ_LOG:
+    {
+      log_scale = IsDlgButtonChecked(hdlg, IDC_CHK_EQ_LOG) == BST_CHECKED;
+
+      RegistryKey reg(REG_KEY);
+      reg.set_bool("log_scale", log_scale);
+      return cmd_ok;
+    }
+  }
   return cmd_not_processed;
 }

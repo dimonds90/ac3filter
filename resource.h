@@ -2,7 +2,6 @@
 // Microsoft Developer Studio generated include file.
 // Used by ac3filter.rc
 //
-#define IDC_GRP_EQ_BANDS                3171
 
 // Next default values for new objects
 // 

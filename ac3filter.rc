@@ -648,15 +648,17 @@ BEGIN
     CTEXT           "16kHz",IDC_LBL_EQ10,358,17,22,8
     GROUPBOX        "Equalizer options",IDC_GRP_EQ_OPTIONS,8,8,94,59
     CONTROL         "Enable equalizer",IDC_CHK_EQ,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,18,20,68,10
+                    WS_TABSTOP,15,20,80,10
     COMBOBOX        IDC_CMB_EQ_PRESET,14,78,83,122,CBS_DROPDOWN | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "Save",IDC_BTN_EQ_SAVE,14,91,41,10
     GROUPBOX        "Equalizer preset",IDC_GRP_EQ_PRESET,8,69,94,35
     PUSHBUTTON      "Delete",IDC_BTN_EQ_DELETE,56,91,41,10
-    PUSHBUTTON      "Reset equalizer",IDC_BTN_EQ_RESET,18,33,69,12,BS_FLAT
+    PUSHBUTTON      "Reset equalizer",IDC_BTN_EQ_RESET,20,48,69,12,BS_FLAT
     CTEXT           "",IDC_SPECTRUM,8,107,384,93,SS_CENTERIMAGE | SS_SUNKEN | 
                     WS_BORDER
+    CONTROL         "Log scale spectrum",IDC_CHK_EQ_LOG,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,33,77,10
 END
 
 

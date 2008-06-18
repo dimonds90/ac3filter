@@ -31,6 +31,7 @@ protected:
   size_t spectrum_length;
   sample_t *spectrum;
   double bin2hz;
+  bool log_scale;
 
 public:
   ControlSpectrum(HWND dlg, IAudioProcessor *proc);
