@@ -71,6 +71,10 @@ void ControlEq::update()
   proc->get_eq(&eq);
   proc->get_eq_bands(freq, gain);
 
+  // set the default scale if no bands defined
+  if (freq[0] == 0)
+    proc->set_eq_bands(band_freq, band_gain);
+
   CheckDlgButton(hdlg, IDC_CHK_EQ, eq? BST_CHECKED: BST_UNCHECKED);
   for (size_t band = 0; band < EQ_BANDS; band++)
   {

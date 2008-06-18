@@ -289,7 +289,6 @@ struct AudioProcessorState
   bool     eq;
   int      eq_freq[EQ_BANDS];
   double   eq_gain[EQ_BANDS];
-  size_t   spectrum_length;
 
   // Matrix
   matrix_t matrix;
