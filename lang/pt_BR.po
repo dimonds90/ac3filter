@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-25 22:58+0300\n"
-"PO-Revision-Date: 2007-05-31 16:57-0300\n"
-"Last-Translator: ReX <brunorex@gmail.com>\n"
+"POT-Creation-Date: 2008-06-18 16:01+0400\n"
+"PO-Revision-Date: 2008-06-20 16:17+0300\n"
+"Last-Translator: Alexander Vigovsky <xvalex@mail.ru>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -16,7 +16,7 @@ msgstr ""
 msgid "IDC_BTN_DONATE"
 msgstr "Fazer Doação"
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter versão %s Copyright (c) 2002-2007 por Alexander Vigovsky"
 
@@ -61,7 +61,7 @@ msgstr ""
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
-msgstr "escrever para o autor|mailto:ac3filter@gmail.com?Subject=AC3Filter"
+msgstr "escrever para o autor|mailto:xvalex@mail.ru?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 msgid "IDC_LNK_FORUM"
@@ -105,27 +105,27 @@ msgstr ""
 
 #. TRANSLATORS: L
 msgid "IDC_LBL_DELAY_L"
-msgstr ""
+msgstr "E"
 
 #. TRANSLATORS: R
 msgid "IDC_LBL_DELAY_R"
-msgstr ""
+msgstr "D"
 
 #. TRANSLATORS: SL
 msgid "IDC_LBL_DELAY_SL"
-msgstr ""
+msgstr "SE"
 
 #. TRANSLATORS: SR
 msgid "IDC_LBL_DELAY_SR"
-msgstr ""
+msgstr "SD"
 
 #. TRANSLATORS: Sub
 msgid "IDC_LBL_DELAY_SW"
 msgstr ""
 
 #. TRANSLATORS: Units:
-msgid "IDC_LBL_UNITS"
-msgstr "Unidades"
+msgid "IDC_LBL_DELAY_UNITS"
+msgstr ""
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
@@ -186,6 +186,38 @@ msgstr ""
 #. TRANSLATORS: Build info
 msgid "IDC_GRP_ENV"
 msgstr "Informação da build"
+
+#. TRANSLATORS: Equalizer
+msgid "IDC_GRP_EQ"
+msgstr ""
+
+#. TRANSLATORS: Equalizer options
+msgid "IDC_GRP_EQ_OPTIONS"
+msgstr ""
+
+#. TRANSLATORS: Reset equalizer
+msgid "IDC_BTN_EQ_RESET"
+msgstr ""
+
+#. TRANSLATORS: Enable equalizer
+msgid "IDC_CHK_EQ"
+msgstr ""
+
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr ""
+
+#. TRANSLATORS: Equalizer preset
+msgid "IDC_GRP_EQ_PRESET"
+msgstr ""
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_EQ_DELETE"
+msgstr ""
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_EQ_SAVE"
+msgstr ""
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
@@ -257,7 +289,7 @@ msgstr ""
 
 #. TRANSLATORS: L
 msgid "IDC_LBL_IN_L"
-msgstr ""
+msgstr "E"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_IN_LFE"
@@ -265,15 +297,15 @@ msgstr ""
 
 #. TRANSLATORS: R
 msgid "IDC_LBL_IN_R"
-msgstr ""
+msgstr "D"
 
 #. TRANSLATORS: SL
 msgid "IDC_LBL_IN_SL"
-msgstr ""
+msgstr "SE"
 
 #. TRANSLATORS: SR
 msgid "IDC_LBL_IN_SR"
-msgstr ""
+msgstr "SD"
 
 #. TRANSLATORS: Interface options
 msgid "IDC_GRP_INTERFACE"
@@ -315,7 +347,7 @@ msgstr ""
 
 #. TRANSLATORS: L
 msgid "IDC_LBL_MATRIX_IN_L"
-msgstr ""
+msgstr "E"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_MATRIX_IN_LFE"
@@ -323,15 +355,15 @@ msgstr ""
 
 #. TRANSLATORS: R
 msgid "IDC_LBL_MATRIX_IN_R"
-msgstr ""
+msgstr "D"
 
 #. TRANSLATORS: SL
 msgid "IDC_LBL_MATRIX_IN_SL"
-msgstr ""
+msgstr "SE"
 
 #. TRANSLATORS: SR
 msgid "IDC_LBL_MATRIX_IN_SR"
-msgstr ""
+msgstr "SD"
 
 #. TRANSLATORS: C'
 msgid "IDC_LBL_MATRIX_OUT_C"
@@ -339,19 +371,19 @@ msgstr ""
 
 #. TRANSLATORS: L'
 msgid "IDC_LBL_MATRIX_OUT_L"
-msgstr ""
+msgstr "E'"
 
 #. TRANSLATORS: R'
 msgid "IDC_LBL_MATRIX_OUT_R"
-msgstr ""
+msgstr "D'"
 
 #. TRANSLATORS: SL'
 msgid "IDC_LBL_MATRIX_OUT_SL"
-msgstr ""
+msgstr "SE'"
 
 #. TRANSLATORS: SR'
 msgid "IDC_LBL_MATRIX_OUT_SR"
-msgstr ""
+msgstr "SD'"
 
 #. TRANSLATORS: Sub
 msgid "IDC_LBL_MATRIX_OUT_SW"
@@ -425,9 +457,17 @@ msgstr "Formato de saída"
 msgid "IDC_CHK_USE_SPDIF"
 msgstr "Usar SPDIF"
 
+#. TRANSLATORS: Format
+msgid "IDC_LBL_FORMAT"
+msgstr ""
+
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
 msgstr "formato de entrada"
+
+#. TRANSLATORS: Rate
+msgid "IDC_LBL_RATE"
+msgstr ""
 
 #. TRANSLATORS: Output gains
 msgid "IDC_GRP_OUTPUT_GAINS"
@@ -443,19 +483,19 @@ msgstr ""
 
 #. TRANSLATORS: L
 msgid "IDC_LBL_OUT_L"
-msgstr ""
+msgstr "E"
 
 #. TRANSLATORS: R
 msgid "IDC_LBL_OUT_R"
-msgstr ""
+msgstr "D"
 
 #. TRANSLATORS: SL
 msgid "IDC_LBL_OUT_SL"
-msgstr ""
+msgstr "SE"
 
 #. TRANSLATORS: SR
 msgid "IDC_LBL_OUT_SR"
-msgstr ""
+msgstr "SD"
 
 #. TRANSLATORS: Sub
 msgid "IDC_LBL_OUT_SW"
@@ -526,9 +566,8 @@ msgid "IDC_CHK_USE_DETECTOR"
 msgstr "Detectar som SPDIF em dados PCM"
 
 #. TRANSLATORS: AC3 encoder bitrate (kbps)
-#, fuzzy
 msgid "IDC_LBL_SPDIF_BITRATE"
-msgstr "Jitter atual:"
+msgstr ""
 
 #. TRANSLATORS: SPDIF passthrough
 msgid "IDC_GRP_SPDIF_PT"
@@ -564,11 +603,11 @@ msgstr "Diferença de tempo (ms):"
 
 #. TRANSLATORS: <- sound lags
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
-msgstr ""
+msgstr "<- atrasos do som"
 
 #. TRANSLATORS: sound hastes ->
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
-msgstr ""
+msgstr "som adiantado ->"
 
 #. TRANSLATORS: Localization
 msgid "IDC_GRP_TRANS"
@@ -581,6 +620,89 @@ msgstr "Idioma:"
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
 msgstr ""
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Principal"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr ""
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr ""
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Sistema"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr ""
+
+msgid "Samples"
+msgstr "Amostragens"
+
+msgid "Millisecs"
+msgstr "Milisegundos"
+
+msgid "Meters"
+msgstr "Metros"
+
+msgid "Centimeters"
+msgstr "Centimetros"
+
+msgid "Feet"
+msgstr "Pés"
+
+msgid "Inches"
+msgstr "Polegadas"
+
+#, c-format
+msgid "%ikHz"
+msgstr ""
+
+#, c-format
+msgid "%iHz"
+msgstr ""
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr ""
+
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Tem certeza de que quer apagar a pré-configuração '%s'?"
+
+msgid "Delete confirmation"
+msgstr "Confirmação para apagar"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Tem certeza de que quer apagar a matriz '%s'?"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' equalizer preset?"
+msgstr ""
+
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Essa opção é PERIGOSA! O filtro talvez produza ruídos muito audíveis com "
+"essa opção ativada. Clique em 'Não' para ativar essa opção."
+
+msgid "Dangerous option!"
+msgstr "Opção perigosa!"
 
 msgid "AS IS (no change)"
 msgstr ""
@@ -645,56 +767,6 @@ msgstr ""
 msgid "PCM Float"
 msgstr ""
 
-msgid "Samples"
-msgstr "Amostragens"
-
-msgid "Millisecs"
-msgstr "Milisegundos"
-
-msgid "Meters"
-msgstr "Metros"
-
-msgid "Centimeters"
-msgstr "Centimetros"
-
-msgid "Feet"
-msgstr "Pés"
-
-msgid "Inches"
-msgstr "Polegadas"
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr ""
-
-#. TRANSLATORS: Mixer
-#, fuzzy
-msgid "IDD_MIXER"
-msgstr "AC3Filter versão %s Copyright (c) 2002-2007 por Alexander Vigovsky"
-
-#. TRANSLATORS: Gains
-#, fuzzy
-msgid "IDD_GAINS"
-msgstr "Ganhos"
-
-#. TRANSLATORS: SPDIF
-#, fuzzy
-msgid "IDD_SPDIF"
-msgstr "Opções de SPDIF"
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr ""
-
-#. TRANSLATORS: About
-#, fuzzy
-msgid "IDD_ABOUT"
-msgstr "O que é isso?"
-
-#, c-format
-msgid "%s %s %iHz"
-msgstr ""
-
 msgid "Use SPDIF"
 msgstr "Usar SPDIF"
 
@@ -719,25 +791,11 @@ msgstr ""
 "Saída\tquer dizer: %ims\tstddev: %ims"
 
 msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
-
-msgid "Dangerous option!"
-msgstr ""
-
-msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
+"Essa opção é PERIGOSA! Talvez o vídeo saia fora de sincronia com essa opção "
+"ativada. Clique em 'Não' para ativar essa opção."
 
-#, c-format
-msgid "Are you sure you want to delete '%s' preset?"
-msgstr "Tem certeza de que quer apagar a pré-configuração '%s'?"
-
-msgid "Delete confirmation"
-msgstr "Confirmação para apagar"
-
-#, c-format
-msgid "Are you sure you want to delete '%s' matrix?"
-msgstr "Tem certeza de que quer apagar a matriz '%s'?"
+#~ msgid "IDC_LBL_UNITS"
+#~ msgstr "Unidades"

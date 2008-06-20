@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-25 22:58+0300\n"
+"POT-Creation-Date: 2008-06-18 16:01+0400\n"
 "PO-Revision-Date: 2007-06-08 22:01+0100\n"
 "Last-Translator: Gioxy <FindMe@DVBViewer.forum>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 msgid "IDC_BTN_DONATE"
 msgstr "Sostieni"
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"
 
@@ -61,7 +61,7 @@ msgstr ""
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
-msgstr "Scrivi all'autore|mailto:ac3filter@gmail.com?Subject=AC3Filter"
+msgstr "Scrivi all'autore|mailto:xvalex@mail.ru?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 msgid "IDC_LNK_FORUM"
@@ -124,8 +124,8 @@ msgid "IDC_LBL_DELAY_SW"
 msgstr "SW"
 
 #. TRANSLATORS: Units:
-msgid "IDC_LBL_UNITS"
-msgstr "Unità:"
+msgid "IDC_LBL_DELAY_UNITS"
+msgstr ""
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
@@ -186,6 +186,38 @@ msgstr "S/PDIF wrapped"
 #. TRANSLATORS: Build info
 msgid "IDC_GRP_ENV"
 msgstr "Info build"
+
+#. TRANSLATORS: Equalizer
+msgid "IDC_GRP_EQ"
+msgstr ""
+
+#. TRANSLATORS: Equalizer options
+msgid "IDC_GRP_EQ_OPTIONS"
+msgstr ""
+
+#. TRANSLATORS: Reset equalizer
+msgid "IDC_BTN_EQ_RESET"
+msgstr ""
+
+#. TRANSLATORS: Enable equalizer
+msgid "IDC_CHK_EQ"
+msgstr ""
+
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr ""
+
+#. TRANSLATORS: Equalizer preset
+msgid "IDC_GRP_EQ_PRESET"
+msgstr ""
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_EQ_DELETE"
+msgstr ""
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_EQ_SAVE"
+msgstr ""
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
@@ -425,9 +457,17 @@ msgstr "Formato uscita"
 msgid "IDC_CHK_USE_SPDIF"
 msgstr "Usa S/PDIF"
 
+#. TRANSLATORS: Format
+msgid "IDC_LBL_FORMAT"
+msgstr ""
+
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
 msgstr "Formato ingresso"
+
+#. TRANSLATORS: Rate
+msgid "IDC_LBL_RATE"
+msgstr ""
 
 #. TRANSLATORS: Output gains
 msgid "IDC_GRP_OUTPUT_GAINS"
@@ -526,9 +566,8 @@ msgid "IDC_CHK_USE_DETECTOR"
 msgstr "Rileva flussi S/PDIF nei dati PCM"
 
 #. TRANSLATORS: AC3 encoder bitrate (kbps)
-#, fuzzy
 msgid "IDC_LBL_SPDIF_BITRATE"
-msgstr "Jitter corrente:"
+msgstr ""
 
 #. TRANSLATORS: SPDIF passthrough
 msgid "IDC_GRP_SPDIF_PT"
@@ -581,6 +620,93 @@ msgstr "Lingua:"
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
 msgstr ""
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Generale"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "Mixer"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "Volumi"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "S/PDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Sistema"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "Info su AC3Filter"
+
+msgid "Samples"
+msgstr "Campioni"
+
+msgid "Millisecs"
+msgstr "Millisecondi"
+
+msgid "Meters"
+msgstr "Metri"
+
+msgid "Centimeters"
+msgstr "Centimetri"
+
+msgid "Feet"
+msgstr "Piedi"
+
+msgid "Inches"
+msgstr "Pollici"
+
+#, c-format
+msgid "%ikHz"
+msgstr ""
+
+#, c-format
+msgid "%iHz"
+msgstr ""
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Eliminare la preimpostazione '%s'?"
+
+msgid "Delete confirmation"
+msgstr "Conferma l'eliminazione"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Eliminare la martice '%s'?"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' equalizer preset?"
+msgstr ""
+
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Questa opzione può essere DANNOSA!\n"
+"\n"
+"Se abilitata il filtro potrebbe generare un forte rumore e danneggiare le "
+"casse acustiche.\n"
+"\n"
+"Premi 'No' per abilitare questa opzione. "
+
+msgid "Dangerous option!"
+msgstr "Opzione pericolosa!"
 
 msgid "AS IS (no change)"
 msgstr "Senza modifiche"
@@ -645,52 +771,6 @@ msgstr "PCM 32bit"
 msgid "PCM Float"
 msgstr "PCM Float"
 
-msgid "Samples"
-msgstr "Campioni"
-
-msgid "Millisecs"
-msgstr "Millisecondi"
-
-msgid "Meters"
-msgstr "Metri"
-
-msgid "Centimeters"
-msgstr "Centimetri"
-
-msgid "Feet"
-msgstr "Piedi"
-
-msgid "Inches"
-msgstr "Pollici"
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr "Generale"
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr "Mixer"
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr "Volumi"
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr "S/PDIF"
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr "Sistema"
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
-msgstr "Info su AC3Filter"
-
-#, c-format
-msgid "%s %s %iHz"
-msgstr "%s %s %iHz"
-
 msgid "Use SPDIF"
 msgstr "Usa S/PDIF"
 
@@ -715,20 +795,6 @@ msgstr ""
 "Output\tmedia: %ims\tdev std: %ims"
 
 msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
-"Questa opzione può essere DANNOSA!\n"
-"\n"
-"Se abilitata il filtro potrebbe generare un forte rumore e danneggiare le "
-"casse acustiche.\n"
-"\n"
-"Premi 'No' per abilitare questa opzione. "
-
-msgid "Dangerous option!"
-msgstr "Opzione pericolosa!"
-
-msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
@@ -738,13 +804,5 @@ msgstr ""
 "\n"
 "Premi 'No' per abilitare questa opzione. "
 
-#, c-format
-msgid "Are you sure you want to delete '%s' preset?"
-msgstr "Eliminare la preimpostazione '%s'?"
-
-msgid "Delete confirmation"
-msgstr "Conferma l'eliminazione"
-
-#, c-format
-msgid "Are you sure you want to delete '%s' matrix?"
-msgstr "Eliminare la martice '%s'?"
+#~ msgid "IDC_LBL_UNITS"
+#~ msgstr "Unità:"

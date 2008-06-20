@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-25 22:58+0300\n"
+"POT-Creation-Date: 2008-06-18 16:01+0400\n"
 "PO-Revision-Date: 2007-08-18 23:10+0100\n"
 "Last-Translator: Sziládi Zsolt <sadistzs@freemail.hu>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 msgid "IDC_BTN_DONATE"
 msgstr "Adomány"
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter %s verzió Copyright (c) 2002-2007 Alexander Vigovsky"
 
@@ -61,7 +61,7 @@ msgstr ""
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
-msgstr "E-mail a szerzőnek|mailto:ac3filter@gmail.com?Subject=AC3Filter"
+msgstr "E-mail a szerzőnek|mailto:xvalex@mail.ru?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 msgid "IDC_LNK_FORUM"
@@ -124,8 +124,8 @@ msgid "IDC_LBL_DELAY_SW"
 msgstr "Mély"
 
 #. TRANSLATORS: Units:
-msgid "IDC_LBL_UNITS"
-msgstr "Egység:"
+msgid "IDC_LBL_DELAY_UNITS"
+msgstr ""
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
@@ -186,6 +186,38 @@ msgstr "SPDIF-csomagolás"
 #. TRANSLATORS: Build info
 msgid "IDC_GRP_ENV"
 msgstr "Fejlesztési információ"
+
+#. TRANSLATORS: Equalizer
+msgid "IDC_GRP_EQ"
+msgstr ""
+
+#. TRANSLATORS: Equalizer options
+msgid "IDC_GRP_EQ_OPTIONS"
+msgstr ""
+
+#. TRANSLATORS: Reset equalizer
+msgid "IDC_BTN_EQ_RESET"
+msgstr ""
+
+#. TRANSLATORS: Enable equalizer
+msgid "IDC_CHK_EQ"
+msgstr ""
+
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr ""
+
+#. TRANSLATORS: Equalizer preset
+msgid "IDC_GRP_EQ_PRESET"
+msgstr ""
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_EQ_DELETE"
+msgstr ""
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_EQ_SAVE"
+msgstr ""
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
@@ -425,9 +457,17 @@ msgstr "Kimeneti formátum"
 msgid "IDC_CHK_USE_SPDIF"
 msgstr "SPDIF használata"
 
+#. TRANSLATORS: Format
+msgid "IDC_LBL_FORMAT"
+msgstr ""
+
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
 msgstr "bemeneti formátum"
+
+#. TRANSLATORS: Rate
+msgid "IDC_LBL_RATE"
+msgstr ""
 
 #. TRANSLATORS: Output gains
 msgid "IDC_GRP_OUTPUT_GAINS"
@@ -581,6 +621,89 @@ msgstr "Nyelv:"
 msgid "IDC_LNK_TRANSLATE"
 msgstr ""
 
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Fő"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "Keverő"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "Erősítések"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Rendszer"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "Névjegy"
+
+msgid "Samples"
+msgstr "Mintavétel"
+
+msgid "Millisecs"
+msgstr "Ezredmásodperc"
+
+msgid "Meters"
+msgstr "Méter"
+
+msgid "Centimeters"
+msgstr "Centiméter"
+
+msgid "Feet"
+msgstr "Láb"
+
+msgid "Inches"
+msgstr "Hüvelyk"
+
+#, c-format
+msgid "%ikHz"
+msgstr ""
+
+#, c-format
+msgid "%iHz"
+msgstr ""
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Biztos, hogy törlöd a(z) '%s' előbeállítást?"
+
+msgid "Delete confirmation"
+msgstr "Törlés megerősítése"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Biztos, hogy törlöd a(z) '%s' mátrixot?"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' equalizer preset?"
+msgstr ""
+
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Ez a beállítás VESZÉLYES! A szűrő nagyon hangos hangot hozhat létre a "
+"beállítás engedélyezésével. Nyomj 'Nem'-et a beállítás engedélyezéséhez."
+
+msgid "Dangerous option!"
+msgstr "Veszélyes beállítás!"
+
 msgid "AS IS (no change)"
 msgstr "AHOGY VAN (változatlan)"
 
@@ -644,52 +767,6 @@ msgstr "32 bites PCM"
 msgid "PCM Float"
 msgstr "Lebegőpontos PCM"
 
-msgid "Samples"
-msgstr "Mintavétel"
-
-msgid "Millisecs"
-msgstr "Ezredmásodperc"
-
-msgid "Meters"
-msgstr "Méter"
-
-msgid "Centimeters"
-msgstr "Centiméter"
-
-msgid "Feet"
-msgstr "Láb"
-
-msgid "Inches"
-msgstr "Hüvelyk"
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr "Fő"
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr "Keverő"
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr "Erősítések"
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr "SPDIF"
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr "Rendszer"
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
-msgstr "Névjegy"
-
-#, c-format
-msgid "%s %s %iHz"
-msgstr "%s %s %iHz"
-
 msgid "Use SPDIF"
 msgstr "SPDIF használata"
 
@@ -714,29 +791,11 @@ msgstr ""
 "Kimeneti\tátlag: %ims\tstddev: %ims"
 
 msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
-"Ez a beállítás VESZÉLYES! A szűrő nagyon hangos hangot hozhat létre a "
-"beállítás engedélyezésével. Nyomj 'Nem'-et a beállítás engedélyezéséhez."
-
-msgid "Dangerous option!"
-msgstr "Veszélyes beállítás!"
-
-msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
 "Ez a beállítás VESZÉLYES! A video elvesztheti a szinkronizációt a hanggal a "
 "beállítás engedélyezésével. Nyomj 'Nem'-et a beállítás engedélyezéséhez."
 
-#, c-format
-msgid "Are you sure you want to delete '%s' preset?"
-msgstr "Biztos, hogy törlöd a(z) '%s' előbeállítást?"
-
-msgid "Delete confirmation"
-msgstr "Törlés megerősítése"
-
-#, c-format
-msgid "Are you sure you want to delete '%s' matrix?"
-msgstr "Biztos, hogy törlöd a(z) '%s' mátrixot?"
+#~ msgid "IDC_LBL_UNITS"
+#~ msgstr "Egység:"

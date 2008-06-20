@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-25 22:58+0300\n"
+"POT-Creation-Date: 2008-06-18 16:01+0400\n"
 "PO-Revision-Date: 2007-08-25 19:32+0100\n"
 "Last-Translator: Ernst Klamer <e.klamer@gmail.com>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 msgid "IDC_BTN_DONATE"
 msgstr "Donatie"
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 door Alexander Vigovsky"
 
@@ -60,7 +60,7 @@ msgstr ""
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
-msgstr "Mail de auteur|mailto:ac3filter@gmail.com?Subject=AC3Filter"
+msgstr "Mail de auteur|mailto:xvalex@mail.ru?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 msgid "IDC_LNK_FORUM"
@@ -123,8 +123,8 @@ msgid "IDC_LBL_DELAY_SW"
 msgstr "Sub"
 
 #. TRANSLATORS: Units:
-msgid "IDC_LBL_UNITS"
-msgstr "Eenheid:"
+msgid "IDC_LBL_DELAY_UNITS"
+msgstr ""
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
@@ -185,6 +185,38 @@ msgstr "SPDIF wrapped"
 #. TRANSLATORS: Build info
 msgid "IDC_GRP_ENV"
 msgstr "Versie info"
+
+#. TRANSLATORS: Equalizer
+msgid "IDC_GRP_EQ"
+msgstr ""
+
+#. TRANSLATORS: Equalizer options
+msgid "IDC_GRP_EQ_OPTIONS"
+msgstr ""
+
+#. TRANSLATORS: Reset equalizer
+msgid "IDC_BTN_EQ_RESET"
+msgstr ""
+
+#. TRANSLATORS: Enable equalizer
+msgid "IDC_CHK_EQ"
+msgstr ""
+
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr ""
+
+#. TRANSLATORS: Equalizer preset
+msgid "IDC_GRP_EQ_PRESET"
+msgstr ""
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_EQ_DELETE"
+msgstr ""
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_EQ_SAVE"
+msgstr ""
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
@@ -424,9 +456,17 @@ msgstr "Output formaat"
 msgid "IDC_CHK_USE_SPDIF"
 msgstr "Gebruik SPDIF"
 
+#. TRANSLATORS: Format
+msgid "IDC_LBL_FORMAT"
+msgstr ""
+
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
 msgstr "Input formaat"
+
+#. TRANSLATORS: Rate
+msgid "IDC_LBL_RATE"
+msgstr ""
 
 #. TRANSLATORS: Output gains
 msgid "IDC_GRP_OUTPUT_GAINS"
@@ -580,6 +620,89 @@ msgstr "Taal:"
 msgid "IDC_LNK_TRANSLATE"
 msgstr ""
 
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Main"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "Mixer"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "Niveau's"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Systeem"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "Over"
+
+msgid "Samples"
+msgstr "Samples"
+
+msgid "Millisecs"
+msgstr "Milliseconden"
+
+msgid "Meters"
+msgstr "Meters"
+
+msgid "Centimeters"
+msgstr "Centimeters"
+
+msgid "Feet"
+msgstr "Feet"
+
+msgid "Inches"
+msgstr "Inches"
+
+#, c-format
+msgid "%ikHz"
+msgstr ""
+
+#, c-format
+msgid "%iHz"
+msgstr ""
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Weet je zeker dat je  '%s' voorkeur wilt verwijderen?"
+
+msgid "Delete confirmation"
+msgstr "Bevestig verwijderen"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Weet u zeker dat u  '%s' matrix wilt verwijderen?"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' equalizer preset?"
+msgstr ""
+
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Deze optie is GEVAARLIJK! Filter kan erg veel lawaai veroorzaken met deze "
+"optie aan. Druk op 'Nee' om deze optie aan te zetten."
+
+msgid "Dangerous option!"
+msgstr "Gevaarlijke optie!"
+
 msgid "AS IS (no change)"
 msgstr "Onveranderd"
 
@@ -643,52 +766,6 @@ msgstr "PCM 32bit"
 msgid "PCM Float"
 msgstr "PCM Float"
 
-msgid "Samples"
-msgstr "Samples"
-
-msgid "Millisecs"
-msgstr "Milliseconden"
-
-msgid "Meters"
-msgstr "Meters"
-
-msgid "Centimeters"
-msgstr "Centimeters"
-
-msgid "Feet"
-msgstr "Feet"
-
-msgid "Inches"
-msgstr "Inches"
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr "Main"
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr "Mixer"
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr "Niveau's"
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr "SPDIF"
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr "Systeem"
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
-msgstr "Over"
-
-#, c-format
-msgid "%s %s %iHz"
-msgstr "%s %s %iHz"
-
 msgid "Use SPDIF"
 msgstr "Gebruik SPDIF"
 
@@ -713,29 +790,11 @@ msgstr ""
 "Output\tmean: %ims\tstddev: %ims"
 
 msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
-"Deze optie is GEVAARLIJK! Filter kan erg veel lawaai veroorzaken met deze "
-"optie aan. Druk op 'Nee' om deze optie aan te zetten."
-
-msgid "Dangerous option!"
-msgstr "Gevaarlijke optie!"
-
-msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
 "Deze optie is GEVAARLIJK! Video kan out of sync gaan lopen met deze optie "
 "aan. Druk op 'Nee' om deze optie aan te zetten."
 
-#, c-format
-msgid "Are you sure you want to delete '%s' preset?"
-msgstr "Weet je zeker dat je  '%s' voorkeur wilt verwijderen?"
-
-msgid "Delete confirmation"
-msgstr "Bevestig verwijderen"
-
-#, c-format
-msgid "Are you sure you want to delete '%s' matrix?"
-msgstr "Weet u zeker dat u  '%s' matrix wilt verwijderen?"
+#~ msgid "IDC_LBL_UNITS"
+#~ msgstr "Eenheid:"
