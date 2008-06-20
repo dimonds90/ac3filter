@@ -1,7 +1,6 @@
 #pragma warning(disable: 4786)
 
 #include <vector>
-#include <string>
 #include "../ac3filter_intl.h"
 #include "../resource_ids.h"
 #include "control_lang.h"
@@ -23,9 +22,7 @@ static const char *package = "ac3filter";
 class EnumLanguages
 {
 protected:
-  typedef std::vector<std::string> svector;
-  typedef std::vector<std::string>::iterator iter;
-
+  typedef std::vector<char *> svector;
   svector codes;
   svector labels;
 
@@ -35,11 +32,10 @@ public:
 
   bool open(const char *path, const char *package)
   {
+    close();
+
     char file[MAX_PATH + 2];
     sprintf(file, "%s\\*", path);
-
-    codes.clear();
-    labels.clear();
 
     WIN32_FIND_DATA fd;
     HANDLE fh = FindFirstFile(file, &fd);
@@ -105,16 +101,18 @@ public:
       if (GetFileAttributes(file) == -1) continue;
 
       // Fill the array
-      std::string label(lang_name(lang));
+      char label[1024];
       if (country != -1 && custom != 0)
-        label = label + " (" + country_name(country) + ", " + custom + ")";
+        sprintf(label, "%s (%s, %s)", lang_name(lang), country_name(country), custom);
       else if (country != -1)
-        label = label + " (" + country_name(country) + ")";
+        sprintf(label, "%s (%s)", lang_name(lang), country_name(country));
       else if (custom != 0)
-        label = label + " (" + custom + ")";
+        sprintf(label, "%s (%s)", lang_name(lang), custom);
+      else
+        sprintf(label, "%s", lang_name(lang));
 
-      codes.push_back(fn);
-      labels.push_back(label);
+      codes.push_back(strdup(fn));
+      labels.push_back(strdup(label));
 
     } while (FindNextFile(fh, &fd));
     FindClose(fh);
@@ -123,6 +121,9 @@ public:
 
   void close()
   {
+    int i;
+    for (i = 0; i < codes.size(); i++) delete codes[i];
+    for (i = 0; i < labels.size(); i++) delete labels[i];
     codes.clear();
     labels.clear();
   }
@@ -134,20 +135,19 @@ public:
 
   const char *code(int i)
   {
-    return codes[i].c_str();
+    return codes[i];
   }
 
   const char *label(int i)
   {
-    return labels[i].c_str();
+    return labels[i];
   }
 
   int find_code(const char *code)
   {
     if (code == 0) return -1;
-    std::string c(code);
     for(int i = 0; i < codes.size(); i++)
-      if (codes[i] == c)
+      if (strcmp(codes[i], code) == 0)
         return i;
     return -1;
   }
