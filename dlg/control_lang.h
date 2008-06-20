@@ -8,10 +8,13 @@
 #include "../guids.h"
 #include "../controls.h"
 
+class EnumLanguages;
 class ControlLang : public Controller
 {
 protected:
-  LinkButton  lnk_translate;
+  LinkButton lnk_translate;
+  char path[MAX_PATH];
+  EnumLanguages *langs;
 
 public:
   ControlLang(HWND dlg);
