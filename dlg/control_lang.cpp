@@ -115,7 +115,7 @@ ControlLang::~ControlLang()
 void ControlLang::init()
 {
 #ifdef ENABLE_NLS
-  if (langs) if (langs->nlangs())
+  if (langs && langs->nlangs())
   {
     SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_RESETCONTENT, 0, 0);
     SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)"--- Original ---");
