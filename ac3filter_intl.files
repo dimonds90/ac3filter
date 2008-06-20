@@ -1,3 +1,11 @@
 dialog_controls.h
 ac3filter_dlg.h
 ac3filter_dlg.cpp
+dlg/control_delay.cpp
+dlg/control_eq.cpp
+dlg/control_info.cpp
+dlg/control_preset.cpp
+dlg/control_spdif.cpp
+dlg/control_spk.cpp
+dlg/control_sync.cpp
+dlg/control_system.cpp

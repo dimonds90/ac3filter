@@ -16,7 +16,7 @@ ita: Italian by Gioxy
 kor: Korean by starcodec
 pol: Polish by Lukasz Pasternak
 por: Portuguese (Brazilian) by ReX
-rus: Russian
+rus: Russian by Valex
 slo: Slovak by Artam
 spa: Spanish by Ferny
 zho: Chinese (Simplified) by FSYX

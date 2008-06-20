@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-25 22:58+0300\n"
+"POT-Creation-Date: 2008-06-18 16:01+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "IDC_BTN_DONATE"
 msgstr ""
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr ""
 
@@ -117,7 +117,7 @@ msgid "IDC_LBL_DELAY_SW"
 msgstr ""
 
 #. TRANSLATORS: Units:
-msgid "IDC_LBL_UNITS"
+msgid "IDC_LBL_DELAY_UNITS"
 msgstr ""
 
 #. TRANSLATORS: DRC
@@ -178,6 +178,38 @@ msgstr ""
 
 #. TRANSLATORS: Build info
 msgid "IDC_GRP_ENV"
+msgstr ""
+
+#. TRANSLATORS: Equalizer
+msgid "IDC_GRP_EQ"
+msgstr ""
+
+#. TRANSLATORS: Equalizer options
+msgid "IDC_GRP_EQ_OPTIONS"
+msgstr ""
+
+#. TRANSLATORS: Reset equalizer
+msgid "IDC_BTN_EQ_RESET"
+msgstr ""
+
+#. TRANSLATORS: Enable equalizer
+msgid "IDC_CHK_EQ"
+msgstr ""
+
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr ""
+
+#. TRANSLATORS: Equalizer preset
+msgid "IDC_GRP_EQ_PRESET"
+msgstr ""
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_EQ_DELETE"
+msgstr ""
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_EQ_SAVE"
 msgstr ""
 
 #. TRANSLATORS: Use AC3Filter for:
@@ -416,8 +448,16 @@ msgstr ""
 msgid "IDC_CHK_USE_SPDIF"
 msgstr ""
 
+#. TRANSLATORS: Format
+msgid "IDC_LBL_FORMAT"
+msgstr ""
+
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
+msgstr ""
+
+#. TRANSLATORS: Rate
+msgid "IDC_LBL_RATE"
 msgstr ""
 
 #. TRANSLATORS: Output gains
@@ -572,6 +612,87 @@ msgstr ""
 msgid "IDC_LNK_TRANSLATE"
 msgstr ""
 
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr ""
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr ""
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr ""
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr ""
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr ""
+
+msgid "Samples"
+msgstr ""
+
+msgid "Millisecs"
+msgstr ""
+
+msgid "Meters"
+msgstr ""
+
+msgid "Centimeters"
+msgstr ""
+
+msgid "Feet"
+msgstr ""
+
+msgid "Inches"
+msgstr ""
+
+#, c-format
+msgid "%ikHz"
+msgstr ""
+
+#, c-format
+msgid "%iHz"
+msgstr ""
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr ""
+
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr ""
+
+msgid "Delete confirmation"
+msgstr ""
+
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr ""
+
+#, c-format
+msgid "Are you sure you want to delete '%s' equalizer preset?"
+msgstr ""
+
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+
+msgid "Dangerous option!"
+msgstr ""
+
 msgid "AS IS (no change)"
 msgstr ""
 
@@ -635,52 +756,6 @@ msgstr ""
 msgid "PCM Float"
 msgstr ""
 
-msgid "Samples"
-msgstr ""
-
-msgid "Millisecs"
-msgstr ""
-
-msgid "Meters"
-msgstr ""
-
-msgid "Centimeters"
-msgstr ""
-
-msgid "Feet"
-msgstr ""
-
-msgid "Inches"
-msgstr ""
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr ""
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr ""
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr ""
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr ""
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr ""
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
-msgstr ""
-
-#, c-format
-msgid "%s %s %iHz"
-msgstr ""
-
 msgid "Use SPDIF"
 msgstr ""
 
@@ -703,25 +778,6 @@ msgid ""
 msgstr ""
 
 msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
-
-msgid "Dangerous option!"
-msgstr ""
-
-msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
-msgstr ""
-
-#, c-format
-msgid "Are you sure you want to delete '%s' preset?"
-msgstr ""
-
-msgid "Delete confirmation"
-msgstr ""
-
-#, c-format
-msgid "Are you sure you want to delete '%s' matrix?"
 msgstr ""

@@ -14,11 +14,20 @@
 #  define gettext_noop(s) s
 #  define N_(s) gettext_noop(s)
 
+// gettext_id(const char *id, const char *str);
+// Translate the string that have an id, return str if no translation found
+// Used to translate dialog controls by an id, instead of translating by the
+// text stored. This allows to translate different controls with the same text
+// differently.
+
 inline const char *gettext_id(const char *id, const char *str)
 {
   const char *translated = gettext(id);
   return translated == id? str: translated;
 }
+
+// gettext_meta()
+// Returns current translation info
 
 inline const char *gettext_meta()
 {
@@ -36,15 +45,24 @@ inline const char *gettext_meta()
 ///////////////////////////////////////////////////////////////////////////////
 // Language codes conversion
 //
-// iso_langs - table of ISO languages
-//   First element of this table (index 0) is known to be English
+// iso_langs - table of languages (ISO 639)
+// First element of this table (index 0) is known to be English
 //
-// find_iso6392() - find an index of iso6392 code; -1 if not found; 0 is English
-// find_iso6391() - find an index of iso6391 code; -1 if not found; 0 is English
-// find_iso_code() - find an index of iso6391/6392 code; -1 if not found; 0 is English
-// lang_from_iso6392() - convert 3-character language code to the language name
-// lang_from_iso6391() - convert 2-character language code to the language name
+// iso_countries - table of countries (ISO 3166)
+//
+// find_iso_lang() - find an index of iso 639 code; -1 if not found; 0 is English
 // lang_from_iso_code() - convert 2 or 3-character code to the language name
+//
+// find_iso_country() - find an index of iso 3166 code; -1 if not found; 0 is English
+// country_from_code() - convert 2 or 3-character code to the country name
+//
+// All functions support ll_CC codes, where ll is a language code and CC is a
+// country code. So find_iso_lang("pt_BR") will return the index of Portuguese
+// language and country_from_code("pt_BR") will return "Brasil".
+//
+// Also, ll_CC string may be converted to llcc code with find_llcc() function.
+// This code contains info about both language and country, and may be used instead
+// of the string value. (Note, that country may not be specified.)
 
 struct iso_lang_s
 { 
@@ -53,15 +71,31 @@ struct iso_lang_s
   const char *iso6391;
 };
 
+struct iso_country_s
+{
+  const char *name;
+  const char *alpha2;
+  const char *alpha3;
+  int code;
+};
+
 extern const iso_lang_s iso_langs[];
+extern const iso_country_s iso_countries[];
 
-int find_iso6392(const char *code);
-int find_iso6391(const char *code);
-int find_iso_code(const char *code);
+#define MAX_LANG_LEN 64
+#define MAX_COUNTRY_LEN 64
 
-const char *lang_from_iso6392(const char *code);
-const char *lang_from_iso6391(const char *code);
-const char *lang_from_iso_code(const char *code);
+int find_llcc(const char *code);
+
+int lang_index(const char *code);
+int lang_index(int llcc);
+const char *lang_name(const char *code);
+const char *lang_name(int llcc);
+
+int country_index(const char *code);
+int country_index(int llcc);
+const char *country_name(const char *code);
+const char *country_name(int llcc);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Language operations

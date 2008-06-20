@@ -270,7 +270,7 @@ AC3FilterDlg::set_lang(const char *_lang)
   if (!_lang)
     _lang = "";
 
-  if (find_iso6392(_lang) != -1)
+  if (lang_index(_lang) != -1)
   {
     char path[MAX_PATH];
     RegistryKey reg(REG_KEY);
@@ -493,7 +493,7 @@ AC3FilterDlg::init_controls()
           DWORD attr = GetFileAttributes(file);
           if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
           { 
-            int iso_index = find_iso6392(fd.cFileName);
+            int iso_index = lang_index(fd.cFileName);
             if (iso_index != -1)
             {
               int cb_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)iso_langs[iso_index].name);
@@ -507,7 +507,8 @@ AC3FilterDlg::init_controls()
 # else
   {
     // Disable language selection if NLS is disabled
-    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, WM_ENABLE, 0, 0);
+    EnableWindow(GetDlgItem(m_Dlg, IDC_CMB_LANG), FALSE);
+    SetDlgItemText(m_Dlg, IDC_EDT_TRANS_INFO, "No localization support.");
   }
 # endif
 
@@ -580,7 +581,7 @@ AC3FilterDlg::update_static_controls()
 
 #ifdef ENABLE_NLS
   {
-    int current_iso_index = find_iso6392(lang);
+    int current_iso_index = lang_index(lang);
     if (current_iso_index != -1)
     {
       int cb_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETCOUNT, 0, 0);
