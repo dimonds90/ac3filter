@@ -216,7 +216,19 @@ void ControlLang::update()
     }
     else
     {
-      SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETCURSEL, i+1, 0);
+      int cb_index = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_GETCOUNT, 0, 0);
+      if (cb_index != CB_ERR)
+      {
+        while (cb_index--)
+        {
+          int j = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_GETITEMDATA, cb_index, 0);
+          if (j != CB_ERR && j == i+1)
+          {
+            SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETCURSEL, cb_index, 0);
+            break;
+          }
+        }
+      }
 
       char info[1024];
       strncpy(info, gettext_meta(), sizeof(info));
