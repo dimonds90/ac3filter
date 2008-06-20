@@ -2,6 +2,7 @@
 #define AC3FILTER_DLG_H
 
 #include <streams.h>
+#include "ac3filter_intl.h"
 #include "controls.h"
 #include "guids.h"
 
