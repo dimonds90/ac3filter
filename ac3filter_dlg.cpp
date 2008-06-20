@@ -192,7 +192,8 @@ AC3FilterDlg::OnActivate()
 
   // Update 'old' values
   const char *new_lang = get_lang();
-  strcpy(lang, new_lang);
+  if (new_lang == 0) new_lang = "";
+  strncpy(lang, new_lang, sizeof(lang));
   old_in_spk = in_spk;
 
   // Run!
