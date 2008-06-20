@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "../ac3filter_intl.h"
 #include "../resource_ids.h"
 #include "control_spk.h"
