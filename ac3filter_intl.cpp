@@ -842,7 +842,7 @@ const iso_country_s iso_countries[] =
   { "Sweden", "SWE", "SE", 752 },
   { "Switzerland", "CHE", "CH", 756 },
   { "Syrian Arab Republic", "SYR", "SY", 760 },
-  { "Taiwan, Province of China", "TWN", "TW", 158 },
+  { "Taiwan", "TWN", "TW", 158 },
   { "Tajikistan", "TJK", "TJ", 762 },
   { "Tanzania, United Republic of", "TZA", "TZ", 834 },
   { "Thailand", "THA", "TH", 764 },
@@ -985,7 +985,7 @@ int country_index(const char *_code)
   if (_code[1] == 0) return -1;
   if (_code[2] == 0) return find_country_alpha2(_code[0], _code[1]);
   if (_code[3] == 0) return find_country_alpha3(_code[0], _code[1], _code[2]);
-  return -1; //country_index(find_llcc(_code));
+  return -1;
 }
 
 const char *country_name(const char *_code)

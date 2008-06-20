@@ -66,8 +66,8 @@ struct iso_lang_s
 struct iso_country_s
 {
   const char *name;
-  const char *alpha2;
   const char *alpha3;
+  const char *alpha2;
   int code;
 };
 
