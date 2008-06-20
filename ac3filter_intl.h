@@ -106,6 +106,9 @@ const char *country_name(int llcc);
 //   package only. set_lang("") cancels translation (now it just switches to
 //   English)
 //
+//   set_lang(0, package, path) may be used to change the packade and path
+//   without changing the language.
+//
 // get_lang() - return currently selected language. Returns zero if no language
 //   selected.
 

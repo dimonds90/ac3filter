@@ -27,6 +27,7 @@ void set_lang(const char *code, const char *package, const char *path)
   {
     if (code[0] == 0) // set_lang("") sets to english
     {
+      lang[0] = 0;
       char lang_env[256];
       sprintf(lang_env, "LANGUAGE=en", lang);
       putenv(lang_env);
