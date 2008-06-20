@@ -43,7 +43,7 @@ private:
   Speakers old_in_spk;
 
   // Language
-  char        lang[256];
+  char        lang[LANG_LEN];
   // Interface
   DoubleEdit  edt_refresh_time;
   // Links

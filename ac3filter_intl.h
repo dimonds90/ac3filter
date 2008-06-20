@@ -50,19 +50,11 @@ inline const char *gettext_meta()
 //
 // iso_countries - table of countries (ISO 3166)
 //
-// find_iso_lang() - find an index of iso 639 code; -1 if not found; 0 is English
-// lang_from_iso_code() - convert 2 or 3-character code to the language name
+// lang_index() - find an index of iso 639 code; -1 if not found; 0 is English
+// lang_name() - convert 2 or 3-character code to the language name
 //
-// find_iso_country() - find an index of iso 3166 code; -1 if not found; 0 is English
-// country_from_code() - convert 2 or 3-character code to the country name
-//
-// All functions support ll_CC codes, where ll is a language code and CC is a
-// country code. So find_iso_lang("pt_BR") will return the index of Portuguese
-// language and country_from_code("pt_BR") will return "Brasil".
-//
-// Also, ll_CC string may be converted to llcc code with find_llcc() function.
-// This code contains info about both language and country, and may be used instead
-// of the string value. (Note, that country may not be specified.)
+// country_index() - find an index of iso 3166 code; -1 if not found; 0 is English
+// country_name() - convert 2 or 3-character code to the country name
 
 struct iso_lang_s
 { 
@@ -82,20 +74,15 @@ struct iso_country_s
 extern const iso_lang_s iso_langs[];
 extern const iso_country_s iso_countries[];
 
-#define MAX_LANG_LEN 64
-#define MAX_COUNTRY_LEN 64
-
-int find_llcc(const char *code);
+#define LANG_LEN 256
 
 int lang_index(const char *code);
-int lang_index(int llcc);
 const char *lang_name(const char *code);
-const char *lang_name(int llcc);
+const char *lang_name(int index);
 
 int country_index(const char *code);
-int country_index(int llcc);
 const char *country_name(const char *code);
-const char *country_name(int llcc);
+const char *country_name(int index);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Language operations

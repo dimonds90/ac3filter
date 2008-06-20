@@ -45,18 +45,79 @@ public:
     HANDLE fh = FindFirstFile(file, &fd);
     if (fh != INVALID_HANDLE_VALUE) do
     {
-      int i = lang_index(fd.cFileName);
-      if (i == -1) continue;
+      // Parse the file name into language, country and custom text:
+      //   pt_BR -> "Purtuguese (Brazil)"
+      //   zh@Simplified -> "Chineese (Simplified)"
 
+      int lang = -1;
+      int country = -1;
+      const char *custom = 0;
+      const char *fn = fd.cFileName;
+
+      lang = lang_index(fn);
+      if (lang == -1)
+      {
+        int len = strlen(fn);
+        char ll[3] = { 0, 0, 0 };
+        char cc[3] = { 0, 0, 0 };
+
+        if (len >= 2 && fn[2] == '@')
+        {
+          /////////////////////////////////////////////////
+          // ll@custom
+
+          if (len > 2)
+            if (fn[2] == '@')
+              custom = fn + 3;
+            else
+              continue;
+
+          ll[0] = fn[0]; ll[1] = fn[1];
+          lang = lang_index(ll);
+          if (lang == -1)
+            continue;
+        }
+        else if (len >= 5 && fn[2] == '_')
+        {
+          /////////////////////////////////////////////////
+          // ll_cc@custom
+
+          if (len > 5)
+            if (fn[5] == '@')
+              custom = fn + 6;
+            else
+              continue;
+
+          ll[0] = fn[0]; ll[1] = fn[1];
+          cc[0] = fn[3]; cc[1] = fn[4];
+          lang = lang_index(ll);
+          country = country_index(cc);
+          if (lang == -1 || country == -1)
+            continue;
+        }
+        else
+          continue;
+      }
+
+      // Ensure that translation data exists
       char file[MAX_PATH + MAX_PATH + 30];
       sprintf(file, "%s\\%s\\LC_MESSAGES\\%s.mo", path, fd.cFileName, package);
       if (GetFileAttributes(file) == -1) continue;
 
-      i = lang_index(fd.cFileName);
-      codes.push_back(fd.cFileName);
-      labels.push_back(iso_langs[i].name);
+      // Fill the array
+      std::string label(lang_name(lang));
+      if (country != -1 && custom != 0)
+        label = label + " (" + country_name(country) + ", " + custom + ")";
+      else if (country != -1)
+        label = label + " (" + country_name(country) + ")";
+      else if (custom != 0)
+        label = label + " (" + custom + ")";
+
+      codes.push_back(fn);
+      labels.push_back(label);
 
     } while (FindNextFile(fh, &fd));
+    FindClose(fh);
     return true;
   }
 

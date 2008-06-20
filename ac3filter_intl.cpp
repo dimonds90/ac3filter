@@ -8,9 +8,7 @@
 // Language selection
 
 // Global language code
-// Only 2 or 3-character codes allowed
-static const int lang_size = 4;
-static char lang[lang_size] = "\0";
+static char lang[LANG_LEN] = "\0";
 extern "C" int _nl_msg_cat_cntr;
 
 void set_lang(const char *code, const char *package, const char *path)
@@ -33,11 +31,11 @@ void set_lang(const char *code, const char *package, const char *path)
       putenv(lang_env);
       ++_nl_msg_cat_cntr;
     }
-    else if (lang_name(code)) // verify the language code provided
+    else
     {
-      strncpy(lang, code, lang_size);
-      lang[lang_size-1] = 0;
-      char lang_env[256];
+      strncpy(lang, code, LANG_LEN);
+      lang[LANG_LEN-1] = 0;
+      char lang_env[LANG_LEN + 10];
       sprintf(lang_env, "LANGUAGE=%s", lang);
       putenv(lang_env);
       ++_nl_msg_cat_cntr;
@@ -880,38 +878,6 @@ const iso_country_s iso_countries[] =
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// ll_CC codes
-
-int find_llcc(const char *code)
-{
-  int lang = -1;
-  int country = -1;
-
-  if (strlen(code) == 5)
-    if (code[2] == '_')
-    {
-      char lang_code[3];
-      char country_code[3];
-      lang_code[0] = code[0];
-      lang_code[1] = code[1];
-      lang_code[2] = 0;
-      country_code[0] = code[3];
-      country_code[1] = code[4];
-      country_code[2] = 0;
-
-      lang = lang_index(lang_code);
-      country = country_index(country_code);
-    }
-
-  if (lang == -1 || country == -1)
-    return -1;
-  else if (country == -1)
-    return lang * array_size(iso_countries);
-  else
-    return lang * array_size(iso_countries) + country;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 // Language codes
 
 int find_iso6391(char a1, char a2)
@@ -922,9 +888,9 @@ int find_iso6391(char a1, char a2)
   int i = 0;
   while (iso_langs[i].name)
   {
-    if (iso_langs[i].iso6392)
-      if (a1 == iso_langs[i].iso6392[0] && 
-          a2 == iso_langs[i].iso6392[1])
+    if (iso_langs[i].iso6391)
+      if (a1 == iso_langs[i].iso6391[0] && 
+          a2 == iso_langs[i].iso6391[1])
         return i;
     i++;
   }
@@ -957,17 +923,6 @@ int lang_index(const char *_code)
   if (_code[1] == 0) return -1;
   if (_code[2] == 0) return find_iso6391(_code[0], _code[1]);
   if (_code[3] == 0) return find_iso6392(_code[0], _code[1], _code[2]);
-  return lang_index(find_llcc(_code));
-}
-
-int lang_index(int llcc)
-{
-  if (llcc >= 0)
-  {
-    int result = llcc / array_size(iso_countries);
-    if (result < array_size(iso_langs))
-      return result;
-  }
   return -1;
 }
 
@@ -977,10 +932,11 @@ const char *lang_name(const char *_code)
   return i == -1? 0: iso_langs[i].name;
 }
 
-const char *lang_name(int llcc)
+const char *lang_name(int index)
 {
-  int i = lang_index(llcc);
-  return i == -1? 0: iso_langs[i].name;
+  if (index >= 0 && index < array_size(iso_langs))
+    return iso_langs[index].name;
+  return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -988,9 +944,9 @@ const char *lang_name(int llcc)
 
 int find_country_alpha3(char a1, char a2, char a3)
 {
-  a1 = (char) tolower(a1);
-  a2 = (char) tolower(a2);
-  a3 = (char) tolower(a3);
+  a1 = (char) toupper(a1);
+  a2 = (char) toupper(a2);
+  a3 = (char) toupper(a3);
 
   int i = 0;
   while (iso_countries[i].name)
@@ -1007,15 +963,15 @@ int find_country_alpha3(char a1, char a2, char a3)
 
 int find_country_alpha2(char a1, char a2)
 {
-  a1 = (char) tolower(a1);
-  a2 = (char) tolower(a2);
+  a1 = (char) toupper(a1);
+  a2 = (char) toupper(a2);
 
   int i = 0;
   while (iso_countries[i].name)
   {
-    if (iso_countries[i].alpha3)
-      if (a1 == iso_countries[i].alpha3[0] && 
-          a2 == iso_countries[i].alpha3[1])
+    if (iso_countries[i].alpha2)
+      if (a1 == iso_countries[i].alpha2[0] && 
+          a2 == iso_countries[i].alpha2[1])
         return i;
     i++;
   }
@@ -1029,12 +985,7 @@ int country_index(const char *_code)
   if (_code[1] == 0) return -1;
   if (_code[2] == 0) return find_country_alpha2(_code[0], _code[1]);
   if (_code[3] == 0) return find_country_alpha3(_code[0], _code[1], _code[2]);
-  return country_index(find_llcc(_code));
-}
-
-int country_index(int llcc)
-{
-  return llcc >= 0? llcc % array_size(iso_countries): -1;
+  return -1; //country_index(find_llcc(_code));
 }
 
 const char *country_name(const char *_code)
@@ -1043,9 +994,10 @@ const char *country_name(const char *_code)
   return i == -1? 0: iso_countries[i].name;
 }
 
-const char *country_name(int llcc)
+const char *country_name(int index)
 {
-  int i = country_index(llcc);
-  return i == -1? 0: iso_countries[i].name;
+  if (index >= 0 && index < array_size(iso_countries))
+    return iso_countries[index].name;
+  return 0;
 }
 

@@ -85,9 +85,9 @@ AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int Dialo
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::AC3FilterDlg(%s)", pName));
 
   // Set language
-  memset(lang, 0, sizeof(lang));
+  memset(lang, 0, LANG_LEN);
   RegistryKey reg(REG_KEY);
-  reg.get_text("Language", lang, sizeof(lang));
+  reg.get_text("Language", lang, LANG_LEN);
   if (lang_index(lang) != -1)
   {
     char path[MAX_PATH];
@@ -193,7 +193,7 @@ AC3FilterDlg::OnActivate()
   // Update 'old' values
   const char *new_lang = get_lang();
   if (new_lang == 0) new_lang = "";
-  strncpy(lang, new_lang, sizeof(lang));
+  strncpy(lang, new_lang, LANG_LEN);
   old_in_spk = in_spk;
 
   // Run!
