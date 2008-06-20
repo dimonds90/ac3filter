@@ -84,9 +84,20 @@ AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int Dialo
 {
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::AC3FilterDlg(%s)", pName));
 
+  // Set language
   memset(lang, 0, sizeof(lang));
-  get_lang(lang, sizeof(lang));
-  set_lang(lang);
+  RegistryKey reg(REG_KEY);
+  reg.get_text("Language", lang, sizeof(lang));
+  if (lang_index(lang) != -1)
+  {
+    char path[MAX_PATH];
+    reg.get_text("Lang_Dir", path, sizeof(path));
+
+    // do not use localization if language repository does not exists
+    DWORD attr = GetFileAttributes(path);
+    if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
+      set_lang(lang, "ac3filter", path);
+  }
 
   title = gettext_id(title_id, title_def);
   filter = 0;
@@ -170,11 +181,6 @@ AC3FilterDlg::OnActivate()
   visible = true;
   refresh = true;
 
-  // select language
-  memset(lang, 0, sizeof(lang));
-  get_lang(lang, sizeof(lang));
-  set_lang(lang);
-
   // Init controllers
   invert_levels = get_invert_levels();
   ctrl = new ControlAll(m_Dlg, filter, dec, proc, invert_levels);
@@ -184,6 +190,12 @@ AC3FilterDlg::OnActivate()
   init();
   update();
 
+  // Update 'old' values
+  const char *new_lang = get_lang();
+  strcpy(lang, new_lang);
+  old_in_spk = in_spk;
+
+  // Run!
   SetTimer(m_hwnd, 1, get_refresh_time(), 0);  // for all dynamic controls
   SetTimer(m_hwnd, 2, 1000, 0); // for CPU usage (should be averaged)
 
@@ -259,58 +271,6 @@ AC3FilterDlg::set_refresh_time(int _refresh_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Translation
-///////////////////////////////////////////////////////////////////////////////
-
-bool
-AC3FilterDlg::set_lang(const char *_lang)
-{
-  // set_lang(0) or set_lang("") cancels translation
-
-  if (!_lang)
-    _lang = "";
-
-  if (lang_index(_lang) != -1)
-  {
-    char path[MAX_PATH];
-    RegistryKey reg(REG_KEY);
-    reg.set_text("Language", _lang);
-    reg.get_text("Lang_Dir", path, sizeof(path));
-
-    // do not use localization if language repository does not exists
-    DWORD attr = GetFileAttributes(path);
-    if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
-    {
-      ::set_lang(_lang, "ac3filter", path);
-      strncpy(lang, _lang, sizeof(lang));
-      return true;
-    }
-    else
-      return false;
-  }
-  if (_lang[0] == 0)
-  {
-    RegistryKey reg(REG_KEY);
-    reg.set_text("Language", "");
-    ::set_lang("");
-    lang[0] = 0;
-    return true;
-  }
-  return false;
-}
-
-void
-AC3FilterDlg::get_lang(char *_buf, size_t _size)
-{
-  if (_buf && _size)
-  {
-    _buf[0] = 0;
-    RegistryKey reg(REG_KEY);
-    reg.get_text("Language", _buf, _size);
-  }
-}
-
-///////////////////////////////////////////////////////////////////////////////
 // Handle messages
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -379,12 +339,10 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 
           // translate if language was changed
           // do not do this all time because this update is visible!
-          char lang_temp[256];
-          memset(lang_temp, 0, sizeof(lang));
-          get_lang(lang_temp, sizeof(lang));
-          if (strcmp(lang_temp, lang))
+          const char *new_lang = get_lang();
+          if (strcmp(lang, new_lang))
           {
-            memcpy(lang, lang_temp, sizeof(lang));
+            strcpy(lang, new_lang);
             init();
           }
 
@@ -463,59 +421,6 @@ AC3FilterDlg::init_controls()
   // Interface
 
   edt_refresh_time.link(m_Dlg, IDC_EDT_REFRESH_TIME);
-
-  /////////////////////////////////////
-  // Languages
-  
-# ifdef ENABLE_NLS
-  {
-    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_RESETCONTENT, 0, 0);
-    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)"--- Original ---");
-    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETITEMDATA, 0, 0);
-
-    char path[MAX_PATH - 2];
-    RegistryKey reg(REG_KEY);
-    path[0] = 0; 
-    reg.get_text("Lang_Dir", path, sizeof(path));
-
-    if (path[0] != 0)
-    {
-      char file[MAX_PATH];
-      sprintf(file, "%s\\*", path);
-
-      WIN32_FIND_DATA fd;
-      HANDLE fh = FindFirstFile(file, &fd);
-      if (fh != INVALID_HANDLE_VALUE)
-        do
-        {
-          char file[MAX_PATH + MAX_PATH + 2];
-          sprintf(file, "%s\\%s", path, fd.cFileName);
-          DWORD attr = GetFileAttributes(file);
-          if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
-          { 
-            int iso_index = lang_index(fd.cFileName);
-            if (iso_index != -1)
-            {
-              int cb_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LONG)iso_langs[iso_index].name);
-              SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETITEMDATA, cb_index, iso_index);
-            }
-          }
-        } while (FindNextFile(fh, &fd));
-    }
-    SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETCURSEL, 0, 0);
-  }
-# else
-  {
-    // Disable language selection if NLS is disabled
-    EnableWindow(GetDlgItem(m_Dlg, IDC_CMB_LANG), FALSE);
-    SetDlgItemText(m_Dlg, IDC_EDT_TRANS_INFO, "No localization support.");
-  }
-# endif
-
-  /////////////////////////////////////
-  // Links
-
-  lnk_translate.link(m_Dlg, IDC_LNK_TRANSLATE);
 }
 
 void
@@ -575,38 +480,6 @@ AC3FilterDlg::update_static_controls()
   CheckDlgButton(m_Dlg, IDC_CHK_TOOLTIPS, tooltips? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(m_Dlg, IDC_CHK_INVERT_LEVELS, invert_levels? BST_CHECKED: BST_UNCHECKED);
   edt_refresh_time.update_value(refresh_time);
-
-  /////////////////////////////////////
-  // Language
-
-#ifdef ENABLE_NLS
-  {
-    int current_iso_index = lang_index(lang);
-    if (current_iso_index != -1)
-    {
-      int cb_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETCOUNT, 0, 0);
-      if (cb_index != CB_ERR)
-      {
-        while (cb_index--)
-        {
-          int iso_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETITEMDATA, cb_index, 0);
-          if (iso_index != CB_ERR && iso_index == current_iso_index)
-          {
-            SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_SETCURSEL, cb_index, 0);
-            break;
-          }
-        }
-      }
-    }
-
-    char info[1024];
-    strncpy(info, gettext_meta(), sizeof(info));
-    info[sizeof(info)-1] = 0;
-    cr2crlf(info, sizeof(info));
-    SetDlgItemText(m_Dlg, IDC_EDT_TRANS_INFO, info);
-  }
-#endif
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -623,8 +496,8 @@ AC3FilterDlg::command(int control, int message)
     if (ctrl->own_control(control))
     {
       Controller::cmd_result result = ctrl->command(control, message);
-      if (result == Controller::cmd_update)
-        update();
+      if (result == Controller::cmd_init) { init(); update(); }
+      if (result == Controller::cmd_update) update();
       return;
     }
 
@@ -667,33 +540,11 @@ AC3FilterDlg::command(int control, int message)
       break;
 
     /////////////////////////////////////
-    // Language
-
-    case IDC_CMB_LANG:
-      if (message == CBN_SELENDOK)
-      {
-        int cb_index, iso_index;
-        cb_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETCURSEL, 0, 0);
-        if (cb_index != CB_ERR)
-        {
-          iso_index = SendDlgItemMessage(m_Dlg, IDC_CMB_LANG, CB_GETITEMDATA, cb_index, 0);
-          if (iso_index != CB_ERR)
-          {
-            set_lang(iso_langs[iso_index].iso6392);
-            init();
-            update();
-          }
-        }
-      }
-      break;
-
-    /////////////////////////////////////
     // Donate
 
     case IDC_BTN_DONATE:
       if (message == BN_CLICKED)
         ShellExecute(0, 0, "http://order.kagi.com/?6CZJZ", 0, 0, SW_SHOWMAXIMIZED);
       break;
-
   }
 }

@@ -10,6 +10,7 @@
 #include "control_levels.h"
 #include "control_preset.h"
 #include "control_system.h"
+#include "control_lang.h"
 #include "control_sync.h"
 #include "control_bass.h"
 #include "control_info.h"
@@ -32,6 +33,7 @@ Controller(_dlg, 0)
   ctrl.push_back(PCtrl(new ControlSpectrum(hdlg, proc)));
   ctrl.push_back(PCtrl(new ControlSPDIF(hdlg, dec)));
   ctrl.push_back(PCtrl(new ControlSystem(hdlg, filter, dec)));
+  ctrl.push_back(PCtrl(new ControlLang(hdlg)));
   ctrl.push_back(PCtrl(new ControlSync(hdlg, dec)));
   ctrl.push_back(PCtrl(new ControlBass(hdlg, proc)));
   ctrl.push_back(PCtrl(new ControlInfo(hdlg, dec)));

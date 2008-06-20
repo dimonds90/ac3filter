@@ -48,7 +48,6 @@ private:
   DoubleEdit  edt_refresh_time;
   // Links
   LinkButton  lnk_donate;
-  LinkButton  lnk_translate;
 
   // Tooltip control
   Tooltip tooltip_ctl;
@@ -74,9 +73,6 @@ private:
 
   int get_refresh_time();
   void set_refresh_time(int refresh_time);
-
-  bool set_lang(const char *lang);
-  void get_lang(char *lang, size_t size);
 
   /////////////////////////////////////////////////////////////////////////////
   // Interface update functions

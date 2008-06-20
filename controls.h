@@ -56,7 +56,7 @@ protected:
   const int *controls;
 
 public:
-  enum cmd_result { cmd_ok, cmd_fail, cmd_not_processed, cmd_update };
+  enum cmd_result { cmd_ok, cmd_fail, cmd_not_processed, cmd_update, cmd_init };
 
   Controller(HWND _hdlg, const int *_controls): hdlg(_hdlg), controls(_controls) {}
   virtual ~Controller() {}
