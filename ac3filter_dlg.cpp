@@ -341,6 +341,7 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
           // translate if language was changed
           // do not do this all time because this update is visible!
           const char *new_lang = get_lang();
+          if (new_lang == 0) new_lang = "";
           if (strcmp(lang, new_lang))
           {
             strcpy(lang, new_lang);
