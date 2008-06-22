@@ -10,6 +10,17 @@
 class AC3FilterDlg : public CBasePropertyPage, public AudioProcessorState
 {
 public:
+  // Custom controllers for different dialogs
+  typedef Controller * (*ctrl_maker)(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels);
+  static Controller *ctrl_main(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels);
+  static Controller *ctrl_mixer(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels);
+  static Controller *ctrl_gains(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels);
+  static Controller *ctrl_eq(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels);
+  static Controller *ctrl_spdif(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels);
+  static Controller *ctrl_system(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels);
+  static Controller *ctrl_about(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels);
+
+  // Dialog creation functions
   static CUnknown * WINAPI CreateMain  (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateMixer (LPUNKNOWN lpunk, HRESULT *phr);
   static CUnknown * WINAPI CreateGains (LPUNKNOWN lpunk, HRESULT *phr);
@@ -29,7 +40,8 @@ private:
   bool visible;
   bool refresh;
 
-  // Dialog controls controllers
+  // Dialog controllers
+  ctrl_maker maker;
   Controller *ctrl;
   Controller *cpu;
 
@@ -53,7 +65,7 @@ private:
   // Tooltip control
   Tooltip tooltip_ctl;
 
-  AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def);
+  AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def, ctrl_maker maker);
 
   BOOL OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 

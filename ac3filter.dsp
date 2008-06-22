@@ -237,10 +237,6 @@ SOURCE=.\dlg\control_agc.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\dlg\control_all.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\dlg\control_all.h
 # End Source File
 # Begin Source File
@@ -306,6 +302,14 @@ SOURCE=.\dlg\control_levels.cpp
 # Begin Source File
 
 SOURCE=.\dlg\control_levels.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_list.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg\control_list.h
 # End Source File
 # Begin Source File
 

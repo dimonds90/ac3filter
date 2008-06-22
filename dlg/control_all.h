@@ -5,26 +5,24 @@
 #ifndef CONTROL_ALL_H
 #define CONTROL_ALL_H
 
-#include <memory>
-#include <vector>
-#include "../guids.h"
-#include "../controls.h"
-
-class ControlAll : public Controller
-{
-protected:
-  typedef std::auto_ptr<Controller> PCtrl;
-  typedef std::vector<PCtrl> VCtrl;
-  VCtrl ctrl;
-
-public:
-  ControlAll(HWND dlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels);
-
-  virtual void init();
-  virtual void update();
-  virtual void update_dynamic();
-  virtual bool own_control(int control);
-  virtual cmd_result command(int control, int message);
-};
+#include "control_about.h"
+#include "control_agc.h"
+#include "control_bass.h"
+#include "control_cpu.h"
+#include "control_delay.h"
+#include "control_eq.h"
+#include "control_info.h"
+#include "control_iogains.h"
+#include "control_lang.h"
+#include "control_levels.h"
+#include "control_list.h"
+#include "control_matrix.h"
+#include "control_preset.h"
+#include "control_spdif.h"
+#include "control_spectrum.h"
+#include "control_spk.h"
+#include "control_sync.h"
+#include "control_system.h"
+#include "control_ver.h"
 
 #endif

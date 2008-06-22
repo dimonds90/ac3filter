@@ -9,7 +9,6 @@
 
 #include "ac3filter_dlg.h"
 #include "dlg/control_all.h"
-#include "dlg/control_cpu.h"
 
 
 
@@ -23,50 +22,147 @@
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+// Specialized controllers
+///////////////////////////////////////////////////////////////////////////////
+
+Controller *AC3FilterDlg::ctrl_main(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels)
+{
+  ControlList *ctrl = new ControlList(hdlg);
+  if (ctrl == 0) return 0;
+
+  ctrl->add(new ControlSpk(hdlg, dec));
+  ctrl->add(new ControlPreset(hdlg, dec, proc));
+  ctrl->add(new ControlLevels(hdlg, filter, proc, invert_levels));
+  ctrl->add(new ControlAGC(hdlg, proc));
+  ctrl->add(new ControlInfo(hdlg, dec));
+  ctrl->add(new ControlVer(hdlg));
+  return ctrl;
+}
+
+Controller *AC3FilterDlg::ctrl_mixer(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels)
+{
+  ControlList *ctrl = new ControlList(hdlg);
+  if (ctrl == 0) return 0;
+
+  ctrl->add(new ControlSpk(hdlg, dec));
+  ctrl->add(new ControlPreset(hdlg, dec, proc));
+  ctrl->add(new ControlLevels(hdlg, filter, proc, invert_levels));
+  ctrl->add(new ControlAGC(hdlg, proc));
+  ctrl->add(new ControlMatrix(hdlg, proc));
+  ctrl->add(new ControlBass(hdlg, proc));
+  ctrl->add(new ControlVer(hdlg));
+  return ctrl;
+}
+
+Controller *AC3FilterDlg::ctrl_gains(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels)
+{
+  ControlList *ctrl = new ControlList(hdlg);
+  if (ctrl == 0) return 0;
+
+  ctrl->add(new ControlPreset(hdlg, dec, proc));
+  ctrl->add(new ControlLevels(hdlg, filter, proc, invert_levels));
+  ctrl->add(new ControlAGC(hdlg, proc));
+  ctrl->add(new ControlMatrix(hdlg, proc));
+  ctrl->add(new ControlDelay(hdlg, proc));
+  ctrl->add(new ControlIOGains(hdlg, proc));
+  ctrl->add(new ControlVer(hdlg));
+  return ctrl;
+}
+
+Controller *AC3FilterDlg::ctrl_eq(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels)
+{
+  ControlList *ctrl = new ControlList(hdlg);
+  if (ctrl == 0) return 0;
+
+  ctrl->add(new ControlPreset(hdlg, dec, proc));
+  ctrl->add(new ControlEq(hdlg, proc));
+  ctrl->add(new ControlSpectrum(hdlg, proc));
+  ctrl->add(new ControlVer(hdlg));
+  return ctrl;
+}
+
+Controller *AC3FilterDlg::ctrl_spdif(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels)
+{
+  ControlList *ctrl = new ControlList(hdlg);
+  if (ctrl == 0) return 0;
+
+  ctrl->add(new ControlSpk(hdlg, dec));
+  ctrl->add(new ControlPreset(hdlg, dec, proc));
+  ctrl->add(new ControlSPDIF(hdlg, dec));
+  ctrl->add(new ControlSystem(hdlg, filter, dec));
+  ctrl->add(new ControlInfo(hdlg, dec));
+  ctrl->add(new ControlVer(hdlg));
+  return ctrl;
+}
+
+Controller *AC3FilterDlg::ctrl_system(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels)
+{
+  ControlList *ctrl = new ControlList(hdlg);
+  if (ctrl == 0) return 0;
+
+  ctrl->add(new ControlSPDIF(hdlg, dec));
+  ctrl->add(new ControlSystem(hdlg, filter, dec));
+  ctrl->add(new ControlLang(hdlg));
+  ctrl->add(new ControlSync(hdlg, dec));
+  ctrl->add(new ControlVer(hdlg));
+  ctrl->add(new ControlAbout(hdlg));
+  return ctrl;
+}
+
+Controller *AC3FilterDlg::ctrl_about(HWND hdlg, IAC3Filter *filter, IDecoder *dec, IAudioProcessor *proc, bool invert_levels)
+{
+  ControlList *ctrl = new ControlList(hdlg);
+  if (ctrl == 0) return 0;
+
+  ctrl->add(new ControlVer(hdlg));
+  ctrl->add(new ControlAbout(hdlg));
+  return ctrl;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
-// Initialization / Deinitialization
+// Dialog creation
 ///////////////////////////////////////////////////////////////////////////////
 
 CUnknown * WINAPI AC3FilterDlg::CreateMain(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: Main */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Main page", lpunk, phr, IDD_MAIN, N_("IDD_MAIN"), "Main");
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Main page", lpunk, phr, IDD_MAIN, N_("IDD_MAIN"), "Main", &AC3FilterDlg::ctrl_main);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateMixer(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: Mixer */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Mixer page", lpunk, phr, IDD_MIXER, N_("IDD_MIXER"), "Mixer");
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Mixer page", lpunk, phr, IDD_MIXER, N_("IDD_MIXER"), "Mixer", &AC3FilterDlg::ctrl_mixer);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateGains(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: Gains */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Gains page", lpunk, phr, IDD_GAINS, N_("IDD_GAINS"), "Gains");
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Gains page", lpunk, phr, IDD_GAINS, N_("IDD_GAINS"), "Gains", &AC3FilterDlg::ctrl_gains);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateEq(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: Equalizer */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Equzlizer page", lpunk, phr, IDD_EQ, N_("IDD_EQ"), "Equalizer");
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Equzlizer page", lpunk, phr, IDD_EQ, N_("IDD_EQ"), "Equalizer", &AC3FilterDlg::ctrl_eq);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateSPDIF(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: SPDIF */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter SPDIF page", lpunk, phr, IDD_SPDIF, N_("IDD_SPDIF"), "SPDIF");
+  CUnknown *punk = new AC3FilterDlg("AC3Filter SPDIF page", lpunk, phr, IDD_SPDIF, N_("IDD_SPDIF"), "SPDIF", &AC3FilterDlg::ctrl_spdif);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateSystem(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: System */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter System page", lpunk, phr, IDD_SYSTEM, N_("IDD_SYSTEM"), "System");
+  CUnknown *punk = new AC3FilterDlg("AC3Filter System page", lpunk, phr, IDD_SYSTEM, N_("IDD_SYSTEM"), "System", &AC3FilterDlg::ctrl_system);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
@@ -74,13 +170,17 @@ CUnknown * WINAPI AC3FilterDlg::CreateSystem(LPUNKNOWN lpunk, HRESULT *phr)
 CUnknown * WINAPI AC3FilterDlg::CreateAbout(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: About */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter About property page", lpunk, phr, IDD_ABOUT, N_("IDD_ABOUT"), "About");
+  CUnknown *punk = new AC3FilterDlg("AC3Filter About property page", lpunk, phr, IDD_ABOUT, N_("IDD_ABOUT"), "About", &AC3FilterDlg::ctrl_about);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 
-AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def)
-:CBasePropertyPage(pName, pUnk, DialogId, 0)
+///////////////////////////////////////////////////////////////////////////////
+// Dialog class
+///////////////////////////////////////////////////////////////////////////////
+
+AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def, ctrl_maker maker_)
+:CBasePropertyPage(pName, pUnk, DialogId, 0), maker(maker_)
 {
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::AC3FilterDlg(%s)", pName));
 
@@ -183,7 +283,7 @@ AC3FilterDlg::OnActivate()
 
   // Init controllers
   invert_levels = get_invert_levels();
-  ctrl = new ControlAll(m_Dlg, filter, dec, proc, invert_levels);
+  if (maker) ctrl = (*maker)(m_Dlg, filter, dec, proc, invert_levels);
   cpu = new ControlCPU(m_Dlg, filter, invert_levels);
 
   // Init and update controls
@@ -416,8 +516,8 @@ AC3FilterDlg::init_controls()
   /////////////////////////////////////
   // Init controllers
 
-  ctrl->init();
-  cpu->init();
+  if (ctrl) ctrl->init();
+  if (cpu) cpu->init();
 
   /////////////////////////////////////
   // Interface
@@ -459,7 +559,7 @@ AC3FilterDlg::init_tooltips()
 void 
 AC3FilterDlg::update_dynamic_controls()
 {
-  ctrl->update_dynamic();
+  if (ctrl) ctrl->update_dynamic();
 }
 
 void 
@@ -472,8 +572,8 @@ AC3FilterDlg::update_static_controls()
   /////////////////////////////////////
   // Update controllers
 
-  ctrl->update();
-  cpu->update();
+  if (ctrl) ctrl->update();
+  if (cpu) cpu->update();
 
   /////////////////////////////////////
   // Interface
@@ -494,14 +594,13 @@ AC3FilterDlg::command(int control, int message)
   /////////////////////////////////////
   // Dispatch message to controllers
 
-  if (ctrl)
-    if (ctrl->own_control(control))
-    {
-      Controller::cmd_result result = ctrl->command(control, message);
-      if (result == Controller::cmd_init) { init(); update(); }
-      if (result == Controller::cmd_update) update();
-      return;
-    }
+  if (ctrl && ctrl->own_control(control))
+  {
+    Controller::cmd_result result = ctrl->command(control, message);
+    if (result == Controller::cmd_init) { init(); update(); }
+    if (result == Controller::cmd_update) update();
+    return;
+  }
 
   switch (control)
   {
