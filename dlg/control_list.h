@@ -13,12 +13,12 @@
 class ControlList : public Controller
 {
 protected:
-  typedef std::auto_ptr<Controller> PCtrl;
-  typedef std::vector<PCtrl> VCtrl;
+  typedef std::vector<Controller *> VCtrl;
   VCtrl ctrl;
 
 public:
   ControlList(HWND dlg);
+  ~ControlList();
 
   void add(Controller *ctrl);
   void drop();

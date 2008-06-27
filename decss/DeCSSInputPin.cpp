@@ -18,7 +18,6 @@
  */
 
 #include <stdio.h>
-#include <atlbase.h>
 #include <dshow.h>
 #include <streams.h>
 #include <uuids.h>
@@ -101,8 +100,9 @@ STDMETHODIMP CDeCSSInputPin::Receive(IMediaSample* pSample)
 		{
 			CSSdescramble(pBuffer, m_TitleKey);
 			pBuffer[0x14] &= ~0x10;
-			CComQIPtr<IMediaSample2> pMS2(pSample);
-			if(pMS2)
+
+			IMediaSample2 *pMS2;
+			if(SUCCEEDED(pSample->QueryInterface(IID_IMediaSample2, (void**) &pMS2)))
 			{
 				AM_SAMPLE2_PROPERTIES props;
 				memset(&props, 0, sizeof(props));
@@ -112,6 +112,7 @@ STDMETHODIMP CDeCSSInputPin::Receive(IMediaSample* pSample)
 					props.dwTypeSpecificFlags &= ~AM_UseNewCSSKey; // no idea if it's useful to clear but can't hurt since we are outputting decrypted PES always
 					pMS2->SetProperties(sizeof(props), (BYTE*)&props);
 				}
+        pMS2->Release();
 			}
 		}
 	}

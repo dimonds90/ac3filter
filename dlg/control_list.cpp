@@ -4,14 +4,21 @@ ControlList::ControlList(HWND _dlg):
 Controller(_dlg, 0)
 {}
 
+
+ControlList::~ControlList()
+{
+  drop();
+}
+
 void ControlList::add(Controller *new_ctrl)
 {
-  ctrl.push_back(PCtrl(new_ctrl));
+  ctrl.push_back(new_ctrl);
 }
 
 void ControlList::drop()
 {
-  ctrl.clear();
+  for (VCtrl::iterator iter = ctrl.begin(); iter < ctrl.end(); iter++)
+    delete *iter;
 }
 
 void ControlList::init()

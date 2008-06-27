@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "ac3filter_intl.h"
 
 #define array_size(a) (sizeof(a) / sizeof(a[0]))
@@ -28,7 +29,7 @@ void set_lang(const char *code, const char *package, const char *path)
       lang[0] = 0;
       char lang_env[256];
       sprintf(lang_env, "LANGUAGE=en", lang);
-      putenv(lang_env);
+      _putenv(lang_env);
       ++_nl_msg_cat_cntr;
     }
     else
@@ -37,7 +38,7 @@ void set_lang(const char *code, const char *package, const char *path)
       lang[LANG_LEN-1] = 0;
       char lang_env[LANG_LEN + 10];
       sprintf(lang_env, "LANGUAGE=%s", lang);
-      putenv(lang_env);
+      _putenv(lang_env);
       ++_nl_msg_cat_cntr;
     }
   }
