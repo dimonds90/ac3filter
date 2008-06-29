@@ -8,6 +8,8 @@ English (built-in)
 cze: czech by Alesh
 dut: Dutch by Ernst Klamer
 fre: French by GEKA2
+fin: Finnish by Jesse
+fre: French by GEKA2
 ger: German by Filico
 heb: Hebrew by PhistucK UnRuleD
 hun: Hungarian by Sziladi Zsolt
@@ -15,8 +17,9 @@ ind: Indonesian by Nicholas N.E
 ita: Italian by Gioxy
 kor: Korean by starcodec
 pol: Polish by Lukasz Pasternak
-por: Portuguese (Brazilian) by ReX
+pt_BR: Portuguese (Brazilian) by ReX
 rus: Russian by Valex
 slo: Slovak by Artam
 spa: Spanish by Ferny
-zho: Chinese (Simplified) by FSYX
+zh@Simplified: Chinese (Simplified) by FSYX
+zh@Traditional: Chinese (Traditional by AlexW
