@@ -143,7 +143,7 @@ ControlSpk::ControlSpk(HWND _dlg, IDecoder *_dec):
 Controller(_dlg, ::controls), dec(_dec)
 {
   dec->AddRef();
-  dec->get_spdif_status(&spdif_status);
+  spdif_status = SPDIF_MODE_NONE;
 }
 
 ControlSpk::~ControlSpk()
