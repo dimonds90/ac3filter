@@ -1,24 +1,9 @@
-First order
-============
-
 * Different settings for different formats
-  [
-   initialize filter with settings set at HKCU\Software\AC3Filter (default preset);
-   presets for different formats should be loaded when input pin connected
-     or input format changes;
-   save settings on 'Apply' and 'Ok' buttons:
-     * to preset according to current format;
-     * to default preset if we're disconnected;
-   load old preset on 'Cancel' button;
-  ]
 * Reset to defaults button
 * AC3-specific options (DRC, equzlizer, clev, slev)
 
 Other
 =====
-* SPDIF: SPDIF output does not work with USB Audio. But foobar2000 does...
-  [https://sourceforge.net/forum/message.php?msg_id=2653711]
-?* HPF for all channels
 * Slider class; reset to default on right-click
 * Custom mixing matrix for different mixing modes
 * Sync is lost after fast output mode changes
@@ -29,27 +14,3 @@ Other
   (Creative drivers bug?)
 * 90-degree phase shifts for DPL/DPL II downmixes. 
   (90-degree shifted IMDCT function?)
-
-Done:
-=====
-+* BUG: chash on output format change
-  [AC3Filter::set_out_spk() did not lock sink]
-+* BUG: chash on mpg files
-  [1->2 channels mix fails; sample buffer was not initialized]
-+* BUG: One-pass normalize option indication incorrect
-+* Option to select what formats to use AC3Filter
-+* Option to select SPDIF passthrough mode
-+* Filter require relogon when changing merit [now it deos not]
-+* revert DS/WO selector
-+* Save settings!!!
-+* revert time shift option
-+* revert filter merit
-+* BUG: On first load SPDIF is on even it is not supported
-+* Main page interface!!!
-+* Bass redirection LPF
-+* Documentation!!!
-+* revert jitter correction
-+* option to disable AC3 encoding.
-+* Take in account dialog flags when updating controls (ac3filter_dlg.cpp)
-+* Presets: standard, film (+10..+15, no matrix norm), music (+0, matrix norm), 
-  loud (+10, one-pass norm), very loud (with DRC)?
