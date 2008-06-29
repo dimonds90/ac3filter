@@ -161,7 +161,7 @@ Controller(_dlg, ::controls)
   langs = 0;
   path[0] = 0; 
 
-#ifdef ENABLE_NLS
+#ifndef DISABLE_NLS
   RegistryKey reg(REG_KEY);
   reg.get_text("Lang_Dir", path, sizeof(path));
   langs = new EnumLanguages(path, package);
@@ -175,7 +175,7 @@ ControlLang::~ControlLang()
 
 void ControlLang::init()
 {
-#ifdef ENABLE_NLS
+#ifndef DISABLE_NLS
   if (langs && langs->nlangs())
   {
     SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_RESETCONTENT, 0, 0);
@@ -204,7 +204,7 @@ void ControlLang::init()
 
 void ControlLang::update()
 {
-#ifdef ENABLE_NLS
+#ifndef DISABLE_NLS
   if (langs)
   {
     const char *lang = get_lang();

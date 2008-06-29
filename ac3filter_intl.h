@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 // gettext standard definitions
 
-#ifdef ENABLE_NLS
+#ifndef DISABLE_NLS
 #  include "intl\include\libintl.h"
 #  define _(s) gettext(s)
 #  define gettext_noop(s) s
