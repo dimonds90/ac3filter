@@ -71,6 +71,7 @@ sub build_project
 print "Building project...\n";
 
 set_ver($ver);
+build_project('spdif_test', 'spdif_test', 'Release');
 build_project('chineese_patch', 'chineese_patch', 'Release');
 build_project('ac3config', 'ac3config', 'Release');
 build_project('ACM', 'ac3filter_acm', 'Release Libc');
@@ -88,6 +89,7 @@ printf "Building package...\n";
 `mkdir $package`;
 
 # binaries
+`copy spdif_test\\release\\spdif_test.exe $package\\spdif_test.exe`;
 `copy chineese_patch\\release\\chineese_patch.exe $package\\dialog_patch.exe`;
 `copy ac3config\\release\\ac3config.exe $package\\ac3config.exe`;
 `copy ACM\\release_libc\\ac3filter.acm $package`;

@@ -107,6 +107,7 @@ Section "AC3Filter DirectShow"
 
   ;; Start Menu shortcuts
   CreateShortCut  "$SMPROGRAMS\AC3Filter\AC3Filter Config.lnk"     "$INSTDIR\ac3config.exe"
+  CreateShortCut  "$SMPROGRAMS\AC3Filter\SPDIF test.lnk"           "$INSTDIR\spdif_test.exe"
   CreateShortCut  "$SMPROGRAMS\AC3Filter\Reset to Defaults.lnk"    "$INSTDIR\ac3filter_reg_reset.reg"
 
 SectionEnd
