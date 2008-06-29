@@ -14,7 +14,7 @@ extern "C" int _nl_msg_cat_cntr;
 
 void set_lang(const char *code, const char *package, const char *path)
 {
-#ifdef DISABLE_NLS
+#ifndef DISABLE_NLS
   if (package)
   {
     if (path)
