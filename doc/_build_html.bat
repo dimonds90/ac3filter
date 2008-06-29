@@ -4,6 +4,7 @@ if "%1" == "all" goto build_all
 if not exist "%1" goto no_file
 if "%1" == "common_packages.tex" goto inc_file
 if "%1" == "common_style.tex" goto inc_file
+if "%1" == "common_rus.tex" goto inc_file
 goto build_file
 
 :build_file
