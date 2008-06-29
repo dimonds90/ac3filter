@@ -27,6 +27,10 @@ cd ac3config
 call _clear.bat
 cd ..
 
+cd spdif_test
+call _clear.bat
+cd ..
+
 cd ACM
 call _clear.bat
 cd ..
