@@ -24,6 +24,9 @@ const DWORD grid_color = RGB(32, 32, 32);
 const DWORD major_color = RGB(64, 64, 64);
 const DWORD label_color = RGB(128, 128, 0);
 
+const int font_size = 12;
+const char *font_name = "Arial";
+
 ControlSpectrum::ControlSpectrum(HWND _dlg, IAudioProcessor *_proc):
 Controller(_dlg, ::controls), proc(_proc), spectrum_length(0), spectrum(0)
 {
@@ -44,7 +47,7 @@ Controller(_dlg, ::controls), proc(_proc), spectrum_length(0), spectrum(0)
     signal_pen = CreatePen(PS_SOLID, 1, signal_color);
     grid_pen = CreatePen(PS_SOLID, 1, grid_color);
     major_pen = CreatePen(PS_SOLID, 1, major_color);
-    grid_font = CreateFont(12, 0, 0, 0, FW_THIN, FALSE, FALSE, FALSE, OEM_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, "Serif");
+    grid_font = CreateFont(font_size, 0, 0, 0, FW_THIN, FALSE, FALSE, FALSE, OEM_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, font_name);
 
     log_scale = false;
     RegistryKey reg(REG_KEY);
