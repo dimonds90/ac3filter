@@ -2,6 +2,74 @@ REGEDIT4
 
 [HKEY_CURRENT_USER\Software\AC3Filter]
 
+[HKEY_CURRENT_USER\Software\AC3Filter\equalizer]
+
+[HKEY_CURRENT_USER\Software\AC3Filter\equalizer\Linear scale]
+"eq_freq_0"=dword:000003e8
+"eq_gain_0"="1"
+"eq_freq_1"=dword:000007d0
+"eq_gain_1"="1"
+"eq_freq_2"=dword:00000fa0
+"eq_gain_2"="1"
+"eq_freq_3"=dword:00001770
+"eq_gain_3"="1"
+"eq_freq_4"=dword:00001f40
+"eq_gain_4"="1"
+"eq_freq_5"=dword:00002710
+"eq_gain_5"="1"
+"eq_freq_6"=dword:00002ee0
+"eq_gain_6"="1"
+"eq_freq_7"=dword:000036b0
+"eq_gain_7"="1"
+"eq_freq_8"=dword:00003e80
+"eq_gain_8"="1"
+"eq_freq_9"=dword:00004650
+"eq_gain_9"="1"
+
+[HKEY_CURRENT_USER\Software\AC3Filter\equalizer\Octave scale]
+"eq_freq_0"=dword:0000001e
+"eq_gain_0"="1"
+"eq_freq_1"=dword:0000003c
+"eq_gain_1"="1"
+"eq_freq_2"=dword:0000007d
+"eq_gain_2"="1"
+"eq_freq_3"=dword:000000fa
+"eq_gain_3"="1"
+"eq_freq_4"=dword:000001f4
+"eq_gain_4"="1"
+"eq_freq_5"=dword:000003e8
+"eq_gain_5"="1"
+"eq_freq_6"=dword:000007d0
+"eq_gain_6"="1"
+"eq_freq_7"=dword:00000fa0
+"eq_gain_7"="1"
+"eq_freq_8"=dword:00001f40
+"eq_gain_8"="1"
+"eq_freq_9"=dword:00003e80
+"eq_gain_9"="1"
+
+[HKEY_CURRENT_USER\Software\AC3Filter\equalizer\Winamp scale]
+"eq_freq_0"=dword:0000003c
+"eq_gain_0"="1"
+"eq_freq_1"=dword:000000aa
+"eq_gain_1"="1"
+"eq_freq_2"=dword:00000136
+"eq_gain_2"="1"
+"eq_freq_3"=dword:00000258
+"eq_gain_3"="1"
+"eq_freq_4"=dword:000003e8
+"eq_gain_4"="1"
+"eq_freq_5"=dword:00000bb8
+"eq_gain_5"="1"
+"eq_freq_6"=dword:00001770
+"eq_gain_6"="1"
+"eq_freq_7"=dword:00002ee0
+"eq_gain_7"="1"
+"eq_freq_8"=dword:000036b0
+"eq_gain_8"="1"
+"eq_freq_9"=dword:00003e80
+"eq_gain_9"="1"
+
 [HKEY_CURRENT_USER\Software\AC3Filter\matrix]
 
 [HKEY_CURRENT_USER\Software\AC3Filter\matrix\Invert phase]
