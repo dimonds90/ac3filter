@@ -883,6 +883,8 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     // Bass redirection
     _conf->get_bool ("bass_redir"       ,state.bass_redir      );
     _conf->get_int32("bass_freq"        ,state.bass_freq       );
+    // Equalizer
+    _conf->get_bool ("eq"               ,state.eq              );
   }
 
   if (_what & AC3FILTER_GAINS)
@@ -919,7 +921,6 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
   if (_what & AC3FILTER_EQ)
   {
     // Equalizer
-    _conf->get_bool ("eq"               ,state.eq              );
     for (int i = 0; i < EQ_BANDS; i++)
     {
       char freq_str[32], gain_str[32];
@@ -1103,6 +1104,8 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     // Bass redirection
     _conf->set_bool ("bass_redir"       ,state.bass_redir      );
     _conf->set_int32("bass_freq"        ,state.bass_freq       );
+    // Equalizer
+    _conf->set_bool ("eq"               ,state.eq              );
   }
 
   if (_what & AC3FILTER_GAINS)
@@ -1139,7 +1142,6 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
   if (_what & AC3FILTER_EQ)
   {
     // Equalizer
-    _conf->set_bool ("eq"               ,state.eq              );
     for (int i = 0; i < EQ_BANDS; i++)
     {
       char freq_str[32], gain_str[32];
