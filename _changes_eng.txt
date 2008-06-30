@@ -1,7 +1,10 @@
-v1.50a
+v1.50a - 30.06.2008
   + Equalizer
   + Spectrum analyzer
   + Sample rate conversion
+  + spdif_test utility
+  * New and updated translations
+  * Old bugs killed, new made :)
 
 
 v1.46 stable - 09.08.2007
