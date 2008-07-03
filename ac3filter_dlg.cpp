@@ -103,6 +103,7 @@ Controller *AC3FilterDlg::ctrl_system(HWND hdlg, IAC3Filter *filter, IDecoder *d
 
   ctrl->add(new ControlSPDIF(hdlg, dec));
   ctrl->add(new ControlSystem(hdlg, filter, dec));
+  ctrl->add(new ControlAGC(hdlg, proc));
   ctrl->add(new ControlLang(hdlg));
   ctrl->add(new ControlSync(hdlg, dec));
   ctrl->add(new ControlVer(hdlg));
