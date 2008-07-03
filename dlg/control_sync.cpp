@@ -25,7 +25,7 @@ ControlSync::ControlSync(HWND _dlg, IDecoder *_dec):
 Controller(_dlg, ::controls), dec(_dec)
 {
   dec->AddRef();
-  jitter[0] = 0;
+  memset(jitter, 0, sizeof(jitter));
 }
 
 ControlSync::~ControlSync()
@@ -57,7 +57,8 @@ void ControlSync::update()
 
 void ControlSync::update_dynamic()
 {
-  char new_jitter[128];
+  char new_jitter[sizeof(jitter)];
+  memset(new_jitter, 0, sizeof(jitter));
   dec->get_jitter(&input_mean, &input_stddev, &output_mean, &output_stddev);
 
   sprintf(new_jitter, _("Input\tmean: %ims\tstddev: %ims\nOutput\tmean: %ims\tstddev: %ims"),
@@ -66,7 +67,7 @@ void ControlSync::update_dynamic()
 
   cr2crlf(new_jitter, sizeof(new_jitter));
 
-  if (memcmp(jitter, new_jitter, strlen(new_jitter)))
+  if (memcmp(jitter, new_jitter, sizeof(jitter)))
   {
     memcpy(jitter, new_jitter, sizeof(jitter));
     SendDlgItemMessage(hdlg, IDC_EDT_JITTER, WM_SETTEXT, 0, (LONG)jitter);
