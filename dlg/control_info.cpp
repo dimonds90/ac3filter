@@ -6,7 +6,6 @@
 static const int controls[] = 
 {
   IDC_GRP_DECODER_INFO,
-  IDC_LBL_INPUT,
   IDC_EDT_INFO,
   IDC_LBL_FRAMES_ERRORS,
   IDC_EDT_FRAMES,
@@ -20,7 +19,7 @@ ControlInfo::ControlInfo(HWND _dlg, IDecoder *_dec):
 Controller(_dlg, ::controls), dec(_dec)
 {
   dec->AddRef();
-  dec->get_in_spk(&in_spk);
+  memset(info, 0, sizeof(info));
 }
 
 ControlInfo::~ControlInfo()
@@ -31,18 +30,6 @@ ControlInfo::~ControlInfo()
 void ControlInfo::update_dynamic()
 {
   char buf[128];
-
-  /////////////////////////////////////////////////////////
-  // Input format
-
-  Speakers new_in_spk;
-  dec->get_in_spk(&new_in_spk);
-  if (in_spk != new_in_spk)
-  {
-    in_spk = new_in_spk;
-    sprintf(buf, _("%s %s %iHz"), in_spk.format_text(), in_spk.mode_text(), in_spk.sample_rate);
-    SetDlgItemText(hdlg, IDC_LBL_INPUT, buf);
-  }
 
   /////////////////////////////////////
   // Stream info

@@ -13,7 +13,6 @@ class ControlInfo : public Controller
 protected:
   IDecoder *dec;
 
-  Speakers in_spk;
   int      frames;
   int      errors;
   char     info[2048];

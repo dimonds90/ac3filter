@@ -13,6 +13,7 @@ class ControlSpk : public Controller
 protected:
   IDecoder *dec;
 
+  Speakers in_spk;
   Speakers user_spk;
   bool     use_spdif;
   int      spdif_status;

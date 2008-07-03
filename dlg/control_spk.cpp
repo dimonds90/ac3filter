@@ -10,6 +10,7 @@ static int controls[] =
   IDC_CMB_FORMAT,
   IDC_CMB_RATE,
   IDC_CHK_USE_SPDIF,
+  IDC_LBL_INPUT,
   IDC_LBL_SPDIF_STATUS,
   0
 };
@@ -196,6 +197,27 @@ void ControlSpk::update()
 
 void ControlSpk::update_dynamic()
 {
+  /////////////////////////////////////////////////////////
+  // Input format
+
+  Speakers new_in_spk;
+  dec->get_in_spk(&new_in_spk);
+  if (in_spk != new_in_spk)
+  {
+    in_spk = new_in_spk;
+    if (in_spk.format == FORMAT_UNKNOWN)
+      SetDlgItemText(hdlg, IDC_LBL_INPUT, "");
+    else
+    {
+      char buf[128];
+      sprintf(buf, _("%s %s %iHz"), in_spk.format_text(), in_spk.mode_text(), in_spk.sample_rate);
+      SetDlgItemText(hdlg, IDC_LBL_INPUT, buf);
+    }
+  }
+
+  /////////////////////////////////////////////////////////
+  // SPDIF status
+
   int new_spdif_status;
   dec->get_spdif_status(&new_spdif_status);
 
