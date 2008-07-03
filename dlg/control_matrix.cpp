@@ -50,7 +50,7 @@ ControlMatrix::ControlMatrix(HWND _dlg, IAudioProcessor *_proc):
 Controller(_dlg, ::controls), proc(_proc)
 {
   proc->AddRef();
-  proc->get_matrix(&matrix);
+  memset(matrix, 0, sizeof(matrix_t));
 }
 
 ControlMatrix::~ControlMatrix()
@@ -82,6 +82,9 @@ void ControlMatrix::update()
   proc->get_normalize_matrix(&normalize_matrix);
   proc->get_voice_control(&voice_control);
   proc->get_expand_stereo(&expand_stereo);
+  proc->get_clev(&clev);
+  proc->get_slev(&slev);
+  proc->get_lfelev(&lfelev);
 
   update_matrix();
 
