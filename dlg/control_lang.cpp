@@ -121,7 +121,7 @@ public:
 
   void close()
   {
-    int i;
+    size_t i;
     for (i = 0; i < codes.size(); i++) delete codes[i];
     for (i = 0; i < labels.size(); i++) delete labels[i];
     codes.clear();
@@ -146,7 +146,7 @@ public:
   int find_code(const char *code)
   {
     if (code == 0) return -1;
-    for(int i = 0; i < codes.size(); i++)
+    for(size_t i = 0; i < codes.size(); i++)
       if (strcmp(codes[i], code) == 0)
         return i;
     return -1;
