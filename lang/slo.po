@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.46\n"
+"Project-Id-Version: AC3Filter 1.50a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-18 16:01+0400\n"
-"PO-Revision-Date: 2007-09-27 15:33+0100\n"
+"POT-Creation-Date: 2008-07-09 11:49+0400\n"
+"PO-Revision-Date: 2008-07-01 17:41+0100\n"
 "Last-Translator: Artam <peterki@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr "Peňažný dar"
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky
 msgid "IDC_VER"
-msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"
+msgstr "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky"
 
 #. TRANSLATORS: What is it?
 msgid "IDC_GRP_ABOUT"
@@ -59,7 +59,7 @@ msgstr ""
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
-msgstr "Pošta autorovi|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "Pošta autorovi|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 msgid "IDC_LNK_FORUM"
@@ -123,7 +123,7 @@ msgstr "Sub"
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
-msgstr ""
+msgstr "Jednotky:"
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
@@ -187,35 +187,35 @@ msgstr "Build info"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
-msgstr ""
+msgstr "Ekvalizér"
 
 #. TRANSLATORS: Equalizer options
 msgid "IDC_GRP_EQ_OPTIONS"
-msgstr ""
+msgstr "Možnosti ekvalizéra"
 
 #. TRANSLATORS: Reset equalizer
 msgid "IDC_BTN_EQ_RESET"
-msgstr ""
+msgstr "Reset ekvalizéra"
 
 #. TRANSLATORS: Enable equalizer
 msgid "IDC_CHK_EQ"
-msgstr ""
+msgstr "Zapnúť ekvalizér"
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
-msgstr ""
+msgstr "Logaritm. stupnica"
 
 #. TRANSLATORS: Equalizer preset
 msgid "IDC_GRP_EQ_PRESET"
-msgstr ""
+msgstr "Nastavenia ekvalizéra"
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_EQ_DELETE"
-msgstr ""
+msgstr "Zmazať"
 
 #. TRANSLATORS: Save
 msgid "IDC_BTN_EQ_SAVE"
-msgstr ""
+msgstr "Uložiť"
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
@@ -389,7 +389,7 @@ msgstr "Sub"
 
 #. TRANSLATORS: Matrix preset
 msgid "IDC_GRP_MATRIX_PRESET"
-msgstr "Nastavenie matice"
+msgstr "Nastavenia matice"
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_MATRIX_DELETE"
@@ -457,7 +457,7 @@ msgstr "Použiť SPDIF"
 
 #. TRANSLATORS: Format
 msgid "IDC_LBL_FORMAT"
-msgstr ""
+msgstr "Formát"
 
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
@@ -465,7 +465,7 @@ msgstr "vstupný formát"
 
 #. TRANSLATORS: Rate
 msgid "IDC_LBL_RATE"
-msgstr ""
+msgstr "Frekv.(Hz)"
 
 #. TRANSLATORS: Output gains
 msgid "IDC_GRP_OUTPUT_GAINS"
@@ -617,7 +617,7 @@ msgstr "Jazyk:"
 
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
-msgstr ""
+msgstr "Ako prekladať?|http://ac3filter.net/guides/how_to_translate"
 
 #. TRANSLATORS: Main
 msgid "IDD_MAIN"
@@ -633,7 +633,7 @@ msgstr "Hlasitosti"
 
 #. TRANSLATORS: Equalizer
 msgid "IDD_EQ"
-msgstr ""
+msgstr "Ekvalizér"
 
 #. TRANSLATORS: SPDIF
 msgid "IDD_SPDIF"
@@ -667,15 +667,11 @@ msgstr "Palce"
 
 #, c-format
 msgid "%ikHz"
-msgstr ""
+msgstr "%ikHz"
 
 #, c-format
 msgid "%iHz"
-msgstr ""
-
-#, c-format
-msgid "%s %s %iHz"
-msgstr "%s %s %iHz"
+msgstr "%iHz"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
@@ -690,22 +686,20 @@ msgstr "Naozaj chcete zmazať '%s' maticu?"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' equalizer preset?"
-msgstr ""
+msgstr "Naozaj chcete zmazať nastavenie '%s' ekvalizéra?"
 
 msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
 "enabled. Press 'No' to enable this option."
 msgstr ""
 "Táto voľba je NEBEZPEČNÁ! Ak je zapnutá, filter môže vydávať veľmi hlasité "
-"pazvuky.\n"
-"\n"
-"Na zapnutie tejto voľby stlačte 'Nie."
+"pazvuky. Na zapnutie tejto voľby stlačte 'Nie."
 
 msgid "Dangerous option!"
 msgstr "Nebezpečná voľba!"
 
 msgid "AS IS (no change)"
-msgstr "AS IS (bez zmeny)"
+msgstr "Bez zmeny (ako vstup)"
 
 msgid "1/0 - mono"
 msgstr "1/0 - mono"
@@ -767,6 +761,10 @@ msgstr "PCM 32bit"
 msgid "PCM Float"
 msgstr "PCM Float"
 
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
+
 msgid "Use SPDIF"
 msgstr "Použiť SPDIF"
 
@@ -795,9 +793,7 @@ msgid ""
 "Press 'No' to enable this option."
 msgstr ""
 "Táto voľba je NEBEZPEČNÁ! Ak ju zapnete, zvuk a obraz môžu stratiť "
-"synchronizáciu.\n"
-"\n"
-"Na zapnutie tejto voľby stlačte 'Nie'."
+"synchronizáciu. Na zapnutie tejto voľby stlačte 'Nie'."
 
 #~ msgid "IDC_LBL_UNITS"
 #~ msgstr "Jednotky:"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-18 16:01+0400\n"
+"POT-Creation-Date: 2008-07-09 11:49+0400\n"
 "PO-Revision-Date: 2007-09-14 18:31+0200\n"
 "Last-Translator: PhistucK UnRuleD <sorrybi@hotmail.com>\n"
 "Language-Team: Hebrew <LL@li.org>\n"
@@ -666,10 +666,6 @@ msgid "%iHz"
 msgstr ""
 
 #, c-format
-msgid "%s %s %iHz"
-msgstr "%s %s %i הרץ"
-
-#, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "בטוח למחוק את ההגדרה מראש '%s'?"
 
@@ -754,6 +750,10 @@ msgstr "PCM 32 סיביות"
 
 msgid "PCM Float"
 msgstr "PCM צף"
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %i הרץ"
 
 msgid "Use SPDIF"
 msgstr "השתמש בSPDIF"

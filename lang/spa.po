@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.46\n"
+"Project-Id-Version: AC3Filter 1.50a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-18 16:01+0400\n"
-"PO-Revision-Date: 2007-08-18 18:17+0100\n"
+"POT-Creation-Date: 2008-07-09 11:49+0400\n"
+"PO-Revision-Date: 2008-06-30 23:18+0100\n"
 "Last-Translator: Ferny <mundodivx@gmail.com>\n"
 "Language-Team: MundoDivX.com <mundodivx@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -27,10 +27,10 @@ msgstr "¿Qué es?"
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
 msgstr ""
-"AC3Filter es un filtro DirectShow gratuito de alta calidad, diseñado para el "
-"procesamiento y decodificación de audio en tiempo real. Su prioridad son las "
-"funcionalidades amplias y unos ajustes convenientes. Soporte salidas multi-"
-"canal y digitales (SPDIF)."
+"AC3Filter es un filtro DirectShow gratuito y de alta calidad, diseñado para "
+"el procesamiento y decodificación de audio en tiempo real. Su objetivo es "
+"proporcionar amplias funcionalidades y ajustes convenientes. Soporta salidas "
+"multi-canal y digitales (SPDIF)."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
@@ -54,9 +54,9 @@ msgstr "Contactar al autor"
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
 msgstr ""
-"Por favor reporte los fallos. Siéntase libre de escribir al autor con sus "
+"Por favor, reporte los fallos. Siéntase libre de escribir al autor con sus "
 "ideas, críticas, etc. Escriba sólo en inglés o ruso. El asunto debe contener "
-"la palabra 'AC3Filter' (debido al filtrado automático)."
+"la palabra 'AC3Filter' (debido al filtrado automático de email)."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
@@ -124,7 +124,7 @@ msgstr "SW"
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
-msgstr ""
+msgstr "Unidades:"
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
@@ -188,35 +188,35 @@ msgstr "Información de compilación"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
-msgstr ""
+msgstr "Ecualizador"
 
 #. TRANSLATORS: Equalizer options
 msgid "IDC_GRP_EQ_OPTIONS"
-msgstr ""
+msgstr "Opciones del ecualizador"
 
 #. TRANSLATORS: Reset equalizer
 msgid "IDC_BTN_EQ_RESET"
-msgstr ""
+msgstr "Resetear ecualizador"
 
 #. TRANSLATORS: Enable equalizer
 msgid "IDC_CHK_EQ"
-msgstr ""
+msgstr "Habilitar ecualizador"
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
-msgstr ""
+msgstr "Reg. escala espectro"
 
 #. TRANSLATORS: Equalizer preset
 msgid "IDC_GRP_EQ_PRESET"
-msgstr ""
+msgstr "Perfiles del ecualizador"
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_EQ_DELETE"
-msgstr ""
+msgstr "Borrar"
 
 #. TRANSLATORS: Save
 msgid "IDC_BTN_EQ_SAVE"
-msgstr ""
+msgstr "Guardar"
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
@@ -256,7 +256,7 @@ msgstr "Ganancias"
 
 #. TRANSLATORS: Gain
 msgid "IDC_LBL_GAIN"
-msgstr "Ganan."
+msgstr "Gananc."
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -458,7 +458,7 @@ msgstr "Usar SPDIF"
 
 #. TRANSLATORS: Format
 msgid "IDC_LBL_FORMAT"
-msgstr ""
+msgstr "Formato"
 
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
@@ -466,7 +466,7 @@ msgstr "Formato de entrada"
 
 #. TRANSLATORS: Rate
 msgid "IDC_LBL_RATE"
-msgstr ""
+msgstr "Velocidad"
 
 #. TRANSLATORS: Output gains
 msgid "IDC_GRP_OUTPUT_GAINS"
@@ -618,7 +618,7 @@ msgstr "Idioma:"
 
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
-msgstr ""
+msgstr "¿Cómo traducir?|http://ac3filter.net/guides/how_to_translate"
 
 #. TRANSLATORS: Main
 msgid "IDD_MAIN"
@@ -634,7 +634,7 @@ msgstr "Ganancias"
 
 #. TRANSLATORS: Equalizer
 msgid "IDD_EQ"
-msgstr ""
+msgstr "Ecualizador"
 
 #. TRANSLATORS: SPDIF
 msgid "IDD_SPDIF"
@@ -668,15 +668,11 @@ msgstr "Pulgadas"
 
 #, c-format
 msgid "%ikHz"
-msgstr ""
+msgstr "%ikHz"
 
 #, c-format
 msgid "%iHz"
-msgstr ""
-
-#, c-format
-msgid "%s %s %iHz"
-msgstr "%s %s %iHz"
+msgstr "%iHz"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
@@ -691,7 +687,7 @@ msgstr "¿Realmente desea borrar la matriz '%s'?"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' equalizer preset?"
-msgstr ""
+msgstr "¿Realmente desea borrar '%s' de los perfiles del ecualizador?"
 
 msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
@@ -765,6 +761,10 @@ msgstr "PCM 32bit"
 
 msgid "PCM Float"
 msgstr "PCM Float"
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
 
 msgid "Use SPDIF"
 msgstr "Usar SPDIF"

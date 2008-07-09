@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-18 16:01+0400\n"
-"PO-Revision-Date: 2007-06-08 22:01+0100\n"
+"POT-Creation-Date: 2008-07-09 11:49+0400\n"
+"PO-Revision-Date: 2008-07-06 18:30+0100\n"
 "Last-Translator: Gioxy <FindMe@DVBViewer.forum>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -109,7 +109,7 @@ msgstr "L"
 
 #. TRANSLATORS: R
 msgid "IDC_LBL_DELAY_R"
-msgstr "L"
+msgstr "R"
 
 #. TRANSLATORS: SL
 msgid "IDC_LBL_DELAY_SL"
@@ -125,7 +125,7 @@ msgstr "SW"
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
-msgstr ""
+msgstr "Unità:"
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
@@ -189,35 +189,35 @@ msgstr "Info build"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
-msgstr ""
+msgstr "Equalizzatore"
 
 #. TRANSLATORS: Equalizer options
 msgid "IDC_GRP_EQ_OPTIONS"
-msgstr ""
+msgstr "Opzioni equalizzatore"
 
 #. TRANSLATORS: Reset equalizer
 msgid "IDC_BTN_EQ_RESET"
-msgstr ""
+msgstr "Ripristina equalizzatore"
 
 #. TRANSLATORS: Enable equalizer
 msgid "IDC_CHK_EQ"
-msgstr ""
+msgstr "Abilita equalizzatore"
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
-msgstr ""
+msgstr "Scala logaritmica"
 
 #. TRANSLATORS: Equalizer preset
 msgid "IDC_GRP_EQ_PRESET"
-msgstr ""
+msgstr "Preimpostazioni"
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_EQ_DELETE"
-msgstr ""
+msgstr "Elimina"
 
 #. TRANSLATORS: Save
 msgid "IDC_BTN_EQ_SAVE"
-msgstr ""
+msgstr "Salva"
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
@@ -459,7 +459,7 @@ msgstr "Usa S/PDIF"
 
 #. TRANSLATORS: Format
 msgid "IDC_LBL_FORMAT"
-msgstr ""
+msgstr "Formato"
 
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
@@ -467,7 +467,7 @@ msgstr "Formato ingresso"
 
 #. TRANSLATORS: Rate
 msgid "IDC_LBL_RATE"
-msgstr ""
+msgstr "Rate"
 
 #. TRANSLATORS: Output gains
 msgid "IDC_GRP_OUTPUT_GAINS"
@@ -567,7 +567,7 @@ msgstr "Rileva flussi S/PDIF nei dati PCM"
 
 #. TRANSLATORS: AC3 encoder bitrate (kbps)
 msgid "IDC_LBL_SPDIF_BITRATE"
-msgstr ""
+msgstr "Bitrate encoder AC3 (kbps)"
 
 #. TRANSLATORS: SPDIF passthrough
 msgid "IDC_GRP_SPDIF_PT"
@@ -619,7 +619,7 @@ msgstr "Lingua:"
 
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
-msgstr ""
+msgstr "Come tradurre?|http://ac3filter.net/guides/how_to_translate"
 
 #. TRANSLATORS: Main
 msgid "IDD_MAIN"
@@ -635,7 +635,7 @@ msgstr "Volumi"
 
 #. TRANSLATORS: Equalizer
 msgid "IDD_EQ"
-msgstr ""
+msgstr "Equalizzatore"
 
 #. TRANSLATORS: SPDIF
 msgid "IDD_SPDIF"
@@ -669,15 +669,11 @@ msgstr "Pollici"
 
 #, c-format
 msgid "%ikHz"
-msgstr ""
+msgstr "%ikHz"
 
 #, c-format
 msgid "%iHz"
-msgstr ""
-
-#, c-format
-msgid "%s %s %iHz"
-msgstr "%s %s %iHz"
+msgstr "%iHz"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
@@ -692,7 +688,7 @@ msgstr "Eliminare la martice '%s'?"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' equalizer preset?"
-msgstr ""
+msgstr "Sei sicuro di voler cancellare la preimpostazione '%s'?"
 
 msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
@@ -770,6 +766,10 @@ msgstr "PCM 32bit"
 
 msgid "PCM Float"
 msgstr "PCM Float"
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
 
 msgid "Use SPDIF"
 msgstr "Usa S/PDIF"

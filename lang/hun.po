@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-18 16:01+0400\n"
+"POT-Creation-Date: 2008-07-09 11:49+0400\n"
 "PO-Revision-Date: 2007-08-18 23:10+0100\n"
 "Last-Translator: Sziládi Zsolt <sadistzs@freemail.hu>\n"
 "Language-Team: \n"
@@ -676,10 +676,6 @@ msgid "%iHz"
 msgstr ""
 
 #, c-format
-msgid "%s %s %iHz"
-msgstr "%s %s %iHz"
-
-#, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Biztos, hogy törlöd a(z) '%s' előbeállítást?"
 
@@ -766,6 +762,10 @@ msgstr "32 bites PCM"
 
 msgid "PCM Float"
 msgstr "Lebegőpontos PCM"
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
 
 msgid "Use SPDIF"
 msgstr "SPDIF használata"

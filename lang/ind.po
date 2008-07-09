@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-18 16:01+0400\n"
+"POT-Creation-Date: 2008-07-09 11:49+0400\n"
 "PO-Revision-Date: 2008-06-20 17:36+0300\n"
 "Last-Translator: Alexander Vigovsky <xvalex@mail.ru>\n"
 "Language-Team: \n"
@@ -26,11 +26,18 @@ msgstr "Apakah AC3Filter itu ?"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filter adalah filter DirectShow berkualitas tinggi yang di desain untuk pemrosesan dan pen-dekode-an suara / audio.Diprioritaskan pada keluasan fungsinya dan pengaturan yang mudah. Mendukung multi-channel dan SPDIF Output."
+msgstr ""
+"AC3Filter adalah filter DirectShow berkualitas tinggi yang di desain untuk "
+"pemrosesan dan pen-dekode-an suara / audio.Diprioritaskan pada keluasan "
+"fungsinya dan pengaturan yang mudah. Mendukung multi-channel dan SPDIF "
+"Output."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr "Filter ini dapat digunakan secara automatis oleh kebanyakan media player. Dibutuhkan untuk memainkan file - file AVI dengan audio track format AC3 atau DTS. Dapat juga digunakan untuk memainkan DVD."
+msgstr ""
+"Filter ini dapat digunakan secara automatis oleh kebanyakan media player. "
+"Dibutuhkan untuk memainkan file - file AVI dengan audio track format AC3 "
+"atau DTS. Dapat juga digunakan untuk memainkan DVD."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -46,7 +53,11 @@ msgstr "Mengontak Pembuat"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
-msgstr "Mohon laporkan semua bug. Anda dipersilahkan mengirim email pada pembuat dengan segala ide, kritik anda.Mohon kirim email hanya dalam bahasa Inggris atau Russia saja. Subject email harus mengandung kata \"AC3Filter\".  ( diterima dengan filter otomatis )"
+msgstr ""
+"Mohon laporkan semua bug. Anda dipersilahkan mengirim email pada pembuat "
+"dengan segala ide, kritik anda.Mohon kirim email hanya dalam bahasa Inggris "
+"atau Russia saja. Subject email harus mengandung kata \"AC3Filter\".  "
+"( diterima dengan filter otomatis )"
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
@@ -322,7 +333,9 @@ msgstr "Lisensi"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
-msgstr "Program ini adalah program gratis, dan boleh didistribusikan berdasarkan ketentuan dari GNU General Public License versi 2."
+msgstr ""
+"Program ini adalah program gratis, dan boleh didistribusikan berdasarkan "
+"ketentuan dari GNU General Public License versi 2."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
@@ -663,10 +676,6 @@ msgid "%iHz"
 msgstr ""
 
 #, c-format
-msgid "%s %s %iHz"
-msgstr ""
-
-#, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Anda yakin ingin menghapus '%s' preset?"
 
@@ -681,7 +690,9 @@ msgstr "Anda yakin ingin menghapus '%s' matrix?"
 msgid "Are you sure you want to delete '%s' equalizer preset?"
 msgstr ""
 
-msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
 msgstr ""
 
 msgid "Dangerous option!"
@@ -750,6 +761,10 @@ msgstr ""
 msgid "PCM Float"
 msgstr ""
 
+#, c-format
+msgid "%s %s %iHz"
+msgstr ""
+
 msgid "Use SPDIF"
 msgstr ""
 
@@ -771,6 +786,7 @@ msgid ""
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
 
-msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
 msgstr ""
-
