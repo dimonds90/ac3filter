@@ -116,7 +116,7 @@ http://order.kagi.com/?6CZJZ&lang=en
 Contact Author: 
 ===============
 
-mailto:xvalex@mail.ru?Subject=AC3Filter
+mailto:ac3filter@gmail.com
 
-Please write in English or Russian. Subject should have 'AC3Filter' word 
-otherwise it may be accidentally deleted with tons of other junk mail.
+Please write in English or Russian only.
+

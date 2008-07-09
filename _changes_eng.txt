@@ -1,3 +1,10 @@
+v1.51a - 09.07.2008
+  * CPU usage takes in account number of processors
+  * Center, Voice and LFE levels are syncronized across Mixer and Gains pages
+  * 'Decoder info' box did not work sometimes
+  * Slovak, Spanish and Italian translations updated
+
+
 v1.50a - 30.06.2008
   + Equalizer
   + Spectrum analyzer

@@ -131,7 +131,7 @@ Section "AC3Filter ACM"
 RegNT:
   DetailPrint "Registering for Windows NT/2k/XP"
   WriteRegStr HKLM "Software\Microsoft\Windows NT\CurrentVersion\Drivers32" "msacm.ac3filter" "ac3filter.acm"
-  WriteRegStr HKLM "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc" "ac3filter.acm" "AC3Filter ACM codec"
+  WriteRegStr HKLM "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc" "ac3filter.acm" "AC3Filter AC3/DTS codec"
   goto Finish
 
 Reg9x:

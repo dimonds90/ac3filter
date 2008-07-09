@@ -87,7 +87,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 libc.lib oldnames.lib winmm.lib kernel32.lib /nologo /dll /incremental:no /debug /debugtype:both /machine:I386 /nodefaultlib /out:"Debug/ac3filter.acm" /pdbtype:sept
-# ADD LINK32 libc.lib oldnames.lib winmm.lib kernel32.lib /nologo /dll /incremental:no /debug /debugtype:both /machine:I386 /nodefaultlib /out:"Debug_Libc/ac3filter.acm" /pdbtype:sept
+# ADD LINK32 libc.lib oldnames.lib winmm.lib kernel32.lib user32.lib /nologo /dll /incremental:no /debug /debugtype:both /machine:I386 /nodefaultlib /out:"Debug_Libc/ac3filter.acm" /pdbtype:sept
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
 PostBuild_Cmds=_copy_debug.bat

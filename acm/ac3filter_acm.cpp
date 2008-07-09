@@ -313,8 +313,8 @@ ACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
   driver_details->cFormatTags = ntags;
   driver_details->cFilterTags = 0;
 
-  lstrcpyW(driver_details->szShortName, L"AC3Filter ACM AC3/DTS codec");
-  lstrcpyW(driver_details->szLongName,  L"AC3Filter ACM AC3/DTS codec");
+  lstrcpyW(driver_details->szShortName, L"AC3Filter AC3/DTS codec");
+  lstrcpyW(driver_details->szLongName,  L"AC3Filter AC3/DTS codec");
   lstrcpyW(driver_details->szCopyright, L"2007 Alexander Vigovsky");
   lstrcpyW(driver_details->szLicensing, L"GPL ver 2");
   lstrcpyW(driver_details->szFeatures,  L"Only stereo decoding");
