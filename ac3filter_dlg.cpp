@@ -18,7 +18,7 @@
 {                                                                 \
   char buf[255];                                                  \
   sprintf(buf, format, ##params);                                 \
-  SendDlgItemMessage(dlg, ctrl, WM_SETTEXT, 0, (LONG)(LPSTR)buf); \
+  SendDlgItemMessage(dlg, ctrl, WM_SETTEXT, 0, (LPARAM) (LPSTR)buf); \
 }
 
 
@@ -376,7 +376,7 @@ AC3FilterDlg::set_refresh_time(int _refresh_time)
 // Handle messages
 ///////////////////////////////////////////////////////////////////////////////
 
-BOOL 
+INT_PTR 
 AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
   switch (uMsg)

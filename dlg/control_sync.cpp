@@ -70,7 +70,7 @@ void ControlSync::update_dynamic()
   if (memcmp(jitter, new_jitter, sizeof(jitter)))
   {
     memcpy(jitter, new_jitter, sizeof(jitter));
-    SendDlgItemMessage(hdlg, IDC_EDT_JITTER, WM_SETTEXT, 0, (LONG)jitter);
+    SendDlgItemMessage(hdlg, IDC_EDT_JITTER, WM_SETTEXT, 0, (LPARAM) jitter);
   }
 }
 

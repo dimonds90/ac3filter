@@ -4,6 +4,9 @@ del *.ncb 2> nul
 del *.plg 2> nul
 del *.dep 2> nul
 del *.opt 2> nul
+del /a:h *.suo 2> nul
+del *.user 2> nul
+
 rmdir /s /q debug 2> nul
 rmdir /s /q perf 2> nul
 del release\*.bsc 2> nul

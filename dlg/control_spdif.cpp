@@ -80,7 +80,7 @@ void ControlSPDIF::init()
   char buf[128];
   for (int i = 0; i < array_size(bitrate_tbl); i++)
   {
-    int index = SendDlgItemMessage(hdlg, IDC_CMB_SPDIF_BITRATE, CB_ADDSTRING, 0, (LONG)itoa(bitrate_tbl[i], buf, 10));
+    int index = SendDlgItemMessage(hdlg, IDC_CMB_SPDIF_BITRATE, CB_ADDSTRING, 0, (LPARAM) itoa(bitrate_tbl[i], buf, 10));
     SendDlgItemMessage(hdlg, IDC_CMB_SPDIF_BITRATE, CB_SETITEMDATA, index, bitrate_tbl[i]);
   }
 }

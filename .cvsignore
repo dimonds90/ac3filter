@@ -7,8 +7,11 @@
 *.plg
 *.opt
 *.dep
+*.suo
+*.user
 
 Debug
 Release
 Perf
+x64
 ChangeLog

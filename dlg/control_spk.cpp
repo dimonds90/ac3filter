@@ -159,16 +159,16 @@ void ControlSpk::init()
 
   SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < array_size(spklist); i++)
-    SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LONG) gettext(spklist[i]));
+    SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LPARAM) gettext(spklist[i]));
 
   SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < array_size(fmtlist); i++)
-    SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_ADDSTRING, 0, (LONG) gettext(fmtlist[i]));
+    SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_ADDSTRING, 0, (LPARAM) gettext(fmtlist[i]));
 
-  SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LONG)_("AS IS (no change)"));
+  SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)_("AS IS (no change)"));
   for (i = 1; i < array_size(rates_list); i++)
   {
-    int index = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LONG)itoa(rates_list[i], buf, 10));
+    int index = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)itoa(rates_list[i], buf, 10));
     SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_SETITEMDATA, index, rates_list[i]);
   }
 }

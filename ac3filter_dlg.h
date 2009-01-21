@@ -67,7 +67,7 @@ private:
 
   AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def, ctrl_maker maker);
 
-  BOOL OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+  INT_PTR OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
   STDMETHODIMP GetPageInfo(LPPROPPAGEINFO pPageInfo);
   HRESULT OnConnect(IUnknown *pUnknown);

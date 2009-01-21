@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <commctrl.h>   // tooltip
 #include "controls.h"
+#include "wincomp.h"
 
 #define TTS_BALLOON 0x40
 
@@ -205,8 +206,8 @@ Edit::link(HWND _dlg, int _item)
   hwnd = GetDlgItem(_dlg, _item);
   if (hwnd)
   {
-    wndproc = (WNDPROC) SetWindowLong(hwnd, GWL_WNDPROC, (DWORD) SubClassProc);
-    SetWindowLong(hwnd, GWL_USERDATA, (DWORD)(Edit *)this);
+    wndproc = (WNDPROC) SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)SubClassProc);
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)(Edit *)this);
   }
 }
 
@@ -215,8 +216,8 @@ Edit::unlink()
 {
   if (hwnd)
   {
-    SetWindowLong(hwnd, GWL_WNDPROC, (DWORD)wndproc);
-    SetWindowLong(hwnd, GWL_USERDATA, 0);
+    SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)wndproc);
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
   }
 
   dlg = 0;
@@ -233,7 +234,7 @@ Edit::enable(bool enabled)
 LRESULT CALLBACK 
 Edit::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  Edit *iam = (Edit *)GetWindowLong(hwnd, GWL_USERDATA);
+  Edit *iam = (Edit *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
   switch (msg) 
   { 
@@ -308,7 +309,7 @@ DoubleEdit::read_value()
 {
   char buf[256];
 
-  if (!SendDlgItemMessage(dlg, item, WM_GETTEXT, 256, (LONG)buf))
+  if (!SendDlgItemMessage(dlg, item, WM_GETTEXT, 256, (LPARAM) buf))
   {
     value = 0;
     return true;
@@ -365,7 +366,7 @@ TextEdit::~TextEdit()
 bool
 TextEdit::read_value()
 {
-  if (!SendDlgItemMessage(dlg, item, WM_GETTEXT, size, (LONG)value))
+  if (!SendDlgItemMessage(dlg, item, WM_GETTEXT, size, (LPARAM) value))
     value[0] = 0;
   else
     value[size] = 0;
@@ -416,8 +417,8 @@ LinkButton::link(HWND _dlg, int _item)
   hwnd = GetDlgItem(_dlg, _item);
   if (hwnd)
   {
-    wndproc = (WNDPROC) SetWindowLong(hwnd, GWL_WNDPROC, (DWORD) SubClassProc);
-    SetWindowLong(hwnd, GWL_USERDATA, (DWORD)(Edit *)this);
+    wndproc = (WNDPROC) SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR) SubClassProc);
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)(Edit *)this);
   }
 
   // Create underlined font
@@ -433,8 +434,8 @@ LinkButton::unlink()
 {
   if (hwnd)
   {
-    SetWindowLong(hwnd, GWL_WNDPROC, (DWORD)wndproc);
-    SetWindowLong(hwnd, GWL_USERDATA, 0);
+    SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR) wndproc);
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
   }
   DeleteObject(font);
 
@@ -447,7 +448,7 @@ LinkButton::unlink()
 LRESULT CALLBACK 
 LinkButton::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  LinkButton *iam = (LinkButton *)GetWindowLong(hwnd, GWL_USERDATA);
+  LinkButton *iam = (LinkButton *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
   switch (msg) 
   { 

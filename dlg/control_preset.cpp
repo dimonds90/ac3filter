@@ -87,7 +87,7 @@ void ControlPreset::update()
     char preset[256];                                                                     \
     int  n;                                                                               \
                                                                                           \
-    SendDlgItemMessage(hdlg, control, WM_GETTEXT, 256, (LONG)preset);                     \
+    SendDlgItemMessage(hdlg, control, WM_GETTEXT, 256, (LPARAM) preset);                  \
     SendDlgItemMessage(hdlg, control, CB_RESETCONTENT, 0, 0);                             \
                                                                                           \
     if (RegOpenKeyEx(HKEY_CURRENT_USER, registry, 0, KEY_READ, &key) == ERROR_SUCCESS)    \
@@ -98,16 +98,16 @@ void ControlPreset::update()
       while (RegEnumKeyEx(key, i++, (LPTSTR)buf, &len, 0, 0, 0, 0) == ERROR_SUCCESS)      \
       {                                                                                   \
         if (strcmp(buf, "Default"))                                                       \
-          SendDlgItemMessage(hdlg, control, CB_ADDSTRING, 0, (LONG)buf);                  \
+          SendDlgItemMessage(hdlg, control, CB_ADDSTRING, 0, (LPARAM) buf);               \
         len = 256;                                                                        \
       }                                                                                   \
       RegCloseKey(key);                                                                   \
     }                                                                                     \
                                                                                           \
-    n = SendDlgItemMessage(hdlg, control, CB_FINDSTRINGEXACT, 0, (LONG)preset);           \
+    n = SendDlgItemMessage(hdlg, control, CB_FINDSTRINGEXACT, 0, (LPARAM) preset);        \
     if (n != CB_ERR)                                                                      \
       SendDlgItemMessage(hdlg, control, CB_SETCURSEL, n, 0);                              \
-    SendDlgItemMessage(hdlg, control, WM_SETTEXT, 0, (LONG)preset);                       \
+    SendDlgItemMessage(hdlg, control, WM_SETTEXT, 0, (LPARAM) preset);                    \
   }
 
   fill_combobox(IDC_CMB_PRESET, REG_KEY_PRESET);
@@ -127,8 +127,8 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
       {
         char buf[256];
         char preset[256];
-        SendDlgItemMessage(hdlg, IDC_CMB_PRESET, CB_GETLBTEXT, SendDlgItemMessage(hdlg, IDC_CMB_PRESET, CB_GETCURSEL, 0, 0), (LONG)preset);
-        SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_SETTEXT, 0, (LONG)preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_PRESET, CB_GETLBTEXT, SendDlgItemMessage(hdlg, IDC_CMB_PRESET, CB_GETCURSEL, 0, 0), (LPARAM) preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_SETTEXT, 0, (LPARAM) preset);
         sprintf(buf, REG_KEY_PRESET"\\%s", preset);
 
         RegistryKey reg(buf);
@@ -139,7 +139,7 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
       {
         char buf[256];
         char preset[256];
-        SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_GETTEXT, 256, (LONG)preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_GETTEXT, 256, (LPARAM) preset);
         sprintf(buf, REG_KEY_PRESET"\\%s", preset);
 
         RegistryKey reg;
@@ -154,7 +154,7 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
     {
       char buf[256];
       char preset[256];
-      SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_GETTEXT, 256, (LONG)preset);
+      SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_GETTEXT, 256, (LPARAM) preset);
       sprintf(buf, REG_KEY_PRESET"\\%s", preset);
 
       RegistryKey reg;
@@ -168,14 +168,14 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
     {
       char buf[256];
       char preset[256];
-      SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_GETTEXT, 256, (LONG)preset);
+      SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_GETTEXT, 256, (LPARAM) preset);
 
       sprintf(buf, _("Are you sure you want to delete '%s' preset?"), preset);
       if (MessageBox(hdlg, buf, _("Delete confirmation"), MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
       {     
         sprintf(buf, REG_KEY_PRESET"\\%s", preset);
         delete_reg_key(buf, HKEY_CURRENT_USER);
-        SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_SETTEXT, 0, (LONG)"");
+        SendDlgItemMessage(hdlg, IDC_CMB_PRESET, WM_SETTEXT, 0, (LPARAM) "");
         update();
       }
       return cmd_ok;
@@ -216,8 +216,8 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
       {
         char buf[256];
         char preset[256];
-        SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, CB_GETLBTEXT, SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, CB_GETCURSEL, 0, 0), (LONG)preset);
-        SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_SETTEXT, 0, (LONG)preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, CB_GETLBTEXT, SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, CB_GETCURSEL, 0, 0), (LPARAM) preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_SETTEXT, 0, (LPARAM) preset);
         sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
 
         proc->set_auto_matrix(false);
@@ -229,7 +229,7 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
       {
         char buf[256];
         char preset[256];
-        SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LONG)preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LPARAM) preset);
         sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
 
         RegistryKey reg;
@@ -244,7 +244,7 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
     {
       char buf[256];
       char preset[256];
-      SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LONG)preset);
+      SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LPARAM) preset);
       sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
 
       RegistryKey reg;
@@ -258,14 +258,14 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
     {
       char buf[256];
       char preset[256];
-      SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LONG)preset);
+      SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_GETTEXT, 256, (LPARAM) preset);
 
       sprintf(buf, _("Are you sure you want to delete '%s' matrix?"), preset);
       if (MessageBox(hdlg, buf, _("Delete confirmation"), MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
       {     
         sprintf(buf, REG_KEY_MATRIX"\\%s", preset);
         delete_reg_key(buf, HKEY_CURRENT_USER);
-        SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_SETTEXT, 0, (LONG)"");
+        SendDlgItemMessage(hdlg, IDC_CMB_MATRIX_PRESET, WM_SETTEXT, 0, (LPARAM) "");
         proc->set_auto_matrix(true);
         update();
       }
@@ -280,8 +280,8 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
       {
         char buf[256];
         char preset[256];
-        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, CB_GETLBTEXT, SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, CB_GETCURSEL, 0, 0), (LONG)preset);
-        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_SETTEXT, 0, (LONG)preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, CB_GETLBTEXT, SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, CB_GETCURSEL, 0, 0), (LPARAM) preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_SETTEXT, 0, (LPARAM) preset);
         sprintf(buf, REG_KEY_EQ"\\%s", preset);
 
         RegistryKey reg(buf);
@@ -293,7 +293,7 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
       {
         char buf[256];
         char preset[256];
-        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_GETTEXT, 256, (LONG)preset);
+        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_GETTEXT, 256, (LPARAM) preset);
         sprintf(buf, REG_KEY_EQ"\\%s", preset);
 
         RegistryKey reg;
@@ -308,7 +308,7 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
     {
       char buf[256];
       char preset[256];
-      SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_GETTEXT, 256, (LONG)preset);
+      SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_GETTEXT, 256, (LPARAM) preset);
       sprintf(buf, REG_KEY_EQ"\\%s", preset);
 
       RegistryKey reg;
@@ -322,14 +322,14 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
     {
       char buf[256];
       char preset[256];
-      SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_GETTEXT, 256, (LONG)preset);
+      SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_GETTEXT, 256, (LPARAM) preset);
 
       sprintf(buf, _("Are you sure you want to delete '%s' equalizer preset?"), preset);
       if (MessageBox(hdlg, buf, _("Delete confirmation"), MB_ICONEXCLAMATION | MB_YESNO) == IDYES)
       {     
         sprintf(buf, REG_KEY_EQ"\\%s", preset);
         delete_reg_key(buf, HKEY_CURRENT_USER);
-        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_SETTEXT, 0, (LONG)"");
+        SendDlgItemMessage(hdlg, IDC_CMB_EQ_PRESET, WM_SETTEXT, 0, (LPARAM) "");
         update();
       }
       return cmd_ok;

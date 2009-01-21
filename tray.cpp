@@ -7,6 +7,7 @@
 #include "tray.h"
 #include "win32\thread.h"
 #include "resource_ids.h"
+#include "wincomp.h"
 
 #define WM_TRAY_ICON (WM_USER + 10)
 
@@ -137,7 +138,7 @@ AC3FilterTray::AC3FilterTray(IAC3Filter *_filter)
     0);
 
   if (hwnd)
-    SetWindowLong(hwnd, GWL_USERDATA, (DWORD)this); 
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)this); 
 
   /////////////////////////////////////////////////////////
   // Tray icon itself
@@ -272,7 +273,7 @@ AC3FilterTray::popup_menu()
 LRESULT CALLBACK 
 AC3FilterTray::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
-  AC3FilterTray *iam = (AC3FilterTray *)GetWindowLong(hwnd, GWL_USERDATA);
+  AC3FilterTray *iam = (AC3FilterTray *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
   int cmd_id;
 
   switch (Msg)
