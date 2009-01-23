@@ -54,7 +54,7 @@ static int bitrate2list(int bitrate)
   return array_size(bitrate_tbl) - 1;
 }
 
-static int list2bitrate(int index)
+static int list2bitrate(LRESULT index)
 {
   if (index >= 0 && index < array_size(bitrate_tbl))
     return bitrate_tbl[index] * 1000;
@@ -80,7 +80,7 @@ void ControlSPDIF::init()
   char buf[128];
   for (int i = 0; i < array_size(bitrate_tbl); i++)
   {
-    int index = SendDlgItemMessage(hdlg, IDC_CMB_SPDIF_BITRATE, CB_ADDSTRING, 0, (LPARAM) itoa(bitrate_tbl[i], buf, 10));
+    LRESULT index = SendDlgItemMessage(hdlg, IDC_CMB_SPDIF_BITRATE, CB_ADDSTRING, 0, (LPARAM) itoa(bitrate_tbl[i], buf, 10));
     SendDlgItemMessage(hdlg, IDC_CMB_SPDIF_BITRATE, CB_SETITEMDATA, index, bitrate_tbl[i]);
   }
 }
@@ -260,7 +260,7 @@ ControlSPDIF::cmd_result ControlSPDIF::command(int control, int message)
     case IDC_CMB_SPDIF_BITRATE:
       if (message == CBN_SELENDOK)
       {
-        int ibitrate = SendDlgItemMessage(hdlg, IDC_CMB_SPDIF_BITRATE, CB_GETCURSEL, 0, 0);
+        LRESULT ibitrate = SendDlgItemMessage(hdlg, IDC_CMB_SPDIF_BITRATE, CB_GETCURSEL, 0, 0);
         if (ibitrate != CB_ERR)
         {
           spdif_bitrate = list2bitrate(ibitrate);

@@ -280,7 +280,7 @@ STDMETHODIMP COMDecoder::get_frames(int *_frames, int *_errors)
   return S_OK;
 }
 
-STDMETHODIMP COMDecoder::get_info(char *_info, int _len)
+STDMETHODIMP COMDecoder::get_info(char *_info, size_t _len)
 {
   dvd.get_info(_info, _len);
   cr2crlf(_info, _len);
@@ -584,12 +584,12 @@ STDMETHODIMP COMDecoder::set_eq_bands(const int *freq, const double *gain)
 }
 
 // Spectrum
-STDMETHODIMP COMDecoder::get_spectrum_length(size_t *spectrum_length)
+STDMETHODIMP COMDecoder::get_spectrum_length(unsigned *spectrum_length)
 {
   if (spectrum_length) *spectrum_length = dvd.proc.get_spectrum_length();
   return S_OK;
 }
-STDMETHODIMP COMDecoder::set_spectrum_length(size_t spectrum_length)
+STDMETHODIMP COMDecoder::set_spectrum_length(unsigned spectrum_length)
 {
   AutoLock config_lock(&config);
   dvd.proc.set_spectrum_length(spectrum_length);

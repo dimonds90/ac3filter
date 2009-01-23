@@ -28,7 +28,7 @@ protected:
 
   HFONT  grid_font;
 
-  size_t spectrum_length;
+  unsigned spectrum_length;
   sample_t *spectrum;
   double bin2hz;
   bool log_scale;

@@ -53,7 +53,7 @@ public:
       lang = lang_index(fn);
       if (lang == -1)
       {
-        int len = strlen(fn);
+        size_t len = strlen(fn);
         char ll[3] = { 0, 0, 0 };
         char cc[3] = { 0, 0, 0 };
 
@@ -128,22 +128,22 @@ public:
     labels.clear();
   }
 
-  int nlangs()
+  size_t nlangs()
   {
     return codes.size();
   }
 
-  const char *code(int i)
+  const char *code(size_t i)
   {
     return codes[i];
   }
 
-  const char *label(int i)
+  const char *label(size_t i)
   {
     return labels[i];
   }
 
-  int find_code(const char *code)
+  size_t find_code(const char *code)
   {
     if (code == 0) return -1;
     for(size_t i = 0; i < codes.size(); i++)
@@ -247,7 +247,7 @@ ControlLang::cmd_result ControlLang::command(int control, int message)
     case IDC_CMB_LANG:
       if (langs && message == CBN_SELENDOK)
       {
-        int cb_index, i;
+        LRESULT cb_index, i;
         const char *lang = "";
         cb_index = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_GETCURSEL, 0, 0);
         if (cb_index != CB_ERR)

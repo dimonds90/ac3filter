@@ -93,7 +93,7 @@ void ControlSpectrum::update_dynamic()
   if (hctrl == 0)
     return;
 
-  size_t new_spectrum_length;
+  unsigned new_spectrum_length;
   proc->get_spectrum_length(&new_spectrum_length);
   if (spectrum_length != new_spectrum_length)
   {
@@ -180,7 +180,7 @@ void ControlSpectrum::paint_linear()
   {
     int pos = x * width / max_x;
     sprintf(label, "%ikHz", int(x * grid_hz / 1000));
-    TextOut(mem_dc, pos, 0, label, strlen(label));
+    TextOut(mem_dc, pos, 0, label, (int)strlen(label));
   }
 
   SetTextAlign(mem_dc, TA_BOTTOM | TA_RIGHT);
@@ -189,7 +189,7 @@ void ControlSpectrum::paint_linear()
   {
     int pos = y * height / max_y;
     sprintf(label, "-%idB", int(y * grid_db));
-    TextOut(mem_dc, width, pos, label, strlen(label));
+    TextOut(mem_dc, width, pos, label, (int)strlen(label));
   }
 
   SelectObject(mem_dc, old_font);
@@ -300,7 +300,7 @@ void ControlSpectrum::paint_log()
         sprintf(label, "%ikHz", delta_hz / 1000);
       else
         sprintf(label, "%iHz", delta_hz);
-      TextOut(mem_dc, pos, 0, label, strlen(label));
+      TextOut(mem_dc, pos, 0, label, (int)strlen(label));
     }
     delta_hz *= 10;
   }
@@ -311,7 +311,7 @@ void ControlSpectrum::paint_log()
   {
     int pos = y * height / max_y;
     sprintf(label, "-%idB", int(y * grid_db));
-    TextOut(mem_dc, width, pos, label, strlen(label));
+    TextOut(mem_dc, width, pos, label, (int)strlen(label));
   }
 
   SelectObject(mem_dc, old_font);
@@ -325,7 +325,7 @@ void ControlSpectrum::paint_log()
   old_pen = (HPEN)SelectObject(mem_dc, signal_pen);
 
   MoveToEx(mem_dc, -1, int(-spectrum[0] * yfactor), 0);
-  for (size_t i = 1; i < spectrum_length; i++)
+  for (unsigned i = 1; i < spectrum_length; i++)
     LineTo(mem_dc, scale(i, spectrum_length, width), int(-spectrum[i] * yfactor));
 
   SelectObject(mem_dc, old_pen);

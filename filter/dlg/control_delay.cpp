@@ -38,7 +38,7 @@ static char *units_list[] =
   N_("Inches")
 };
 
-static int list2units(int list)
+static int list2units(LRESULT list)
 {
   switch (list)
   {

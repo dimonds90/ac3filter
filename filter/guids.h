@@ -13,7 +13,7 @@
 
 extern HINSTANCE ac3filter_instance;
 
-void cr2crlf(char *buf, int size);
+void cr2crlf(char *buf, size_t size);
 
 // registry key
 #define REG_KEY        "Software\\AC3Filter"
@@ -162,7 +162,7 @@ DECLARE_INTERFACE_(IAC3Filter, IUnknown)
   STDMETHOD (get_cpu_usage)(double *cpu_usage) = 0;
 
   // Build and environment info
-  STDMETHOD (get_env) (char *buf, int size) = 0;
+  STDMETHOD (get_env) (char *buf, size_t size) = 0;
 };
 
 DECLARE_INTERFACE_(IDecoder, IUnknown)
@@ -247,7 +247,7 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
                                
   // Stats
   STDMETHOD (get_frames)(int  *frames, int *errors) = 0;
-  STDMETHOD (get_info)  (char *info, int len) = 0;
+  STDMETHOD (get_info)  (char *info, size_t len) = 0;
 
   // Load/save settings
   STDMETHOD (load_params) (Config *config, int what) = 0;
@@ -366,8 +366,8 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (get_eq_bands)     (int *freqs, double *gains) = 0;
   STDMETHOD (set_eq_bands)     (const int *freqs, const double *gains) = 0;
   // Spectrum
-  STDMETHOD (get_spectrum_length) (size_t *length) = 0;
-  STDMETHOD (set_spectrum_length) (size_t  length) = 0;
+  STDMETHOD (get_spectrum_length) (unsigned *length) = 0;
+  STDMETHOD (set_spectrum_length) (unsigned  length) = 0;
   STDMETHOD (get_spectrum)     (sample_t *data, double *bin2hz) = 0;
   // Delay
   STDMETHOD (get_delay)        (bool *delay) = 0;

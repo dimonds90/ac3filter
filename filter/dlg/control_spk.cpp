@@ -53,7 +53,7 @@ static const int rates_list[] =
   0, 8000, 11025, 22050, 24000, 32000, 44100, 48000, 96000, 192000
 };
 
-static Speakers list2spk(int ispk, int ifmt, int sample_rate)
+static Speakers list2spk(LRESULT ispk, LRESULT ifmt, int sample_rate)
 {
   int format = FORMAT_PCM16;
   int mask = MODE_STEREO;
@@ -168,7 +168,7 @@ void ControlSpk::init()
   SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)_("AS IS (no change)"));
   for (i = 1; i < array_size(rates_list); i++)
   {
-    int index = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)itoa(rates_list[i], buf, 10));
+    LRESULT index = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)itoa(rates_list[i], buf, 10));
     SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_SETITEMDATA, index, rates_list[i]);
   }
 }
@@ -186,9 +186,9 @@ void ControlSpk::update()
   {
     char buf[128];
     sprintf(buf, "%i", user_spk.sample_rate);
-    int i = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_FINDSTRINGEXACT, -1, (LPARAM)buf);
-    if (i != CB_ERR)
-      SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_SETCURSEL, i, 0);
+    LRESULT index = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_FINDSTRINGEXACT, -1, (LPARAM)buf);
+    if (index != CB_ERR)
+      SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_SETCURSEL, index, 0);
   }
   else
     SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_SETCURSEL, 0, 0);
@@ -258,10 +258,10 @@ ControlSpk::cmd_result ControlSpk::command(int control, int message)
     case IDC_CMB_FORMAT:
       if (message == CBN_SELENDOK)
       {
-        int ispk = SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_GETCURSEL, 0, 0);
-        int ifmt = SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_GETCURSEL, 0, 0);
-        int irate = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_GETCURSEL, 0, 0);
-        int sample_rate = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_GETITEMDATA, irate, 0);
+        LRESULT ispk = SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_GETCURSEL, 0, 0);
+        LRESULT ifmt = SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_GETCURSEL, 0, 0);
+        LRESULT irate = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_GETCURSEL, 0, 0);
+        int sample_rate = (int)SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_GETITEMDATA, irate, 0);
 
         user_spk = list2spk(ispk, ifmt, sample_rate);
         dec->set_user_spk(user_spk);

@@ -49,12 +49,12 @@ RegistryKey::create_key(LPCTSTR name, HKEY hive)
     key = 0;
 
   // split path and subkey name
-  const int buf_size = 255;
+  const size_t buf_size = 255;
   CHAR path[buf_size];
   CHAR subkey[buf_size];
   LPCTSTR name_end = name + strlen(name) - 1;
   LPCTSTR pos;
-  int n;
+  size_t n;
 
   // find key name
   pos = name_end;
@@ -207,7 +207,7 @@ RegistryKey::set_float(LPCTSTR name, double _value)
 
   char buf[256];
   sprintf(buf, "%lg", _value);
-  RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)&buf, strlen(buf)+1);
+  RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)&buf, (DWORD)strlen(buf)+1);
 //  DbgLog((LOG_TRACE, 3, "RegistryKey::set_float(\"%s\", %lg = \"%s\")", name, _value, buf));
 }
 
@@ -217,7 +217,7 @@ RegistryKey::set_text(LPCTSTR name, const char *_value)
   if (!key) return;
 
   if (_value)
-    RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)_value, strlen(_value)+1);
+    RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)_value, (DWORD)strlen(_value)+1);
   else
     RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)"", 1);
 //  DbgLog((LOG_TRACE, 3, "RegistryKey::set_text(\"%s\", \"%s\")", name, _value? _value: ""));

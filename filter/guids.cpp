@@ -3,7 +3,7 @@
 #include <initguid.h>
 #include "guids.h"
 
-void cr2crlf(char *_buf, int _size)
+void cr2crlf(char *_buf, size_t _size)
 {
   int cnt = 0;
 

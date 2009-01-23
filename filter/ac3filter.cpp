@@ -942,10 +942,10 @@ AC3Filter::get_cpu_usage(double *_cpu_usage)
 
 // Build and environment info
 STDMETHODIMP
-AC3Filter::get_env(char *_buf, int _size)
+AC3Filter::get_env(char *_buf, size_t _size)
 {
   const char *env = valib_build_info();
-  int len = strlen(env) + 1;
+  size_t len = strlen(env) + 1;
   memcpy(_buf, env, MIN(_size, len));
   cr2crlf(_buf, _size);
   return S_OK;

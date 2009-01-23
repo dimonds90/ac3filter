@@ -108,7 +108,7 @@ public:
   STDMETHODIMP get_cpu_usage(double *cpu_usage);
 
   // Build and environment info
-  STDMETHODIMP get_env(char *buf, int size);
+  STDMETHODIMP get_env(char *buf, size_t size);
 };
 
 #endif

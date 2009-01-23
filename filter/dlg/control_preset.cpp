@@ -85,7 +85,7 @@ void ControlPreset::update()
   {                                                                                       \
     HKEY key;                                                                             \
     char preset[256];                                                                     \
-    int  n;                                                                               \
+    LRESULT n;                                                                            \
                                                                                           \
     SendDlgItemMessage(hdlg, control, WM_GETTEXT, 256, (LPARAM) preset);                  \
     SendDlgItemMessage(hdlg, control, CB_RESETCONTENT, 0, 0);                             \
