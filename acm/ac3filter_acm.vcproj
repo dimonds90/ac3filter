@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="ac3filter_intl"
-	ProjectGUID="{09B334F2-1E68-43F8-BD83-18417ECE399B}"
-	RootNamespace="ac3filter_intl"
+	Name="ac3filter_acm"
+	ProjectGUID="{BF73E10D-B324-4149-B871-67F1E9B29EE4}"
+	RootNamespace="ac3filter_acm"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -27,7 +27,6 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -44,8 +43,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="gnu/include/$(PlatformName)-$(ConfigurationName)"
-				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="..\..\valib\valib"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -63,8 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="intl.lib iconv.lib"
-				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)-$(ConfigurationName)"
+				AdditionalDependencies="winmm.lib"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -100,7 +97,6 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -118,8 +114,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="gnu/include/$(PlatformName)-$(ConfigurationName)"
-				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="..\..\valib\valib"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -136,9 +131,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="intl.lib iconv.lib"
-				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)-$(ConfigurationName)"
-				ModuleDefinitionFile="ac3filter_intl.def"
+				AdditionalDependencies="winmm.lib"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -175,7 +168,6 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -193,8 +185,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="gnu/include/$(PlatformName)-$(ConfigurationName)"
-				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="..\..\valib\valib"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -212,8 +203,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="intl.lib iconv.lib"
-				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)-$(ConfigurationName)"
+				AdditionalDependencies="winmm.lib"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -249,7 +239,6 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -268,8 +257,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="gnu/include/$(PlatformName)-$(ConfigurationName)"
-				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="..\..\valib\valib"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -286,9 +274,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="intl.lib iconv.lib"
-				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)-$(ConfigurationName)"
-				ModuleDefinitionFile="ac3filter_intl.def"
+				AdditionalDependencies="winmm.lib"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -321,60 +307,28 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\ac3filter_intl.cpp"
+			RelativePath=".\ac3filter_acm.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\ac3filter_intl.def"
+			RelativePath=".\dbglog.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\ac3filter_intl.h"
+			RelativePath=".\dbglog.h"
 			>
 		</File>
 		<File
-			RelativePath=".\build_gnu.cmd"
+			RelativePath=".\decoder.cpp"
 			>
-			<FileConfiguration
-				Name="Debug|Win32"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)&#x0D;&#x0A;"
-					Outputs="gnu/lib/$(PlatformName)-$(ConfigurationName)/intl.lib"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|Win32"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)&#x0D;&#x0A;"
-					Outputs="gnu/lib/$(PlatformName)-$(ConfigurationName)/intl.lib"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Debug|x64"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)&#x0D;&#x0A;"
-					Outputs="gnu/lib/$(PlatformName)-$(ConfigurationName)/intl.lib"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|x64"
-				>
-				<Tool
-					Name="VCCustomBuildTool"
-					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)&#x0D;&#x0A;"
-					Outputs="gnu/lib/$(PlatformName)-$(ConfigurationName)/intl.lib;gnu/lib/$(PlatformName)-$(ConfigurationName)/iconv.lib"
-				/>
-			</FileConfiguration>
+		</File>
+		<File
+			RelativePath=".\decoder.h"
+			>
+		</File>
+		<File
+			RelativePath=".\msacmdrv.h"
+			>
 		</File>
 	</Files>
 	<Globals>

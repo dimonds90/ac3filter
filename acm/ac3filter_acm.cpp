@@ -14,8 +14,8 @@
 #define VERSION_ACM     MAKE_ACM_VERSION(3, 51, 0)
 #define VERSION_DRIVER  MAKE_ACM_VERSION(0, 2, 0)
 
-#define WAVE_FORMAT_AC3 0x2000
-#define WAVE_FORMAT_DTS 0x2001
+#define WAVE_FORMAT_AVI_AC3 0x2000
+#define WAVE_FORMAT_AVI_DTS 0x2001
 
 #define BUFFER_SIZE 4096
 
@@ -214,14 +214,14 @@ static const int pcm_bps[] =
 const FormatTag tags[] =
 {
   { 
-    0, L"AC3", WAVE_FORMAT_AC3, 
+    0, L"AC3", WAVE_FORMAT_AVI_AC3, 
     ac3_sample_rate, array_size(ac3_sample_rate), 
     ac3_channels, array_size(ac3_channels), 
     ac3_bitrate, array_size(ac3_bitrate), 
     0, 1 
   },
   { 
-    1, L"DTS", WAVE_FORMAT_DTS, 
+    1, L"DTS", WAVE_FORMAT_AVI_DTS, 
     dts_sample_rate, array_size(dts_sample_rate), 
     dts_channels, array_size(dts_channels), 
     dts_bitrate, array_size(dts_bitrate), 
@@ -483,8 +483,8 @@ ACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
     ///////////////////////////////////////////////////////
     // Suggest decompression format
 
-    case WAVE_FORMAT_AC3:
-    case WAVE_FORMAT_DTS:
+    case WAVE_FORMAT_AVI_AC3:
+    case WAVE_FORMAT_AVI_DTS:
       if (suggest & ACM_FORMATSUGGESTF_WFORMATTAG)
       {
         if (dst->wFormatTag != WAVE_FORMAT_PCM)
@@ -563,8 +563,8 @@ ACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
   Speakers in_spk;
   Speakers out_spk;
 
-  if (src->wFormatTag != WAVE_FORMAT_AC3 &&
-      src->wFormatTag != WAVE_FORMAT_DTS)
+  if (src->wFormatTag != WAVE_FORMAT_AVI_AC3 &&
+      src->wFormatTag != WAVE_FORMAT_AVI_DTS)
     return ACMERR_NOTPOSSIBLE;
 
   if (dst->wFormatTag != WAVE_FORMAT_PCM)

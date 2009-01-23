@@ -118,7 +118,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../valib/valib"
+				AdditionalIncludeDirectories="../../valib/valib"
+				PreprocessorDefinitions="DISABLE_NLS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -137,7 +138,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib intl\lib\x64\intl.lib intl\lib\x64\iconv.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib "
+				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib "
 				OutputFile="$(OutDir)\$(ProjectName).ax"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
@@ -193,7 +194,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../valib/valib"
+				AdditionalIncludeDirectories="../../valib/valib"
+				PreprocessorDefinitions="DISABLE_NLS"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -211,8 +213,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib intl\lib\intl.lib intl\lib\iconv.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib "
+				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib "
 				OutputFile="$(OutDir)\$(ProjectName).ax"
+				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
@@ -269,7 +272,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../valib/valib"
+				AdditionalIncludeDirectories="../../valib/valib"
+				PreprocessorDefinitions="DISABLE_NLS"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -287,8 +291,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib intl\lib\x64\intl.lib intl\lib\x64\iconv.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib "
+				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib "
 				OutputFile="$(OutDir)\$(ProjectName).ax"
+				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
