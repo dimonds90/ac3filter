@@ -3,22 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "ac3filter"=.\ac3filter.dsp - Package Owner=<4>
-
-Package=<5>
-{{{
-}}}
-
-Package=<4>
-{{{
-    Begin Project Dependency
-    Project_Dep_Name valib
-    End Project Dependency
-}}}
-
-###############################################################################
-
-Project: "valib"=..\..\valib\lib\valib.dsp - Package Owner=<4>
+Project: "ac3filter_intl"=.\ac3filter_intl.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

@@ -18,8 +18,8 @@ goto end
 
 :build_all
 echo Building all files
-call _clear_output.bat
-for %%f in (*.tex) do call _build_pdf %%f 
+call clean_temp.cmd
+for %%f in (*.tex) do call build_pdf.cmd %%f 
 call clean_temp.cmd
 goto end
 
@@ -33,8 +33,8 @@ goto end
 
 :usage
 echo Usage
-echo   _build_pdf file.tex - build pdf for the given tex file
-echo   _build_pdf all      - build pdf for all tex files
+echo   build_pdf file.tex - build pdf for the given tex file
+echo   build_pdf all      - build pdf for all tex files
 goto end
 
 :end

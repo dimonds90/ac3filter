@@ -16,8 +16,8 @@ goto end
 
 :build_all
 echo Building all files
-call _clear_output.bat
-for %%f in (*.tex) do call _build_html %%f 
+call clean_temp.cmd
+for %%f in (*.tex) do call build_html.cmd %%f 
 call clean_temp.cmd
 goto end
 
@@ -31,8 +31,8 @@ goto end
 
 :usage
 echo Usage
-echo   _build_html file.tex - build html for the given tex file
-echo   _build_html all      - build html for all tex files
+echo   build_html file.tex - build html for the given tex file
+echo   build_html all      - build html for all tex files
 goto end
 
 :end

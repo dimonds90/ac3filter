@@ -1,8 +1,10 @@
 #include <windows.h>
 #include <ocidl.h>
 #include <olectl.h>
-#include "..\registry.h"
-#include "..\guids.h"
+#include "registry.h"
+#include "..\..\filter\guids.h"
+
+
 
 INT APIENTRY WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR pCmdLine, 
                       INT nCmdShow )

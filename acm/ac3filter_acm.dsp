@@ -59,7 +59,7 @@ LINK32=link.exe
 # SUBTRACT LINK32 /map
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
-PostBuild_Cmds=_copy_release.bat
+PostBuild_Cmds=install.cmd Release_Libc
 # End Special Build Tool
 
 !ELSEIF  "$(CFG)" == "ac3filter_acm - Win32 Debug Libc"
@@ -90,7 +90,7 @@ LINK32=link.exe
 # ADD LINK32 libc.lib oldnames.lib winmm.lib kernel32.lib user32.lib /nologo /dll /incremental:no /debug /debugtype:both /machine:I386 /nodefaultlib /out:"Debug_Libc/ac3filter.acm" /pdbtype:sept
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
-PostBuild_Cmds=_copy_debug.bat
+PostBuild_Cmds=install.cmd Debug_Libc
 # End Special Build Tool
 
 !ENDIF 
