@@ -27,7 +27,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="gnu/include/$(PlatformName)-$(ConfigurationName)"
+				AdditionalIncludeDirectories="gnu/include/$(PlatformName)"
 				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -64,7 +64,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="intl.lib iconv.lib"
-				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)-$(ConfigurationName)"
+				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)"
 				ModuleDefinitionFile="ac3filter_intl.def"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
@@ -100,7 +100,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -118,7 +118,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="gnu/include/$(PlatformName)-$(ConfigurationName)"
+				AdditionalIncludeDirectories="gnu/include/$(PlatformName)"
 				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -138,7 +138,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="intl.lib iconv.lib"
-				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)-$(ConfigurationName)"
+				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)"
 				ModuleDefinitionFile="ac3filter_intl.def"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
@@ -193,7 +193,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="gnu/include/$(PlatformName)-$(ConfigurationName)"
+				AdditionalIncludeDirectories="gnu/include/$(PlatformName)"
 				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -212,7 +212,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="intl.lib iconv.lib"
-				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)-$(ConfigurationName)"
+				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)"
 				ModuleDefinitionFile="ac3filter_intl.def"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
@@ -270,7 +270,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="gnu/include/$(PlatformName)-$(ConfigurationName)"
+				AdditionalIncludeDirectories="gnu/include/$(PlatformName)"
 				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -289,7 +289,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="intl.lib iconv.lib"
-				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)-$(ConfigurationName)"
+				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)"
 				ModuleDefinitionFile="ac3filter_intl.def"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
@@ -343,8 +343,8 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)&#x0D;&#x0A;"
-					Outputs="gnu/lib/$(PlatformName)-$(ConfigurationName)/intl.lib"
+					CommandLine="build_gnu.cmd $(PlatformName)"
+					Outputs="gnu/lib/$(PlatformName)/intl.lib;gnu/lib/$(PlatformName)/iconv.lib"
 				/>
 			</FileConfiguration>
 			<FileConfiguration
@@ -353,8 +353,8 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)&#x0D;&#x0A;"
-					Outputs="gnu/lib/$(PlatformName)-$(ConfigurationName)/intl.lib"
+					CommandLine="build_gnu.cmd $(PlatformName)"
+					Outputs="gnu/lib/$(PlatformName)/intl.lib;gnu/lib/$(PlatformName)/iconv.lib"
 				/>
 			</FileConfiguration>
 			<FileConfiguration
@@ -363,8 +363,8 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)&#x0D;&#x0A;"
-					Outputs="gnu/lib/$(PlatformName)-$(ConfigurationName)/intl.lib"
+					CommandLine="build_gnu.cmd $(PlatformName)"
+					Outputs="gnu/lib/$(PlatformName)/intl.lib;gnu/lib/$(PlatformName)/iconv.lib"
 				/>
 			</FileConfiguration>
 			<FileConfiguration
@@ -373,8 +373,8 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)-$(ConfigurationName)&#x0D;&#x0A;"
-					Outputs="gnu/lib/$(PlatformName)-$(ConfigurationName)/intl.lib;gnu/lib/$(PlatformName)-$(ConfigurationName)/iconv.lib"
+					CommandLine="build_gnu.cmd $(PlatformName)"
+					Outputs="gnu/lib/$(PlatformName)/intl.lib;gnu/lib/$(PlatformName)/iconv.lib"
 				/>
 			</FileConfiguration>
 		</File>
