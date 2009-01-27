@@ -1,16 +1,38 @@
 /*
   Internationalization support for AC3Filter
+
+  Load and use ac3filter_intl.dll dynamically. This allows to redistribute the
+  filter without translation dll.
 */
 
-#ifndef AC3FILTER_INTL
-#define AC3FILTER_INTL
+#ifndef AC3FILTER_INTL_DLL
+#define AC3FILTER_INTL_DLL
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Use the same interface as DLL uses.
+// If DLL interface changes we can notice and accomodate the changes immediately.
+
+#include "../intl/ac3filter_intl.h"
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Load/unload the DLL
+// Reference counting is used to actually unload the DLL.
+
+bool init_nls();
+bool is_nls_available();
+void free_nls();
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // gettext standard definitions
 
 #ifndef DISABLE_NLS
-#  include "intl\include\libintl.h"
-#  define _(s) gettext(s)
+#  define _(s) gettext_wrapper(s)
 #  define gettext_noop(s) s
 #  define N_(s) gettext_noop(s)
 
@@ -22,7 +44,7 @@
 
 inline const char *gettext_id(const char *id, const char *str)
 {
-  const char *translated = gettext(id);
+  const char *translated = gettext_wrapper(id);
   return translated == id? str: translated;
 }
 
@@ -31,7 +53,7 @@ inline const char *gettext_id(const char *id, const char *str)
 
 inline const char *gettext_meta()
 {
-  return gettext("");
+  return gettext_wrapper("");
 }
 
 #else
@@ -40,66 +62,8 @@ inline const char *gettext_meta()
 #  define gettext_noop(s) s
 #  define N_(s) gettext_noop(s)
 #  define gettext_id(id, s) s
+#  define gettext_meta() ""
 #endif
 
-///////////////////////////////////////////////////////////////////////////////
-// Language codes conversion
-//
-// iso_langs - table of languages (ISO 639)
-// First element of this table (index 0) is known to be English
-//
-// iso_countries - table of countries (ISO 3166)
-//
-// lang_index() - find an index of iso 639 code; -1 if not found; 0 is English
-// lang_name() - convert 2 or 3-character code to the language name
-//
-// country_index() - find an index of iso 3166 code; -1 if not found; 0 is English
-// country_name() - convert 2 or 3-character code to the country name
-
-struct iso_lang_s
-{ 
-  const char *name;
-  const char *iso6392;
-  const char *iso6391;
-};
-
-struct iso_country_s
-{
-  const char *name;
-  const char *alpha3;
-  const char *alpha2;
-  int code;
-};
-
-extern const iso_lang_s iso_langs[];
-extern const iso_country_s iso_countries[];
-
-#define LANG_LEN 256
-
-int lang_index(const char *code);
-const char *lang_name(const char *code);
-const char *lang_name(int index);
-
-int country_index(const char *code);
-const char *country_name(const char *code);
-const char *country_name(int index);
-
-///////////////////////////////////////////////////////////////////////////////
-// Language operations
-//
-// set_lang() - set global language to the language specified and init the
-//   default package. You may omit package and set only language code. Code may
-//   be either 2 or 3 character code. You may omit language code to set default
-//   package only. set_lang("") cancels translation (now it just switches to
-//   English)
-//
-//   set_lang(0, package, path) may be used to change the packade and path
-//   without changing the language.
-//
-// get_lang() - return currently selected language. Returns zero if no language
-//   selected.
-
-void set_lang(const char *code, const char *package = 0, const char *path = 0);
-const char *get_lang();
 
 #endif

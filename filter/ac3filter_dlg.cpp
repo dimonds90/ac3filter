@@ -185,21 +185,6 @@ AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int Dialo
 {
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::AC3FilterDlg(%s)", pName));
 
-  // Set language
-  memset(lang, 0, LANG_LEN);
-  RegistryKey reg(REG_KEY);
-  reg.get_text("Language", lang, LANG_LEN);
-  if (lang_index(lang) != -1)
-  {
-    char path[MAX_PATH];
-    reg.get_text("Lang_Dir", path, sizeof(path));
-
-    // do not use localization if language repository does not exists
-    DWORD attr = GetFileAttributes(path);
-    if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
-      set_lang(lang, "ac3filter", path);
-  }
-
   title = gettext_id(title_id, title_def);
   filter = 0;
   proc   = 0;

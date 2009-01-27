@@ -86,7 +86,7 @@ void ControlDelay::init()
 
   SendDlgItemMessage(hdlg, IDC_CMB_DELAY_UNITS, CB_RESETCONTENT, 0, 0);
   for (int i = 0; i < array_size(units_list); i++)
-    SendDlgItemMessage(hdlg, IDC_CMB_DELAY_UNITS, CB_ADDSTRING, 0, (LPARAM) gettext(units_list[i]));
+    SendDlgItemMessage(hdlg, IDC_CMB_DELAY_UNITS, CB_ADDSTRING, 0, (LPARAM) gettext_wrapper(units_list[i]));
 }
 
 void ControlDelay::update()

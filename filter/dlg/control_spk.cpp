@@ -159,11 +159,11 @@ void ControlSpk::init()
 
   SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < array_size(spklist); i++)
-    SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LPARAM) gettext(spklist[i]));
+    SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LPARAM) gettext_wrapper(spklist[i]));
 
   SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < array_size(fmtlist); i++)
-    SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_ADDSTRING, 0, (LPARAM) gettext(fmtlist[i]));
+    SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_ADDSTRING, 0, (LPARAM) gettext_wrapper(fmtlist[i]));
 
   SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)_("AS IS (no change)"));
   for (i = 1; i < array_size(rates_list); i++)

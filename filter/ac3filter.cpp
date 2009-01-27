@@ -1,5 +1,6 @@
 #include "guids.h"
 #include "ac3filter.h"
+#include "ac3filter_intl.h"
 #include "decss\DeCSSInputPin.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -65,6 +66,25 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   reg.get_int32("reinit", reinit);
   reg.get_bool ("spdif_no_pcm", spdif_no_pcm);
 
+  // Init NLS
+  init_nls();
+  if (is_nls_available())
+  {
+    char lang[LANG_LEN];
+    memset(lang, 0, LANG_LEN);
+    reg.get_text("Language", lang, LANG_LEN);
+    if (lang_index(lang) != -1)
+    {
+      char path[MAX_PATH];
+      reg.get_text("Lang_Dir", path, sizeof(path));
+
+      // do not use localization if language repository does not exists
+      DWORD attr = GetFileAttributes(path);
+      if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
+        set_lang(lang, "ac3filter", path);
+    }
+  }
+
   // init decoder
   dec.set_sink(sink);
   dec.load_params(0, AC3FILTER_ALL);
@@ -73,6 +93,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
 
 AC3Filter::~AC3Filter()
 {
+  free_nls();
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::~AC3Filter", this));
 }
 

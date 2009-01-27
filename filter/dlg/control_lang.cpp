@@ -103,13 +103,13 @@ public:
       // Fill the array
       char label[1024];
       if (country != -1 && custom != 0)
-        sprintf(label, "%s (%s, %s)", lang_name(lang), country_name(country), custom);
+        sprintf(label, "%s (%s, %s)", lang_by_index(lang), country_by_index(country), custom);
       else if (country != -1)
-        sprintf(label, "%s (%s)", lang_name(lang), country_name(country));
+        sprintf(label, "%s (%s)", lang_by_index(lang), country_by_index(country));
       else if (custom != 0)
-        sprintf(label, "%s (%s)", lang_name(lang), custom);
+        sprintf(label, "%s (%s)", lang_by_index(lang), custom);
       else
-        sprintf(label, "%s", lang_name(lang));
+        sprintf(label, "%s", lang_by_index(lang));
 
       codes.push_back(strdup(fn));
       labels.push_back(strdup(label));
@@ -162,9 +162,12 @@ Controller(_dlg, ::controls)
   path[0] = 0; 
 
 #ifndef DISABLE_NLS
-  RegistryKey reg(REG_KEY);
-  reg.get_text("Lang_Dir", path, sizeof(path));
-  langs = new EnumLanguages(path, package);
+  if (is_nls_available())
+  {
+    RegistryKey reg(REG_KEY);
+    reg.get_text("Lang_Dir", path, sizeof(path));
+    langs = new EnumLanguages(path, package);
+  }
 #endif
 }
 
@@ -176,28 +179,39 @@ ControlLang::~ControlLang()
 void ControlLang::init()
 {
 #ifndef DISABLE_NLS
-  if (langs && langs->nlangs())
+  if (is_nls_available())
   {
-    SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_RESETCONTENT, 0, 0);
-    SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LPARAM) "--- Original ---");
-    SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETITEMDATA, 0, 0);
-
-    for (int i = 0; i < langs->nlangs(); i++)
+    if (langs && langs->nlangs())
     {
-      int cb_index = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LPARAM) langs->label(i));
-      SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETITEMDATA, cb_index, i+1);
+      SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_RESETCONTENT, 0, 0);
+      SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LPARAM) "--- Original ---");
+      SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETITEMDATA, 0, 0);
+
+      for (size_t i = 0; i < langs->nlangs(); i++)
+      {
+        int cb_index = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LPARAM) langs->label(i));
+        SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETITEMDATA, cb_index, i+1);
+      }
+      SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETCURSEL, 0, 0);
     }
-    SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETCURSEL, 0, 0);
+    else
+    {
+      EnableWindow(GetDlgItem(hdlg, IDC_CMB_LANG), FALSE);
+      SetDlgItemText(hdlg, IDC_EDT_TRANS_INFO, "Cannot find localization files");
+    }
   }
   else
   {
+    // Disable language selection if NLS is unavailable
     EnableWindow(GetDlgItem(hdlg, IDC_CMB_LANG), FALSE);
-    SetDlgItemText(hdlg, IDC_EDT_TRANS_INFO, "Cannot find localization files");
+    SetDlgItemText(hdlg, IDC_EDT_TRANS_INFO, "ac3filter_intl.dll not found");
   }
 #else
-  // Disable language selection if NLS is disabled
-  EnableWindow(GetDlgItem(hdlg, IDC_CMB_LANG), FALSE);
-  SetDlgItemText(hdlg, IDC_EDT_TRANS_INFO, "No localization support.");
+  {
+    // Disable language selection if NLS is disabled
+    EnableWindow(GetDlgItem(hdlg, IDC_CMB_LANG), FALSE);
+    SetDlgItemText(hdlg, IDC_EDT_TRANS_INFO, "No localization support");
+  }
 #endif
   lnk_translate.link(hdlg, IDC_LNK_TRANSLATE);
 }
@@ -205,7 +219,7 @@ void ControlLang::init()
 void ControlLang::update()
 {
 #ifndef DISABLE_NLS
-  if (langs)
+  if (is_nls_available() && langs)
   {
     const char *lang = get_lang();
     int i = langs->find_code(lang);
