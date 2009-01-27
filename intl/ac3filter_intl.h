@@ -12,26 +12,6 @@ extern "C" {
 
 const char *gettext_wrapper(const char *);
 
-// gettext_id(const char *id, const char *str);
-// Translate the string that have an id, return str if no translation found
-// Used to translate dialog controls by an id, instead of translating by the
-// text stored. This allows to translate different controls with the same text
-// differently.
-
-inline const char *gettext_id(const char *id, const char *str)
-{
-  const char *translated = gettext_wrapper(id);
-  return translated == id? str: translated;
-}
-
-// gettext_meta()
-// Returns current translation info
-
-inline const char *gettext_meta()
-{
-  return gettext_wrapper("");
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // Language codes conversion
 //
