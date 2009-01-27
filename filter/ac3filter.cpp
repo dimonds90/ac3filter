@@ -67,22 +67,20 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   reg.get_bool ("spdif_no_pcm", spdif_no_pcm);
 
   // Init NLS
-  init_nls();
+
+  char path[MAX_PATH];
+  reg.get_text("Lang_Dir", path, sizeof(path));
+  DWORD attr = GetFileAttributes(path);
+  if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
+    init_nls(path);
+
   if (is_nls_available())
   {
     char lang[LANG_LEN];
     memset(lang, 0, LANG_LEN);
     reg.get_text("Language", lang, LANG_LEN);
     if (lang_index(lang) != -1)
-    {
-      char path[MAX_PATH];
-      reg.get_text("Lang_Dir", path, sizeof(path));
-
-      // do not use localization if language repository does not exists
-      DWORD attr = GetFileAttributes(path);
-      if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
-        set_lang(lang, "ac3filter", path);
-    }
+      set_lang(lang, "ac3filter", path);
   }
 
   // init decoder

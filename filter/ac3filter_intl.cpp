@@ -1,10 +1,13 @@
+#include <stdio.h>
 #include <windows.h>
 #include "defs.h"
+#include "auto_buf.h"
 #include "ac3filter_intl.h"
 
-static HMODULE h_intl = 0;
+static HMODULE h_dll = 0;
 static size_t ref_count = 0;
 static bool dll_exists = true;
+static const char *dll_name = "ac3filter_intl.dll";
 
 // function types
 
@@ -43,9 +46,9 @@ static FARPROC func_ptrs[nfuncs];
 
 ///////////////////////////////////////////////////////////////////////////////
 
-bool init_nls()
+bool init_nls(const char *path, const char *alt_dll_name)
 {
-  if (h_intl)
+  if (h_dll)
   {
     ref_count++;
     return true;
@@ -53,9 +56,20 @@ bool init_nls()
 
   if (dll_exists)
   {
-    h_intl = LoadLibrary("ac3filter_intl.dll");
-    DWORD err = GetLastError();
-    if (h_intl == 0)
+    if (alt_dll_name == 0)
+      alt_dll_name = dll_name;
+
+    if (path)
+    {
+      AutoBuf<char> full_dll_name(strlen(path) + strlen(alt_dll_name) + 2);
+      sprintf(full_dll_name, "%s\\%s", path, alt_dll_name);
+      h_dll = LoadLibrary(full_dll_name);
+    }
+
+    if (h_dll == 0)
+      h_dll = LoadLibrary(alt_dll_name);
+
+    if (h_dll == 0)
     {
       dll_exists = false;
       return false;
@@ -64,11 +78,11 @@ bool init_nls()
 
   for (int i = 0; i < nfuncs; i++)
   {
-    func_ptrs[i] = GetProcAddress(h_intl, func_names[i]);
+    func_ptrs[i] = GetProcAddress(h_dll, func_names[i]);
     if (func_ptrs[i] == 0)
     {
-      FreeLibrary(h_intl);
-      h_intl = 0;
+      FreeLibrary(h_dll);
+      h_dll = 0;
       dll_exists = false;
       return false;
     }
@@ -85,43 +99,43 @@ void free_nls()
     ref_count--;
     if (ref_count == 0)
     {
-      FreeLibrary(h_intl);
-      h_intl = 0;
+      FreeLibrary(h_dll);
+      h_dll = 0;
     }
   }
 }
 
 bool is_nls_available()
 {
-  return h_intl != 0;
+  return h_dll != 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Wrapper functions
 
 const char *gettext_wrapper(const char *str)
-{ return h_intl? ((str2str_func)func_ptrs[GETTEXT_WRAPPER])(str): str; }
+{ return h_dll? ((str2str_func)func_ptrs[GETTEXT_WRAPPER])(str): str; }
 
 int lang_index(const char *code)
-{ return h_intl? ((str2int_func)func_ptrs[LANG_INDEX])(code): -1; }
+{ return h_dll? ((str2int_func)func_ptrs[LANG_INDEX])(code): -1; }
 
 const char *lang_by_code(const char *code)
-{ return h_intl? ((str2str_func)func_ptrs[LANG_BY_CODE])(code): 0; }
+{ return h_dll? ((str2str_func)func_ptrs[LANG_BY_CODE])(code): 0; }
 
 const char *lang_by_index(int index)
-{ return h_intl? ((int2str_func)func_ptrs[LANG_BY_INDEX])(index): 0; }
+{ return h_dll? ((int2str_func)func_ptrs[LANG_BY_INDEX])(index): 0; }
 
 int country_index(const char *code)
-{ return h_intl? ((str2int_func)func_ptrs[COUNTRY_INDEX])(code): -1; }
+{ return h_dll? ((str2int_func)func_ptrs[COUNTRY_INDEX])(code): -1; }
 
 const char *country_by_code(const char *code)
-{ return h_intl? ((str2str_func)func_ptrs[COUNTRY_BY_CODE])(code): 0; }
+{ return h_dll? ((str2str_func)func_ptrs[COUNTRY_BY_CODE])(code): 0; }
 
 const char *country_by_index(int index)
-{ return h_intl? ((int2str_func)func_ptrs[COUNTRY_BY_INDEX])(index): 0; }
+{ return h_dll? ((int2str_func)func_ptrs[COUNTRY_BY_INDEX])(index): 0; }
 
 void set_lang(const char *code, const char *package, const char *path)
-{ if (h_intl) ((set_lang_func)func_ptrs[SET_LANG])(code, package, path); }
+{ if (h_dll) ((set_lang_func)func_ptrs[SET_LANG])(code, package, path); }
 
 const char *get_lang()
-{ return h_intl? ((get_lang_func)func_ptrs[GET_LANG])(): 0; }
+{ return h_dll? ((get_lang_func)func_ptrs[GET_LANG])(): 0; }

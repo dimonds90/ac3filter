@@ -1,8 +1,8 @@
 /*
   Internationalization support for AC3Filter
 
-  Load and use ac3filter_intl.dll dynamically. This allows to redistribute the
-  filter without translation dll.
+  Load and use language support dll dynamically. This allows to redistribute
+  the filter without NLS support.
 */
 
 #ifndef AC3FILTER_INTL_DLL
@@ -19,10 +19,11 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// Load/unload the DLL
-// Reference counting is used to actually unload the DLL.
+// Load/unload the language support DLL
+// Reference counting is used to actually unload the DLL
+// Path and alternate DLL name can be specified.
 
-bool init_nls();
+bool init_nls(const char *path = 0, const char *dll_name = 0);
 bool is_nls_available();
 void free_nls();
 
