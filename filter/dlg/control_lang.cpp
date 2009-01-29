@@ -143,10 +143,10 @@ public:
     return labels[i];
   }
 
-  size_t find_code(const char *code)
+  int find_code(const char *code)
   {
     if (code == 0) return -1;
-    for(size_t i = 0; i < codes.size(); i++)
+    for (int i = 0; i < (int)codes.size(); i++)
       if (strcmp(codes[i], code) == 0)
         return i;
     return -1;
@@ -189,7 +189,7 @@ void ControlLang::init()
 
       for (size_t i = 0; i < langs->nlangs(); i++)
       {
-        int cb_index = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LPARAM) langs->label(i));
+        LRESULT cb_index = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_ADDSTRING, 0, (LPARAM) langs->label(i));
         SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETITEMDATA, cb_index, i+1);
       }
       SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETCURSEL, 0, 0);
@@ -203,8 +203,10 @@ void ControlLang::init()
   else
   {
     // Disable language selection if NLS is unavailable
+    char str[255];
+    sprintf(str, "%s not found", nls_dll_name());
     EnableWindow(GetDlgItem(hdlg, IDC_CMB_LANG), FALSE);
-    SetDlgItemText(hdlg, IDC_EDT_TRANS_INFO, "ac3filter_intl.dll not found");
+    SetDlgItemText(hdlg, IDC_EDT_TRANS_INFO, str);
   }
 #else
   {
@@ -230,12 +232,12 @@ void ControlLang::update()
     }
     else
     {
-      int cb_index = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_GETCOUNT, 0, 0);
+      LRESULT cb_index = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_GETCOUNT, 0, 0);
       if (cb_index != CB_ERR)
       {
         while (cb_index--)
         {
-          int j = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_GETITEMDATA, cb_index, 0);
+          LRESULT j = SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_GETITEMDATA, cb_index, 0);
           if (j != CB_ERR && j == i+1)
           {
             SendDlgItemMessage(hdlg, IDC_CMB_LANG, CB_SETCURSEL, cb_index, 0);

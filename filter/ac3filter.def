@@ -1,4 +1,3 @@
-LIBRARY ac3filter.ax
 EXPORTS
   DllGetClassObject PRIVATE
   DllCanUnloadNow PRIVATE

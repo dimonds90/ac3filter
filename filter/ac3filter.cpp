@@ -4,6 +4,30 @@
 #include "decss\DeCSSInputPin.h"
 
 ///////////////////////////////////////////////////////////////////////////////
+// Truncate the last element of the path with the trailing slash
+// "c:\dir\dir2\filename.ext" turns into
+// "c:\dir\dir2"
+// "c:\dir"
+// etc..
+
+size_t cut_last_name(char *name, size_t size)
+{
+  size_t pos = 0;
+  while (pos < size && name[pos])
+    pos++;
+
+  // skip the trailing slash if it is present
+  if (name[pos] == 0) pos--;
+  if (name[pos] == '\\') pos--;
+
+  while (pos > 0 && name[pos] != '\\')
+    pos--;
+
+  name[pos] = 0;
+  return pos;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // Define number of buffers and max buffer size sent to downstream.
 // So these numbers define total buffer length. For buffer with 2048 samples:
 // 2048 [samples] / 48000 [samples/sec] * 30 [buffers] = 1.28 [sec]
@@ -67,12 +91,15 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   reg.get_bool ("spdif_no_pcm", spdif_no_pcm);
 
   // Init NLS
+  // Search NLS DLL at the filter's folder
 
+  size_t path_size = MAX_PATH;
   char path[MAX_PATH];
-  reg.get_text("Lang_Dir", path, sizeof(path));
-  DWORD attr = GetFileAttributes(path);
-  if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
-    init_nls(path);
+
+  path_size = GetModuleFileName(ac3filter_instance, path, (DWORD)path_size);
+  if (path_size)
+    if (cut_last_name(path, path_size))
+      init_nls(path);
 
   if (is_nls_available())
   {
@@ -80,7 +107,13 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
     memset(lang, 0, LANG_LEN);
     reg.get_text("Language", lang, LANG_LEN);
     if (lang_index(lang) != -1)
-      set_lang(lang, "ac3filter", path);
+    {
+      char lang_dir[MAX_PATH];
+      reg.get_text("Lang_Dir", lang_dir, array_size(lang_dir));
+      DWORD attr = GetFileAttributes(lang_dir);
+      if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
+        set_lang(lang, "ac3filter", lang_dir);
+    }
   }
 
   // init decoder

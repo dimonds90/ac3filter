@@ -7,7 +7,16 @@
 static HMODULE h_dll = 0;
 static size_t ref_count = 0;
 static bool dll_exists = true;
+
+// Both 32bit and 64bit AC3Filter versions may reside in
+// the same folder, therefore we have to have different
+// DLL names for both paltforms.
+
+#ifdef _M_X64
+static const char *dll_name = "ac3filter64_intl.dll";
+#else
 static const char *dll_name = "ac3filter_intl.dll";
+#endif
 
 // function types
 
@@ -45,8 +54,14 @@ static const int nfuncs = array_size(func_names);
 static FARPROC func_ptrs[nfuncs];
 
 ///////////////////////////////////////////////////////////////////////////////
+// NLS control
 
-bool init_nls(const char *path, const char *alt_dll_name)
+const char *nls_dll_name()
+{
+  return dll_name;
+}
+
+bool init_nls(const char *path)
 {
   if (h_dll)
   {
@@ -56,18 +71,18 @@ bool init_nls(const char *path, const char *alt_dll_name)
 
   if (dll_exists)
   {
-    if (alt_dll_name == 0)
-      alt_dll_name = dll_name;
-
     if (path)
     {
-      AutoBuf<char> full_dll_name(strlen(path) + strlen(alt_dll_name) + 2);
-      sprintf(full_dll_name, "%s\\%s", path, alt_dll_name);
-      h_dll = LoadLibrary(full_dll_name);
+      AutoBuf<char> full_dll_name(strlen(path) + strlen(dll_name) + 2);
+      if (full_dll_name.size() != 0)
+      {
+        sprintf(full_dll_name, "%s\\%s", path, dll_name);
+        h_dll = LoadLibrary(full_dll_name);
+      }
     }
 
     if (h_dll == 0)
-      h_dll = LoadLibrary(alt_dll_name);
+      h_dll = LoadLibrary(dll_name);
 
     if (h_dll == 0)
     {

@@ -23,7 +23,8 @@
 // Reference counting is used to actually unload the DLL
 // Path and alternate DLL name can be specified.
 
-bool init_nls(const char *path = 0, const char *dll_name = 0);
+const char *nls_dll_name();
+bool init_nls(const char *path = 0);
 bool is_nls_available();
 void free_nls();
 
