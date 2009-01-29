@@ -138,6 +138,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="intl.lib iconv.lib"
+				OutputFile="$(OutDir)\ac3filter64_intl.dll"
 				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)"
 				ModuleDefinitionFile="ac3filter_intl.def"
 				GenerateDebugInformation="true"
@@ -289,6 +290,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="intl.lib iconv.lib"
+				OutputFile="$(OutDir)\ac3filter64_intl.dll"
 				AdditionalLibraryDirectories="gnu/lib/$(PlatformName)"
 				ModuleDefinitionFile="ac3filter_intl.def"
 				GenerateDebugInformation="true"
@@ -343,7 +345,7 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)"
+					CommandLine="build_gnu.cmd $(PlatformName)&#x0D;&#x0A;"
 					Outputs="gnu/lib/$(PlatformName)/intl.lib;gnu/lib/$(PlatformName)/iconv.lib"
 				/>
 			</FileConfiguration>
@@ -353,7 +355,7 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)"
+					CommandLine="build_gnu.cmd $(PlatformName)&#x0D;&#x0A;"
 					Outputs="gnu/lib/$(PlatformName)/intl.lib;gnu/lib/$(PlatformName)/iconv.lib"
 				/>
 			</FileConfiguration>
@@ -363,7 +365,7 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)"
+					CommandLine="build_gnu.cmd $(PlatformName)&#x0D;&#x0A;"
 					Outputs="gnu/lib/$(PlatformName)/intl.lib;gnu/lib/$(PlatformName)/iconv.lib"
 				/>
 			</FileConfiguration>
@@ -373,7 +375,7 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Build GNU gettext"
-					CommandLine="build_gnu.cmd $(PlatformName)"
+					CommandLine="build_gnu.cmd $(PlatformName)&#x0D;&#x0A;"
 					Outputs="gnu/lib/$(PlatformName)/intl.lib;gnu/lib/$(PlatformName)/iconv.lib"
 				/>
 			</FileConfiguration>
