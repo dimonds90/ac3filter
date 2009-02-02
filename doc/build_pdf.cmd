@@ -14,6 +14,7 @@ pdflatex %1
 pdflatex %1
 pdflatex %1
 call clean_temp.cmd
+if not exist %~n1.pdf echo %1 : error: cannot build PDF && set errorlevel=1
 goto end
 
 :build_all

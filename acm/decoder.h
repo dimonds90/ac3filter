@@ -12,7 +12,7 @@ protected:
   bool is_open;
   Chunk chunk;
   DecoderGraph dec;
-  DataBuf buf;
+  Rawdata buf;
 
 public:
   StreamDecoder();

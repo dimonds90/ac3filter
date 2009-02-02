@@ -27,16 +27,20 @@ goto end
 
 :no_file
 echo File %1 does not exists
+set errorlevel=1
 goto end
 
 :inc_file
 echo File %1 is include file (do not build)
+set errorlevel=1
 goto end
 
 :usage
 echo Usage
 echo   build file.tex - build pdf and html for the given tex file
 echo   build all      - build pdf and html for all tex files
+set errorlevel=1
 goto end
 
 :end
+echo errorlevel=%errorlevel%

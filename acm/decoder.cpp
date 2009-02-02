@@ -57,9 +57,9 @@ StreamDecoder::decode(
   while (src_len && dst_len)
     if (dec.is_empty() && chunk.is_empty())
     {
-      size = MIN(buf.get_size(), src_len);
-      memcpy(buf.get_data(), src, size);
-      chunk.set_rawdata(in_spk, buf.get_data(), size);
+      size = MIN(buf.size(), src_len);
+      memcpy(buf.data(), src, size);
+      chunk.set_rawdata(in_spk, buf.data(), size);
       if (!dec.process(&chunk))
       {
         dbglog("error in process()");
