@@ -50,7 +50,7 @@ DbgLog::printf(const char *format, va_list args)
 
     DWORD written;
     SetFilePointer(f, 0, 0, FILE_END);
-    WriteFile(f, str, strlen(str), &written, 0);
+    WriteFile(f, str, (DWORD) strlen(str), &written, 0);
   }
 }
 

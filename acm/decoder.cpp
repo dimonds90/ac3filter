@@ -49,11 +49,11 @@ StreamDecoder::reset()
 
 bool 
 StreamDecoder::decode(
-  uint8_t *src, unsigned src_len,
-  uint8_t *dst, unsigned dst_len,
-  unsigned *src_gone, unsigned *dst_gone)
+  uint8_t *src, size_t src_len,
+  uint8_t *dst, size_t dst_len,
+  size_t *src_gone, size_t *dst_gone)
 {
-  unsigned size;
+  size_t size;
   while (src_len && dst_len)
     if (dec.is_empty() && chunk.is_empty())
     {

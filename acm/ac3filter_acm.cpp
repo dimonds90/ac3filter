@@ -101,7 +101,7 @@ struct FormatTag
     details->dwFormatTag       = format_tag;
     details->cbFormatSize      = sizeof(WAVEFORMATEX);
     details->fdwSupport        = ACMDRIVERDETAILS_SUPPORTF_CODEC;
-    details->cStandardFormats  = nformats();
+    details->cStandardFormats  = (DWORD)nformats();
     if (name)
       lstrcpyW(details->szFormatTag, name);
   }
@@ -247,7 +247,7 @@ class ACM
 {
 protected:
   HMODULE hmodule;
-  LONG DriverProcedure(const HDRVR hdrvr, const UINT msg, LONG lParam1, LONG lParam2);
+  LRESULT DriverProcedure(const HDRVR hdrvr, const UINT msg, LONG lParam1, LONG lParam2);
 
   inline DWORD about(HWND parent);
   inline DWORD config(HWND parent);
@@ -267,7 +267,7 @@ protected:
   inline DWORD on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
   inline DWORD on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header);
 
-  friend LONG WINAPI DriverProc(DWORD dwDriverId, HDRVR hdrvr, UINT msg, LONG lParam1, LONG lParam2);
+  friend LRESULT WINAPI DriverProc(DWORD dwDriverId, HDRVR hdrvr, UINT msg, LONG lParam1, LONG lParam2);
 
 public:
   ACM(HMODULE hmodule);
@@ -674,24 +674,24 @@ ACM::on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEA
   stream_header->cbSrcLengthUsed = 0;
   stream_header->cbDstLengthUsed = 0;
 
-  unsigned gone_src = 0;
-  unsigned gone_dst = 0;
+  size_t gone_src = 0;
+  size_t gone_dst = 0;
   while (stream_header->cbSrcLength > stream_header->cbSrcLengthUsed && stream_header->cbDstLength > stream_header->cbDstLengthUsed)
     if (dec->decode(
       (uint8_t*)stream_header->pbSrc + stream_header->cbSrcLengthUsed, stream_header->cbSrcLength - stream_header->cbSrcLengthUsed, 
       (uint8_t*)stream_header->pbDst + stream_header->cbDstLengthUsed, stream_header->cbDstLength - stream_header->cbDstLengthUsed, 
       &gone_src, &gone_dst))
     {
-      stream_header->cbSrcLengthUsed += gone_src;
-      stream_header->cbDstLengthUsed += gone_dst;
+      stream_header->cbSrcLengthUsed += (DWORD) gone_src;
+      stream_header->cbDstLengthUsed += (DWORD) gone_dst;
       gone_src = 0;
       gone_dst = 0;
     }
     else
     {
       // What to do in case of errors?
-      stream_header->cbSrcLengthUsed += gone_src;
-      stream_header->cbDstLengthUsed += gone_dst;
+      stream_header->cbSrcLengthUsed += (DWORD) gone_src;
+      stream_header->cbDstLengthUsed += (DWORD) gone_dst;
       gone_src = 0;
       gone_dst = 0;
     }
@@ -705,7 +705,7 @@ ACM::on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEA
 // ACM::DriverProc
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-LONG
+LRESULT
 ACM::DriverProcedure(const HDRVR hdrvr, const UINT msg, LONG lParam1, LONG lParam2)
 {
   switch (msg) 
@@ -823,10 +823,9 @@ ACM::DriverProcedure(const HDRVR hdrvr, const UINT msg, LONG lParam1, LONG lPara
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-LONG WINAPI
+LRESULT WINAPI
 DriverProc(DWORD dwDriverId, HDRVR hdrvr, UINT msg, LONG lParam1, LONG lParam2)
 {
-
   switch (msg)
   {
     ///////////////////////////////////////////////////////
