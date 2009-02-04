@@ -1,6 +1,5 @@
-@echo off
+rem @echo off
 
-set compiler=vc9
 set platform=Win32
 set config=Release
 
@@ -16,14 +15,16 @@ set DIRS=%*
 if "%DIRS%"=="" set DIRS=*
 
 for /d %%d in (%DIRS%) do if exist %%d\build.cmd (
-  cd %OLD_DIR%\%%d
+  cd %%d
   echo Building %%d...
   call build.cmd %compiler% %platform% %config%
-  if errorlevel 1 goto err
+  if errorlevel 1 echo Build error at %cd%\%%d& goto err
+  cd %OLD_DIR%
 )
 goto end
 
 :err
-echo Build error!!!
-:end
 cd %OLD_DIR%
+error 2>nul
+
+:end
