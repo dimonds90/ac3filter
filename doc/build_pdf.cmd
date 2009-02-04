@@ -1,41 +1,39 @@
 @echo off
-if "%1" == "" goto usage
-if "%1" == "all" goto build_all
-if not exist "%1" goto no_file
-if "%1" == "common_packages.tex" goto inc_file
-if "%1" == "common_style.tex" goto inc_file
-if "%1" == "common_rus.tex" goto inc_file
-goto build_file
+if "%1" == "" goto build_all
+if not exist "%1" goto err_no_file
+if exist "%~dpn1.pdf" goto warn_built
 
-:build_file
+if "%1" == "common_packages.tex" goto end
+if "%1" == "common_style.tex" goto end
+if "%1" == "common_rus.tex" goto end
+
 echo Building file %1
 call clean_temp.cmd
 pdflatex %1
 pdflatex %1
 pdflatex %1
 call clean_temp.cmd
-if not exist %~n1.pdf echo %1 : error: cannot build PDF && set errorlevel=1
-goto end
+if not exist %~dpn1.pdf goto err_pdf
 
 :build_all
-echo Building all files
-call clean_temp.cmd
-for %%f in (*.tex) do call build_pdf.cmd %%f 
-call clean_temp.cmd
+echo Building all .tex files
+for %%f in (*.tex) do (
+  call build_pdf.cmd %%f
+  if errorlevel 1 goto end)
 goto end
 
-:no_file
-echo File %1 does not exists
+:err_pdf
+echo %1 : error: cannot build PDF
+goto fail
+
+:err_no_file
+echo %1 : error: file does not exist
+goto fail
+
+:warn_built
+echo %1 is already built
 goto end
 
-:inc_file
-echo File %1 is include file (do not build)
-goto end
-
-:usage
-echo Usage
-echo   build_pdf file.tex - build pdf for the given tex file
-echo   build_pdf all      - build pdf for all tex files
-goto end
-
+:fail
+error 2>nul
 :end

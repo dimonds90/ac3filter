@@ -1,14 +1,35 @@
 @echo off
 
-for /d %%d in (*) do if exist %%d\build.cmd (
-  cd %%d
-  echo Building %%d...
-  call build.cmd %*
-  if errorlevel 1 goto err
-  cd ..
-)
+rem -------------------------------------------------------
+echo Building projects
+
+set PROJECTS=acm filter intl tools\ac3config tools\spdif_test
+call cmd\build_all %PROJECTS%
+if errorlevel 1 goto fail
+
+rem -------------------------------------------------------
+echo Building docs...
+
+cd doc
+call build_pdf.cmd
+if errorlevel 1 goto fail
+cd ..
+
+rem -------------------------------------------------------
+echo Building translations...
+
+cd lang
+call update.cmd
+if errorlevel 1 goto fail
+
+call build.cmd
+if errorlevel 1 goto fail
+cd ..
+
+echo All OK!
 goto end
 
-:err
-echo Build error!!!
+:fail
+echo Build failed!
+error 2>nul
 :end
