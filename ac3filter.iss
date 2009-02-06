@@ -43,10 +43,23 @@ Source: "GPL.txt"; DestDir: "{app}"
 Name: "{group}\AC3Filter home"; Filename: "http://ac3filter.net"
 Name: "{group}\AC3Config"; Filename: "{app}\ac3config.exe"; Components: prog\filter32
 Name: "{group}\AC3Config"; Filename: "{app}\x64\ac3config.exe"; Components: prog\filter64 and not prog\filter32
+
+Name: "{group}\Documentation (eng)\AC3Filter User's Manual"; Filename: "{app}\doc\ac3filter_eng.pdf"; Components: doc\eng
+Name: "{group}\Documentation (eng)\AC3Filter & SPDIF"; Filename: "{app}\doc\spdif_eng.pdf"; Components: doc\eng
+Name: "{group}\Documentation (eng)\Loudness and dynamic range"; Filename: "{app}\doc\loudness_eng.pdf"; Components: doc\eng
+
+Name: "{group}\Documentation (rus)\AC3Filter - Руководство пользователя"; Filename: "{app}\doc\ac3filter_rus.pdf"; Components: doc\rus
+Name: "{group}\Documentation (rus)\AC3Filter & SPDIF"; Filename: "{app}\doc\spdif_rud.pdf"; Components: doc\rus
+Name: "{group}\Documentation (rus)\Громкость и динамический диапазон"; Filename: "{app}\doc\loudness_rus.pdf"; Components: doc\rus
+
 Name: "{group}\Reset to defaults"; Filename: "{app}\Reset to defaults.reg"
 Name: "{group}\Default presets"; Filename: "{app}\Presets.reg"
 Name: "{group}\Readme"; Filename: "{app}\Readme.txt"
-Name: "{group}\Changelog"; Filename: "{app}\Changes.txt"
-Name: "{group}\GPL"; Filename: "{app}\GPL.txt"
 Name: "{group}\Uninstall AC3Filter"; Filename: "{uninstallexe}"
+
+[Registry]
+Root: HKCU; Subkey: "Software\AC3Filter"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Install_Dir"; ValueData: "{app}"
+Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Lang_Dir"; ValueData: "{app}\Lang"; Components: lang;
+
 
