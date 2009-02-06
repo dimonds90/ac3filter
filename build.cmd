@@ -4,7 +4,7 @@ rem -------------------------------------------------------
 echo Building projects
 
 set PROJECTS=acm filter intl tools\ac3config tools\spdif_test
-call cmd\build_all %PROJECTS%
+call cmd\build_all %* %PROJECTS%
 if errorlevel 1 goto fail
 
 rem -------------------------------------------------------
