@@ -1,6 +1,6 @@
 [Setup]
 AppName=AC3Filter
-AppVerName=AC3Filter ver 1.60a
+AppVerName=AC3Filter v.{param:ver|internal}
 DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
 SolidCompression=yes
@@ -19,6 +19,7 @@ Name: "doc\eng"; Description: "English"; Types: full
 Name: "doc\rus"; Description: "Russian"; Types: full
 
 [Tasks]
+Name: "opt_tray"; Description: "Tray icon"; GroupDescription: "Options:";
 Name: "opt_pcm"; Description: "Process all audio with AC3Filter"; GroupDescription: "Options:";
 Name: "opt_spdif"; Description: "Enable SPDIF output by default"; GroupDescription: "Options:"; Flags: unchecked;
 
@@ -71,3 +72,6 @@ Root: HKCU; Subkey: "Software\AC3Filter"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Install_Dir"; ValueData: "{app}"
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Lang_Dir"; ValueData: "{app}\Lang"; Components: lang;
 
+[Run]
+Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
+Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg""";
