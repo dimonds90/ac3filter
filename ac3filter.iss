@@ -6,13 +6,15 @@ DefaultGroupName=AC3Filter
 SolidCompression=yes
 
 [Components]
-Name: "prog"; Description: "Program files:"; Types: full compact
+Name: "prog";          Description: "Program files:"; Types: full compact
 Name: "prog\filter32"; Description: "AC3Filter (32bit)"; Types: full compact
 Name: "prog\filter64"; Description: "AC3Filter (64bit)"; Check: IsWin64; Types: full compact
-Name: "prog\acm32"; Description: "AC3Filter ACM driver (32bit)"; Types: full compact
-Name: "prog\acm64"; Description: "AC3Filter ACM driver (64bit)"; Check: IsWin64; Types: full compact
+Name: "prog\acm32";    Description: "AC3Filter ACM driver (32bit)"; Types: full compact
+Name: "prog\acm64";    Description: "AC3Filter ACM driver (64bit)"; Check: IsWin64; Types: full compact
+
 Name: "lang"; Description: "Language files"; Types: full
-Name: "doc"; Description: "Documentation"; Types: full
+
+Name: "doc";     Description: "Documentation"; Types: full
 Name: "doc\eng"; Description: "English"; Types: full
 Name: "doc\rus"; Description: "Russian"; Types: full
 
@@ -21,28 +23,35 @@ Name: "opt_pcm"; Description: "Process all audio with AC3Filter"; GroupDescripti
 Name: "opt_spdif"; Description: "Enable SPDIF output by default"; GroupDescription: "Options:"; Flags: unchecked;
 
 [Files]
-Source: "filter\Release\ac3filter.ax"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete
-Source: "intl\Release\ac3filter_intl.dll"; DestDir: "{app}"; Components: prog\filter32 and lang; Flags: 32bit RestartReplace UninsRestartDelete
-Source: "tools\ac3config\Release\ac3config.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete
+Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete
+Source: "intl\Release\ac3filter_intl.dll";         DestDir: "{app}"; Components: prog\filter32 and lang; Flags: 32bit RestartReplace UninsRestartDelete
+Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete
+Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete
 
-Source: "filter\x64\Release\ac3filter64.ax"; DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit Regserver RestartReplace UninsRestartDelete
-Source: "intl\x64\Release\ac3filter64_intl.dll"; DestDir: "{app}\x64"; Components: prog\filter64 and lang; Flags: 64bit RestartReplace UninsRestartDelete
-Source: "tools\ac3config\x64\Release\ac3config.exe"; DestDir: "{app}\x64"; Components: prog\filter64 and not prog\filter32; Flags: 64bit RestartReplace UninsRestartDelete
+Source: "filter\x64\Release\ac3filter64.ax";           DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit Regserver RestartReplace UninsRestartDelete
+Source: "intl\x64\Release\ac3filter64_intl.dll";       DestDir: "{app}\x64"; Components: prog\filter64 and lang; Flags: 64bit RestartReplace UninsRestartDelete
+Source: "tools\ac3config\x64\Release\ac3config.exe";   DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit RestartReplace UninsRestartDelete
+Source: "tools\spdif_test\x64\Release\spdif_test.exe"; DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit RestartReplace UninsRestartDelete
 
-Source: "acm\Release\ac3filter.acm"; DestDir: "{app}"; Components: prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete
+Source: "acm\Release\ac3filter.acm";       DestDir: "{app}";     Components: prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete
 Source: "acm\x64\Release\ac3filter64.acm"; DestDir: "{app}\x64"; Components: prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete
+
 Source: "doc\*_rus.pdf"; DestDir: "{app}\doc"; Components: doc\rus
 Source: "doc\*_eng.pdf"; DestDir: "{app}\doc"; Components: doc\eng
+
 Source: "lang\lang\*"; DestDir: "{app}\lang"; Components: lang; Flags: recursesubdirs
-Source: "reg\*.reg"; DestDir: "{app}"
-Source: "Readme.txt"; DestDir: "{app}"
+
+Source: "reg\*.reg";   DestDir: "{app}"
+Source: "Readme.txt";  DestDir: "{app}"
 Source: "Changes.txt"; DestDir: "{app}"
-Source: "GPL.txt"; DestDir: "{app}"
+Source: "GPL.txt";     DestDir: "{app}"
 
 [Icons]
 Name: "{group}\AC3Filter home"; Filename: "http://ac3filter.net"
 Name: "{group}\AC3Config"; Filename: "{app}\ac3config.exe"; Components: prog\filter32
 Name: "{group}\AC3Config"; Filename: "{app}\x64\ac3config.exe"; Components: prog\filter64 and not prog\filter32
+Name: "{group}\SPDIF test (32bit)"; Filename: "{app}\spdif_test.exe"; Components: prog\filter32
+Name: "{group}\SPDIF test (64bit)"; Filename: "{app}\x64\spdif_test.exe"; Components: prog\filter64
 
 Name: "{group}\Documentation (eng)\AC3Filter User's Manual"; Filename: "{app}\doc\ac3filter_eng.pdf"; Components: doc\eng
 Name: "{group}\Documentation (eng)\AC3Filter & SPDIF"; Filename: "{app}\doc\spdif_eng.pdf"; Components: doc\eng
@@ -61,5 +70,4 @@ Name: "{group}\Uninstall AC3Filter"; Filename: "{uninstallexe}"
 Root: HKCU; Subkey: "Software\AC3Filter"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Install_Dir"; ValueData: "{app}"
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Lang_Dir"; ValueData: "{app}\Lang"; Components: lang;
-
 
