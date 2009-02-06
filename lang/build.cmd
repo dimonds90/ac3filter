@@ -1,5 +1,5 @@
 @echo off
-set LANG=Lang
+set LANG=lang
 
 rmdir /q /s "%LANG%" 2>nul
 mkdir "%LANG%"
