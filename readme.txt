@@ -25,7 +25,7 @@ Main features:
 * Direct access to mixing matrix
 * 32bit and 64bit OS support
   
-Copyright (c) 2002-2008 by Alexander Vigovsky (xvalex@mail.ru)
+Copyright (c) 2002-2009 by Alexander Vigovsky (ac3filter@gmail.com)
 
 
 License:

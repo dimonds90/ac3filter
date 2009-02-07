@@ -127,7 +127,7 @@ BEGIN
     LTEXT           "SR'",IDC_LBL_MATRIX_OUT_SR,372,82,16,8
     LTEXT           "Sub",IDC_LBL_MATRIX_OUT_SW,372,95,16,8
     GROUPBOX        "Mixing matrix",IDC_GRP_MATRIX,192,8,200,102
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
     CTEXT           "Voice",IDC_LBL_VOICE,97,17,27,8
@@ -282,7 +282,7 @@ BEGIN
                     TBS_BOTH | WS_TABSTOP,362,122,27,60
     EDITTEXT        IDC_EDT_OUT_LFE,364,183,23,12,ES_AUTOHSCROLL
     GROUPBOX        "Output gains",IDC_GRP_OUTPUT_GAINS,180,104,212,96
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
     CTEXT           "Voice",IDC_LBL_VOICE,90,17,27,8
@@ -370,7 +370,7 @@ BEGIN
                     141,149,8
     EDITTEXT        IDC_EDT_REFRESH_TIME,207,139,22,12,ES_AUTOHSCROLL
     GROUPBOX        "Interface options",IDC_GRP_INTERFACE,200,92,192,64
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
     CONTROL         "Check output format support",IDC_CHK_QUERY_SINK,"Button",
@@ -428,7 +428,7 @@ BEGIN
     EDITTEXT        IDC_EDT_INFO,13,75,178,108,ES_MULTILINE | ES_READONLY | 
                     WS_VSCROLL
     GROUPBOX        "Decoder info",IDC_GRP_DECODER_INFO,8,64,188,136
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
     COMBOBOX        IDC_CMB_SPK,14,21,86,86,CBS_DROPDOWNLIST | WS_VSCROLL | 
@@ -486,7 +486,7 @@ BEGIN
                     ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | NOT 
                     WS_BORDER
     GROUPBOX        "Thanks to",IDC_GRP_CREDITS,204,76,188,124
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
     LTEXT           "AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.",
@@ -552,7 +552,7 @@ BEGIN
     GROUPBOX        "CPU",IDC_GRP_CPU,260,104,30,96
     GROUPBOX        "Input levels",IDC_GRP_INPUT_LEVELS,294,8,98,96
     GROUPBOX        "Output levels",IDC_GRP_OUTPUT_LEVELS,294,104,98,96
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
     CONTROL         "Progress1",IDC_OUT_SW,"msctls_progress32",PBS_VERTICAL | 
@@ -604,7 +604,7 @@ BEGIN
     CONTROL         "Slider3",IDC_SLI_EQ1,"msctls_trackbar32",TBS_VERT | 
                     TBS_BOTH | WS_TABSTOP,113,25,27,60
     EDITTEXT        IDC_EDT_EQ1,115,86,23,12,ES_AUTOHSCROLL
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky",
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",
                     IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
     GROUPBOX        "Equalizer",IDC_GRP_EQ,106,8,286,96
