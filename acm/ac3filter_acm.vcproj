@@ -64,6 +64,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="winmm.lib"
 				OutputFile="$(OutDir)\ac3filter.acm"
+				ModuleDefinitionFile="ac3filter_acm.def"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -87,6 +88,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="copy /b $(OutDir)\ac3filter.acm %windir%\system32"
+				CommandLine="copy /b $(OutDir)\ac3filter.acm %windir%\system32"
 			/>
 		</Configuration>
 		<Configuration
@@ -136,6 +139,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="winmm.lib"
 				OutputFile="$(OutDir)\ac3filter64.acm"
+				ModuleDefinitionFile="ac3filter_acm.def"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -208,6 +212,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="winmm.lib"
 				OutputFile="$(OutDir)\ac3filter.acm"
+				ModuleDefinitionFile="ac3filter_acm.def"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -233,6 +238,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="copy /b $(OutDir)\ac3filter.acm %windir%\system32"
+				CommandLine="copy /b $(OutDir)\ac3filter.acm %windir%\system32"
 			/>
 		</Configuration>
 		<Configuration
@@ -283,6 +290,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="winmm.lib"
 				OutputFile="$(OutDir)\ac3filter64.acm"
+				ModuleDefinitionFile="ac3filter_acm.def"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
