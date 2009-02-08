@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <mmreg.h>
 #include <msacm.h>
+#include <new>
 #include "msacmdrv.h"
 
 #include "dbglog.h"
@@ -23,7 +24,25 @@
 // Override memory allocation
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-extern void *operator new(size_t size)     { return LocalAlloc(LPTR, size); }
+extern void *operator new(size_t size)
+{
+  void *ptr = LocalAlloc(LPTR, size);
+
+#if _MSC_VER >= 1400
+  // Looks like Visual C++ CRT relies on std::bad_alloc exception,
+  // because it crashes without it.
+  //
+  // To reproduce the crach we need:
+  // * Visual Studio 2008
+  // * Multithreaded static release CRT (debug CRT works well)
+  // * Compile and install the ACM
+  // * Run Windows media player and choose Help->About->Technical support information
+
+  if (ptr == 0) throw std::bad_alloc();
+#endif
+
+  return ptr;
+}
 extern void  operator delete(void *block)  { LocalFree(block); }
 
 extern void *malloc(size_t size) { return LocalAlloc(LPTR, size); }
@@ -102,6 +121,7 @@ struct FormatTag
     details->cbFormatSize      = sizeof(WAVEFORMATEX);
     details->fdwSupport        = ACMDRIVERDETAILS_SUPPORTF_CODEC;
     details->cStandardFormats  = (DWORD)nformats();
+    details->szFormatTag[0]    = 0;
     if (name)
       lstrcpyW(details->szFormatTag, name);
   }
@@ -313,8 +333,8 @@ ACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
   driver_details->cFormatTags = ntags;
   driver_details->cFilterTags = 0;
 
-  lstrcpyW(driver_details->szShortName, L"AC3Filter AC3/DTS codec");
-  lstrcpyW(driver_details->szLongName,  L"AC3Filter AC3/DTS codec");
+  lstrcpyW(driver_details->szShortName, L"AC3Filter ACM codec");
+  lstrcpyW(driver_details->szLongName,  L"AC3Filter ACM codec");
   lstrcpyW(driver_details->szCopyright, L"2007 Alexander Vigovsky");
   lstrcpyW(driver_details->szLicensing, L"GPL ver 2");
   lstrcpyW(driver_details->szFeatures,  L"Only stereo decoding");
@@ -325,7 +345,7 @@ ACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
 DWORD 
 ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags)
 {
-  if (formattag_details->cbStruct < sizeof(formattag_details))
+  if (formattag_details->cbStruct < sizeof(ACMFORMATTAGDETAILS))
   {
     dbglog("ACM::on_formattag_details() error: formattag_details->cbStruct < sizeof(formattag_details)");
     return MMSYSERR_INVALPARAM;
@@ -706,7 +726,7 @@ ACM::on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEA
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 LRESULT
-ACM::DriverProcedure(const HDRVR hdrvr, const UINT msg, LONG lParam1, LONG lParam2)
+ACM::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARAM lParam2)
 {
   switch (msg) 
   {
@@ -814,7 +834,7 @@ ACM::DriverProcedure(const HDRVR hdrvr, const UINT msg, LONG lParam1, LONG lPara
   default:
     // Process any other messages.
     dbglog("ACM::DriverProc unknown message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
-    return DefDriverProc ((DWORD)this, hdrvr, msg, lParam1, lParam2);
+    return DefDriverProc ((DWORD_PTR)this, hdrvr, msg, lParam1, lParam2);
   }
 }
 
@@ -824,7 +844,7 @@ ACM::DriverProcedure(const HDRVR hdrvr, const UINT msg, LONG lParam1, LONG lPara
 
 
 LRESULT WINAPI
-DriverProc(DWORD dwDriverId, HDRVR hdrvr, UINT msg, LONG lParam1, LONG lParam2)
+DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM lParam2)
 {
   switch (msg)
   {
@@ -871,7 +891,7 @@ DriverProc(DWORD dwDriverId, HDRVR hdrvr, UINT msg, LONG lParam1, LONG lParam2)
       
       ACM* acm = new ACM(GetDriverModuleHandle(hdrvr));
       dbglog("Instance open (0x%08X)", acm);
-      return (LONG)acm;
+      return (LPARAM)acm;
     }
     
     ///////////////////////////////////////////////////////
@@ -908,7 +928,7 @@ DriverProc(DWORD dwDriverId, HDRVR hdrvr, UINT msg, LONG lParam1, LONG lParam2)
       if (acm)
         return acm->DriverProcedure(hdrvr, msg, lParam1, lParam2);
 
-      dbglog("warning: driver is not opened, message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
+      dbglog("warning: driver was not open, message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
       return DefDriverProc (dwDriverId, hdrvr, msg, lParam1, lParam2);
     }
   }
