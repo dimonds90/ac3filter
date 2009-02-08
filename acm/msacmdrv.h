@@ -2,7 +2,7 @@
 //
 //  msacmdrv.h
 //
-//  Copyright (c) 1992-1994 Microsoft Corporation.  All Rights Reserved.
+//  Copyright (c) 1992-1999 Microsoft Corporation.  All Rights Reserved.
 //
 //  Description:
 //      Audio Compression Manager Public Header File for Drivers
@@ -14,15 +14,17 @@
 #ifndef _INC_ACMDRV
 #define _INC_ACMDRV         /* #defined if msacmdrv.h has been included */
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 #if !defined(_INC_ACM)
 #ifndef RC_INVOKED
 #error MSACM.H to be included first
 #endif
 #endif
 
-#ifndef RC_INVOKED
-#pragma pack(1)             /* Assume byte packing throughout */
-#endif  /* RC_INVOKED */
+#include "pshpack1.h"   /* Assume byte packing throughout */
 
 #ifdef __cplusplus
 extern "C" {                /* Assume C declarations for C++ */
@@ -33,7 +35,7 @@ extern "C" {                /* Assume C declarations for C++ */
 //
 //  ACM Driver Version:
 //
-//  the version is a 32 bit number that is broken into three parts as 
+//  the version is a 32 bit number that is broken into three parts as
 //  follows:
 //
 //      bits 24 - 31:   8 bit _major_ version number
@@ -43,7 +45,7 @@ extern "C" {                /* Assume C declarations for C++ */
 //  this is then displayed as follows:
 //
 //      bMajor = (BYTE)(dwVersion >> 24)
-//      bMinor = (BYTE)(dwVersion >> 16) & 
+//      bMinor = (BYTE)(dwVersion >> 16) &
 //      wBuild = LOWORD(dwVersion)
 //
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
@@ -126,7 +128,7 @@ extern "C" {                /* Assume C declarations for C++ */
 //
 //
 //
-#define ACMDRVOPENDESC_SECTIONNAME_CHARS    
+#define ACMDRVOPENDESC_SECTIONNAME_CHARS
 
 #ifdef _WIN32
 typedef struct tACMDRVOPENDESCA
@@ -139,6 +141,7 @@ typedef struct tACMDRVOPENDESCA
     DWORD           dwError;        // result from DRV_OPEN request
     LPCSTR          pszSectionName; // see DRVCONFIGINFO.lpszDCISectionName
     LPCSTR          pszAliasName;   // see DRVCONFIGINFO.lpszDCIAliasName
+    DWORD	    dnDevNode;	    // devnode id for pnp drivers.
 
 } ACMDRVOPENDESCA, *PACMDRVOPENDESCA, FAR *LPACMDRVOPENDESCA;
 
@@ -152,6 +155,7 @@ typedef struct tACMDRVOPENDESCW
     DWORD           dwError;        // result from DRV_OPEN request
     LPCWSTR         pszSectionName; // see DRVCONFIGINFO.lpszDCISectionName
     LPCWSTR         pszAliasName;   // see DRVCONFIGINFO.lpszDCIAliasName
+    DWORD	    dnDevNode;	    // devnode id for pnp drivers.
 
 } ACMDRVOPENDESCW, *PACMDRVOPENDESCW, FAR *LPACMDRVOPENDESCW;
 
@@ -169,6 +173,7 @@ typedef struct tACMDRVOPENDESC
     DWORD           dwError;        // result from DRV_OPEN request
     LPCSTR          pszSectionName; // see DRVCONFIGINFO.lpszDCISectionName
     LPCSTR          pszAliasName;   // see DRVCONFIGINFO.lpszDCIAliasName
+    DWORD	    dnDevNode;	    // devnode id for pnp drivers.
 
 } ACMDRVOPENDESC, *PACMDRVOPENDESC, FAR *LPACMDRVOPENDESC;
 #endif
@@ -185,11 +190,11 @@ typedef struct tACMDRVSTREAMINSTANCE
     LPWAVEFORMATEX      pwfxSrc;
     LPWAVEFORMATEX      pwfxDst;
     LPWAVEFILTER        pwfltr;
-    DWORD               dwCallback;
-    DWORD               dwInstance;
+    DWORD_PTR           dwCallback;
+    DWORD_PTR           dwInstance;
     DWORD               fdwOpen;
     DWORD               fdwDriver;
-    DWORD               dwDriver;
+    DWORD_PTR           dwDriver;
     HACMSTREAM          has;
 
 } ACMDRVSTREAMINSTANCE, *PACMDRVSTREAMINSTANCE, FAR *LPACMDRVSTREAMINSTANCE;
@@ -204,20 +209,20 @@ typedef struct tACMDRVSTREAMHEADER
 {
     DWORD                   cbStruct;
     DWORD                   fdwStatus;
-    DWORD                   dwUser;
+    DWORD_PTR               dwUser;
     LPBYTE                  pbSrc;
     DWORD                   cbSrcLength;
     DWORD                   cbSrcLengthUsed;
-    DWORD                   dwSrcUser;
+    DWORD_PTR               dwSrcUser;
     LPBYTE                  pbDst;
     DWORD                   cbDstLength;
     DWORD                   cbDstLengthUsed;
-    DWORD                   dwDstUser;
+    DWORD_PTR               dwDstUser;
 
     DWORD                   fdwConvert;     // flags passed from convert func
     LPACMDRVSTREAMHEADER    padshNext;      // for async driver queueing
     DWORD                   fdwDriver;      // driver instance flags
-    DWORD                   dwDriver;       // driver instance data
+    DWORD_PTR               dwDriver;       // driver instance data
 
     //
     //  all remaining fields are used by the ACM for bookkeeping purposes.
@@ -226,7 +231,7 @@ typedef struct tACMDRVSTREAMHEADER
     //  may change, so do NOT rely on them in shipping code.
     //
     DWORD                   fdwPrepared;
-    DWORD                   dwPrepared;
+    DWORD_PTR               dwPrepared;
     LPBYTE                  pbPreparedSrc;
     DWORD                   cbPreparedSrcLength;
     LPBYTE                  pbPreparedDst;
@@ -265,24 +270,6 @@ typedef struct tACMDRVFORMATSUGGEST
 
 } ACMDRVFORMATSUGGEST, *PACMDRVFORMATSUGGEST, FAR *LPACMDRVFORMATSUGGEST;
 
-
-//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
-//
-//
-//
-//
-//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
-
-//
-//
-//
-#ifndef WIN32
-    LRESULT ACMAPI acmApplicationExit(HTASK htask, LPARAM lParam);
-    BOOL ACMAPI acmHugePageLock(LPBYTE pbArea, DWORD cbBuffer);
-    void ACMAPI acmHugePageUnlock(LPBYTE pbArea, DWORD cbBuffer);
-#endif
-
-
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
 //
 //  ACM Driver Messages
@@ -311,14 +298,14 @@ typedef struct tACMDRVFORMATSUGGEST
 #define ACMDM_STREAM_RESET              (ACMDM_BASE + 80)
 #define ACMDM_STREAM_PREPARE            (ACMDM_BASE + 81)
 #define ACMDM_STREAM_UNPREPARE          (ACMDM_BASE + 82)
+#define ACMDM_STREAM_UPDATE	        (ACMDM_BASE + 83)
 
 
-#ifndef RC_INVOKED
-#pragma pack()          /* Revert to default packing */
-#endif  /* RC_INVOKED */
+#include "poppack.h"    /* Revert to default packing */
 
 #ifdef __cplusplus
 }                       /* End of extern "C" { */
 #endif  /* __cplusplus */
 
 #endif  /* _INC_ACMDRV */
+

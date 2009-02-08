@@ -1,7 +1,6 @@
 #include <windows.h>
 #include <mmreg.h>
 #include <msacm.h>
-#include <new>
 #include "msacmdrv.h"
 
 #include "dbglog.h"
@@ -19,34 +18,6 @@
 #define WAVE_FORMAT_AVI_DTS 0x2001
 
 #define BUFFER_SIZE 4096
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Override memory allocation
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-extern void *operator new(size_t size)
-{
-  void *ptr = LocalAlloc(LPTR, size);
-
-#if _MSC_VER >= 1400
-  // Looks like Visual C++ CRT relies on std::bad_alloc exception,
-  // because it crashes without it.
-  //
-  // To reproduce the crach we need:
-  // * Visual Studio 2008
-  // * Multithreaded static release CRT (debug CRT works well)
-  // * Compile and install the ACM
-  // * Run Windows media player and choose Help->About->Technical support information
-
-  if (ptr == 0) throw std::bad_alloc();
-#endif
-
-  return ptr;
-}
-extern void  operator delete(void *block)  { LocalFree(block); }
-
-extern void *malloc(size_t size) { return LocalAlloc(LPTR, size); }
-extern void free(void *block)    { LocalFree(block); }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Formats
@@ -267,27 +238,27 @@ class ACM
 {
 protected:
   HMODULE hmodule;
-  LRESULT DriverProcedure(const HDRVR hdrvr, const UINT msg, LONG lParam1, LONG lParam2);
+  LRESULT DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARAM lParam2);
 
-  inline DWORD about(HWND parent);
-  inline DWORD config(HWND parent);
+  inline LRESULT about(HWND parent);
+  inline LRESULT config(HWND parent);
 
   // ACM additional messages
-  inline DWORD on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details);
-  inline DWORD on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags);
-  inline DWORD on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags);
-  inline DWORD on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest);
+  inline LRESULT on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details);
+  inline LRESULT on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags);
+  inline LRESULT on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags);
+  inline LRESULT on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest);
 
   // ACM stream messages
-  inline DWORD on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance);
-  inline DWORD on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance);
+  inline LRESULT on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance);
+  inline LRESULT on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance);
 
-  inline DWORD on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size);
-  inline DWORD on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
-  inline DWORD on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
-  inline DWORD on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header);
+  inline LRESULT on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size);
+  inline LRESULT on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
+  inline LRESULT on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
+  inline LRESULT on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header);
 
-  friend LRESULT WINAPI DriverProc(DWORD dwDriverId, HDRVR hdrvr, UINT msg, LONG lParam1, LONG lParam2);
+  friend LRESULT WINAPI DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM lParam2);
 
 public:
   ACM(HMODULE hmodule);
@@ -305,21 +276,21 @@ ACM::~ACM()
 
 
 
-DWORD 
+LRESULT
 ACM::about(HWND parent)
 {
   MessageBox(parent, "Copyright (c) 2007 by Alexander Vigovsky", "About", MB_OK);
   return DRVCNF_OK;
 }
 
-DWORD 
+LRESULT
 ACM::config(HWND parent)
 {
   MessageBox(parent, "Sorry, configuration is not implemented", "Configuration", MB_OK);
   return DRVCNF_OK;
 }
 
-DWORD 
+LRESULT 
 ACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
 {
   driver_details->hicon       = 0;
@@ -342,7 +313,7 @@ ACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
   return MMSYSERR_NOERROR;
 }
 
-DWORD 
+LRESULT 
 ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags)
 {
   if (formattag_details->cbStruct < sizeof(ACMFORMATTAGDETAILS))
@@ -405,7 +376,7 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
   return MMSYSERR_NOERROR;
 }
 
-DWORD 
+LRESULT 
 ACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
 {
   if (format_details->cbStruct < sizeof(ACMFORMATDETAILS))
@@ -468,7 +439,7 @@ ACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
   // note: we should never be here
 }
 
-DWORD 
+LRESULT 
 ACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
 {
   DWORD suggest = (ACM_FORMATSUGGESTF_TYPEMASK & format_suggest->fdwSuggest);
@@ -565,7 +536,7 @@ ACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
 }
 
 
-DWORD 
+LRESULT 
 ACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
 {
   //  the most important condition to check before doing anything else
@@ -612,7 +583,7 @@ ACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
   {
     StreamDecoder *dec = new StreamDecoder;
     if (dec->open(in_spk, out_spk))
-      stream_instance->dwInstance = (DWORD)dec;  
+      stream_instance->dwInstance = (LRESULT)dec;  
     else
     {
       dbglog("ACM::on_stream_open() error: cannot open stream");
@@ -623,7 +594,7 @@ ACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
   return MMSYSERR_NOERROR;
 }
 
-DWORD 
+LRESULT 
 ACM::on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance)
 {
   StreamDecoder *dec = (StreamDecoder *)stream_instance->dwInstance;
@@ -632,7 +603,7 @@ ACM::on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance)
   return MMSYSERR_NOERROR;
 }
 
-DWORD 
+LRESULT 
 ACM::on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size)
 {
   // Most common AC3 format is 5.1 48kHz 448kbps
@@ -660,7 +631,7 @@ ACM::on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE s
   }
 }
 
-DWORD 
+LRESULT 
 ACM::on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
 {
   dbglog("ACM::on_stream_prepare(): Src = %d (0x%04X) / %d\tDst = %d (0x%04X) / %d",
@@ -674,7 +645,7 @@ ACM::on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER
   return MMSYSERR_NOERROR;
 }
 
-DWORD 
+LRESULT 
 ACM::on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
 {
   dbglog("ACM::on_stream_unprepare(): Src = %d / %d\tDst = %d / %d",
@@ -687,7 +658,7 @@ ACM::on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEAD
   return MMSYSERR_NOERROR;  
 }
 
-DWORD 
+LRESULT 
 ACM::on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header)
 {
   StreamDecoder *dec = (StreamDecoder *)stream_instance->dwInstance;
@@ -888,7 +859,6 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
           return FALSE;
         }
       } 
-      
       ACM* acm = new ACM(GetDriverModuleHandle(hdrvr));
       dbglog("Instance open (0x%08X)", acm);
       return (LPARAM)acm;
@@ -901,7 +871,6 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
     case DRV_CLOSE: 
     {
       dbglog("DRV_CLOSE");
-      
       ACM *acm = (ACM *)dwDriverId;
       if (acm)
       {
@@ -914,7 +883,6 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
         dbglog("error: cannot close instance NULL");
         return FALSE;
       }
-      break;
     }
     
     ///////////////////////////////////////////////////////
@@ -924,10 +892,8 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
     default:
     {
       ACM *acm = (ACM *)dwDriverId;
-
       if (acm)
         return acm->DriverProcedure(hdrvr, msg, lParam1, lParam2);
-
       dbglog("warning: driver was not open, message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
       return DefDriverProc (dwDriverId, hdrvr, msg, lParam1, lParam2);
     }

@@ -88,8 +88,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="copy /b $(OutDir)\ac3filter.acm %windir%\system32"
-				CommandLine="copy /b $(OutDir)\ac3filter.acm %windir%\system32"
+				Description="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
+				CommandLine="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -163,6 +163,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
+				CommandLine="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -238,8 +240,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="copy /b $(OutDir)\ac3filter.acm %windir%\system32"
-				CommandLine="copy /b $(OutDir)\ac3filter.acm %windir%\system32"
+				Description="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
+				CommandLine="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -316,6 +318,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
+				CommandLine="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
 			/>
 		</Configuration>
 	</Configurations>
@@ -340,6 +344,10 @@
 		</File>
 		<File
 			RelativePath=".\decoder.h"
+			>
+		</File>
+		<File
+			RelativePath=".\mem_override.cpp"
 			>
 		</File>
 		<File
