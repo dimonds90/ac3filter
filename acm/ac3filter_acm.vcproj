@@ -331,6 +331,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\acm_drv.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\acm_drv.h"
+			>
+		</File>
+		<File
 			RelativePath=".\dbglog.cpp"
 			>
 		</File>
@@ -347,7 +355,7 @@
 			>
 		</File>
 		<File
-			RelativePath=".\mem_override.cpp"
+			RelativePath=".\format_tag.h"
 			>
 		</File>
 		<File

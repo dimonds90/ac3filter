@@ -3,6 +3,9 @@
 #include <msacm.h>
 #include "msacmdrv.h"
 
+#include "acm_drv.h"
+#include "format_tag.h"
+
 #include "dbglog.h"
 #include "decoder.h"
 #include "win32\winspk.h"
@@ -61,71 +64,6 @@
 //
 // Bit per sample can vary for PCM formats so we need to enumerate it too.
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////
-// FormatTag
-// Structure that holds format tag info, including format enumeration info.
-///////////////////////////////////////////////////////////////////////////////
-
-struct FormatTag
-{
-  int     index;          // format tag index
-  LPCWSTR name;           // format name string (may be null)
-  DWORD   format_tag;     // format tag
-
-  const int *sample_rate; // allowed sample rates
-  int nsample_rates;      // number of sample rates
-
-  const int *channels;    // allowed channel configs
-  int nchannels;          // number of channel configs
-
-  const int *bitrate;     // allowed bitrates   (null for PCM formats)
-  int nbitrates;          // number of bitrates (1 for PCM formats)
-
-  const int *bps;         // allowed bit per sample   (null for non-PCM formats)
-  int nbps;               // number of bit per sample (1 for non-PCM formats)
-
-  void formattag_details(LPACMFORMATTAGDETAILS details) const
-  {
-    details->dwFormatTagIndex  = index;
-    details->dwFormatTag       = format_tag;
-    details->cbFormatSize      = sizeof(WAVEFORMATEX);
-    details->fdwSupport        = ACMDRIVERDETAILS_SUPPORTF_CODEC;
-    details->cStandardFormats  = (DWORD)nformats();
-    details->szFormatTag[0]    = 0;
-    if (name)
-      lstrcpyW(details->szFormatTag, name);
-  }
-
-  bool format_details(LPACMFORMATDETAILS details) const
-  {
-    int i = details->dwFormatIndex;
-
-    int ibps         = i % nbps;
-    int ibitrate     = i / nbps % nbitrates;
-    int isample_rate = i / nbps / nbitrates % nsample_rates;
-    int ichannels    = i / nbps / nbitrates / nsample_rates;
-
-    details->fdwSupport  = ACMDRIVERDETAILS_SUPPORTF_CODEC;
-    details->szFormat[0] = 0; // let windows to fill this
-
-    WAVEFORMATEX *wfx = details->pwfx;
-    wfx->wFormatTag      = (WORD) format_tag;
-    wfx->nChannels       = mask_nch(channels[ichannels]);
-    wfx->nSamplesPerSec  = sample_rate[isample_rate];
-    wfx->wBitsPerSample  = bps? bps[ibps]: 0;
-    wfx->nAvgBytesPerSec = bitrate? bitrate[ibitrate] / 8: wfx->wBitsPerSample * wfx->nSamplesPerSec / 8;
-    wfx->cbSize          = 0;
-
-    dbglog("FormatTag::format_details(): tag: 0x%04X channles: %i sample rate: %iHz bits/sample: %i bytes/sec: %i", wfx->wFormatTag, wfx->nChannels, wfx->nSamplesPerSec, wfx->wBitsPerSample, wfx->nAvgBytesPerSec);
-    return true;
-  }
-
-  size_t nformats() const
-  {
-    return (size_t) nsample_rates * nchannels * nbitrates * nbps;
-  }
-};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Description of supported formats
@@ -234,64 +172,61 @@ const int ntags = array_size(tags);
 // ACM
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ACM
+class AC3FilterACM : public ACMDrv
 {
 protected:
-  HMODULE hmodule;
-  LRESULT DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARAM lParam2);
-
-  inline LRESULT about(HWND parent);
-  inline LRESULT config(HWND parent);
+  virtual LRESULT about(HWND parent);
+  virtual LRESULT config(HWND parent);
 
   // ACM additional messages
-  inline LRESULT on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details);
-  inline LRESULT on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags);
-  inline LRESULT on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags);
-  inline LRESULT on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest);
+  virtual LRESULT on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details);
+  virtual LRESULT on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags);
+  virtual LRESULT on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags);
+  virtual LRESULT on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest);
 
   // ACM stream messages
-  inline LRESULT on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance);
-  inline LRESULT on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance);
+  virtual LRESULT on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance);
+  virtual LRESULT on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance);
 
-  inline LRESULT on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size);
-  inline LRESULT on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
-  inline LRESULT on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
-  inline LRESULT on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header);
-
-  friend LRESULT WINAPI DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM lParam2);
+  virtual LRESULT on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size);
+  virtual LRESULT on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
+  virtual LRESULT on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
+  virtual LRESULT on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header);
 
 public:
-  ACM(HMODULE hmodule);
-  ~ACM();
+  AC3FilterACM() {};
+  ~AC3FilterACM() {};
 };
 
-
-ACM::ACM(HMODULE _hmodule)
+ACMDrv *make_acm(HDRVR hdrvr)
 {
-  hmodule = _hmodule;
-}
-ACM::~ACM()
-{
+  return new AC3FilterACM();
 }
 
-
+///////////////////////////////////////////////////////////////////////////////
+// Config and about
+///////////////////////////////////////////////////////////////////////////////
 
 LRESULT
-ACM::about(HWND parent)
+AC3FilterACM::about(HWND parent)
 {
-  MessageBox(parent, "Copyright (c) 2007 by Alexander Vigovsky", "About", MB_OK);
+  MessageBox(parent, "Copyright (c) 2007-2009 by Alexander Vigovsky", "About", MB_OK);
   return DRVCNF_OK;
 }
 
 LRESULT
-ACM::config(HWND parent)
+AC3FilterACM::config(HWND parent)
 {
   MessageBox(parent, "Sorry, configuration is not implemented", "Configuration", MB_OK);
   return DRVCNF_OK;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Details and enumerations
+///////////////////////////////////////////////////////////////////////////////
+
 LRESULT 
-ACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
+AC3FilterACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
 {
   driver_details->hicon       = 0;
   driver_details->fccType     = ACMDRIVERDETAILS_FCCTYPE_AUDIOCODEC;
@@ -305,20 +240,20 @@ ACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
   driver_details->cFilterTags = 0;
 
   lstrcpyW(driver_details->szShortName, L"AC3Filter ACM codec");
-  lstrcpyW(driver_details->szLongName,  L"AC3Filter ACM codec");
-  lstrcpyW(driver_details->szCopyright, L"2007 Alexander Vigovsky");
-  lstrcpyW(driver_details->szLicensing, L"GPL ver 2");
-  lstrcpyW(driver_details->szFeatures,  L"Only stereo decoding");
+  lstrcpyW(driver_details->szLongName,  L"Decode AC3 and DTS audio");
+  lstrcpyW(driver_details->szCopyright, L"2007-2009 Alexander Vigovsky");
+  lstrcpyW(driver_details->szLicensing, L"GPL");
+  lstrcpyW(driver_details->szFeatures,  L"Stereo decoding only");
 
   return MMSYSERR_NOERROR;
 }
 
 LRESULT 
-ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags)
+AC3FilterACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags)
 {
   if (formattag_details->cbStruct < sizeof(ACMFORMATTAGDETAILS))
   {
-    dbglog("ACM::on_formattag_details() error: formattag_details->cbStruct < sizeof(formattag_details)");
+    dbglog("AC3FilterACM::on_formattag_details() error: formattag_details->cbStruct < sizeof(formattag_details)");
     return MMSYSERR_INVALPARAM;
   }
 
@@ -331,11 +266,11 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
   {
     case ACM_FORMATTAGDETAILSF_INDEX:
       // formattag_details->dwFormatTagIndex is given
-      dbglog("ACM::on_formattag_details(): Details for format tag index = %i", formattag_details->dwFormatTagIndex);
+      dbglog("AC3FilterACM::on_formattag_details(): Details for format tag index = %i", formattag_details->dwFormatTagIndex);
 
       if (formattag_details->dwFormatTagIndex >= ntags)
       {
-        dbglog("ACM::on_formattag_details() warning: unsupported format tag index #%i", formattag_details->dwFormatTagIndex);
+        dbglog("AC3FilterACM::on_formattag_details() warning: unsupported format tag index #%i", formattag_details->dwFormatTagIndex);
         return ACMERR_NOTPOSSIBLE;
       }
 
@@ -345,7 +280,7 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
 
     case ACM_FORMATTAGDETAILSF_FORMATTAG:
       // formattag_details->dwFormatTag is given
-      dbglog("ACM::on_formattag_details(): Details for format tag = 0x%04X", formattag_details->dwFormatTag);
+      dbglog("AC3FilterACM::on_formattag_details(): Details for format tag = 0x%04X", formattag_details->dwFormatTag);
 
       for (itag = 0; itag < ntags; itag++)
         if (tags[itag].format_tag == formattag_details->dwFormatTag)
@@ -353,7 +288,7 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
 
       if (itag >= ntags)
       {
-        dbglog("ACM::on_formattag_details() warning: unsupported format tag 0x%04X", formattag_details->dwFormatTag);
+        dbglog("AC3FilterACM::on_formattag_details() warning: unsupported format tag 0x%04X", formattag_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
@@ -364,7 +299,7 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
       break; // case ACM_FORMATTAGDETAILSF_FORMATTAG:
 
     default:
-      dbglog("ACM::on_formattag_details() error: unknown flag: 0x%08X", flags);
+      dbglog("AC3FilterACM::on_formattag_details() error: unknown flag: 0x%08X", flags);
       return ACMERR_NOTPOSSIBLE;
 
   } // switch (flags & ACM_FORMATTAGDETAILSF_QUERYMASK)
@@ -377,17 +312,17 @@ ACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM 
 }
 
 LRESULT 
-ACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
+AC3FilterACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
 {
   if (format_details->cbStruct < sizeof(ACMFORMATDETAILS))
   {
-    dbglog("ACM::on_format_details() error: format_details->cbStruct < sizeof(ACMFORMATDETAILS)");
+    dbglog("AC3FilterACM::on_format_details() error: format_details->cbStruct < sizeof(ACMFORMATDETAILS)");
     return MMSYSERR_INVALPARAM;
   }
 
   if (format_details->cbwfx < sizeof(WAVEFORMATEX))
   {
-    dbglog("ACM::on_format_details() error: format_detils->cbwfx < sizeof(WAVEOFORMATEX)");
+    dbglog("AC3FilterACM::on_format_details() error: format_detils->cbwfx < sizeof(WAVEOFORMATEX)");
     return ACMERR_NOTPOSSIBLE;
   }
 
@@ -404,7 +339,7 @@ ACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
     // fdwSupport, pwfx, szFormat (optional)
 
     case ACM_FORMATDETAILSF_INDEX:
-      dbglog("ACM::on_format_details() details for format tag 0x%04X index %i", format_details->dwFormatTag, format_details->dwFormatIndex);
+      dbglog("AC3FilterACM::on_format_details() details for format tag 0x%04X index %i", format_details->dwFormatTag, format_details->dwFormatIndex);
 
       for (itag = 0; itag < ntags; itag++)
         if (tags[itag].format_tag == format_details->dwFormatTag)
@@ -412,13 +347,13 @@ ACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
 
       if (itag >= ntags)
       {
-        dbglog("ACM::on_format_details() warning: unsupported format tag 0x%04X", format_details->dwFormatTag);
+        dbglog("AC3FilterACM::on_format_details() warning: unsupported format tag 0x%04X", format_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
       if (format_details->dwFormatIndex > tags[itag].nformats())
       {
-        dbglog("ACM::on_format_details() error: unknown index %i for format tag %i", format_details->dwFormatIndex, format_details->dwFormatTag);
+        dbglog("AC3FilterACM::on_format_details() error: unknown index %i for format tag %i", format_details->dwFormatIndex, format_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
@@ -432,7 +367,7 @@ ACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
       return MMSYSERR_NOERROR;
 
     default:
-      dbglog("ACM::on_formattag_details() error: unknown flag: 0x%08X", flags);
+      dbglog("AC3FilterACM::on_formattag_details() error: unknown flag: 0x%08X", flags);
       return ACMERR_NOTPOSSIBLE;
   }
 
@@ -440,19 +375,19 @@ ACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
 }
 
 LRESULT 
-ACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
+AC3FilterACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
 {
   DWORD suggest = (ACM_FORMATSUGGESTF_TYPEMASK & format_suggest->fdwSuggest);
   WAVEFORMATEX *src = format_suggest->pwfxSrc;
   WAVEFORMATEX *dst = format_suggest->pwfxDst;
- 
+
   dbglog("Suggest %s%s%s%s (0x%08X)",
     (suggest & ACM_FORMATSUGGESTF_NCHANNELS) ? "channels, ":"",
     (suggest & ACM_FORMATSUGGESTF_NSAMPLESPERSEC) ? "samples/sec, ":"",
     (suggest & ACM_FORMATSUGGESTF_WBITSPERSAMPLE) ? "bits/sample, ":"",
     (suggest & ACM_FORMATSUGGESTF_WFORMATTAG) ? "format, ":"",
     suggest);
- 
+
   dbglog("Suggest for source format = 0x%04X, channels = %d, Samples/s = %d, AvgB/s = %d, BlockAlign = %d, b/sample = %d",
     src->wFormatTag,
     src->nChannels,
@@ -535,9 +470,12 @@ ACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
   return MMSYSERR_NOERROR;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Stream functions
+///////////////////////////////////////////////////////////////////////////////
 
 LRESULT 
-ACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
+AC3FilterACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
 {
   //  the most important condition to check before doing anything else
   //  is that this ACM driver can actually perform the conversion we are
@@ -563,19 +501,19 @@ ACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
 
   if (stream_instance->fdwOpen & ACM_STREAMOPENF_ASYNC)
   {
-    dbglog("ACM::on_stream_open() error: async mode is not supported");
+    dbglog("AC3FilterACM::on_stream_open() error: async mode is not supported");
     return ACMERR_NOTPOSSIBLE;
   }
 
   if (!wfx2spk(src, in_spk))
   {
-    dbglog("ACM::on_stream_open() error: wrong input format");
+    dbglog("AC3FilterACM::on_stream_open() error: wrong input format");
     return ACMERR_NOTPOSSIBLE;
   }
 
   if (!wfx2spk(dst, out_spk))
   {
-    dbglog("ACM::on_stream_open() error: wrong output format");
+    dbglog("AC3FilterACM::on_stream_open() error: wrong output format");
     return ACMERR_NOTPOSSIBLE;
   }
 
@@ -586,7 +524,7 @@ ACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
       stream_instance->dwInstance = (LRESULT)dec;  
     else
     {
-      dbglog("ACM::on_stream_open() error: cannot open stream");
+      dbglog("AC3FilterACM::on_stream_open() error: cannot open stream");
       return ACMERR_NOTPOSSIBLE;
     }
   }
@@ -595,7 +533,7 @@ ACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
 }
 
 LRESULT 
-ACM::on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance)
+AC3FilterACM::on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance)
 {
   StreamDecoder *dec = (StreamDecoder *)stream_instance->dwInstance;
   delete dec;
@@ -604,7 +542,7 @@ ACM::on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance)
 }
 
 LRESULT 
-ACM::on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size)
+AC3FilterACM::on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size)
 {
   // Most common AC3 format is 5.1 48kHz 448kbps
   // It is about 1:10 compression ratio, so we can 
@@ -632,9 +570,9 @@ ACM::on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE s
 }
 
 LRESULT 
-ACM::on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
+AC3FilterACM::on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
 {
-  dbglog("ACM::on_stream_prepare(): Src = %d (0x%04X) / %d\tDst = %d (0x%04X) / %d",
+  dbglog("AC3FilterACM::on_stream_prepare(): Src = %d (0x%04X) / %d\tDst = %d (0x%04X) / %d",
     stream_header->cbSrcLength,
     stream_header->pbSrc,
     stream_header->cbSrcLengthUsed,
@@ -646,9 +584,9 @@ ACM::on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER
 }
 
 LRESULT 
-ACM::on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
+AC3FilterACM::on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
 {
-  dbglog("ACM::on_stream_unprepare(): Src = %d / %d\tDst = %d / %d",
+  dbglog("AC3FilterACM::on_stream_unprepare(): Src = %d / %d\tDst = %d / %d",
     stream_header->cbSrcLength,
     stream_header->cbSrcLengthUsed,
     stream_header->cbDstLength,
@@ -659,7 +597,7 @@ ACM::on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEAD
 }
 
 LRESULT 
-ACM::on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header)
+AC3FilterACM::on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header)
 {
   StreamDecoder *dec = (StreamDecoder *)stream_instance->dwInstance;
   stream_header->cbSrcLengthUsed = 0;
@@ -688,214 +626,4 @@ ACM::on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEA
     }
 
   return MMSYSERR_NOERROR;
-}
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ACM::DriverProc
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-LRESULT
-ACM::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARAM lParam2)
-{
-  switch (msg) 
-  {
-  ///////////////////////////////////////////////////////
-  // Driver instance messages
-  ///////////////////////////////////////////////////////
-
-  // Sent when the driver is installed.
-  // Can return DRVCNF_OK, DRVCNF_CANCEL, DRV_RESTART
-  case DRV_INSTALL:
-    dbglog("DRV_INSTALL");
-    return DRVCNF_OK;
-    
-  // Sent when the driver is removed.
-  // Return value ignored
-  case DRV_REMOVE:
-    dbglog("DRV_REMOVE");
-    return 1;
-    
-  // Sent to determine if the driver can be configured.
-  // Zero indicates configuration NOT supported
-  case DRV_QUERYCONFIGURE:
-    dbglog("DRV_QUERYCONFIGURE");
-    return 0;
-    
-  // Sent to display the configuration
-  // dialog box for the driver.
-  // Can return DRVCNF_OK, DRVCNF_CANCEL, DRVCNF_RESTART
-  case DRV_CONFIGURE:
-    dbglog("DRV_CONFIGURE");
-    return DRVCNF_OK; // config((HWND)lParam1);
-    
-  /////////////////////////////////////////////////////////
-  // ACM additional messages
-  /////////////////////////////////////////////////////////
-    
-  case ACMDM_DRIVER_ABOUT:
-    dbglog("ACMDM_DRIVER_ABOUT");
-    return DRVCNF_OK; // about((HWND)lParam1);
- 
-  // acmDriverDetails
-  // Fill-in general informations about the driver/codec
-  case ACMDM_DRIVER_DETAILS: 
-    dbglog("ACMDM_DRIVER_DETAILS");
-    return on_driver_details(hdrvr, (LPACMDRIVERDETAILS)lParam1);
-    
-  // acmFormatTagDetails
-  case ACMDM_FORMATTAG_DETAILS: 
-    dbglog("ACMDM_FORMATTAG_DETAILS");
-    return on_formattag_details((LPACMFORMATTAGDETAILS)lParam1, lParam2);
-    
-  // acmFormatDetails
-  case ACMDM_FORMAT_DETAILS: 
-    dbglog("ACMDM_FORMAT_DETAILS");
-    return on_format_details((LPACMFORMATDETAILS) lParam1, lParam2);
-    
-  // acmFormatSuggest
-  // Sent to determine if the driver can be configured.
-  case ACMDM_FORMAT_SUGGEST: 
-    dbglog("ACMDM_FORMAT_SUGGEST");
-    return on_format_suggest((LPACMDRVFORMATSUGGEST)lParam1);
-    
-  /////////////////////////////////////////////////////////
-  // ACM stream messages
-  /////////////////////////////////////////////////////////
-    
-  // Sent to determine if the driver can be configured.
-  case ACMDM_STREAM_OPEN:
-    dbglog("ACMDM_STREAM_OPEN");
-    return on_stream_open((LPACMDRVSTREAMINSTANCE)lParam1);
-    
-  // returns a recommended size for a source 
-  // or destination buffer on an ACM stream
-  case ACMDM_STREAM_SIZE:
-    dbglog("ACMDM_STREAM_SIZE");
-    return on_stream_size((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMDRVSTREAMSIZE)lParam2);
-    
-  // prepares an ACMSTREAMHEADER structure for
-  // an ACM stream conversion
-  case ACMDM_STREAM_PREPARE:
-    dbglog("ACMDM_STREAM_PREPARE");
-    return on_stream_prepare((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMSTREAMHEADER) lParam2);
-    
-  // cleans up the preparation performed by
-  // the ACMDM_STREAM_PREPARE message for an ACM stream
-  case ACMDM_STREAM_UNPREPARE:
-    dbglog("ACMDM_STREAM_UNPREPARE");
-    return on_stream_unprepare((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMSTREAMHEADER) lParam2);
-    
-  // perform a conversion on the specified conversion stream
-  case ACMDM_STREAM_CONVERT:
-    dbglog("ACMDM_STREAM_CONVERT");
-    return on_stream_convert((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMDRVSTREAMHEADER) lParam2);
-    
-  // closes an ACM conversion stream
-  case ACMDM_STREAM_CLOSE:
-    dbglog("ACMDM_STREAM_CLOSE");
-    return on_stream_close((LPACMDRVSTREAMINSTANCE)lParam1);
-    break;
-    
-  /////////////////////////////////////////////////////////
-  // ACM other messages
-  /////////////////////////////////////////////////////////
-   
-  default:
-    // Process any other messages.
-    dbglog("ACM::DriverProc unknown message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
-    return DefDriverProc ((DWORD_PTR)this, hdrvr, msg, lParam1, lParam2);
-  }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// DriverProc
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-LRESULT WINAPI
-DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM lParam2)
-{
-  switch (msg)
-  {
-    ///////////////////////////////////////////////////////
-    // Driver init messages
-
-    case DRV_LOAD:
-      dbglog("DRV_LOAD");
-      return TRUE;
-    
-    case DRV_FREE:
-      dbglog("DRV_FREE");
-      return TRUE;
-    
-    case DRV_ENABLE:
-      dbglog("DRV_ENABLE");
-      return TRUE;
-    
-    case DRV_DISABLE:
-      dbglog("DRV_DISABLE");
-      return TRUE;
-    
-    ///////////////////////////////////////////////////////
-    // DRV_OPEN
-    // Open the driver instance
-    
-    case DRV_OPEN: 
-    {
-      if (lParam2)
-        dbglog("DRV_OPEN (ID 0x%08X), pDesc = 0x%08X", dwDriverId, lParam2);
-      else
-        dbglog("DRV_OPEN (ID 0x%08X), pDesc = NULL", dwDriverId);
-
-      if (lParam2) 
-      {
-        LPACMDRVOPENDESC desc = (LPACMDRVOPENDESC)lParam2;
-        
-        if (desc->fccType != ACMDRIVERDETAILS_FCCTYPE_AUDIOCODEC) 
-        {
-          dbglog("error: wrong desc->fccType (0x%04X)", desc->fccType);
-          return FALSE;
-        }
-      } 
-      ACM* acm = new ACM(GetDriverModuleHandle(hdrvr));
-      dbglog("Instance open (0x%08X)", acm);
-      return (LPARAM)acm;
-    }
-    
-    ///////////////////////////////////////////////////////
-    // DRV_CLOSE
-    // Close the driver instance
-
-    case DRV_CLOSE: 
-    {
-      dbglog("DRV_CLOSE");
-      ACM *acm = (ACM *)dwDriverId;
-      if (acm)
-      {
-        delete acm;
-        dbglog("Instance close (0x%08X)", acm);
-        return TRUE;
-      }
-      else
-      {
-        dbglog("error: cannot close instance NULL");
-        return FALSE;
-      }
-    }
-    
-    ///////////////////////////////////////////////////////
-    // Other driver messages
-    // Pass it to the driver instance
-
-    default:
-    {
-      ACM *acm = (ACM *)dwDriverId;
-      if (acm)
-        return acm->DriverProcedure(hdrvr, msg, lParam1, lParam2);
-      dbglog("warning: driver was not open, message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
-      return DefDriverProc (dwDriverId, hdrvr, msg, lParam1, lParam2);
-    }
-  }
 }

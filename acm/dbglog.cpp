@@ -1,4 +1,4 @@
-#ifdef _DEBUG
+#if 1
 #include <stdio.h>
 #include "DbgLog.h"
 
