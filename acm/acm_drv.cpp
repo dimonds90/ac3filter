@@ -72,23 +72,23 @@ ACMDrv::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARA
   // Fill-in general informations about the driver/codec
   case ACMDM_DRIVER_DETAILS: 
     dbglog("ACMDM_DRIVER_DETAILS");
-    return on_driver_details(hdrvr, (LPACMDRIVERDETAILS)lParam1);
+    return driver_details(hdrvr, (LPACMDRIVERDETAILS)lParam1);
     
   // acmFormatTagDetails
   case ACMDM_FORMATTAG_DETAILS: 
     dbglog("ACMDM_FORMATTAG_DETAILS");
-    return on_formattag_details((LPACMFORMATTAGDETAILS)lParam1, lParam2);
+    return formattag_details((LPACMFORMATTAGDETAILS)lParam1, lParam2);
     
   // acmFormatDetails
   case ACMDM_FORMAT_DETAILS: 
     dbglog("ACMDM_FORMAT_DETAILS");
-    return on_format_details((LPACMFORMATDETAILS) lParam1, lParam2);
+    return format_details((LPACMFORMATDETAILS) lParam1, lParam2);
     
   // acmFormatSuggest
   // Sent to determine if the driver can be configured.
   case ACMDM_FORMAT_SUGGEST: 
     dbglog("ACMDM_FORMAT_SUGGEST");
-    return on_format_suggest((LPACMDRVFORMATSUGGEST)lParam1);
+    return format_suggest((LPACMDRVFORMATSUGGEST)lParam1);
     
   /////////////////////////////////////////////////////////
   // ACM stream messages
@@ -97,35 +97,35 @@ ACMDrv::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARA
   // Sent to determine if the driver can be configured.
   case ACMDM_STREAM_OPEN:
     dbglog("ACMDM_STREAM_OPEN");
-    return on_stream_open((LPACMDRVSTREAMINSTANCE)lParam1);
+    return stream_open((LPACMDRVSTREAMINSTANCE)lParam1);
     
   // returns a recommended size for a source 
   // or destination buffer on an ACM stream
   case ACMDM_STREAM_SIZE:
     dbglog("ACMDM_STREAM_SIZE");
-    return on_stream_size((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMDRVSTREAMSIZE)lParam2);
+    return stream_size((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMDRVSTREAMSIZE)lParam2);
     
   // prepares an ACMSTREAMHEADER structure for
   // an ACM stream conversion
   case ACMDM_STREAM_PREPARE:
     dbglog("ACMDM_STREAM_PREPARE");
-    return on_stream_prepare((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMSTREAMHEADER) lParam2);
+    return stream_prepare((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMSTREAMHEADER) lParam2);
     
   // cleans up the preparation performed by
   // the ACMDM_STREAM_PREPARE message for an ACM stream
   case ACMDM_STREAM_UNPREPARE:
     dbglog("ACMDM_STREAM_UNPREPARE");
-    return on_stream_unprepare((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMSTREAMHEADER) lParam2);
+    return stream_unprepare((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMSTREAMHEADER) lParam2);
     
   // perform a conversion on the specified conversion stream
   case ACMDM_STREAM_CONVERT:
     dbglog("ACMDM_STREAM_CONVERT");
-    return on_stream_convert((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMDRVSTREAMHEADER) lParam2);
+    return stream_convert((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMDRVSTREAMHEADER) lParam2);
     
   // closes an ACM conversion stream
   case ACMDM_STREAM_CLOSE:
     dbglog("ACMDM_STREAM_CLOSE");
-    return on_stream_close((LPACMDRVSTREAMINSTANCE)lParam1);
+    return stream_close((LPACMDRVSTREAMINSTANCE)lParam1);
     break;
     
   /////////////////////////////////////////////////////////

@@ -179,19 +179,19 @@ protected:
   virtual LRESULT configure(HWND parent, LPDRVCONFIGINFO config_info);
 
   // ACM additional messages
-  virtual LRESULT on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details);
-  virtual LRESULT on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags);
-  virtual LRESULT on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags);
-  virtual LRESULT on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest);
+  virtual LRESULT driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details);
+  virtual LRESULT formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags);
+  virtual LRESULT format_details(LPACMFORMATDETAILS format_details, const LPARAM flags);
+  virtual LRESULT format_suggest(LPACMDRVFORMATSUGGEST format_suggest);
 
   // ACM stream messages
-  virtual LRESULT on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance);
-  virtual LRESULT on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance);
+  virtual LRESULT stream_open(LPACMDRVSTREAMINSTANCE stream_instance);
+  virtual LRESULT stream_close(LPACMDRVSTREAMINSTANCE stream_instance);
 
-  virtual LRESULT on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size);
-  virtual LRESULT on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
-  virtual LRESULT on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
-  virtual LRESULT on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header);
+  virtual LRESULT stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size);
+  virtual LRESULT stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
+  virtual LRESULT stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header);
+  virtual LRESULT stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header);
 
 public:
   AC3FilterACM() {};
@@ -232,7 +232,7 @@ AC3FilterACM::configure(HWND parent, LPDRVCONFIGINFO config_info)
 ///////////////////////////////////////////////////////////////////////////////
 
 LRESULT 
-AC3FilterACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
+AC3FilterACM::driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details)
 {
   driver_details->hicon       = 0;
   driver_details->fccType     = ACMDRIVERDETAILS_FCCTYPE_AUDIOCODEC;
@@ -255,11 +255,11 @@ AC3FilterACM::on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_det
 }
 
 LRESULT 
-AC3FilterACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags)
+AC3FilterACM::formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags)
 {
   if (formattag_details->cbStruct < sizeof(ACMFORMATTAGDETAILS))
   {
-    dbglog("AC3FilterACM::on_formattag_details() error: formattag_details->cbStruct < sizeof(formattag_details)");
+    dbglog("AC3FilterACM::formattag_details() error: formattag_details->cbStruct < sizeof(formattag_details)");
     return MMSYSERR_INVALPARAM;
   }
 
@@ -272,11 +272,11 @@ AC3FilterACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, cons
   {
     case ACM_FORMATTAGDETAILSF_INDEX:
       // formattag_details->dwFormatTagIndex is given
-      dbglog("AC3FilterACM::on_formattag_details(): Details for format tag index = %i", formattag_details->dwFormatTagIndex);
+      dbglog("AC3FilterACM::formattag_details(): Details for format tag index = %i", formattag_details->dwFormatTagIndex);
 
       if (formattag_details->dwFormatTagIndex >= ntags)
       {
-        dbglog("AC3FilterACM::on_formattag_details() warning: unsupported format tag index #%i", formattag_details->dwFormatTagIndex);
+        dbglog("AC3FilterACM::formattag_details() warning: unsupported format tag index #%i", formattag_details->dwFormatTagIndex);
         return ACMERR_NOTPOSSIBLE;
       }
 
@@ -286,7 +286,7 @@ AC3FilterACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, cons
 
     case ACM_FORMATTAGDETAILSF_FORMATTAG:
       // formattag_details->dwFormatTag is given
-      dbglog("AC3FilterACM::on_formattag_details(): Details for format tag = 0x%04X", formattag_details->dwFormatTag);
+      dbglog("AC3FilterACM::formattag_details(): Details for format tag = 0x%04X", formattag_details->dwFormatTag);
 
       for (itag = 0; itag < ntags; itag++)
         if (tags[itag].format_tag == formattag_details->dwFormatTag)
@@ -294,7 +294,7 @@ AC3FilterACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, cons
 
       if (itag >= ntags)
       {
-        dbglog("AC3FilterACM::on_formattag_details() warning: unsupported format tag 0x%04X", formattag_details->dwFormatTag);
+        dbglog("AC3FilterACM::formattag_details() warning: unsupported format tag 0x%04X", formattag_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
@@ -305,7 +305,7 @@ AC3FilterACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, cons
       break; // case ACM_FORMATTAGDETAILSF_FORMATTAG:
 
     default:
-      dbglog("AC3FilterACM::on_formattag_details() error: unknown flag: 0x%08X", flags);
+      dbglog("AC3FilterACM::formattag_details() error: unknown flag: 0x%08X", flags);
       return ACMERR_NOTPOSSIBLE;
 
   } // switch (flags & ACM_FORMATTAGDETAILSF_QUERYMASK)
@@ -318,17 +318,17 @@ AC3FilterACM::on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, cons
 }
 
 LRESULT 
-AC3FilterACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
+AC3FilterACM::format_details(LPACMFORMATDETAILS format_details, const LPARAM flags)
 {
   if (format_details->cbStruct < sizeof(ACMFORMATDETAILS))
   {
-    dbglog("AC3FilterACM::on_format_details() error: format_details->cbStruct < sizeof(ACMFORMATDETAILS)");
+    dbglog("AC3FilterACM::format_details() error: format_details->cbStruct < sizeof(ACMFORMATDETAILS)");
     return MMSYSERR_INVALPARAM;
   }
 
   if (format_details->cbwfx < sizeof(WAVEFORMATEX))
   {
-    dbglog("AC3FilterACM::on_format_details() error: format_detils->cbwfx < sizeof(WAVEOFORMATEX)");
+    dbglog("AC3FilterACM::format_details() error: format_detils->cbwfx < sizeof(WAVEOFORMATEX)");
     return ACMERR_NOTPOSSIBLE;
   }
 
@@ -345,7 +345,7 @@ AC3FilterACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM 
     // fdwSupport, pwfx, szFormat (optional)
 
     case ACM_FORMATDETAILSF_INDEX:
-      dbglog("AC3FilterACM::on_format_details() details for format tag 0x%04X index %i", format_details->dwFormatTag, format_details->dwFormatIndex);
+      dbglog("AC3FilterACM::format_details() details for format tag 0x%04X index %i", format_details->dwFormatTag, format_details->dwFormatIndex);
 
       for (itag = 0; itag < ntags; itag++)
         if (tags[itag].format_tag == format_details->dwFormatTag)
@@ -353,13 +353,13 @@ AC3FilterACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM 
 
       if (itag >= ntags)
       {
-        dbglog("AC3FilterACM::on_format_details() warning: unsupported format tag 0x%04X", format_details->dwFormatTag);
+        dbglog("AC3FilterACM::format_details() warning: unsupported format tag 0x%04X", format_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
       if (format_details->dwFormatIndex > tags[itag].nformats())
       {
-        dbglog("AC3FilterACM::on_format_details() error: unknown index %i for format tag %i", format_details->dwFormatIndex, format_details->dwFormatTag);
+        dbglog("AC3FilterACM::format_details() error: unknown index %i for format tag %i", format_details->dwFormatIndex, format_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
@@ -373,7 +373,7 @@ AC3FilterACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM 
       return MMSYSERR_NOERROR;
 
     default:
-      dbglog("AC3FilterACM::on_formattag_details() error: unknown flag: 0x%08X", flags);
+      dbglog("AC3FilterACM::formattag_details() error: unknown flag: 0x%08X", flags);
       return ACMERR_NOTPOSSIBLE;
   }
 
@@ -381,7 +381,7 @@ AC3FilterACM::on_format_details(LPACMFORMATDETAILS format_details, const LPARAM 
 }
 
 LRESULT 
-AC3FilterACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
+AC3FilterACM::format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
 {
   DWORD suggest = (ACM_FORMATSUGGESTF_TYPEMASK & format_suggest->fdwSuggest);
   WAVEFORMATEX *src = format_suggest->pwfxSrc;
@@ -481,7 +481,7 @@ AC3FilterACM::on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
 ///////////////////////////////////////////////////////////////////////////////
 
 LRESULT 
-AC3FilterACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
+AC3FilterACM::stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
 {
   //  the most important condition to check before doing anything else
   //  is that this ACM driver can actually perform the conversion we are
@@ -507,19 +507,19 @@ AC3FilterACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
 
   if (stream_instance->fdwOpen & ACM_STREAMOPENF_ASYNC)
   {
-    dbglog("AC3FilterACM::on_stream_open() error: async mode is not supported");
+    dbglog("AC3FilterACM::stream_open() error: async mode is not supported");
     return ACMERR_NOTPOSSIBLE;
   }
 
   if (!wfx2spk(src, in_spk))
   {
-    dbglog("AC3FilterACM::on_stream_open() error: wrong input format");
+    dbglog("AC3FilterACM::stream_open() error: wrong input format");
     return ACMERR_NOTPOSSIBLE;
   }
 
   if (!wfx2spk(dst, out_spk))
   {
-    dbglog("AC3FilterACM::on_stream_open() error: wrong output format");
+    dbglog("AC3FilterACM::stream_open() error: wrong output format");
     return ACMERR_NOTPOSSIBLE;
   }
 
@@ -530,7 +530,7 @@ AC3FilterACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
       stream_instance->dwInstance = (LRESULT)dec;  
     else
     {
-      dbglog("AC3FilterACM::on_stream_open() error: cannot open stream");
+      dbglog("AC3FilterACM::stream_open() error: cannot open stream");
       return ACMERR_NOTPOSSIBLE;
     }
   }
@@ -539,7 +539,7 @@ AC3FilterACM::on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
 }
 
 LRESULT 
-AC3FilterACM::on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance)
+AC3FilterACM::stream_close(LPACMDRVSTREAMINSTANCE stream_instance)
 {
   StreamDecoder *dec = (StreamDecoder *)stream_instance->dwInstance;
   delete dec;
@@ -548,7 +548,7 @@ AC3FilterACM::on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance)
 }
 
 LRESULT 
-AC3FilterACM::on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size)
+AC3FilterACM::stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size)
 {
   // Most common AC3 format is 5.1 48kHz 448kbps
   // It is about 1:10 compression ratio, so we can 
@@ -576,9 +576,9 @@ AC3FilterACM::on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTR
 }
 
 LRESULT 
-AC3FilterACM::on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
+AC3FilterACM::stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
 {
-  dbglog("AC3FilterACM::on_stream_prepare(): Src = %d (0x%04X) / %d\tDst = %d (0x%04X) / %d",
+  dbglog("AC3FilterACM::stream_prepare(): Src = %d (0x%04X) / %d\tDst = %d (0x%04X) / %d",
     stream_header->cbSrcLength,
     stream_header->pbSrc,
     stream_header->cbSrcLengthUsed,
@@ -590,9 +590,9 @@ AC3FilterACM::on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTR
 }
 
 LRESULT 
-AC3FilterACM::on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
+AC3FilterACM::stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
 {
-  dbglog("AC3FilterACM::on_stream_unprepare(): Src = %d / %d\tDst = %d / %d",
+  dbglog("AC3FilterACM::stream_unprepare(): Src = %d / %d\tDst = %d / %d",
     stream_header->cbSrcLength,
     stream_header->cbSrcLengthUsed,
     stream_header->cbDstLength,
@@ -603,7 +603,7 @@ AC3FilterACM::on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMS
 }
 
 LRESULT 
-AC3FilterACM::on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header)
+AC3FilterACM::stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header)
 {
   StreamDecoder *dec = (StreamDecoder *)stream_instance->dwInstance;
   stream_header->cbSrcLengthUsed = 0;

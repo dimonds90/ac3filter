@@ -23,19 +23,19 @@ protected:
   virtual LRESULT configure(HWND parent, LPDRVCONFIGINFO config_info) = 0;
 
   // ACM additional messages
-  virtual LRESULT on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details) = 0;
-  virtual LRESULT on_formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags) = 0;
-  virtual LRESULT on_format_details(LPACMFORMATDETAILS format_details, const LPARAM flags) = 0;
-  virtual LRESULT on_format_suggest(LPACMDRVFORMATSUGGEST format_suggest) = 0;
+  virtual LRESULT driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details) = 0;
+  virtual LRESULT formattag_details(LPACMFORMATTAGDETAILS formattag_details, const LPARAM flags) = 0;
+  virtual LRESULT format_details(LPACMFORMATDETAILS format_details, const LPARAM flags) = 0;
+  virtual LRESULT format_suggest(LPACMDRVFORMATSUGGEST format_suggest) = 0;
 
   // ACM stream messages
-  virtual LRESULT on_stream_open(LPACMDRVSTREAMINSTANCE stream_instance) = 0;
-  virtual LRESULT on_stream_close(LPACMDRVSTREAMINSTANCE stream_instance) = 0;
+  virtual LRESULT stream_open(LPACMDRVSTREAMINSTANCE stream_instance) = 0;
+  virtual LRESULT stream_close(LPACMDRVSTREAMINSTANCE stream_instance) = 0;
 
-  virtual LRESULT on_stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size) = 0;
-  virtual LRESULT on_stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header) = 0;
-  virtual LRESULT on_stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header) = 0;
-  virtual LRESULT on_stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header) = 0;
+  virtual LRESULT stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMSIZE stream_size) = 0;
+  virtual LRESULT stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header) = 0;
+  virtual LRESULT stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header) = 0;
+  virtual LRESULT stream_convert(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAMHEADER stream_header) = 0;
 
 public:
   ACMDrv() {};
