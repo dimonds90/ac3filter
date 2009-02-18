@@ -143,30 +143,29 @@ static const int pcm_bps[] =
 const FormatTag tags[] =
 {
   { 
-    0, L"AC3", WAVE_FORMAT_AVI_AC3, 
+    0, L"PCM", WAVE_FORMAT_PCM, 
+    pcm_sample_rate, array_size(pcm_sample_rate), 
+    pcm_channels, array_size(pcm_channels), 
+    0, 1, 
+    pcm_bps, array_size(pcm_bps) 
+  },
+  { 
+    1, L"AC3", WAVE_FORMAT_AVI_AC3, 
     ac3_sample_rate, array_size(ac3_sample_rate), 
     ac3_channels, array_size(ac3_channels), 
     ac3_bitrate, array_size(ac3_bitrate), 
     0, 1 
   },
   { 
-    1, L"DTS", WAVE_FORMAT_AVI_DTS, 
+    2, L"DTS", WAVE_FORMAT_AVI_DTS, 
     dts_sample_rate, array_size(dts_sample_rate), 
     dts_channels, array_size(dts_channels), 
     dts_bitrate, array_size(dts_bitrate), 
     0, 1 
   },
-  { 
-    2, 0, WAVE_FORMAT_PCM, 
-    pcm_sample_rate, array_size(pcm_sample_rate), 
-    pcm_channels, array_size(pcm_channels), 
-    0, 1, 
-    pcm_bps, array_size(pcm_bps) 
-  },
 };
 
 const int ntags = array_size(tags);
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ACM
@@ -176,7 +175,8 @@ class AC3FilterACM : public ACMDrv
 {
 protected:
   virtual LRESULT about(HWND parent);
-  virtual LRESULT config(HWND parent);
+  virtual BOOL    query_configure();
+  virtual LRESULT configure(HWND parent, LPDRVCONFIGINFO config_info);
 
   // ACM additional messages
   virtual LRESULT on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details);
@@ -195,10 +195,10 @@ protected:
 
 public:
   AC3FilterACM() {};
-  ~AC3FilterACM() {};
+  virtual ~AC3FilterACM() {};
 };
 
-ACMDrv *make_acm(HDRVR hdrvr)
+ACMDrv *make_acm(HDRVR hdrvr, LPACMDRVOPENDESC pado)
 {
   return new AC3FilterACM();
 }
@@ -214,8 +214,14 @@ AC3FilterACM::about(HWND parent)
   return DRVCNF_OK;
 }
 
+BOOL
+AC3FilterACM::query_configure()
+{
+  return FALSE;
+}
+
 LRESULT
-AC3FilterACM::config(HWND parent)
+AC3FilterACM::configure(HWND parent, LPDRVCONFIGINFO config_info)
 {
   MessageBox(parent, "Sorry, configuration is not implemented", "Configuration", MB_OK);
   return DRVCNF_OK;

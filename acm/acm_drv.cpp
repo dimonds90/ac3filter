@@ -2,6 +2,39 @@
 #include "dbglog.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Memory allocation
+//
+// A driver instance may be closed AFTER the driver module was unloaded from the process'es memory. I.e. init/uninit
+// sequence looks like:
+//
+// * DLLMain(DLL_PROCESS_ATTACH)
+//   On this step CRT initializes and can be used afterwards.
+// * DriverProc(DRV_LOAD)
+// * DriverProc(DRV_OPEN)
+//   Here we allocate the driver instance
+// * DLLMain(DLL_PROCESS_DETACH)
+//   On this step CRT shuts down and destroys memory heap.
+// * DriverProc(DRV_CLOSE)
+//   Here we must deallocate instance data
+// * DriverProc(DRV_FREE)
+//
+// Therefore we cannot rely on CRT memory allocation in this case...
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void *
+ACMDrv::operator new(size_t size)
+{
+  void *ptr = LocalAlloc(LPTR, size);
+  return ptr;
+}
+
+void 
+ACMDrv::operator delete(void *ptr, size_t size)
+{
+  LocalFree(ptr);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ACMDrv::DriverProc
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,31 +46,19 @@ ACMDrv::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARA
   ///////////////////////////////////////////////////////
   // Driver instance messages
   ///////////////////////////////////////////////////////
-
-  // Sent when the driver is installed.
-  // Can return DRVCNF_OK, DRVCNF_CANCEL, DRV_RESTART
-  case DRV_INSTALL:
-    dbglog("DRV_INSTALL");
-    return DRVCNF_OK;
-    
-  // Sent when the driver is removed.
-  // Return value ignored
-  case DRV_REMOVE:
-    dbglog("DRV_REMOVE");
-    return 1;
-    
+  
   // Sent to determine if the driver can be configured.
   // Zero indicates configuration NOT supported
   case DRV_QUERYCONFIGURE:
     dbglog("DRV_QUERYCONFIGURE");
-    return 0;
+    return query_configure();
     
   // Sent to display the configuration
   // dialog box for the driver.
   // Can return DRVCNF_OK, DRVCNF_CANCEL, DRVCNF_RESTART
   case DRV_CONFIGURE:
     dbglog("DRV_CONFIGURE");
-    return DRVCNF_OK; // config((HWND)lParam1);
+    return configure((HWND)lParam1, (LPDRVCONFIGINFO)lParam2);
     
   /////////////////////////////////////////////////////////
   // ACM additional messages
@@ -112,8 +133,11 @@ ACMDrv::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARA
   /////////////////////////////////////////////////////////
    
   default:
-    // Process any other messages.
-    dbglog("ACM::DriverProc unknown message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
+    if (msg >= ACMDM_USER)
+    {
+      dbglog("ACM::DriverProc unknown user message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
+      return MMSYSERR_NOTSUPPORTED;
+    }
     return DefDriverProc ((DWORD_PTR)this, hdrvr, msg, lParam1, lParam2);
   }
 }
@@ -122,10 +146,11 @@ ACMDrv::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARA
 // DriverProc
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 LRESULT WINAPI
 DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM lParam2)
 {
+  ACMDrv *acm = (ACMDrv *)dwDriverId;
+
   switch (msg)
   {
     ///////////////////////////////////////////////////////
@@ -142,32 +167,30 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
       dbglog("DRV_FREE");
       return TRUE;
     
-    case DRV_ENABLE:
-      dbglog("DRV_ENABLE");
-      return TRUE;
-    
-    case DRV_DISABLE:
-      dbglog("DRV_DISABLE");
-      return TRUE;
-    
     ///////////////////////////////////////////////////////
     // DRV_OPEN
     // Open the driver instance
     
     case DRV_OPEN: 
     {
-      dbglog("DRV_OPEN (ID 0x%08X), pDesc = 0x%08X", dwDriverId, lParam2);
-      LPACMDRVOPENDESC desc = (LPACMDRVOPENDESC)lParam2;     
+      LPACMDRVOPENDESC desc = (LPACMDRVOPENDESC)lParam2;
+      dbglog("DRV_OPEN (ID 0x%08X), pDesc = 0x%08X", dwDriverId, desc);
 
-      if (desc)
-        if (desc->fccType != ACMDRIVERDETAILS_FCCTYPE_AUDIOCODEC) 
-        {
-          dbglog("error: wrong desc->fccType (0x%04X)", desc->fccType);
-          return FALSE;
-        }
+      if (desc) if (desc->fccType != ACMDRIVERDETAILS_FCCTYPE_AUDIOCODEC) 
+      {
+        dbglog("error: wrong desc->fccType (0x%04X)", desc->fccType);
+        return FALSE;
+      }
 
-      ACMDrv* acm = make_acm(hdrvr);
-      dbglog("Instance open (0x%08X)", acm);
+      acm = make_acm(hdrvr, desc);
+      if (acm == 0 && desc)
+        desc->dwError = MMSYSERR_NOMEM;
+
+      if (acm == 0)
+        dbglog("error: make_acm() returns zero");
+      else
+        dbglog("Instance open (0x%08X)", acm);
+
       return (LRESULT)acm;
     }
     
@@ -178,18 +201,15 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
     case DRV_CLOSE: 
     {
       dbglog("DRV_CLOSE");
-      ACMDrv *acm = (ACMDrv *)dwDriverId;
       if (acm)
       {
-        delete acm;
         dbglog("Instance close (0x%08X)", acm);
-        return TRUE;
+        delete acm;
       }
       else
-      {
-        dbglog("error: cannot close instance NULL");
-        return FALSE;
-      }
+        dbglog("error: cannot close null instance");
+
+      return TRUE;
     }
     
     ///////////////////////////////////////////////////////
@@ -198,11 +218,30 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
 
     default:
     {
-      ACMDrv *acm = (ACMDrv *)dwDriverId;
       if (acm)
         return acm->DriverProcedure(hdrvr, msg, lParam1, lParam2);
       dbglog("warning: driver was not open, message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
       return DefDriverProc (dwDriverId, hdrvr, msg, lParam1, lParam2);
     }
   }
+}
+
+
+BOOL WINAPI DllMain(
+  HINSTANCE hinstDLL,
+  DWORD fdwReason,
+  LPVOID lpvReserved
+)
+{
+  switch (fdwReason)
+  {
+  case DLL_PROCESS_ATTACH:
+    dbglog("DLL_PROCESS_ATTACH");
+    break;
+
+  case DLL_PROCESS_DETACH:
+    dbglog("DLL_PROCESS_DETACH");
+    break;
+  }
+  return TRUE;
 }

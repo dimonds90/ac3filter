@@ -19,7 +19,8 @@ private:
 
 protected:
   virtual LRESULT about(HWND parent) = 0;
-  virtual LRESULT config(HWND parent) = 0;
+  virtual BOOL    query_configure() = 0;
+  virtual LRESULT configure(HWND parent, LPDRVCONFIGINFO config_info) = 0;
 
   // ACM additional messages
   virtual LRESULT on_driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_details) = 0;
@@ -39,8 +40,11 @@ protected:
 public:
   ACMDrv() {};
   virtual ~ACMDrv() {};
+
+  void *operator new(size_t size);
+  void operator delete(void *ptr, size_t size);
 };
 
-extern ACMDrv *make_acm(HDRVR hdrvr);
+extern ACMDrv *make_acm(HDRVR hdrvr, LPACMDRVOPENDESC pado);
 
 #endif
