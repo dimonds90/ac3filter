@@ -1,5 +1,6 @@
 [Setup]
 AppName=AC3Filter
+AppID=AC3Filter
 AppVerName=AC3Filter v.{param:ver|internal}
 DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
@@ -18,11 +19,6 @@ Name: "doc";     Description: "Documentation"; Types: full
 Name: "doc\eng"; Description: "English"; Types: full
 Name: "doc\rus"; Description: "Russian"; Types: full
 
-[Tasks]
-Name: "opt_tray"; Description: "Tray icon"; GroupDescription: "Options:";
-Name: "opt_pcm"; Description: "Process all audio with AC3Filter"; GroupDescription: "Options:";
-Name: "opt_spdif"; Description: "Enable SPDIF output by default"; GroupDescription: "Options:"; Flags: unchecked;
-
 [Files]
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete
 Source: "intl\Release\ac3filter_intl.dll";         DestDir: "{app}"; Components: prog\filter32 and lang; Flags: 32bit RestartReplace UninsRestartDelete
@@ -34,8 +30,8 @@ Source: "intl\x64\Release\ac3filter64_intl.dll";       DestDir: "{app}\x64"; Com
 Source: "tools\ac3config\x64\Release\ac3config.exe";   DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit RestartReplace UninsRestartDelete
 Source: "tools\spdif_test\x64\Release\spdif_test.exe"; DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit RestartReplace UninsRestartDelete
 
-Source: "acm\Release\ac3filter.acm";       DestDir: "{app}";     Components: prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete
-Source: "acm\x64\Release\ac3filter64.acm"; DestDir: "{app}\x64"; Components: prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete
+Source: "acm\Release\ac3filter.acm";       DestDir: "{sys}"; Components: prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete
+Source: "acm\x64\Release\ac3filter64.acm"; DestDir: "{sys}"; Components: prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete
 
 Source: "doc\*_rus.pdf"; DestDir: "{app}\doc"; Components: doc\rus
 Source: "doc\*_eng.pdf"; DestDir: "{app}\doc"; Components: doc\eng
@@ -72,6 +68,13 @@ Root: HKCU; Subkey: "Software\AC3Filter"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Install_Dir"; ValueData: "{app}"
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Lang_Dir"; ValueData: "{app}\Lang"; Components: lang;
 
+Root: HKLM32; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers32"; ValueType: string; ValueName: "msacm.ac3filter"; ValueData: "ac3filter.acm"; Components: prog\acm32; Flags: uninsdeletevalue
+Root: HKLM32; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc"; ValueType: string; ValueName: "ac3filter.acm"; ValueData: "AC3Filter ACM codec"; Components: prog\acm32; Flags: uninsdeletevalue
+
+Root: HKLM64; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers32"; ValueType: string; ValueName: "msacm.ac3filter"; ValueData: "ac3filter64.acm"; Components: prog\acm64; Flags: uninsdeletevalue
+Root: HKLM64; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc"; ValueType: string; ValueName: "ac3filter.acm"; ValueData: "AC3Filter ACM codec"; Components: prog\acm64; Flags: uninsdeletevalue
+
 [Run]
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg""";
+
