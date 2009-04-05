@@ -89,6 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="register.cmd $(ConfigurationName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -163,6 +164,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="register.cmd $(PlatformName)\$(ConfigurationName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -239,6 +241,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="register.cmd $(ConfigurationName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -316,6 +319,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="register.cmd $(PlatformName)\$(ConfigurationName)"
 			/>
 		</Configuration>
 	</Configurations>
