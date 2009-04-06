@@ -105,9 +105,9 @@ void ControlSpectrum::update_dynamic()
 
   if (spectrum)
   {
-    proc->get_spectrum(spectrum, &bin2hz);
+    proc->get_spectrum(-1, spectrum, &bin2hz);
     for (size_t i = 0; i < spectrum_length; i++)
-      spectrum[i] = value2db(spectrum[i]);
+      spectrum[i] = spectrum[i] > 0? value2db(spectrum[i]): -db_range;
 
     if (log_scale)
       paint_log();

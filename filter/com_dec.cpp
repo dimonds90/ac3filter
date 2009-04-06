@@ -595,10 +595,10 @@ STDMETHODIMP COMDecoder::set_spectrum_length(unsigned spectrum_length)
   dvd.proc.set_spectrum_length(spectrum_length);
   return S_OK;
 }
-STDMETHODIMP COMDecoder::get_spectrum(sample_t *data, double *bin2hz)
+STDMETHODIMP COMDecoder::get_spectrum(int ch, sample_t *data, double *bin2hz)
 {
   AutoLock config_lock(&config);
-  dvd.proc.get_spectrum(data, bin2hz);
+  dvd.proc.get_spectrum(ch, data, bin2hz);
   return S_OK;
 }
 
