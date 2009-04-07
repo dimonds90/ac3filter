@@ -162,15 +162,15 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
     case DRV_LOAD:
       dbglog("DRV_LOAD");
       return TRUE;
-    
+
     case DRV_FREE:
       dbglog("DRV_FREE");
       return TRUE;
-    
+
     ///////////////////////////////////////////////////////
     // DRV_OPEN
     // Open the driver instance
-    
+
     case DRV_OPEN: 
     {
       LPACMDRVOPENDESC desc = (LPACMDRVOPENDESC)lParam2;
