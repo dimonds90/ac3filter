@@ -196,11 +196,11 @@ public:
   STDMETHODIMP get_eq           (bool *eq);
   STDMETHODIMP set_eq           (bool  eq);
   STDMETHODIMP get_eq_master_nbands(size_t *nbands);
-  STDMETHODIMP get_eq_master_bands(int *freqs, double *gains, int first_band, int nbands);
-  STDMETHODIMP set_eq_master_bands(size_t nbands, const int *freqs, const double *gains);
+  STDMETHODIMP get_eq_master_bands(EqBand *bands, size_t first_band, size_t nbands);
+  STDMETHODIMP set_eq_master_bands(EqBand *bands, size_t nbands);
   STDMETHODIMP get_eq_nbands    (int ch, size_t *nbands);
-  STDMETHODIMP get_eq_bands     (int ch, int *freqs, double *gains, int first_band, int nbands);
-  STDMETHODIMP set_eq_bands     (int ch, size_t nbands, const int *freqs, const double *gains);
+  STDMETHODIMP get_eq_bands     (int ch, EqBand *bands, size_t first_band, size_t nbands);
+  STDMETHODIMP set_eq_bands     (int ch, EqBand *bands, size_t nbands);
   // Spectrum
   STDMETHODIMP get_spectrum_length (unsigned *length);
   STDMETHODIMP set_spectrum_length (unsigned  length);

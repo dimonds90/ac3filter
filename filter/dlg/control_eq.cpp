@@ -33,6 +33,11 @@ static const int idc_lbl_eq[EQ_BANDS] =
   IDC_LBL_EQ1, IDC_LBL_EQ2, IDC_LBL_EQ3, IDC_LBL_EQ4, IDC_LBL_EQ5, IDC_LBL_EQ6, IDC_LBL_EQ7, IDC_LBL_EQ8, IDC_LBL_EQ9, IDC_LBL_EQ10,
 };
 
+static EqBand default_bands[EQ_BANDS] = 
+{
+  { 30, 1.0 }, { 60, 1.0 }, { 125, 1.0 }, { 250, 1.0 }, { 500, 1.0 }, { 1000, 1.0 }, { 2000, 1.0 }, { 4000, 1.0 }, { 8000, 1.0 }, { 16000, 1.0 }
+};
+
 static const int band_freq[EQ_BANDS] =
 { 30, 60, 125, 250, 500, 1000, 2000, 4000, 8000, 16000 };
 
@@ -70,14 +75,14 @@ void ControlEq::update()
 {
   proc->get_eq(&eq);
   proc->get_eq_master_nbands(&nbands);
-  proc->get_eq_master_bands(freq, gain, 0, EQ_BANDS);
+  proc->get_eq_master_bands(bands, 0, EQ_BANDS);
 
   // set the default scale if no bands defined
   if (nbands == 0)
   {
-    proc->set_eq_master_bands(EQ_BANDS, band_freq, band_gain);
+    proc->set_eq_master_bands(default_bands, EQ_BANDS);
     proc->get_eq_master_nbands(&nbands);
-    proc->get_eq_master_bands(freq, gain, 0, EQ_BANDS);
+    proc->get_eq_master_bands(bands, 0, EQ_BANDS);
   }
 
   CheckDlgButton(hdlg, IDC_CHK_EQ, eq? BST_CHECKED: BST_UNCHECKED);
@@ -86,17 +91,17 @@ void ControlEq::update()
     if (band < nbands)
     {
       char buf[32];
-      if (freq[band] >= 1000)
-        sprintf(buf, _("%ikHz"), freq[band] / 1000);
+      if (bands[band].freq >= 1000)
+        sprintf(buf, _("%ikHz"), bands[band].freq / 1000);
       else
-        sprintf(buf, _("%iHz"), freq[band]);
+        sprintf(buf, _("%iHz"), bands[band].freq);
 
       ShowWindow(GetDlgItem(hdlg, idc_edt_eq[band]), SW_SHOW);
       ShowWindow(GetDlgItem(hdlg, idc_sli_eq[band]), SW_SHOW);
       ShowWindow(GetDlgItem(hdlg, idc_lbl_eq[band]), SW_SHOW);
 
-      edt_gain[band].update_value(value2db(gain[band]));
-      SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETPOS, TRUE, long(-value2db(gain[band]) * ticks));
+      edt_gain[band].update_value(value2db(bands[band].gain));
+      SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETPOS, TRUE, long(-value2db(bands[band].gain) * ticks));
       SetDlgItemText(hdlg, idc_lbl_eq[band], buf);
     }
     else
@@ -116,9 +121,9 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
     for (band = 0; band < EQ_BANDS; band++)
       if (control == idc_edt_eq[band])
       {
-        proc->get_eq_master_bands(freq, gain, 0, EQ_BANDS);
-        gain[band] = db2value(edt_gain[band].value);
-        proc->set_eq_master_bands(EQ_BANDS, band_freq, gain);
+        proc->get_eq_master_bands(bands, 0, EQ_BANDS);
+        bands[band].gain = db2value(edt_gain[band].value);
+        proc->set_eq_master_bands(bands, EQ_BANDS);
         update();
         return cmd_ok;
       }
@@ -127,9 +132,9 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
     for (band = 0; band < EQ_BANDS; band++)
       if (control == idc_sli_eq[band])
       {
-        proc->get_eq_master_bands(freq, gain, 0, EQ_BANDS);
-        gain[band] = db2value(-double(SendDlgItemMessage(hdlg, idc_sli_eq[band],TBM_GETPOS, 0, 0))/ticks);
-        proc->set_eq_master_bands(EQ_BANDS, band_freq, gain);
+        proc->get_eq_master_bands(bands, 0, EQ_BANDS);
+        bands[band].gain = db2value(-double(SendDlgItemMessage(hdlg, idc_sli_eq[band],TBM_GETPOS, 0, 0))/ticks);
+        proc->set_eq_master_bands(bands, EQ_BANDS);
         update();
         return cmd_ok;
       }
@@ -145,7 +150,7 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
 
     case IDC_BTN_EQ_RESET:
     {
-      proc->set_eq_master_bands(EQ_BANDS, band_freq, band_gain);
+      proc->set_eq_master_bands(bands, EQ_BANDS);
       update();
       return cmd_ok;
     }

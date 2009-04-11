@@ -554,15 +554,15 @@ STDMETHODIMP COMDecoder::get_eq_master_nbands(size_t *nbands)
   if (nbands) *nbands = dvd.proc.get_eq_master_nbands();
   return S_OK;
 }
-STDMETHODIMP COMDecoder::get_eq_master_bands(int *freq, double *gain, int first_band, int nbands)
+STDMETHODIMP COMDecoder::get_eq_master_bands(EqBand *bands, size_t first_band, size_t nbands)
 {
-  dvd.proc.get_eq_master_bands(freq, gain, first_band, nbands);
+  dvd.proc.get_eq_master_bands(bands, first_band, nbands);
   return S_OK;
 }
-STDMETHODIMP COMDecoder::set_eq_master_bands(size_t nbands, const int *freq, const double *gain)
+STDMETHODIMP COMDecoder::set_eq_master_bands(EqBand *bands, size_t nbands)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_eq_master_bands(nbands, freq, gain);
+  dvd.proc.set_eq_master_bands(bands, nbands);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_eq_nbands(int ch_name, size_t *nbands)
@@ -570,15 +570,15 @@ STDMETHODIMP COMDecoder::get_eq_nbands(int ch_name, size_t *nbands)
   if (nbands) *nbands = dvd.proc.get_eq_nbands(ch_name);
   return S_OK;
 }
-STDMETHODIMP COMDecoder::get_eq_bands(int ch_name, int *freq, double *gain, int first_band, int nbands)
+STDMETHODIMP COMDecoder::get_eq_bands(int ch_name, EqBand *bands, size_t first_band, size_t nbands)
 {
-  dvd.proc.get_eq_bands(ch_name, freq, gain, first_band, nbands);
+  dvd.proc.get_eq_bands(ch_name, bands, first_band, nbands);
   return S_OK;
 }
-STDMETHODIMP COMDecoder::set_eq_bands(int ch_name, size_t nbands, const int *freq, const double *gain)
+STDMETHODIMP COMDecoder::set_eq_bands(int ch_name, EqBand *bands, size_t nbands)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_eq_bands(ch_name, nbands, freq, gain);
+  dvd.proc.set_eq_bands(ch_name, bands, nbands);
   return S_OK;
 }
 
@@ -803,55 +803,55 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
 
   if (state && (_what & AC3FILTER_EQ))
   {
+    // Equalizer
+
     bool eq;
     int32_t nbands;
-    AutoBuf<int> freq;
-    AutoBuf<double> gain;
+    AutoBuf<EqBand> bands;
     char nbands_str[32], freq_str[32], gain_str[32];
 
-    // Equalizer
+    eq = state->eq;
     _conf->get_bool ("eq"               ,eq                     );
 
     nbands = 0;
     _conf->get_int32("eq_nbands"        ,nbands                 );
-    freq.allocate(nbands);
-    gain.allocate(nbands);
-    if (!freq.is_allocated() || !gain.is_allocated())
+    bands.allocate(nbands);
+    if (!bands.is_allocated())
       nbands = 0;
 
-    for (int32_t band = 0; band < nbands; band++)
+    for (int32_t i = 0; i < nbands; i++)
     {
-      freq[band] = 0;
-      gain[band] = 0;
-      sprintf(freq_str, "eq_freq_%i", band);
-      sprintf(gain_str, "eq_gain_%i", band);
-      _conf->get_int32(freq_str       ,freq[band]               );
-      _conf->get_float(gain_str       ,gain[band]               );
+      bands[i].freq = 0;
+      bands[i].gain = 0;
+      sprintf(freq_str, "eq_freq_%i", i);
+      sprintf(gain_str, "eq_gain_%i", i);
+      _conf->get_int32(freq_str       ,bands[i].freq            );
+      _conf->get_float(gain_str       ,bands[i].gain            );
     }
-    dvd.proc.set_eq_master_bands(nbands, freq, gain);
+    dvd.proc.set_eq_master_bands(bands, nbands);
+    state->eq_master_bands = 0;
 
     for (int ch = 0; ch < NCHANNELS; ch++)
-      if (state->eq_nbands[ch] && state->eq_freq[ch] && state->eq_gain[ch])
-      {
+    {
+      nbands = 0;
+      sprintf(nbands_str, "eq_%s_nbands", ch_names[ch]);
+      _conf->set_int32(nbands_str     ,state->eq_master_nbands);
+      bands.allocate(nbands);
+      if (!bands.is_allocated())
         nbands = 0;
-        sprintf(nbands_str, "eq_%s_nbands", ch_names[ch]);
-        _conf->set_int32(nbands_str     ,state->eq_master_nbands);
-        freq.allocate(nbands);
-        gain.allocate(nbands);
-        if (!freq.is_allocated() || !gain.is_allocated())
-          nbands = 0;
 
-        for (int32_t band = 0; band < nbands; band++)
-        {
-          freq[band] = 0;
-          gain[band] = 0;
-          sprintf(freq_str, "eq_%s_freq_%i", ch_names[ch], band);
-          sprintf(gain_str, "eq_%s_gain_%i", ch_names[ch], band);
-          _conf->set_int32(freq_str       ,freq[band]               );
-          _conf->set_float(gain_str       ,gain[band]               );
-        }
-        dvd.proc.set_eq_bands(ch, nbands, freq, gain);
+      for (int32_t i = 0; i < nbands; i++)
+      {
+        bands[i].freq = 0;
+        bands[i].gain = 0;
+        sprintf(freq_str, "eq_%s_freq_%i", ch_names[ch], i);
+        sprintf(gain_str, "eq_%s_gain_%i", ch_names[ch], i);
+        _conf->set_int32(freq_str       ,bands[i].freq        );
+        _conf->set_float(gain_str       ,bands[i].gain        );
       }
+      dvd.proc.set_eq_bands(ch, bands, nbands);
+      state->eq_bands[ch] = 0;
+    }
   }
 
   if (_what & AC3FILTER_SYNC)
@@ -1031,32 +1031,32 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
   if (state && (_what & AC3FILTER_EQ))
   {
     // Equalizer
+    char nbands_str[32], freq_str[32], gain_str[32];
+
     _conf->set_bool ("eq"               ,state->eq              );
-    if (state->eq_master_nbands && state->eq_master_freq && state->eq_master_gain)
+    if (state->eq_master_nbands && state->eq_master_bands)
     {
-      char freq_str[32], gain_str[32];
       _conf->set_int32("eq_nbands"      ,state->eq_master_nbands);
-      for (size_t band = 0; band < state->eq_master_nbands; band++)
+      for (size_t i = 0; i < state->eq_master_nbands; i++)
       {
-        sprintf(freq_str, "eq_freq_%i", band);
-        sprintf(gain_str, "eq_gain_%i", band);
-        _conf->set_int32(freq_str       ,state->eq_master_freq[band]);
-        _conf->set_float(gain_str       ,state->eq_master_gain[band]);
+        sprintf(freq_str, "eq_freq_%i", i);
+        sprintf(gain_str, "eq_gain_%i", i);
+        _conf->set_int32(freq_str       ,state->eq_master_bands[i].freq);
+        _conf->set_float(gain_str       ,state->eq_master_bands[i].gain);
       }
     }
 
     for (int ch = 0; ch < NCHANNELS; ch++)
-      if (state->eq_nbands[ch] && state->eq_freq[ch] && state->eq_gain[ch])
+      if (state->eq_nbands[ch] && state->eq_bands[ch])
       {
-        char nbands_str[32], freq_str[32], gain_str[32];
         sprintf(nbands_str, "eq_%s_nbands", ch_names[ch]);
         _conf->set_int32(nbands_str     ,state->eq_master_nbands);
-        for (size_t band = 0; band < state->eq_master_nbands; band++)
+        for (size_t i = 0; i < state->eq_master_nbands; i++)
         {
-          sprintf(freq_str, "eq_%s_freq_%i", ch_names[ch], band);
-          sprintf(gain_str, "eq_%s_gain_%i", ch_names[ch], band);
-          _conf->set_int32(freq_str     ,state->eq_freq[ch][band]);
-          _conf->set_float(gain_str     ,state->eq_gain[ch][band]);
+          sprintf(freq_str, "eq_%s_freq_%i", ch_names[ch], i);
+          sprintf(gain_str, "eq_%s_gain_%i", ch_names[ch], i);
+          _conf->set_int32(freq_str     ,state->eq_bands[ch][i].freq);
+          _conf->set_float(gain_str     ,state->eq_bands[ch][i].gain);
         }
       }
   }

@@ -17,8 +17,7 @@ protected:
 
   bool eq;
   size_t nbands;
-  int freq[EQ_BANDS];
-  double gain[EQ_BANDS];
+  EqBand bands[EQ_BANDS];
   DoubleEdit edt_gain[EQ_BANDS];
 
 public:
