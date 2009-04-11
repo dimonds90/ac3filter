@@ -7,7 +7,7 @@
 #include "guids.h"
 
           
-class AC3FilterDlg : public CBasePropertyPage, public AudioProcessorState
+class AC3FilterDlg : public CBasePropertyPage
 {
 public:
   // Custom controllers for different dialogs

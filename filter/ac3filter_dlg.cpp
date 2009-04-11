@@ -488,10 +488,6 @@ AC3FilterDlg::reload_state()
   tooltips = get_tooltips();
   invert_levels = get_invert_levels();
   refresh_time = get_refresh_time();
-
-  vtime_t time;
-  filter->get_playback_time(&time);
-  proc->get_state(this, time);
 }
 
 void 

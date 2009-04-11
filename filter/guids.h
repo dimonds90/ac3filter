@@ -57,8 +57,6 @@ void cr2crlf(char *buf, size_t size);
 #define DTS_CONV_16BIT   1
 #define DTS_CONV_14BIT   2
 
-#define EQ_BANDS 10
-
 ///////////////////////////////////////////////////////////////////////////////
 // Media types
 ///////////////////////////////////////////////////////////////////////////////
@@ -254,60 +252,6 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
   STDMETHOD (save_params) (Config *config, int what) = 0;
 };
 
-struct AudioProcessorState
-{
-  // AGC options
-  bool auto_gain;
-  bool normalize;
-  sample_t attack;
-  sample_t release;
-
-  // Matrix options
-  bool auto_matrix;
-  bool normalize_matrix;
-  bool voice_control;
-  bool expand_stereo;
-
-  // Master gain
-  sample_t master;
-  sample_t gain;
-
-  // Mix levels
-  sample_t clev;
-  sample_t slev;
-  sample_t lfelev;
-
-  // Input/output gains
-  sample_t input_gains[NCHANNELS];
-  sample_t output_gains[NCHANNELS];
-
-  // Input/output levels
-  sample_t input_levels[NCHANNELS];
-  sample_t output_levels[NCHANNELS];
-
-  // Equalizer
-  bool     eq;
-  int      eq_freq[EQ_BANDS];
-  double   eq_gain[EQ_BANDS];
-
-  // Matrix
-  matrix_t matrix;
-
-  // DRC
-  bool     drc;
-  sample_t drc_power;
-  sample_t drc_level;
-
-  // Bass redirection
-  bool     bass_redir;
-  int      bass_freq;
-
-  // Delay
-  bool     delay;
-  int      delay_units;
-  float    delays[NCHANNELS];
-};
-
 DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
 {
   // AGC options
@@ -360,11 +304,15 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_bass_redir)   (bool  bass_redir) = 0;
   STDMETHOD (get_bass_freq)    (int  *bass_freq) = 0;
   STDMETHOD (set_bass_freq)    (int   bass_freq) = 0;
-  // Eqalizer
+  // Equalizer
   STDMETHOD (get_eq)           (bool *eq) = 0;
   STDMETHOD (set_eq)           (bool  eq) = 0;
-  STDMETHOD (get_eq_bands)     (int *freqs, double *gains) = 0;
-  STDMETHOD (set_eq_bands)     (const int *freqs, const double *gains) = 0;
+  STDMETHOD (get_eq_master_nbands)(size_t *nbands) = 0;
+  STDMETHOD (get_eq_master_bands)(int *freqs, double *gains, int first_band, int nbands) = 0;
+  STDMETHOD (set_eq_master_bands)(size_t nbands, const int *freqs, const double *gains) = 0;
+  STDMETHOD (get_eq_nbands)    (int ch, size_t *nbands) = 0;
+  STDMETHOD (get_eq_bands)     (int ch, int *freqs, double *gains, int first_band, int nbands) = 0;
+  STDMETHOD (set_eq_bands)     (int ch, size_t nbands, const int *freqs, const double *gains) = 0;
   // Spectrum
   STDMETHOD (get_spectrum_length) (unsigned *length) = 0;
   STDMETHOD (set_spectrum_length) (unsigned  length) = 0;
@@ -376,10 +324,6 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_delay_units)  (int  delay_units) = 0;
   STDMETHOD (get_delays)       (float *delays) = 0;
   STDMETHOD (set_delays)       (float *delays) = 0;
-
-  STDMETHOD (get_state)        (AudioProcessorState *state, vtime_t time = 0) = 0;
-  STDMETHOD (set_state)        (AudioProcessorState *state) = 0;
 };
-
 
 #endif

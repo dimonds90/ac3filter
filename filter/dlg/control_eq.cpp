@@ -69,19 +69,21 @@ void ControlEq::init()
 void ControlEq::update()
 {
   proc->get_eq(&eq);
-  proc->get_eq_bands(freq, gain);
+  proc->get_eq_master_nbands(&nbands);
+  proc->get_eq_master_bands(freq, gain, 0, EQ_BANDS);
 
   // set the default scale if no bands defined
-  if (freq[0] == 0)
+  if (nbands == 0)
   {
-    proc->set_eq_bands(band_freq, band_gain);
-    proc->get_eq_bands(freq, gain);
+    proc->set_eq_master_bands(EQ_BANDS, band_freq, band_gain);
+    proc->get_eq_master_nbands(&nbands);
+    proc->get_eq_master_bands(freq, gain, 0, EQ_BANDS);
   }
 
   CheckDlgButton(hdlg, IDC_CHK_EQ, eq? BST_CHECKED: BST_UNCHECKED);
   for (size_t band = 0; band < EQ_BANDS; band++)
   {
-    if (freq[band] > 0)
+    if (band < nbands)
     {
       char buf[32];
       if (freq[band] >= 1000)
@@ -114,9 +116,9 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
     for (band = 0; band < EQ_BANDS; band++)
       if (control == idc_edt_eq[band])
       {
-        proc->get_eq_bands(freq, gain);
+        proc->get_eq_master_bands(freq, gain, 0, EQ_BANDS);
         gain[band] = db2value(edt_gain[band].value);
-        proc->set_eq_bands(band_freq, gain);
+        proc->set_eq_master_bands(EQ_BANDS, band_freq, gain);
         update();
         return cmd_ok;
       }
@@ -125,9 +127,9 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
     for (band = 0; band < EQ_BANDS; band++)
       if (control == idc_sli_eq[band])
       {
-        proc->get_eq_bands(freq, gain);
+        proc->get_eq_master_bands(freq, gain, 0, EQ_BANDS);
         gain[band] = db2value(-double(SendDlgItemMessage(hdlg, idc_sli_eq[band],TBM_GETPOS, 0, 0))/ticks);
-        proc->set_eq_bands(band_freq, gain);
+        proc->set_eq_master_bands(EQ_BANDS, band_freq, gain);
         update();
         return cmd_ok;
       }
@@ -143,7 +145,7 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
 
     case IDC_BTN_EQ_RESET:
     {
-      proc->set_eq_bands(band_freq, band_gain);
+      proc->set_eq_master_bands(EQ_BANDS, band_freq, band_gain);
       update();
       return cmd_ok;
     }

@@ -1,5 +1,9 @@
-#include "com_dec.h"
 #include <stdio.h>
+#include "filters/proc_state.h"
+#include "com_dec.h"
+
+static const char *ch_names[NCHANNELS] = 
+{ "L", "C", "R", "SL", "SR", "LFE" };
 
 COMDecoder::COMDecoder(IUnknown *_outer, int _nsamples): dvd(_nsamples)
 { 
@@ -545,41 +549,36 @@ STDMETHODIMP COMDecoder::set_eq(bool _eq)
   dvd.proc.set_eq(_eq);
   return S_OK;
 }
-STDMETHODIMP COMDecoder::get_eq_bands(int *freq, double *gain)
+STDMETHODIMP COMDecoder::get_eq_master_nbands(size_t *nbands)
 {
-  int i;
-
-  if (!freq || !gain) return E_FAIL;
-
-  for (i = 0; i < EQ_BANDS; i++)
-    freq[i] = 0, gain[i] = 1.0;
-
-  size_t bands = dvd.proc.get_eq_nbands();
-
-  if (bands > EQ_BANDS)
-  {
-    int *freq_proc = new int[bands];
-    double *gain_proc = new double[bands];
-
-    if (!freq_proc || !gain_proc)
-    {
-      safe_delete(freq_proc);
-      safe_delete(gain_proc);
-      return E_FAIL;
-    }
-    dvd.proc.get_eq_bands(freq_proc, gain_proc);
-    for (i = 0; i < EQ_BANDS; i++)
-      freq[i] = freq_proc[i], gain[i] = gain_proc[i];
-  }
-  else
-    dvd.proc.get_eq_bands(freq, gain);
-
+  if (nbands) *nbands = dvd.proc.get_eq_master_nbands();
   return S_OK;
 }
-STDMETHODIMP COMDecoder::set_eq_bands(const int *freq, const double *gain)
+STDMETHODIMP COMDecoder::get_eq_master_bands(int *freq, double *gain, int first_band, int nbands)
+{
+  dvd.proc.get_eq_master_bands(freq, gain, first_band, nbands);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_eq_master_bands(size_t nbands, const int *freq, const double *gain)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_eq_bands(EQ_BANDS, freq, gain);
+  dvd.proc.set_eq_master_bands(nbands, freq, gain);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_eq_nbands(int ch_name, size_t *nbands)
+{
+  if (nbands) *nbands = dvd.proc.get_eq_nbands(ch_name);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_eq_bands(int ch_name, int *freq, double *gain, int first_band, int nbands)
+{
+  dvd.proc.get_eq_bands(ch_name, freq, gain, first_band, nbands);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_eq_bands(int ch_name, size_t nbands, const int *freq, const double *gain)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_eq_bands(ch_name, nbands, freq, gain);
   return S_OK;
 }
 
@@ -692,126 +691,12 @@ STDMETHODIMP COMDecoder::get_jitter(vtime_t *_input_mean, vtime_t *_input_stddev
   return S_OK;
 }
 
-
-
-STDMETHODIMP COMDecoder::get_state(AudioProcessorState *_state, vtime_t _time)
-{
-  AutoLock config_lock(&config);
-
-  // AGC options
-  get_auto_gain(&_state->auto_gain);
-  get_normalize(&_state->normalize);
-  get_attack(&_state->attack);
-  get_release(&_state->release);
-
-  // Matrix options
-  get_auto_matrix(&_state->auto_matrix);
-  get_normalize_matrix(&_state->normalize_matrix);
-  get_voice_control(&_state->voice_control);
-  get_expand_stereo(&_state->expand_stereo);
-
-  // Master gain
-  get_master(&_state->master);
-  get_gain(&_state->gain);
-
-  // Mix levels
-  get_clev(&_state->clev);
-  get_slev(&_state->slev);
-  get_lfelev(&_state->lfelev);
-
-  // Input/output gains
-  get_input_gains(_state->input_gains);
-  get_output_gains(_state->output_gains);
-
-  // Input/output levels
-  get_levels(_time, _state->input_levels, _state->output_levels);
-
-  // Matrix
-  get_matrix(&_state->matrix);
-
-  // DRC
-  get_drc(&_state->drc);
-  get_drc_power(&_state->drc_power);
-  get_drc_level(&_state->drc_level);
-
-  // Bass redirection
-  get_bass_redir(&_state->bass_redir);
-  get_bass_freq(&_state->bass_freq);
-
-  // Equalizer
-  get_eq(&_state->eq);
-  get_eq_bands(_state->eq_freq, _state->eq_gain);
-
-  // Delay
-  get_delay(&_state->delay);
-  get_delay_units(&_state->delay_units);
-  get_delays(_state->delays);
-
-  return S_OK;
-};
-
-STDMETHODIMP COMDecoder::set_state     (AudioProcessorState *_state)
-{
-  AutoLock config_lock(&config);
-
-  // AGC options
-  set_auto_gain(_state->auto_gain);
-  set_normalize(_state->normalize);
-  set_attack(_state->attack);
-  set_release(_state->release);
-
-  // Matrix options
-  set_auto_matrix(_state->auto_matrix);
-  set_normalize_matrix(_state->normalize_matrix);
-  set_voice_control(_state->voice_control);
-  set_expand_stereo(_state->expand_stereo);
-
-  // Master gain
-  set_master(_state->master);
-
-  // Mix levels
-  set_clev(_state->clev);
-  set_slev(_state->slev);
-  set_lfelev(_state->lfelev);
-
-  // Input/output gains
-  set_input_gains(_state->input_gains);
-  set_output_gains(_state->output_gains);
-
-  // Matrix
-  set_matrix(&_state->matrix);
-
-  // DRC
-  set_drc(_state->drc);
-  set_drc_power(_state->drc_power);
-
-  // Bass redirection
-  set_bass_redir(_state->bass_redir);
-  set_bass_freq(_state->bass_freq);
-
-  // Equalizer
-  set_eq(_state->eq);
-  set_eq_bands(_state->eq_freq, _state->eq_gain);
-
-  // Delay
-  set_delay(_state->delay);
-  set_delay_units(_state->delay_units);
-  set_delays(_state->delays);
-
-  return S_OK;
-};
-
-
-
-
-
 // Load/save settings
 
 STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
 {
   AutoLock config_lock(&config);
-  AudioProcessorState state;
-  get_state(&state);
+  AudioProcessorState *state = dvd.proc.get_state(0);
 
   RegistryKey reg;
   if (!_conf)
@@ -861,74 +746,112 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     dvd.set_use_spdif(use_spdif);
   }
 
-  if (_what & AC3FILTER_PROC)
+  if (state && (_what & AC3FILTER_PROC))
   {
     // Options
-    _conf->get_bool ("auto_gain"        ,state.auto_gain       );
-    _conf->get_bool ("normalize"        ,state.normalize       );
-    _conf->get_bool ("normalize_matrix" ,state.normalize_matrix);
-    _conf->get_bool ("auto_matrix"      ,state.auto_matrix     );
-    _conf->get_bool ("expand_stereo"    ,state.expand_stereo   );
-    _conf->get_bool ("voice_control"    ,state.voice_control   );
-    _conf->get_float("attack"           ,state.attack          );
-    _conf->get_float("release"          ,state.release         );
+    _conf->get_bool ("auto_gain"        ,state->auto_gain       );
+    _conf->get_bool ("normalize"        ,state->normalize       );
+    _conf->get_bool ("normalize_matrix" ,state->normalize_matrix);
+    _conf->get_bool ("auto_matrix"      ,state->auto_matrix     );
+    _conf->get_bool ("expand_stereo"    ,state->expand_stereo   );
+    _conf->get_bool ("voice_control"    ,state->voice_control   );
+    _conf->get_float("attack"           ,state->attack          );
+    _conf->get_float("release"          ,state->release         );
     // Gains
-    _conf->get_float("master"           ,state.master          );
-    _conf->get_float("clev"             ,state.clev            );
-    _conf->get_float("slev"             ,state.slev            );
-    _conf->get_float("lfelev"           ,state.lfelev          );
+    _conf->get_float("master"           ,state->master          );
+    _conf->get_float("clev"             ,state->clev            );
+    _conf->get_float("slev"             ,state->slev            );
+    _conf->get_float("lfelev"           ,state->lfelev          );
     // DRC
-    _conf->get_bool ("drc"              ,state.drc             );
-    _conf->get_float("drc_power"        ,state.drc_power       );
+    _conf->get_bool ("drc"              ,state->drc             );
+    _conf->get_float("drc_power"        ,state->drc_power       );
     // Bass redirection
-    _conf->get_bool ("bass_redir"       ,state.bass_redir      );
-    _conf->get_int32("bass_freq"        ,state.bass_freq       );
-    // Equalizer
-    _conf->get_bool ("eq"               ,state.eq              );
+    _conf->get_bool ("bass_redir"       ,state->bass_redir      );
+    _conf->get_int32("bass_freq"        ,state->bass_freq       );
   }
 
-  if (_what & AC3FILTER_GAINS)
+  if (state && (_what & AC3FILTER_GAINS))
   {
     // I/O Gains
-    _conf->get_float("gain_input_L"     ,state.input_gains[CH_L]   );
-    _conf->get_float("gain_input_C"     ,state.input_gains[CH_C]   );
-    _conf->get_float("gain_input_R"     ,state.input_gains[CH_R]   );
-    _conf->get_float("gain_input_SL"    ,state.input_gains[CH_SL]  );
-    _conf->get_float("gain_input_SR"    ,state.input_gains[CH_SR]  );
-    _conf->get_float("gain_input_LFE"   ,state.input_gains[CH_LFE] );
+    _conf->get_float("gain_input_L"     ,state->input_gains[CH_L]   );
+    _conf->get_float("gain_input_C"     ,state->input_gains[CH_C]   );
+    _conf->get_float("gain_input_R"     ,state->input_gains[CH_R]   );
+    _conf->get_float("gain_input_SL"    ,state->input_gains[CH_SL]  );
+    _conf->get_float("gain_input_SR"    ,state->input_gains[CH_SR]  );
+    _conf->get_float("gain_input_LFE"   ,state->input_gains[CH_LFE] );
 
-    _conf->get_float("gain_output_L"    ,state.output_gains[CH_L]  );
-    _conf->get_float("gain_output_C"    ,state.output_gains[CH_C]  );
-    _conf->get_float("gain_output_R"    ,state.output_gains[CH_R]  );
-    _conf->get_float("gain_output_SL"   ,state.output_gains[CH_SL] );
-    _conf->get_float("gain_output_SR"   ,state.output_gains[CH_SR] );
-    _conf->get_float("gain_output_LFE"  ,state.output_gains[CH_LFE]);
+    _conf->get_float("gain_output_L"    ,state->output_gains[CH_L]  );
+    _conf->get_float("gain_output_C"    ,state->output_gains[CH_C]  );
+    _conf->get_float("gain_output_R"    ,state->output_gains[CH_R]  );
+    _conf->get_float("gain_output_SL"   ,state->output_gains[CH_SL] );
+    _conf->get_float("gain_output_SR"   ,state->output_gains[CH_SR] );
+    _conf->get_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
   }
 
-  if (_what & AC3FILTER_DELAY)
+  if (state && (_what & AC3FILTER_DELAY))
   {
     // Delays
-    _conf->get_bool ("delay"            ,state.delay           );
-    _conf->get_int32("delay_units"      ,state.delay_units     );
-    _conf->get_float("delay_L"          ,state.delays[CH_L]    );
-    _conf->get_float("delay_C"          ,state.delays[CH_C]    );
-    _conf->get_float("delay_R"          ,state.delays[CH_R]    );
-    _conf->get_float("delay_SL"         ,state.delays[CH_SL]   );
-    _conf->get_float("delay_SR"         ,state.delays[CH_SR]   );
-    _conf->get_float("delay_LFE"        ,state.delays[CH_LFE]  );
+    _conf->get_bool ("delay"            ,state->delay           );
+    _conf->get_int32("delay_units"      ,state->delay_units     );
+    _conf->get_float("delay_L"          ,state->delays[CH_L]    );
+    _conf->get_float("delay_C"          ,state->delays[CH_C]    );
+    _conf->get_float("delay_R"          ,state->delays[CH_R]    );
+    _conf->get_float("delay_SL"         ,state->delays[CH_SL]   );
+    _conf->get_float("delay_SR"         ,state->delays[CH_SR]   );
+    _conf->get_float("delay_LFE"        ,state->delays[CH_LFE]  );
   }
 
-  if (_what & AC3FILTER_EQ)
+  if (state && (_what & AC3FILTER_EQ))
   {
+    bool eq;
+    int32_t nbands;
+    AutoBuf<int> freq;
+    AutoBuf<double> gain;
+    char nbands_str[32], freq_str[32], gain_str[32];
+
     // Equalizer
-    for (int i = 0; i < EQ_BANDS; i++)
+    _conf->get_bool ("eq"               ,eq                     );
+
+    nbands = 0;
+    _conf->get_int32("eq_nbands"        ,nbands                 );
+    freq.allocate(nbands);
+    gain.allocate(nbands);
+    if (!freq.is_allocated() || !gain.is_allocated())
+      nbands = 0;
+
+    for (int32_t band = 0; band < nbands; band++)
     {
-      char freq_str[32], gain_str[32];
-      sprintf(freq_str, "eq_freq_%i", i);
-      sprintf(gain_str, "eq_gain_%i", i);
-      _conf->get_int32(freq_str         ,state.eq_freq[i]      );
-      _conf->get_float(gain_str         ,state.eq_gain[i]      );
+      freq[band] = 0;
+      gain[band] = 0;
+      sprintf(freq_str, "eq_freq_%i", band);
+      sprintf(gain_str, "eq_gain_%i", band);
+      _conf->get_int32(freq_str       ,freq[band]               );
+      _conf->get_float(gain_str       ,gain[band]               );
     }
+    dvd.proc.set_eq_master_bands(nbands, freq, gain);
+
+    for (int ch = 0; ch < NCHANNELS; ch++)
+      if (state->eq_nbands[ch] && state->eq_freq[ch] && state->eq_gain[ch])
+      {
+        nbands = 0;
+        sprintf(nbands_str, "eq_%s_nbands", ch_names[ch]);
+        _conf->set_int32(nbands_str     ,state->eq_master_nbands);
+        freq.allocate(nbands);
+        gain.allocate(nbands);
+        if (!freq.is_allocated() || !gain.is_allocated())
+          nbands = 0;
+
+        for (int32_t band = 0; band < nbands; band++)
+        {
+          freq[band] = 0;
+          gain[band] = 0;
+          sprintf(freq_str, "eq_%s_freq_%i", ch_names[ch], band);
+          sprintf(gain_str, "eq_%s_gain_%i", ch_names[ch], band);
+          _conf->set_int32(freq_str       ,freq[band]               );
+          _conf->set_float(gain_str       ,gain[band]               );
+        }
+        dvd.proc.set_eq_bands(ch, nbands, freq, gain);
+      }
   }
 
   if (_what & AC3FILTER_SYNC)
@@ -949,53 +872,24 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     dvd.syncer.set_threshold(threshold);
   }
 
-  if (_what & AC3FILTER_MATRIX)
+  if (state && (_what & AC3FILTER_MATRIX))
   {
-    // state.matrix
-    _conf->get_float("matrix_L_L",    state.matrix[0][0]);
-    _conf->get_float("matrix_L_C",    state.matrix[0][1]);
-    _conf->get_float("matrix_L_R",    state.matrix[0][2]);
-    _conf->get_float("matrix_L_SL",   state.matrix[0][3]);
-    _conf->get_float("matrix_L_SR",   state.matrix[0][4]);
-    _conf->get_float("matrix_L_LFE",  state.matrix[0][5]);
-                                       
-    _conf->get_float("matrix_C_L",    state.matrix[1][0]);
-    _conf->get_float("matrix_C_C",    state.matrix[1][1]);
-    _conf->get_float("matrix_C_R",    state.matrix[1][2]);
-    _conf->get_float("matrix_C_SL",   state.matrix[1][3]);
-    _conf->get_float("matrix_C_SR",   state.matrix[1][4]);
-    _conf->get_float("matrix_C_LFE",  state.matrix[1][5]);
-                                       
-    _conf->get_float("matrix_R_L",    state.matrix[2][0]);
-    _conf->get_float("matrix_R_C",    state.matrix[2][1]);
-    _conf->get_float("matrix_R_R",    state.matrix[2][2]);
-    _conf->get_float("matrix_R_SL",   state.matrix[2][3]);
-    _conf->get_float("matrix_R_SR",   state.matrix[2][4]);
-    _conf->get_float("matrix_R_LFE",  state.matrix[2][5]);
-      
-    _conf->get_float("matrix_SL_L",   state.matrix[3][0]);
-    _conf->get_float("matrix_SL_C",   state.matrix[3][1]);
-    _conf->get_float("matrix_SL_R",   state.matrix[3][2]);
-    _conf->get_float("matrix_SL_SL",  state.matrix[3][3]);
-    _conf->get_float("matrix_SL_SR",  state.matrix[3][4]);
-    _conf->get_float("matrix_SL_LFE", state.matrix[3][5]);
-                                       
-    _conf->get_float("matrix_SR_L",   state.matrix[4][0]);
-    _conf->get_float("matrix_SR_C",   state.matrix[4][1]);
-    _conf->get_float("matrix_SR_R",   state.matrix[4][2]);
-    _conf->get_float("matrix_SR_SL",  state.matrix[4][3]);
-    _conf->get_float("matrix_SR_SR",  state.matrix[4][4]);
-    _conf->get_float("matrix_SR_LFE", state.matrix[4][5]);
-
-    _conf->get_float("matrix_LFE_L",  state.matrix[5][0]);
-    _conf->get_float("matrix_LFE_C",  state.matrix[5][1]);
-    _conf->get_float("matrix_LFE_R",  state.matrix[5][2]);
-    _conf->get_float("matrix_LFE_SL", state.matrix[5][3]);
-    _conf->get_float("matrix_LFE_SR", state.matrix[5][4]);
-    _conf->get_float("matrix_LFE_LFE",state.matrix[5][5]);
+    // Matrix
+    char element_str[32];
+    for (int ch1 = 0; ch1 < NCHANNELS; ch1++)
+      for (int ch2 = 0; ch2 < NCHANNELS; ch2++)
+      {
+        state->matrix[ch1][ch2] = 0;
+        sprintf(element_str, "matrix_%s_%s", ch_names[ch1], ch_names[ch2]);
+        _conf->get_float(element_str, state->matrix[ch1][ch2]);
+      }
   }
 
-  set_state(&state);
+  if (state)
+  {
+    dvd.proc.set_state(state);
+    safe_delete(state);
+  }
 
   if (_what & AC3FILTER_SYS)
   {
@@ -1058,13 +952,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
 
 STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
 {
-  AudioProcessorState state;
-  Speakers user_spk;
-  bool use_spdif;
-
-  get_state(&state);
-  user_spk = dvd.get_user();
-  use_spdif = dvd.get_use_spdif();
+  AudioProcessorState *state = dvd.proc.get_state(0);
 
   RegistryKey reg;
   if (!_conf)
@@ -1075,6 +963,9 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
 
   if (_what & AC3FILTER_SPK)
   {
+    Speakers user_spk = dvd.get_user();
+    bool use_spdif = dvd.get_use_spdif();
+
     _conf->set_int32("format"           ,user_spk.format  );
     _conf->set_int32("mask"             ,user_spk.mask    );
     _conf->set_int32("sample_rate"      ,user_spk.sample_rate);
@@ -1082,74 +973,92 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     _conf->set_bool ("use_spdif"        ,use_spdif        );
   }
 
-  if (_what & AC3FILTER_PROC)
+  if (state && (_what & AC3FILTER_PROC))
   {
     // Options
-    _conf->set_bool ("auto_gain"        ,state.auto_gain       );
-    _conf->set_bool ("normalize"        ,state.normalize       );
-    _conf->set_bool ("normalize_matrix" ,state.normalize_matrix);
-    _conf->set_bool ("auto_matrix"      ,state.auto_matrix     );
-    _conf->set_bool ("expand_stereo"    ,state.expand_stereo   );
-    _conf->set_bool ("voice_control"    ,state.voice_control   );
-    _conf->set_float("attack"           ,state.attack          );
-    _conf->set_float("release"          ,state.release         );
+    _conf->set_bool ("auto_gain"        ,state->auto_gain       );
+    _conf->set_bool ("normalize"        ,state->normalize       );
+    _conf->set_bool ("normalize_matrix" ,state->normalize_matrix);
+    _conf->set_bool ("auto_matrix"      ,state->auto_matrix     );
+    _conf->set_bool ("expand_stereo"    ,state->expand_stereo   );
+    _conf->set_bool ("voice_control"    ,state->voice_control   );
+    _conf->set_float("attack"           ,state->attack          );
+    _conf->set_float("release"          ,state->release         );
     // Gains
-    _conf->set_float("master"           ,state.master          );
-    _conf->set_float("clev"             ,state.clev            );
-    _conf->set_float("slev"             ,state.slev            );
-    _conf->set_float("lfelev"           ,state.lfelev          );
+    _conf->set_float("master"           ,state->master          );
+    _conf->set_float("clev"             ,state->clev            );
+    _conf->set_float("slev"             ,state->slev            );
+    _conf->set_float("lfelev"           ,state->lfelev          );
     // DRC
-    _conf->set_bool ("drc"              ,state.drc             );
-    _conf->set_float("drc_power"        ,state.drc_power       );
+    _conf->set_bool ("drc"              ,state->drc             );
+    _conf->set_float("drc_power"        ,state->drc_power       );
     // Bass redirection
-    _conf->set_bool ("bass_redir"       ,state.bass_redir      );
-    _conf->set_int32("bass_freq"        ,state.bass_freq       );
-    // Equalizer
-    _conf->set_bool ("eq"               ,state.eq              );
+    _conf->set_bool ("bass_redir"       ,state->bass_redir      );
+    _conf->set_int32("bass_freq"        ,state->bass_freq       );
   }
 
-  if (_what & AC3FILTER_GAINS)
+  if (state && (_what & AC3FILTER_GAINS))
   {
     // I/O Gains
-    _conf->set_float("gain_input_L"     ,state.input_gains[CH_L]   );
-    _conf->set_float("gain_input_C"     ,state.input_gains[CH_C]   );
-    _conf->set_float("gain_input_R"     ,state.input_gains[CH_R]   );
-    _conf->set_float("gain_input_SL"    ,state.input_gains[CH_SL]  );
-    _conf->set_float("gain_input_SR"    ,state.input_gains[CH_SR]  );
-    _conf->set_float("gain_input_LFE"   ,state.input_gains[CH_LFE] );
+    _conf->set_float("gain_input_L"     ,state->input_gains[CH_L]   );
+    _conf->set_float("gain_input_C"     ,state->input_gains[CH_C]   );
+    _conf->set_float("gain_input_R"     ,state->input_gains[CH_R]   );
+    _conf->set_float("gain_input_SL"    ,state->input_gains[CH_SL]  );
+    _conf->set_float("gain_input_SR"    ,state->input_gains[CH_SR]  );
+    _conf->set_float("gain_input_LFE"   ,state->input_gains[CH_LFE] );
 
-    _conf->set_float("gain_output_L"    ,state.output_gains[CH_L]  );
-    _conf->set_float("gain_output_C"    ,state.output_gains[CH_C]  );
-    _conf->set_float("gain_output_R"    ,state.output_gains[CH_R]  );
-    _conf->set_float("gain_output_SL"   ,state.output_gains[CH_SL] );
-    _conf->set_float("gain_output_SR"   ,state.output_gains[CH_SR] );
-    _conf->set_float("gain_output_LFE"  ,state.output_gains[CH_LFE]);
+    _conf->set_float("gain_output_L"    ,state->output_gains[CH_L]  );
+    _conf->set_float("gain_output_C"    ,state->output_gains[CH_C]  );
+    _conf->set_float("gain_output_R"    ,state->output_gains[CH_R]  );
+    _conf->set_float("gain_output_SL"   ,state->output_gains[CH_SL] );
+    _conf->set_float("gain_output_SR"   ,state->output_gains[CH_SR] );
+    _conf->set_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
   }
 
-  if (_what & AC3FILTER_DELAY)
+  if (state && (_what & AC3FILTER_DELAY))
   {
     // Delays
-    _conf->set_bool ("delay"            ,state.delay           );
-    _conf->set_int32("delay_units"      ,state.delay_units     );
-    _conf->set_float("delay_L"          ,state.delays[CH_L]    );
-    _conf->set_float("delay_C"          ,state.delays[CH_C]    );
-    _conf->set_float("delay_R"          ,state.delays[CH_R]    );
-    _conf->set_float("delay_SL"         ,state.delays[CH_SL]   );
-    _conf->set_float("delay_SR"         ,state.delays[CH_SR]   );
-    _conf->set_float("delay_LFE"        ,state.delays[CH_LFE]  );
+    _conf->set_bool ("delay"            ,state->delay           );
+    _conf->set_int32("delay_units"      ,state->delay_units     );
+    _conf->set_float("delay_L"          ,state->delays[CH_L]    );
+    _conf->set_float("delay_C"          ,state->delays[CH_C]    );
+    _conf->set_float("delay_R"          ,state->delays[CH_R]    );
+    _conf->set_float("delay_SL"         ,state->delays[CH_SL]   );
+    _conf->set_float("delay_SR"         ,state->delays[CH_SR]   );
+    _conf->set_float("delay_LFE"        ,state->delays[CH_LFE]  );
   }
 
-  if (_what & AC3FILTER_EQ)
+  if (state && (_what & AC3FILTER_EQ))
   {
     // Equalizer
-    for (int i = 0; i < EQ_BANDS; i++)
+    _conf->set_bool ("eq"               ,state->eq              );
+    if (state->eq_master_nbands && state->eq_master_freq && state->eq_master_gain)
     {
       char freq_str[32], gain_str[32];
-      sprintf(freq_str, "eq_freq_%i", i);
-      sprintf(gain_str, "eq_gain_%i", i);
-      _conf->set_int32(freq_str         ,state.eq_freq[i]      );
-      _conf->set_float(gain_str         ,state.eq_gain[i]      );
+      _conf->set_int32("eq_nbands"      ,state->eq_master_nbands);
+      for (size_t band = 0; band < state->eq_master_nbands; band++)
+      {
+        sprintf(freq_str, "eq_freq_%i", band);
+        sprintf(gain_str, "eq_gain_%i", band);
+        _conf->set_int32(freq_str       ,state->eq_master_freq[band]);
+        _conf->set_float(gain_str       ,state->eq_master_gain[band]);
+      }
     }
+
+    for (int ch = 0; ch < NCHANNELS; ch++)
+      if (state->eq_nbands[ch] && state->eq_freq[ch] && state->eq_gain[ch])
+      {
+        char nbands_str[32], freq_str[32], gain_str[32];
+        sprintf(nbands_str, "eq_%s_nbands", ch_names[ch]);
+        _conf->set_int32(nbands_str     ,state->eq_master_nbands);
+        for (size_t band = 0; band < state->eq_master_nbands; band++)
+        {
+          sprintf(freq_str, "eq_%s_freq_%i", ch_names[ch], band);
+          sprintf(gain_str, "eq_%s_gain_%i", ch_names[ch], band);
+          _conf->set_int32(freq_str     ,state->eq_freq[ch][band]);
+          _conf->set_float(gain_str     ,state->eq_gain[ch][band]);
+        }
+      }
   }
 
   if (_what & AC3FILTER_SYNC)
@@ -1165,50 +1074,16 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     _conf->set_float("threshold"        ,threshold       );
   }
 
-  if (_what & AC3FILTER_MATRIX)
+  if (state && (_what & AC3FILTER_MATRIX))
   {
-    // state.matrix
-    _conf->set_float("matrix_L_L",    state.matrix[0][0]);
-    _conf->set_float("matrix_L_C",    state.matrix[0][1]);
-    _conf->set_float("matrix_L_R",    state.matrix[0][2]);
-    _conf->set_float("matrix_L_SL",   state.matrix[0][3]);
-    _conf->set_float("matrix_L_SR",   state.matrix[0][4]);
-    _conf->set_float("matrix_L_LFE",  state.matrix[0][5]);
-                                       
-    _conf->set_float("matrix_C_L",    state.matrix[1][0]);
-    _conf->set_float("matrix_C_C",    state.matrix[1][1]);
-    _conf->set_float("matrix_C_R",    state.matrix[1][2]);
-    _conf->set_float("matrix_C_SL",   state.matrix[1][3]);
-    _conf->set_float("matrix_C_SR",   state.matrix[1][4]);
-    _conf->set_float("matrix_C_LFE",  state.matrix[1][5]);
-                                       
-    _conf->set_float("matrix_R_L",    state.matrix[2][0]);
-    _conf->set_float("matrix_R_C",    state.matrix[2][1]);
-    _conf->set_float("matrix_R_R",    state.matrix[2][2]);
-    _conf->set_float("matrix_R_SL",   state.matrix[2][3]);
-    _conf->set_float("matrix_R_SR",   state.matrix[2][4]);
-    _conf->set_float("matrix_R_LFE",  state.matrix[2][5]);
-      
-    _conf->set_float("matrix_SL_L",   state.matrix[3][0]);
-    _conf->set_float("matrix_SL_C",   state.matrix[3][1]);
-    _conf->set_float("matrix_SL_R",   state.matrix[3][2]);
-    _conf->set_float("matrix_SL_SL",  state.matrix[3][3]);
-    _conf->set_float("matrix_SL_SR",  state.matrix[3][4]);
-    _conf->set_float("matrix_SL_LFE", state.matrix[3][5]);
-                                       
-    _conf->set_float("matrix_SR_L",   state.matrix[4][0]);
-    _conf->set_float("matrix_SR_C",   state.matrix[4][1]);
-    _conf->set_float("matrix_SR_R",   state.matrix[4][2]);
-    _conf->set_float("matrix_SR_SL",  state.matrix[4][3]);
-    _conf->set_float("matrix_SR_SR",  state.matrix[4][4]);
-    _conf->set_float("matrix_SR_LFE", state.matrix[4][5]);
-
-    _conf->set_float("matrix_LFE_L",  state.matrix[5][0]);
-    _conf->set_float("matrix_LFE_C",  state.matrix[5][1]);
-    _conf->set_float("matrix_LFE_R",  state.matrix[5][2]);
-    _conf->set_float("matrix_LFE_SL", state.matrix[5][3]);
-    _conf->set_float("matrix_LFE_SR", state.matrix[5][4]);
-    _conf->set_float("matrix_LFE_LFE",state.matrix[5][5]);
+    // Matrix
+    char element_str[32];
+    for (int ch1 = 0; ch1 < NCHANNELS; ch1++)
+      for (int ch2 = 0; ch2 < NCHANNELS; ch2++)
+      {
+        sprintf(element_str, "matrix_%s_%s", ch_names[ch1], ch_names[ch2]);
+        _conf->set_float(element_str, state->matrix[ch1][ch2]);
+      }
   }
 
   if (_what & AC3FILTER_SYS)
@@ -1250,5 +1125,6 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
 
   }
 
+  safe_delete(state);
   return S_OK;
 }

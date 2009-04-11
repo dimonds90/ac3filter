@@ -192,11 +192,15 @@ public:
   STDMETHODIMP set_bass_redir   (bool  bass_redir);
   STDMETHODIMP get_bass_freq    (int  *bass_freq);
   STDMETHODIMP set_bass_freq    (int   bass_freq);
-  // Eqalizer
+  // Equalizer
   STDMETHODIMP get_eq           (bool *eq);
   STDMETHODIMP set_eq           (bool  eq);
-  STDMETHODIMP get_eq_bands     (int *freq, double *gain);
-  STDMETHODIMP set_eq_bands     (const int *freq, const double *gain);
+  STDMETHODIMP get_eq_master_nbands(size_t *nbands);
+  STDMETHODIMP get_eq_master_bands(int *freqs, double *gains, int first_band, int nbands);
+  STDMETHODIMP set_eq_master_bands(size_t nbands, const int *freqs, const double *gains);
+  STDMETHODIMP get_eq_nbands    (int ch, size_t *nbands);
+  STDMETHODIMP get_eq_bands     (int ch, int *freqs, double *gains, int first_band, int nbands);
+  STDMETHODIMP set_eq_bands     (int ch, size_t nbands, const int *freqs, const double *gains);
   // Spectrum
   STDMETHODIMP get_spectrum_length (unsigned *length);
   STDMETHODIMP set_spectrum_length (unsigned  length);
@@ -219,9 +223,6 @@ public:
   STDMETHODIMP get_threshold    (vtime_t *threshold);
   STDMETHODIMP set_threshold    (vtime_t  threshold);
   STDMETHODIMP get_jitter       (vtime_t *input_mean, vtime_t *input_stddev, vtime_t *output_mean, vtime_t *output_stddev);
-                                
-  STDMETHODIMP get_state        (AudioProcessorState *state, vtime_t time = 0);
-  STDMETHODIMP set_state        (AudioProcessorState *state);
 };
 
 

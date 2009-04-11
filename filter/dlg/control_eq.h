@@ -8,12 +8,15 @@
 #include "../guids.h"
 #include "../controls.h"
 
+#define EQ_BANDS 10
+
 class ControlEq : public Controller
 {
 protected:
   IAudioProcessor *proc;
 
   bool eq;
+  size_t nbands;
   int freq[EQ_BANDS];
   double gain[EQ_BANDS];
   DoubleEdit edt_gain[EQ_BANDS];
