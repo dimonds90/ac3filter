@@ -16,6 +16,7 @@ protected:
   IAudioProcessor *proc;
 
   bool eq;
+  int eq_ch;
   size_t nbands;
   EqBand bands[EQ_BANDS];
   DoubleEdit edt_gain[EQ_BANDS];

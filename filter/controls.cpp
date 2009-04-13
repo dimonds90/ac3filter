@@ -9,6 +9,10 @@
 
 #define TTS_BALLOON 0x40
 
+///////////////////////////////////////////////////////////////////////////////
+// Tooltip
+///////////////////////////////////////////////////////////////////////////////
+
 Tooltip::Tooltip()
 {
   hwnd = 0;
@@ -190,14 +194,12 @@ Tooltip::add_control(int control_id, const char *text)
 */
 }
 
-
-Edit::~Edit()
-{
-  unlink();
-}
+///////////////////////////////////////////////////////////////////////////////
+// SubclassedControl
+///////////////////////////////////////////////////////////////////////////////
 
 void
-Edit::link(HWND _dlg, int _item)
+SubclassedControl::link(HWND _dlg, int _item)
 {
   if (hwnd) unlink();
 
@@ -206,17 +208,19 @@ Edit::link(HWND _dlg, int _item)
   hwnd = GetDlgItem(_dlg, _item);
   if (hwnd)
   {
-    wndproc = (WNDPROC) SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)SubClassProc);
-    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)(Edit *)this);
+    next_wndproc = (WNDPROC) SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)SubClassProc);
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)(SubclassedControl *)this);
   }
+  on_link();
 }
 
 void 
-Edit::unlink()
+SubclassedControl::unlink()
 {
+  on_unlink();
   if (hwnd)
   {
-    SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)wndproc);
+    SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)next_wndproc);
     SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
   }
 
@@ -226,63 +230,73 @@ Edit::unlink()
 }
 
 void
-Edit::enable(bool enabled)
+SubclassedControl::enable(bool enabled)
 {
   EnableWindow(hwnd, enabled);
 }
 
-LRESULT CALLBACK 
-Edit::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK
+SubclassedControl::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  Edit *iam = (Edit *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+  SubclassedControl *iam = (SubclassedControl *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+  if (iam) return iam->wndproc(hwnd, msg, wParam, lParam);
+  else return 0;
+}
 
+///////////////////////////////////////////////////////////////////////////////
+// Edit, IntEdit, DoubleEdit, TextEdit controls
+///////////////////////////////////////////////////////////////////////////////
+
+LRESULT CALLBACK
+Edit::wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
   switch (msg) 
   { 
     case WM_GETDLGCODE:
-      return CallWindowProc(iam->wndproc, hwnd, msg, wParam, lParam) | DLGC_WANTALLKEYS;
+      return CallWindowProc(next_wndproc, hwnd, msg, wParam, lParam) | DLGC_WANTALLKEYS;
 
     case WM_KILLFOCUS:
-      if (iam->editing)
+      if (editing)
       {
-        if (iam->read_value())
+        if (read_value())
         {
-          iam->write_value();
-          SendMessage(iam->dlg, WM_COMMAND, MAKEWPARAM(iam->item, CB_ENTER), 0); 
+          write_value();
+          SendMessage(dlg, WM_COMMAND, MAKEWPARAM(item, CB_ENTER), 0); 
         }
         else
         {
-          iam->restore_value();
-          iam->write_value();
-          MessageBox(0, iam->incorrect_value(), "Error", MB_ICONEXCLAMATION | MB_OK);
+          restore_value();
+          write_value();
+          MessageBox(0, incorrect_value(), "Error", MB_ICONEXCLAMATION | MB_OK);
         }
-        iam->editing = false;
+        editing = false;
       }
       break;
 
     case WM_KEYDOWN: 
-      if (!iam->editing)
+      if (!editing)
       {
-        iam->backup_value();
-        iam->editing = true;
+        backup_value();
+        editing = true;
       } 
 
-      if (iam->editing && wParam == VK_RETURN)
+      if (editing && wParam == VK_RETURN)
       {
-        if (iam->read_value())
+        if (read_value())
         {
-          iam->editing = false;
-          SendMessage(iam->dlg, WM_COMMAND, MAKEWPARAM(iam->item, CB_ENTER), 0); 
+          editing = false;
+          SendMessage(dlg, WM_COMMAND, MAKEWPARAM(item, CB_ENTER), 0); 
         }
         else
-          MessageBox(0, iam->incorrect_value(), "Error", MB_ICONEXCLAMATION | MB_OK);
+          MessageBox(0, incorrect_value(), "Error", MB_ICONEXCLAMATION | MB_OK);
         return 0; 
       }
 
-      if (iam->editing && wParam == VK_ESCAPE)
+      if (editing && wParam == VK_ESCAPE)
       {
-        iam->restore_value();
-        iam->write_value();
-        iam->editing = false;
+        restore_value();
+        write_value();
+        editing = false;
         return 0;
       }
 
@@ -301,7 +315,47 @@ Edit::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
   } // switch  (msg)
 
   // Call the original window procedure for default processing. 
-  return CallWindowProc(iam->wndproc, hwnd, msg, wParam, lParam); 
+  return SubclassedControl::wndproc(hwnd, msg, wParam, lParam);
+}
+
+bool
+IntEdit::read_value()
+{
+  char buf[256];
+
+  if (!SendDlgItemMessage(dlg, item, WM_GETTEXT, 256, (LPARAM) buf))
+  {
+    value = 0;
+    return true;
+  }
+
+  int new_value = 0;
+  char tmp;
+  if (sscanf(buf, "%i%c", &new_value, &tmp) != 1)
+    return false;
+
+  value = new_value;
+  return true;
+}
+
+void
+IntEdit::backup_value()
+{
+  old_value = value;
+}
+
+void 
+IntEdit::restore_value()
+{
+  value = old_value;
+}
+
+void 
+IntEdit::write_value()
+{
+  char buf[256];
+  sprintf(buf, "%i", value);
+  SetDlgItemText(dlg, item, buf);
 }
 
 bool
@@ -335,7 +389,6 @@ DoubleEdit::restore_value()
 {
   value = old_value;
 }
-
 
 void 
 DoubleEdit::write_value()
@@ -386,7 +439,6 @@ TextEdit::restore_value()
   strcpy(value, old_value);
 }
 
-
 void 
 TextEdit::write_value()
 {
@@ -401,26 +453,13 @@ TextEdit::set_text(const char *_text)
   write_value();
 }
 
-
-LinkButton::~LinkButton()
-{
-  unlink();
-}
+///////////////////////////////////////////////////////////////////////////////
+// LinkButton
+///////////////////////////////////////////////////////////////////////////////
 
 void
-LinkButton::link(HWND _dlg, int _item)
+LinkButton::on_link()
 {
-  if (hwnd) unlink();
-
-  dlg = _dlg;
-  item = _item;
-  hwnd = GetDlgItem(_dlg, _item);
-  if (hwnd)
-  {
-    wndproc = (WNDPROC) SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR) SubClassProc);
-    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)(Edit *)this);
-  }
-
   // Create underlined font
   HFONT dlg_font = (HFONT)SendDlgItemMessage(dlg, item, WM_GETFONT, 0, 0);
   LOGFONT logfont;
@@ -430,47 +469,34 @@ LinkButton::link(HWND _dlg, int _item)
 }
 
 void 
-LinkButton::unlink()
+LinkButton::on_unlink()
 {
-  if (hwnd)
-  {
-    SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR) wndproc);
-    SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
-  }
   DeleteObject(font);
-
-  dlg = 0;
-  item = 0;
-  hwnd = 0;
   font = 0;
 }
 
 LRESULT CALLBACK 
-LinkButton::SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LinkButton::wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  LinkButton *iam = (LinkButton *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-
   switch (msg) 
   { 
     case WM_PAINT: 
     {
       PAINTSTRUCT ps;
       HDC dc = BeginPaint(hwnd, &ps);
-      iam->paint(dc);
+      paint(dc);
       EndPaint(hwnd, &ps);
       return 0;
     }
-
     case WM_LBUTTONDOWN:
     {
-      iam->press();
+      press();
       return 0;
     }
-
   } 
-        
+
   // Call the original window procedure for default processing. 
-  return CallWindowProc(iam->wndproc, hwnd, msg, wParam, lParam); 
+  return SubclassedControl::wndproc(hwnd, msg, wParam, lParam);
 }
 
 void 

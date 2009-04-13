@@ -111,29 +111,61 @@ public:
   void add_control(int control_id, const char *text);
 };
 
-class Edit
+class SubclassedControl
 {
 protected:
   static LRESULT CALLBACK SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
   HWND    dlg;
   HWND    hwnd;
   int     item;
-  WNDPROC wndproc;
-  bool    editing;
+  WNDPROC next_wndproc;
 
+  virtual void on_link() {};
+  virtual void on_unlink() {};
+  virtual LRESULT CALLBACK wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+  { return CallWindowProc(next_wndproc, hwnd, msg, wParam, lParam); }
+
+public:
+  SubclassedControl(): dlg(0), hwnd(0), item(0), next_wndproc(0) {};
+  virtual ~SubclassedControl() { unlink(); }
+
+  void link(HWND dlg, int item);
+  void unlink();
+  void enable(bool enabled);
+};
+
+
+class Edit : public SubclassedControl
+{
+protected:
+  bool editing;
   virtual bool read_value() = 0;
   virtual void backup_value() = 0;
   virtual void restore_value() = 0;
   virtual void write_value() = 0;
   virtual const char *incorrect_value() { return "Incorrect value"; }
+  virtual LRESULT CALLBACK wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 public:
-  Edit(): dlg(0), hwnd(0), item(0), wndproc(0), editing(false) {};
-  ~Edit();
+  Edit(): editing(false) {};
+};
 
-  void link(HWND dlg, int item);
-  void unlink();
-  void enable(bool enabled);
+class IntEdit : public Edit
+{
+protected:
+  int old_value;
+
+  bool read_value();
+  void backup_value();
+  void restore_value();
+  void write_value();
+  const char *incorrect_value() { return "Incorrect value: must be an integer number"; }
+
+public:
+  int value;
+  IntEdit(): value(0) {};
+
+  void update_value(int _value) { value = _value; write_value(); };
 };
 
 class DoubleEdit : public Edit
@@ -149,7 +181,7 @@ protected:
 
 public:
   double value;
-  DoubleEdit() {};
+  DoubleEdit(): value(0) {};
 
   void update_value(double _value) { value = _value; write_value(); };
 };
@@ -174,26 +206,20 @@ public:
   const char *get_text() { return value; };
 };
 
-class LinkButton
+class LinkButton : public SubclassedControl
 {
 protected:
-  HWND    dlg;
-  HWND    hwnd;
-  int     item;
-  WNDPROC wndproc;
   HFONT   font;
 
-  static LRESULT CALLBACK SubClassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-public:
-  LinkButton(): dlg(0), hwnd(0), item(0), wndproc(0) {};
-  ~LinkButton();
-
-  void link(HWND dlg, int item);
-  void unlink();  
+  virtual void on_link();
+  virtual void on_unlink();
+  virtual LRESULT CALLBACK wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
   virtual void paint(HDC dc);
   virtual void press();
+
+public:
+  LinkButton(): font(0) {};
 };
 
 #endif

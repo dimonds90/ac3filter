@@ -12,20 +12,20 @@ static const int controls[] =
   0
 };
 
-const double db_range = 100; // 120dB range
-const double grid_hz = 1000;  // 1kHz grid step
-const double grid_db = 10;    // 10db grid step
-const int major_db = 2;  // major line grid step
-const int major_hz = 2;  // major line grid step
+static const double db_range = 100; // 120dB range
+static const double grid_hz = 1000;  // 1kHz grid step
+static const double grid_db = 10;    // 10db grid step
+static const int major_db = 2;  // major line grid step
+static const int major_hz = 2;  // major line grid step
 
-const DWORD bkg_color = RGB(0, 0, 0);
-const DWORD signal_color = RGB(0, 255, 255);
-const DWORD grid_color = RGB(32, 32, 32);
-const DWORD major_color = RGB(64, 64, 64);
-const DWORD label_color = RGB(128, 128, 0);
+static const DWORD bkg_color = RGB(0, 0, 0);
+static const DWORD signal_color = RGB(0, 255, 255);
+static const DWORD grid_color = RGB(32, 32, 32);
+static const DWORD major_color = RGB(64, 64, 64);
+static const DWORD label_color = RGB(128, 128, 0);
 
-const int font_size = 12;
-const char *font_name = "Arial";
+static const int font_size = 12;
+static const char *font_name = "Arial";
 
 ControlSpectrum::ControlSpectrum(HWND _dlg, IAudioProcessor *_proc):
 Controller(_dlg, ::controls), proc(_proc), spectrum_length(0), spectrum(0)
@@ -216,7 +216,7 @@ void ControlSpectrum::paint_linear()
   ReleaseDC(hctrl, ctrl_dc);
 }
 
-int scale(int pos, int max, int width)
+static int scale(int pos, int max, int width)
 {
   return int(width + log10(double(pos)/double(max)) * width / 3);
 }
