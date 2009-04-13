@@ -1039,7 +1039,7 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     _conf->set_bool ("eq"               ,state->eq              );
     if (state->eq_master_nbands && state->eq_master_bands)
     {
-      _conf->set_int32("eq_nbands"      ,state->eq_master_nbands);
+      _conf->set_int32("eq_nbands"      ,(int)state->eq_master_nbands);
       _conf->set_float("eq_ripple"      ,state->eq_master_ripple);
       for (size_t i = 0; i < state->eq_master_nbands; i++)
       {
@@ -1054,7 +1054,7 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
       if (state->eq_nbands[ch] && state->eq_bands[ch])
       {
         sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
-        _conf->set_int32(param_str      ,state->eq_nbands[ch]);
+        _conf->set_int32(param_str      ,(int)state->eq_nbands[ch]);
         sprintf(param_str, "eq_%s_ripple", ch_names[ch]);
         _conf->set_float(param_str      ,state->eq_ripple[ch]);
         for (size_t i = 0; i < state->eq_master_nbands; i++)
