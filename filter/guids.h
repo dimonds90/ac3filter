@@ -308,12 +308,11 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   // Equalizer
   STDMETHOD (get_eq)           (bool *eq) = 0;
   STDMETHOD (set_eq)           (bool  eq) = 0;
-  STDMETHOD (get_eq_master_nbands)(size_t *nbands) = 0;
-  STDMETHOD (get_eq_master_bands)(EqBand *bands, size_t first_band, size_t nbands) = 0;
-  STDMETHOD (set_eq_master_bands)(EqBand *bands, size_t nbands) = 0;
   STDMETHOD (get_eq_nbands)    (int ch, size_t *nbands) = 0;
   STDMETHOD (get_eq_bands)     (int ch, EqBand *bands, size_t first_band, size_t nbands) = 0;
   STDMETHOD (set_eq_bands)     (int ch, EqBand *bands, size_t nbands) = 0;
+  STDMETHOD (get_eq_ripple)    (int ch, double *ripple_db) = 0;
+  STDMETHOD (set_eq_ripple)    (int ch, double ripple_db) = 0;
   // Spectrum
   STDMETHOD (get_spectrum_length) (unsigned *length) = 0;
   STDMETHOD (set_spectrum_length) (unsigned  length) = 0;

@@ -549,22 +549,6 @@ STDMETHODIMP COMDecoder::set_eq(bool _eq)
   dvd.proc.set_eq(_eq);
   return S_OK;
 }
-STDMETHODIMP COMDecoder::get_eq_master_nbands(size_t *nbands)
-{
-  if (nbands) *nbands = dvd.proc.get_eq_master_nbands();
-  return S_OK;
-}
-STDMETHODIMP COMDecoder::get_eq_master_bands(EqBand *bands, size_t first_band, size_t nbands)
-{
-  dvd.proc.get_eq_master_bands(bands, first_band, nbands);
-  return S_OK;
-}
-STDMETHODIMP COMDecoder::set_eq_master_bands(EqBand *bands, size_t nbands)
-{
-  AutoLock config_lock(&config);
-  dvd.proc.set_eq_master_bands(bands, nbands);
-  return S_OK;
-}
 STDMETHODIMP COMDecoder::get_eq_nbands(int ch_name, size_t *nbands)
 {
   if (nbands) *nbands = dvd.proc.get_eq_nbands(ch_name);
@@ -579,6 +563,17 @@ STDMETHODIMP COMDecoder::set_eq_bands(int ch_name, EqBand *bands, size_t nbands)
 {
   AutoLock config_lock(&config);
   dvd.proc.set_eq_bands(ch_name, bands, nbands);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_eq_ripple(int ch_name, double *ripple_db)
+{
+  if (ripple_db) *ripple_db = dvd.proc.get_eq_ripple(ch_name);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_eq_ripple(int ch, double ripple_db)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_eq_ripple(ch, ripple_db);
   return S_OK;
 }
 
@@ -807,14 +802,17 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
 
     bool eq;
     int32_t nbands;
+    double ripple;
     AutoBuf<EqBand> bands;
-    char nbands_str[32], freq_str[32], gain_str[32];
+    char param_str[32];
 
     eq = state->eq;
     _conf->get_bool ("eq"               ,eq                     );
 
     nbands = 0;
+    ripple = state->eq_master_ripple;
     _conf->get_int32("eq_nbands"        ,nbands                 );
+    _conf->get_float("eq_ripple"        ,ripple                 );
     bands.allocate(nbands);
     if (!bands.is_allocated())
       nbands = 0;
@@ -823,19 +821,23 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     {
       bands[i].freq = 0;
       bands[i].gain = 0;
-      sprintf(freq_str, "eq_freq_%i", i);
-      sprintf(gain_str, "eq_gain_%i", i);
-      _conf->get_int32(freq_str       ,bands[i].freq            );
-      _conf->get_float(gain_str       ,bands[i].gain            );
+      sprintf(param_str, "eq_freq_%i", i);
+      _conf->get_int32(param_str      ,bands[i].freq            );
+      sprintf(param_str, "eq_gain_%i", i);
+      _conf->get_float(param_str      ,bands[i].gain            );
     }
-    dvd.proc.set_eq_master_bands(bands, nbands);
+    dvd.proc.set_eq_bands(CH_NONE, bands, nbands);
+    dvd.proc.set_eq_ripple(CH_NONE, ripple);
     state->eq_master_bands = 0;
 
     for (int ch = 0; ch < NCHANNELS; ch++)
     {
       nbands = 0;
-      sprintf(nbands_str, "eq_%s_nbands", ch_names[ch]);
-      _conf->set_int32(nbands_str     ,state->eq_master_nbands);
+      ripple = state->eq_ripple[ch];
+      sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
+      _conf->get_int32(param_str      ,nbands                   );
+      sprintf(param_str, "eq_%s_ripple", ch_names[ch]);
+      _conf->get_float(param_str      ,ripple                   );
       bands.allocate(nbands);
       if (!bands.is_allocated())
         nbands = 0;
@@ -844,12 +846,13 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
       {
         bands[i].freq = 0;
         bands[i].gain = 0;
-        sprintf(freq_str, "eq_%s_freq_%i", ch_names[ch], i);
-        sprintf(gain_str, "eq_%s_gain_%i", ch_names[ch], i);
-        _conf->set_int32(freq_str       ,bands[i].freq        );
-        _conf->set_float(gain_str       ,bands[i].gain        );
+        sprintf(param_str, "eq_%s_freq_%i", ch_names[ch], i);
+        _conf->get_int32(param_str      ,bands[i].freq        );
+        sprintf(param_str, "eq_%s_gain_%i", ch_names[ch], i);
+        _conf->get_float(param_str      ,bands[i].gain        );
       }
       dvd.proc.set_eq_bands(ch, bands, nbands);
+      dvd.proc.set_eq_ripple(ch, ripple);
       state->eq_bands[ch] = 0;
     }
   }
@@ -1031,32 +1034,35 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
   if (state && (_what & AC3FILTER_EQ))
   {
     // Equalizer
-    char nbands_str[32], freq_str[32], gain_str[32];
+    char param_str[32];
 
     _conf->set_bool ("eq"               ,state->eq              );
     if (state->eq_master_nbands && state->eq_master_bands)
     {
       _conf->set_int32("eq_nbands"      ,state->eq_master_nbands);
+      _conf->set_float("eq_ripple"      ,state->eq_master_ripple);
       for (size_t i = 0; i < state->eq_master_nbands; i++)
       {
-        sprintf(freq_str, "eq_freq_%i", i);
-        sprintf(gain_str, "eq_gain_%i", i);
-        _conf->set_int32(freq_str       ,state->eq_master_bands[i].freq);
-        _conf->set_float(gain_str       ,state->eq_master_bands[i].gain);
+        sprintf(param_str, "eq_freq_%i", i);
+        _conf->set_int32(param_str      ,state->eq_master_bands[i].freq);
+        sprintf(param_str, "eq_gain_%i", i);
+        _conf->set_float(param_str      ,state->eq_master_bands[i].gain);
       }
     }
 
     for (int ch = 0; ch < NCHANNELS; ch++)
       if (state->eq_nbands[ch] && state->eq_bands[ch])
       {
-        sprintf(nbands_str, "eq_%s_nbands", ch_names[ch]);
-        _conf->set_int32(nbands_str     ,state->eq_master_nbands);
+        sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
+        _conf->set_int32(param_str      ,state->eq_nbands[ch]);
+        sprintf(param_str, "eq_%s_ripple", ch_names[ch]);
+        _conf->set_float(param_str      ,state->eq_ripple[ch]);
         for (size_t i = 0; i < state->eq_master_nbands; i++)
         {
-          sprintf(freq_str, "eq_%s_freq_%i", ch_names[ch], i);
-          sprintf(gain_str, "eq_%s_gain_%i", ch_names[ch], i);
-          _conf->set_int32(freq_str     ,state->eq_bands[ch][i].freq);
-          _conf->set_float(gain_str     ,state->eq_bands[ch][i].gain);
+          sprintf(param_str, "eq_%s_freq_%i", ch_names[ch], i);
+          _conf->set_int32(param_str    ,state->eq_bands[ch][i].freq);
+          sprintf(param_str, "eq_%s_gain_%i", ch_names[ch], i);
+          _conf->set_float(param_str    ,state->eq_bands[ch][i].gain);
         }
       }
   }
