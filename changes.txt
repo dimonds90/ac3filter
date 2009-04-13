@@ -1,5 +1,7 @@
 v1.60a
   + 64bit OS support
+  + Multichannel equalizer
+  + Customize equalizer dialog
 
 
 v1.51a - 09.07.2008
