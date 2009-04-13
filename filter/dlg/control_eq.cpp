@@ -179,7 +179,7 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
 
     case IDC_BTN_EQ_CUSTOM:
     {
-      DWORD result;
+      INT_PTR result;
       CustomEq custom_eq;
       custom_eq.set_bands(bands, EQ_BANDS);
       custom_eq.set_ripple(ripple);

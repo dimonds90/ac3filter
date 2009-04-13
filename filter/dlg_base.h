@@ -27,7 +27,7 @@ public:
   DialogBase();
   virtual ~DialogBase();
 
-  DWORD exec(HINSTANCE hinstance, LPCSTR dlg_res, HWND parent);
+  INT_PTR exec(HINSTANCE hinstance, LPCSTR dlg_res, HWND parent);
   void show() { if (hwnd) ShowWindow(hwnd, SW_SHOW); }
   void hide() { if (hwnd) ShowWindow(hwnd, SW_HIDE); }
 };

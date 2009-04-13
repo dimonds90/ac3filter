@@ -9,12 +9,12 @@ DialogBase::DialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   DialogBase *dlg;
   if (uMsg == WM_INITDIALOG)
   {
-    SetWindowLong(hwnd, DWL_USER, lParam);
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
     dlg = (DialogBase *)lParam;
     if (!dlg) return TRUE;
   }
 
-  dlg = (DialogBase *)GetWindowLong(hwnd, DWL_USER);
+  dlg = (DialogBase *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
   if (!dlg) return FALSE;
 
   switch (uMsg)
@@ -62,14 +62,14 @@ DialogBase::DialogBase()
 DialogBase::~DialogBase()
 {}
 
-DWORD
+INT_PTR
 DialogBase::exec(HINSTANCE _hinstance, LPCSTR _dlg_res, HWND _parent)
 {
   hwnd = 0;
   hinstance = _hinstance;
   parent = _parent;
 
-  DWORD result = DialogBoxParam(hinstance, _dlg_res, parent, DialogProc, (LPARAM)this);
+  INT_PTR result = DialogBoxParam(hinstance, _dlg_res, parent, DialogProc, (LPARAM)this);
 
   hwnd = 0;
   hinstance = 0;

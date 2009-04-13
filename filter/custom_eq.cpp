@@ -362,7 +362,7 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
   ReleaseDC(hwnd, wnd_dc);
 }
 
-static int scale(int pos, int max, int width)
+static int scale(size_t pos, size_t max, int width)
 {
   return int(width + log10(double(pos)/double(max)) * width / 3);
 }
@@ -477,7 +477,7 @@ SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz)
 
   val = spectrum[0] > 0? -value2db(spectrum[0]) + max_db: db_range;
   MoveToEx(mem_dc, -1, int(val * yfactor), 0);
-  for (unsigned i = 1; i < length; i++)
+  for (size_t i = 1; i < length; i++)
   {
     val = spectrum[i] > 0? -value2db(spectrum[i]) + max_db: db_range;
     LineTo(mem_dc, scale(i, length, width), int(val * yfactor));

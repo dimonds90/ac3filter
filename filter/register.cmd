@@ -1,5 +1,8 @@
-@echo off
+rem @echo off
 echo ------------------------
-echo Register %1 version
-regsvr32 /s /u %1\ac3filter.ax
-regsvr32 /s %1\ac3filter.ax
+echo Register %1
+set filter=%1\ac3filter.ax
+if not exist "%filter%" set filter=%1\ac3filter64.ax
+
+regsvr32 /s /u "%filter%"
+regsvr32 /s "%filter%"
