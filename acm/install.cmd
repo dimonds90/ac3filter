@@ -21,7 +21,7 @@ goto fail
 
 :err_install_64
 echo Cannot install x64 module on 32bit platform
-goto fail
+goto end
 
 :usage
 echo Usage: %~n0 [platform] file
