@@ -253,11 +253,12 @@ Edit::wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
   switch (msg) 
   { 
     case WM_GETDLGCODE:
-      return CallWindowProc(next_wndproc, hwnd, msg, wParam, lParam) | DLGC_WANTALLKEYS;
+      return SubclassedControl::wndproc(hwnd, msg, wParam, lParam) | DLGC_WANTALLKEYS;
 
     case WM_KILLFOCUS:
       if (editing)
       {
+        editing = false;
         if (read_value())
         {
           write_value();
@@ -267,9 +268,8 @@ Edit::wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         {
           restore_value();
           write_value();
-          MessageBox(0, incorrect_value(), "Error", MB_ICONEXCLAMATION | MB_OK);
+          MessageBox(dlg, incorrect_value(), "Error", MB_ICONEXCLAMATION | MB_OK);
         }
-        editing = false;
       }
       break;
 
@@ -282,13 +282,18 @@ Edit::wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
       if (editing && wParam == VK_RETURN)
       {
+        editing = false;
         if (read_value())
         {
-          editing = false;
+          write_value();
           SendMessage(dlg, WM_COMMAND, MAKEWPARAM(item, CB_ENTER), 0); 
         }
         else
-          MessageBox(0, incorrect_value(), "Error", MB_ICONEXCLAMATION | MB_OK);
+        {
+          restore_value();
+          write_value();
+          MessageBox(dlg, incorrect_value(), "Error", MB_ICONEXCLAMATION | MB_OK);
+        }
         return 0; 
       }
 
