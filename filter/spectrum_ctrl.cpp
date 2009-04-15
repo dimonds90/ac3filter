@@ -2,16 +2,6 @@
 #include <stdio.h>
 #include "spectrum_ctrl.h"
 
-static const double max_db = 12;
-static const double min_db = -12;
-static const double db_range = max_db - min_db;
-
-static const double grid_hz = 1000;  // 1kHz grid step
-static const double grid_db = 2;    //  2db grid step
-
-static const int major_db = 2;  // major line grid step
-static const int major_hz = 2;  // major line grid step
-
 static const DWORD bkg_color = RGB(0, 0, 0);
 static const DWORD signal_color = RGB(0, 255, 255);
 static const DWORD minor_color = RGB(32, 32, 32);
@@ -23,8 +13,35 @@ static const char *font_name = "Arial";
 
 ///////////////////////////////////////////////////////////////////////////////
 
-SpectrumCtrl::SpectrumCtrl()
+SpectrumCtrl::SpectrumCtrl():
+  min_db(-12), max_db(12), db_range(24),
+  min_hz(0), max_hz(24000), hz_range(24000),
+  xfactor(0), yfactor(0)
 {}
+
+inline int SpectrumCtrl::db2y(double db)
+{ return (int)((max_db - db) * yfactor); }
+
+inline int SpectrumCtrl::hz2x_lin(double hz)
+{ return (int)((hz - min_hz) * xfactor); }
+
+inline int SpectrumCtrl::hz2x_log(double hz)
+{ return (int)(log(hz / min_hz) * width / log(max_hz/min_hz)); }
+
+void
+SpectrumCtrl::set_range(double _min_db, double _max_db, double _min_hz, double _max_hz)
+{
+  min_db = _min_db;
+  max_db = _max_db;
+  db_range = max_db - min_db;
+
+  min_hz = _min_hz;
+  max_hz = _max_hz;
+  hz_range = max_hz - min_hz;
+
+  xfactor = hz_range > 0? double(width) / hz_range: 0;
+  yfactor = db_range > 0? double(height) / db_range: 0;
+}
 
 void
 SpectrumCtrl::on_link()
@@ -34,6 +51,9 @@ SpectrumCtrl::on_link()
   GetClientRect(hwnd, &client_rect);
   width = client_rect.right - client_rect.left;
   height = client_rect.bottom - client_rect.top;
+
+  xfactor = hz_range > 0? double(width) / hz_range: 0;
+  yfactor = db_range > 0? double(height) / db_range: 0;
 
   HDC wnd_dc = GetDC(hwnd);
   mem_dc = CreateCompatibleDC(wnd_dc);
@@ -62,6 +82,7 @@ SpectrumCtrl::on_unlink()
   DeleteDC(mem_dc);
 }
 
+
 void
 SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
 {
@@ -71,47 +92,53 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
   char label[32];
   HPEN old_pen;
   HFONT old_font;
-  int x, y, max_x, max_y;
+  int x, y;
+  double db, hz;
 
   FillRect(mem_dc, &client_rect, bkg_brush);
+
+  int minor_db_height = 6;
+  int minor_db_lines = 3;
+
+  double minor_db = int(db_range * minor_db_height + height - 1) / height;
+  double major_db = minor_db * minor_db_lines;
+
+  double minor_hz = 500;
+  double major_hz = 2000;
 
   /////////////////////////////////////////////////////////
   // Grid
 
   old_pen = (HPEN)SelectObject(mem_dc, minor_pen);
 
-  max_y = int(db_range / grid_db);
-  for (y = 1; y < max_y; y++)
+  for (db = int(min_db / minor_db) * minor_db; db < max_db; db += minor_db)
   {
-    int pos = y * height / max_y;
-    MoveToEx(mem_dc, 0, pos, 0);
-    LineTo(mem_dc, width, pos);
+    y = db2y(db);
+    MoveToEx(mem_dc, 0, y, 0);
+    LineTo(mem_dc, width, y);
   }
 
-  max_x = int(length * bin2hz / grid_hz);
-  for (x = 1; x < max_x; x++)
+  for (hz = int(min_hz / minor_hz) * minor_hz; hz < max_hz; hz += minor_hz)
   {
-    int pos = x * width / max_x;
-    MoveToEx(mem_dc, pos, 0, 0);
-    LineTo(mem_dc, pos, height);
+    x = hz2x_lin(hz);
+    MoveToEx(mem_dc, x, 0, 0);
+    LineTo(mem_dc, x, height);
   }
 
   SelectObject(mem_dc, major_pen);
 
-  max_y = int(db_range / grid_db);
-  for (y = major_db; y < max_y; y += major_db)
+  for (db = int(min_db / major_db) * major_db; db < max_db; db += major_db)
   {
-    int pos = y * height / max_y;
-    MoveToEx(mem_dc, 0, pos, 0);
-    LineTo(mem_dc, width, pos);
+    y = db2y(db);
+    MoveToEx(mem_dc, 0, y, 0);
+    LineTo(mem_dc, width, y);
   }
 
-  max_x = int(length * bin2hz / grid_hz);
-  for (x = major_hz; x < max_x; x += major_hz)
+  for (hz = int(min_hz / major_hz) * major_hz; hz < max_hz; hz += major_hz)
   {
-    int pos = x * width / max_x;
-    MoveToEx(mem_dc, pos, 0, 0);
-    LineTo(mem_dc, pos, height);
+    x = hz2x_lin(hz);
+    MoveToEx(mem_dc, x, 0, 0);
+    LineTo(mem_dc, x, height);
   }
 
   SelectObject(mem_dc, old_pen);
@@ -125,21 +152,19 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
   old_font = (HFONT)SelectObject(mem_dc, grid_font);
 
   SetTextAlign(mem_dc, TA_TOP | TA_CENTER);
-  max_x = int(length * bin2hz / grid_hz);
-  for (x = major_hz; x < max_x; x += major_hz)
+  for (hz = int(min_hz / major_hz + 1) * major_hz; hz < max_hz; hz += major_hz)
   {
-    int pos = x * width / max_x;
-    sprintf(label, "%ikHz", int(x * grid_hz / 1000));
-    TextOut(mem_dc, pos, 0, label, (int)strlen(label));
+    x = hz2x_lin(hz);
+    sprintf(label, "%ikHz", int(hz / 1000));
+    TextOut(mem_dc, x, 0, label, (int)strlen(label));
   }
 
   SetTextAlign(mem_dc, TA_BOTTOM | TA_RIGHT);
-  max_y = int(db_range / grid_db);
-  for (y = major_db; y <= max_y; y += major_db)
+  for (db = int(min_db / major_db) * major_db; db < max_db; db += major_db)
   {
-    int pos = y * height / max_y;
-    sprintf(label, "%+idB", int(-y * grid_db + max_db));
-    TextOut(mem_dc, width, pos, label, (int)strlen(label));
+    y = db2y(db);
+    sprintf(label, "%+idB", int(db));
+    TextOut(mem_dc, width, y, label, (int)strlen(label));
   }
 
   SelectObject(mem_dc, old_font);
@@ -147,18 +172,15 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
   /////////////////////////////////////////////////////////
   // Spectrum
 
-  double xfactor = double(width) / double(length);
-  double yfactor = double(height) / db_range;
-  double val;
-
   old_pen = (HPEN)SelectObject(mem_dc, signal_pen);
 
-  val = spectrum[0] > 0? -value2db(spectrum[0]) + max_db: db_range;
-  MoveToEx(mem_dc, 0, int(val * yfactor), 0);
-  for (size_t i = 1; i < length; i++)
+  db = spectrum[1] > 0? value2db(spectrum[1]): min_db;
+  MoveToEx(mem_dc, 0, db2y(db), 0);
+  for (size_t i = 2; i < length; i++)
   {
-    val = spectrum[i] > 0? -value2db(spectrum[i]) + max_db: db_range;
-    LineTo(mem_dc, int(i * xfactor), int(val * yfactor));
+    x = hz2x_lin(i * bin2hz);
+    y = db2y(spectrum[i] > 0? value2db(spectrum[i]): min_db);
+    LineTo(mem_dc, x, y);
   }
 
   SelectObject(mem_dc, old_pen);
@@ -171,11 +193,6 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
   ReleaseDC(hwnd, wnd_dc);
 }
 
-static int scale(size_t pos, size_t max, int width)
-{
-  return int(width + log10(double(pos)/double(max)) * width / 3);
-}
-
 void
 SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz)
 {
@@ -185,57 +202,57 @@ SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz)
   char label[32];
   HPEN old_pen;
   HFONT old_font;
-  int y, max_y, delta_hz;
-  const int nyquist = int(length * bin2hz);
+  int x, y;
+  double db, hz;
 
   FillRect(mem_dc, &client_rect, bkg_brush);
+
+  int minor_db_height = 6;
+  int minor_db_lines = 3;
+
+  double minor_db = int(db_range * minor_db_height + height - 1) / height;
+  double major_db = minor_db * minor_db_lines;
+
+  if (min_hz <= 0) min_hz = max_hz / 1000;
+  int minor_hz_lines = 10;
+  int minor_hz_start = (int)pow(
+    (double)minor_hz_lines, 
+    (int)(log(min_hz) / log((double)minor_hz_lines)));
 
   /////////////////////////////////////////////////////////
   // Grid
 
   old_pen = (HPEN)SelectObject(mem_dc, minor_pen);
 
-  max_y = int(db_range / grid_db);
-  for (y = 1; y < max_y; y++)
+  for (db = int(min_db / minor_db) * minor_db; db < max_db; db += minor_db)
   {
-    int pos = y * height / max_y;
-    MoveToEx(mem_dc, 0, pos, 0);
-    LineTo(mem_dc, width, pos);
+    y = db2y(db);
+    MoveToEx(mem_dc, 0, y, 0);
+    LineTo(mem_dc, width, y);
   }
 
-  delta_hz = 1;
-  while (delta_hz < 100000)
-  {
-    if (scale(delta_hz * 9, nyquist, width) > 0)
-      for (int i = 1; i < 10; i++)
-      {
-        int pos = scale(i * delta_hz, nyquist, width);
-        MoveToEx(mem_dc, pos, 0, 0);
-        LineTo(mem_dc, pos, height);
-      }
-    delta_hz *= 10;
-  }
+  for (hz = minor_hz_start; hz < max_hz; hz *= minor_hz_lines)
+    for (int i = 0; i < minor_hz_lines; i++)
+    {
+      x = hz2x_log(hz + i * hz);
+      MoveToEx(mem_dc, x, 0, 0);
+      LineTo(mem_dc, x, height);
+    }
 
   SelectObject(mem_dc, major_pen);
 
-  max_y = int(db_range / grid_db);
-  for (y = major_db; y < max_y; y+=major_db)
+  for (db = int(min_db / major_db) * major_db; db < max_db; db += major_db)
   {
-    int pos = y * height / max_y;
-    MoveToEx(mem_dc, 0, pos, 0);
-    LineTo(mem_dc, width, pos);
+    y = db2y(db);
+    MoveToEx(mem_dc, 0, y, 0);
+    LineTo(mem_dc, width, y);
   }
 
-  delta_hz = 1;
-  while (delta_hz < 100000)
+  for (hz = minor_hz_start; hz < max_hz; hz *= minor_hz_lines)
   {
-    if (scale(delta_hz, nyquist, width) > 0)
-    {
-      int pos = scale(delta_hz, nyquist, width);
-      MoveToEx(mem_dc, pos, 0, 0);
-      LineTo(mem_dc, pos, height);
-    }
-    delta_hz *= 10;
+    x = hz2x_log(hz);
+    MoveToEx(mem_dc, x, 0, 0);
+    LineTo(mem_dc, x, height);
   }
 
   SelectObject(mem_dc, old_pen);
@@ -249,28 +266,22 @@ SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz)
   old_font = (HFONT)SelectObject(mem_dc, grid_font);
 
   SetTextAlign(mem_dc, TA_TOP | TA_CENTER);
-  delta_hz = 1;
-  while (delta_hz < 100000)
+  for (hz = minor_hz_start; hz < max_hz; hz *= minor_hz_lines)
   {
-    if (scale(delta_hz, nyquist, width) > 0)
-    {
-      int pos = scale(delta_hz, nyquist, width);
-      if (delta_hz >= 1000)
-        sprintf(label, "%ikHz", delta_hz / 1000);
-      else
-        sprintf(label, "%iHz", delta_hz);
-      TextOut(mem_dc, pos, 0, label, (int)strlen(label));
-    }
-    delta_hz *= 10;
+    x = hz2x_log(hz);
+    if (hz >= 1000)
+      sprintf(label, "%ikHz", int(hz / 1000));
+    else
+      sprintf(label, "%iHz", int(hz));
+    TextOut(mem_dc, x, 0, label, (int)strlen(label));
   }
 
   SetTextAlign(mem_dc, TA_BOTTOM | TA_RIGHT);
-  max_y = int(db_range / grid_db);
-  for (y = major_db; y <= max_y; y+=major_db)
+  for (db = int(min_db / major_db) * major_db; db < max_db; db += major_db)
   {
-    int pos = y * height / max_y;
-    sprintf(label, "%+idB", int(-y * grid_db + max_db));
-    TextOut(mem_dc, width, pos, label, (int)strlen(label));
+    y = db2y(db);
+    sprintf(label, "%+idB", int(db));
+    TextOut(mem_dc, width, y, label, (int)strlen(label));
   }
 
   SelectObject(mem_dc, old_font);
@@ -278,18 +289,15 @@ SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz)
   /////////////////////////////////////////////////////////
   // Spectrum
 
-  double xfactor = double(width) / double(length);
-  double yfactor = double(height) / db_range;
-  double val;
-
   old_pen = (HPEN)SelectObject(mem_dc, signal_pen);
 
-  val = spectrum[0] > 0? -value2db(spectrum[0]) + max_db: db_range;
-  MoveToEx(mem_dc, -1, int(val * yfactor), 0);
-  for (size_t i = 1; i < length; i++)
+  db = spectrum[1] > 0? value2db(spectrum[1]): min_db;
+  MoveToEx(mem_dc, hz2x_log(1 * bin2hz), db2y(db), 0);
+  for (size_t i = 2; i < length; i++)
   {
-    val = spectrum[i] > 0? -value2db(spectrum[i]) + max_db: db_range;
-    LineTo(mem_dc, scale(i, length, width), int(val * yfactor));
+    x = hz2x_log(i * bin2hz);
+    y = db2y(spectrum[i] > 0? value2db(spectrum[i]): min_db);
+    LineTo(mem_dc, x, y);
   }
 
   SelectObject(mem_dc, old_pen);

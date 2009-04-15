@@ -7,29 +7,18 @@
 
 #include "../guids.h"
 #include "../controls.h"
+#include "../spectrum_ctrl.h"
+#include "buffer.h"
 
 class ControlSpectrum : public Controller
 {
 protected:
   IAudioProcessor *proc;
 
-  HWND hctrl;
-  RECT client_rect;
-  int width, height;
-
-  HDC     mem_dc;
-  HBITMAP mem_bitmap;
-  HBITMAP old_bitmap;
-
-  HBRUSH bkg_brush;
-  HPEN   signal_pen;
-  HPEN   grid_pen;
-  HPEN   major_pen;
-
-  HFONT  grid_font;
+  SpectrumCtrl spectrum;
 
   unsigned spectrum_length;
-  sample_t *spectrum;
+  Samples spectrum_buf;
   double bin2hz;
   bool log_scale;
 
@@ -40,8 +29,6 @@ public:
   virtual void init();
   virtual void update();
   virtual void update_dynamic();
-  void paint_linear();
-  void paint_log();
 
   virtual cmd_result command(int control, int message);
 };

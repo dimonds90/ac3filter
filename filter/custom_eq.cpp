@@ -55,14 +55,17 @@ CustomEq::on_create()
 void
 CustomEq::update()
 {
+  int i;
+  size_t band;
+
   nbands = eq.get_nbands();
   ripple = eq.get_ripple();
   eq.get_bands(bands, 0, EQ_BANDS);
 
-  for (int i = 0; i < EQ_BANDS; i++)
+  for (band = 0; band < EQ_BANDS; band++)
   {
-    edt_freq[i].update_value(bands[i].freq);
-    edt_gain[i].update_value(value2db(bands[i].gain));
+    edt_freq[band].update_value(bands[band].freq);
+    edt_gain[band].update_value(value2db(bands[band].gain));
   }
   edt_ripple.update_value(ripple);
   CheckDlgButton(hwnd, IDC_CHK_EQ_LOG, log_scale? BST_CHECKED: BST_UNCHECKED);
@@ -72,7 +75,6 @@ CustomEq::update()
 
   if (fir)
   {
-    int i;
     int length = MAX(8192, clp2(fir->length));
     edt_length.update_value(fir->length);
 
@@ -87,6 +89,15 @@ CustomEq::update()
     for (i = 0; i < length / 2; i++)
       buf[i] = sqrt(buf[i*2]*buf[i*2] + buf[i*2+1]*buf[i*2+1]);
 
+    double min_gain = -12;
+    double max_gain = 12;
+    for (band = 0; band < nbands; band++)
+    {
+      if (value2db(bands[band].gain) < min_gain) min_gain = value2db(bands[band].gain);
+      if (value2db(bands[band].gain) > max_gain) max_gain = value2db(bands[band].gain);
+    }
+
+    spectrum.set_range(min_gain, max_gain, 0, sample_rate / 2);
     if (log_scale)
       spectrum.draw_log(buf, length/2, double(sample_rate)/length);
     else
