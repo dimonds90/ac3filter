@@ -398,8 +398,6 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
       if (IsWindowVisible(hwnd))
         if (visible)
         {
-          tooltip_ctl.track();
-
           // normal update
           switch (wParam)
           {

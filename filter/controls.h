@@ -1,23 +1,9 @@
 /*
   Controls used at config dialog.
 
-  Tooltip
-  -------
-  Implements tooltips. For some reasons OleCreatePropertyFrame blocks dialog
-  mouse messages (WM_NCHITTEST returns HTNOWHERE), therefore, we have to
-  implement own algorithm of tooltip activation based on timer.
-
-  create() - create tooltip control.
-  destroy() - destroy tooltip control.
-  track() - this function tracks mouse position and activates tooltip when
-    needed. It must be called periodically (by timer for example).
-
-  enable() - enable or disable tooltips at all.
-  set_width() - set tooltip width. This also enables multi-line mode.
-  set_delay() - time when tooltip should appear in ms.
-
-  add_window() - add a window to show tooltip on.
-  add cointrol() - add a control to show tooltip on.
+  SubclassedControl
+  -----------------
+  Use subclassing to alter control behavior.
 
   Edit
   ----
@@ -30,6 +16,10 @@
   DoubleEdit
   ----------
   Numeric edit control.
+
+  IntEdit
+  ----------
+  Integer edit control.
 
   TextEdit
   --------
@@ -78,38 +68,6 @@ public:
   virtual cmd_result command(int control, int message) { return cmd_not_processed; }
 };
 
-
-class Tooltip
-{
-protected:
-  HWND hwnd;
-  HWND tooltip;
-  HINSTANCE hinstance;
-
-  POINT mouse_pt;
-  __int64 mouse_time;
-
-  bool enabled;
-  bool visible;
-  int  delay;
-
-  void show(bool show);
-
-public:
-  Tooltip();
-  ~Tooltip();
-
-  bool create(HINSTANCE _hinstance, HWND _hwnd, bool enabled = true);
-  void destroy();
-  void track();
-
-  void enable(bool enabled);
-  void set_width(int width);
-  void set_delay(int ms);
-
-  void add_window(HWND window, const char *text);
-  void add_control(int control_id, const char *text);
-};
 
 class SubclassedControl
 {

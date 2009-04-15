@@ -1,123 +1,73 @@
 #include <math.h>
-#include <windows.h>
-#include <commctrl.h>
 #include <stdio.h>
-#include "../resource_ids.h"
-#include "control_spectrum.h"
+#include "spectrum_ctrl.h"
 
-static const int controls[] =
-{
-  IDC_SPECTRUM,
-  IDC_CHK_EQ_LOG,
-  0
-};
+static const double max_db = 12;
+static const double min_db = -12;
+static const double db_range = max_db - min_db;
 
-static const double db_range = 100; // 120dB range
 static const double grid_hz = 1000;  // 1kHz grid step
-static const double grid_db = 10;    // 10db grid step
+static const double grid_db = 2;    //  2db grid step
+
 static const int major_db = 2;  // major line grid step
 static const int major_hz = 2;  // major line grid step
 
 static const DWORD bkg_color = RGB(0, 0, 0);
 static const DWORD signal_color = RGB(0, 255, 255);
-static const DWORD grid_color = RGB(32, 32, 32);
+static const DWORD minor_color = RGB(32, 32, 32);
 static const DWORD major_color = RGB(64, 64, 64);
 static const DWORD label_color = RGB(128, 128, 0);
 
 static const int font_size = 12;
 static const char *font_name = "Arial";
 
-ControlSpectrum::ControlSpectrum(HWND _dlg, IAudioProcessor *_proc):
-Controller(_dlg, ::controls), proc(_proc), spectrum_length(0), spectrum(0)
+///////////////////////////////////////////////////////////////////////////////
+
+SpectrumCtrl::SpectrumCtrl()
+{}
+
+void
+SpectrumCtrl::on_link()
 {
-  hctrl = GetDlgItem(hdlg, IDC_SPECTRUM);
-  if (hctrl)
-  {
-    GetClientRect(hctrl, &client_rect);
-    width = client_rect.right - client_rect.left;
-    height = client_rect.bottom - client_rect.top;
+  if (!hwnd) return;
 
-    HDC ctrl_dc = GetDC(hctrl);
-    mem_dc = CreateCompatibleDC(ctrl_dc);
-    mem_bitmap = CreateCompatibleBitmap(ctrl_dc, width, height);
-    old_bitmap = (HBITMAP)SelectObject(mem_dc, mem_bitmap);
-    ReleaseDC(hctrl, ctrl_dc);
+  GetClientRect(hwnd, &client_rect);
+  width = client_rect.right - client_rect.left;
+  height = client_rect.bottom - client_rect.top;
 
-    bkg_brush = CreateSolidBrush(bkg_color);
-    signal_pen = CreatePen(PS_SOLID, 1, signal_color);
-    grid_pen = CreatePen(PS_SOLID, 1, grid_color);
-    major_pen = CreatePen(PS_SOLID, 1, major_color);
-    grid_font = CreateFont(font_size, 0, 0, 0, FW_THIN, FALSE, FALSE, FALSE, OEM_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, font_name);
+  HDC wnd_dc = GetDC(hwnd);
+  mem_dc = CreateCompatibleDC(wnd_dc);
+  mem_bitmap = CreateCompatibleBitmap(wnd_dc, width, height);
+  old_bitmap = (HBITMAP)SelectObject(mem_dc, mem_bitmap);
+  ReleaseDC(hwnd, wnd_dc);
 
-    log_scale = false;
-    RegistryKey reg(REG_KEY);
-    reg.get_bool("log_scale", log_scale);
-
-    proc->set_spectrum_length(8*1024);
-  }
-
-  proc->AddRef();
+  bkg_brush = CreateSolidBrush(bkg_color);
+  signal_pen = CreatePen(PS_SOLID, 1, signal_color);
+  minor_pen = CreatePen(PS_SOLID, 1, minor_color);
+  major_pen = CreatePen(PS_SOLID, 1, major_color);
+  grid_font = CreateFont(font_size, 0, 0, 0, FW_THIN, FALSE, FALSE, FALSE, OEM_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, font_name);
 }
 
-ControlSpectrum::~ControlSpectrum()
+void
+SpectrumCtrl::on_unlink()
 {
-  if (hctrl)
-  {
-    DeleteObject(bkg_brush);
-    DeleteObject(signal_pen);
-    DeleteObject(grid_pen);
-    DeleteObject(major_pen);
-    DeleteObject(grid_font);
-
-    SelectObject(mem_dc, old_bitmap);
-    DeleteObject(mem_bitmap);
-    DeleteDC(mem_dc);
-
-    proc->set_spectrum_length(0);
-  }
-
-  proc->Release();
+  if (!hwnd) return;
+  DeleteObject(bkg_brush);
+  DeleteObject(signal_pen);
+  DeleteObject(minor_pen);
+  DeleteObject(major_pen);
+  DeleteObject(grid_font);
+  SelectObject(mem_dc, old_bitmap);
+  DeleteObject(mem_bitmap);
+  DeleteDC(mem_dc);
 }
 
-void ControlSpectrum::init()
+void
+SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
 {
-  CheckDlgButton(hdlg, IDC_CHK_EQ_LOG, log_scale? BST_CHECKED: BST_UNCHECKED);
-}
-
-void ControlSpectrum::update()
-{
-}
-
-void ControlSpectrum::update_dynamic()
-{
-  if (hctrl == 0)
+  if (!hwnd || !spectrum || !length)
     return;
 
-  unsigned new_spectrum_length;
-  proc->get_spectrum_length(&new_spectrum_length);
-  if (spectrum_length != new_spectrum_length)
-  {
-    safe_delete(spectrum);
-    spectrum_length = new_spectrum_length;
-    if (spectrum_length)
-      spectrum = new sample_t[spectrum_length];
-  }
-
-  if (spectrum)
-  {
-    proc->get_spectrum(-1, spectrum, &bin2hz);
-    for (size_t i = 0; i < spectrum_length; i++)
-      spectrum[i] = spectrum[i] > 0? value2db(spectrum[i]): -db_range;
-
-    if (log_scale)
-      paint_log();
-    else
-      paint_linear();
-  }
-}
-
-void ControlSpectrum::paint_linear()
-{
   char label[32];
   HPEN old_pen;
   HFONT old_font;
@@ -128,7 +78,7 @@ void ControlSpectrum::paint_linear()
   /////////////////////////////////////////////////////////
   // Grid
 
-  old_pen = (HPEN)SelectObject(mem_dc, grid_pen);
+  old_pen = (HPEN)SelectObject(mem_dc, minor_pen);
 
   max_y = int(db_range / grid_db);
   for (y = 1; y < max_y; y++)
@@ -138,7 +88,7 @@ void ControlSpectrum::paint_linear()
     LineTo(mem_dc, width, pos);
   }
 
-  max_x = int(spectrum_length * bin2hz / grid_hz);
+  max_x = int(length * bin2hz / grid_hz);
   for (x = 1; x < max_x; x++)
   {
     int pos = x * width / max_x;
@@ -149,15 +99,15 @@ void ControlSpectrum::paint_linear()
   SelectObject(mem_dc, major_pen);
 
   max_y = int(db_range / grid_db);
-  for (y = major_db; y < max_y; y+=major_db)
+  for (y = major_db; y < max_y; y += major_db)
   {
     int pos = y * height / max_y;
     MoveToEx(mem_dc, 0, pos, 0);
     LineTo(mem_dc, width, pos);
   }
 
-  max_x = int(spectrum_length * bin2hz / grid_hz);
-  for (x = major_hz; x < max_x; x+=major_hz)
+  max_x = int(length * bin2hz / grid_hz);
+  for (x = major_hz; x < max_x; x += major_hz)
   {
     int pos = x * width / max_x;
     MoveToEx(mem_dc, pos, 0, 0);
@@ -175,7 +125,7 @@ void ControlSpectrum::paint_linear()
   old_font = (HFONT)SelectObject(mem_dc, grid_font);
 
   SetTextAlign(mem_dc, TA_TOP | TA_CENTER);
-  max_x = int(spectrum_length * bin2hz / grid_hz);
+  max_x = int(length * bin2hz / grid_hz);
   for (x = major_hz; x < max_x; x += major_hz)
   {
     int pos = x * width / max_x;
@@ -185,10 +135,10 @@ void ControlSpectrum::paint_linear()
 
   SetTextAlign(mem_dc, TA_BOTTOM | TA_RIGHT);
   max_y = int(db_range / grid_db);
-  for (y = major_db; y <= max_y; y+=major_db)
+  for (y = major_db; y <= max_y; y += major_db)
   {
     int pos = y * height / max_y;
-    sprintf(label, "-%idB", int(y * grid_db));
+    sprintf(label, "%+idB", int(-y * grid_db + max_db));
     TextOut(mem_dc, width, pos, label, (int)strlen(label));
   }
 
@@ -197,44 +147,53 @@ void ControlSpectrum::paint_linear()
   /////////////////////////////////////////////////////////
   // Spectrum
 
-  double xfactor = double(width) / double(spectrum_length);
+  double xfactor = double(width) / double(length);
   double yfactor = double(height) / db_range;
+  double val;
 
   old_pen = (HPEN)SelectObject(mem_dc, signal_pen);
 
-  MoveToEx(mem_dc, 0, int(-spectrum[0] * yfactor), 0);
-  for (size_t i = 1; i < spectrum_length; i++)
-    LineTo(mem_dc, int(i * xfactor), int(-spectrum[i] * yfactor));
+  val = spectrum[0] > 0? -value2db(spectrum[0]) + max_db: db_range;
+  MoveToEx(mem_dc, 0, int(val * yfactor), 0);
+  for (size_t i = 1; i < length; i++)
+  {
+    val = spectrum[i] > 0? -value2db(spectrum[i]) + max_db: db_range;
+    LineTo(mem_dc, int(i * xfactor), int(val * yfactor));
+  }
 
   SelectObject(mem_dc, old_pen);
 
   /////////////////////////////////////////////////////////
   // Show the result
 
-  HDC ctrl_dc = GetDC(hctrl);
-  BitBlt(ctrl_dc, client_rect.left, client_rect.top, width, height, mem_dc, 0, 0, SRCCOPY);
-  ReleaseDC(hctrl, ctrl_dc);
+  HDC wnd_dc = GetDC(hwnd);
+  BitBlt(wnd_dc, client_rect.left, client_rect.top, width, height, mem_dc, 0, 0, SRCCOPY);
+  ReleaseDC(hwnd, wnd_dc);
 }
 
-static int scale(int pos, int max, int width)
+static int scale(size_t pos, size_t max, int width)
 {
   return int(width + log10(double(pos)/double(max)) * width / 3);
 }
 
-void ControlSpectrum::paint_log()
+void
+SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz)
 {
+  if (!hwnd || !spectrum || !length)
+    return;
+
   char label[32];
   HPEN old_pen;
   HFONT old_font;
   int y, max_y, delta_hz;
-  const int nyquist = int(spectrum_length * bin2hz);
+  const int nyquist = int(length * bin2hz);
 
   FillRect(mem_dc, &client_rect, bkg_brush);
 
   /////////////////////////////////////////////////////////
   // Grid
 
-  old_pen = (HPEN)SelectObject(mem_dc, grid_pen);
+  old_pen = (HPEN)SelectObject(mem_dc, minor_pen);
 
   max_y = int(db_range / grid_db);
   for (y = 1; y < max_y; y++)
@@ -310,7 +269,7 @@ void ControlSpectrum::paint_log()
   for (y = major_db; y <= max_y; y+=major_db)
   {
     int pos = y * height / max_y;
-    sprintf(label, "-%idB", int(y * grid_db));
+    sprintf(label, "%+idB", int(-y * grid_db + max_db));
     TextOut(mem_dc, width, pos, label, (int)strlen(label));
   }
 
@@ -319,37 +278,39 @@ void ControlSpectrum::paint_log()
   /////////////////////////////////////////////////////////
   // Spectrum
 
-  double xfactor = double(width) / double(spectrum_length);
+  double xfactor = double(width) / double(length);
   double yfactor = double(height) / db_range;
+  double val;
 
   old_pen = (HPEN)SelectObject(mem_dc, signal_pen);
 
-  MoveToEx(mem_dc, -1, int(-spectrum[0] * yfactor), 0);
-  for (unsigned i = 1; i < spectrum_length; i++)
-    LineTo(mem_dc, scale(i, spectrum_length, width), int(-spectrum[i] * yfactor));
+  val = spectrum[0] > 0? -value2db(spectrum[0]) + max_db: db_range;
+  MoveToEx(mem_dc, -1, int(val * yfactor), 0);
+  for (size_t i = 1; i < length; i++)
+  {
+    val = spectrum[i] > 0? -value2db(spectrum[i]) + max_db: db_range;
+    LineTo(mem_dc, scale(i, length, width), int(val * yfactor));
+  }
 
   SelectObject(mem_dc, old_pen);
 
   /////////////////////////////////////////////////////////
   // Show the result
 
-  HDC ctrl_dc = GetDC(hctrl);
-  BitBlt(ctrl_dc, client_rect.left, client_rect.top, width, height, mem_dc, 0, 0, SRCCOPY);
-  ReleaseDC(hctrl, ctrl_dc);
+  HDC wnd_dc = GetDC(hwnd);
+  BitBlt(wnd_dc, client_rect.left, client_rect.top, width, height, mem_dc, 0, 0, SRCCOPY);
+  ReleaseDC(hwnd, wnd_dc);
 }
 
-ControlSpectrum::cmd_result ControlSpectrum::command(int control, int message)
+LRESULT CALLBACK
+SpectrumCtrl::wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  switch (control)
+  if (msg == WM_PAINT)
   {
-    case IDC_CHK_EQ_LOG:
-    {
-      log_scale = IsDlgButtonChecked(hdlg, IDC_CHK_EQ_LOG) == BST_CHECKED;
-
-      RegistryKey reg(REG_KEY);
-      reg.set_bool("log_scale", log_scale);
-      return cmd_ok;
-    }
+    PAINTSTRUCT ps;
+    HDC dc = BeginPaint(hwnd, &ps);
+    BitBlt(dc, client_rect.left, client_rect.top, width, height, mem_dc, 0, 0, SRCCOPY);
+    EndPaint(hwnd, &ps);
   }
-  return cmd_not_processed;
+  return SubclassedControl::wndproc(hwnd, msg, wParam, lParam);
 }

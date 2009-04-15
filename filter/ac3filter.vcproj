@@ -430,6 +430,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\spectrum_ctrl.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\spectrum_ctrl.h"
+				>
+			</File>
+			<File
 				RelativePath=".\tray.cpp"
 				>
 			</File>

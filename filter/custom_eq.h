@@ -1,37 +1,10 @@
 #include "dlg_base.h"
 #include "controls.h"
+#include "spectrum_ctrl.h"
 #include "buffer.h"
 #include "dsp/fft.h"
 #include "fir/eq_fir.h"
 
-
-class SpectrumCtrl : public SubclassedControl
-{
-protected:
-  RECT client_rect;
-  int width, height;
-
-  HDC     mem_dc;
-  HBITMAP mem_bitmap;
-  HBITMAP old_bitmap;
-
-  HBRUSH bkg_brush;
-  HPEN   signal_pen;
-  HPEN   grid_pen;
-  HPEN   major_pen;
-
-  HFONT  grid_font;
-
-  virtual void on_link();
-  virtual void on_unlink();
-  virtual LRESULT CALLBACK wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-public:
-  SpectrumCtrl();
-
-  void draw_lin(sample_t *spectrum, size_t length, double bin2hz);
-  void draw_log(sample_t *spectrum, size_t length, double bin2hz);
-};
 
 class CustomEq : public DialogBase
 {

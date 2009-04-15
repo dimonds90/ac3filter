@@ -62,9 +62,6 @@ private:
   // Links
   LinkButton  lnk_donate;
 
-  // Tooltip control
-  Tooltip tooltip_ctl;
-
   AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def, ctrl_maker maker);
 
   INT_PTR OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
