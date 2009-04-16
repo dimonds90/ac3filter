@@ -50,7 +50,6 @@ ControlMatrix::ControlMatrix(HWND _dlg, IAudioProcessor *_proc):
 Controller(_dlg, ::controls), proc(_proc)
 {
   proc->AddRef();
-  memset(matrix, 0, sizeof(matrix_t));
 }
 
 ControlMatrix::~ControlMatrix()
@@ -124,7 +123,7 @@ void ControlMatrix::update_dynamic()
   {
     matrix_t new_matrix;
     proc->get_matrix(&new_matrix);
-    if (memcmp(matrix, new_matrix, sizeof(matrix_t)))
+    if (matrix != new_matrix)
       update_matrix();
   }
 };

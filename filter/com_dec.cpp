@@ -474,13 +474,13 @@ STDMETHODIMP COMDecoder::get_levels(vtime_t _time, sample_t *_input_levels, samp
 // Matrix
 STDMETHODIMP COMDecoder::get_matrix(matrix_t *_matrix)
 {
-  if (_matrix) dvd.proc.get_matrix(_matrix);
+  if (_matrix) dvd.proc.get_matrix(*_matrix);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_matrix(matrix_t *_matrix)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_matrix(_matrix);
+  dvd.proc.set_matrix(*_matrix);
   return S_OK;
 }
 

@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <commctrl.h>
+#include "wincomp.h"
 #include "dlg_base.h"
 
 
