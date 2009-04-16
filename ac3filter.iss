@@ -2,6 +2,9 @@
 AppName=AC3Filter
 AppID=AC3Filter
 AppVerName=AC3Filter
+AppPublisher=Alexander Vigovsky
+AppPublisherURL=http://ac3filter.net
+AppCopyright=Copyright (c) 2002-2009 by Alexander Vigovsky
 DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
 SolidCompression=yes
