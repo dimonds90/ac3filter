@@ -259,7 +259,7 @@ AC3FilterACM::formattag_details(LPACMFORMATTAGDETAILS formattag_details, const L
 {
   if (formattag_details->cbStruct < sizeof(ACMFORMATTAGDETAILS))
   {
-    dbglog("AC3FilterACM::formattag_details() error: formattag_details->cbStruct < sizeof(formattag_details)");
+    dbglog("AC3FilterACM::formattag_details() error: formattag_details->cbStruct < sizeof(ACMFORMATTAGDETAILS)");
     return MMSYSERR_INVALPARAM;
   }
 
