@@ -255,6 +255,9 @@ DECLARE_INTERFACE_(IDecoder, IUnknown)
 
 DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
 {
+  STDMETHOD (get_proc_in_spk)  (Speakers *spk) = 0;
+  STDMETHOD (get_proc_out_spk) (Speakers *spk) = 0;
+
   // AGC options
   STDMETHOD (get_auto_gain)    (bool *auto_gain) = 0;
   STDMETHOD (set_auto_gain)    (bool  auto_gain) = 0;
@@ -313,10 +316,6 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_eq_bands)     (int ch, EqBand *bands, size_t nbands) = 0;
   STDMETHOD (get_eq_ripple)    (int ch, double *ripple_db) = 0;
   STDMETHOD (set_eq_ripple)    (int ch, double ripple_db) = 0;
-  // Spectrum
-  STDMETHOD (get_spectrum_length) (unsigned *length) = 0;
-  STDMETHOD (set_spectrum_length) (unsigned  length) = 0;
-  STDMETHOD (get_spectrum)     (int ch, sample_t *data, double *bin2hz) = 0;
   // Delay
   STDMETHOD (get_delay)        (bool *delay) = 0;
   STDMETHOD (set_delay)        (bool  delay) = 0;
@@ -324,6 +323,15 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_delay_units)  (int  delay_units) = 0;
   STDMETHOD (get_delays)       (float *delays) = 0;
   STDMETHOD (set_delays)       (float *delays) = 0;
+  // Cache
+  STDMETHOD (get_input_cache_size)(vtime_t *size) = 0;
+  STDMETHOD (set_input_cache_size)(vtime_t size) = 0;
+  STDMETHOD (get_output_cache_size)(vtime_t *size) = 0;
+  STDMETHOD (set_output_cache_size)(vtime_t size) = 0;
+  STDMETHOD (get_input_cache_time)(vtime_t *time) = 0;
+  STDMETHOD (get_output_cache_time)(vtime_t *time) = 0;
+  STDMETHOD (get_input_cache)(vtime_t time, samples_t buf, size_t size) = 0;
+  STDMETHOD (get_output_cache)(vtime_t time, samples_t buf, size_t size) = 0;
 };
 
 #endif

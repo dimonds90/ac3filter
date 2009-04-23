@@ -294,6 +294,19 @@ STDMETHODIMP COMDecoder::get_info(char *_info, size_t _len)
 ///////////////////////////////////////////////////////////////////////////////
 // IAudioProcessor
 
+// Formats
+STDMETHODIMP COMDecoder::get_proc_in_spk(Speakers *spk)
+{
+  if (spk) *spk = dvd.proc.get_input();
+  return S_OK;
+}
+
+STDMETHODIMP COMDecoder::get_proc_out_spk(Speakers *spk)
+{
+  if (spk) *spk = dvd.proc.get_output();
+  return S_OK;
+}
+
 // AGC options
 STDMETHODIMP COMDecoder::get_auto_gain (bool *_auto_gain)
 {
@@ -577,26 +590,6 @@ STDMETHODIMP COMDecoder::set_eq_ripple(int ch, double ripple_db)
   return S_OK;
 }
 
-// Spectrum
-STDMETHODIMP COMDecoder::get_spectrum_length(unsigned *spectrum_length)
-{
-  if (spectrum_length) *spectrum_length = dvd.proc.get_spectrum_length();
-  return S_OK;
-}
-STDMETHODIMP COMDecoder::set_spectrum_length(unsigned spectrum_length)
-{
-  AutoLock config_lock(&config);
-  dvd.proc.set_spectrum_length(spectrum_length);
-  return S_OK;
-}
-STDMETHODIMP COMDecoder::get_spectrum(int ch, sample_t *data, double *bin2hz)
-{
-  AutoLock config_lock(&config);
-  dvd.proc.get_spectrum(ch, data, bin2hz);
-  return S_OK;
-}
-
-
 // Delay
 STDMETHODIMP COMDecoder::get_delay(bool *_delay)
 {
@@ -685,6 +678,61 @@ STDMETHODIMP COMDecoder::get_jitter(vtime_t *_input_mean, vtime_t *_input_stddev
   if (_output_stddev) *_output_stddev = dvd.syncer.get_output_stddev();
   return S_OK;
 }
+
+// Cache
+STDMETHODIMP COMDecoder::get_input_cache_size(vtime_t *size)
+{
+  if (size) *size = dvd.proc.get_input_cache_size();
+  return S_OK;
+}
+
+STDMETHODIMP COMDecoder::set_input_cache_size(vtime_t size)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_input_cache_size(size);
+  return S_OK;
+}
+
+STDMETHODIMP COMDecoder::get_output_cache_size(vtime_t *size)
+{
+  if (size) *size = dvd.proc.get_output_cache_size();
+  return S_OK;
+}
+
+STDMETHODIMP COMDecoder::set_output_cache_size(vtime_t size)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_output_cache_size(size);
+  return S_OK;
+}
+
+STDMETHODIMP COMDecoder::get_input_cache_time(vtime_t *time)
+{
+  if (time) *time = dvd.proc.get_input_time();
+  return S_OK;
+}
+
+STDMETHODIMP COMDecoder::get_output_cache_time(vtime_t *time)
+{
+  if (time) *time = dvd.proc.get_output_time();
+  return S_OK;
+}
+
+STDMETHODIMP COMDecoder::get_input_cache(vtime_t time, samples_t buf, size_t size)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.get_input_cache(time, buf, size);
+  return S_OK;
+}
+
+STDMETHODIMP COMDecoder::get_output_cache(vtime_t time, samples_t buf, size_t size)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.get_output_cache(time, buf, size);
+  return S_OK;
+}
+
+
 
 // Load/save settings
 

@@ -77,7 +77,7 @@ Controller *AC3FilterDlg::ctrl_eq(HWND hdlg, IAC3Filter *filter, IDecoder *dec, 
 
   ctrl->add(new ControlPreset(hdlg, dec, proc));
   ctrl->add(new ControlEq(hdlg, proc));
-  ctrl->add(new ControlSpectrum(hdlg, proc));
+  ctrl->add(new ControlSpectrum(hdlg, filter, proc));
   ctrl->add(new ControlVer(hdlg));
   return ctrl;
 }

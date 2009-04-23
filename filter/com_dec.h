@@ -141,6 +141,11 @@ public:
   /////////////////////////////////////////////////////////
   // IAudioProcessor
 
+  // Formats
+  STDMETHODIMP get_proc_in_spk  (Speakers *spk);
+  STDMETHODIMP get_proc_out_spk (Speakers *spk);
+
+
   // AGC options
   STDMETHODIMP get_auto_gain    (bool *auto_gain);
   STDMETHODIMP set_auto_gain    (bool  auto_gain);
@@ -200,10 +205,6 @@ public:
   STDMETHODIMP set_eq_bands     (int ch, EqBand *bands, size_t nbands);
   STDMETHODIMP get_eq_ripple    (int ch, double *ripple_db);
   STDMETHODIMP set_eq_ripple    (int ch, double ripple);
-  // Spectrum
-  STDMETHODIMP get_spectrum_length (unsigned *length);
-  STDMETHODIMP set_spectrum_length (unsigned  length);
-  STDMETHODIMP get_spectrum      (int ch, sample_t *data, double *bin2hz);
   // Delay
   STDMETHODIMP get_delay        (bool *delay);
   STDMETHODIMP set_delay        (bool  delay);
@@ -222,7 +223,15 @@ public:
   STDMETHODIMP get_threshold    (vtime_t *threshold);
   STDMETHODIMP set_threshold    (vtime_t  threshold);
   STDMETHODIMP get_jitter       (vtime_t *input_mean, vtime_t *input_stddev, vtime_t *output_mean, vtime_t *output_stddev);
+  // Cache
+  STDMETHODIMP get_input_cache_size(vtime_t *size);
+  STDMETHODIMP set_input_cache_size(vtime_t size);
+  STDMETHODIMP get_output_cache_size(vtime_t *size);
+  STDMETHODIMP set_output_cache_size(vtime_t size);
+  STDMETHODIMP get_input_cache_time(vtime_t *time);
+  STDMETHODIMP get_output_cache_time(vtime_t *time);
+  STDMETHODIMP get_input_cache(vtime_t time, samples_t buf, size_t size);
+  STDMETHODIMP get_output_cache(vtime_t time, samples_t buf, size_t size);
 };
-
 
 #endif

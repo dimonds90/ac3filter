@@ -8,22 +8,30 @@
 #include "../guids.h"
 #include "../controls.h"
 #include "../spectrum_ctrl.h"
+#include "dsp/fft.h"
 #include "buffer.h"
 
 class ControlSpectrum : public Controller
 {
 protected:
+  IAC3Filter *filter;
   IAudioProcessor *proc;
+
+  FFT fft;
+  SampleBuf buf;
+  Samples win;
 
   SpectrumCtrl spectrum;
 
-  unsigned spectrum_length;
-  Samples spectrum_buf;
-  double bin2hz;
+  Speakers spk;
+  unsigned length;
   bool log_scale;
 
+  void init_spectrum(unsigned length);
+  bool is_ok() const { return !spk.is_unknown(); }
+
 public:
-  ControlSpectrum(HWND dlg, IAudioProcessor *proc);
+  ControlSpectrum(HWND dlg, IAC3Filter *filter, IAudioProcessor *proc);
   ~ControlSpectrum();
 
   virtual void init();
