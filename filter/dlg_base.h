@@ -20,6 +20,7 @@ protected:
   virtual void on_destroy() {}
   virtual void on_show() {}
   virtual void on_hide() {}
+  virtual void translate();
 
   virtual BOOL on_message(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) { return FALSE; }
 

@@ -3,6 +3,10 @@
 #include "wincomp.h"
 #include "dlg_base.h"
 
+#include "defs.h"
+#include "resource_ids.h"
+#include "ac3filter_intl.h"
+#include "dialog_controls.h"
 
 INT_PTR CALLBACK
 DialogBase::DialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -22,6 +26,7 @@ DialogBase::DialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   {
     case WM_INITDIALOG:
       dlg->hwnd = hwnd;
+      dlg->translate();
       dlg->on_create();
       return TRUE;
 
@@ -31,7 +36,7 @@ DialogBase::DialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
       case IDOK:
         EndDialog(hwnd, IDOK);
         return TRUE;
-    
+
       case IDCANCEL:
         EndDialog(hwnd, IDCANCEL);
         return TRUE;
@@ -62,6 +67,15 @@ DialogBase::DialogBase()
 
 DialogBase::~DialogBase()
 {}
+
+void
+DialogBase::translate()
+{
+  for (int i = 0; i < array_size(dialog_controls); i++)
+    if (dialog_controls[i].label)
+      if (dialog_controls[i].label[0] != 0)
+        SetDlgItemText(hwnd, dialog_controls[i].id, gettext_id(dialog_controls[i].strid, dialog_controls[i].label));
+}
 
 INT_PTR
 DialogBase::exec(HINSTANCE _hinstance, LPCSTR _dlg_res, HWND _parent)
