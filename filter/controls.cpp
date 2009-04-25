@@ -65,7 +65,12 @@ Edit::wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
   switch (msg) 
   { 
     case WM_GETDLGCODE:
-      return SubclassedControl::wndproc(hwnd, msg, wParam, lParam) | DLGC_WANTALLKEYS;
+    {
+      LRESULT dlgcode = SubclassedControl::wndproc(hwnd, msg, wParam, lParam);
+      if (wParam == VK_RETURN || wParam == VK_ESCAPE)
+         dlgcode |= DLGC_WANTMESSAGE;
+      return dlgcode;
+    }
 
     case WM_KILLFOCUS:
       if (editing)
