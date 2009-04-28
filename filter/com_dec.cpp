@@ -856,6 +856,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
 
     eq = state->eq;
     _conf->get_bool ("eq"               ,eq                     );
+    state->eq = eq;
 
     nbands = 0;
     ripple = state->eq_master_ripple;
