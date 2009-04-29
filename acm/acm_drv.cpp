@@ -29,7 +29,7 @@ ACMDrv::operator new(size_t size)
 }
 
 void 
-ACMDrv::operator delete(void *ptr, size_t size)
+ACMDrv::operator delete(void *ptr)
 {
   LocalFree(ptr);
 }

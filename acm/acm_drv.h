@@ -42,7 +42,7 @@ public:
   virtual ~ACMDrv() {};
 
   void *operator new(size_t size);
-  void operator delete(void *ptr, size_t size);
+  void operator delete(void *ptr);
 };
 
 extern ACMDrv *make_acm(HDRVR hdrvr, LPACMDRVOPENDESC pado);

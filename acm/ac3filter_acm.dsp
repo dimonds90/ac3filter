@@ -55,7 +55,7 @@ BSC32=bscmake.exe
 LINK32=link.exe
 # ADD BASE LINK32 msvcrt.lib oldnames.lib winmm.lib kernel32.lib /nologo /dll /machine:I386 /nodefaultlib /out:"Release/ac3filter.acm"
 # SUBTRACT BASE LINK32 /map
-# ADD LINK32 libc.lib oldnames.lib winmm.lib kernel32.lib /nologo /dll /machine:I386 /nodefaultlib /out:"Release_Libc/ac3filter.acm"
+# ADD LINK32 libc.lib oldnames.lib winmm.lib kernel32.lib user32.lib /nologo /dll /machine:I386 /nodefaultlib /out:"Release_Libc/ac3filter.acm"
 # SUBTRACT LINK32 /map
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
@@ -109,6 +109,14 @@ SOURCE=.\ac3filter_acm.def
 # End Source File
 # Begin Source File
 
+SOURCE=.\acm_drv.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\acm_drv.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\dbglog.cpp
 # End Source File
 # Begin Source File
@@ -122,6 +130,10 @@ SOURCE=.\decoder.cpp
 # Begin Source File
 
 SOURCE=.\decoder.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\format_tag.h
 # End Source File
 # Begin Source File
 
