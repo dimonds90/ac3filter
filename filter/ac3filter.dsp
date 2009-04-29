@@ -383,6 +383,30 @@ SOURCE=.\controls.cpp
 
 SOURCE=.\controls.h
 # End Source File
+# Begin Source File
+
+SOURCE=.\custom_eq.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\custom_eq.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg_base.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\dlg_base.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\spectrum_ctrl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\spectrum_ctrl.h
+# End Source File
 # End Group
 # Begin Source File
 
