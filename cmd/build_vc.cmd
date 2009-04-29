@@ -2,6 +2,8 @@
 
 set platform=Win32
 set config=Release
+set dir=%~dp0
+
 
 if /i "%1"=="vc6"     set compiler=vc6& shift
 if /i "%1"=="vc9"     set compiler=vc9& shift
@@ -10,6 +12,7 @@ if /i "%1"=="x64"     set platform=x64& shift
 if /i "%1"=="Debug"   set config=Debug& shift
 if /i "%1"=="Release" set config=Release& shift
 if not "%1"=="" goto usage
+call "%dir%config.cmd"
 
 if not defined compiler goto vc9
 goto %compiler%
@@ -29,10 +32,11 @@ rem -------------------------------------------------------
 rem Visual Studio 97
 
 :vc6
+if defined vc6vars call "%vc6vars%" 2>nul
 if exist "%MSDevDir%\bin\msdev.exe" set msdev=%MSDevDir%\bin\msdev.exe
 if not defined msdev for %%f in (msdev.exe) do set msdev=%%~$PATH:f
 if not defined msdev (
-  call vcvars32
+  call vcvars32 2>nul
   for %%v in (msdev.exe) do if exist "%%~$PATH:v" set msdev=%%~$PATH:v
 )
 if not defined msdev goto no_vc6
@@ -47,9 +51,10 @@ rem -------------------------------------------------------
 rem Visual Studio 2008
 
 :vc9
+if defined vc9vars call "%vc9vars%" 2>nul
 for %%f in (vcbuild.exe) do set vcbuild=%%~$PATH:f
 if not defined vcbuild (
-  call vcvars32
+  call vcvars32 2>nul
   for %%v in (vcbuild.exe) do if exist "%%~$PATH:v" set vcbuild=%%~$PATH:v
 )
 if not defined vcbuild goto no_vc9
