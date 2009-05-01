@@ -64,8 +64,20 @@ CustomEq::update()
 
   for (band = 0; band < EQ_BANDS; band++)
   {
-    edt_freq[band].update_value(bands[band].freq);
-    edt_gain[band].update_value(value2db(bands[band].gain));
+    if (band < nbands)
+    {
+      edt_freq[band].update_value(bands[band].freq);
+      edt_gain[band].update_value(value2db(bands[band].gain));
+      edt_gain[band].enable(true);
+    }
+    else
+    {
+      bands[band].freq = 0;
+      bands[band].gain = 0;
+      edt_freq[band].update_value(0);
+      edt_gain[band].update_value(0);
+      edt_gain[band].enable(false);
+    }
   }
   edt_ripple.update_value(ripple);
   CheckDlgButton(hwnd, IDC_CHK_EQ_LOG, log_scale? BST_CHECKED: BST_UNCHECKED);

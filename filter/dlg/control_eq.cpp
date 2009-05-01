@@ -117,6 +117,8 @@ void ControlEq::update()
     }
     else
     {
+      bands[band].freq = 0;
+      bands[band].gain = 0;
       ShowWindow(GetDlgItem(hdlg, idc_edt_eq[band]), SW_HIDE);
       ShowWindow(GetDlgItem(hdlg, idc_sli_eq[band]), SW_HIDE);
       ShowWindow(GetDlgItem(hdlg, idc_lbl_eq[band]), SW_HIDE);
@@ -186,9 +188,11 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
       result = custom_eq.exec(ac3filter_instance, MAKEINTRESOURCE(IDD_EQ_CUSTOM), hdlg);
       if (result == IDOK)
       {
-        custom_eq.get_bands(bands, 0, EQ_BANDS);
+        nbands = custom_eq.get_nbands();
         ripple = custom_eq.get_ripple();
-        proc->set_eq_bands(eq_ch, bands, EQ_BANDS);
+        if (nbands > EQ_BANDS) nbands = EQ_BANDS;
+        custom_eq.get_bands(bands, 0, nbands);
+        proc->set_eq_bands(eq_ch, bands, nbands);
         proc->set_eq_ripple(eq_ch, ripple);
         update();
       }
