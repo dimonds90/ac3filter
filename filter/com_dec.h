@@ -230,8 +230,8 @@ public:
   STDMETHODIMP set_output_cache_size(vtime_t size);
   STDMETHODIMP get_input_cache_time(vtime_t *time);
   STDMETHODIMP get_output_cache_time(vtime_t *time);
-  STDMETHODIMP get_input_cache(vtime_t time, samples_t buf, size_t size);
-  STDMETHODIMP get_output_cache(vtime_t time, samples_t buf, size_t size);
+  STDMETHODIMP get_input_cache(vtime_t time, samples_t buf, size_t size, size_t *out_size);
+  STDMETHODIMP get_output_cache(vtime_t time, samples_t buf, size_t size, size_t *out_size);
 };
 
 #endif

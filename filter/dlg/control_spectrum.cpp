@@ -88,7 +88,9 @@ void ControlSpectrum::update()
 
 void ControlSpectrum::update_dynamic()
 {
+  int ch;
   unsigned i;
+  size_t out_size;
   Speakers new_spk;
   sample_t *data = buf[0];
 
@@ -114,10 +116,13 @@ void ControlSpectrum::update_dynamic()
 
   // Get data
   playback_time -= vtime_t(length / 2) / spk.sample_rate;
-  proc->get_output_cache(playback_time, buf, length);
+  proc->get_output_cache(playback_time, buf, length, &out_size);
+  if (out_size < length)
+    for (ch = 0; ch < spk.nch(); ch++)
+      memset(buf[ch] + out_size, 0, (length - out_size) * sizeof(sample_t));
 
   // Sum channels
-  for (int ch = 1; ch < spk.nch(); ch++)
+  for (ch = 1; ch < spk.nch(); ch++)
     for (i = 0; i < length; i++)
       data[i] += buf[ch][i];
 

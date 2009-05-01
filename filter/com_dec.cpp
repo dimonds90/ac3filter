@@ -718,17 +718,19 @@ STDMETHODIMP COMDecoder::get_output_cache_time(vtime_t *time)
   return S_OK;
 }
 
-STDMETHODIMP COMDecoder::get_input_cache(vtime_t time, samples_t buf, size_t size)
+STDMETHODIMP COMDecoder::get_input_cache(vtime_t time, samples_t buf, size_t size, size_t *out_size)
 {
   AutoLock config_lock(&config);
-  dvd.proc.get_input_cache(time, buf, size);
+  size_t result = dvd.proc.get_input_cache(time, buf, size);
+  if (out_size) *out_size = result;
   return S_OK;
 }
 
-STDMETHODIMP COMDecoder::get_output_cache(vtime_t time, samples_t buf, size_t size)
+STDMETHODIMP COMDecoder::get_output_cache(vtime_t time, samples_t buf, size_t size, size_t *out_size)
 {
   AutoLock config_lock(&config);
-  dvd.proc.get_output_cache(time, buf, size);
+  size_t result = dvd.proc.get_output_cache(time, buf, size);
+  if (out_size) *out_size = result;
   return S_OK;
 }
 

@@ -330,8 +330,8 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_output_cache_size)(vtime_t size) = 0;
   STDMETHOD (get_input_cache_time)(vtime_t *time) = 0;
   STDMETHOD (get_output_cache_time)(vtime_t *time) = 0;
-  STDMETHOD (get_input_cache)(vtime_t time, samples_t buf, size_t size) = 0;
-  STDMETHOD (get_output_cache)(vtime_t time, samples_t buf, size_t size) = 0;
+  STDMETHOD (get_input_cache)(vtime_t time, samples_t buf, size_t size, size_t *out_size) = 0;
+  STDMETHOD (get_output_cache)(vtime_t time, samples_t buf, size_t size, size_t *out_size) = 0;
 };
 
 #endif
