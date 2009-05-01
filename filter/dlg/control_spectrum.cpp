@@ -90,7 +90,6 @@ void ControlSpectrum::update_dynamic()
 {
   unsigned i;
   Speakers new_spk;
-  vtime_t time;
   sample_t *data = buf[0];
 
   // Format change
@@ -114,9 +113,8 @@ void ControlSpectrum::update_dynamic()
     proc->set_output_cache_size(lag_time + 1.0);
 
   // Get data
-  filter->get_playback_time(&time);
-  time -= vtime_t(length / 2) / spk.sample_rate;
-  proc->get_output_cache(time, buf, length);
+  playback_time -= vtime_t(length / 2) / spk.sample_rate;
+  proc->get_output_cache(playback_time, buf, length);
 
   // Sum channels
   for (int ch = 1; ch < spk.nch(); ch++)
