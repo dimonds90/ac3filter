@@ -13,15 +13,51 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 295
+// Total controls: 325
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
+  /* TRANSLATORS: Cancel */
+  { IDCANCEL, N_("IDCANCEL"), "Cancel", "" },
   /* TRANSLATORS: Donate */
   { IDC_BTN_DONATE, N_("IDC_BTN_DONATE"), "Donate", "" },
+  /* TRANSLATORS: Log scale spectrum */
+  { IDC_CHK_EQ_LOG, N_("IDC_CHK_EQ_LOG"), "Log scale spectrum", "" },
+  { IDC_EDT_EQ_FREQ1, "IDC_EDT_EQ_FREQ1", "", "" },
+  { IDC_EDT_EQ_FREQ10, "IDC_EDT_EQ_FREQ10", "", "" },
+  { IDC_EDT_EQ_FREQ2, "IDC_EDT_EQ_FREQ2", "", "" },
+  { IDC_EDT_EQ_FREQ3, "IDC_EDT_EQ_FREQ3", "", "" },
+  { IDC_EDT_EQ_FREQ4, "IDC_EDT_EQ_FREQ4", "", "" },
+  { IDC_EDT_EQ_FREQ5, "IDC_EDT_EQ_FREQ5", "", "" },
+  { IDC_EDT_EQ_FREQ6, "IDC_EDT_EQ_FREQ6", "", "" },
+  { IDC_EDT_EQ_FREQ7, "IDC_EDT_EQ_FREQ7", "", "" },
+  { IDC_EDT_EQ_FREQ8, "IDC_EDT_EQ_FREQ8", "", "" },
+  { IDC_EDT_EQ_FREQ9, "IDC_EDT_EQ_FREQ9", "", "" },
+  { IDC_EDT_EQ_GAIN1, "IDC_EDT_EQ_GAIN1", "", "" },
+  { IDC_EDT_EQ_GAIN10, "IDC_EDT_EQ_GAIN10", "", "" },
+  { IDC_EDT_EQ_GAIN2, "IDC_EDT_EQ_GAIN2", "", "" },
+  { IDC_EDT_EQ_GAIN3, "IDC_EDT_EQ_GAIN3", "", "" },
+  { IDC_EDT_EQ_GAIN4, "IDC_EDT_EQ_GAIN4", "", "" },
+  { IDC_EDT_EQ_GAIN5, "IDC_EDT_EQ_GAIN5", "", "" },
+  { IDC_EDT_EQ_GAIN6, "IDC_EDT_EQ_GAIN6", "", "" },
+  { IDC_EDT_EQ_GAIN7, "IDC_EDT_EQ_GAIN7", "", "" },
+  { IDC_EDT_EQ_GAIN8, "IDC_EDT_EQ_GAIN8", "", "" },
+  { IDC_EDT_EQ_GAIN9, "IDC_EDT_EQ_GAIN9", "", "" },
+  { IDC_EDT_EQ_LEN, "IDC_EDT_EQ_LEN", "", "" },
+  { IDC_EDT_EQ_RIPPLE, "IDC_EDT_EQ_RIPPLE", "", "" },
+  /* TRANSLATORS: Frequency (Hz) */
+  { IDC_LBL_EQ_FREQ, N_("IDC_LBL_EQ_FREQ"), "Frequency (Hz)", "" },
+  /* TRANSLATORS: Gain (dB) */
+  { IDC_LBL_EQ_GAIN, N_("IDC_LBL_EQ_GAIN"), "Gain (dB)", "" },
+  /* TRANSLATORS: Filter length: */
+  { IDC_LBL_EQ_LEN, N_("IDC_LBL_EQ_LEN"), "Filter length:", "" },
+  /* TRANSLATORS: Max ripple (dB) */
+  { IDC_LBL_EQ_RIPPLE, N_("IDC_LBL_EQ_RIPPLE"), "Max ripple (dB)", "" },
   { IDC_SPECTRUM, "IDC_SPECTRUM", "", "" },
-  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky */
-  { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky", "" },
+  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky */
+  { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky", "" },
+  /* TRANSLATORS: OK */
+  { IDOK, N_("IDOK"), "OK", "" },
 
   // What is it?
   /* TRANSLATORS: What is it? */
@@ -181,12 +217,13 @@ static const ControlDesc dialog_controls[] =
   // Equalizer options
   /* TRANSLATORS: Equalizer options */
   { IDC_GRP_EQ_OPTIONS, N_("IDC_GRP_EQ_OPTIONS"), "Equalizer options", "" },
-  /* TRANSLATORS: Reset equalizer */
-  { IDC_BTN_EQ_RESET, N_("IDC_BTN_EQ_RESET"), "Reset equalizer", "" },
-  /* TRANSLATORS: Enable equalizer */
-  { IDC_CHK_EQ, N_("IDC_CHK_EQ"), "Enable equalizer", "" },
-  /* TRANSLATORS: Log scale spectrum */
-  { IDC_CHK_EQ_LOG, N_("IDC_CHK_EQ_LOG"), "Log scale spectrum", "" },
+  /* TRANSLATORS: Custom */
+  { IDC_BTN_EQ_CUSTOM, N_("IDC_BTN_EQ_CUSTOM"), "Custom", "" },
+  /* TRANSLATORS: Reset */
+  { IDC_BTN_EQ_RESET, N_("IDC_BTN_EQ_RESET"), "Reset", "" },
+  /* TRANSLATORS: Enable */
+  { IDC_CHK_EQ, N_("IDC_CHK_EQ"), "Enable", "" },
+  { IDC_CMB_EQ_CH, "IDC_CMB_EQ_CH", "", "" },
 
   // Equalizer preset
   /* TRANSLATORS: Equalizer preset */

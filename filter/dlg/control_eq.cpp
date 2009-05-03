@@ -11,6 +11,7 @@ static const int controls[] =
 {
   IDC_GRP_EQ,
   IDC_CHK_EQ,
+  IDC_CMB_EQ_CH,
   IDC_BTN_EQ_RESET,
   IDC_BTN_EQ_CUSTOM,
 
@@ -18,7 +19,6 @@ static const int controls[] =
   IDC_EDT_EQ1, IDC_EDT_EQ2, IDC_EDT_EQ3, IDC_EDT_EQ4, IDC_EDT_EQ5, IDC_EDT_EQ6, IDC_EDT_EQ7, IDC_EDT_EQ8, IDC_EDT_EQ9, IDC_EDT_EQ10,
   IDC_LBL_EQ1, IDC_LBL_EQ2, IDC_LBL_EQ3, IDC_LBL_EQ4, IDC_LBL_EQ5, IDC_LBL_EQ6, IDC_LBL_EQ7, IDC_LBL_EQ8, IDC_LBL_EQ9, IDC_LBL_EQ10,
 
-  IDC_RBT_EQ_MASTER, IDC_RBT_EQ_L, IDC_RBT_EQ_C, IDC_RBT_EQ_R, IDC_RBT_EQ_SL, IDC_RBT_EQ_SR, IDC_RBT_EQ_SUB,
   0
 };
 
@@ -37,14 +37,20 @@ static const int idc_lbl_eq[EQ_BANDS] =
   IDC_LBL_EQ1, IDC_LBL_EQ2, IDC_LBL_EQ3, IDC_LBL_EQ4, IDC_LBL_EQ5, IDC_LBL_EQ6, IDC_LBL_EQ7, IDC_LBL_EQ8, IDC_LBL_EQ9, IDC_LBL_EQ10,
 };
 
-static const int idc_rb_ch[NCHANNELS+1] =
-{
-  IDC_RBT_EQ_MASTER, IDC_RBT_EQ_L, IDC_RBT_EQ_C, IDC_RBT_EQ_R, IDC_RBT_EQ_SL, IDC_RBT_EQ_SR, IDC_RBT_EQ_SUB
-};
-
-static const int idc_ch[NCHANNELS+1] =
+static const int ch_name[NCHANNELS+1] =
 {
   CH_NONE /* master equalizer */, CH_L, CH_C, CH_R, CH_SL, CH_SR, CH_LFE
+};
+
+static const char *ch_text[NCHANNELS+1] =
+{
+  N_("Master"),
+  N_("Left"),
+  N_("Center"),
+  N_("Right"),
+  N_("Surround Left"),
+  N_("Surround Right"),
+  N_("Subwoofer")
 };
 
 static EqBand default_bands[EQ_BANDS] = 
@@ -72,7 +78,13 @@ ControlEq::~ControlEq()
 void ControlEq::init()
 {
   eq_ch = -1;
-  CheckDlgButton(hdlg, IDC_RBT_EQ_MASTER, BST_CHECKED);
+  for (int i = 0; i < array_size(ch_text); i++)
+  {
+    LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)ch_text[i]);
+    SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, idx, (LPARAM)ch_name[i]);
+  }
+  SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, 0, 0);
+
   for (size_t band = 0; band < EQ_BANDS; band++)
   {
     edt_gain[band].link(hdlg, idc_edt_eq[band]);
@@ -152,15 +164,6 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
         return cmd_ok;
       }
 
-  if (message == BN_CLICKED)
-    for (int i = 0; i < array_size(idc_rb_ch); i++)
-      if (control == idc_rb_ch[i])
-      {
-        eq_ch = idc_ch[i];
-        update();
-        return cmd_ok;
-      }
-
   switch (control)
   {
     case IDC_CHK_EQ:
@@ -169,6 +172,19 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
       proc->set_eq(eq);
       return cmd_ok;
     }
+
+    case IDC_CMB_EQ_CH:
+      if (message == CBN_SELENDOK)
+      {
+        LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_GETCURSEL, 0, 0);
+        if (idx != CB_ERR)
+        {
+          LRESULT data = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_GETITEMDATA, idx, 0);
+          eq_ch = data;
+          update();
+        }
+      }
+      break;
 
     case IDC_BTN_EQ_RESET:
     {

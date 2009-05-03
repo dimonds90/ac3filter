@@ -378,15 +378,16 @@
 #define IDC_GRP_EQ_OPTIONS             53102
 #define IDC_CHK_EQ                     53103
 #define IDC_CHK_EQ_LOG                 53104
-#define IDC_BTN_EQ_RESET               53105
-#define IDC_BTN_EQ_CUSTOM              53106
-#define IDC_LBL_EQ_FREQ                53107
-#define IDC_LBL_EQ_GAIN                53108
-#define IDC_LBL_EQ_LEN                 53109
-#define IDC_EDT_EQ_LEN                 53110
-#define IDC_EDT_EQ_RIPPLE              53111
-#define IDC_LBL_EQ_RIPPLE              53112
-#define IDC_SPECTRUM                   53113
+#define IDC_CMB_EQ_CH                  53105
+#define IDC_BTN_EQ_RESET               53106
+#define IDC_BTN_EQ_CUSTOM              53107
+#define IDC_LBL_EQ_FREQ                53108
+#define IDC_LBL_EQ_GAIN                53109
+#define IDC_LBL_EQ_LEN                 53110
+#define IDC_EDT_EQ_LEN                 53111
+#define IDC_EDT_EQ_RIPPLE              53112
+#define IDC_LBL_EQ_RIPPLE              53113
+#define IDC_SPECTRUM                   53114
 
 #define IDC_EDT_EQ1                    53120
 #define IDC_EDT_EQ2                    53121
@@ -420,14 +421,6 @@
 #define IDC_LBL_EQ8                    53147
 #define IDC_LBL_EQ9                    53148
 #define IDC_LBL_EQ10                   53149
-
-#define IDC_RBT_EQ_MASTER              53150
-#define IDC_RBT_EQ_L                   53151
-#define IDC_RBT_EQ_C                   53152
-#define IDC_RBT_EQ_R                   53153
-#define IDC_RBT_EQ_SL                  53154
-#define IDC_RBT_EQ_SR                  53155
-#define IDC_RBT_EQ_SUB                 53156
 
 #define IDC_EDT_EQ_FREQ1               53160
 #define IDC_EDT_EQ_FREQ2               53161
