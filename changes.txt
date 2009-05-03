@@ -1,7 +1,14 @@
 v1.60a
-  + 64bit OS support
+  + 64bit filter
   + Multichannel equalizer
-  + Customize equalizer dialog
+  + Customize equalizer dialog with frequency response of the equalizer
+  * Equalizer rewrited
+  * Spectrum synchronized with playback
+  * Localized installer
+  ! Fixed: ACM driver sometimes crashed
+  ! Fixed: equalizer can mute the sound sometimes
+  ! Fixed: "incorrect value" error message may appear under the settings dialog
+  ! Fixed: tab key now works at edit controls
 
 
 v1.51a - 09.07.2008
