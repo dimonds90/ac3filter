@@ -180,7 +180,7 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
         if (idx != CB_ERR)
         {
           LRESULT data = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_GETITEMDATA, idx, 0);
-          eq_ch = data;
+          eq_ch = (int)data;
           update();
         }
       }
