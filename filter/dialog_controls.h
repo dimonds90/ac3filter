@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 325
+// Total controls: 323
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -44,15 +44,12 @@ static const ControlDesc dialog_controls[] =
   { IDC_EDT_EQ_GAIN8, "IDC_EDT_EQ_GAIN8", "", "" },
   { IDC_EDT_EQ_GAIN9, "IDC_EDT_EQ_GAIN9", "", "" },
   { IDC_EDT_EQ_LEN, "IDC_EDT_EQ_LEN", "", "" },
-  { IDC_EDT_EQ_RIPPLE, "IDC_EDT_EQ_RIPPLE", "", "" },
   /* TRANSLATORS: Frequency (Hz) */
   { IDC_LBL_EQ_FREQ, N_("IDC_LBL_EQ_FREQ"), "Frequency (Hz)", "" },
   /* TRANSLATORS: Gain (dB) */
   { IDC_LBL_EQ_GAIN, N_("IDC_LBL_EQ_GAIN"), "Gain (dB)", "" },
   /* TRANSLATORS: Filter length: */
   { IDC_LBL_EQ_LEN, N_("IDC_LBL_EQ_LEN"), "Filter length:", "" },
-  /* TRANSLATORS: Max ripple (dB) */
-  { IDC_LBL_EQ_RIPPLE, N_("IDC_LBL_EQ_RIPPLE"), "Max ripple (dB)", "" },
   { IDC_SPECTRUM, "IDC_SPECTRUM", "", "" },
   /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky */
   { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky", "" },

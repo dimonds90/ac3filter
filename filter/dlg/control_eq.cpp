@@ -98,7 +98,6 @@ void ControlEq::update()
   proc->get_eq(&eq);
   proc->get_eq_nbands(eq_ch, &nbands);
   proc->get_eq_bands(eq_ch, bands, 0, EQ_BANDS);
-  proc->get_eq_ripple(eq_ch, &ripple);
 
   // set the default scale if no bands defined
   if (nbands == 0)
@@ -200,16 +199,13 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
       INT_PTR result;
       CustomEq custom_eq;
       custom_eq.set_bands(bands, EQ_BANDS);
-      custom_eq.set_ripple(ripple);
       result = custom_eq.exec(ac3filter_instance, MAKEINTRESOURCE(IDD_EQ_CUSTOM), hdlg);
       if (result == IDOK)
       {
         nbands = custom_eq.get_nbands();
-        ripple = custom_eq.get_ripple();
         if (nbands > EQ_BANDS) nbands = EQ_BANDS;
         custom_eq.get_bands(bands, 0, nbands);
         proc->set_eq_bands(eq_ch, bands, nbands);
-        proc->set_eq_ripple(eq_ch, ripple);
         update();
       }
       return cmd_ok;

@@ -578,17 +578,6 @@ STDMETHODIMP COMDecoder::set_eq_bands(int ch_name, EqBand *bands, size_t nbands)
   dvd.proc.set_eq_bands(ch_name, bands, nbands);
   return S_OK;
 }
-STDMETHODIMP COMDecoder::get_eq_ripple(int ch_name, double *ripple_db)
-{
-  if (ripple_db) *ripple_db = dvd.proc.get_eq_ripple(ch_name);
-  return S_OK;
-}
-STDMETHODIMP COMDecoder::set_eq_ripple(int ch, double ripple_db)
-{
-  AutoLock config_lock(&config);
-  dvd.proc.set_eq_ripple(ch, ripple_db);
-  return S_OK;
-}
 
 // Delay
 STDMETHODIMP COMDecoder::get_delay(bool *_delay)
@@ -852,7 +841,6 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
 
     bool eq;
     int32_t nbands;
-    double ripple;
     AutoBuf<EqBand> bands;
     char param_str[32];
 
@@ -861,9 +849,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     state->eq = eq;
 
     nbands = 0;
-    ripple = state->eq_master_ripple;
     _conf->get_int32("eq_nbands"        ,nbands                 );
-    _conf->get_float("eq_ripple"        ,ripple                 );
     bands.allocate(nbands);
     if (!bands.is_allocated())
       nbands = 0;
@@ -878,17 +864,13 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
       _conf->get_float(param_str      ,bands[i].gain            );
     }
     dvd.proc.set_eq_bands(CH_NONE, bands, nbands);
-    dvd.proc.set_eq_ripple(CH_NONE, ripple);
     state->eq_master_bands = 0;
 
     for (int ch = 0; ch < NCHANNELS; ch++)
     {
       nbands = 0;
-      ripple = state->eq_ripple[ch];
       sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
       _conf->get_int32(param_str      ,nbands                   );
-      sprintf(param_str, "eq_%s_ripple", ch_names[ch]);
-      _conf->get_float(param_str      ,ripple                   );
       bands.allocate(nbands);
       if (!bands.is_allocated())
         nbands = 0;
@@ -903,7 +885,6 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
         _conf->get_float(param_str      ,bands[i].gain        );
       }
       dvd.proc.set_eq_bands(ch, bands, nbands);
-      dvd.proc.set_eq_ripple(ch, ripple);
       state->eq_bands[ch] = 0;
     }
   }
@@ -1091,7 +1072,6 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     if (state->eq_master_nbands && state->eq_master_bands)
     {
       _conf->set_int32("eq_nbands"      ,(int)state->eq_master_nbands);
-      _conf->set_float("eq_ripple"      ,state->eq_master_ripple);
       for (size_t i = 0; i < state->eq_master_nbands; i++)
       {
         sprintf(param_str, "eq_freq_%i", i);
@@ -1106,8 +1086,6 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
       {
         sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
         _conf->set_int32(param_str      ,(int)state->eq_nbands[ch]);
-        sprintf(param_str, "eq_%s_ripple", ch_names[ch]);
-        _conf->set_float(param_str      ,state->eq_ripple[ch]);
         for (size_t i = 0; i < state->eq_master_nbands; i++)
         {
           sprintf(param_str, "eq_%s_freq_%i", ch_names[ch], i);

@@ -314,8 +314,6 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (get_eq_nbands)    (int ch, size_t *nbands) = 0;
   STDMETHOD (get_eq_bands)     (int ch, EqBand *bands, size_t first_band, size_t nbands) = 0;
   STDMETHOD (set_eq_bands)     (int ch, EqBand *bands, size_t nbands) = 0;
-  STDMETHOD (get_eq_ripple)    (int ch, double *ripple_db) = 0;
-  STDMETHOD (set_eq_ripple)    (int ch, double ripple_db) = 0;
   // Delay
   STDMETHOD (get_delay)        (bool *delay) = 0;
   STDMETHOD (set_delay)        (bool  delay) = 0;

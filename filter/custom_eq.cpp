@@ -19,8 +19,6 @@ static EqBand default_bands[EQ_BANDS] =
   { 30, 1.0 }, { 60, 1.0 }, { 125, 1.0 }, { 250, 1.0 }, { 500, 1.0 }, { 1000, 1.0 }, { 2000, 1.0 }, { 4000, 1.0 }, { 8000, 1.0 }, { 16000, 1.0 }
 };
 
-static const double default_ripple = 0.1;
-
 inline unsigned int clp2(unsigned int x)
 {
   // smallest power-of-2 >= x
@@ -45,7 +43,6 @@ CustomEq::on_create()
     edt_freq[i].link(hwnd, idc_edt_freq[i]);
     edt_gain[i].link(hwnd, idc_edt_gain[i]);
   }
-  edt_ripple.link(hwnd, IDC_EDT_EQ_RIPPLE);
   edt_length.link(hwnd, IDC_EDT_EQ_LEN);
 
   spectrum.link(hwnd, IDC_SPECTRUM);
@@ -59,7 +56,6 @@ CustomEq::update()
   size_t band;
 
   nbands = eq.get_nbands();
-  ripple = eq.get_ripple();
   eq.get_bands(bands, 0, EQ_BANDS);
 
   for (band = 0; band < EQ_BANDS; band++)
@@ -79,7 +75,6 @@ CustomEq::update()
       edt_gain[band].enable(false);
     }
   }
-  edt_ripple.update_value(ripple);
   CheckDlgButton(hwnd, IDC_CHK_EQ_LOG, log_scale? BST_CHECKED: BST_UNCHECKED);
 
   const int sample_rate = 48000;
@@ -105,8 +100,8 @@ CustomEq::update()
     double max_gain = 12;
     for (band = 0; band < nbands; band++)
     {
-      if (value2db(bands[band].gain) - ripple < min_gain) min_gain = value2db(bands[band].gain) - ripple;
-      if (value2db(bands[band].gain) + ripple > max_gain) max_gain = value2db(bands[band].gain) + ripple;
+      if (value2db(bands[band].gain) < min_gain) min_gain = value2db(bands[band].gain);
+      if (value2db(bands[band].gain) > max_gain) max_gain = value2db(bands[band].gain);
     }
 
     spectrum.set_range(min_gain, max_gain, 0, sample_rate / 2);
@@ -144,18 +139,8 @@ CustomEq::on_message(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     switch (control)
     {
-      case IDC_EDT_EQ_RIPPLE:
-        if (message == CB_ENTER)
-        {
-          ripple = edt_ripple.value;
-          eq.set_ripple(ripple);
-          update();
-        }
-        return TRUE;
-
       case IDC_BTN_EQ_RESET:
         eq.set_bands(default_bands, EQ_BANDS);
-        eq.set_ripple(default_ripple);
         update();
 
 
@@ -191,24 +176,11 @@ CustomEq::get_bands(EqBand *out_bands, size_t first_band, size_t out_nbands) con
   return eq.get_bands(out_bands, first_band, out_nbands);
 }
 
-double
-CustomEq::get_ripple() const
-{ return ripple; }
-
-void
-CustomEq::set_ripple(double ripple_db)
-{
-  eq.set_ripple(ripple_db);
-  ripple = eq.get_ripple();
-}
-
 void
 CustomEq::reset()
 {
   eq.set_bands(default_bands, EQ_BANDS);
-  eq.set_ripple(default_ripple);
 
   nbands = eq.get_nbands();
   eq.get_bands(bands, 0, EQ_BANDS);
-  ripple = eq.get_ripple();
 }

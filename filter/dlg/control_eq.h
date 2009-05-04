@@ -18,7 +18,6 @@ protected:
   bool eq;
   int eq_ch;
   size_t nbands;
-  double ripple;
   EqBand bands[EQ_BANDS];
   DoubleEdit edt_gain[EQ_BANDS];
 

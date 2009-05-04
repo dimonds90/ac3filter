@@ -11,12 +11,10 @@ class CustomEq : public DialogBase
 protected:
   size_t nbands;
   AutoBuf<EqBand> bands;
-  double ripple;
   EqFIR eq;
 
   IntEdit edt_freq[10];
   DoubleEdit edt_gain[10];
-  DoubleEdit edt_ripple;
   IntEdit edt_length;
   bool log_scale;
 
@@ -35,7 +33,5 @@ public:
   size_t get_nbands() const;
   size_t set_bands(const EqBand *bands, size_t nbands);
   size_t get_bands(EqBand *bands, size_t first_band, size_t nbands) const;
-  double get_ripple() const;
-  void set_ripple(double ripple_db);
   void reset();
 };

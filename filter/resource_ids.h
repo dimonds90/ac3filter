@@ -385,9 +385,7 @@
 #define IDC_LBL_EQ_GAIN                53109
 #define IDC_LBL_EQ_LEN                 53110
 #define IDC_EDT_EQ_LEN                 53111
-#define IDC_EDT_EQ_RIPPLE              53112
-#define IDC_LBL_EQ_RIPPLE              53113
-#define IDC_SPECTRUM                   53114
+#define IDC_SPECTRUM                   53112
 
 #define IDC_EDT_EQ1                    53120
 #define IDC_EDT_EQ2                    53121
