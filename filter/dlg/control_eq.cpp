@@ -37,6 +37,21 @@ static const int idc_lbl_eq[EQ_BANDS] =
   IDC_LBL_EQ1, IDC_LBL_EQ2, IDC_LBL_EQ3, IDC_LBL_EQ4, IDC_LBL_EQ5, IDC_LBL_EQ6, IDC_LBL_EQ7, IDC_LBL_EQ8, IDC_LBL_EQ9, IDC_LBL_EQ10,
 };
 
+static const int band_reorder[EQ_BANDS+1][EQ_BANDS] = 
+{
+  { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, // 0 bands
+  { 4, 0, 1, 2, 3, 5, 6, 7, 8, 9 }, // 1 bands
+  { 2, 7, 0, 1, 3, 4, 5, 6, 8, 9 }, // 2 bands
+  { 1, 4, 7, 0, 2, 3, 5, 6, 8, 9 }, // 3 bands
+  { 1, 3, 5, 7, 0, 2, 4, 6, 8, 9 }, // 4 bands
+  { 1, 3, 4, 5, 7, 0, 2, 6, 8, 9 }, // 5 bands
+  { 1, 2, 4, 5, 7, 8, 0, 3, 6, 9 }, // 6 bands
+  { 1, 2, 3, 4, 5, 6, 7, 0, 8, 9 }, // 7 bands
+  { 1, 2, 3, 4, 5, 6, 7, 8, 0, 9 }, // 8 bands
+  { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, // 9 bands
+  { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, // 10 bands
+ };
+
 static const int ch_name[NCHANNELS+1] =
 {
   CH_NONE /* master equalizer */, CH_L, CH_C, CH_R, CH_SL, CH_SR, CH_LFE
@@ -118,21 +133,21 @@ void ControlEq::update()
       else
         sprintf(buf, _("%iHz"), bands[band].freq);
 
-      ShowWindow(GetDlgItem(hdlg, idc_edt_eq[band]), SW_SHOW);
-      ShowWindow(GetDlgItem(hdlg, idc_sli_eq[band]), SW_SHOW);
-      ShowWindow(GetDlgItem(hdlg, idc_lbl_eq[band]), SW_SHOW);
+      ShowWindow(GetDlgItem(hdlg, idc_edt_eq[band_reorder[nbands][band]]), SW_SHOW);
+      ShowWindow(GetDlgItem(hdlg, idc_sli_eq[band_reorder[nbands][band]]), SW_SHOW);
+      ShowWindow(GetDlgItem(hdlg, idc_lbl_eq[band_reorder[nbands][band]]), SW_SHOW);
 
-      edt_gain[band].update_value(value2db(bands[band].gain));
-      SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETPOS, TRUE, long(-value2db(bands[band].gain) * ticks));
-      SetDlgItemText(hdlg, idc_lbl_eq[band], buf);
+      edt_gain[band_reorder[nbands][band]].update_value(value2db(bands[band].gain));
+      SendDlgItemMessage(hdlg, idc_sli_eq[band_reorder[nbands][band]], TBM_SETPOS, TRUE, long(-value2db(bands[band].gain) * ticks));
+      SetDlgItemText(hdlg, idc_lbl_eq[band_reorder[nbands][band]], buf);
     }
     else
     {
       bands[band].freq = 0;
       bands[band].gain = 0;
-      ShowWindow(GetDlgItem(hdlg, idc_edt_eq[band]), SW_HIDE);
-      ShowWindow(GetDlgItem(hdlg, idc_sli_eq[band]), SW_HIDE);
-      ShowWindow(GetDlgItem(hdlg, idc_lbl_eq[band]), SW_HIDE);
+      ShowWindow(GetDlgItem(hdlg, idc_edt_eq[band_reorder[nbands][band]]), SW_HIDE);
+      ShowWindow(GetDlgItem(hdlg, idc_sli_eq[band_reorder[nbands][band]]), SW_HIDE);
+      ShowWindow(GetDlgItem(hdlg, idc_lbl_eq[band_reorder[nbands][band]]), SW_HIDE);
     }
   }
 };
@@ -143,10 +158,10 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
 
   if (message == CB_ENTER)
     for (band = 0; band < EQ_BANDS; band++)
-      if (control == idc_edt_eq[band])
+      if (control == idc_edt_eq[band_reorder[nbands][band]])
       {
         proc->get_eq_bands(eq_ch, bands, 0, EQ_BANDS);
-        bands[band].gain = db2value(edt_gain[band].value);
+        bands[band].gain = db2value(edt_gain[band_reorder[nbands][band]].value);
         proc->set_eq_bands(eq_ch, bands, EQ_BANDS);
         update();
         return cmd_ok;
@@ -154,10 +169,10 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
 
   if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
     for (band = 0; band < EQ_BANDS; band++)
-      if (control == idc_sli_eq[band])
+      if (control == idc_sli_eq[band_reorder[nbands][band]])
       {
         proc->get_eq_bands(eq_ch, bands, 0, EQ_BANDS);
-        bands[band].gain = db2value(-double(SendDlgItemMessage(hdlg, idc_sli_eq[band],TBM_GETPOS, 0, 0))/ticks);
+        bands[band].gain = db2value(-double(SendDlgItemMessage(hdlg, idc_sli_eq[band_reorder[nbands][band]],TBM_GETPOS, 0, 0))/ticks);
         proc->set_eq_bands(eq_ch, bands, EQ_BANDS);
         update();
         return cmd_ok;
