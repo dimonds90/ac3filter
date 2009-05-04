@@ -100,8 +100,8 @@ CustomEq::update()
     double max_gain = 12;
     for (band = 0; band < nbands; band++)
     {
-      if (value2db(bands[band].gain) < min_gain) min_gain = value2db(bands[band].gain);
-      if (value2db(bands[band].gain) > max_gain) max_gain = value2db(bands[band].gain);
+      if (value2db(bands[band].gain) * 1.05 < min_gain) min_gain = value2db(bands[band].gain) * 1.05;
+      if (value2db(bands[band].gain) * 1.05 > max_gain) max_gain = value2db(bands[band].gain) * 1.05;
     }
 
     spectrum.set_range(min_gain, max_gain, 0, sample_rate / 2);
