@@ -92,7 +92,7 @@ ControlEq::~ControlEq()
 
 void ControlEq::init()
 {
-  eq_ch = -1;
+  eq_ch = CH_NONE;
   for (int i = 0; i < array_size(ch_text); i++)
   {
     LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)ch_text[i]);
@@ -111,6 +111,7 @@ void ControlEq::init()
 void ControlEq::update()
 {
   proc->get_eq(&eq);
+  proc->get_eq_channel(&eq_ch);
   proc->get_eq_nbands(eq_ch, &nbands);
   proc->get_eq_bands(eq_ch, bands, 0, EQ_BANDS);
 
@@ -193,8 +194,8 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
         LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_GETCURSEL, 0, 0);
         if (idx != CB_ERR)
         {
-          LRESULT data = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_GETITEMDATA, idx, 0);
-          eq_ch = (int)data;
+          eq_ch = (int)SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_GETITEMDATA, idx, 0);
+          proc->set_eq_channel(eq_ch);
           update();
         }
       }

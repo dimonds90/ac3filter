@@ -2,12 +2,17 @@
 #include "filters/proc_state.h"
 #include "com_dec.h"
 
+#define EQ_TYPE_SINGLE 1
+#define EQ_TYPE_MULTICHANNEL 2
+#define EQ_TYPE_ALL 3
+
 static const char *ch_names[NCHANNELS] = 
 { "L", "C", "R", "SL", "SR", "LFE" };
 
 COMDecoder::COMDecoder(IUnknown *_outer, int _nsamples): dvd(_nsamples)
 { 
   outer = _outer; 
+  cur_ch = CH_NONE; // Master is the default equalizer channel
   formats = FORMAT_CLASS_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES |  FORMAT_MASK_SPDIF;
   dvd.proc.set_input_order(win_order);
   dvd.proc.set_output_order(win_order);
@@ -578,6 +583,18 @@ STDMETHODIMP COMDecoder::set_eq_bands(int ch_name, EqBand *bands, size_t nbands)
   dvd.proc.set_eq_bands(ch_name, bands, nbands);
   return S_OK;
 }
+STDMETHODIMP COMDecoder::get_eq_channel(int *_ch)
+{
+  if (_ch) *_ch = cur_ch;
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_eq_channel(int _ch)
+{
+  if (_ch == CH_NONE || _ch >= 0 && _ch < NCHANNELS)
+    cur_ch = _ch;
+  return S_OK;
+}
+
 
 // Delay
 STDMETHODIMP COMDecoder::get_delay(bool *_delay)
@@ -727,7 +744,295 @@ STDMETHODIMP COMDecoder::get_output_cache(vtime_t time, samples_t buf, size_t si
 
 // Load/save settings
 
-STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
+void COMDecoder::save_spk(Config *conf)
+{
+  assert(conf);
+  Speakers user_spk = dvd.get_user();
+  bool use_spdif = dvd.get_use_spdif();
+
+  conf->set_int32("format",      user_spk.format);
+  conf->set_int32("mask",        user_spk.mask);
+  conf->set_int32("sample_rate", user_spk.sample_rate);
+  conf->set_int32("relation",    user_spk.relation);
+  conf->set_bool ("use_spdif",   use_spdif);
+}
+
+void COMDecoder::load_spk(Config *conf)
+{
+  assert(conf);
+  Speakers user_spk = dvd.get_user();
+  bool use_spdif = dvd.get_use_spdif();
+
+  conf->get_int32("format",      user_spk.format);
+  conf->get_int32("mask",        user_spk.mask);
+  conf->get_int32("sample_rate", user_spk.sample_rate);
+  conf->get_int32("relation",    user_spk.relation);
+  conf->get_bool ("use_spdif",   use_spdif);
+
+  switch (user_spk.format)
+  {
+    case FORMAT_PCM16_BE:
+    case FORMAT_PCM16: 
+      user_spk.level = 32767;
+      break;
+
+    case FORMAT_PCM24_BE:
+    case FORMAT_PCM24: 
+      user_spk.level = 8388607;
+      break;
+
+    case FORMAT_PCM32_BE:
+    case FORMAT_PCM32: 
+      user_spk.level = 2147483647;      
+      break;
+
+    case FORMAT_PCMFLOAT:
+      user_spk.level = 1.0; 
+      break;
+
+    default: 
+      user_spk.level = 1.0; 
+      break;
+  }
+
+  dvd.set_user(user_spk);
+  dvd.set_use_spdif(use_spdif);
+}
+
+
+void COMDecoder::save_eq(Config *conf, int preset)
+{
+  assert(conf);
+  char param_str[32];
+  EqBand band;
+
+  int eq_type = EQ_TYPE_SINGLE;
+  switch (preset & AC3FILTER_EQ_MASK)
+  {
+    case AC3FILTER_EQ_MCH: eq_type = EQ_TYPE_MULTICHANNEL; break;
+    case AC3FILTER_EQ_ALL: eq_type = EQ_TYPE_ALL; break;
+  }
+  conf->set_int32("eq_type", eq_type);
+
+  if (eq_type == EQ_TYPE_SINGLE || eq_type == EQ_TYPE_ALL)
+  {
+    int eq_channel = cur_ch;
+    if (eq_type == EQ_TYPE_ALL)
+      eq_channel = CH_NONE;
+
+    size_t nbands = dvd.proc.get_eq_nbands(eq_channel);
+    conf->set_int32("eq_nbands", (int)nbands);
+    for (size_t i = 0; i < nbands; i++)
+    {
+      dvd.proc.get_eq_bands(eq_channel, &band, i, 1);
+      sprintf(param_str, "eq_freq_%i", i);
+      conf->set_int32(param_str, band.freq);
+      sprintf(param_str, "eq_gain_%i", i);
+      conf->set_float(param_str, band.gain);
+    }
+  }
+
+  if (eq_type == EQ_TYPE_MULTICHANNEL || eq_type == EQ_TYPE_ALL)
+    for (int ch = 0; ch < NCHANNELS; ch++)
+    {
+      size_t nbands = dvd.proc.get_eq_nbands(ch);
+      sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
+      conf->set_int32(param_str, (int)nbands);
+
+      for (size_t i = 0; i < nbands; i++)
+      {
+        dvd.proc.get_eq_bands(ch, &band, i, 1);
+        sprintf(param_str, "eq_%s_freq_%i", ch_names[ch], i);
+        conf->set_int32(param_str, band.freq);
+        sprintf(param_str, "eq_%s_gain_%i", ch_names[ch], i);
+        conf->set_float(param_str, band.gain);
+      }
+    }
+}
+
+void COMDecoder::load_eq(Config *conf)
+{
+  assert(conf);
+  AutoBuf<EqBand> bands;
+  char param_str[32];
+
+  int eq_type = 1;
+  conf->get_int32("eq_type", eq_type);
+
+  if (eq_type == EQ_TYPE_SINGLE || eq_type == EQ_TYPE_ALL)
+  {
+    int32_t nbands = 10;
+    conf->get_int32("eq_nbands", nbands);
+
+    bands.allocate(nbands);
+    if (!bands.is_allocated())
+      nbands = 0;
+
+    for (int32_t i = 0; i < nbands; i++)
+    {
+      bands[i].freq = 0;
+      bands[i].gain = 0;
+      sprintf(param_str, "eq_freq_%i", i);
+      conf->get_int32(param_str, bands[i].freq);
+      sprintf(param_str, "eq_gain_%i", i);
+      conf->get_float(param_str, bands[i].gain);
+    }
+
+    if (eq_type == EQ_TYPE_ALL)
+      dvd.proc.set_eq_bands(CH_NONE, bands, nbands);
+    else
+      dvd.proc.set_eq_bands(cur_ch, bands, nbands);
+  }
+
+  if (eq_type == EQ_TYPE_MULTICHANNEL || eq_type == EQ_TYPE_ALL)
+    for (int ch = 0; ch < NCHANNELS; ch++)
+    {
+      int32_t nbands = 0;
+      sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
+      conf->get_int32(param_str, nbands);
+
+      bands.allocate(nbands);
+      if (!bands.is_allocated())
+        nbands = 0;
+
+      for (int32_t i = 0; i < nbands; i++)
+      {
+        bands[i].freq = 0;
+        bands[i].gain = 0;
+        sprintf(param_str, "eq_%s_freq_%i", ch_names[ch], i);
+        conf->get_int32(param_str, bands[i].freq);
+        sprintf(param_str, "eq_%s_gain_%i", ch_names[ch], i);
+        conf->get_float(param_str, bands[i].gain);
+      }
+      dvd.proc.set_eq_bands(ch, bands, nbands);
+    }
+}
+
+void COMDecoder::save_sync(Config *conf)
+{
+  vtime_t time_shift  = dvd.syncer.get_time_shift();
+  vtime_t time_factor = dvd.syncer.get_time_factor();
+  bool    dejitter    = dvd.syncer.get_dejitter();
+  vtime_t threshold   = dvd.syncer.get_threshold();
+
+  conf->set_float("time_shift",  time_shift);
+  conf->set_float("time_factor", time_factor);
+  conf->set_bool ("dejitter",    dejitter);
+  conf->set_float("threshold",   threshold);
+}
+
+void COMDecoder::load_sync(Config *conf)
+{
+  vtime_t time_shift  = dvd.syncer.get_time_shift();
+  vtime_t time_factor = dvd.syncer.get_time_factor();
+  bool    dejitter    = dvd.syncer.get_dejitter();
+  vtime_t threshold   = dvd.syncer.get_threshold();
+
+  conf->get_float("time_shift",  time_shift);
+  conf->get_float("time_factor", time_factor);
+  conf->get_bool ("dejitter",    dejitter);
+  conf->get_float("threshold",   threshold);
+
+  dvd.syncer.set_time_shift(time_shift);
+  dvd.syncer.set_time_factor(time_factor);
+  dvd.syncer.set_dejitter(dejitter);
+  dvd.syncer.set_threshold(threshold);
+}
+
+void COMDecoder::save_sys(Config *conf)
+{
+  bool query_sink = dvd.get_query_sink();
+  bool use_detector = dvd.get_use_detector();
+
+  int  spdif_pt = dvd.get_spdif_pt();
+  bool spdif_as_pcm = dvd.get_spdif_as_pcm();
+  bool spdif_encode = dvd.get_spdif_encode();
+  bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+  int  spdif_bitrate = dvd.get_spdif_bitrate();
+
+  bool spdif_check_sr = dvd.get_spdif_check_sr();
+  bool spdif_allow_48 = dvd.get_spdif_allow_48();
+  bool spdif_allow_44 = dvd.get_spdif_allow_44();
+  bool spdif_allow_32 = dvd.get_spdif_allow_32();
+
+  int  dts_mode = dvd.get_dts_mode();
+  int  dts_conv = dvd.get_dts_conv();
+
+  conf->set_int32("formats"          ,formats         );
+  conf->set_bool ("query_sink"       ,query_sink      );
+  conf->set_bool ("use_detector"     ,use_detector    );
+
+  conf->set_int32("spdif_pt"         ,spdif_pt        );
+  conf->set_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
+  conf->set_bool ("spdif_encode"     ,spdif_encode    );
+  conf->set_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
+  conf->set_int32("spdif_bitrate"    ,spdif_bitrate   );
+
+  conf->set_bool ("spdif_check_sr"   ,spdif_check_sr  );
+  conf->set_bool ("spdif_allow_48"   ,spdif_allow_48  );
+  conf->set_bool ("spdif_allow_44"   ,spdif_allow_44  );
+  conf->set_bool ("spdif_allow_32"   ,spdif_allow_32  );
+
+  conf->set_int32("dts_mode"         ,dts_mode        );
+  conf->set_int32("dts_conv"         ,dts_conv        );
+}
+
+void COMDecoder::load_sys(Config *conf)
+{
+  bool query_sink = dvd.get_query_sink();
+  bool use_detector = dvd.get_use_detector();
+
+  int  spdif_pt = dvd.get_spdif_pt();
+  bool spdif_as_pcm = dvd.get_spdif_as_pcm();
+  bool spdif_encode = dvd.get_spdif_encode();
+  bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
+  int  spdif_bitrate = dvd.get_spdif_bitrate();
+
+  bool spdif_check_sr = dvd.get_spdif_check_sr();
+  bool spdif_allow_48 = dvd.get_spdif_allow_48();
+  bool spdif_allow_44 = dvd.get_spdif_allow_44();
+  bool spdif_allow_32 = dvd.get_spdif_allow_32();
+
+  int  dts_mode = dvd.get_dts_mode();
+  int  dts_conv = dvd.get_dts_conv();
+
+  conf->get_int32("formats"          ,formats         );
+  conf->get_bool ("query_sink"       ,query_sink      );
+  conf->get_bool ("use_detector"     ,use_detector    );
+
+  conf->get_int32("spdif_pt"         ,spdif_pt        );
+  conf->get_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
+  conf->get_bool ("spdif_encode"     ,spdif_encode    );
+  conf->get_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
+  conf->get_int32("spdif_bitrate"    ,spdif_bitrate   );
+
+  conf->get_bool ("spdif_check_sr"   ,spdif_check_sr  );
+  conf->get_bool ("spdif_allow_48"   ,spdif_allow_48  );
+  conf->get_bool ("spdif_allow_44"   ,spdif_allow_44  );
+  conf->get_bool ("spdif_allow_32"   ,spdif_allow_32  );
+
+  conf->get_int32("dts_mode"         ,dts_mode        );
+  conf->get_int32("dts_conv"         ,dts_conv        );
+
+  dvd.set_query_sink(query_sink);
+  dvd.set_use_detector(use_detector);
+
+  dvd.set_spdif_pt(spdif_pt);
+  dvd.set_spdif_as_pcm(spdif_as_pcm);
+  dvd.set_spdif_encode(spdif_encode);
+  dvd.set_spdif_stereo_pt(spdif_stereo_pt);
+  dvd.set_spdif_bitrate(spdif_bitrate);
+
+  dvd.set_spdif_check_sr(spdif_check_sr);
+  dvd.set_spdif_allow_48(spdif_allow_48);
+  dvd.set_spdif_allow_44(spdif_allow_44);
+  dvd.set_spdif_allow_32(spdif_allow_32);
+
+  dvd.set_dts_mode(dts_mode);
+  dvd.set_dts_conv(dts_conv);
+}
+
+STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
 {
   AutoLock config_lock(&config);
   AudioProcessorState *state = dvd.proc.get_state(0);
@@ -739,48 +1044,10 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     reg.open_key(REG_KEY_PRESET"\\Default");
   }
 
-  if (_what & AC3FILTER_SPK)
-  {
-    Speakers user_spk = dvd.get_user();
-    bool use_spdif = dvd.get_use_spdif();
+  if (_preset & AC3FILTER_SPK)
+    load_spk(_conf);
 
-    _conf->get_int32("format"           ,user_spk.format     );
-    _conf->get_int32("mask"             ,user_spk.mask       );
-    _conf->get_int32("sample_rate"      ,user_spk.sample_rate);
-    _conf->get_int32("relation"         ,user_spk.relation   );
-    _conf->get_bool ("use_spdif"        ,use_spdif           );
-
-    switch (user_spk.format)
-    {
-      case FORMAT_PCM16_BE:
-      case FORMAT_PCM16: 
-        user_spk.level = 32767;
-        break;
-
-      case FORMAT_PCM24_BE:
-      case FORMAT_PCM24: 
-        user_spk.level = 8388607;
-        break;
-
-      case FORMAT_PCM32_BE:
-      case FORMAT_PCM32: 
-        user_spk.level = 2147483647;      
-        break;
-
-      case FORMAT_PCMFLOAT:
-        user_spk.level = 1.0; 
-        break;
-
-      default: 
-        user_spk.level = 1.0; 
-        break;
-    }
-
-    dvd.set_user(user_spk);
-    dvd.set_use_spdif(use_spdif);
-  }
-
-  if (state && (_what & AC3FILTER_PROC))
+  if (state && (_preset & AC3FILTER_PROC))
   {
     // Options
     _conf->get_bool ("auto_gain"        ,state->auto_gain       );
@@ -804,7 +1071,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     _conf->get_int32("bass_freq"        ,state->bass_freq       );
   }
 
-  if (state && (_what & AC3FILTER_GAINS))
+  if (state && (_preset & AC3FILTER_GAINS))
   {
     // I/O Gains
     _conf->get_float("gain_input_L"     ,state->input_gains[CH_L]   );
@@ -822,7 +1089,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     _conf->get_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
   }
 
-  if (state && (_what & AC3FILTER_DELAY))
+  if (state && (_preset & AC3FILTER_DELAY))
   {
     // Delays
     _conf->get_bool ("delay"            ,state->delay           );
@@ -835,79 +1102,7 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
     _conf->get_float("delay_LFE"        ,state->delays[CH_LFE]  );
   }
 
-  if (state && (_what & AC3FILTER_EQ))
-  {
-    // Equalizer
-
-    bool eq;
-    int32_t nbands;
-    AutoBuf<EqBand> bands;
-    char param_str[32];
-
-    eq = state->eq;
-    _conf->get_bool ("eq"               ,eq                     );
-    state->eq = eq;
-
-    nbands = 0;
-    _conf->get_int32("eq_nbands"        ,nbands                 );
-    bands.allocate(nbands);
-    if (!bands.is_allocated())
-      nbands = 0;
-
-    for (int32_t i = 0; i < nbands; i++)
-    {
-      bands[i].freq = 0;
-      bands[i].gain = 0;
-      sprintf(param_str, "eq_freq_%i", i);
-      _conf->get_int32(param_str      ,bands[i].freq            );
-      sprintf(param_str, "eq_gain_%i", i);
-      _conf->get_float(param_str      ,bands[i].gain            );
-    }
-    dvd.proc.set_eq_bands(CH_NONE, bands, nbands);
-    state->eq_master_bands = 0;
-
-    for (int ch = 0; ch < NCHANNELS; ch++)
-    {
-      nbands = 0;
-      sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
-      _conf->get_int32(param_str      ,nbands                   );
-      bands.allocate(nbands);
-      if (!bands.is_allocated())
-        nbands = 0;
-
-      for (int32_t i = 0; i < nbands; i++)
-      {
-        bands[i].freq = 0;
-        bands[i].gain = 0;
-        sprintf(param_str, "eq_%s_freq_%i", ch_names[ch], i);
-        _conf->get_int32(param_str      ,bands[i].freq        );
-        sprintf(param_str, "eq_%s_gain_%i", ch_names[ch], i);
-        _conf->get_float(param_str      ,bands[i].gain        );
-      }
-      dvd.proc.set_eq_bands(ch, bands, nbands);
-      state->eq_bands[ch] = 0;
-    }
-  }
-
-  if (_what & AC3FILTER_SYNC)
-  {
-    vtime_t time_shift  = dvd.syncer.get_time_shift();
-    vtime_t time_factor = dvd.syncer.get_time_factor();
-    bool    dejitter    = dvd.syncer.get_dejitter();
-    vtime_t threshold   = dvd.syncer.get_threshold();
-
-    _conf->get_float("time_shift"       ,time_shift      );
-    _conf->get_float("time_factor"      ,time_factor     );
-    _conf->get_bool ("dejitter"         ,dejitter        );
-    _conf->get_float("threshold"        ,threshold       );
-
-    dvd.syncer.set_time_shift(time_shift);
-    dvd.syncer.set_time_factor(time_factor);
-    dvd.syncer.set_dejitter(dejitter);
-    dvd.syncer.set_threshold(threshold);
-  }
-
-  if (state && (_what & AC3FILTER_MATRIX))
+  if (state && (_preset & AC3FILTER_MATRIX))
   {
     // Matrix
     char element_str[32];
@@ -920,72 +1115,42 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _what)
       }
   }
 
+  if ((_preset & AC3FILTER_EQ_MASK) && (_preset & AC3FILTER_PROC))
+  {
+    bool eq = dvd.proc.get_eq();
+    _conf->get_bool ("eq", eq);
+    dvd.proc.set_eq(eq);
+  }
+
+  if (_preset & AC3FILTER_EQ_MASK)
+  {
+    load_eq(_conf);
+    state->eq = dvd.proc.get_eq();
+    state->eq_master_nbands = 0;
+    safe_delete(state->eq_master_bands);
+    for (int ch = 0; ch < NCHANNELS; ch++)
+    {
+      state->eq_nbands[ch] = 0;
+      safe_delete(state->eq_bands[ch]);
+    }
+  }
+
+  if (_preset & AC3FILTER_SYNC)
+    load_sync(_conf);
+
+  if (_preset & AC3FILTER_SYS)
+    load_sys(_conf);
+
   if (state)
   {
     dvd.proc.set_state(state);
     safe_delete(state);
   }
 
-  if (_what & AC3FILTER_SYS)
-  {
-    bool query_sink = dvd.get_query_sink();
-    bool use_detector = dvd.get_use_detector();
-
-    int  spdif_pt = dvd.get_spdif_pt();
-    bool spdif_as_pcm = dvd.get_spdif_as_pcm();
-    bool spdif_encode = dvd.get_spdif_encode();
-    bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
-    int  spdif_bitrate = dvd.get_spdif_bitrate();
-
-    bool spdif_check_sr = dvd.get_spdif_check_sr();
-    bool spdif_allow_48 = dvd.get_spdif_allow_48();
-    bool spdif_allow_44 = dvd.get_spdif_allow_44();
-    bool spdif_allow_32 = dvd.get_spdif_allow_32();
-
-    int  dts_mode = dvd.get_dts_mode();
-    int  dts_conv = dvd.get_dts_conv();
-
-    _conf->get_int32("formats"          ,formats         );
-    _conf->get_bool ("query_sink"       ,query_sink      );
-    _conf->get_bool ("use_detector"     ,use_detector    );
-
-    _conf->get_int32("spdif_pt"         ,spdif_pt        );
-    _conf->get_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
-    _conf->get_bool ("spdif_encode"     ,spdif_encode    );
-    _conf->get_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
-    _conf->get_int32("spdif_bitrate"    ,spdif_bitrate   );
-
-    _conf->get_bool ("spdif_check_sr"   ,spdif_check_sr  );
-    _conf->get_bool ("spdif_allow_48"   ,spdif_allow_48  );
-    _conf->get_bool ("spdif_allow_44"   ,spdif_allow_44  );
-    _conf->get_bool ("spdif_allow_32"   ,spdif_allow_32  );
-
-    _conf->get_int32("dts_mode"         ,dts_mode        );
-    _conf->get_int32("dts_conv"         ,dts_conv        );
-
-    dvd.set_query_sink(query_sink);
-    dvd.set_use_detector(use_detector);
-
-    dvd.set_spdif_pt(spdif_pt);
-    dvd.set_spdif_as_pcm(spdif_as_pcm);
-    dvd.set_spdif_encode(spdif_encode);
-    dvd.set_spdif_stereo_pt(spdif_stereo_pt);
-    dvd.set_spdif_bitrate(spdif_bitrate);
-
-    dvd.set_spdif_check_sr(spdif_check_sr);
-    dvd.set_spdif_allow_48(spdif_allow_48);
-    dvd.set_spdif_allow_44(spdif_allow_44);
-    dvd.set_spdif_allow_32(spdif_allow_32);
-
-    dvd.set_dts_mode(dts_mode);
-    dvd.set_dts_conv(dts_conv);
-  }
-
-
   return S_OK;
 }
 
-STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
+STDMETHODIMP COMDecoder::save_params(Config *_conf, int _preset)
 {
   AudioProcessorState *state = dvd.proc.get_state(0);
 
@@ -996,19 +1161,10 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     reg.create_key(REG_KEY_PRESET"\\Default");
   }
 
-  if (_what & AC3FILTER_SPK)
-  {
-    Speakers user_spk = dvd.get_user();
-    bool use_spdif = dvd.get_use_spdif();
+  if (_preset & AC3FILTER_SPK)
+    save_spk(_conf);
 
-    _conf->set_int32("format"           ,user_spk.format  );
-    _conf->set_int32("mask"             ,user_spk.mask    );
-    _conf->set_int32("sample_rate"      ,user_spk.sample_rate);
-    _conf->set_int32("relation"         ,user_spk.relation);
-    _conf->set_bool ("use_spdif"        ,use_spdif        );
-  }
-
-  if (state && (_what & AC3FILTER_PROC))
+  if (state && (_preset & AC3FILTER_PROC))
   {
     // Options
     _conf->set_bool ("auto_gain"        ,state->auto_gain       );
@@ -1032,7 +1188,7 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     _conf->set_int32("bass_freq"        ,state->bass_freq       );
   }
 
-  if (state && (_what & AC3FILTER_GAINS))
+  if (state && (_preset & AC3FILTER_GAINS))
   {
     // I/O Gains
     _conf->set_float("gain_input_L"     ,state->input_gains[CH_L]   );
@@ -1050,7 +1206,7 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     _conf->set_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
   }
 
-  if (state && (_what & AC3FILTER_DELAY))
+  if (state && (_preset & AC3FILTER_DELAY))
   {
     // Delays
     _conf->set_bool ("delay"            ,state->delay           );
@@ -1063,53 +1219,7 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
     _conf->set_float("delay_LFE"        ,state->delays[CH_LFE]  );
   }
 
-  if (state && (_what & AC3FILTER_EQ))
-  {
-    // Equalizer
-    char param_str[32];
-
-    _conf->set_bool ("eq"               ,state->eq              );
-    if (state->eq_master_nbands && state->eq_master_bands)
-    {
-      _conf->set_int32("eq_nbands"      ,(int)state->eq_master_nbands);
-      for (size_t i = 0; i < state->eq_master_nbands; i++)
-      {
-        sprintf(param_str, "eq_freq_%i", i);
-        _conf->set_int32(param_str      ,state->eq_master_bands[i].freq);
-        sprintf(param_str, "eq_gain_%i", i);
-        _conf->set_float(param_str      ,state->eq_master_bands[i].gain);
-      }
-    }
-
-    for (int ch = 0; ch < NCHANNELS; ch++)
-      if (state->eq_nbands[ch] && state->eq_bands[ch])
-      {
-        sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
-        _conf->set_int32(param_str      ,(int)state->eq_nbands[ch]);
-        for (size_t i = 0; i < state->eq_master_nbands; i++)
-        {
-          sprintf(param_str, "eq_%s_freq_%i", ch_names[ch], i);
-          _conf->set_int32(param_str    ,state->eq_bands[ch][i].freq);
-          sprintf(param_str, "eq_%s_gain_%i", ch_names[ch], i);
-          _conf->set_float(param_str    ,state->eq_bands[ch][i].gain);
-        }
-      }
-  }
-
-  if (_what & AC3FILTER_SYNC)
-  {
-    vtime_t time_shift  = dvd.syncer.get_time_shift();
-    vtime_t time_factor = dvd.syncer.get_time_factor();
-    bool    dejitter    = dvd.syncer.get_dejitter();
-    vtime_t threshold   = dvd.syncer.get_threshold();
-
-    _conf->set_float("time_shift"       ,time_shift      );
-    _conf->set_float("time_factor"      ,time_factor     );
-    _conf->set_bool ("dejitter"         ,dejitter        );
-    _conf->set_float("threshold"        ,threshold       );
-  }
-
-  if (state && (_what & AC3FILTER_MATRIX))
+  if (state && (_preset & AC3FILTER_MATRIX))
   {
     // Matrix
     char element_str[32];
@@ -1121,44 +1231,17 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _what)
       }
   }
 
-  if (_what & AC3FILTER_SYS)
-  {
-    bool query_sink = dvd.get_query_sink();
-    bool use_detector = dvd.get_use_detector();
+  if ((_preset & AC3FILTER_EQ_MASK) && (_preset & AC3FILTER_PROC))
+    _conf->set_bool("eq", dvd.proc.get_eq());
 
-    int  spdif_pt = dvd.get_spdif_pt();
-    bool spdif_as_pcm = dvd.get_spdif_as_pcm();
-    bool spdif_encode = dvd.get_spdif_encode();
-    bool spdif_stereo_pt = dvd.get_spdif_stereo_pt();
-    int  spdif_bitrate = dvd.get_spdif_bitrate();
+  if (_preset & AC3FILTER_EQ_MASK)
+    save_eq(_conf, _preset & AC3FILTER_EQ_MASK);
 
-    bool spdif_check_sr = dvd.get_spdif_check_sr();
-    bool spdif_allow_48 = dvd.get_spdif_allow_48();
-    bool spdif_allow_44 = dvd.get_spdif_allow_44();
-    bool spdif_allow_32 = dvd.get_spdif_allow_32();
+  if (_preset & AC3FILTER_SYNC)
+    save_sync(_conf);
 
-    int  dts_mode = dvd.get_dts_mode();
-    int  dts_conv = dvd.get_dts_conv();
-
-    _conf->set_int32("formats"          ,formats         );
-    _conf->set_bool ("query_sink"       ,query_sink      );
-    _conf->set_bool ("use_detector"     ,use_detector    );
-
-    _conf->set_int32("spdif_pt"         ,spdif_pt        );
-    _conf->set_bool ("spdif_as_pcm"     ,spdif_as_pcm    );
-    _conf->set_bool ("spdif_encode"     ,spdif_encode    );
-    _conf->set_bool ("spdif_stereo_pt"  ,spdif_stereo_pt );
-    _conf->set_int32("spdif_bitrate"    ,spdif_bitrate   );
-
-    _conf->set_bool ("spdif_check_sr"   ,spdif_check_sr  );
-    _conf->set_bool ("spdif_allow_48"   ,spdif_allow_48  );
-    _conf->set_bool ("spdif_allow_44"   ,spdif_allow_44  );
-    _conf->set_bool ("spdif_allow_32"   ,spdif_allow_32  );
-
-    _conf->set_int32("dts_mode"         ,dts_mode        );
-    _conf->set_int32("dts_conv"         ,dts_conv        );
-
-  }
+  if (_preset & AC3FILTER_SYS)
+    save_sys(_conf);
 
   safe_delete(state);
   return S_OK;

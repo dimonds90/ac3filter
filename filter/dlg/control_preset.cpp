@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../save_eq.h"
 #include "../ac3filter_intl.h"
 #include "../resource_ids.h"
 #include "control_preset.h"
@@ -285,8 +286,7 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
         sprintf(buf, REG_KEY_EQ"\\%s", preset);
 
         RegistryKey reg(buf);
-        dec->load_params(&reg, AC3FILTER_EQ);
-        proc->set_eq(true);
+        dec->load_params(&reg, AC3FILTER_EQ_ALL);
         return cmd_update;
       }
       if (message == CB_ENTER)
@@ -298,8 +298,13 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
 
         RegistryKey reg;
         reg.create_key(buf);
-        dec->save_params(&reg, AC3FILTER_EQ);
-        update();
+        SaveEq save_eq(AC3FILTER_EQ_CUR);
+        if (save_eq.exec(ac3filter_instance, MAKEINTRESOURCE(IDD_EQ_SAVE), hdlg) == IDOK)
+        {
+          int preset = save_eq.get_preset();
+          dec->save_params(&reg, preset);
+          update();
+        }
         return cmd_ok;
       }
       return cmd_not_processed;
@@ -313,8 +318,13 @@ ControlPreset::cmd_result ControlPreset::command(int control, int message)
 
       RegistryKey reg;
       reg.create_key(buf);
-      dec->save_params(&reg, AC3FILTER_EQ);
-      update();
+      SaveEq save_eq(AC3FILTER_EQ_CUR);
+      if (save_eq.exec(ac3filter_instance, MAKEINTRESOURCE(IDD_EQ_SAVE), hdlg) == IDOK)
+      {
+        int preset = save_eq.get_preset();
+        dec->save_params(&reg, preset);
+        update();
+      }
       return cmd_ok;
     }
 

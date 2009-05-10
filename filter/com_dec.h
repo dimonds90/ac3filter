@@ -13,7 +13,8 @@
 class COMDecoder : public Filter, public IDecoder, public IAudioProcessor
 {
 protected:
-  int  formats; // formats allowed
+  int cur_ch; // current equalizer channel
+  int formats; // formats allowed
   DVDGraph dvd;
 
 protected:
@@ -135,8 +136,20 @@ public:
   STDMETHODIMP get_info  (char *info, size_t len);
 
   // Load/save settings
-  STDMETHODIMP load_params(Config *config, int what);
-  STDMETHODIMP save_params(Config *config, int what);
+  void save_spk(Config *config);
+  void load_spk(Config *config);
+
+  void save_eq(Config *config, int eq_type);
+  void load_eq(Config *config);
+
+  void save_sync(Config *config);
+  void load_sync(Config *config);
+
+  void save_sys(Config *config);
+  void load_sys(Config *config);
+
+  STDMETHODIMP load_params(Config *config, int preset);
+  STDMETHODIMP save_params(Config *config, int preset);
 
   /////////////////////////////////////////////////////////
   // IAudioProcessor
@@ -203,6 +216,8 @@ public:
   STDMETHODIMP get_eq_nbands    (int ch, size_t *nbands);
   STDMETHODIMP get_eq_bands     (int ch, EqBand *bands, size_t first_band, size_t nbands);
   STDMETHODIMP set_eq_bands     (int ch, EqBand *bands, size_t nbands);
+  STDMETHODIMP get_eq_channel   (int *ch);
+  STDMETHODIMP set_eq_channel   (int  ch);
   // Delay
   STDMETHODIMP get_delay        (bool *delay);
   STDMETHODIMP set_delay        (bool  delay);

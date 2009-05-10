@@ -23,25 +23,28 @@ void cr2crlf(char *buf, size_t size);
 #define REG_KEY_EQ     "Software\\AC3Filter\\equalizer"
 
 // preset settings
-#define AC3FILTER_SPK    0x01 // Speakers configuration: 
-                              // spk
-#define AC3FILTER_PROC   0x02 // Audio processor settings:
-                              // auto_gain, normalize, auto_matrix, normalize_matrix, voice_control, expand_stereo,
-                              // drc, drc_power, master, clev, slev, lfelev
-#define AC3FILTER_GAINS  0x04 // Input/output gains: 
-                              // input_gains, output_gains
-#define AC3FILTER_MATRIX 0x08 // Mixing matrix:
-                              // matrix
-#define AC3FILTER_DELAY  0x10 // Delay settings:
-                              // delay, delay_units, delays
-#define AC3FILTER_EQ     0x20 // Equalizer
-#define AC3FILTER_SYNC   0x40 // Syncronization settings:
-                              // time_shift, time_factor, dejitter, threshold
-#define AC3FILTER_SYS    0x80 // System settings: 
-                              // formats, spdif, config_autoload, 
+#define AC3FILTER_SPK     0x0001 // Speakers configuration: 
+                                 // spk, use_spdif
+#define AC3FILTER_PROC    0x0002 // Audio processor settings:
+                                 // auto_gain, normalize, auto_matrix, normalize_matrix, voice_control, expand_stereo,
+                                 // drc, drc_power, master, clev, slev, lfelev
+#define AC3FILTER_GAINS   0x0004 // Input/output gains: 
+                                 // input_gains, output_gains
+#define AC3FILTER_MATRIX  0x0008 // Mixing matrix:
+                                 // matrix
+#define AC3FILTER_DELAY   0x0010 // Delay settings:
+                                 // delay, delay_units, delays
+#define AC3FILTER_EQ_MASK 0x0060 // Equalizer type mask
+#define AC3FILTER_EQ_ALL  0x0060 // Full equalizer settings (master & multichannel)
+#define AC3FILTER_EQ_CUR  0x0020 // Current equalizer channel
+#define AC3FILTER_EQ_MCH  0x0040 // Multichannel equalizer
+#define AC3FILTER_SYNC    0x0080 // Syncronization settings:
+                                 // time_shift, time_factor, dejitter, threshold
+#define AC3FILTER_SYS     0x0100 // System settings: 
+                                 // formats, spdif, config_autoload, 
 
-#define AC3FILTER_ALL    0xff // all settings
-#define AC3FILTER_PRESET 0x3f // settings that saved into preset (all except system settings and sync)
+#define AC3FILTER_ALL     0x01ff // all settings
+#define AC3FILTER_PRESET  0x007f // settings that saved into preset (all except system settings and sync)
 
 // Constants from dvd_graph.h
 #define SPDIF_MODE_NONE                0
@@ -314,6 +317,8 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (get_eq_nbands)    (int ch, size_t *nbands) = 0;
   STDMETHOD (get_eq_bands)     (int ch, EqBand *bands, size_t first_band, size_t nbands) = 0;
   STDMETHOD (set_eq_bands)     (int ch, EqBand *bands, size_t nbands) = 0;
+  STDMETHOD (get_eq_channel)   (int *ch) = 0;
+  STDMETHOD (set_eq_channel)   (int  ch) = 0;
   // Delay
   STDMETHOD (get_delay)        (bool *delay) = 0;
   STDMETHOD (set_delay)        (bool  delay) = 0;

@@ -430,6 +430,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\save_eq.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\save_eq.h"
+				>
+			</File>
+			<File
 				RelativePath=".\spectrum_ctrl.cpp"
 				>
 			</File>

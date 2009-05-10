@@ -27,6 +27,7 @@
 #define IDD_SYSTEM                      107
 #define IDD_ABOUT                       108
 #define IDD_EQ_CUSTOM                   109
+#define IDD_EQ_SAVE                     110
 
 #define IDD_SIMPLE                      200
 #define IDD_TEMPL                       201
@@ -441,6 +442,11 @@
 #define IDC_EDT_EQ_GAIN8               53177
 #define IDC_EDT_EQ_GAIN9               53178
 #define IDC_EDT_EQ_GAIN10              53179
+
+// Save equalizer dialog (532)
+#define IDC_RBT_EQ_CUR                 53201
+#define IDC_RBT_EQ_MCH                 53202
+#define IDC_RBT_EQ_ALL                 53203
 
 // Logos (100)
 #define IDC_LOGO                       10001
