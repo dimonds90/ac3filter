@@ -1,3 +1,6 @@
+#ifndef CUSTOM_EQ
+#define CUSTOM_EQ
+
 #include "dlg_base.h"
 #include "controls.h"
 #include "spectrum_ctrl.h"
@@ -35,3 +38,5 @@ public:
   size_t get_bands(EqBand *bands, size_t first_band, size_t nbands) const;
   void reset();
 };
+
+#endif
