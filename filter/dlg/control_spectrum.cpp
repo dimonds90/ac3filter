@@ -27,8 +27,8 @@ static const int controls[] =
 
 static const double max_db = 0;
 static const double min_db = -100;
-static const unsigned lin_window_length = 512;
-static const unsigned log_window_length = 1024;
+static const unsigned lin_window_length = 1024;
+static const unsigned log_window_length = 4096;
 static const int sample_rate = 48000;
 static const vtime_t max_lag_time = 5.0;
 
