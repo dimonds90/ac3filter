@@ -1,14 +1,19 @@
 v1.60a
   + 64bit filter
+  + Lite filter version
   + Multichannel equalizer
   + Customize equalizer dialog with frequency response of the equalizer
   * Equalizer rewrited
-  * Spectrum synchronized with playback
+  * Spectrum synchronized with audio playback
   * Localized installer
   ! Fixed: ACM driver sometimes crashed
   ! Fixed: equalizer can mute the sound sometimes
   ! Fixed: "incorrect value" error message may appear under the settings dialog
   ! Fixed: tab key now works at edit controls
+
+  New Translations:
+  * Slovenian, thanks to DarkHand
+  * Greek, thanks to Peter Perdik and Dimitrios Topouzidis
 
 
 v1.51a - 09.07.2008
