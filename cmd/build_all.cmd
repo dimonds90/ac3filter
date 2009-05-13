@@ -1,4 +1,4 @@
-rem @echo off
+@echo off
 
 set platform=Win32
 set config=Release
