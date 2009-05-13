@@ -1,32 +1,32 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.46\n"
+"Project-Id-Version: AC3Filter 1.51a\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-13 16:55+0400\n"
-"PO-Revision-Date: 2007-08-25 19:32+0100\n"
-"Last-Translator: Ernst Klamer <e.klamer@gmail.com>\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Valex <xvalex.ru>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-Language: Greek\n"
+"X-Poedit-Country: GREECE\n"
 
 #. TRANSLATORS: Main
 msgid "IDD_MAIN"
-msgstr "Main"
+msgstr "Αρχικό"
 
 #. TRANSLATORS: Mixer
 msgid "IDD_MIXER"
-msgstr "Mixer"
+msgstr "Μίκτης"
 
 #. TRANSLATORS: Gains
 msgid "IDD_GAINS"
-msgstr "Niveau's"
+msgstr "Κέρδη"
 
 #. TRANSLATORS: Equalizer
 msgid "IDD_EQ"
-msgstr ""
+msgstr "Ισοσταθμιστής"
 
 #. TRANSLATORS: SPDIF
 msgid "IDD_SPDIF"
@@ -34,11 +34,11 @@ msgstr "SPDIF"
 
 #. TRANSLATORS: System
 msgid "IDD_SYSTEM"
-msgstr "Systeem"
+msgstr "Σύστημα"
 
 #. TRANSLATORS: About
 msgid "IDD_ABOUT"
-msgstr "Over"
+msgstr "Σχετικά"
 
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
@@ -46,7 +46,7 @@ msgstr ""
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
-msgstr "Donatie"
+msgstr "Δωρεά"
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
@@ -78,7 +78,7 @@ msgstr ""
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
 msgid "IDC_VER"
-msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 door Alexander Vigovsky"
+msgstr "AC3Filter έκδοση %s Copyright (c) 2002-2008 από τον Alexander Vigovsky"
 
 #. TRANSLATORS: OK
 msgid "IDOK"
@@ -86,22 +86,22 @@ msgstr ""
 
 #. TRANSLATORS: What is it?
 msgid "IDC_GRP_ABOUT"
-msgstr "Wat is AC3Filter?"
+msgstr "Τί είναι;"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
 msgstr ""
-"AC3Filter is een gratis hoge kwaliteits DirectShow filter ontworpen voor "
-"real time audio decoding en processing. De prioriteit ligt in het geven van "
-"een brede functionaliteit en uitgebreide instellingen. Multi-kanaals en "
-"digitaal (SPDIF) output wordt ondersteund."
+"Το AC3Filter είναι ένα υψηλής ποιότητας δωρεάν φίλτρο DirectShow σχεδιασμένο "
+"για αναπαραγωγή και επεξεργασία σε πραγματικό χρόνο. Έχει προτεραιότητα σε "
+"ευρεία λειτουργικότητα και βολικές ρυθμίσεις. Υποστηρίζει πολυκάναλες και "
+"ψηφιακές (SPDIF) εξόδους."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
 msgstr ""
-"Het wordt automatisch gebruikt door de meeste multimedia spelers. Benodigd "
-"voor het afspelen van AVI bestanden met AC3 of DTS audio tracks. Kan ook "
-"gebruikt worden voor het afspelen van DVD."
+"Χρησιμοποιείται αυτόματα από τους περισσότερους multimedia players. "
+"Απαιτείται για αναπαραγωγή αρχείων AVI με AC3 ή DTS tracks ήχου. Επίσης "
+"μπορεί να χρησιμοποιηθεί για αναπαραγωγή DVD."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -109,30 +109,30 @@ msgstr "AGC"
 
 #. TRANSLATORS: Attack/release speed (dB/s):
 msgid "IDC_LBL_ATTACK_RELEASE"
-msgstr "Attack/release snelheid (dB/s):"
+msgstr ""
 
 #. TRANSLATORS: Contact author
 msgid "IDC_GRP_CONTACT"
-msgstr "Contact auteur"
+msgstr "Επικοινωνία με τον δημιουργό"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
 msgstr ""
-"Geef aub alle fouten in het programma door. Voel u vrij om de auteur te "
-"emailen met uw ideeën, kritiek, etc. Schrijf aub in het Engels of Russisch. "
-"Gebruik als onderwerp het woord 'AC3Filter' (vanwege automatische filtering)"
+"Παρακαλώ αναφέρετε όλα τα λάθη. Στείλτε ελεύθερα email στον συντάκτη με τις "
+"ιδέες σας, κριτικές κλπ. Παρακαλώ γράψτε μόνο στα Αγγλικά ή στα Ρώσικα. Το "
+"θέμα πρέπει να περιέχει τη λέξη 'AC3Filter' (λόγω αυτόματου φιλτραρίσματος)."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
-msgstr "Mail de auteur|mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "mail@ δημιουργό|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 msgid "IDC_LNK_FORUM"
-msgstr "Project forum|http://ac3filter.net/forum/"
+msgstr "Forum έργου|http://ac3filter.net/forum/"
 
 #. TRANSLATORS: Homepage|http://ac3filter.net/
 msgid "IDC_LNK_HOME"
-msgstr "Homepage|http://ac3filter.net/"
+msgstr "Αρχική σελίδα|http://ac3filter.net/"
 
 #. TRANSLATORS: CPU
 msgid "IDC_GRP_CPU"
@@ -144,23 +144,23 @@ msgstr "0%"
 
 #. TRANSLATORS: Thanks to
 msgid "IDC_GRP_CREDITS"
-msgstr "Met dank aan"
+msgstr "Ευχαριστίες"
 
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
-msgstr "Decoder info"
+msgstr "Πληροφορίες αποκωδικοποιητή"
 
 #. TRANSLATORS: Frames / Errors
 msgid "IDC_LBL_FRAMES_ERRORS"
-msgstr "Frames / fouten"
+msgstr "Frames/Σφάλματα"
 
 #. TRANSLATORS: Delays
 msgid "IDC_GRP_DELAYS"
-msgstr "Vertragingen"
+msgstr "Καθυστερήσεις"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DELAYS"
-msgstr "Aan"
+msgstr "Ενεργό"
 
 #. TRANSLATORS: C
 msgid "IDC_LBL_DELAY_C"
@@ -188,7 +188,7 @@ msgstr "Sub"
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
-msgstr ""
+msgstr "Μονάδες:"
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
@@ -196,67 +196,67 @@ msgstr "DRC"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DRC"
-msgstr "Aan"
+msgstr "Ενεργό"
 
 #. TRANSLATORS: DirectShow options
 msgid "IDC_GRP_DSHOW"
-msgstr "DirectShow opties"
+msgstr "Επιλογές DirectShow"
 
 #. TRANSLATORS: Check output format support
 msgid "IDC_CHK_QUERY_SINK"
-msgstr "Controleer ondersteuning output formaat"
+msgstr "Έλεγξε υποστήριξη για την διαμόρφωση εξόδου"
 
 #. TRANSLATORS: Force sound card to reinit after seek / pause
 msgid "IDC_CHK_REINIT"
-msgstr "Forceer geluidskaart om te herinitiëren na pauze"
+msgstr ""
 
 #. TRANSLATORS: Disallow PCM output in SPDIF mode
 msgid "IDC_CHK_SPDIF_NO_PCM"
-msgstr "Weiger PCM output in SPDIF mode"
+msgstr "Απόρριψε PCM έξοδο στην διαμόρφωση SPDIF"
 
 #. TRANSLATORS: SPDIF/DTS conversion
 msgid "IDC_GRP_DTS_CONV"
-msgstr "SPDIF/DTS conversie"
+msgstr "Μετατροπή SPDIF/DTS"
 
 #. TRANSLATORS: Convert to DTS14
 msgid "IDC_RBT_DTS_CONV_14BIT"
-msgstr "Convert. naar DTS14"
+msgstr "Μετατροπή σε DTS14"
 
 #. TRANSLATORS: Convert to DTS16
 msgid "IDC_RBT_DTS_CONV_16BIT"
-msgstr "Convert. naar DTS16"
+msgstr "Μετατροπή σε DTS16"
 
 #. TRANSLATORS: Do not convert
 msgid "IDC_RBT_DTS_CONV_NONE"
-msgstr "Niet converteren"
+msgstr "Καμία μετατροπή"
 
 #. TRANSLATORS: SPDIF/DTS mode
 msgid "IDC_GRP_DTS_MODE"
-msgstr "SPDIF/DTS mode"
+msgstr "Διαμόρφωση SPDIF/DTS"
 
 #. TRANSLATORS: Auto
 msgid "IDC_RBT_DTS_MODE_AUTO"
-msgstr "Auto"
+msgstr "Αυτόματα"
 
 #. TRANSLATORS: Padded DTS
 msgid "IDC_RBT_DTS_MODE_PADDED"
-msgstr "Padded DTS"
+msgstr ""
 
 #. TRANSLATORS: SPDIF wrapped
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
-msgstr "SPDIF wrapped"
+msgstr ""
 
 #. TRANSLATORS: Build info
 msgid "IDC_GRP_ENV"
-msgstr "Versie info"
+msgstr "Πληροφορίες κατασκευής"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
-msgstr ""
+msgstr "Ισοσταθμιστής"
 
 #. TRANSLATORS: Equalizer options
 msgid "IDC_GRP_EQ_OPTIONS"
-msgstr ""
+msgstr "Επιλογές ισοσταθμιστή"
 
 #. TRANSLATORS: Custom
 msgid "IDC_BTN_EQ_CUSTOM"
@@ -272,19 +272,19 @@ msgstr ""
 
 #. TRANSLATORS: Equalizer preset
 msgid "IDC_GRP_EQ_PRESET"
-msgstr ""
+msgstr "Ρύθμιση ισοσταθμιστή"
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_EQ_DELETE"
-msgstr ""
+msgstr "Σβήσε"
 
 #. TRANSLATORS: Save
 msgid "IDC_BTN_EQ_SAVE"
-msgstr ""
+msgstr "Σώσε"
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
-msgstr "Gebruik AC3Filter voor:"
+msgstr "Χρήση AC3Filter για:"
 
 #. TRANSLATORS: AC3
 msgid "IDC_CHK_AC3"
@@ -312,15 +312,15 @@ msgstr "SPDIF"
 
 #. TRANSLATORS: Gain
 msgid "IDC_GRP_GAIN"
-msgstr "Niveau"
+msgstr "Κέρδος"
 
 #. TRANSLATORS: Gains
 msgid "IDC_GRP_GAINS"
-msgstr "Niveau's"
+msgstr "Κέρδη"
 
 #. TRANSLATORS: Gain
 msgid "IDC_LBL_GAIN"
-msgstr "Niveau"
+msgstr "Κέρδος"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -328,7 +328,7 @@ msgstr "LFE"
 
 #. TRANSLATORS: Master
 msgid "IDC_LBL_MASTER"
-msgstr "Master"
+msgstr "Κύριο"
 
 #. TRANSLATORS: Surround
 msgid "IDC_LBL_SUR"
@@ -336,15 +336,15 @@ msgstr "Surround"
 
 #. TRANSLATORS: Voice
 msgid "IDC_LBL_VOICE"
-msgstr "Spraak"
+msgstr "Φωνή"
 
 #. TRANSLATORS: Input gains
 msgid "IDC_GRP_INPUT_GAINS"
-msgstr "Input niveau"
+msgstr "Κέρδη εισόδου"
 
 #. TRANSLATORS: Input levels
 msgid "IDC_GRP_INPUT_LEVELS"
-msgstr "Input levels"
+msgstr "Στάθμες εισόδου"
 
 #. TRANSLATORS: C
 msgid "IDC_LBL_IN_C"
@@ -372,37 +372,37 @@ msgstr "SR"
 
 #. TRANSLATORS: Interface options
 msgid "IDC_GRP_INTERFACE"
-msgstr "Interface opties"
+msgstr "Επιλογές διασύνδεσης"
 
 #. TRANSLATORS: Invert levels
 msgid "IDC_CHK_INVERT_LEVELS"
-msgstr "Invert levels"
+msgstr "Αναστροφή σταθμών"
 
 #. TRANSLATORS: Show tooltips
 msgid "IDC_CHK_TOOLTIPS"
-msgstr "Tooltips laten zien"
+msgstr "Δείξε βοηθήματα"
 
 #. TRANSLATORS: Show tray icon
 msgid "IDC_CHK_TRAY"
-msgstr "Taakbalkicoon laten zien"
+msgstr "Δείξε εικονίδιο στο system tray"
 
 #. TRANSLATORS: Interface update rate (ms)
 msgid "IDC_LBL_REFRESH_TIME"
-msgstr "Interface update snelheid (ms)"
+msgstr "Ρυθμός ανανέωσης διασύνδεσης (ms)"
 
 #. TRANSLATORS: License
 msgid "IDC_GRP_LICENSE"
-msgstr "Licensie"
+msgstr "Άδεια"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
 msgstr ""
-"Dit programma is gratis software en mag verder worden gedistribueerd volgens "
-"de uitgangspunten van de GNU General Public License versie 2."
+"Αυτό το πρόγραμμα είναι δωρεάν και μπορεί να διανεμηθεί σύμφωνα με τους "
+"όρους της GNU General Public License version 2."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
-msgstr "Mixing matrix"
+msgstr "Πίνακας μίξης"
 
 #. TRANSLATORS: C
 msgid "IDC_LBL_MATRIX_IN_C"
@@ -454,91 +454,91 @@ msgstr "Sub"
 
 #. TRANSLATORS: Matrix preset
 msgid "IDC_GRP_MATRIX_PRESET"
-msgstr "Matrix voorkeur"
+msgstr "Ρύθμιση πίνακα"
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_MATRIX_DELETE"
-msgstr "Delete"
+msgstr "Σβήσε"
 
 #. TRANSLATORS: Save
 msgid "IDC_BTN_MATRIX_SAVE"
-msgstr "Safe"
+msgstr "Σώσε"
 
 #. TRANSLATORS: Filter merit
 msgid "IDC_GRP_MERIT"
-msgstr "Filter merit"
+msgstr "Προτίμηση φίλτρων"
 
 #. TRANSLATORS: Prefer AC3Filter
 msgid "IDC_RBT_MERIT_PREFERRED"
-msgstr "Voorkeur voor AC3Filter"
+msgstr "Προτίμησε AC3Filter"
 
 #. TRANSLATORS: Prefer other decoder
 msgid "IDC_RBT_MERIT_UNLIKELY"
-msgstr "Voorkeur voor andere decoder"
+msgstr "Προτίμησε άλλον αποκωδικ."
 
 #. TRANSLATORS: Options
 msgid "IDC_GRP_MIXER_OPTIONS"
-msgstr "Opties"
+msgstr "Επιλογές"
 
 #. TRANSLATORS: Auto gain control
 msgid "IDC_CHK_AUTO_GAIN"
-msgstr "Auto niveau controle"
+msgstr "Αυτόμ. έλεγχος κέρδους"
 
 #. TRANSLATORS: Auto matrix
 msgid "IDC_CHK_AUTO_MATRIX"
-msgstr "Auto matrix"
+msgstr "Αυτόματος πίνακας"
 
 #. TRANSLATORS: Bass redirection
 msgid "IDC_CHK_BASS_REDIR"
-msgstr "Bass redirection"
+msgstr "Ανακατεύθυνση μπάσων"
 
 #. TRANSLATORS: Expand stereo
 msgid "IDC_CHK_EXPAND_STEREO"
-msgstr "Stereo uitbreiding"
+msgstr "Επέκταση stereo"
 
 #. TRANSLATORS: One-pass norm
 msgid "IDC_CHK_NORMALIZE"
-msgstr "One-pass norm"
+msgstr "Ομαλοπ. 1 περάσματος"
 
 #. TRANSLATORS: Normalize matrix
 msgid "IDC_CHK_NORM_MATRIX"
-msgstr "Normaliseer matrix"
+msgstr "Πίνακας ομαλοπ."
 
 #. TRANSLATORS: Voice control
 msgid "IDC_CHK_VOICE_CONTROL"
-msgstr "Spraak controle"
+msgstr "Έλεγχος φωνής"
 
 #. TRANSLATORS: Cutoff frequency
 msgid "IDC_LBL_BASS_FREQ"
-msgstr "Cutoff frequentie"
+msgstr "Συχν. αποκοπής"
 
 #. TRANSLATORS: Output format
 msgid "IDC_GRP_OUTPUT"
-msgstr "Output formaat"
+msgstr "Διαμόρφωση εξόδου"
 
 #. TRANSLATORS: Use SPDIF
 msgid "IDC_CHK_USE_SPDIF"
-msgstr "Gebruik SPDIF"
+msgstr "Χρήση SPDIF"
 
 #. TRANSLATORS: Format
 msgid "IDC_LBL_FORMAT"
-msgstr ""
+msgstr "Διαμόρφωση"
 
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
-msgstr "Input formaat"
+msgstr "Διαμόρφωση εισόδου"
 
 #. TRANSLATORS: Rate
 msgid "IDC_LBL_RATE"
-msgstr ""
+msgstr "Ρυθμός"
 
 #. TRANSLATORS: Output gains
 msgid "IDC_GRP_OUTPUT_GAINS"
-msgstr "Output niveau's"
+msgstr "Κέρδη εξόδου"
 
 #. TRANSLATORS: Output levels
 msgid "IDC_GRP_OUTPUT_LEVELS"
-msgstr "Output levels"
+msgstr "Στάθμες εξόδου"
 
 #. TRANSLATORS: C
 msgid "IDC_LBL_OUT_C"
@@ -566,35 +566,35 @@ msgstr "Sub"
 
 #. TRANSLATORS: Preset
 msgid "IDC_GRP_PRESET"
-msgstr "Voorkeur"
+msgstr "Αρχική ρύθμιση"
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_PRESET_DELETE"
-msgstr "Delete"
+msgstr "Σβήσε"
 
 #. TRANSLATORS: File
 msgid "IDC_BTN_PRESET_FILE"
-msgstr "File"
+msgstr "Αρχείο"
 
 #. TRANSLATORS: Save
 msgid "IDC_BTN_PRESET_SAVE"
-msgstr "Save"
+msgstr "Σώσε"
 
 #. TRANSLATORS: Default audio renderer
 msgid "IDC_GRP_RENDERER"
-msgstr "Standaard audio renderer"
+msgstr "Εξ' ορισμού αποκωδ. ήχου"
 
 #. TRANSLATORS: Use Direct Sound by default
 msgid "IDC_RBT_RENDER_DS"
-msgstr "Direct Sound als standaard"
+msgstr "Χρήση Direct Sound"
 
 #. TRANSLATORS: Use Wave Out by default
 msgid "IDC_RBT_RENDER_WO"
-msgstr "Wave Out als standaard"
+msgstr "Χρήση Wave Out"
 
 #. TRANSLATORS: SPDIF options
 msgid "IDC_GRP_SPDIF"
-msgstr "SPDIF opties"
+msgstr "Επιλογές SPDIF"
 
 #. TRANSLATORS: 32kHz
 msgid "IDC_CHK_SPDIF_ALLOW_32"
@@ -610,27 +610,27 @@ msgstr "48kHz"
 
 #. TRANSLATORS: Output SPDIF as PCM
 msgid "IDC_CHK_SPDIF_AS_PCM"
-msgstr "Output SPDIF als PCM"
+msgstr "Έξοδος SPDIF σαν PCM"
 
 #. TRANSLATORS: Restrict SPDIF sample rate
 msgid "IDC_CHK_SPDIF_CHECK_SR"
-msgstr "Beperk SPDIF sample rate"
+msgstr "Περιορισμός δειγματοληψίας SPDIF"
 
 #. TRANSLATORS: Use AC3 encoder
 msgid "IDC_CHK_SPDIF_ENCODE"
-msgstr "Gebruik AC3 encoder"
+msgstr "Χρήση κωδικοποιητή AC3"
 
 #. TRANSLATORS: Do not encode stereo PCM
 msgid "IDC_CHK_SPDIF_STEREO_PT"
-msgstr "Stereo PCM niet encoderen"
+msgstr "Μην κωδικοποιείς stereo PCM"
 
 #. TRANSLATORS: Detect SPDIF stream in PCM data
 msgid "IDC_CHK_USE_DETECTOR"
-msgstr "Detecteer SPDIF stream in PCM data"
+msgstr "Εντοπισμός ρεύματος SPDIF στα δεδομένα PCM"
 
 #. TRANSLATORS: AC3 encoder bitrate (kbps)
 msgid "IDC_LBL_SPDIF_BITRATE"
-msgstr "AC3 encoder bitrate (kbps)"
+msgstr "Bitrate κωδικοποιητή AC3 (kbps)"
 
 #. TRANSLATORS: SPDIF passthrough
 msgid "IDC_GRP_SPDIF_PT"
@@ -646,61 +646,61 @@ msgstr "DTS"
 
 #. TRANSLATORS: MPEG Audio
 msgid "IDC_CHK_SPDIF_MPA"
-msgstr "MPEG audio"
+msgstr "MPEG Audio"
 
 #. TRANSLATORS: Audio/Video sync
 msgid "IDC_GRP_SYNC"
-msgstr "Audio/Video synchronisatie"
+msgstr "Συγχονισμός Εικόνας/Ήχου"
 
 #. TRANSLATORS: Jitter correction.
 msgid "IDC_CHK_JITTER"
-msgstr "Jitter correctie:"
+msgstr "Διόρθωση jitter"
 
 #. TRANSLATORS: Current jitter:
 msgid "IDC_LBL_JITTER"
-msgstr "Huidige jitter:"
+msgstr "Τρέχον jitter:"
 
 #. TRANSLATORS: Time shift (ms):
 msgid "IDC_LBL_TIME_SHIFT"
-msgstr "Tijdsverschuiving (ms):"
+msgstr ""
 
 #. TRANSLATORS: <- sound lags
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
-msgstr "<- geluidsvertraging"
+msgstr "<- Ο ήχος αργεί"
 
 #. TRANSLATORS: sound hastes ->
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
-msgstr "geluidsversnelling ->"
+msgstr "Ο ήχος βιάζει ->"
 
 #. TRANSLATORS: Localization
 msgid "IDC_GRP_TRANS"
-msgstr "Localisatie"
+msgstr "Εντοπισμός"
 
 #. TRANSLATORS: Language:
 msgid "IDC_LBL_LANG"
-msgstr "Taal:"
+msgstr "Γλώσσα:"
 
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
-msgstr ""
+msgstr "Πώς μεταφράζω;|http://ac3filter.net/guides/how_to_translate"
 
 msgid "Samples"
-msgstr "Samples"
+msgstr "Δείγματα"
 
 msgid "Millisecs"
-msgstr "Milliseconden"
+msgstr "Millisecs"
 
 msgid "Meters"
-msgstr "Meters"
+msgstr "Μέτρα"
 
 msgid "Centimeters"
-msgstr "Centimeters"
+msgstr "Εκατοστά"
 
 msgid "Feet"
-msgstr "Feet"
+msgstr "Πόδια"
 
 msgid "Inches"
-msgstr "Inches"
+msgstr "Ίντσες"
 
 msgid "Master"
 msgstr ""
@@ -725,48 +725,48 @@ msgstr ""
 
 #, c-format
 msgid "%ikHz"
-msgstr ""
+msgstr "%ikHz"
 
 #, c-format
 msgid "%iHz"
-msgstr ""
+msgstr "%iHz"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
-msgstr "Weet je zeker dat je  '%s' voorkeur wilt verwijderen?"
+msgstr "Σίγουρα θέλετε να σβήσετε την ρύθμιση '%s';"
 
 msgid "Delete confirmation"
-msgstr "Bevestig verwijderen"
+msgstr "Επιβεβαίωση διαγραφής"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
-msgstr "Weet u zeker dat u  '%s' matrix wilt verwijderen?"
+msgstr "Σίγουρα θέλετε να σβήσετε τον πίνακα '%s';"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' equalizer preset?"
-msgstr ""
+msgstr "Σίγουρα θέλετε να σβήσετε την ρύθμιση του ισοσταθμιστή '%s'; "
 
 msgid ""
 "This option is DANGEROUS! Filter may make very loud noise with this option "
 "enabled. Press 'No' to enable this option."
 msgstr ""
-"Deze optie is GEVAARLIJK! Filter kan erg veel lawaai veroorzaken met deze "
-"optie aan. Druk op 'Nee' om deze optie aan te zetten."
+"Αυτή η επιλογή είναι ΕΠΙΚΙΝΔΥΝΗ. Το φίλτρο μπορεί να κάνει πολύ θόρυβο με "
+"αυτήν την επιλογή. Πατήστε 'Όχι' για να την ενεργοποίησετε."
 
 msgid "Dangerous option!"
-msgstr "Gevaarlijke optie!"
+msgstr "Επικίνδυνη επιλογή!"
 
 msgid "AS IS (no change)"
-msgstr "Onveranderd"
+msgstr "Όπως είναι (καμία αλλαγή)"
 
 msgid "1/0 - mono"
-msgstr "1/0 - mono"
+msgstr "1/0 -  μονοφωνικό"
 
 msgid "2/0 - stereo"
-msgstr "2/0 - stereo"
+msgstr "2/0 - στερεοφωνικό"
 
 msgid "3/0 - 3 front"
-msgstr "3/0 - 3 front"
+msgstr "3/0 - 3 εμπρός"
 
 msgid "2/1 - surround"
 msgstr "2/1 - surround"
@@ -778,16 +778,16 @@ msgid "2/2 - quadro"
 msgstr "2/2 - quadro"
 
 msgid "3/2 - 5 channels"
-msgstr "3/2 - 5 kanaals"
+msgstr "3/2 - 5 κανάλια"
 
 msgid "1/0+SW 1.1 mono"
-msgstr "1/0+SW 1.1 mono"
+msgstr ""
 
 msgid "2/0+SW 2.1 stereo"
-msgstr "2/0+SW 2.1 stereo"
+msgstr ""
 
 msgid "3/0+SW 3.1 front"
-msgstr "3/0+SW 3.1 front"
+msgstr "3/0+SW 3.1 εμπρός"
 
 msgid "2/1+SW 3.1 surround"
 msgstr "2/1+SW 3.1 surround"
@@ -799,7 +799,7 @@ msgid "2/2+SW 4.1 quadro"
 msgstr "2/2+SW 4.1 quadro"
 
 msgid "3/2+SW 5.1 channels"
-msgstr "3/2+SW 5.1 kanaals"
+msgstr "3/2+SW 5.1 κανάλια"
 
 msgid "Dolby Surround/ProLogic"
 msgstr "Dolby Surround/ProLogic"
@@ -824,34 +824,31 @@ msgid "%s %s %iHz"
 msgstr "%s %s %iHz"
 
 msgid "Use SPDIF"
-msgstr "Gebruik SPDIF"
+msgstr "Χρήση SPDIF"
 
 msgid "Use SPDIF (disabled)"
-msgstr "Gebruik SPDIF (uit)"
+msgstr "Χρήση SPDIF (απενεργοποιημένο)"
 
 msgid "Use SPDIF (passthrough)"
-msgstr "Gebruik SPDIF (passthrough)"
+msgstr "Χρήση SPDIF (passthrough)"
 
 msgid "Use SPDIF (AC3 encode)"
-msgstr "Gebruik SPDIF (AC3 encode)"
+msgstr "Χρήση SPDIF (κωδικ. AC3)"
 
 msgid "Use SPDIF (Unknown)"
-msgstr "Gebruik SPDIF (onbekend)"
+msgstr "Χρήση SPDIF (Άγνωστο)"
 
 #, c-format
 msgid ""
 "Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
-"Input\tmean: %ims\tstddev: %ims\n"
-"Output\tmean: %ims\tstddev: %ims"
+"Είσοδος\tmean: %ims\tstddev: %ims\n"
+"Έξοδος\tmean: %ims\tstddev: %ims"
 
 msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr ""
-"Deze optie is GEVAARLIJK! Video kan out of sync gaan lopen met deze optie "
-"aan. Druk op 'Nee' om deze optie aan te zetten."
-
-#~ msgid "IDC_LBL_UNITS"
-#~ msgstr "Eenheid:"
+"Αυτή η επιλογή είναι ΕΠΙΚΙΝΔΥΝΗ. Η εικόνα μπορεί να αποσυγχρονιστεί με αυτήν "
+"την επιλογή. Πατήστε 'Όχι' για να την ενεργοποίησετε."

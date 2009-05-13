@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-21 11:44+0300\n"
+"POT-Creation-Date: 2009-05-13 16:55+0400\n"
 "PO-Revision-Date: 2007-08-18 23:10+0100\n"
 "Last-Translator: Sziládi Zsolt <sadistzs@freemail.hu>\n"
 "Language-Team: \n"
@@ -40,13 +40,49 @@ msgstr "Rendszer"
 msgid "IDD_ABOUT"
 msgstr "Névjegy"
 
+#. TRANSLATORS: Cancel
+msgid "IDCANCEL"
+msgstr ""
+
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
 msgstr "Adomány"
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr ""
+
+#. TRANSLATORS: Frequency (Hz)
+msgid "IDC_LBL_EQ_FREQ"
+msgstr ""
+
+#. TRANSLATORS: Gain (dB)
+msgid "IDC_LBL_EQ_GAIN"
+msgstr ""
+
+#. TRANSLATORS: Filter length:
+msgid "IDC_LBL_EQ_LEN"
+msgstr ""
+
+#. TRANSLATORS: Save all (multichannel and master equalizers).
+msgid "IDC_RBT_EQ_ALL"
+msgstr ""
+
+#. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
+msgid "IDC_RBT_EQ_CUR"
+msgstr ""
+
+#. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
+msgid "IDC_RBT_EQ_MCH"
+msgstr ""
+
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter %s verzió Copyright (c) 2002-2007 Alexander Vigovsky"
+
+#. TRANSLATORS: OK
+msgid "IDOK"
+msgstr ""
 
 #. TRANSLATORS: What is it?
 msgid "IDC_GRP_ABOUT"
@@ -223,16 +259,16 @@ msgstr ""
 msgid "IDC_GRP_EQ_OPTIONS"
 msgstr ""
 
-#. TRANSLATORS: Reset equalizer
+#. TRANSLATORS: Custom
+msgid "IDC_BTN_EQ_CUSTOM"
+msgstr ""
+
+#. TRANSLATORS: Reset
 msgid "IDC_BTN_EQ_RESET"
 msgstr ""
 
-#. TRANSLATORS: Enable equalizer
+#. TRANSLATORS: Enable
 msgid "IDC_CHK_EQ"
-msgstr ""
-
-#. TRANSLATORS: Log scale spectrum
-msgid "IDC_CHK_EQ_LOG"
 msgstr ""
 
 #. TRANSLATORS: Equalizer preset
@@ -666,6 +702,27 @@ msgstr "Láb"
 
 msgid "Inches"
 msgstr "Hüvelyk"
+
+msgid "Master"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Surround Left"
+msgstr ""
+
+msgid "Surround Right"
+msgstr ""
+
+msgid "Subwoofer"
+msgstr ""
 
 #, c-format
 msgid "%ikHz"
