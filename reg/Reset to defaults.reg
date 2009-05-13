@@ -4,7 +4,7 @@ REGEDIT4
 "relation"=dword:00000000
 "use_spdif"=dword:00000000
 "normalize"=dword:00000000
-"normalize_matrix"=dword:00000001
+"normalize_matrix"=dword:00000000
 "auto_matrix"=dword:00000001
 "voice_control"=dword:00000001
 "release"="50.000000"
@@ -103,7 +103,7 @@ REGEDIT4
 "use_spdif"=dword:00000000
 "auto_gain"=dword:00000001
 "normalize"=dword:00000000
-"normalize_matrix"=dword:00000001
+"normalize_matrix"=dword:00000000
 "auto_matrix"=dword:00000001
 "expand_stereo"=dword:00000001
 "voice_control"=dword:00000001
