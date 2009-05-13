@@ -35,7 +35,7 @@ static const vtime_t max_lag_time = 5.0;
 ControlSpectrum::ControlSpectrum(HWND _dlg, IAC3Filter *_filter, IAudioProcessor *_proc):
 Controller(_dlg, ::controls), filter(_filter), proc(_proc), length(0)
 {
-  log_scale = false;
+  log_scale = true;
   RegistryKey reg(REG_KEY);
   reg.get_bool("log_scale", log_scale);
 
