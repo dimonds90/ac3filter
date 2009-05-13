@@ -63,11 +63,14 @@ rem -------------------------
 rem Revert version info
 
 cd filter
-if exist ac3filter_ver.old ren ac3filter_ver.old ac3filter_ver.h
+if exist ac3filter_ver.old (
+  del ac3filter_ver.h
+  ren ac3filter_ver.old ac3filter_ver.h
+)
 cd ..
 
 rem -------------------------------------------------------
-echo Building translations...
+rem Build translations
 :build_translations
 
 cd lang
@@ -86,10 +89,10 @@ call vars.cmd
 if "%inno_setup%" == "" set inno_setup=iscc.exe
 if not exist "%inno_setup%" goto err_iss
 
-del /y ..\ac3filter.exe
-del /y ..\ac3filter_%ver_file%.exe
-del /y ..\ac3filter_lite.exe
-del /y ..\ac3filter_lite_%ver_file%.exe
+del ..\ac3filter.exe
+del ..\ac3filter_%ver_file%.exe
+del ..\ac3filter_lite.exe
+del ..\ac3filter_lite_%ver_file%.exe
 
 "%inno_setup%" /o".." /f"%out_file%" ac3filter.iss
 if errorlevel 1 goto fail
