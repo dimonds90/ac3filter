@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 323
+// Total controls: 326
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -50,6 +50,12 @@ static const ControlDesc dialog_controls[] =
   { IDC_LBL_EQ_GAIN, N_("IDC_LBL_EQ_GAIN"), "Gain (dB)", "" },
   /* TRANSLATORS: Filter length: */
   { IDC_LBL_EQ_LEN, N_("IDC_LBL_EQ_LEN"), "Filter length:", "" },
+  /* TRANSLATORS: Save all (multichannel and master equalizers). */
+  { IDC_RBT_EQ_ALL, N_("IDC_RBT_EQ_ALL"), "Save all (multichannel and master equalizers).", "" },
+  /* TRANSLATORS: Save current channel only, so you can apply this preset to any channel. */
+  { IDC_RBT_EQ_CUR, N_("IDC_RBT_EQ_CUR"), "Save current channel only, so you can apply this preset to any channel.", "" },
+  /* TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later. */
+  { IDC_RBT_EQ_MCH, N_("IDC_RBT_EQ_MCH"), "Save all channels (except Master), so you can restore multichannel setup later.", "" },
   { IDC_SPECTRUM, "IDC_SPECTRUM", "", "" },
   /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky */
   { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky", "" },
