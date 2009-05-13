@@ -95,7 +95,7 @@ void ControlEq::init()
   eq_ch = CH_NONE;
   for (int i = 0; i < array_size(ch_text); i++)
   {
-    LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)ch_text[i]);
+    LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)gettext_wrapper(ch_text[i]));
     SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, idx, (LPARAM)ch_name[i]);
   }
   SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, 0, 0);
