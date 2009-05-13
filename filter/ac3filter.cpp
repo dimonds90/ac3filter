@@ -90,7 +90,6 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
 
 AC3Filter::~AC3Filter()
 {
-  free_nls();
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::~AC3Filter", this));
 }
 
