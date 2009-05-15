@@ -93,12 +93,15 @@ ControlEq::~ControlEq()
 void ControlEq::init()
 {
   eq_ch = CH_NONE;
+  proc->get_eq_channel(&eq_ch);
+
   for (int i = 0; i < array_size(ch_text); i++)
   {
     LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)gettext_wrapper(ch_text[i]));
     SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, idx, (LPARAM)ch_name[i]);
+    if (ch_name[i] == eq_ch)
+      SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, idx, 0);
   }
-  SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, 0, 0);
 
   for (size_t band = 0; band < EQ_BANDS; band++)
   {
