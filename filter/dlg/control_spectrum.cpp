@@ -62,7 +62,7 @@ ControlSpectrum::init_spectrum(unsigned new_length)
 
   proc->get_proc_out_spk(&spk);
   fft.set_length(length);
-  buf.allocate(spk.nch(), length);
+  buf.allocate(length);
   win.allocate(length);
 
   if (spk.is_unknown() || !fft.is_ok() || !buf.is_allocated() || !win.is_allocated())
@@ -92,7 +92,6 @@ void ControlSpectrum::update_dynamic()
   unsigned i;
   size_t out_size;
   Speakers new_spk;
-  sample_t *data = buf[0];
 
   // Format change
   proc->get_proc_out_spk(&new_spk);
@@ -116,30 +115,25 @@ void ControlSpectrum::update_dynamic()
 
   // Get data
   playback_time -= vtime_t(length / 2) / spk.sample_rate;
-  proc->get_output_cache(playback_time, buf, length, &out_size);
+  proc->get_output_cache(CH_NONE, playback_time, buf, length, &out_size);
   if (out_size < length)
     for (ch = 0; ch < spk.nch(); ch++)
-      memset(buf[ch] + out_size, 0, (length - out_size) * sizeof(sample_t));
-
-  // Sum channels
-  for (ch = 1; ch < spk.nch(); ch++)
-    for (i = 0; i < length; i++)
-      data[i] += buf[ch][i];
+      memset(buf + out_size, 0, (length - out_size) * sizeof(sample_t));
 
   // Normalization and windowing
   double norm = 1.0 / (spk.level * length / 2);
   for (i = 0; i < length; i++)
-    data[i] *= win[i] * norm;
+    buf[i] *= win[i] * norm;
 
   // FFT and amplitude
-  fft.rdft(data);
+  fft.rdft(buf);
   for (i = 0; i < length / 2; i++)
-    data[i] = sqrt(data[i*2]*data[i*2] + data[i*2+1]*data[i*2+1]);
+    buf[i] = sqrt(buf[i*2]*buf[i*2] + buf[i*2+1]*buf[i*2+1]);
 
   if (log_scale)
-    spectrum.draw_log(data, length/2, double(spk.sample_rate)/length);
+    spectrum.draw_log(buf, length/2, double(spk.sample_rate)/length);
   else
-    spectrum.draw_lin(data, length/2, double(spk.sample_rate)/length);
+    spectrum.draw_lin(buf, length/2, double(spk.sample_rate)/length);
 }
 
 ControlSpectrum::cmd_result ControlSpectrum::command(int control, int message)

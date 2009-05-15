@@ -18,7 +18,7 @@ protected:
   IAudioProcessor *proc;
 
   FFT fft;
-  SampleBuf buf;
+  Samples buf;
   Samples win;
 
   SpectrumCtrl spectrum;

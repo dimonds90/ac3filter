@@ -714,28 +714,28 @@ STDMETHODIMP COMDecoder::set_output_cache_size(vtime_t size)
 
 STDMETHODIMP COMDecoder::get_input_cache_time(vtime_t *time)
 {
-  if (time) *time = dvd.proc.get_input_time();
+  if (time) *time = dvd.proc.get_input_cache_time();
   return S_OK;
 }
 
 STDMETHODIMP COMDecoder::get_output_cache_time(vtime_t *time)
 {
-  if (time) *time = dvd.proc.get_output_time();
+  if (time) *time = dvd.proc.get_output_cache_time();
   return S_OK;
 }
 
-STDMETHODIMP COMDecoder::get_input_cache(vtime_t time, samples_t buf, size_t size, size_t *out_size)
+STDMETHODIMP COMDecoder::get_input_cache(int ch_name, vtime_t time, sample_t *buf, size_t size, size_t *out_size)
 {
   AutoLock config_lock(&config);
-  size_t result = dvd.proc.get_input_cache(time, buf, size);
+  size_t result = dvd.proc.get_input_cache(ch_name, time, buf, size);
   if (out_size) *out_size = result;
   return S_OK;
 }
 
-STDMETHODIMP COMDecoder::get_output_cache(vtime_t time, samples_t buf, size_t size, size_t *out_size)
+STDMETHODIMP COMDecoder::get_output_cache(int ch_name, vtime_t time, sample_t *buf, size_t size, size_t *out_size)
 {
   AutoLock config_lock(&config);
-  size_t result = dvd.proc.get_output_cache(time, buf, size);
+  size_t result = dvd.proc.get_output_cache(ch_name, time, buf, size);
   if (out_size) *out_size = result;
   return S_OK;
 }
