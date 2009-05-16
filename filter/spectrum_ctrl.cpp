@@ -92,7 +92,7 @@ SpectrumCtrl::on_unlink()
 void
 SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz, const char *title)
 {
-  if (!hwnd || !spectrum || !length)
+  if (!hwnd)
     return;
 
   char label[32];
@@ -185,18 +185,21 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz, const c
   /////////////////////////////////////////////////////////
   // Spectrum
 
-  old_pen = (HPEN)SelectObject(mem_dc, signal_pen);
-
-  db = spectrum[1] > 0? value2db(spectrum[1]): min_db;
-  MoveToEx(mem_dc, 0, db2y(db), 0);
-  for (size_t i = 2; i < length; i++)
+  if (spectrum && length)
   {
-    x = hz2x_lin(i * bin2hz);
-    y = db2y(spectrum[i] > 0? value2db(spectrum[i]): min_db);
-    LineTo(mem_dc, x, y);
-  }
+    old_pen = (HPEN)SelectObject(mem_dc, signal_pen);
 
-  SelectObject(mem_dc, old_pen);
+    db = spectrum[1] > 0? value2db(spectrum[1]): min_db;
+    MoveToEx(mem_dc, 0, db2y(db), 0);
+    for (size_t i = 2; i < length; i++)
+    {
+      x = hz2x_lin(i * bin2hz);
+      y = db2y(spectrum[i] > 0? value2db(spectrum[i]): min_db);
+      LineTo(mem_dc, x, y);
+    }
+
+    SelectObject(mem_dc, old_pen);
+  }
 
   /////////////////////////////////////////////////////////
   // Show the result
@@ -209,7 +212,7 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz, const c
 void
 SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz, const char *title)
 {
-  if (!hwnd || !spectrum || !length)
+  if (!hwnd)
     return;
 
   char label[32];
@@ -309,18 +312,21 @@ SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz, const c
   /////////////////////////////////////////////////////////
   // Spectrum
 
-  old_pen = (HPEN)SelectObject(mem_dc, signal_pen);
-
-  db = spectrum[1] > 0? value2db(spectrum[1]): min_db;
-  MoveToEx(mem_dc, hz2x_log(1 * bin2hz), db2y(db), 0);
-  for (size_t i = 2; i < length; i++)
+  if (spectrum && length)
   {
-    x = hz2x_log(i * bin2hz);
-    y = db2y(spectrum[i] > 0? value2db(spectrum[i]): min_db);
-    LineTo(mem_dc, x, y);
-  }
+    old_pen = (HPEN)SelectObject(mem_dc, signal_pen);
 
-  SelectObject(mem_dc, old_pen);
+    db = spectrum[1] > 0? value2db(spectrum[1]): min_db;
+    MoveToEx(mem_dc, hz2x_log(1 * bin2hz), db2y(db), 0);
+    for (size_t i = 2; i < length; i++)
+    {
+      x = hz2x_log(i * bin2hz);
+      y = db2y(spectrum[i] > 0? value2db(spectrum[i]): min_db);
+      LineTo(mem_dc, x, y);
+    }
+
+    SelectObject(mem_dc, old_pen);
+  }
 
   /////////////////////////////////////////////////////////
   // Show the result

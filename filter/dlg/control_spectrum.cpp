@@ -109,8 +109,15 @@ void ControlSpectrum::update_dynamic()
   if (spk != new_spk)
     init_spectrum(length);
 
-  // Show nothing when uninitialized
-  if (!is_ok()) return;
+  // Show "no data" when uninitialized
+  if (!is_ok())
+  {
+    if (log_scale)
+      spectrum.draw_log(0, 0, 0, _("Spectrum: no data"));
+    else
+      spectrum.draw_lin(0, 0, 0, _("Spectrum: no data"));
+    return;
+  }
 
   // Automatically adjust cache size
   vtime_t playback_time, cache_time, cache_size, lag_time;
