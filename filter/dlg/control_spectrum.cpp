@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "dsp/kaiser.h"
 #include "../resource_ids.h"
+#include "../ac3filter_intl.h"
 #include "control_spectrum.h"
 
 inline unsigned int clp2(unsigned int x)
@@ -31,6 +32,17 @@ static const unsigned lin_window_length = 1024;
 static const unsigned log_window_length = 4096;
 static const int sample_rate = 48000;
 static const vtime_t max_lag_time = 5.0;
+
+static const char *ch_text[NCHANNELS] =
+{
+  N_("Left"),
+  N_("Center"),
+  N_("Right"),
+  N_("Surround Left"),
+  N_("Surround Right"),
+  N_("Subwoofer")
+};
+
 
 ControlSpectrum::ControlSpectrum(HWND _dlg, IAC3Filter *_filter, IAudioProcessor *_proc):
 Controller(_dlg, ::controls), filter(_filter), proc(_proc), length(0)
@@ -88,7 +100,6 @@ void ControlSpectrum::update()
 
 void ControlSpectrum::update_dynamic()
 {
-  int ch;
   unsigned i;
   size_t out_size;
   Speakers new_spk;
@@ -114,11 +125,12 @@ void ControlSpectrum::update_dynamic()
     proc->set_output_cache_size(lag_time + 1.0);
 
   // Get data
+  int eq_ch = CH_NONE;
+  proc->get_eq_channel(&eq_ch);
   playback_time -= vtime_t(length / 2) / spk.sample_rate;
-  proc->get_output_cache(CH_NONE, playback_time, buf, length, &out_size);
+  proc->get_output_cache(eq_ch, playback_time, buf, length, &out_size);
   if (out_size < length)
-    for (ch = 0; ch < spk.nch(); ch++)
-      memset(buf + out_size, 0, (length - out_size) * sizeof(sample_t));
+    memset(buf + out_size, 0, (length - out_size) * sizeof(sample_t));
 
   // Normalization and windowing
   double norm = 1.0 / (spk.level * length / 2);
@@ -130,10 +142,15 @@ void ControlSpectrum::update_dynamic()
   for (i = 0; i < length / 2; i++)
     buf[i] = sqrt(buf[i*2]*buf[i*2] + buf[i*2+1]*buf[i*2+1]);
 
+  // Label
+  char label[256];
+  sprintf(label, _("Spectrum: %s"), 
+    eq_ch >= 0 && eq_ch < NCHANNELS? gettext_wrapper(ch_text[eq_ch]): _("All channels"));
+
   if (log_scale)
-    spectrum.draw_log(buf, length/2, double(spk.sample_rate)/length);
+    spectrum.draw_log(buf, length/2, double(spk.sample_rate)/length, label);
   else
-    spectrum.draw_lin(buf, length/2, double(spk.sample_rate)/length);
+    spectrum.draw_lin(buf, length/2, double(spk.sample_rate)/length, label);
 }
 
 ControlSpectrum::cmd_result ControlSpectrum::command(int control, int message)

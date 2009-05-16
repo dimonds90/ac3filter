@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+#include "ac3filter_intl.h"
 #include "spectrum_ctrl.h"
 
 static const DWORD bkg_color = RGB(0, 0, 0);
@@ -8,8 +9,11 @@ static const DWORD minor_color = RGB(32, 32, 32);
 static const DWORD major_color = RGB(64, 64, 64);
 static const DWORD label_color = RGB(128, 128, 0);
 
-static const int font_size = 12;
-static const char *font_name = "Arial";
+static const int grid_font_size = 12;
+static const char *grid_font_name = "Arial";
+
+static const int title_font_size = 16;
+static const char *title_font_name = "Arial";
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -65,7 +69,8 @@ SpectrumCtrl::on_link()
   signal_pen = CreatePen(PS_SOLID, 1, signal_color);
   minor_pen = CreatePen(PS_SOLID, 1, minor_color);
   major_pen = CreatePen(PS_SOLID, 1, major_color);
-  grid_font = CreateFont(font_size, 0, 0, 0, FW_THIN, FALSE, FALSE, FALSE, OEM_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, font_name);
+  grid_font = CreateFont(grid_font_size, 0, 0, 0, FW_THIN, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, grid_font_name);
+  title_font = CreateFont(title_font_size, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, VARIABLE_PITCH, title_font_name);
 }
 
 void
@@ -77,6 +82,7 @@ SpectrumCtrl::on_unlink()
   DeleteObject(minor_pen);
   DeleteObject(major_pen);
   DeleteObject(grid_font);
+  DeleteObject(title_font);
   SelectObject(mem_dc, old_bitmap);
   DeleteObject(mem_bitmap);
   DeleteDC(mem_dc);
@@ -84,7 +90,7 @@ SpectrumCtrl::on_unlink()
 
 
 void
-SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
+SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz, const char *title)
 {
   if (!hwnd || !spectrum || !length)
     return;
@@ -149,13 +155,20 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
   SetTextColor(mem_dc, label_color);
   SetBkColor(mem_dc, bkg_color);
   SetBkMode(mem_dc, OPAQUE);
-  old_font = (HFONT)SelectObject(mem_dc, grid_font);
 
+  old_font = (HFONT)SelectObject(mem_dc, title_font);
+  SetTextAlign(mem_dc, TA_TOP | TA_LEFT);
+
+  if (title)
+    TextOut(mem_dc, 10, 12, title, strlen(title));
+
+  SelectObject(mem_dc, grid_font);
   SetTextAlign(mem_dc, TA_TOP | TA_CENTER);
+
   for (hz = int(min_hz / major_hz + 1) * major_hz; hz < max_hz; hz += major_hz)
   {
     x = hz2x_lin(hz);
-    sprintf(label, "%ikHz", int(hz / 1000));
+    sprintf(label, "%i%s", int(hz / 1000), _("kHz"));
     TextOut(mem_dc, x, 0, label, (int)strlen(label));
   }
 
@@ -163,7 +176,7 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
   for (db = int(min_db / major_db) * major_db; db < max_db; db += major_db)
   {
     y = db2y(db);
-    sprintf(label, "%+idB", int(db));
+    sprintf(label, "%+i%s", int(db), _("dB"));
     TextOut(mem_dc, width, y, label, (int)strlen(label));
   }
 
@@ -194,7 +207,7 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz)
 }
 
 void
-SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz)
+SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz, const char *title)
 {
   if (!hwnd || !spectrum || !length)
     return;
@@ -263,16 +276,23 @@ SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz)
   SetTextColor(mem_dc, label_color);
   SetBkColor(mem_dc, bkg_color);
   SetBkMode(mem_dc, OPAQUE);
-  old_font = (HFONT)SelectObject(mem_dc, grid_font);
 
+  old_font = (HFONT)SelectObject(mem_dc, title_font);
+  SetTextAlign(mem_dc, TA_TOP | TA_LEFT);
+
+  if (title)
+    TextOut(mem_dc, 10, 12, title, strlen(title));
+
+  SelectObject(mem_dc, grid_font);
   SetTextAlign(mem_dc, TA_TOP | TA_CENTER);
+
   for (hz = minor_hz_start; hz < max_hz; hz *= minor_hz_lines)
   {
     x = hz2x_log(hz);
     if (hz >= 1000)
-      sprintf(label, "%ikHz", int(hz / 1000));
+      sprintf(label, "%i%s", int(hz / 1000), _("kHz"));
     else
-      sprintf(label, "%iHz", int(hz));
+      sprintf(label, "%i%s", int(hz), _("Hz"));
     TextOut(mem_dc, x, 0, label, (int)strlen(label));
   }
 
@@ -280,7 +300,7 @@ SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz)
   for (db = int(min_db / major_db) * major_db; db < max_db; db += major_db)
   {
     y = db2y(db);
-    sprintf(label, "%+idB", int(db));
+    sprintf(label, "%+i%s", int(db), _("dB"));
     TextOut(mem_dc, width, y, label, (int)strlen(label));
   }
 

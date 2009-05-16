@@ -26,6 +26,7 @@ protected:
   HPEN   major_pen;
 
   HFONT  grid_font;
+  HFONT  title_font;
 
   inline int db2y(double db);
   inline int hz2x_lin(double hz);
@@ -39,8 +40,8 @@ public:
   SpectrumCtrl();
 
   void set_range(double min_db, double max_db, double min_hz, double max_hz);
-  void draw_lin(sample_t *spectrum, size_t length, double bin2hz);
-  void draw_log(sample_t *spectrum, size_t length, double bin2hz);
+  void draw_lin(sample_t *spectrum, size_t length, double bin2hz, const char *title = 0);
+  void draw_log(sample_t *spectrum, size_t length, double bin2hz, const char *title = 0);
 };
 
 #endif
