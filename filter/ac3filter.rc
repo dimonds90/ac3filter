@@ -531,19 +531,19 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,341,192,50,14
 END
 
-IDD_EQ_SAVE DIALOGEX 0, 0, 157, 119
+IDD_EQ_SAVE DIALOGEX 0, 0, 188, 119
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Save"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,26,98,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,81,98,50,14
+    DEFPUSHBUTTON   "OK",IDOK,41,98,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,96,98,50,14
     CONTROL         "Save current channel only, so you can apply this preset to any channel.",IDC_RBT_EQ_CUR,
-                    "Button",BS_AUTORADIOBUTTON | BS_MULTILINE,7,7,143,24
+                    "Button",BS_AUTORADIOBUTTON | BS_MULTILINE,7,7,174,24
     CONTROL         "Save all channels (except Master), so you can restore multichannel setup later.",IDC_RBT_EQ_MCH,
-                    "Button",BS_AUTORADIOBUTTON | BS_MULTILINE,7,36,143,24
+                    "Button",BS_AUTORADIOBUTTON | BS_MULTILINE,7,36,174,24
     CONTROL         "Save all (multichannel and master equalizers).",IDC_RBT_EQ_ALL,
-                    "Button",BS_AUTORADIOBUTTON | BS_MULTILINE,7,65,143,24
+                    "Button",BS_AUTORADIOBUTTON | BS_MULTILINE,7,65,174,24
 END
 
 
@@ -636,7 +636,7 @@ BEGIN
     IDD_EQ_SAVE, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 150
+        RIGHTMARGIN, 181
         TOPMARGIN, 7
         BOTTOMMARGIN, 112
     END
