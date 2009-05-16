@@ -95,6 +95,7 @@ void ControlEq::init()
   eq_ch = CH_NONE;
   proc->get_eq_channel(&eq_ch);
 
+  SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_RESETCONTENT, 0, 0);
   for (int i = 0; i < array_size(ch_text); i++)
   {
     LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)gettext_wrapper(ch_text[i]));
