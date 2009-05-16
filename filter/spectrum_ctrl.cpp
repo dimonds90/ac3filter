@@ -160,7 +160,7 @@ SpectrumCtrl::draw_lin(sample_t *spectrum, size_t length, double bin2hz, const c
   SetTextAlign(mem_dc, TA_TOP | TA_LEFT);
 
   if (title)
-    TextOut(mem_dc, 10, 12, title, strlen(title));
+    TextOut(mem_dc, 10, 12, title, (int)strlen(title));
 
   SelectObject(mem_dc, grid_font);
   SetTextAlign(mem_dc, TA_TOP | TA_CENTER);
@@ -284,7 +284,7 @@ SpectrumCtrl::draw_log(sample_t *spectrum, size_t length, double bin2hz, const c
   SetTextAlign(mem_dc, TA_TOP | TA_LEFT);
 
   if (title)
-    TextOut(mem_dc, 10, 12, title, strlen(title));
+    TextOut(mem_dc, 10, 12, title, (int)strlen(title));
 
   SelectObject(mem_dc, grid_font);
   SetTextAlign(mem_dc, TA_TOP | TA_CENTER);
