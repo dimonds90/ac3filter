@@ -173,6 +173,14 @@ SOURCE=.\rot.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\save_eq.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\save_eq.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\tray.cpp
 # End Source File
 # Begin Source File
