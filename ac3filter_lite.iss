@@ -1,6 +1,7 @@
 [Setup]
-AppName=AC3Filter Lite
 AppID=AC3Filter
+AppVersion={#appver}
+AppName=AC3Filter Lite
 AppVerName=AC3Filter {#appver}
 AppPublisher=Alexander Vigovsky
 AppPublisherURL=http://ac3filter.net
@@ -37,9 +38,9 @@ Name: "prog";          Description: "Program files:"; Types: full compact
 Name: "prog\filter32"; Description: "AC3Filter (32bit)"; Types: full compact
 
 [Files]
-Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete
-Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete
-Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete
+Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
+Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 
 Source: "reg\*.reg";   DestDir: "{app}"
 Source: "Readme.txt";  DestDir: "{app}"
