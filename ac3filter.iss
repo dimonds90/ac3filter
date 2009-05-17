@@ -76,12 +76,6 @@ Source: "Changes.txt"; DestDir: "{app}"
 Source: "GPL.txt";     DestDir: "{app}"
 
 [Icons]
-Name: "{group}\AC3Filter home"; Filename: "http://ac3filter.net"
-Name: "{group}\AC3Config"; Filename: "{app}\ac3config.exe"; Components: prog\filter32
-Name: "{group}\AC3Config"; Filename: "{app}\x64\ac3config.exe"; Components: prog\filter64 and not prog\filter32
-Name: "{group}\SPDIF test (32bit)"; Filename: "{app}\spdif_test.exe"; Components: prog\filter32
-Name: "{group}\SPDIF test (64bit)"; Filename: "{app}\x64\spdif_test.exe"; Components: prog\filter64
-
 Name: "{group}\Documentation (eng)\AC3Filter User's Manual"; Filename: "{app}\doc\ac3filter_eng.pdf"; Components: doc\eng
 Name: "{group}\Documentation (eng)\AC3Filter & SPDIF"; Filename: "{app}\doc\spdif_eng.pdf"; Components: doc\eng
 Name: "{group}\Documentation (eng)\Loudness and dynamic range"; Filename: "{app}\doc\loudness_eng.pdf"; Components: doc\eng
@@ -90,9 +84,15 @@ Name: "{group}\Documentation (rus)\AC3Filter - Руководство пользователя"; Filena
 Name: "{group}\Documentation (rus)\AC3Filter & SPDIF"; Filename: "{app}\doc\spdif_rud.pdf"; Components: doc\rus
 Name: "{group}\Documentation (rus)\Громкость и динамический диапазон"; Filename: "{app}\doc\loudness_rus.pdf"; Components: doc\rus
 
-Name: "{group}\Reset to defaults"; Filename: "{app}\Reset to defaults.reg"
-Name: "{group}\Default presets"; Filename: "{app}\Presets.reg"
+Name: "{group}\AC3Filter home"; Filename: "http://ac3filter.net"
+Name: "{group}\AC3Filter Config"; Filename: "{app}\ac3config.exe"; Components: prog\filter32
+Name: "{group}\AC3Filter Config"; Filename: "{app}\x64\ac3config.exe"; Components: prog\filter64 and not prog\filter32
+Name: "{group}\SPDIF test (32bit)"; Filename: "{app}\spdif_test.exe"; Components: prog\filter32
+Name: "{group}\SPDIF test (64bit)"; Filename: "{app}\x64\spdif_test.exe"; Components: prog\filter64
+
 Name: "{group}\Readme"; Filename: "{app}\Readme.txt"
+Name: "{group}\Reset to defaults"; Filename: "{app}\Reset to defaults.reg"
+Name: "{group}\Restore default presets"; Filename: "{app}\Presets.reg"
 Name: "{group}\Uninstall AC3Filter"; Filename: "{uninstallexe}"
 
 [Registry]

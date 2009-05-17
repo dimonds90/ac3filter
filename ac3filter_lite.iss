@@ -54,12 +54,12 @@ Source: "GPL.txt";     DestDir: "{app}"
 
 [Icons]
 Name: "{group}\AC3Filter home"; Filename: "http://ac3filter.net"
-Name: "{group}\AC3Config"; Filename: "{app}\ac3config.exe"; Components: prog\filter32
+Name: "{group}\AC3Filter Config"; Filename: "{app}\ac3config.exe"; Components: prog\filter32
 Name: "{group}\SPDIF test (32bit)"; Filename: "{app}\spdif_test.exe"; Components: prog\filter32
 
-Name: "{group}\Reset to defaults"; Filename: "{app}\Reset to defaults.reg"
-Name: "{group}\Default presets"; Filename: "{app}\Presets.reg"
 Name: "{group}\Readme"; Filename: "{app}\Readme.txt"
+Name: "{group}\Reset to defaults"; Filename: "{app}\Reset to defaults.reg"
+Name: "{group}\Restore default presets"; Filename: "{app}\Presets.reg"
 Name: "{group}\Uninstall AC3Filter"; Filename: "{uninstallexe}"
 
 [Registry]
