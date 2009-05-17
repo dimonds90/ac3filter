@@ -14,6 +14,12 @@ call clean.cmd
 cd ../ac3filter2
 call clean.cmd
 
+del ..\ac3filter.exe
+del ..\ac3filter_lite.exe
+del ..\ac3filter_%ver_file%.exe
+del ..\ac3filter_%ver_file%_lite.exe
+del ..\ac3filter_%ver_file%_src.zip
+
 set src_arc="ac3filter_%ver_file%_src.zip"
 set src_files=ac3filter2\*.* valib\*.*
 
@@ -89,18 +95,13 @@ call vars.cmd
 if "%inno_setup%" == "" set inno_setup=iscc.exe
 if not exist "%inno_setup%" goto err_iss
 
-del ..\ac3filter.exe
-del ..\ac3filter_%ver_file%.exe
-del ..\ac3filter_lite.exe
-del ..\ac3filter_lite_%ver_file%.exe
-
 "%inno_setup%" /o".." /f"%out_file%" ac3filter.iss
 if errorlevel 1 goto fail
 ren ..\ac3filter.exe ac3filter_%ver_file%.exe
 
 "%inno_setup%" /o".." /f"%out_file%" ac3filter_lite.iss
 if errorlevel 1 goto fail
-ren ..\ac3filter_lite.exe ac3filter_lite_%ver_file%.exe
+ren ..\ac3filter_lite.exe ac3filter_%ver_file%_lite.exe
 
 rem -------------------------------------------------------
 rem All OK
