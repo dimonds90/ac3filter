@@ -1,3 +1,7 @@
+#ifndef appver
+#define appver "test"
+#endif
+
 [Setup]
 AppID=AC3Filter
 AppVersion={#appver}
@@ -10,6 +14,7 @@ DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
 SolidCompression=yes
 LanguageDetectionMethod=locale
+MinVersion=0, 4.0
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"

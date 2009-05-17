@@ -1,3 +1,7 @@
+#ifndef appver
+#define appver "test"
+#endif
+
 [Setup]
 AppID=AC3Filter
 AppVersion={#appver}
