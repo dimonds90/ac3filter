@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.45b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-13 16:55+0400\n"
+"POT-Creation-Date: 2009-05-16 22:11+0400\n"
 "PO-Revision-Date: 2007-06-08 20:33+0800\n"
 "Last-Translator: FSYX <fsyx@qq.com>\n"
 "Language-Team: ChongQing Mobile\n"
@@ -44,6 +44,15 @@ msgstr "系统"
 #. TRANSLATORS: About
 msgid "IDD_ABOUT"
 msgstr "关于"
+
+msgid "kHz"
+msgstr ""
+
+msgid "dB"
+msgstr ""
+
+msgid "Hz"
+msgstr ""
 
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
@@ -755,6 +764,16 @@ msgstr ""
 
 msgid "Dangerous option!"
 msgstr "存在风险!"
+
+msgid "Spectrum: no data"
+msgstr ""
+
+#, c-format
+msgid "Spectrum: %s"
+msgstr ""
+
+msgid "All channels"
+msgstr ""
 
 msgid "AS IS (no change)"
 msgstr "AS IS (无转换)"

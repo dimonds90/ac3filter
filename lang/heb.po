@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-13 16:55+0400\n"
+"POT-Creation-Date: 2009-05-16 22:11+0400\n"
 "PO-Revision-Date: 2007-09-14 18:31+0200\n"
 "Last-Translator: PhistucK UnRuleD <sorrybi@hotmail.com>\n"
 "Language-Team: Hebrew <LL@li.org>\n"
@@ -42,6 +42,15 @@ msgstr "מערכת"
 #. TRANSLATORS: About
 msgid "IDD_ABOUT"
 msgstr "אודות"
+
+msgid "kHz"
+msgstr ""
+
+msgid "dB"
+msgstr ""
+
+msgid "Hz"
+msgstr ""
 
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
@@ -744,6 +753,16 @@ msgstr "האפשרות הזו מסוכנת! המסנן אולי יגרום לרעש מאד רועש כשהאפשרות הזומאושרת. 
 
 msgid "Dangerous option!"
 msgstr "אפשרות מסוכנת!"
+
+msgid "Spectrum: no data"
+msgstr ""
+
+#, c-format
+msgid "Spectrum: %s"
+msgstr ""
+
+msgid "All channels"
+msgstr ""
 
 msgid "AS IS (no change)"
 msgstr "כמו שהוא (ללא שינוי)"

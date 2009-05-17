@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.51a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-13 16:55+0400\n"
+"POT-Creation-Date: 2009-05-16 22:11+0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Valex <xvalex.ru>\n"
 "Language-Team: \n"
@@ -39,6 +39,15 @@ msgstr "Σύστημα"
 #. TRANSLATORS: About
 msgid "IDD_ABOUT"
 msgstr "Σχετικά"
+
+msgid "kHz"
+msgstr ""
+
+msgid "dB"
+msgstr ""
+
+msgid "Hz"
+msgstr ""
 
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
@@ -755,6 +764,16 @@ msgstr ""
 
 msgid "Dangerous option!"
 msgstr "Επικίνδυνη επιλογή!"
+
+msgid "Spectrum: no data"
+msgstr ""
+
+#, c-format
+msgid "Spectrum: %s"
+msgstr ""
+
+msgid "All channels"
+msgstr ""
 
 msgid "AS IS (no change)"
 msgstr "Όπως είναι (καμία αλλαγή)"
