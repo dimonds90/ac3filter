@@ -1,7 +1,7 @@
 #ifndef AC3FILTER_ACM_DBGLOG_H
 #define AC3FILTER_ACM_DBGLOG_H
 
-#if 1
+#if _DEBUG
 
 #include "windows.h"
 
