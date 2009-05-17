@@ -65,6 +65,8 @@ Name: "{group}\Uninstall AC3Filter"; Filename: "{uninstallexe}"
 [Registry]
 Root: HKCU; Subkey: "Software\AC3Filter"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Install_Dir"; ValueData: "{app}"
+Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "tray"; ValueData: 1
+Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "refresh_time"; ValueData: 50
 
 [Run]
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
