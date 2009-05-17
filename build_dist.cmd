@@ -14,8 +14,6 @@ call clean.cmd
 cd ../ac3filter2
 call clean.cmd
 
-del ..\ac3filter.exe
-del ..\ac3filter_lite.exe
 del ..\ac3filter_%ver_file%.exe
 del ..\ac3filter_%ver_file%_lite.exe
 del ..\ac3filter_%ver_file%_src.zip
@@ -95,13 +93,11 @@ call vars.cmd
 if "%inno_setup%" == "" set inno_setup=iscc.exe
 if not exist "%inno_setup%" goto err_iss
 
-"%inno_setup%" /o".." /f"%out_file%" ac3filter.iss
+"%inno_setup%" /Dappver="%ver_text%" /o".." /f"ac3filter_%ver_file%" ac3filter.iss
 if errorlevel 1 goto fail
-ren ..\ac3filter.exe ac3filter_%ver_file%.exe
 
-"%inno_setup%" /o".." /f"%out_file%" ac3filter_lite.iss
+"%inno_setup%" /Dappver="%ver_text%" /o".." /f"ac3filter_%ver_file%_lite" ac3filter_lite.iss
 if errorlevel 1 goto fail
-ren ..\ac3filter_lite.exe ac3filter_%ver_file%_lite.exe
 
 rem -------------------------------------------------------
 rem All OK

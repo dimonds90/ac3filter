@@ -14,7 +14,6 @@ call clean.cmd
 cd ../ac3filter2
 call clean.cmd
 
-del ..\ac3filter_win9x.exe
 del ..\ac3filter_%ver_file%_win9x.exe
 
 rem -------------------------------------------------------
@@ -81,9 +80,8 @@ call vars.cmd
 if "%inno_setup%" == "" set inno_setup=iscc.exe
 if not exist "%inno_setup%" goto err_iss
 
-"%inno_setup%" /o".." /f"%out_file%" ac3filter_win9x.iss
+"%inno_setup%" /Dappver="%ver_text%" /o".." /f"ac3filter_%ver_file%_win9x" ac3filter_win9x.iss
 if errorlevel 1 goto fail
-ren ..\ac3filter_win9x.exe ac3filter_%ver_file%_win9x.exe
 
 rem -------------------------------------------------------
 rem All OK

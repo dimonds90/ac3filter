@@ -1,7 +1,7 @@
 [Setup]
-AppName=AC3Filter
+AppName=AC3Filter for Win9x
 AppID=AC3Filter
-AppVerName=AC3Filter
+AppVerName=AC3Filter {#appver}
 AppPublisher=Alexander Vigovsky
 AppPublisherURL=http://ac3filter.net
 AppCopyright=Copyright (c) 2002-2009 by Alexander Vigovsky
@@ -9,8 +9,6 @@ DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
 SolidCompression=yes
 LanguageDetectionMethod=locale
-OutputDir=..
-OutputBaseFileName=ac3filter_win9x
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
