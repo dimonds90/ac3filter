@@ -1,4 +1,8 @@
-v1.60a
+v1.61b
+  * Clear filter cache on install
+
+
+v1.60b - 17.05.2009
   + 64bit filter
   + Lite filter version
   + Multichannel equalizer
