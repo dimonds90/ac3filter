@@ -58,17 +58,23 @@ Name: "{group}\AC3Filter Config"; Filename: "{app}\ac3config.exe"; Components: p
 Name: "{group}\SPDIF test (32bit)"; Filename: "{app}\spdif_test.exe"; Components: prog\filter32
 
 Name: "{group}\Readme"; Filename: "{app}\Readme.txt"
+Name: "{group}\License"; Filename: "{app}\GPL.txt"
 Name: "{group}\Reset to defaults"; Filename: "{app}\Reset to defaults.reg"
 Name: "{group}\Restore default presets"; Filename: "{app}\Presets.reg"
+Name: "{group}\Clear filter cache"; Filename: "{app}\Clear filter cache.reg"
 Name: "{group}\Uninstall AC3Filter"; Filename: "{uninstallexe}"
 
 [Registry]
+
+; AC3Filter registry parameters
 Root: HKCU; Subkey: "Software\AC3Filter"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Install_Dir"; ValueData: "{app}"
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "tray"; ValueData: 1
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "refresh_time"; ValueData: 50
 
+; Clear DirectShow filter cache on install and ununstall
+Root: HKCU; Subkey: "Software\Microsoft\Multimedia\ActiveMovie\Filter Cache"; Flags: deletekey uninsdeletekey noerror
+
 [Run]
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg""";
-
