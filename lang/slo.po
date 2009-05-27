@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.50a\n"
+"Project-Id-Version: AC3Filter 1.60b\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-16 22:11+0400\n"
-"PO-Revision-Date: 2009-05-13 16:54+0300\n"
-"Last-Translator: Valex <xvalex.ru>\n"
+"PO-Revision-Date: 2009-05-20 14:38+0100\n"
+"Last-Translator: Artam <peterki@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -41,17 +41,17 @@ msgid "IDD_ABOUT"
 msgstr "O programe"
 
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 msgid "dB"
-msgstr ""
+msgstr "dB"
 
 msgid "Hz"
-msgstr ""
+msgstr "Hz"
 
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
-msgstr ""
+msgstr "Zrušiť"
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -63,27 +63,27 @@ msgstr "Logaritm. stupnica"
 
 #. TRANSLATORS: Frequency (Hz)
 msgid "IDC_LBL_EQ_FREQ"
-msgstr ""
+msgstr "Frekvencia (Hz)"
 
 #. TRANSLATORS: Gain (dB)
 msgid "IDC_LBL_EQ_GAIN"
-msgstr ""
+msgstr "Zisk (dB)"
 
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
-msgstr ""
+msgstr "Filter (dĺžka):"
 
 #. TRANSLATORS: Save all (multichannel and master equalizers).
 msgid "IDC_RBT_EQ_ALL"
-msgstr ""
+msgstr "Uložiť všetko (viackanálový aj master ekvalizér)."
 
 #. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
 msgid "IDC_RBT_EQ_CUR"
-msgstr ""
+msgstr "Uložiť nastavenie len aktuálneho kanálu, potom toto nastavenie môžete použiť na iný kanál."
 
 #. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
 msgid "IDC_RBT_EQ_MCH"
-msgstr ""
+msgstr "Uložiť nastavenie všetkých kanálov (okrem Master), aby ste mohli neskôr znovu obnoviť viackanálové nastavenie."
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
 msgid "IDC_VER"
@@ -91,7 +91,7 @@ msgstr "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky"
 
 #. TRANSLATORS: OK
 msgid "IDOK"
-msgstr ""
+msgstr "OK"
 
 #. TRANSLATORS: What is it?
 msgid "IDC_GRP_ABOUT"
@@ -99,17 +99,11 @@ msgstr "Čo je to?"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr ""
-"AC3Filter je DirectShow filter vysokej kvality pre dekódovanie a spracovanie "
-"zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita a "
-"jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
+msgstr "AC3Filter je DirectShow filter vysokej kvality pre dekódovanie a spracovanie zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita a jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr ""
-"Väčšina multimediálnych prehrávačov ho používa automaticky. Je nevyhnutný na "
-"prehrávanie AVI súborov s AC3 alebo DTS zvukovými stopami. Môže sa tiež "
-"použiť na prehrávanie DVD."
+msgstr "Väčšina multimediálnych prehrávačov ho používa automaticky. Je nevyhnutný na prehrávanie AVI súborov s AC3 alebo DTS zvukovými stopami. Môže sa tiež použiť na prehrávanie DVD."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -125,10 +119,7 @@ msgstr "Kontakt na autora"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
-msgstr ""
-"Prosím, dajte vedieť o všetkých nájdených chybách. Kedykoľvek zašlite "
-"autorovi vaše nápady, kritiku atď. Píšte len po anglicky a po rusky. Subjekt "
-"by mal obsahovať slovo 'AC3Filter' (kvôli automatickému filtrovaniu)."
+msgstr "Prosím, dajte vedieť o všetkých nájdených chybách. Kedykoľvek zašlite autorovi vaše nápady, kritiku atď. Píšte len po anglicky a po rusky. Subjekt by mal obsahovať slovo 'AC3Filter' (kvôli automatickému filtrovaniu)."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
@@ -268,15 +259,15 @@ msgstr "Možnosti ekvalizéra"
 
 #. TRANSLATORS: Custom
 msgid "IDC_BTN_EQ_CUSTOM"
-msgstr ""
+msgstr "Vlastné"
 
 #. TRANSLATORS: Reset
 msgid "IDC_BTN_EQ_RESET"
-msgstr ""
+msgstr "Reset"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_EQ"
-msgstr ""
+msgstr "Zapnúť"
 
 #. TRANSLATORS: Equalizer preset
 msgid "IDC_GRP_EQ_PRESET"
@@ -404,9 +395,7 @@ msgstr "Licencia"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
-msgstr ""
-"Tento program je slobodný (free) software a môže byť šírený v súlade s "
-"podmienkami GNU General Public License version 2."
+msgstr "Tento program je slobodný (free) software a môže byť šírený v súlade s podmienkami GNU General Public License version 2."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
@@ -711,25 +700,25 @@ msgid "Inches"
 msgstr "Palce"
 
 msgid "Master"
-msgstr ""
+msgstr "Master"
 
 msgid "Left"
-msgstr ""
+msgstr "Ľavý"
 
 msgid "Center"
-msgstr ""
+msgstr "Center"
 
 msgid "Right"
-msgstr ""
+msgstr "Pravý"
 
 msgid "Surround Left"
-msgstr ""
+msgstr "Zadný Ľavý"
 
 msgid "Surround Right"
-msgstr ""
+msgstr "Zadný Pravý"
 
 msgid "Subwoofer"
-msgstr ""
+msgstr "Subwoofer"
 
 #, c-format
 msgid "%ikHz"
@@ -754,25 +743,21 @@ msgstr "Naozaj chcete zmazať '%s' maticu?"
 msgid "Are you sure you want to delete '%s' equalizer preset?"
 msgstr "Naozaj chcete zmazať nastavenie '%s' ekvalizéra?"
 
-msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
-"Táto voľba je NEBEZPEČNÁ! Ak je zapnutá, filter môže vydávať veľmi hlasité "
-"pazvuky. Na zapnutie tejto voľby stlačte 'Nie."
+msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
+msgstr "Táto voľba je NEBEZPEČNÁ! Ak je zapnutá, filter môže vydávať veľmi hlasité pazvuky. Na zapnutie tejto voľby stlačte 'Nie."
 
 msgid "Dangerous option!"
 msgstr "Nebezpečná voľba!"
 
 msgid "Spectrum: no data"
-msgstr ""
+msgstr "Spektrum: žiadne dáta"
 
 #, c-format
 msgid "Spectrum: %s"
-msgstr ""
+msgstr "Spektrum: %s"
 
 msgid "All channels"
-msgstr ""
+msgstr "Všetky kanály"
 
 msgid "AS IS (no change)"
 msgstr "Bez zmeny (ako vstup)"
@@ -864,9 +849,6 @@ msgstr ""
 "Vstup\tmean: %ims\tstddev: %ims\n"
 "Výstup\tmean: %ims\tstddev: %ims"
 
-msgid ""
-"This option is DANGEROUS! Video may go out of sync with this option enabled. "
-"Press 'No' to enable this option."
-msgstr ""
-"Táto voľba je NEBEZPEČNÁ! Ak ju zapnete, zvuk a obraz môžu stratiť "
-"synchronizáciu. Na zapnutie tejto voľby stlačte 'Nie'."
+msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
+msgstr "Táto voľba je NEBEZPEČNÁ! Ak ju zapnete, zvuk a obraz môžu stratiť synchronizáciu. Na zapnutie tejto voľby stlačte 'Nie'."
+
