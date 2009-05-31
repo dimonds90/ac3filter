@@ -1,5 +1,8 @@
-v1.61b
-  * Clear filter cache on install
+v1.61b - 01.06.2009
+  * Clear DirectShow filter cache on install and uninstall
+  ! Fixed: Matrix was not saved
+  ! Fixed: Popping sound when seeking DTS/WAV or AC3/WAV file
+  * Translations updated: Slovak (thanks to Artam), Spanish (thanks to Ferny)
 
 
 v1.60b - 17.05.2009
