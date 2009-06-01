@@ -57,10 +57,10 @@ rem Build projects
 
 set PROJECTS=acm filter intl tools\ac3config tools\spdif_test
 
-call cmd\build_all x86 %PROJECTS%
+call cmd\build_all vc9 x86 %PROJECTS%
 if errorlevel 1 goto fail
 
-call cmd\build_all x64 %PROJECTS%
+call cmd\build_all vc9 x64 %PROJECTS%
 if errorlevel 1 goto fail
 
 rem -------------------------
