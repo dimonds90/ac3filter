@@ -13,7 +13,9 @@ COMDecoder::COMDecoder(IUnknown *_outer, int _nsamples): dvd(_nsamples)
 { 
   outer = _outer; 
   cur_ch = CH_NONE; // Master is the default equalizer channel
-  formats = FORMAT_CLASS_PCM | FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK_PES |  FORMAT_MASK_SPDIF;
+  formats = FORMAT_CLASS_PCM | FORMAT_CLASS_LPCM |
+            FORMAT_MASK_AC3 | FORMAT_MASK_MPA | FORMAT_MASK_DTS |
+            FORMAT_MASK_PES | FORMAT_MASK_SPDIF;
   dvd.proc.set_input_order(win_order);
   dvd.proc.set_output_order(win_order);
 };
@@ -763,37 +765,19 @@ void COMDecoder::load_spk(Config *conf)
   Speakers user_spk = dvd.get_user();
   bool use_spdif = dvd.get_use_spdif();
 
-  conf->get_int32("format",      user_spk.format);
-  conf->get_int32("mask",        user_spk.mask);
-  conf->get_int32("sample_rate", user_spk.sample_rate);
-  conf->get_int32("relation",    user_spk.relation);
+  int format = user_spk.format;
+  int mask = user_spk.mask;
+  int sample_rate = user_spk.sample_rate;
+  int relation = user_spk.relation;
+
+  conf->get_int32("format",      format);
+  conf->get_int32("mask",        mask);
+  conf->get_int32("sample_rate", sample_rate);
+  conf->get_int32("relation",    relation);
   conf->get_bool ("use_spdif",   use_spdif);
 
-  switch (user_spk.format)
-  {
-    case FORMAT_PCM16_BE:
-    case FORMAT_PCM16: 
-      user_spk.level = 32767;
-      break;
-
-    case FORMAT_PCM24_BE:
-    case FORMAT_PCM24: 
-      user_spk.level = 8388607;
-      break;
-
-    case FORMAT_PCM32_BE:
-    case FORMAT_PCM32: 
-      user_spk.level = 2147483647;      
-      break;
-
-    case FORMAT_PCMFLOAT:
-      user_spk.level = 1.0; 
-      break;
-
-    default: 
-      user_spk.level = 1.0; 
-      break;
-  }
+  user_spk.set(format, mask, sample_rate);
+  user_spk.relation = relation;
 
   dvd.set_user(user_spk);
   dvd.set_use_spdif(use_spdif);
