@@ -92,7 +92,7 @@ REGEDIT4
 "delay_SR"="0.000000"
 "delay_LFE"="0.000000"
 "dejitter"=dword:00000001
-"formats"=dword:00007dfc
+"formats"=dword:0001fffc
 "dts_mode"=dword:00000002
 "dts_conv"=dword:00000000
 
