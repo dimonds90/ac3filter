@@ -7,6 +7,7 @@ static int controls[] =
 {
   IDC_GRP_FORMATS,
   IDC_CHK_PCM,
+  IDC_CHK_LPCM,
   IDC_CHK_AC3,
   IDC_CHK_DTS,
   IDC_CHK_MPA,
@@ -151,11 +152,12 @@ void ControlSystem::update()
   /////////////////////////////////////
   // Formats
 
-  CheckDlgButton(hdlg, IDC_CHK_PCM, (formats & FORMAT_CLASS_PCM_LE) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_MPA, (formats & FORMAT_MASK_MPA) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_AC3, (formats & FORMAT_MASK_AC3) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_DTS, (formats & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_PES, (formats & FORMAT_MASK_PES) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_PCM,   (formats & FORMAT_CLASS_PCM_LE) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_LPCM,  (formats & FORMAT_CLASS_LPCM) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_MPA,   (formats & FORMAT_MASK_MPA) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_AC3,   (formats & FORMAT_MASK_AC3) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_DTS,   (formats & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_PES,   (formats & FORMAT_MASK_PES) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(hdlg, IDC_CHK_SPDIF, (formats & FORMAT_MASK_SPDIF) != 0? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
@@ -198,18 +200,20 @@ ControlSystem::cmd_result ControlSystem::command(int control, int message)
     // Formats
 
     case IDC_CHK_PCM:
+    case IDC_CHK_LPCM:
     case IDC_CHK_MPA:
     case IDC_CHK_AC3:
     case IDC_CHK_DTS:
     case IDC_CHK_PES:
     case IDC_CHK_SPDIF:
     {
-      formats = FORMAT_CLASS_PCM_BE; // Always allow DVD LPCM
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_PCM) == BST_CHECKED? FORMAT_CLASS_PCM: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_MPA) == BST_CHECKED? FORMAT_MASK_MPA: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_AC3) == BST_CHECKED? FORMAT_MASK_AC3: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_PES) == BST_CHECKED? FORMAT_MASK_PES: 0;
+      formats = 0;
+      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_PCM)   == BST_CHECKED? FORMAT_CLASS_PCM: 0;
+      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_LPCM)  == BST_CHECKED? FORMAT_CLASS_LPCM | FORMAT_MASK_PCM16_BE: 0;
+      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_MPA)   == BST_CHECKED? FORMAT_MASK_MPA: 0;
+      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_AC3)   == BST_CHECKED? FORMAT_MASK_AC3: 0;
+      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_DTS)   == BST_CHECKED? FORMAT_MASK_DTS: 0;
+      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_PES)   == BST_CHECKED? FORMAT_MASK_PES: 0;
       formats |= IsDlgButtonChecked(hdlg, IDC_CHK_SPDIF) == BST_CHECKED? FORMAT_MASK_SPDIF: 0;
       dec->set_formats(formats);
       update();
