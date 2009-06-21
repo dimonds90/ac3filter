@@ -1,3 +1,10 @@
+v1.62b -
+  * LPCM 20/24bit support (was noise)
+  * Precise PCM passthrough
+  ! Fixed: Delay settings did not work after restart.
+  + Japan translation added (thanks to tnetsixenon)
+
+
 v1.61b - 01.06.2009
   * Clear DirectShow filter cache on install and uninstall
   ! Fixed: Matrix was not saved
