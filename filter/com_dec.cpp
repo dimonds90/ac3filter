@@ -557,6 +557,30 @@ STDMETHODIMP COMDecoder::set_bass_freq(int bass_freq)
   return S_OK;
 }
 
+// SRC
+STDMETHODIMP COMDecoder::get_src_quality(double *_src_quality)
+{
+  if (_src_quality) *_src_quality = dvd.proc.get_src_quality();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_src_quality(double _src_quality)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_src_quality(_src_quality);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_src_att(double *_src_att)
+{
+  if (_src_att) *_src_att = dvd.proc.get_src_att();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_src_att(double _src_att)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_src_att(_src_att);
+  return S_OK;
+}
+
 // Equalizer
 STDMETHODIMP COMDecoder::get_eq(bool *_eq)
 {
@@ -630,6 +654,19 @@ STDMETHODIMP COMDecoder::set_delays(float *_delays)
 {
   AutoLock config_lock(&config);
   dvd.proc.set_delays(_delays);
+  return S_OK;
+}
+
+// Dithering
+STDMETHODIMP COMDecoder::get_dithering(int *_dithering)
+{
+  if (_dithering) *_dithering = dvd.proc.get_dithering();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_dithering(int _dithering)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_dithering(_dithering);
   return S_OK;
 }
 
@@ -744,6 +781,7 @@ STDMETHODIMP COMDecoder::get_output_cache(int ch_name, vtime_t time, sample_t *b
 
 
 
+///////////////////////////////////////////////////////////////////////////////
 // Load/save settings
 
 void COMDecoder::save_spk(Config *conf)
@@ -776,8 +814,7 @@ void COMDecoder::load_spk(Config *conf)
   conf->get_int32("relation",    relation);
   conf->get_bool ("use_spdif",   use_spdif);
 
-  user_spk.set(format, mask, sample_rate);
-  user_spk.relation = relation;
+  user_spk.set(format, mask, sample_rate, -1, relation);
 
   dvd.set_user(user_spk);
   dvd.set_use_spdif(use_spdif);
@@ -1053,6 +1090,11 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
     // Bass redirection
     _conf->get_bool ("bass_redir"       ,state->bass_redir      );
     _conf->get_int32("bass_freq"        ,state->bass_freq       );
+    // SRC
+    _conf->get_float("src_quality"      ,state->src_quality     );
+    _conf->get_float("src_att"          ,state->src_att         );
+    // Dithering
+    _conf->get_int32("dithering"        ,state->dithering       );
   }
 
   if (state && (_preset & AC3FILTER_GAINS))
@@ -1170,6 +1212,11 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _preset)
     // Bass redirection
     _conf->set_bool ("bass_redir"       ,state->bass_redir      );
     _conf->set_int32("bass_freq"        ,state->bass_freq       );
+    // SRC
+    _conf->set_float("src_quality"      ,state->src_quality     );
+    _conf->set_float("src_att"          ,state->src_att         );
+    // Dithering
+    _conf->set_int32("dithering"        ,state->dithering       );
   }
 
   if (state && (_preset & AC3FILTER_GAINS))

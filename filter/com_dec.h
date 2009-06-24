@@ -210,6 +210,11 @@ public:
   STDMETHODIMP set_bass_redir   (bool  bass_redir);
   STDMETHODIMP get_bass_freq    (int  *bass_freq);
   STDMETHODIMP set_bass_freq    (int   bass_freq);
+  // SRC
+  STDMETHODIMP get_src_quality  (double *src_quality);
+  STDMETHODIMP set_src_quality  (double  src_quality);
+  STDMETHODIMP get_src_att      (double *src_att);
+  STDMETHODIMP set_src_att      (double  src_att);
   // Equalizer
   STDMETHODIMP get_eq           (bool *eq);
   STDMETHODIMP set_eq           (bool  eq);
@@ -225,6 +230,9 @@ public:
   STDMETHODIMP set_delay_units  (int  delay_units);
   STDMETHODIMP get_delays       (float *delays);
   STDMETHODIMP set_delays       (float *delays);
+  // Dithering
+  STDMETHODIMP get_dithering    (int *dithering);
+  STDMETHODIMP set_dithering    (int  dithering);
   // Linear time transform
   STDMETHODIMP get_time_shift   (vtime_t *time_shift);
   STDMETHODIMP set_time_shift   (vtime_t  time_shift);

@@ -311,6 +311,11 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_bass_redir)   (bool  bass_redir) = 0;
   STDMETHOD (get_bass_freq)    (int  *bass_freq) = 0;
   STDMETHOD (set_bass_freq)    (int   bass_freq) = 0;
+  // SRC
+  STDMETHOD (get_src_quality)  (double *src_quality) = 0;
+  STDMETHOD (set_src_quality)  (double  src_quality) = 0;
+  STDMETHOD (get_src_att)      (double *src_att) = 0;
+  STDMETHOD (set_src_att)      (double  src_att) = 0;
   // Equalizer
   STDMETHOD (get_eq)           (bool *eq) = 0;
   STDMETHOD (set_eq)           (bool  eq) = 0;
@@ -326,6 +331,9 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_delay_units)  (int  delay_units) = 0;
   STDMETHOD (get_delays)       (float *delays) = 0;
   STDMETHOD (set_delays)       (float *delays) = 0;
+  // Dithering
+  STDMETHOD (get_dithering)    (int *dithering) = 0;
+  STDMETHOD (set_dithering)    (int  dithering) = 0;
   // Cache
   STDMETHOD (get_input_cache_size)(vtime_t *size) = 0;
   STDMETHOD (set_input_cache_size)(vtime_t size) = 0;
