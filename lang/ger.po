@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.46\n"
+"Project-Id-Version: AC3Filter 1.61b\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-16 22:11+0400\n"
-"PO-Revision-Date: 2007-08-20 00:29+0100\n"
-"Last-Translator: Filico <findme@dvbiewer.forum>\n"
+"PO-Revision-Date: 2009-06-24 19:46+0100\n"
+"Last-Translator: Filico <findme@dvbviewer.forum>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -41,17 +41,17 @@ msgid "IDD_ABOUT"
 msgstr "Über"
 
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 msgid "dB"
-msgstr ""
+msgstr "dB"
 
 msgid "Hz"
-msgstr ""
+msgstr "Hz"
 
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
-msgstr ""
+msgstr "Abbrechen"
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -59,31 +59,31 @@ msgstr "Spenden"
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
-msgstr ""
+msgstr "Skalenspektrum loggen"
 
 #. TRANSLATORS: Frequency (Hz)
 msgid "IDC_LBL_EQ_FREQ"
-msgstr ""
+msgstr "Frequenz (Hz)"
 
 #. TRANSLATORS: Gain (dB)
 msgid "IDC_LBL_EQ_GAIN"
-msgstr ""
+msgstr "Gain (dB)"
 
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
-msgstr ""
+msgstr "Filterlänge:"
 
 #. TRANSLATORS: Save all (multichannel and master equalizers).
 msgid "IDC_RBT_EQ_ALL"
-msgstr ""
+msgstr "Alle sichern (Multikanal und Master Equalizer)"
 
 #. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
 msgid "IDC_RBT_EQ_CUR"
-msgstr ""
+msgstr "Aktuellen Kanal sichern, um diese Voreinstellung für jeden Kanal anzuwenden."
 
 #. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
 msgid "IDC_RBT_EQ_MCH"
-msgstr ""
+msgstr "Alle Kanäle (außer Master) sichern, um das Multikanal-Setup später wiederherzustellen."
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
 msgid "IDC_VER"
@@ -99,18 +99,11 @@ msgstr "Was ist der AC3Filter?"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr ""
-"Der AC3Filter ist ein hochqualitativer freier DirectShow-Filter, der für "
-"eine Echtzeitaudiodekodierung und -verarbeitung konzipiert wurde. Er stellt "
-"umfangreiche Funktionen und bequeme Einstellungen zur Verfügung. Er "
-"unterstützt Mehrkanal- und Digitalausgabe (SPDIF)."
+msgstr "Der AC3Filter ist ein hochqualitativer freier DirectShow-Filter, der für eine Echtzeitaudiodekodierung und -verarbeitung konzipiert wurde. Er stellt umfangreiche Funktionen und bequeme Einstellungen zur Verfügung. Er unterstützt Mehrkanal- und Digitalausgabe (SPDIF)."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr ""
-"Er wird automatisch von den meisten Multimedia-Playern verwendet. Wird für "
-"die Wiedergabe von AVI-Dateien mit AC3- oder DTS-Tonspuren benötigt und kann "
-"ebenso für DVD-Wiedergabe genutzt werden."
+msgstr "Er wird automatisch von den meisten Multimedia-Playern verwendet. Wird für die Wiedergabe von AVI-Dateien mit AC3- oder DTS-Tonspuren benötigt und kann ebenso für DVD-Wiedergabe genutzt werden."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -126,11 +119,7 @@ msgstr "Autor kontaktieren"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
-msgstr ""
-"Bitte melden Sie alle Fehler. Schreiben Sie eine E-Mail an den Autor mit "
-"ihren Ideen, Vorschlägen, etc. Schreiben Sie bitte nur in Englisch oder "
-"Russisch. Der Betreff sollte das Wort 'AC3Filter' enthalten (augrund der "
-"automatischen Filterung)."
+msgstr "Bitte melden Sie alle Fehler. Schreiben Sie eine E-Mail an den Autor mit ihren Ideen, Vorschlägen, etc. Schreiben Sie bitte nur in Englisch oder Russisch. Der Betreff sollte das Wort 'AC3Filter' enthalten (augrund der automatischen Filterung)."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
@@ -262,35 +251,35 @@ msgstr "Build Info"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
-msgstr ""
+msgstr "Equalizer"
 
 #. TRANSLATORS: Equalizer options
 msgid "IDC_GRP_EQ_OPTIONS"
-msgstr ""
+msgstr "Equalizer-Optionen"
 
 #. TRANSLATORS: Custom
 msgid "IDC_BTN_EQ_CUSTOM"
-msgstr ""
+msgstr "Custom"
 
 #. TRANSLATORS: Reset
 msgid "IDC_BTN_EQ_RESET"
-msgstr ""
+msgstr "Reset"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_EQ"
-msgstr ""
+msgstr "Aktivieren"
 
 #. TRANSLATORS: Equalizer preset
 msgid "IDC_GRP_EQ_PRESET"
-msgstr ""
+msgstr "Equalizer-Voreinstellung"
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_EQ_DELETE"
-msgstr ""
+msgstr "Delete"
 
 #. TRANSLATORS: Save
 msgid "IDC_BTN_EQ_SAVE"
-msgstr ""
+msgstr "Save"
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
@@ -406,9 +395,7 @@ msgstr "Lizenz"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
-msgstr ""
-"Dieses Programm ist freie Software und darf im Sinne der GNU General Public "
-"License Version 2 verbreitet werden."
+msgstr "Dieses Programm ist freie Software und darf im Sinne der GNU General Public License Version 2 verbreitet werden."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
@@ -713,40 +700,40 @@ msgid "Inches"
 msgstr "Inches"
 
 msgid "Master"
-msgstr ""
+msgstr "Master"
 
 msgid "Left"
-msgstr ""
+msgstr "Vorne links"
 
 msgid "Center"
-msgstr ""
+msgstr "Center"
 
 msgid "Right"
-msgstr ""
+msgstr "Vorne rechts"
 
 msgid "Surround Left"
-msgstr ""
+msgstr "Hinten links"
 
 msgid "Surround Right"
-msgstr ""
+msgstr "Hinten rechts"
 
 msgid "Subwoofer"
-msgstr ""
+msgstr "Subwoofer"
 
 #, c-format
 msgid "%ikHz"
-msgstr ""
+msgstr "%ikHz"
 
 #, c-format
 msgid "%iHz"
-msgstr ""
+msgstr "%iHz"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
 msgstr "Möchten Sie wirklich die Voreinstellung '%s' löschen?"
 
 msgid "Delete confirmation"
-msgstr ""
+msgstr "Bestätigungsdialog"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
@@ -754,27 +741,23 @@ msgstr "Möchten Sie wirklich die Matrix '%s' löschen?"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' equalizer preset?"
-msgstr ""
+msgstr "Möchten Sie wirklich die Equalizer-Voreinstellung '%s' löschen?"
 
-msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
-"ACHTUNG! Der Filter kann eine erhöhte Lautstärke produzieren, wenn diese "
-"Option aktiviert ist. Klicken Sie auf 'Nein', um diese Option zu aktivieren."
+msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
+msgstr "ACHTUNG! Der Filter kann eine erhöhte Lautstärke produzieren, wenn diese Option aktiviert ist. Klicken Sie auf 'Nein', um diese Option zu aktivieren."
 
 msgid "Dangerous option!"
 msgstr "Hinweis"
 
 msgid "Spectrum: no data"
-msgstr ""
+msgstr "Spektrum: keine Daten"
 
 #, c-format
 msgid "Spectrum: %s"
-msgstr ""
+msgstr "Spectrum: %s"
 
 msgid "All channels"
-msgstr ""
+msgstr "Alle Kanäle"
 
 msgid "AS IS (no change)"
 msgstr "AS IS (no change)"
@@ -866,12 +849,9 @@ msgstr ""
 "Eingang\tmean: %ims\tstddev: %ims\n"
 "Ausgang\tmean: %ims\tstddev: %ims"
 
-msgid ""
-"This option is DANGEROUS! Video may go out of sync with this option enabled. "
-"Press 'No' to enable this option."
-msgstr ""
-"ACHTUNG! Das Video kann asynchron laufen, wenn diese Option aktiviert ist. "
-"Klicken Sie auf 'Nein', um diese Option zu aktivieren."
+msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
+msgstr "ACHTUNG! Das Video kann asynchron laufen, wenn diese Option aktiviert ist. Klicken Sie auf 'Nein', um diese Option zu aktivieren."
 
 #~ msgid "IDC_LBL_UNITS"
 #~ msgstr "Einheit:"
+
