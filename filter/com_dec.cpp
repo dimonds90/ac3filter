@@ -979,6 +979,13 @@ void COMDecoder::save_sys(Config *conf)
   int  dts_mode = dvd.get_dts_mode();
   int  dts_conv = dvd.get_dts_conv();
 
+  sample_t attack = dvd.proc.get_attack();
+  sample_t release = dvd.proc.get_release();
+  int dithering = dvd.proc.get_dithering();
+
+  double src_quality = dvd.proc.get_src_quality();
+  double src_att = dvd.proc.get_src_att();
+
   conf->set_int32("formats"          ,formats         );
   conf->set_bool ("query_sink"       ,query_sink      );
   conf->set_bool ("use_detector"     ,use_detector    );
@@ -996,6 +1003,13 @@ void COMDecoder::save_sys(Config *conf)
 
   conf->set_int32("dts_mode"         ,dts_mode        );
   conf->set_int32("dts_conv"         ,dts_conv        );
+
+  conf->set_float("attack"           ,attack          );
+  conf->set_float("release"          ,release         );
+  conf->set_int32("dithering"        ,dithering       );
+
+  conf->set_float("src_quality"      ,src_quality     );
+  conf->set_float("src_att"          ,src_att         );
 }
 
 void COMDecoder::load_sys(Config *conf)
@@ -1017,6 +1031,13 @@ void COMDecoder::load_sys(Config *conf)
   int  dts_mode = dvd.get_dts_mode();
   int  dts_conv = dvd.get_dts_conv();
 
+  sample_t attack = dvd.proc.get_attack();
+  sample_t release = dvd.proc.get_release();
+  int dithering = dvd.proc.get_dithering();
+
+  double src_quality = dvd.proc.get_src_quality();
+  double src_att = dvd.proc.get_src_att();
+
   conf->get_int32("formats"          ,formats         );
   conf->get_bool ("query_sink"       ,query_sink      );
   conf->get_bool ("use_detector"     ,use_detector    );
@@ -1035,6 +1056,13 @@ void COMDecoder::load_sys(Config *conf)
   conf->get_int32("dts_mode"         ,dts_mode        );
   conf->get_int32("dts_conv"         ,dts_conv        );
 
+  conf->get_float("attack"           ,attack          );
+  conf->get_float("release"          ,release         );
+  conf->get_int32("dithering"        ,dithering       );
+
+  conf->get_float("src_quality"      ,src_quality     );
+  conf->get_float("src_att"          ,src_att         );
+
   dvd.set_query_sink(query_sink);
   dvd.set_use_detector(use_detector);
 
@@ -1051,12 +1079,18 @@ void COMDecoder::load_sys(Config *conf)
 
   dvd.set_dts_mode(dts_mode);
   dvd.set_dts_conv(dts_conv);
+
+  dvd.proc.set_attack(attack);
+  dvd.proc.set_release(release);
+  dvd.proc.set_dithering(dithering);
+
+  dvd.proc.set_src_quality(src_quality);
+  dvd.proc.set_src_att(src_att);
 }
 
 STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
 {
   AutoLock config_lock(&config);
-  AudioProcessorState *state = dvd.proc.get_state(0);
 
   RegistryKey reg;
   if (!_conf)
@@ -1068,6 +1102,16 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
   if (_preset & AC3FILTER_SPK)
     load_spk(_conf);
 
+  if (_preset & AC3FILTER_SYNC)
+    load_sync(_conf);
+
+  if (_preset & AC3FILTER_SYS)
+    load_sys(_conf);
+
+  if (_preset & AC3FILTER_EQ_MASK)
+    load_eq(_conf);
+
+  AudioProcessorState *state = dvd.proc.get_state(0);
   if (state && (_preset & AC3FILTER_PROC))
   {
     // Options
@@ -1077,8 +1121,6 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
     _conf->get_bool ("auto_matrix"      ,state->auto_matrix     );
     _conf->get_bool ("expand_stereo"    ,state->expand_stereo   );
     _conf->get_bool ("voice_control"    ,state->voice_control   );
-    _conf->get_float("attack"           ,state->attack          );
-    _conf->get_float("release"          ,state->release         );
     // Gains
     _conf->get_float("master"           ,state->master          );
     _conf->get_float("clev"             ,state->clev            );
@@ -1090,11 +1132,6 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
     // Bass redirection
     _conf->get_bool ("bass_redir"       ,state->bass_redir      );
     _conf->get_int32("bass_freq"        ,state->bass_freq       );
-    // SRC
-    _conf->get_float("src_quality"      ,state->src_quality     );
-    _conf->get_float("src_att"          ,state->src_att         );
-    // Dithering
-    _conf->get_int32("dithering"        ,state->dithering       );
   }
 
   if (state && (_preset & AC3FILTER_GAINS))
@@ -1141,31 +1178,10 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
       }
   }
 
+  // Load equalizer switch ONLY when both
+  // equalizer and processor states are loaded
   if ((_preset & AC3FILTER_EQ_MASK) && (_preset & AC3FILTER_PROC))
-  {
-    bool eq = dvd.proc.get_eq();
-    _conf->get_bool ("eq", eq);
-    dvd.proc.set_eq(eq);
-  }
-
-  if (_preset & AC3FILTER_EQ_MASK)
-  {
-    load_eq(_conf);
-    state->eq = dvd.proc.get_eq();
-    state->eq_master_nbands = 0;
-    safe_delete(state->eq_master_bands);
-    for (int ch = 0; ch < NCHANNELS; ch++)
-    {
-      state->eq_nbands[ch] = 0;
-      safe_delete(state->eq_bands[ch]);
-    }
-  }
-
-  if (_preset & AC3FILTER_SYNC)
-    load_sync(_conf);
-
-  if (_preset & AC3FILTER_SYS)
-    load_sys(_conf);
+    _conf->get_bool ("eq"               ,state->eq              );
 
   if (state)
   {
@@ -1178,8 +1194,6 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
 
 STDMETHODIMP COMDecoder::save_params(Config *_conf, int _preset)
 {
-  AudioProcessorState *state = dvd.proc.get_state(0);
-
   RegistryKey reg;
   if (!_conf)
   {
@@ -1190,6 +1204,16 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _preset)
   if (_preset & AC3FILTER_SPK)
     save_spk(_conf);
 
+  if (_preset & AC3FILTER_SYNC)
+    save_sync(_conf);
+
+  if (_preset & AC3FILTER_SYS)
+    save_sys(_conf);
+
+  if (_preset & AC3FILTER_EQ_MASK)
+    save_eq(_conf, _preset & AC3FILTER_EQ_MASK);
+
+  AudioProcessorState *state = dvd.proc.get_state(0);
   if (state && (_preset & AC3FILTER_PROC))
   {
     // Options
@@ -1199,8 +1223,6 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _preset)
     _conf->set_bool ("auto_matrix"      ,state->auto_matrix     );
     _conf->set_bool ("expand_stereo"    ,state->expand_stereo   );
     _conf->set_bool ("voice_control"    ,state->voice_control   );
-    _conf->set_float("attack"           ,state->attack          );
-    _conf->set_float("release"          ,state->release         );
     // Gains
     _conf->set_float("master"           ,state->master          );
     _conf->set_float("clev"             ,state->clev            );
@@ -1212,11 +1234,6 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _preset)
     // Bass redirection
     _conf->set_bool ("bass_redir"       ,state->bass_redir      );
     _conf->set_int32("bass_freq"        ,state->bass_freq       );
-    // SRC
-    _conf->set_float("src_quality"      ,state->src_quality     );
-    _conf->set_float("src_att"          ,state->src_att         );
-    // Dithering
-    _conf->set_int32("dithering"        ,state->dithering       );
   }
 
   if (state && (_preset & AC3FILTER_GAINS))
@@ -1262,17 +1279,10 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _preset)
       }
   }
 
+  // Save equalizer switch ONLY when both
+  // equalizer and processor states are saved
   if ((_preset & AC3FILTER_EQ_MASK) && (_preset & AC3FILTER_PROC))
-    _conf->set_bool("eq", dvd.proc.get_eq());
-
-  if (_preset & AC3FILTER_EQ_MASK)
-    save_eq(_conf, _preset & AC3FILTER_EQ_MASK);
-
-  if (_preset & AC3FILTER_SYNC)
-    save_sync(_conf);
-
-  if (_preset & AC3FILTER_SYS)
-    save_sys(_conf);
+    _conf->set_bool ("eq"               ,state->eq              );
 
   safe_delete(state);
   return S_OK;
