@@ -1088,6 +1088,129 @@ void COMDecoder::load_sys(Config *conf)
   dvd.proc.set_src_att(src_att);
 }
 
+void COMDecoder::save_proc(Config *conf, AudioProcessorState *state)
+{
+  // Options
+  conf->set_bool ("auto_gain"        ,state->auto_gain       );
+  conf->set_bool ("normalize"        ,state->normalize       );
+  conf->set_bool ("normalize_matrix" ,state->normalize_matrix);
+  conf->set_bool ("auto_matrix"      ,state->auto_matrix     );
+  conf->set_bool ("expand_stereo"    ,state->expand_stereo   );
+  conf->set_bool ("voice_control"    ,state->voice_control   );
+  // Gains
+  conf->set_float("master"           ,state->master          );
+  conf->set_float("clev"             ,state->clev            );
+  conf->set_float("slev"             ,state->slev            );
+  conf->set_float("lfelev"           ,state->lfelev          );
+  // DRC
+  conf->set_bool ("drc"              ,state->drc             );
+  conf->set_float("drc_power"        ,state->drc_power       );
+  // Bass redirection
+  conf->set_bool ("bass_redir"       ,state->bass_redir      );
+  conf->set_int32("bass_freq"        ,state->bass_freq       );
+}
+
+void COMDecoder::load_proc(Config *conf, AudioProcessorState *state)
+{
+  // Options
+  conf->get_bool ("auto_gain"        ,state->auto_gain       );
+  conf->get_bool ("normalize"        ,state->normalize       );
+  conf->get_bool ("normalize_matrix" ,state->normalize_matrix);
+  conf->get_bool ("auto_matrix"      ,state->auto_matrix     );
+  conf->get_bool ("expand_stereo"    ,state->expand_stereo   );
+  conf->get_bool ("voice_control"    ,state->voice_control   );
+  // Gains
+  conf->get_float("master"           ,state->master          );
+  conf->get_float("clev"             ,state->clev            );
+  conf->get_float("slev"             ,state->slev            );
+  conf->get_float("lfelev"           ,state->lfelev          );
+  // DRC
+  conf->get_bool ("drc"              ,state->drc             );
+  conf->get_float("drc_power"        ,state->drc_power       );
+  // Bass redirection
+  conf->get_bool ("bass_redir"       ,state->bass_redir      );
+  conf->get_int32("bass_freq"        ,state->bass_freq       );
+}
+
+void COMDecoder::save_gains(Config *conf, AudioProcessorState *state)
+{
+  conf->set_float("gain_input_L"     ,state->input_gains[CH_L]   );
+  conf->set_float("gain_input_C"     ,state->input_gains[CH_C]   );
+  conf->set_float("gain_input_R"     ,state->input_gains[CH_R]   );
+  conf->set_float("gain_input_SL"    ,state->input_gains[CH_SL]  );
+  conf->set_float("gain_input_SR"    ,state->input_gains[CH_SR]  );
+  conf->set_float("gain_input_LFE"   ,state->input_gains[CH_LFE] );
+
+  conf->set_float("gain_output_L"    ,state->output_gains[CH_L]  );
+  conf->set_float("gain_output_C"    ,state->output_gains[CH_C]  );
+  conf->set_float("gain_output_R"    ,state->output_gains[CH_R]  );
+  conf->set_float("gain_output_SL"   ,state->output_gains[CH_SL] );
+  conf->set_float("gain_output_SR"   ,state->output_gains[CH_SR] );
+  conf->set_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
+}
+
+void COMDecoder::load_gains(Config *conf, AudioProcessorState *state)
+{
+  conf->get_float("gain_input_L"     ,state->input_gains[CH_L]   );
+  conf->get_float("gain_input_C"     ,state->input_gains[CH_C]   );
+  conf->get_float("gain_input_R"     ,state->input_gains[CH_R]   );
+  conf->get_float("gain_input_SL"    ,state->input_gains[CH_SL]  );
+  conf->get_float("gain_input_SR"    ,state->input_gains[CH_SR]  );
+  conf->get_float("gain_input_LFE"   ,state->input_gains[CH_LFE] );
+
+  conf->get_float("gain_output_L"    ,state->output_gains[CH_L]  );
+  conf->get_float("gain_output_C"    ,state->output_gains[CH_C]  );
+  conf->get_float("gain_output_R"    ,state->output_gains[CH_R]  );
+  conf->get_float("gain_output_SL"   ,state->output_gains[CH_SL] );
+  conf->get_float("gain_output_SR"   ,state->output_gains[CH_SR] );
+  conf->get_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
+}
+
+void COMDecoder::save_delays(Config *conf, AudioProcessorState *state)
+{
+  conf->set_int32("delay_units"      ,state->delay_units     );
+  conf->set_float("delay_L"          ,state->delays[CH_L]    );
+  conf->set_float("delay_C"          ,state->delays[CH_C]    );
+  conf->set_float("delay_R"          ,state->delays[CH_R]    );
+  conf->set_float("delay_SL"         ,state->delays[CH_SL]   );
+  conf->set_float("delay_SR"         ,state->delays[CH_SR]   );
+  conf->set_float("delay_LFE"        ,state->delays[CH_LFE]  );
+}
+
+void COMDecoder::load_delays(Config *conf, AudioProcessorState *state)
+{
+  conf->get_int32("delay_units"      ,state->delay_units     );
+  conf->get_float("delay_L"          ,state->delays[CH_L]    );
+  conf->get_float("delay_C"          ,state->delays[CH_C]    );
+  conf->get_float("delay_R"          ,state->delays[CH_R]    );
+  conf->get_float("delay_SL"         ,state->delays[CH_SL]   );
+  conf->get_float("delay_SR"         ,state->delays[CH_SR]   );
+  conf->get_float("delay_LFE"        ,state->delays[CH_LFE]  );
+}
+
+void COMDecoder::save_matrix(Config *conf, AudioProcessorState *state)
+{
+  char element_str[32];
+  for (int ch1 = 0; ch1 < NCHANNELS; ch1++)
+    for (int ch2 = 0; ch2 < NCHANNELS; ch2++)
+    {
+      sprintf(element_str, "matrix_%s_%s", ch_names[ch1], ch_names[ch2]);
+      conf->set_float(element_str, state->matrix[ch1][ch2]);
+    }
+}
+
+void COMDecoder::load_matrix(Config *conf, AudioProcessorState *state)
+{
+  char element_str[32];
+  for (int ch1 = 0; ch1 < NCHANNELS; ch1++)
+    for (int ch2 = 0; ch2 < NCHANNELS; ch2++)
+    {
+      state->matrix[ch1][ch2] = 0;
+      sprintf(element_str, "matrix_%s_%s", ch_names[ch1], ch_names[ch2]);
+      conf->get_float(element_str, state->matrix[ch1][ch2]);
+    }
+}
+
 STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
 {
   AutoLock config_lock(&config);
@@ -1112,79 +1235,29 @@ STDMETHODIMP COMDecoder::load_params(Config *_conf, int _preset)
     load_eq(_conf);
 
   AudioProcessorState *state = dvd.proc.get_state(0);
-  if (state && (_preset & AC3FILTER_PROC))
-  {
-    // Options
-    _conf->get_bool ("auto_gain"        ,state->auto_gain       );
-    _conf->get_bool ("normalize"        ,state->normalize       );
-    _conf->get_bool ("normalize_matrix" ,state->normalize_matrix);
-    _conf->get_bool ("auto_matrix"      ,state->auto_matrix     );
-    _conf->get_bool ("expand_stereo"    ,state->expand_stereo   );
-    _conf->get_bool ("voice_control"    ,state->voice_control   );
-    // Gains
-    _conf->get_float("master"           ,state->master          );
-    _conf->get_float("clev"             ,state->clev            );
-    _conf->get_float("slev"             ,state->slev            );
-    _conf->get_float("lfelev"           ,state->lfelev          );
-    // DRC
-    _conf->get_bool ("drc"              ,state->drc             );
-    _conf->get_float("drc_power"        ,state->drc_power       );
-    // Bass redirection
-    _conf->get_bool ("bass_redir"       ,state->bass_redir      );
-    _conf->get_int32("bass_freq"        ,state->bass_freq       );
-  }
-
-  if (state && (_preset & AC3FILTER_GAINS))
-  {
-    // I/O Gains
-    _conf->get_float("gain_input_L"     ,state->input_gains[CH_L]   );
-    _conf->get_float("gain_input_C"     ,state->input_gains[CH_C]   );
-    _conf->get_float("gain_input_R"     ,state->input_gains[CH_R]   );
-    _conf->get_float("gain_input_SL"    ,state->input_gains[CH_SL]  );
-    _conf->get_float("gain_input_SR"    ,state->input_gains[CH_SR]  );
-    _conf->get_float("gain_input_LFE"   ,state->input_gains[CH_LFE] );
-
-    _conf->get_float("gain_output_L"    ,state->output_gains[CH_L]  );
-    _conf->get_float("gain_output_C"    ,state->output_gains[CH_C]  );
-    _conf->get_float("gain_output_R"    ,state->output_gains[CH_R]  );
-    _conf->get_float("gain_output_SL"   ,state->output_gains[CH_SL] );
-    _conf->get_float("gain_output_SR"   ,state->output_gains[CH_SR] );
-    _conf->get_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
-  }
-
-  if (state && (_preset & AC3FILTER_DELAY))
-  {
-    // Delays
-    _conf->get_bool ("delay"            ,state->delay           );
-    _conf->get_int32("delay_units"      ,state->delay_units     );
-    _conf->get_float("delay_L"          ,state->delays[CH_L]    );
-    _conf->get_float("delay_C"          ,state->delays[CH_C]    );
-    _conf->get_float("delay_R"          ,state->delays[CH_R]    );
-    _conf->get_float("delay_SL"         ,state->delays[CH_SL]   );
-    _conf->get_float("delay_SR"         ,state->delays[CH_SR]   );
-    _conf->get_float("delay_LFE"        ,state->delays[CH_LFE]  );
-  }
-
-  if (state && (_preset & AC3FILTER_MATRIX))
-  {
-    // Matrix
-    char element_str[32];
-    for (int ch1 = 0; ch1 < NCHANNELS; ch1++)
-      for (int ch2 = 0; ch2 < NCHANNELS; ch2++)
-      {
-        state->matrix[ch1][ch2] = 0;
-        sprintf(element_str, "matrix_%s_%s", ch_names[ch1], ch_names[ch2]);
-        _conf->get_float(element_str, state->matrix[ch1][ch2]);
-      }
-  }
-
-  // Load equalizer switch ONLY when both
-  // equalizer and processor states are loaded
-  if ((_preset & AC3FILTER_EQ_MASK) && (_preset & AC3FILTER_PROC))
-    _conf->get_bool ("eq"               ,state->eq              );
-
   if (state)
   {
+    if (_preset & AC3FILTER_PROC)
+      load_proc(_conf, state);
+
+    if (_preset & AC3FILTER_GAINS)
+      load_gains(_conf, state);
+
+    if (_preset & AC3FILTER_DELAY)
+      load_delays(_conf, state);
+
+    if (_preset & AC3FILTER_MATRIX)
+      load_matrix(_conf, state);
+
+    // Load equalizer/delay switch ONLY when both
+    // equalizer/delay and processor states are loaded
+
+    if ((_preset & AC3FILTER_EQ_MASK) && (_preset & AC3FILTER_PROC))
+      _conf->get_bool ("eq"               ,state->eq              );
+
+    if ((_preset & AC3FILTER_DELAY) && (_preset & AC3FILTER_PROC))
+      _conf->get_bool ("delay"            ,state->delay           );
+
     dvd.proc.set_state(state);
     safe_delete(state);
   }
@@ -1214,76 +1287,30 @@ STDMETHODIMP COMDecoder::save_params(Config *_conf, int _preset)
     save_eq(_conf, _preset & AC3FILTER_EQ_MASK);
 
   AudioProcessorState *state = dvd.proc.get_state(0);
-  if (state && (_preset & AC3FILTER_PROC))
+  if (state)
   {
-    // Options
-    _conf->set_bool ("auto_gain"        ,state->auto_gain       );
-    _conf->set_bool ("normalize"        ,state->normalize       );
-    _conf->set_bool ("normalize_matrix" ,state->normalize_matrix);
-    _conf->set_bool ("auto_matrix"      ,state->auto_matrix     );
-    _conf->set_bool ("expand_stereo"    ,state->expand_stereo   );
-    _conf->set_bool ("voice_control"    ,state->voice_control   );
-    // Gains
-    _conf->set_float("master"           ,state->master          );
-    _conf->set_float("clev"             ,state->clev            );
-    _conf->set_float("slev"             ,state->slev            );
-    _conf->set_float("lfelev"           ,state->lfelev          );
-    // DRC
-    _conf->set_bool ("drc"              ,state->drc             );
-    _conf->set_float("drc_power"        ,state->drc_power       );
-    // Bass redirection
-    _conf->set_bool ("bass_redir"       ,state->bass_redir      );
-    _conf->set_int32("bass_freq"        ,state->bass_freq       );
+    if (_preset & AC3FILTER_PROC)
+      save_proc(_conf, state);
+
+    if (_preset & AC3FILTER_GAINS)
+      save_gains(_conf, state);
+
+    if (_preset & AC3FILTER_DELAY)
+      save_delays(_conf, state);
+
+    if (_preset & AC3FILTER_MATRIX)
+      save_matrix(_conf, state);
+
+    // Save equalizer/delay switch ONLY when both
+    // equalizer/delay and processor states are saved
+
+    if ((_preset & AC3FILTER_EQ_MASK) && (_preset & AC3FILTER_PROC))
+      _conf->set_bool ("eq"               ,state->eq              );
+
+    if ((_preset & AC3FILTER_DELAY) && (_preset & AC3FILTER_PROC))
+      _conf->set_bool ("delay"            ,state->delay           );
+
+    safe_delete(state);
   }
-
-  if (state && (_preset & AC3FILTER_GAINS))
-  {
-    // I/O Gains
-    _conf->set_float("gain_input_L"     ,state->input_gains[CH_L]   );
-    _conf->set_float("gain_input_C"     ,state->input_gains[CH_C]   );
-    _conf->set_float("gain_input_R"     ,state->input_gains[CH_R]   );
-    _conf->set_float("gain_input_SL"    ,state->input_gains[CH_SL]  );
-    _conf->set_float("gain_input_SR"    ,state->input_gains[CH_SR]  );
-    _conf->set_float("gain_input_LFE"   ,state->input_gains[CH_LFE] );
-
-    _conf->set_float("gain_output_L"    ,state->output_gains[CH_L]  );
-    _conf->set_float("gain_output_C"    ,state->output_gains[CH_C]  );
-    _conf->set_float("gain_output_R"    ,state->output_gains[CH_R]  );
-    _conf->set_float("gain_output_SL"   ,state->output_gains[CH_SL] );
-    _conf->set_float("gain_output_SR"   ,state->output_gains[CH_SR] );
-    _conf->set_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
-  }
-
-  if (state && (_preset & AC3FILTER_DELAY))
-  {
-    // Delays
-    _conf->set_bool ("delay"            ,state->delay           );
-    _conf->set_int32("delay_units"      ,state->delay_units     );
-    _conf->set_float("delay_L"          ,state->delays[CH_L]    );
-    _conf->set_float("delay_C"          ,state->delays[CH_C]    );
-    _conf->set_float("delay_R"          ,state->delays[CH_R]    );
-    _conf->set_float("delay_SL"         ,state->delays[CH_SL]   );
-    _conf->set_float("delay_SR"         ,state->delays[CH_SR]   );
-    _conf->set_float("delay_LFE"        ,state->delays[CH_LFE]  );
-  }
-
-  if (state && (_preset & AC3FILTER_MATRIX))
-  {
-    // Matrix
-    char element_str[32];
-    for (int ch1 = 0; ch1 < NCHANNELS; ch1++)
-      for (int ch2 = 0; ch2 < NCHANNELS; ch2++)
-      {
-        sprintf(element_str, "matrix_%s_%s", ch_names[ch1], ch_names[ch2]);
-        _conf->set_float(element_str, state->matrix[ch1][ch2]);
-      }
-  }
-
-  // Save equalizer switch ONLY when both
-  // equalizer and processor states are saved
-  if ((_preset & AC3FILTER_EQ_MASK) && (_preset & AC3FILTER_PROC))
-    _conf->set_bool ("eq"               ,state->eq              );
-
-  safe_delete(state);
   return S_OK;
 }

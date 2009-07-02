@@ -27,6 +27,31 @@ protected:
   ULONG   STDMETHODCALLTYPE Release()  
     { return outer->Release(); }
 
+  // Load/save settings
+  void save_spk(Config *config);
+  void load_spk(Config *config);
+
+  void save_eq(Config *config, int eq_type);
+  void load_eq(Config *config);
+
+  void save_sync(Config *config);
+  void load_sync(Config *config);
+
+  void save_sys(Config *config);
+  void load_sys(Config *config);
+
+  void save_proc(Config *conf, AudioProcessorState *state);
+  void load_proc(Config *conf, AudioProcessorState *state);
+
+  void save_gains(Config *conf, AudioProcessorState *state);
+  void load_gains(Config *conf, AudioProcessorState *state);
+
+  void save_delays(Config *conf, AudioProcessorState *state);
+  void load_delays(Config *conf, AudioProcessorState *state);
+
+  void save_matrix(Config *conf, AudioProcessorState *state);
+  void load_matrix(Config *conf, AudioProcessorState *state);
+
 public:
   CritSec config;
 
@@ -134,19 +159,6 @@ public:
   // Stats
   STDMETHODIMP get_frames(int  *frames, int *errors);
   STDMETHODIMP get_info  (char *info, size_t len);
-
-  // Load/save settings
-  void save_spk(Config *config);
-  void load_spk(Config *config);
-
-  void save_eq(Config *config, int eq_type);
-  void load_eq(Config *config);
-
-  void save_sync(Config *config);
-  void load_sync(Config *config);
-
-  void save_sys(Config *config);
-  void load_sys(Config *config);
 
   STDMETHODIMP load_params(Config *config, int preset);
   STDMETHODIMP save_params(Config *config, int preset);
