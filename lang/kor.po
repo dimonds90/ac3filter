@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-09 11:49+0400\n"
+"POT-Creation-Date: 2009-01-21 11:44+0300\n"
 "PO-Revision-Date: 2007-11-13 16:37+0900\n"
 "Last-Translator: starcodec <starcodec@gmail.com>\n"
 "Language-Team: starcodec <starcodec@gmail.com>\n"
@@ -12,6 +12,34 @@ msgstr ""
 "X-Poedit-Language: Korean\n"
 "X-Poedit-Country: KOREA, REPUBLIC OF\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "메인"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "믹서"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "증폭"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "시스템"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "정보"
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -619,34 +647,6 @@ msgstr "언어:"
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
 msgstr ""
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr "메인"
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr "믹서"
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr "증폭"
-
-#. TRANSLATORS: Equalizer
-msgid "IDD_EQ"
-msgstr ""
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr "SPDIF"
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr "시스템"
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
-msgstr "정보"
 
 msgid "Samples"
 msgstr "샘플"

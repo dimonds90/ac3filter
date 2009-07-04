@@ -8,13 +8,41 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-09 11:49+0400\n"
+"POT-Creation-Date: 2009-01-21 11:44+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr ""
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr ""
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr ""
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr ""
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr ""
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -610,34 +638,6 @@ msgstr ""
 
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
-msgstr ""
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr ""
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr ""
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr ""
-
-#. TRANSLATORS: Equalizer
-msgid "IDD_EQ"
-msgstr ""
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr ""
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr ""
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
 msgstr ""
 
 msgid "Samples"

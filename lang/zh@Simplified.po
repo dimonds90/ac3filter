@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.45b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-09 11:49+0400\n"
+"POT-Creation-Date: 2009-01-21 11:44+0300\n"
 "PO-Revision-Date: 2007-06-08 20:33+0800\n"
 "Last-Translator: FSYX <fsyx@qq.com>\n"
 "Language-Team: ChongQing Mobile\n"
@@ -16,6 +16,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Chinese\n"
 "X-Poedit-Country: CHINA\n"
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "主体"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "混音"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "放大"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "系统"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "关于"
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -619,34 +647,6 @@ msgstr "语言:"
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
 msgstr ""
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr "主体"
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr "混音"
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr "放大"
-
-#. TRANSLATORS: Equalizer
-msgid "IDD_EQ"
-msgstr ""
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr "SPDIF"
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr "系统"
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
-msgstr "关于"
 
 msgid "Samples"
 msgstr "采样"

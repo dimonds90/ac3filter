@@ -1,5 +1,0 @@
-gettext 13.1
-libiconv 1.9.2
-
-We use static linking because dynamic linking does not work well
-(gettext utilities crash) with MSVC 6

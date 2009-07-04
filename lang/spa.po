@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.50a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-09 11:49+0400\n"
+"POT-Creation-Date: 2009-01-21 11:44+0300\n"
 "PO-Revision-Date: 2008-06-30 23:18+0100\n"
 "Last-Translator: Ferny <mundodivx@gmail.com>\n"
 "Language-Team: MundoDivX.com <mundodivx@gmail.com>\n"
@@ -11,6 +11,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Principal"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "Mezclador"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "Ganancias"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr "Ecualizador"
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Sistema"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "Acerca de"
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -619,34 +647,6 @@ msgstr "Idioma:"
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
 msgstr "¿Cómo traducir?|http://ac3filter.net/guides/how_to_translate"
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr "Principal"
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr "Mezclador"
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr "Ganancias"
-
-#. TRANSLATORS: Equalizer
-msgid "IDD_EQ"
-msgstr "Ecualizador"
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr "SPDIF"
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr "Sistema"
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
-msgstr "Acerca de"
 
 msgid "Samples"
 msgstr "Muestras"

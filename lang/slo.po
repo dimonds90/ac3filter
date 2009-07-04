@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.50a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-09 11:49+0400\n"
+"POT-Creation-Date: 2009-01-21 11:44+0300\n"
 "PO-Revision-Date: 2008-07-01 17:41+0100\n"
 "Last-Translator: Artam <peterki@hotmail.com>\n"
 "Language-Team: \n"
@@ -11,6 +11,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Slovak\n"
 "X-Poedit-Country: SLOVAKIA\n"
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Hlavný panel"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "Mixer"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "Hlasitosti"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr "Ekvalizér"
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Systém"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "O programe"
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -618,34 +646,6 @@ msgstr "Jazyk:"
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
 msgstr "Ako prekladať?|http://ac3filter.net/guides/how_to_translate"
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr "Hlavný panel"
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr "Mixer"
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr "Hlasitosti"
-
-#. TRANSLATORS: Equalizer
-msgid "IDD_EQ"
-msgstr "Ekvalizér"
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr "SPDIF"
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr "Systém"
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
-msgstr "O programe"
 
 msgid "Samples"
 msgstr "Vzorky"

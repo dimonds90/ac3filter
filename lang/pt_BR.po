@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-09 11:49+0400\n"
+"POT-Creation-Date: 2009-01-21 11:44+0300\n"
 "PO-Revision-Date: 2008-06-20 16:17+0300\n"
 "Last-Translator: Alexander Vigovsky <xvalex@mail.ru>\n"
 "Language-Team: \n"
@@ -11,6 +11,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Principal"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr ""
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr ""
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr ""
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr ""
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Sistema"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr ""
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -619,34 +647,6 @@ msgstr "Idioma:"
 
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
-msgstr ""
-
-#. TRANSLATORS: Main
-msgid "IDD_MAIN"
-msgstr "Principal"
-
-#. TRANSLATORS: Mixer
-msgid "IDD_MIXER"
-msgstr ""
-
-#. TRANSLATORS: Gains
-msgid "IDD_GAINS"
-msgstr ""
-
-#. TRANSLATORS: Equalizer
-msgid "IDD_EQ"
-msgstr ""
-
-#. TRANSLATORS: SPDIF
-msgid "IDD_SPDIF"
-msgstr ""
-
-#. TRANSLATORS: System
-msgid "IDD_SYSTEM"
-msgstr "Sistema"
-
-#. TRANSLATORS: About
-msgid "IDD_ABOUT"
 msgstr ""
 
 msgid "Samples"

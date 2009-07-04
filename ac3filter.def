@@ -1,7 +1,0 @@
-LIBRARY ac3filter.ax
-EXPORTS
-  DllGetClassObject PRIVATE
-  DllCanUnloadNow PRIVATE
-  DllRegisterServer PRIVATE
-  DllUnregisterServer PRIVATE
-  config
