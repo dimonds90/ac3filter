@@ -4,6 +4,15 @@ syntax:glob
 **\Debug
 **\Release
 
+# Visual studio intermediate files
+*.aps
+*.ncb
+*.plg
+*.opt
+*.dep
+*.suo
+*.user
+
 # Libintl build files
 
 intl\gnu\gettext-0.13.1-mod
