@@ -1,0 +1,282 @@
+\documentclass[12pt]{article}
+
+\usepackage{a4wide}
+\usepackage[english]{babel}
+
+\input{common_packages}
+\input{common_style}
+
+\title{AC3Filter \& SPDIF}
+\author{Alexander Vigovsky}
+\date{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGIN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\filterlinks
+\tableofcontents
+\pagebreak
+
+\section{How sound cards handle SPDIF}
+
+\subsection{General info about SPDIF}
+
+SPDIF (Sony/Philips Digital Interconnect Format) is a digital audio interface. SPDIF was first used only to transmit stereo 16-bit PCM data (CD player was the only source of digital audio). It is very straightforward: audio samples are transmitted at constant frequency, one-by-one (and bit-by-bit) in 32-bit blocks where 8 bits are used for synchronization and some side info and 24 bits are used for sample. In most cases, only 16-bit transmission is supported (CD carries only 16-bit sound) and low 8 bits of a sample are always zeroed. This interface is very simple and cheap and so it became widespread.
+
+Therefore, when multi-channel sound era came to home theaters, SPDIF was an ideal candidate for digital interface to transmit multi-channel sound. However, it is a problem: current interface implementations work only with stereo sound, but now it is required to transmit up to 6 channels (or 8 channels at present). It was decided not to change the interface but to transmit compressed multi-channel sound \emph{instead} of PCM data (for digital interface it does not matter what to transmit). So receiver must recognize compressed data and decode it. For this purpose a new standard was introduced (IEC 61937) that describes how compressed data must be transmitted and how receivers can distinguish PCM and compressed data.
+
+Because compressed data is transmitted in place of PCM data, the bitrate of the compressed stream must be exactly the same as uncompressed stereo 16-bit PCM bitrate. Usually, compressed stream (even multi-channel) has a lower bitrate. Because of this compressed stream must be padded with zeros to match PCM bitrate.
+
+Required bitrate depends on the sample rate:
+\begin{center} \begin{tabular}{|l|l|}
+  \hline
+  sample rate & bitrate \\
+  \hline
+  48000Hz & 1.536mbps \\
+  44100Hz & 1.411mbps \\
+  32000Hz & 1.024mbps \\
+  \hline
+\end{tabular} \end{center}
+
+It is impossible to transmit a stream with a higher bitrate. For example, it is impossible to transmit 2mbps DTS over SPDIF.
+
+So SPDIF interface has two modes: PCM data transmission mode and compressed data transmission mode. Unless noted we well use “SPDIF transmission”, “SPDIF output mode” and “SPDIF stream” terms only for encoded streams afterwards.
+
+\subsection{What is multi-channel AudioCD}
+
+Compressed data may be transmitted over SPDIF instead of PCM data. Therefore, we can prepare a CD disk and place compressed AC3 or DTS data instead of usual PCM tracks. When we playback this disk with a CD player connected to a receiver we will get true multi-channel sound!
+
+But this trick does not work with analog connection and portable CD players: we will get terribly loud noise instead of nice music. Because of this CD disks with AC3/DTS tracks are relatively rare.
+
+\subsection{What is 14bit DTS}
+
+As was said before, SPDIF data is transmitted instead of PCM data. Therefore, it may be mistakenly recognized as PCM and make harsh noise. To make this noise less unpleasant, DTS stream may be converted from 16-bit to 14-bit format that reduces the loudness of the possible noise. This conversion is lossless and does not affect nor the quality, nor the loudness of the normal playback.
+
+14bit format is usually used at multi-channel CD disks with DTS track (AC3 format does not allow such conversion). Therefore, when usual CD player plays it back it makes less noise.
+
+\subsection{DTS over SPDIF}
+
+There are two ways to transmit DTS stream over SPDIF:
+\begin{description}
+  \item [Wrapped:] DTS stream is wrapped according to IEC 61937 standard. Each DTS frame is supplemented with SPDIF header and padded with zeros to match SPDIF bitrate.
+  \item [Padded:] DTS stream is only padded with zeros to match SPDIF bitrate.
+\end{description}
+
+Note, that it may be impossible to convert padded DTS stream to wrapped one, when wrapped to padded stream conversion is always possible.
+
+Multi-channel AudioCD usually use padded DTS stream type. Therefore, it may be impossible to decode it with a decoder that only supports wrapped stream type.
+
+\subsection{How sound cards transmit PCM over SPDIF}
+
+As we remember, SPDIF can carry only two uncompressed channels. But what if some application starts multi-channel playback? Sound card downmixes multi-channel sound into two channels before sending it over SPDIF.
+
+\warning{Uncompressed sound transmitted over SPDIF is always stereo!}
+
+Some sound cards have several SPDIF outputs that can transmit multi-channel sound (3 SPDIF outputs can transmit 6 channels). But most receivers do not support this function (even receivers with several SPDIF inputs). Therefore, we will not consider this case afterwards.
+
+Some sound cards can encode the multi-channel sound before sending it over SPDIF. But this option is rare and we will not consider this case.
+
+\subsection{SPDIF sample rates}
+
+SPDIF interface supports three standard sample rates: 48 kHz, 44.1 kHz and 32 kHz. All other sample rates are impossible to transmit. Nevertheless, most audio cards support only 48 kHz (used at DVD). Therefore, sound with widely used 44100Hz sample rate may have problems with SPDIF transmission.
+
+\warning{Sound with non-48kHz sample rate may have problems with SPDIF transmission!}
+
+\subsection{SPDIF transmission monopoly}
+
+Sound cards allow playback of many sounds at the same time. How it works? All sounds from all applications are mixed into one stream, sounds with different sample rates are resampled and result is sent to one physical output. Therefore, Windows works like it can playback any sound at any time. But SPDIF transmission requires playback monopoly because SPDIF stream is encoded and it cannot be resampled and mixed with other sounds. Therefore, only one SPDIF transmission at a time is possible. Also all uncompressed sound playback must be muted during this time.
+
+When some application starts SPDIF transmission, sound card must do following:
+\begin{itemize}
+\item mute all uncompressed sound playback
+\item open exclusive SPDIF output channel
+\item start transmission
+\item prohibit any other try to start SPDIF transmission
+\end{itemize}
+
+When SPDIF transmission stops, sound card must do following:
+\begin{itemize}
+\item stop SPDIF transmission
+\item close SPDIF output channel
+\item restore all uncompressed output
+\item allow applications to start a new SPDIF transmission
+\end{itemize}
+
+For example, imagine that you have Winamp playing some music in background. You start watching a movie with AC3 sound track in SPDIF mode. When a movie playback starts, sound card mutes the music from Winamp and gives exclusive playback right to the media player. Media player starts playback. After receiving of some data receiver recognizes compressed SPDIF transmission and changes indication from “PCM” to “Dolby Digital”. 
+
+When you pause (not stop) the movie playback, sound card closes SPDIF transmission and restores music playback from Winamp. Receiver does not recognize any compressed transmission anymore and changes “Dolby Digital” back to “PCM”.
+
+But exclusive right on SPDIF playback still belongs to the media player because it did not actually close SPDIF playback but just pause it. So if you try to start another movie in SPDIF mode (without closing of the current one) player will fail to start a new SPDIF transmission and will start PCM (stereo!) playback. When you stop the first movie playback, the media player actually closes SPDIF output and exclusive SPDIF right sets free so any other application can use it.
+
+\subsection{Bug with switching between PCM and SPDIF}
+
+So, sound card handles switching between PCM and SPDIF output mode. But not all sound cards can do this correctly. When you pause SPDIF playback, sound card change SPDIF mode to PCM and may not restore SPDIF after playback resumes. In some cases, sound card may disable PCM mode without enabling SPDIF. In the last case, sound disappears ALL TOGETHER!
+
+\section{How the filter handles SPDIF}
+
+\subsection{SPDIF modes}
+
+SPDIF transmission is used only when \optname{Use SPDIF} option is enabled. It will be implied afterwards.
+
+There are three SPDIF output modes:
+\begin{description}
+\item [SPDIF passthrough mode] In this mode, compressed stream is sent to SPDIF without any change. It is impossible to process compressed stream without decompression. Therefore no other filter option can work in this mode (even filter cannot display input/output levels). We cannot even change the sound volume from the computer (only receiver’s volume control works).
+\item [SPDIF encode mode] In this case, input stream is decoded, processed and encoded to AC3 that is sent over SPDIF. Because we have decoded stream in this case, all processing options work. We can change number of channels, volume, etc before sending the result to the receiver. This allows any stream (even not directly supported by receiver or SPDIF at all) to be sent over SPDIF.
+\item [Disabled] Filter does not do SPDIF transmission.
+\end{description}
+
+\subsection{DTS over SPDIF passthrough}
+
+AC3Filter supports both DTS output modes (wrapped and padded). You may set desired mode with \optname{SPDIF/DTS output} option. \optval{Auto} directs the filter to use wrapped format if possible and padded otherwise.
+
+It may be impossible to convert padded DTS stream to wrapped one. Therefore, if you set the filter to use wrapped format, it may not enable DTS passthrough for some audio tracks (DTS from multi-channel AudioCD for instance) and use AC3 encode mode instead.
+
+To reduce the possible noise level you can set the filter to convert DTS to 14bit format with \optname{Convert to 14bit} option. This conversion increases the bitrate of the stream and converted stream may not match SPDIF bitrate restriction. Therefore, the filter does this conversion only when possible.
+
+Note, that receiver/decoder may not support some combinations of wrapped/padded 16-bit/14bit stream types.
+
+\subsection{SPDIF mode decision}
+
+How filter decides what mode to use for a given track? Let us see internal data flow diagram:
+
+\img{pic_spdif/data_flow}
+
+It is two SPDIF decision points:
+\begin{enumerate}
+\item SPDIF passthrough decision. At this point filter does following checks:
+  \begin{itemize}
+  \item Is given format supported by receiver and allowed for passthrough? This is controlled by \optname{SPDIF passthrough} options. Only checked formats are allowed.
+  \item Is given sample rate allowed for SPDIF output? This is controlled by \optname{Restrict sample rates} option. If restriction is enabled, filter allows only checked sample rates. (See below for details)
+  \item Does sound card support given SPDIF format? This check is done only when \optname{Check output format support} option is enabled. It is not recommended to disable this check! (See below for details)
+  \end{itemize}
+  If all checks passed, filter enables SPDIF passthrough mode.
+\item AC3 encode decision. At this point filter does following checks:
+  \begin{itemize}
+  \item Is encode allowed? This is controlled by \optname{Use AC3 encoder} option.
+  \item Do we need to encode this stream? It is an option \optname{Do not encode stereo PCM} to inhibit encoding of stereo sound (See below for details)
+  \item Can current stream be encoded? Not all channel configurations and sample rates are allowed for AC3.
+  \item Is given sample rate allowed for SPDIF output?
+  \item Does sound card support given SPDIF format?
+  \end{itemize}
+  If all checks passed, filter enables AC3 encode mode.
+\end{enumerate}
+
+\subsection{SPDIF output support}
+
+When filter tries to open SPDIF output it first asks: “Dear sound card, would you please playback SPDIF with X sample rate?”. If sound card permits this, filter starts an SPDIF transmission. If sound card refuses filter disables SPDIF output.
+
+The reason for this dialogue to fail may be:
+\begin{itemize}
+\item Another application uses SPDIF.
+\item Sound card does not support SPDIF output at all.
+\item Driver does not support SPDIF output (USB sound cards).
+\item Driver does not support dynamical format change to/from SPDIF (SB Live 24bit).
+\item Sample rate is not supported for SPDIF.
+\end{itemize}
+
+Filter cannot get to know why sound card refuses SPDIF transmission. It can just to establish a fact. You can disable this dialogue with \optname{Check output format support} option on System page. But in most cases, you will just get no sound at all instead of correct PCM output (that is better than nothing). So it is strongly not recommended to disable this option.
+
+\subsection{SPDIF-as-PCM trick}
+
+Sound card tricking may solve problems number 3 and 4. Because SPDIF data is sent instead if PCM data we can trick the sound card and say that we want to transmit PCM data, but send compressed stream instead. This is controlled by \optname{Output SPDIF as PCM} option.
+
+However, this trick works only when sound card does not alter our data and transmit it bit-by-bit directly to the SPDIF output:
+\begin{itemize}
+\item Volume settings in both sound card mixer and player must be at maximum level. Otherwise, sound card applies gain to our compressed stream and breaks it.
+\item It must be no other sound playing. Otherwise, sound card will mix PCM and compressed data what leads to destruction of compressed data structure. Therefore, you must disable any background music. Any sound during movie playback (like ICQ notification, or something other) will temporarily break normal playback and produce loud noise.
+\item Sound card must truly support the given sample rate. Many sound cards support only 48 kHz and do sample rate conversion for all sounds with other sample rates. Sample rate conversion like any other manipulation breaks compressed sound stream.
+\end{itemize}
+
+Filter cannot control first two conditions so you must set volume and disable all background sounds manually. But filter may verify sample rate and prohibit SPDIF transmissions with incorrect sample rates (thus protecting you from the loud noise caused by broken compressed stream and eliminating the need to enable/disable SPDIF each time for movies with different sample rates).
+
+\warning{This option may force the filter to produce LOUD noise if used incorrectly!}
+
+\subsection{SPDIF sample rate check}
+
+SPDIF sample rate check is controlled by \optname{Restrict sample rates} option. If this option is enabled, SPDIF transmission will be enabled only for streams with allowed sample rates. Generally, this option is required when SPDIF-as-PCM trick is used.
+
+Suppose that we have sound card that supports only 48 kHz. With SPDIF-as-PCM trick, we transmit compressed data in PCM output mode. Sound card agrees to playback sound any sample rate but does sample rate conversion for “incorrect” sample rates. Therefore, movies with 48 kHz audio track will be played correctly and 44.1 kHz tracks will produce terrible noise. To eliminate this we must enable SPDIF transmission only for “good” sample rates and do uncompressed output for any other sample rate.
+
+This option is useful anyway. Without SPDIF-as-PCM trick, it forces the filter to report about disallowed sample rate instead of simply stating that sound card cannot do SPDIF transmission.
+
+\subsection{Why not to encode stereo PCM}
+
+When encoding to AC3 loss of quality occurs (it is an axiom for any lossy encoding format like mp3, ac3, ogg, aac and others). It is the only way to transmit 6 channels over SPDIF with reasonable low distortions. But if we have just a stereo track, why we need to encode it and loose quality? As was said before SPDIF interface was initially used to transmit stereo sound. Therefore, when we have a stereo track it is better not to encode it to AC3 but transmit it 'as is' without any quality loss.
+
+Stereo sound encoding is controlled by \optname{Do not encode stereo PCM} option. When this option is enabled, stereo output will not be encoded. Note that SPDIF status will be set to ‘Disabled’ even in case when SPDIF is enabled and allowed. Sometimes it may be dubious why. Nevertheless, it is recommended not to disable this option.
+
+This option affects only stereo output. Multi-channel output will be encoded anyway (unless \optname{Use AC3 encoder} option is disabled).
+
+\subsection{SPDIF status reporting}
+
+At the “Decoder info” box filter displays processing information. If \optname{Use SPDIF} checkbox is enabled current SPDIF status with all SPDIF options is also shown there. Example:
+
+\begin{verbatim}
+Input format: DTS - 44100
+User format: PCM16 - 0
+Output format: PCM16 3/2.1 (5.1) 44100
+
+Use SPDIF
+  SPDIF status: Disabled (Disallowed sample rate)
+  SPDIF passthrough for: AC3 DTS
+  Use AC3 encoder (do not encode stereo PCM)
+  Check SPDIF sample rate (allow: 48kHz)
+  Query for SPDIF output support
+\end{verbatim}
+
+This means that we have 44.1 kHz DTS track at input. Current output format is PCM 5.1 (6 channels) 44.1 kHz. \optname{Use SPDIF} is enabled but transmission was not set because sample rate is prohibited for SPDIF transmission. Below we can see that sample rate check is enabled and 48 kHz is the only allowed sample rate.
+
+Let us summarize reasons why SPDIF transmission may not be possible:
+\begin{description}
+\item [Do not encode stereo PCM] - Filter is set to produce stereo output and \optname{Do not encode stereo PCM} option is enabled.
+\item [Disallowed sample rate] - \optname{Restrict SPDIF sample rate} option is enabled and sample rate of the current track is not allowed for SPDIF transmission.
+\item [SPDIF output is not supported] - Sound card refused to open SPDIF output channel. See SPDIF output support for more info.
+\item [AC3 encoder disabled] - SPDIF passthrough is forbidden and \optname{Use AC3 encoder} option is disabled.
+\end{description}
+
+\subsection{SPDIF pause bug}
+
+As was said before, some sound cards have a bug with pausing of SPDIF transmission. After pause, sound card switches to PCM output mode and does not restore SPDIF transmission afterwards. In this case, sound card requires complete reinit (i.e. we need to close current audio playback and open it back again) after each pause/seek command. It is controlled by \optname{Force sound card to reinit after seek/pause} option. Enable this option ONLY if your sound card has this bug because it breaks normal data flow in DirectShow and may not be compatible with some players.
+
+Technical details\\
+It is no direct support for sound card reinit neither in DirectShow nor in any media player. But solution exists. Filter changes output format to PCM and sends several null samples. So sound card has to close current SPDIF output channel, and open PCM output. After that, filter changes output format back to SPDIF and continues transmission from the point it was stopped. Sound card has to open a new SPDIF output channel and starts playback normally.
+
+Details for programmers\\
+Problem occurs with IDirectSoundBuffer::Stop() call:
+
+\begin{verbatim}
+IDirectSoundBuffer8 *ds_buf;
+
+// [...] open, init, start playback.
+
+ds_buf->Stop();
+// Now sound card switches to PCM mode
+// and restores all PCM sounds muted during SPDIF transmission.
+
+ds_buf->Play(0, 0, DSBPLAY_LOOPING);
+// Now sound card must continue SPDIF transmission.
+// But some cards with the bug do not do this...
+
+\end{verbatim}
+
+It does not matter that Play() is called just after Stop() or after some time. Anyway after Stop() call SPDIF transmission stops forever.
+
+\subsection{SPDIF and post-processing}
+
+Some players may use post-processing filters (equalizers, DRC, etc). Usually such filters do not support SPDIF because SPDIF stream cannot be processed at all.
+
+Normally when \optname{Use SPDIF} option is enabled filter publish two output formats: SPDIF and PCM at the same time. This means that filter says: "I can do both PCM and SPDIF output, choose one that you can use, but know that SPDIF is preferred". If sound card that does not support SPDIF, it can choose PCM and work properly with using of AC3Filter. In addition, if a movie contains sound track that cannot be SPDIF'ed on current sound card (for example 44100Hz track), AC3Filter will switch to PCM playback automatically.
+
+Now let's consider a media player that does audio post-processing. If player see that AC3Filter can do PCM output it decides to do post-processing and inserts post-processing filter after AC3Filter. When playback starts, AC3Filter asks next filter (that is post-processing filter): "Could you accept SPDIF stream"? Post-processing filter refuses and AC3Fitler starts PCM playback and reports: "SPDIF output is not supported".
+
+The best way to force SPDIF to work in this case is to disable ALL audio post-processing options of your player (equalizers, DRC, etc) or use another player. Some filters installed with super-mega-codec-packs may be used automatically. In this case, it's better to uninstall such filters.
+
+But sometimes it's very hard to determine how to force the player not to use post-processing. SPDIF-as-PCM trick cannot force the problem because post-processing filter will certainly break the SPDIF stream. In this case it is possible for AC3Filter not to publish PCM when SPDIF is enabled with \optname{Disallow PCM output in SPDIF mode} option. When this option is enabled filter says that it supports only SPDIF output. Player cannot use post-processing filter after AC3Filter (because post-processing filter will refuse to work with SPDIF stream) and will be forced to connect AC3Filter directly to sound card renderer filter.
+
+\warning{Using \optname{Disallow PCM output in SPDIF mode} option may force the player not to use AC3Filter. If an audio track of a movie cannot be SPDIF'ed, the player will not use AC3Filter. You have to disable \optname{Use SPDIF} option to use AC3Filter with this film and enable it back again if you want to watch another movie in SPDIF mode.}
+
+\end{document}
