@@ -44,3 +44,6 @@ doc\*.css
 
 # Language build files
 lang\lang
+
+# Config
+cmd/config.cmd

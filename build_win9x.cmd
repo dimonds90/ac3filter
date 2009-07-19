@@ -11,7 +11,7 @@ rem Clean all
 
 cd ../valib
 call clean.cmd
-cd ../ac3filter2
+cd ../ac3filter
 call clean.cmd
 
 del ..\ac3filter_%ver_file%_win9x.exe

@@ -13,7 +13,7 @@ rem Clean all and make the source distribution
 
 cd ../valib
 call clean.cmd
-cd ../ac3filter2
+cd ../ac3filter
 call clean.cmd
 
 del ..\ac3filter_%ver_file%.exe
@@ -21,14 +21,14 @@ del ..\ac3filter_%ver_file%_lite.exe
 del ..\ac3filter_%ver_file%_src.zip
 
 set src_arc="ac3filter_%ver_file%_src.zip"
-set src_files=ac3filter2\*.* valib\*.*
+set src_files=ac3filter\*.* valib\*.*
 
 call vars.cmd
 cd ..
 if exist "%src_arc%" del "%src_arc%"
 %make_src%
 if errorlevel 1 goto fail
-cd ac3filter2
+cd ac3filter
 
 
 rem -------------------------------------------------------
