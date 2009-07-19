@@ -1,4 +1,4 @@
-v1.62b - not yet released
+v1.62b - 17.07.2009
   * Precise PCM passthrough
   ! Fixed: Noise on LPCM 20/24bit tracks
   ! Fixed: Delay settings did not work after restart.
