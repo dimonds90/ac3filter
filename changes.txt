@@ -1,4 +1,7 @@
 v1.63b - not released yet
+  * AC3 decoding bug fixed (ID 1)
+  + Command line interface for AC3Config utility
+
   + Swedish translation added (thanks to Niclas Burgren)
   * French language updated (thanks to Philippe AGUESSE)
 

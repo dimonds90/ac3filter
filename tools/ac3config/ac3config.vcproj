@@ -311,6 +311,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\cmd_line.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\cmd_line.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\filter\guids.cpp"
 			>
 		</File>
