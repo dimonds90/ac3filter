@@ -1,3 +1,7 @@
+v1.63b - not released yet
+  + Swedish translation added (thanks to Niclas Burgren)
+  * French language updated (thanks to Philippe AGUESSE)
+
 v1.62b - not yet released
   * Precise PCM passthrough
   ! Fixed: Noise on LPCM 20/24bit tracks
