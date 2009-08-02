@@ -1,11 +1,12 @@
 v1.63b - not released yet
-  * AC3 decoding bug fixed (ID 1)
-  + Command line interface for AC3Config utility
+  * AC3 decoding bug fixed (Issue 1)
+  + Remote control using windows messages
+  + Command line interface for AC3Config utility (run ac3config /? for help)
 
   + Swedish translation added (thanks to Niclas Burgren)
   * French language updated (thanks to Philippe AGUESSE)
 
-v1.62b - not yet released
+v1.62b - 17.07.2009
   * Precise PCM passthrough
   ! Fixed: Noise on LPCM 20/24bit tracks
   ! Fixed: Delay settings did not work after restart.

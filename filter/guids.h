@@ -61,6 +61,10 @@ void cr2crlf(char *buf, size_t size);
 #define DTS_CONV_16BIT   1
 #define DTS_CONV_14BIT   2
 
+// Notification messages for AC3Filter tray
+#define WM_TRAY_ICON (WM_USER + 10)
+#define WM_PRESET    (WM_USER + 11)
+
 ///////////////////////////////////////////////////////////////////////////////
 // Media types
 ///////////////////////////////////////////////////////////////////////////////

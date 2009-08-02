@@ -5,22 +5,30 @@
 #include "registry.h"
 #include "..\..\filter\guids.h"
 #include "cmd_line.h"
+#include "crc.h"
 
-const char *usage_title = "Usage";
+const char *usage_title = "AC3Config usage";
 const char *usage_text = 
-"AC3Filter configuration utility:\n"
+"AC3Filter configuration utility\n"
 "\n"
 "Usage:\n"
-"> ac3config [/?] [/preset PRESET_NAME] [/load]\n"
+"> ac3config [/?] [/preset PRESET] [/remote PRESET] [/q]\n"
 "\n"
 "Where:\n"
-"  /?      - show this help\n"
+"  /? - show this help\n"
+"  /q - be quiet (do not show the config dialog)\n"
 "  /preset - load the specified preset\n"
-"  /load   - just load the preset, do not show the dialog\n"
+"  /remote - find an active AC3Filter and change the preset for it.\n"
 "\n"
-"Example:\n"
-"> ac3config /preset \"my preset\" /load\n"
-"Load 'my preset' preset and exit (do not show dialog).\n";
+"Examples:\n"
+"> ac3config\n"
+"Show AC3Filter configuration dialog.\n"
+"\n"
+"> ac3config /preset MyPreset /q\n"
+"Load 'MyPreset' preset and exit (do not show dialog). Note, that this command does not affect current playback, it just changes the default preset. Only applications started later are affected.\n"
+"\n"
+"> ac3config /remote \"Enable SPDIF\" /q\n"
+"You can specify such command line at your infrared control application to control the current playback. Note that default preset is not affected in this case. Applications started later will use an old default preset.\n";
 
 const char *offline_title = "WARNING!";
 const char *offline_text =
@@ -50,7 +58,8 @@ INT APIENTRY WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR pCmdLine,
 
   CmdLine cmd_line(pCmdLine);
   LPCSTR preset = 0;
-  bool load_preset = false;
+  LPCSTR remote_preset = 0;
+  bool quiet = false;
 
 
   /////////////////////////////////////////////////////////
@@ -71,15 +80,47 @@ INT APIENTRY WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR pCmdLine,
       continue;
     }
 
-    if (strcmp(cmd_line[i], "/load") == 0)
+    if (strcmp(cmd_line[i], "/remote") == 0)
     {
-      load_preset = true;
+      if (cmd_line.count() <= i + 1)
+      {
+        usage();
+        return -1;
+      }
+
+      i++;
+      remote_preset = cmd_line[i];
+      continue;
+    }
+
+    if (strcmp(cmd_line[i], "/q") == 0)
+    {
+      quiet = true;
       continue;
     }
 
     usage();
     return -1;
   }
+
+  /////////////////////////////////////////////////////////
+  // Remote control
+
+  if (remote_preset)
+  {
+    HWND control_wnd = FindWindow("AC3Filter control", 0);
+    if (control_wnd)
+    {
+      uint32_t preset_hash = 0;
+      size_t len = strlen(remote_preset);
+      preset_hash = crc32.calc(preset_hash, (uint8_t *)remote_preset, len);
+      preset_hash = crc32.crc_get(preset_hash);
+      PostMessage(control_wnd, WM_PRESET, 0, preset_hash);
+    }
+  }
+
+  if (!preset && quiet)
+    return 0;
 
   /////////////////////////////////////////////////////////
   // Create filter
@@ -103,11 +144,11 @@ INT APIENTRY WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR pCmdLine,
     RegistryKey reg(buf);
 
     dec->load_params(&reg, AC3FILTER_ALL);
-    if (load_preset)
+    if (quiet)
       dec->save_params(0, AC3FILTER_ALL);
   }
 
-  if (load_preset)
+  if (quiet)
   {
     dec->Release();
     CoUninitialize();
