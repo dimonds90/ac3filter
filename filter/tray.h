@@ -35,6 +35,7 @@ public:
   void config();
   void popup_menu();
   void preset(const char *preset);
+  void preset(int hash);
 };
 
 #endif

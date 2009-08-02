@@ -8,8 +8,7 @@
 #include "win32\thread.h"
 #include "resource_ids.h"
 #include "wincomp.h"
-
-#define WM_TRAY_ICON (WM_USER + 10)
+#include "crc.h"
 
 #define CMD_CONFIG       (100)
 #define CMD_FIRST_PRESET (200)
@@ -244,6 +243,34 @@ AC3FilterTray::preset(const char *preset)
 }
 
 void
+AC3FilterTray::preset(int hash)
+{
+  HKEY key;
+  const int preset_size = 256;
+  char preset_buf[preset_size];
+  uint32_t preset_hash = 0;
+
+  if (RegOpenKeyEx(HKEY_CURRENT_USER, REG_KEY_PRESET, 0, KEY_READ, &key) == ERROR_SUCCESS)
+  {
+    int i = 0;
+    DWORD len = preset_size;
+    while (RegEnumKeyEx(key, i++, (LPTSTR)preset_buf, &len, 0, 0, 0, 0) == ERROR_SUCCESS)
+    {
+      preset_hash = 0;
+      preset_hash = crc32.calc(preset_hash, (uint8_t *)preset_buf, len);
+      preset_hash = crc32.crc_get(preset_hash);
+      len = preset_size;
+      if (preset_hash == hash)
+        break;
+    }
+    RegCloseKey(key);
+  }
+
+  if (preset_hash && preset_hash == hash)
+    preset(preset_buf);
+}
+
+void
 AC3FilterTray::config()
 {
   if (!dialog || !filter)
@@ -293,6 +320,10 @@ AC3FilterTray::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
           return 0;
       }
       break;
+
+    case WM_PRESET:
+      iam->preset(lParam);
+      return 0;
 
     ///////////////////////////////////
     // Menu
