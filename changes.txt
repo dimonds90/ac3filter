@@ -1,6 +1,7 @@
 v1.63b - not released yet
   * AC3 decoding bug fixed (Issue 1)
   + Remote control using windows messages
+  + Write version number to the registry on install (issue 17)
   + Command line interface for AC3Config utility (run ac3config /? for help)
 
   + Swedish translation added (thanks to Niclas Burgren)

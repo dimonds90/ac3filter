@@ -4,8 +4,8 @@ set ver_text=%1
 set ver_file=%2
 set timestamp=%date:~8,2%%date:~3,2%%date:~0,2%%time:~0,2%%time:~3,2%
 
-if "%ver_text%"=="" set ver_text=test%timestamp%
-if "%ver_file%"=="" set ver_file=test%timestamp%
+if "%ver_text%"=="" set ver_text=test %timestamp%
+if "%ver_file%"=="" set ver_file=test_%timestamp%
 
 rem -------------------------------------------------------
 rem Clean all and make the source distribution

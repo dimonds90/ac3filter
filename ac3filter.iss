@@ -106,6 +106,9 @@ Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Lang_Di
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "tray"; ValueData: 1
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "refresh_time"; ValueData: 50
 
+; Version
+Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Version"; ValueData: "{#appver}"
+
 ; Clear DirectShow filter cache on install and ununstall
 Root: HKCU; Subkey: "Software\Microsoft\Multimedia\ActiveMovie\Filter Cache"; Flags: deletekey uninsdeletekey noerror
 
