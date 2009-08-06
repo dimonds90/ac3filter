@@ -132,7 +132,6 @@ void
 AC3Filter::reset()
 {
   dec.reset();
-  // sink->send_discontinuity();
   cpu.reset();
 }
 
@@ -305,7 +304,11 @@ AC3Filter::Receive(IMediaSample *in)
     if (dec.get_input() != in_spk)
     {
       DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change", this));
+
       flush();
+      reset();
+      sink->send_discontinuity();
+
       if (!set_input(in_spk))
         return VFW_E_INVALIDMEDIATYPE;
     }
@@ -315,14 +318,18 @@ AC3Filter::Receive(IMediaSample *in)
 
   /////////////////////////////////////////////////////////
   // Discontinuity
+  // After receiving discontinuity we must:
+  // * Flush the buffered data (send some samples)
+  // * Drop unfinished buffers
+  // * Mark next sample with discontinuity flag
 
   if (in->IsDiscontinuity() == S_OK)
   {
     DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Discontinuity", this));
-    sink->send_discontinuity();
-    // we have to reset because we may need to drop incomplete frame in the decoder
+
     flush();
     reset();
+    sink->send_discontinuity();
   }
 
   /////////////////////////////////////////////////////////
@@ -371,7 +378,7 @@ AC3Filter::StartStreaming()
   reset();
 
   // It's right time to show the tray icon
-  // Applicaqtion may construct several graphs,
+  // Application may construct several graphs,
   // but we're interested only in working graphs...
   if (tray)
     tray_ctl.show();
