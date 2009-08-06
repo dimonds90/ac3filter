@@ -522,11 +522,13 @@ AC3Filter::Run(REFERENCE_TIME tStart)
 
     CAutoLock lock(&m_csReceive);
 
-    uint8_t *buf = new uint8_t[reinit * 4];
-    memset(buf, 0, reinit * 4);
+    Rawdata buf(reinit * 4);
+    buf.zero();
 
     Chunk chunk;
-    chunk.set_rawdata(Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate, 32767), buf, reinit * 4);
+    chunk.set_rawdata(
+      Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate),
+      buf, buf.size());
 
     BeginFlush();
     EndFlush();
