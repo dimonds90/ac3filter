@@ -98,6 +98,14 @@ SOURCE=.\ac3config.rc
 # End Source File
 # Begin Source File
 
+SOURCE=.\cmd_line.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\cmd_line.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\filter\guids.cpp
 # End Source File
 # Begin Source File
@@ -115,6 +123,10 @@ SOURCE=.\registry.cpp
 # Begin Source File
 
 SOURCE=.\registry.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\resource.h
 # End Source File
 # End Target
 # End Project

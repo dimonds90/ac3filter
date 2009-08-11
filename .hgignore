@@ -3,6 +3,8 @@ syntax:glob
 # Build files
 **\Debug
 **\Release
+**\Debug_Libc
+**\Release_Libc
 
 # Visual studio intermediate files
 *.aps
