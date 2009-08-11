@@ -17,7 +17,7 @@ const char *usage_text =
 "Where:\n"
 "  /? - show this help\n"
 "  /q - be quiet (do not show the config dialog)\n"
-"  /preset - load the specified preset\n"
+"  /preset - set the default preset\n"
 "  /remote - find an active AC3Filter and change the preset for it.\n"
 "\n"
 "Examples:\n"
@@ -25,7 +25,7 @@ const char *usage_text =
 "Show AC3Filter configuration dialog.\n"
 "\n"
 "> ac3config /preset MyPreset /q\n"
-"Load 'MyPreset' preset and exit (do not show dialog). Note, that this command does not affect current playback, it just changes the default preset. Only applications started later are affected.\n"
+"Load 'MyPreset' preset and exit (do not show the dialog). Note, that this command does not affect current playback, it just changes the default preset. Only applications started later are affected.\n"
 "\n"
 "> ac3config /remote \"Enable SPDIF\" /q\n"
 "You can specify such command line at your infrared control application to control the current playback. Note that default preset is not affected in this case. Applications started later will use an old default preset.\n";
