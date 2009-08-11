@@ -1,0 +1,16 @@
+Debug
+Debug_libc
+Release
+Release_libc
+Perf
+x64
+
+*.aps
+*.ncb
+*.plg
+*.opt
+*.dep
+*.suo
+*.user
+
+ChangeLog
