@@ -1,3 +1,6 @@
+v1.64b - unreleased
+  * Dutch language (thanks to Ernst Klamer)
+
 v1.63b - 11.08.2009
   * AC3 decoding bug fixed (Issue 1)
   * Channel order bug fixed (issue 43)
