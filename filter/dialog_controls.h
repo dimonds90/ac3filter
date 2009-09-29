@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 326
+// Total controls: 343
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -244,6 +244,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_CHK_AC3, N_("IDC_CHK_AC3"), "AC3", "" },
   /* TRANSLATORS: DTS */
   { IDC_CHK_DTS, N_("IDC_CHK_DTS"), "DTS", "" },
+  /* TRANSLATORS: LPCM */
+  { IDC_CHK_LPCM, N_("IDC_CHK_LPCM"), "LPCM", "" },
   /* TRANSLATORS: MPEG Audio */
   { IDC_CHK_MPA, N_("IDC_CHK_MPA"), "MPEG Audio", "" },
   /* TRANSLATORS: PCM */
@@ -318,6 +320,14 @@ static const ControlDesc dialog_controls[] =
   { IDC_LBL_IN_SL, N_("IDC_LBL_IN_SL"), "SL", "" },
   /* TRANSLATORS: SR */
   { IDC_LBL_IN_SR, N_("IDC_LBL_IN_SR"), "SR", "" },
+  { IDC_LEVEL_IN1, "IDC_LEVEL_IN1", "", "" },
+  { IDC_LEVEL_IN2, "IDC_LEVEL_IN2", "", "" },
+  { IDC_LEVEL_IN3, "IDC_LEVEL_IN3", "", "" },
+  { IDC_LEVEL_IN4, "IDC_LEVEL_IN4", "", "" },
+  { IDC_LEVEL_IN5, "IDC_LEVEL_IN5", "", "" },
+  { IDC_LEVEL_IN6, "IDC_LEVEL_IN6", "", "" },
+  { IDC_LEVEL_IN7, "IDC_LEVEL_IN7", "", "" },
+  { IDC_LEVEL_IN8, "IDC_LEVEL_IN8", "", "" },
 
   // Interface options
   /* TRANSLATORS: Interface options */
@@ -486,6 +496,14 @@ static const ControlDesc dialog_controls[] =
   { IDC_LBL_OUT_SR, N_("IDC_LBL_OUT_SR"), "SR", "" },
   /* TRANSLATORS: Sub */
   { IDC_LBL_OUT_SW, N_("IDC_LBL_OUT_SW"), "Sub", "" },
+  { IDC_LEVEL_OUT1, "IDC_LEVEL_OUT1", "", "" },
+  { IDC_LEVEL_OUT2, "IDC_LEVEL_OUT2", "", "" },
+  { IDC_LEVEL_OUT3, "IDC_LEVEL_OUT3", "", "" },
+  { IDC_LEVEL_OUT4, "IDC_LEVEL_OUT4", "", "" },
+  { IDC_LEVEL_OUT5, "IDC_LEVEL_OUT5", "", "" },
+  { IDC_LEVEL_OUT6, "IDC_LEVEL_OUT6", "", "" },
+  { IDC_LEVEL_OUT7, "IDC_LEVEL_OUT7", "", "" },
+  { IDC_LEVEL_OUT8, "IDC_LEVEL_OUT8", "", "" },
   { IDC_OUT_C, "IDC_OUT_C", "", "" },
   { IDC_OUT_L, "IDC_OUT_L", "", "" },
   { IDC_OUT_R, "IDC_OUT_R", "", "" },

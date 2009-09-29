@@ -15,9 +15,9 @@ protected:
 
   bool  delay;
   int   delay_units;
-  float delays[NCHANNELS];
+  float delays[CH_NAMES];
 
-  DoubleEdit edt_delay[NCHANNELS];
+  DoubleEdit edt_delay[6];
 
 public:
   ControlDelay(HWND dlg, IAudioProcessor *proc);

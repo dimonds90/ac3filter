@@ -4,6 +4,8 @@
 #include "../resource_ids.h"
 #include "control_matrix.h"
 
+#define MATRIX_CHANNELS 6
+
 static const int controls[] =
 {
   IDC_GRP_MATRIX,
@@ -30,7 +32,7 @@ static const int controls[] =
   0
 };
 
-static const int matrix_controls[NCHANNELS][NCHANNELS] =
+static const int matrix_controls[MATRIX_CHANNELS][MATRIX_CHANNELS] =
 {
   { IDC_EDT_L_L,   IDC_EDT_C_L,   IDC_EDT_R_L,   IDC_EDT_SL_L,   IDC_EDT_SR_L,   IDC_EDT_LFE_L },
   { IDC_EDT_L_C,   IDC_EDT_C_C,   IDC_EDT_R_C,   IDC_EDT_SL_C,   IDC_EDT_SR_C,   IDC_EDT_LFE_C },
@@ -39,6 +41,8 @@ static const int matrix_controls[NCHANNELS][NCHANNELS] =
   { IDC_EDT_L_SR,  IDC_EDT_C_SR,  IDC_EDT_R_SR,  IDC_EDT_SL_SR,  IDC_EDT_SR_SR,  IDC_EDT_LFE_SR },
   { IDC_EDT_L_LFE, IDC_EDT_C_LFE, IDC_EDT_R_LFE, IDC_EDT_SL_LFE, IDC_EDT_SR_LFE, IDC_EDT_LFE_LFE }
 };
+
+static const int matrix_ch[MATRIX_CHANNELS] = { CH_L, CH_C, CH_R, CH_SL, CH_SR, CH_LFE };
 
 static const double min_gain_level = -20.0;
 static const double max_gain_level = +20.0;
@@ -59,8 +63,8 @@ ControlMatrix::~ControlMatrix()
 
 void ControlMatrix::init()
 {
-  for (int i = 0; i < NCHANNELS; i++)
-    for (int j = 0; j < NCHANNELS; j++)
+  for (int i = 0; i < MATRIX_CHANNELS; i++)
+    for (int j = 0; j < MATRIX_CHANNELS; j++)
       edt_matrix[i][j].link(hdlg, matrix_controls[i][j]);
 
   SendDlgItemMessage(hdlg, IDC_SLI_LFE,    TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
@@ -108,10 +112,10 @@ void ControlMatrix::update()
 void ControlMatrix::update_matrix()
 {
   proc->get_matrix(&matrix);
-  for (int i = 0; i < NCHANNELS; i++)
-    for (int j = 0; j < NCHANNELS; j++)
+  for (int i = 0; i < MATRIX_CHANNELS; i++)
+    for (int j = 0; j < MATRIX_CHANNELS; j++)
     {
-      edt_matrix[i][j].update_value(matrix[j][i]);
+      edt_matrix[i][j].update_value(matrix[matrix_ch[j]][matrix_ch[i]]);
       SendDlgItemMessage(hdlg, matrix_controls[j][i], EM_SETREADONLY, auto_matrix, 0);
     }
 }
@@ -135,11 +139,11 @@ ControlMatrix::cmd_result ControlMatrix::command(int control, int message)
     proc->get_matrix(&matrix);
     bool update_matrix = false;
 
-    for (int i = 0; i < NCHANNELS; i++)
-      for (int j = 0; j < NCHANNELS; j++)
+    for (int i = 0; i < MATRIX_CHANNELS; i++)
+      for (int j = 0; j < MATRIX_CHANNELS; j++)
         if (control == matrix_controls[i][j])
         {
-          matrix[j][i] = edt_matrix[i][j].value;
+          matrix[matrix_ch[j]][matrix_ch[i]] = edt_matrix[i][j].value;
           update_matrix = true;
         }
 

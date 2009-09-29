@@ -19,33 +19,29 @@ static int controls[] =
 // Speakers list definition
 ///////////////////////////////////////////////////////////////////////////////
 
-static const char *spklist[] = 
+static const struct { int mask; int relation; const char *text; } spklist[] = 
 {
-  N_("AS IS (no change)"),
-  N_("1/0 - mono"),
-  N_("2/0 - stereo"),
-  N_("3/0 - 3 front"),
-  N_("2/1 - surround"),
-  N_("3/1 - surround"),
-  N_("2/2 - quadro"),
-  N_("3/2 - 5 channels"),
-  N_("1/0+SW 1.1 mono"),
-  N_("2/0+SW 2.1 stereo"),
-  N_("3/0+SW 3.1 front"),
-  N_("2/1+SW 3.1 surround"),
-  N_("3/1+SW 4.1 surround"),
-  N_("2/2+SW 4.1 quadro"),
-  N_("3/2+SW 5.1 channels"),
-  N_("Dolby Surround/ProLogic"),
-  N_("Dolby ProLogic II"),
+  { 0,              0, N_("Do not change") },
+  { MODE_1_0,       0, N_("Mono") },
+  { MODE_2_0,       0, N_("Stereo") },
+  { MODE_2_2,       0, N_("Quadro") },
+  { MODE_3_2,       0, N_("5 channels") },
+
+  { MODE_2_0_LFE,   0, N_("2.1 Stereo") },
+  { MODE_2_2_LFE,   0, N_("4.1 Quadro") },
+  { MODE_3_2_LFE,   0, N_("5.1 (6 channels)") },
+  { MODE_3_2_2_LFE, 0, N_("7.1 (8 channels)") },
+
+  { MODE_2_0, RELATION_DOLBY,  N_("Dolby Surround/ProLogic") },
+  { MODE_2_0, RELATION_DOLBY2, N_("Dolby ProLogic II") },
 };
 
-static const char *fmtlist[] = 
+static const struct {int format; const char *text; } fmtlist[] = 
 {
-  N_("PCM 16bit"),
-  N_("PCM 24bit"),
-  N_("PCM 32bit"),
-  N_("PCM Float"),
+  { FORMAT_PCM16, N_("PCM 16bit") },
+  { FORMAT_PCM24, N_("PCM 24bit") },
+  { FORMAT_PCM32, N_("PCM 32bit") },
+  { FORMAT_PCMFLOAT, N_("PCM Float") },
 };
 
 static const int rates_list[] =
@@ -58,81 +54,32 @@ static Speakers list2spk(LRESULT ispk, LRESULT ifmt, int sample_rate)
   int format = FORMAT_PCM16;
   int mask = MODE_STEREO;
   int relation = NO_RELATION;
-  sample_t level = 32767;
 
-  switch (ispk)
+  if (ispk >= 0 && ispk < array_size(spklist))
   {
-    case  0: mask = 0;        break;
-    case  1: mask = MODE_1_0; break;
-    case  2: mask = MODE_2_0; break;
-    case  3: mask = MODE_3_0; break;
-    case  4: mask = MODE_2_1; break;
-    case  5: mask = MODE_3_1; break;
-    case  6: mask = MODE_2_2; break;
-    case  7: mask = MODE_3_2; break;
-           
-    case  8: mask = MODE_1_0 | CH_MASK_LFE; break;
-    case  9: mask = MODE_2_0 | CH_MASK_LFE; break;
-    case 10: mask = MODE_3_0 | CH_MASK_LFE; break;
-    case 11: mask = MODE_2_1 | CH_MASK_LFE; break;
-    case 12: mask = MODE_3_1 | CH_MASK_LFE; break;
-    case 13: mask = MODE_2_2 | CH_MASK_LFE; break;
-    case 14: mask = MODE_3_2 | CH_MASK_LFE; break;
-
-    case 15: mask = MODE_STEREO; relation = RELATION_DOLBY; break;
-    case 16: mask = MODE_STEREO, relation = RELATION_DOLBY2; break;
+    mask = spklist[ispk].mask;
+    relation = spklist[ispk].relation;
   }
 
-  switch (ifmt)
-  {
-    case 0: format = FORMAT_PCM16;    level = 32767; break;
-    case 1: format = FORMAT_PCM24;    level = 8388607; break;
-    case 2: format = FORMAT_PCM32;    level = 2147483647; break;
-    case 3: format = FORMAT_PCMFLOAT; level = 1.0; break;
-  }
+  if (ifmt >= 0 && ifmt < array_size(fmtlist))
+    format = fmtlist[ifmt].format;
 
-  return Speakers(format, mask, sample_rate, level, relation);
+  return Speakers(format, mask, sample_rate, -1, relation);
 }
 
 static int spk2ispk(Speakers spk)
 {
-  switch (spk.relation)
-  {
-    case RELATION_DOLBY:   return 15;
-    case RELATION_DOLBY2:  return 16;
-    default:
-      switch (spk.mask)
-      {
-        case 0:            return 0;
-        case MODE_1_0:     return 1;
-        case MODE_2_0:     return 2;
-        case MODE_3_0:     return 3;
-        case MODE_2_1:     return 4;
-        case MODE_3_1:     return 5;
-        case MODE_2_2:     return 6;
-        case MODE_3_2:     return 7;
-                                  
-        case MODE_1_0 | CH_MASK_LFE: return  8;
-        case MODE_2_0 | CH_MASK_LFE: return  9;
-        case MODE_3_0 | CH_MASK_LFE: return 10;
-        case MODE_2_1 | CH_MASK_LFE: return 11;
-        case MODE_3_1 | CH_MASK_LFE: return 12;
-        case MODE_2_2 | CH_MASK_LFE: return 13;
-        case MODE_3_2 | CH_MASK_LFE: return 14;
-      }
-  }
+  for (int i = 0; i < array_size(spklist); i++)
+    if (spk.mask == spklist[i].mask && spk.relation == spklist[i].relation)
+      return i;
   return 0;
 }
 
 static int spk2ifmt(Speakers spk)
 {
-  switch (spk.format)
-  {
-    case FORMAT_PCM16:    return 0;
-    case FORMAT_PCM24:    return 1;
-    case FORMAT_PCM32:    return 2;
-    case FORMAT_PCMFLOAT: return 3;
-  }
+  for (int i = 0; i < array_size(fmtlist); i++)
+    if (spk.format == fmtlist[i].format)
+      return i;
   return 0;
 }
 
@@ -159,13 +106,13 @@ void ControlSpk::init()
 
   SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < array_size(spklist); i++)
-    SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LPARAM) gettext_wrapper(spklist[i]));
+    SendDlgItemMessage(hdlg, IDC_CMB_SPK, CB_ADDSTRING, 0, (LPARAM) gettext(spklist[i].text));
 
   SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < array_size(fmtlist); i++)
-    SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_ADDSTRING, 0, (LPARAM) gettext_wrapper(fmtlist[i]));
+    SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_ADDSTRING, 0, (LPARAM) gettext(fmtlist[i].text));
 
-  SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)_("AS IS (no change)"));
+  SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)_("Do not change"));
   for (i = 1; i < array_size(rates_list); i++)
   {
     LRESULT index = SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)itoa(rates_list[i], buf, 10));

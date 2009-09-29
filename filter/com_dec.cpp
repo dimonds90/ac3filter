@@ -6,8 +6,8 @@
 #define EQ_TYPE_MULTICHANNEL 2
 #define EQ_TYPE_ALL 3
 
-static const char *ch_names[NCHANNELS] = 
-{ "L", "C", "R", "SL", "SR", "LFE" };
+static const char *ch_names[CH_NAMES] = 
+{ "L", "C", "R", "SL", "SR", "LFE", "CL", "CR", "BL", "BC", "BR" };
 
 COMDecoder::COMDecoder(IUnknown *_outer, int _nsamples): dvd(_nsamples)
 { 
@@ -616,7 +616,7 @@ STDMETHODIMP COMDecoder::get_eq_channel(int *_ch)
 }
 STDMETHODIMP COMDecoder::set_eq_channel(int _ch)
 {
-  if (_ch == CH_NONE || _ch >= 0 && _ch < NCHANNELS)
+  if (_ch == CH_NONE || _ch >= 0 && _ch < CH_NAMES)
     cur_ch = _ch;
   return S_OK;
 }
@@ -854,18 +854,18 @@ void COMDecoder::save_eq(Config *conf, int preset)
   }
 
   if (eq_type == EQ_TYPE_MULTICHANNEL || eq_type == EQ_TYPE_ALL)
-    for (int ch = 0; ch < NCHANNELS; ch++)
+    for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
     {
-      size_t nbands = dvd.proc.get_eq_nbands(ch);
-      sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
+      size_t nbands = dvd.proc.get_eq_nbands(ch_name);
+      sprintf(param_str, "eq_%s_nbands", ch_names[ch_name]);
       conf->set_int32(param_str, (int)nbands);
 
       for (size_t i = 0; i < nbands; i++)
       {
-        dvd.proc.get_eq_bands(ch, &band, i, 1);
-        sprintf(param_str, "eq_%s_freq_%i", ch_names[ch], i);
+        dvd.proc.get_eq_bands(ch_name, &band, i, 1);
+        sprintf(param_str, "eq_%s_freq_%i", ch_names[ch_name], i);
         conf->set_int32(param_str, band.freq);
-        sprintf(param_str, "eq_%s_gain_%i", ch_names[ch], i);
+        sprintf(param_str, "eq_%s_gain_%i", ch_names[ch_name], i);
         conf->set_float(param_str, band.gain);
       }
     }
@@ -906,10 +906,10 @@ void COMDecoder::load_eq(Config *conf)
   }
 
   if (eq_type == EQ_TYPE_MULTICHANNEL || eq_type == EQ_TYPE_ALL)
-    for (int ch = 0; ch < NCHANNELS; ch++)
+    for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
     {
       int32_t nbands = 0;
-      sprintf(param_str, "eq_%s_nbands", ch_names[ch]);
+      sprintf(param_str, "eq_%s_nbands", ch_names[ch_name]);
       conf->get_int32(param_str, nbands);
 
       bands.allocate(nbands);
@@ -920,12 +920,12 @@ void COMDecoder::load_eq(Config *conf)
       {
         bands[i].freq = 0;
         bands[i].gain = 0;
-        sprintf(param_str, "eq_%s_freq_%i", ch_names[ch], i);
+        sprintf(param_str, "eq_%s_freq_%i", ch_names[ch_name], i);
         conf->get_int32(param_str, bands[i].freq);
-        sprintf(param_str, "eq_%s_gain_%i", ch_names[ch], i);
+        sprintf(param_str, "eq_%s_gain_%i", ch_names[ch_name], i);
         conf->get_float(param_str, bands[i].gain);
       }
-      dvd.proc.set_eq_bands(ch, bands, nbands);
+      dvd.proc.set_eq_bands(ch_name, bands, nbands);
     }
 }
 
@@ -1191,8 +1191,8 @@ void COMDecoder::load_delays(Config *conf, AudioProcessorState *state)
 void COMDecoder::save_matrix(Config *conf, AudioProcessorState *state)
 {
   char element_str[32];
-  for (int ch1 = 0; ch1 < NCHANNELS; ch1++)
-    for (int ch2 = 0; ch2 < NCHANNELS; ch2++)
+  for (int ch1 = 0; ch1 < CH_NAMES; ch1++)
+    for (int ch2 = 0; ch2 < CH_NAMES; ch2++)
     {
       sprintf(element_str, "matrix_%s_%s", ch_names[ch1], ch_names[ch2]);
       conf->set_float(element_str, state->matrix[ch1][ch2]);
@@ -1202,8 +1202,8 @@ void COMDecoder::save_matrix(Config *conf, AudioProcessorState *state)
 void COMDecoder::load_matrix(Config *conf, AudioProcessorState *state)
 {
   char element_str[32];
-  for (int ch1 = 0; ch1 < NCHANNELS; ch1++)
-    for (int ch2 = 0; ch2 < NCHANNELS; ch2++)
+  for (int ch1 = 0; ch1 < CH_NAMES; ch1++)
+    for (int ch2 = 0; ch2 < CH_NAMES; ch2++)
     {
       state->matrix[ch1][ch2] = 0;
       sprintf(element_str, "matrix_%s_%s", ch_names[ch1], ch_names[ch2]);

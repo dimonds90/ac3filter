@@ -3,6 +3,8 @@
 #include "filters/delay.h"
 #include "control_delay.h"
 
+#define NDELAYS 6
+
 static const int controls[] =
 {
   IDC_GRP_DELAYS,
@@ -14,7 +16,7 @@ static const int controls[] =
   0
 };
 
-static const int idc_edt_delay[NCHANNELS] =
+static const int idc_edt_delay[NDELAYS] =
 { 
   IDC_EDT_DELAY_L,
   IDC_EDT_DELAY_C,
@@ -22,6 +24,11 @@ static const int idc_edt_delay[NCHANNELS] =
   IDC_EDT_DELAY_SL,
   IDC_EDT_DELAY_SR,
   IDC_EDT_DELAY_LFE
+};
+
+static const int delay_ch[NDELAYS] =
+{
+  CH_L, CH_C, CH_R, CH_SL, CH_SR, CH_LFE
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -81,12 +88,14 @@ ControlDelay::~ControlDelay()
 
 void ControlDelay::init()
 {
-  for (int ch = 0; ch < NCHANNELS; ch++)
-    edt_delay[ch].link(hdlg, idc_edt_delay[ch]);
+  int i;
+
+  for (i = 0; i < NDELAYS; i++)
+    edt_delay[i].link(hdlg, idc_edt_delay[i]);
 
   SendDlgItemMessage(hdlg, IDC_CMB_DELAY_UNITS, CB_RESETCONTENT, 0, 0);
-  for (int i = 0; i < array_size(units_list); i++)
-    SendDlgItemMessage(hdlg, IDC_CMB_DELAY_UNITS, CB_ADDSTRING, 0, (LPARAM) gettext_wrapper(units_list[i]));
+  for (i = 0; i < array_size(units_list); i++)
+    SendDlgItemMessage(hdlg, IDC_CMB_DELAY_UNITS, CB_ADDSTRING, 0, (LPARAM) gettext(units_list[i]));
 }
 
 void ControlDelay::update()
@@ -95,10 +104,10 @@ void ControlDelay::update()
   proc->get_delay_units(&delay_units);
   proc->get_delays(delays);
 
-  for (int ch = 0; ch < NCHANNELS; ch++)
+  for (int i = 0; i < NDELAYS; i++)
   {
-    edt_delay[ch].update_value(delays[ch]);
-    edt_delay[ch].enable(delay);
+    edt_delay[i].update_value(delays[delay_ch[i]]);
+    edt_delay[i].enable(delay);
   }
 
   CheckDlgButton(hdlg, IDC_CHK_DELAYS, delay? BST_CHECKED: BST_UNCHECKED);
@@ -126,8 +135,9 @@ ControlDelay::cmd_result ControlDelay::command(int control, int message)
     case IDC_EDT_DELAY_LFE:
       if (message == CB_ENTER)
       {
-        for (int ch = 0; ch < NCHANNELS; ch++)
-          delays[ch] = (float)edt_delay[ch].value;
+        proc->get_delays(delays);
+        for (int i = 0; i < NDELAYS; i++)
+          delays[delay_ch[i]] = (float)edt_delay[i].value;
         proc->set_delays(delays);
         return cmd_ok;
       }

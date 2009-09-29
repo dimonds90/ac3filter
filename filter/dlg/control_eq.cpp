@@ -3,9 +3,12 @@
 #include <commctrl.h>
 #include <stdio.h>
 #include "../ac3filter_intl.h"
+#include "../ch_names.h"
 #include "../custom_eq.h"
 #include "../resource_ids.h"
 #include "control_eq.h"
+
+#define EQ_CHANNELS 6
 
 static const int controls[] =
 {
@@ -52,22 +55,6 @@ static const int band_reorder[EQ_BANDS+1][EQ_BANDS] =
   { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, // 10 bands
  };
 
-static const int ch_name[NCHANNELS+1] =
-{
-  CH_NONE /* master equalizer */, CH_L, CH_C, CH_R, CH_SL, CH_SR, CH_LFE
-};
-
-static const char *ch_text[NCHANNELS+1] =
-{
-  N_("Master"),
-  N_("Left"),
-  N_("Center"),
-  N_("Right"),
-  N_("Surround Left"),
-  N_("Surround Right"),
-  N_("Subwoofer")
-};
-
 static EqBand default_bands[EQ_BANDS] = 
 {
   { 30, 1.0 }, { 60, 1.0 }, { 125, 1.0 }, { 250, 1.0 }, { 500, 1.0 }, { 1000, 1.0 }, { 2000, 1.0 }, { 4000, 1.0 }, { 8000, 1.0 }, { 16000, 1.0 }
@@ -95,13 +82,20 @@ void ControlEq::init()
   eq_ch = CH_NONE;
   proc->get_eq_channel(&eq_ch);
 
+  LRESULT cmb_index;
   SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_RESETCONTENT, 0, 0);
-  for (int i = 0; i < array_size(ch_text); i++)
+
+  cmb_index = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)_("All channels"));
+  SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, cmb_index, (LPARAM)CH_NONE);
+  if (CH_NONE == eq_ch)
+    SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, cmb_index, 0);
+
+  for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
   {
-    LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)gettext_wrapper(ch_text[i]));
-    SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, idx, (LPARAM)ch_name[i]);
-    if (ch_name[i] == eq_ch)
-      SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, idx, 0);
+    cmb_index = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)gettext(long_ch_names[ch_name]));
+    SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, cmb_index, (LPARAM)ch_name);
+    if (ch_name == eq_ch)
+      SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, cmb_index, 0);
   }
 
   for (size_t band = 0; band < EQ_BANDS; band++)

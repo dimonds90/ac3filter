@@ -5,7 +5,10 @@
 #include "dsp/kaiser.h"
 #include "../resource_ids.h"
 #include "../ac3filter_intl.h"
+#include "../ch_names.h"
 #include "control_spectrum.h"
+
+#define SPECTRUM_CHANNELS 6
 
 inline unsigned int clp2(unsigned int x)
 {
@@ -32,17 +35,6 @@ static const unsigned lin_window_length = 1024;
 static const unsigned log_window_length = 4096;
 static const int sample_rate = 48000;
 static const vtime_t max_lag_time = 5.0;
-
-static const char *ch_text[NCHANNELS] =
-{
-  N_("Left"),
-  N_("Center"),
-  N_("Right"),
-  N_("Surround Left"),
-  N_("Surround Right"),
-  N_("Subwoofer")
-};
-
 
 ControlSpectrum::ControlSpectrum(HWND _dlg, IAC3Filter *_filter, IAudioProcessor *_proc):
 Controller(_dlg, ::controls), filter(_filter), proc(_proc), length(0)
@@ -152,7 +144,7 @@ void ControlSpectrum::update_dynamic()
   // Label
   char label[256];
   sprintf(label, _("Spectrum: %s"), 
-    eq_ch >= 0 && eq_ch < NCHANNELS? gettext_wrapper(ch_text[eq_ch]): _("All channels"));
+    validate_ch_name(eq_ch)? gettext(long_ch_names[eq_ch]): _("All channels"));
 
   if (log_scale)
     spectrum.draw_log(buf, length/2, double(spk.sample_rate)/length, label);

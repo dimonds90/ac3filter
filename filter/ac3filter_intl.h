@@ -34,6 +34,7 @@ void free_nls();
 // gettext standard definitions
 
 #ifndef DISABLE_NLS
+#  define gettext(s) gettext_wrapper(s)
 #  define _(s) gettext_wrapper(s)
 #  define gettext_noop(s) s
 #  define N_(s) gettext_noop(s)

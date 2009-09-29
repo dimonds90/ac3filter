@@ -13,11 +13,11 @@ class ControlIOGains : public Controller
 protected:
   IAudioProcessor *proc;
 
-  sample_t input_gains[NCHANNELS];
-  sample_t output_gains[NCHANNELS];
+  sample_t input_gains[CH_NAMES];
+  sample_t output_gains[CH_NAMES];
 
-  DoubleEdit edt_in_gains[NCHANNELS];
-  DoubleEdit edt_out_gains[NCHANNELS];
+  DoubleEdit edt_in_gains[6];
+  DoubleEdit edt_out_gains[6];
 
 public:
   ControlIOGains(HWND dlg, IAudioProcessor *proc);

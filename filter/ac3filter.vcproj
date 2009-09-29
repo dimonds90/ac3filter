@@ -364,6 +364,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ch_names.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ch_names.h"
+				>
+			</File>
+			<File
 				RelativePath=".\com_dec.cpp"
 				>
 			</File>
