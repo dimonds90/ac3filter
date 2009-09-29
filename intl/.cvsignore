@@ -1,0 +1,11 @@
+Debug
+Release
+x64
+
+*.aps
+*.ncb
+*.plg
+*.opt
+*.dep
+*.suo
+*.user
