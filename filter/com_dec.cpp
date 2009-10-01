@@ -1134,58 +1134,54 @@ void COMDecoder::load_proc(Config *conf, AudioProcessorState *state)
 
 void COMDecoder::save_gains(Config *conf, AudioProcessorState *state)
 {
-  conf->set_float("gain_input_L"     ,state->input_gains[CH_L]   );
-  conf->set_float("gain_input_C"     ,state->input_gains[CH_C]   );
-  conf->set_float("gain_input_R"     ,state->input_gains[CH_R]   );
-  conf->set_float("gain_input_SL"    ,state->input_gains[CH_SL]  );
-  conf->set_float("gain_input_SR"    ,state->input_gains[CH_SR]  );
-  conf->set_float("gain_input_LFE"   ,state->input_gains[CH_LFE] );
-
-  conf->set_float("gain_output_L"    ,state->output_gains[CH_L]  );
-  conf->set_float("gain_output_C"    ,state->output_gains[CH_C]  );
-  conf->set_float("gain_output_R"    ,state->output_gains[CH_R]  );
-  conf->set_float("gain_output_SL"   ,state->output_gains[CH_SL] );
-  conf->set_float("gain_output_SR"   ,state->output_gains[CH_SR] );
-  conf->set_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
+  char str[32];
+  for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
+  {
+    sprintf(str, "gain_input_%s", ch_names[ch_name]);
+    conf->set_float(str, state->input_gains[ch_name]);
+  }
+  for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
+  {
+    sprintf(str, "gain_output_%s", ch_names[ch_name]);
+    conf->set_float(str, state->output_gains[ch_name]);
+  }
 }
 
 void COMDecoder::load_gains(Config *conf, AudioProcessorState *state)
 {
-  conf->get_float("gain_input_L"     ,state->input_gains[CH_L]   );
-  conf->get_float("gain_input_C"     ,state->input_gains[CH_C]   );
-  conf->get_float("gain_input_R"     ,state->input_gains[CH_R]   );
-  conf->get_float("gain_input_SL"    ,state->input_gains[CH_SL]  );
-  conf->get_float("gain_input_SR"    ,state->input_gains[CH_SR]  );
-  conf->get_float("gain_input_LFE"   ,state->input_gains[CH_LFE] );
-
-  conf->get_float("gain_output_L"    ,state->output_gains[CH_L]  );
-  conf->get_float("gain_output_C"    ,state->output_gains[CH_C]  );
-  conf->get_float("gain_output_R"    ,state->output_gains[CH_R]  );
-  conf->get_float("gain_output_SL"   ,state->output_gains[CH_SL] );
-  conf->get_float("gain_output_SR"   ,state->output_gains[CH_SR] );
-  conf->get_float("gain_output_LFE"  ,state->output_gains[CH_LFE]);
+  char str[32];
+  for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
+  {
+    sprintf(str, "gain_input_%s", ch_names[ch_name]);
+    conf->get_float(str, state->input_gains[ch_name]);
+  }
+  for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
+  {
+    sprintf(str, "gain_output_%s", ch_names[ch_name]);
+    conf->get_float(str, state->output_gains[ch_name]);
+  }
 }
 
 void COMDecoder::save_delays(Config *conf, AudioProcessorState *state)
 {
-  conf->set_int32("delay_units"      ,state->delay_units     );
-  conf->set_float("delay_L"          ,state->delays[CH_L]    );
-  conf->set_float("delay_C"          ,state->delays[CH_C]    );
-  conf->set_float("delay_R"          ,state->delays[CH_R]    );
-  conf->set_float("delay_SL"         ,state->delays[CH_SL]   );
-  conf->set_float("delay_SR"         ,state->delays[CH_SR]   );
-  conf->set_float("delay_LFE"        ,state->delays[CH_LFE]  );
+  char str[32];
+  conf->set_int32("delay_units", state->delay_units     );
+  for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
+  {
+    sprintf(str, "delay_%s", ch_names[ch_name]);
+    conf->set_float(str, state->delays[ch_name]);
+  }
 }
 
 void COMDecoder::load_delays(Config *conf, AudioProcessorState *state)
 {
-  conf->get_int32("delay_units"      ,state->delay_units     );
-  conf->get_float("delay_L"          ,state->delays[CH_L]    );
-  conf->get_float("delay_C"          ,state->delays[CH_C]    );
-  conf->get_float("delay_R"          ,state->delays[CH_R]    );
-  conf->get_float("delay_SL"         ,state->delays[CH_SL]   );
-  conf->get_float("delay_SR"         ,state->delays[CH_SR]   );
-  conf->get_float("delay_LFE"        ,state->delays[CH_LFE]  );
+  char str[32];
+  conf->get_int32("delay_units", state->delay_units     );
+  for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
+  {
+    sprintf(str, "delay_%s", ch_names[ch_name]);
+    conf->get_float(str, state->delays[ch_name]);
+  }
 }
 
 void COMDecoder::save_matrix(Config *conf, AudioProcessorState *state)

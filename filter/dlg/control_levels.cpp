@@ -2,7 +2,6 @@
 #include <windows.h>
 #include <commctrl.h>
 #include "../resource_ids.h"
-#include "../resource.h"
 #include "control_levels.h"
 
 #define NLEVELS 8
@@ -28,6 +27,9 @@ static const int ch_map52[NLEVELS]  = { CH_LFE, CH_SL, CH_L, CH_CL, CH_C, CH_CR,
 static const double min_level = -50.0;
 static const int ticks = 5;
 
+static const COLORREF levels_color = RGB(0, 128, 0);
+static const COLORREF overflow_color = RGB(255, 0, 0);
+
 ///////////////////////////////////////////////////////////////////////////////
 
 ControlLevels::ControlLevels(HWND _dlg, IAC3Filter *_filter, IAudioProcessor *_proc, bool _invert_levels): 
@@ -47,8 +49,8 @@ void ControlLevels::init()
 {
   for (int ch = 0; ch < NLEVELS; ch++)
   {
-    SendDlgItemMessage(hdlg, idc_level_in[ch],  PBM_SETBARCOLOR, 0, RGB(0, 128, 0));
-    SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETBARCOLOR, 0, RGB(0, 128, 0));
+    SendDlgItemMessage(hdlg, idc_level_in[ch],  PBM_SETBARCOLOR, 0, levels_color);
+    SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETBARCOLOR, 0, levels_color);
     SendDlgItemMessage(hdlg, idc_level_in[ch],  PBM_SETRANGE, 0, MAKELPARAM(0, -min_level * ticks));
     SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETRANGE, 0, MAKELPARAM(0, -min_level * ticks));
   }
@@ -79,6 +81,6 @@ void ControlLevels::update_dynamic()
     }
     SendDlgItemMessage(hdlg, idc_level_in[ch],  PBM_SETPOS, in, 0);
     SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETPOS, out, 0);
-    SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETBARCOLOR, 0, (output_levels[ch] > 0.99)? RGB(255, 0, 0): RGB(0, 128, 0));
+    SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETBARCOLOR, 0, (output_levels[ch] > 0.99)? overflow_color: levels_color);
   }
 };

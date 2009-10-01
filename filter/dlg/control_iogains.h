@@ -16,8 +16,8 @@ protected:
   sample_t input_gains[CH_NAMES];
   sample_t output_gains[CH_NAMES];
 
-  DoubleEdit edt_in_gains[6];
-  DoubleEdit edt_out_gains[6];
+  DoubleEdit edt_in_gains[8];
+  DoubleEdit edt_out_gains[8];
 
 public:
   ControlIOGains(HWND dlg, IAudioProcessor *proc);
