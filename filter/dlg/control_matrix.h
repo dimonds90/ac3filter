@@ -23,7 +23,7 @@ protected:
   DoubleEdit edt_voice;
   DoubleEdit edt_sur;
   DoubleEdit edt_lfe;
-  DoubleEdit edt_matrix[6][6];
+  DoubleEdit edt_matrix[8][8];
 
 public:
   ControlMatrix(HWND dlg, IAudioProcessor *proc);

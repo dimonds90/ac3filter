@@ -1,76 +1,55 @@
+#include "../ch_names.h"
 #include "../ac3filter_intl.h"
 #include "../resource_ids.h"
 #include "filters/delay.h"
 #include "control_delay.h"
 
-#define NDELAYS 6
+#define NDELAYS 8
 
 static const int controls[] =
 {
   IDC_GRP_DELAYS,
   IDC_CHK_DELAYS,
+  IDC_BTN_DELAYS_RESET,
   IDC_LBL_DELAY_UNITS,
   IDC_CMB_DELAY_UNITS,
-  IDC_LBL_DELAY_L, IDC_LBL_DELAY_C, IDC_LBL_DELAY_R, IDC_LBL_DELAY_SL, IDC_LBL_DELAY_SR, IDC_LBL_DELAY_SW,
-  IDC_EDT_DELAY_L, IDC_EDT_DELAY_C, IDC_EDT_DELAY_R, IDC_EDT_DELAY_SL, IDC_EDT_DELAY_SR, IDC_EDT_DELAY_LFE,
+  IDC_LBL_DELAY1, IDC_LBL_DELAY2, IDC_LBL_DELAY3, IDC_LBL_DELAY4, IDC_LBL_DELAY5, IDC_LBL_DELAY6, IDC_LBL_DELAY7, IDC_LBL_DELAY8, 
+  IDC_EDT_DELAY1, IDC_EDT_DELAY2, IDC_EDT_DELAY3, IDC_EDT_DELAY4, IDC_EDT_DELAY5, IDC_EDT_DELAY6, IDC_EDT_DELAY7, IDC_EDT_DELAY8, 
   0
 };
 
-static const int idc_edt_delay[NDELAYS] =
-{ 
-  IDC_EDT_DELAY_L,
-  IDC_EDT_DELAY_C,
-  IDC_EDT_DELAY_R,
-  IDC_EDT_DELAY_SL,
-  IDC_EDT_DELAY_SR,
-  IDC_EDT_DELAY_LFE
-};
+static const int idc_edt_delay[NDELAYS] = { IDC_EDT_DELAY1, IDC_EDT_DELAY2, IDC_EDT_DELAY3, IDC_EDT_DELAY4, IDC_EDT_DELAY5, IDC_EDT_DELAY6, IDC_EDT_DELAY7, IDC_EDT_DELAY8, };
+static const int idc_lbl_delay[NDELAYS] = { IDC_LBL_DELAY1, IDC_LBL_DELAY2, IDC_LBL_DELAY3, IDC_LBL_DELAY4, IDC_LBL_DELAY5, IDC_LBL_DELAY6, IDC_LBL_DELAY7, IDC_LBL_DELAY8, };
 
-static const int delay_ch[NDELAYS] =
-{
-  CH_L, CH_C, CH_R, CH_SL, CH_SR, CH_LFE
-};
+static const int ch_map322[NDELAYS] = { CH_LFE, CH_BL, CH_SL, CH_L, CH_C, CH_R, CH_SR, CH_BR };
 
 ///////////////////////////////////////////////////////////////////////////////
 // Delay units
 ///////////////////////////////////////////////////////////////////////////////
 
-static char *units_list[] =
+static struct { int units; const char *name; } units_list[] =
 {
-  N_("Samples"),
-  N_("Millisecs"),
-  N_("Meters"),
-  N_("Centimeters"),
-  N_("Feet"),
-  N_("Inches")
+  { DELAY_SP, N_("Samples") },
+  { DELAY_MS, N_("Millisecs") },
+  { DELAY_M,  N_("Meters") },
+  { DELAY_CM, N_("Centimeters") },
+  { DELAY_FT, N_("Feet") },
+  { DELAY_IN, N_("Inches") },
 };
 
 static int list2units(LRESULT list)
 {
-  switch (list)
-  {
-    case 0:  return DELAY_SP;
-    case 1:  return DELAY_MS;
-    case 2:  return DELAY_M;
-    case 3:  return DELAY_CM;
-    case 4:  return DELAY_FT;
-    case 5:  return DELAY_IN;
-    default: return DELAY_SP;
-  }
+  if (list >= 0 && list < array_size(units_list))
+    return units_list[list].units;
+  return DELAY_SP;
 }
 
 static int units2list(int units)
 {
-  switch (units)
-  {
-    case DELAY_SP: return 0;
-    case DELAY_MS: return 1;
-    case DELAY_M : return 2;
-    case DELAY_CM: return 3;
-    case DELAY_FT: return 4;
-    case DELAY_IN: return 5;
-    default:       return 0;
-  }
+  for (int i = 0; i < array_size(units_list); i++)
+    if (units_list[i].units == units)
+      return i;
+  return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -95,7 +74,10 @@ void ControlDelay::init()
 
   SendDlgItemMessage(hdlg, IDC_CMB_DELAY_UNITS, CB_RESETCONTENT, 0, 0);
   for (i = 0; i < array_size(units_list); i++)
-    SendDlgItemMessage(hdlg, IDC_CMB_DELAY_UNITS, CB_ADDSTRING, 0, (LPARAM) gettext(units_list[i]));
+    SendDlgItemMessage(hdlg, IDC_CMB_DELAY_UNITS, CB_ADDSTRING, 0, (LPARAM) gettext(units_list[i].name));
+
+  for (int i = 0; i < NDELAYS; i++)
+    SetDlgItemText(hdlg, idc_lbl_delay[i], gettext(short_ch_names[ch_map322[i]]));
 }
 
 void ControlDelay::update()
@@ -106,7 +88,7 @@ void ControlDelay::update()
 
   for (int i = 0; i < NDELAYS; i++)
   {
-    edt_delay[i].update_value(delays[delay_ch[i]]);
+    edt_delay[i].update_value(delays[ch_map322[i]]);
     edt_delay[i].enable(delay);
   }
 
@@ -127,17 +109,29 @@ ControlDelay::cmd_result ControlDelay::command(int control, int message)
       break;
     }
 
-    case IDC_EDT_DELAY_L:
-    case IDC_EDT_DELAY_C:
-    case IDC_EDT_DELAY_R:
-    case IDC_EDT_DELAY_SL:
-    case IDC_EDT_DELAY_SR:
-    case IDC_EDT_DELAY_LFE:
+    case IDC_BTN_DELAYS_RESET:
+    {
+      for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
+        delays[ch_name] = 0;
+      proc->set_delays(delays);
+      update();
+      break;
+    }
+      
+
+    case IDC_EDT_DELAY1:
+    case IDC_EDT_DELAY2:
+    case IDC_EDT_DELAY3:
+    case IDC_EDT_DELAY4:
+    case IDC_EDT_DELAY5:
+    case IDC_EDT_DELAY6:
+    case IDC_EDT_DELAY7:
+    case IDC_EDT_DELAY8:
       if (message == CB_ENTER)
       {
         proc->get_delays(delays);
         for (int i = 0; i < NDELAYS; i++)
-          delays[delay_ch[i]] = (float)edt_delay[i].value;
+          delays[ch_map322[i]] = (float)edt_delay[i].value;
         proc->set_delays(delays);
         return cmd_ok;
       }
@@ -153,5 +147,6 @@ ControlDelay::cmd_result ControlDelay::command(int control, int message)
       }
       return cmd_not_processed;
   }
+
   return cmd_not_processed;
 }

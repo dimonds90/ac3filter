@@ -12,8 +12,8 @@ struct ControlDesc
   const char *tip;
 };
 
-// Total groups: 35
-// Total controls: 343
+// Total groups: 36
+// Total controls: 398
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -114,27 +114,27 @@ static const ControlDesc dialog_controls[] =
   // Delays
   /* TRANSLATORS: Delays */
   { IDC_GRP_DELAYS, N_("IDC_GRP_DELAYS"), "Delays", "" },
+  /* TRANSLATORS: Reset */
+  { IDC_BTN_DELAYS_RESET, N_("IDC_BTN_DELAYS_RESET"), "Reset", "" },
   /* TRANSLATORS: Enable */
   { IDC_CHK_DELAYS, N_("IDC_CHK_DELAYS"), "Enable", "" },
   { IDC_CMB_DELAY_UNITS, "IDC_CMB_DELAY_UNITS", "", "" },
-  { IDC_EDT_DELAY_C, "IDC_EDT_DELAY_C", "", "" },
-  { IDC_EDT_DELAY_L, "IDC_EDT_DELAY_L", "", "" },
-  { IDC_EDT_DELAY_LFE, "IDC_EDT_DELAY_LFE", "", "" },
-  { IDC_EDT_DELAY_R, "IDC_EDT_DELAY_R", "", "" },
-  { IDC_EDT_DELAY_SL, "IDC_EDT_DELAY_SL", "", "" },
-  { IDC_EDT_DELAY_SR, "IDC_EDT_DELAY_SR", "", "" },
-  /* TRANSLATORS: C */
-  { IDC_LBL_DELAY_C, N_("IDC_LBL_DELAY_C"), "C", "" },
-  /* TRANSLATORS: L */
-  { IDC_LBL_DELAY_L, N_("IDC_LBL_DELAY_L"), "L", "" },
-  /* TRANSLATORS: R */
-  { IDC_LBL_DELAY_R, N_("IDC_LBL_DELAY_R"), "R", "" },
-  /* TRANSLATORS: SL */
-  { IDC_LBL_DELAY_SL, N_("IDC_LBL_DELAY_SL"), "SL", "" },
-  /* TRANSLATORS: SR */
-  { IDC_LBL_DELAY_SR, N_("IDC_LBL_DELAY_SR"), "SR", "" },
-  /* TRANSLATORS: Sub */
-  { IDC_LBL_DELAY_SW, N_("IDC_LBL_DELAY_SW"), "Sub", "" },
+  { IDC_EDT_DELAY1, "IDC_EDT_DELAY1", "", "" },
+  { IDC_EDT_DELAY2, "IDC_EDT_DELAY2", "", "" },
+  { IDC_EDT_DELAY3, "IDC_EDT_DELAY3", "", "" },
+  { IDC_EDT_DELAY4, "IDC_EDT_DELAY4", "", "" },
+  { IDC_EDT_DELAY5, "IDC_EDT_DELAY5", "", "" },
+  { IDC_EDT_DELAY6, "IDC_EDT_DELAY6", "", "" },
+  { IDC_EDT_DELAY7, "IDC_EDT_DELAY7", "", "" },
+  { IDC_EDT_DELAY8, "IDC_EDT_DELAY8", "", "" },
+  { IDC_LBL_DELAY1, "IDC_LBL_DELAY1", "", "" },
+  { IDC_LBL_DELAY2, "IDC_LBL_DELAY2", "", "" },
+  { IDC_LBL_DELAY3, "IDC_LBL_DELAY3", "", "" },
+  { IDC_LBL_DELAY4, "IDC_LBL_DELAY4", "", "" },
+  { IDC_LBL_DELAY5, "IDC_LBL_DELAY5", "", "" },
+  { IDC_LBL_DELAY6, "IDC_LBL_DELAY6", "", "" },
+  { IDC_LBL_DELAY7, "IDC_LBL_DELAY7", "", "" },
+  { IDC_LBL_DELAY8, "IDC_LBL_DELAY8", "", "" },
   /* TRANSLATORS: Units: */
   { IDC_LBL_DELAY_UNITS, N_("IDC_LBL_DELAY_UNITS"), "Units:", "" },
 
@@ -258,68 +258,50 @@ static const ControlDesc dialog_controls[] =
   // Gain
   /* TRANSLATORS: Gain */
   { IDC_GRP_GAIN, N_("IDC_GRP_GAIN"), "Gain", "" },
+  { IDC_EDT_GAIN, "IDC_EDT_GAIN", "", "" },
+  { IDC_EDT_MASTER, "IDC_EDT_MASTER", "", "" },
+  /* TRANSLATORS: Gain */
+  { IDC_LBL_GAIN, N_("IDC_LBL_GAIN"), "Gain", "" },
+  /* TRANSLATORS: Master */
+  { IDC_LBL_MASTER, N_("IDC_LBL_MASTER"), "Master", "" },
+  { IDC_SLI_GAIN, "IDC_SLI_GAIN", "", "" },
+  { IDC_SLI_MASTER, "IDC_SLI_MASTER", "", "" },
 
   // Gains
   /* TRANSLATORS: Gains */
   { IDC_GRP_GAINS, N_("IDC_GRP_GAINS"), "Gains", "" },
-  { IDC_EDT_GAIN, "IDC_EDT_GAIN", "", "" },
   { IDC_EDT_LFE, "IDC_EDT_LFE", "", "" },
-  { IDC_EDT_MASTER, "IDC_EDT_MASTER", "", "" },
   { IDC_EDT_SUR, "IDC_EDT_SUR", "", "" },
   { IDC_EDT_VOICE, "IDC_EDT_VOICE", "", "" },
-  /* TRANSLATORS: Gain */
-  { IDC_LBL_GAIN, N_("IDC_LBL_GAIN"), "Gain", "" },
   /* TRANSLATORS: LFE */
   { IDC_LBL_LFE, N_("IDC_LBL_LFE"), "LFE", "" },
-  /* TRANSLATORS: Master */
-  { IDC_LBL_MASTER, N_("IDC_LBL_MASTER"), "Master", "" },
   /* TRANSLATORS: Surround */
   { IDC_LBL_SUR, N_("IDC_LBL_SUR"), "Surround", "" },
   /* TRANSLATORS: Voice */
   { IDC_LBL_VOICE, N_("IDC_LBL_VOICE"), "Voice", "" },
-  { IDC_SLI_GAIN, "IDC_SLI_GAIN", "", "" },
   { IDC_SLI_LFE, "IDC_SLI_LFE", "", "" },
-  { IDC_SLI_MASTER, "IDC_SLI_MASTER", "", "" },
   { IDC_SLI_SUR, "IDC_SLI_SUR", "", "" },
   { IDC_SLI_VOICE, "IDC_SLI_VOICE", "", "" },
 
   // Input gains
   /* TRANSLATORS: Input gains */
   { IDC_GRP_INPUT_GAINS, N_("IDC_GRP_INPUT_GAINS"), "Input gains", "" },
-  { IDC_EDT_IN_C, "IDC_EDT_IN_C", "", "" },
-  { IDC_EDT_IN_L, "IDC_EDT_IN_L", "", "" },
-  { IDC_EDT_IN_LFE, "IDC_EDT_IN_LFE", "", "" },
-  { IDC_EDT_IN_R, "IDC_EDT_IN_R", "", "" },
-  { IDC_EDT_IN_SL, "IDC_EDT_IN_SL", "", "" },
-  { IDC_EDT_IN_SR, "IDC_EDT_IN_SR", "", "" },
-  { IDC_SLI_IN_C, "IDC_SLI_IN_C", "", "" },
-  { IDC_SLI_IN_L, "IDC_SLI_IN_L", "", "" },
-  { IDC_SLI_IN_LFE, "IDC_SLI_IN_LFE", "", "" },
-  { IDC_SLI_IN_R, "IDC_SLI_IN_R", "", "" },
-  { IDC_SLI_IN_SL, "IDC_SLI_IN_SL", "", "" },
-  { IDC_SLI_IN_SR, "IDC_SLI_IN_SR", "", "" },
-
-  // Input levels
-  /* TRANSLATORS: Input levels */
-  { IDC_GRP_INPUT_LEVELS, N_("IDC_GRP_INPUT_LEVELS"), "Input levels", "" },
-  { IDC_IN_C, "IDC_IN_C", "", "" },
-  { IDC_IN_L, "IDC_IN_L", "", "" },
-  { IDC_IN_LFE, "IDC_IN_LFE", "", "" },
-  { IDC_IN_R, "IDC_IN_R", "", "" },
-  { IDC_IN_SL, "IDC_IN_SL", "", "" },
-  { IDC_IN_SR, "IDC_IN_SR", "", "" },
-  /* TRANSLATORS: C */
-  { IDC_LBL_IN_C, N_("IDC_LBL_IN_C"), "C", "" },
-  /* TRANSLATORS: L */
-  { IDC_LBL_IN_L, N_("IDC_LBL_IN_L"), "L", "" },
-  /* TRANSLATORS: LFE */
-  { IDC_LBL_IN_LFE, N_("IDC_LBL_IN_LFE"), "LFE", "" },
-  /* TRANSLATORS: R */
-  { IDC_LBL_IN_R, N_("IDC_LBL_IN_R"), "R", "" },
-  /* TRANSLATORS: SL */
-  { IDC_LBL_IN_SL, N_("IDC_LBL_IN_SL"), "SL", "" },
-  /* TRANSLATORS: SR */
-  { IDC_LBL_IN_SR, N_("IDC_LBL_IN_SR"), "SR", "" },
+  { IDC_EDT_GAIN_IN1, "IDC_EDT_GAIN_IN1", "", "" },
+  { IDC_EDT_GAIN_IN2, "IDC_EDT_GAIN_IN2", "", "" },
+  { IDC_EDT_GAIN_IN3, "IDC_EDT_GAIN_IN3", "", "" },
+  { IDC_EDT_GAIN_IN4, "IDC_EDT_GAIN_IN4", "", "" },
+  { IDC_EDT_GAIN_IN5, "IDC_EDT_GAIN_IN5", "", "" },
+  { IDC_EDT_GAIN_IN6, "IDC_EDT_GAIN_IN6", "", "" },
+  { IDC_EDT_GAIN_IN7, "IDC_EDT_GAIN_IN7", "", "" },
+  { IDC_EDT_GAIN_IN8, "IDC_EDT_GAIN_IN8", "", "" },
+  { IDC_LBL_GAIN_IN1, "IDC_LBL_GAIN_IN1", "", "" },
+  { IDC_LBL_GAIN_IN2, "IDC_LBL_GAIN_IN2", "", "" },
+  { IDC_LBL_GAIN_IN3, "IDC_LBL_GAIN_IN3", "", "" },
+  { IDC_LBL_GAIN_IN4, "IDC_LBL_GAIN_IN4", "", "" },
+  { IDC_LBL_GAIN_IN5, "IDC_LBL_GAIN_IN5", "", "" },
+  { IDC_LBL_GAIN_IN6, "IDC_LBL_GAIN_IN6", "", "" },
+  { IDC_LBL_GAIN_IN7, "IDC_LBL_GAIN_IN7", "", "" },
+  { IDC_LBL_GAIN_IN8, "IDC_LBL_GAIN_IN8", "", "" },
   { IDC_LEVEL_IN1, "IDC_LEVEL_IN1", "", "" },
   { IDC_LEVEL_IN2, "IDC_LEVEL_IN2", "", "" },
   { IDC_LEVEL_IN3, "IDC_LEVEL_IN3", "", "" },
@@ -328,6 +310,18 @@ static const ControlDesc dialog_controls[] =
   { IDC_LEVEL_IN6, "IDC_LEVEL_IN6", "", "" },
   { IDC_LEVEL_IN7, "IDC_LEVEL_IN7", "", "" },
   { IDC_LEVEL_IN8, "IDC_LEVEL_IN8", "", "" },
+  { IDC_SLI_GAIN_IN1, "IDC_SLI_GAIN_IN1", "", "" },
+  { IDC_SLI_GAIN_IN2, "IDC_SLI_GAIN_IN2", "", "" },
+  { IDC_SLI_GAIN_IN3, "IDC_SLI_GAIN_IN3", "", "" },
+  { IDC_SLI_GAIN_IN4, "IDC_SLI_GAIN_IN4", "", "" },
+  { IDC_SLI_GAIN_IN5, "IDC_SLI_GAIN_IN5", "", "" },
+  { IDC_SLI_GAIN_IN6, "IDC_SLI_GAIN_IN6", "", "" },
+  { IDC_SLI_GAIN_IN7, "IDC_SLI_GAIN_IN7", "", "" },
+  { IDC_SLI_GAIN_IN8, "IDC_SLI_GAIN_IN8", "", "" },
+
+  // Input levels
+  /* TRANSLATORS: Input levels */
+  { IDC_GRP_INPUT_LEVELS, N_("IDC_GRP_INPUT_LEVELS"), "Input levels", "" },
 
   // Interface options
   /* TRANSLATORS: Interface options */
@@ -351,66 +345,86 @@ static const ControlDesc dialog_controls[] =
   // Mixing matrix
   /* TRANSLATORS: Mixing matrix */
   { IDC_GRP_MATRIX, N_("IDC_GRP_MATRIX"), "Mixing matrix", "" },
-  { IDC_EDT_C_C, "IDC_EDT_C_C", "", "" },
-  { IDC_EDT_C_L, "IDC_EDT_C_L", "", "" },
-  { IDC_EDT_C_LFE, "IDC_EDT_C_LFE", "", "" },
-  { IDC_EDT_C_R, "IDC_EDT_C_R", "", "" },
-  { IDC_EDT_C_SL, "IDC_EDT_C_SL", "", "" },
-  { IDC_EDT_C_SR, "IDC_EDT_C_SR", "", "" },
-  { IDC_EDT_LFE_C, "IDC_EDT_LFE_C", "", "" },
-  { IDC_EDT_LFE_L, "IDC_EDT_LFE_L", "", "" },
-  { IDC_EDT_LFE_LFE, "IDC_EDT_LFE_LFE", "", "" },
-  { IDC_EDT_LFE_R, "IDC_EDT_LFE_R", "", "" },
-  { IDC_EDT_LFE_SL, "IDC_EDT_LFE_SL", "", "" },
-  { IDC_EDT_LFE_SR, "IDC_EDT_LFE_SR", "", "" },
-  { IDC_EDT_L_C, "IDC_EDT_L_C", "", "" },
-  { IDC_EDT_L_L, "IDC_EDT_L_L", "", "" },
-  { IDC_EDT_L_LFE, "IDC_EDT_L_LFE", "", "" },
-  { IDC_EDT_L_R, "IDC_EDT_L_R", "", "" },
-  { IDC_EDT_L_SL, "IDC_EDT_L_SL", "", "" },
-  { IDC_EDT_L_SR, "IDC_EDT_L_SR", "", "" },
-  { IDC_EDT_R_C, "IDC_EDT_R_C", "", "" },
-  { IDC_EDT_R_L, "IDC_EDT_R_L", "", "" },
-  { IDC_EDT_R_LFE, "IDC_EDT_R_LFE", "", "" },
-  { IDC_EDT_R_R, "IDC_EDT_R_R", "", "" },
-  { IDC_EDT_R_SL, "IDC_EDT_R_SL", "", "" },
-  { IDC_EDT_R_SR, "IDC_EDT_R_SR", "", "" },
-  { IDC_EDT_SL_C, "IDC_EDT_SL_C", "", "" },
-  { IDC_EDT_SL_L, "IDC_EDT_SL_L", "", "" },
-  { IDC_EDT_SL_LFE, "IDC_EDT_SL_LFE", "", "" },
-  { IDC_EDT_SL_R, "IDC_EDT_SL_R", "", "" },
-  { IDC_EDT_SL_SL, "IDC_EDT_SL_SL", "", "" },
-  { IDC_EDT_SL_SR, "IDC_EDT_SL_SR", "", "" },
-  { IDC_EDT_SR_C, "IDC_EDT_SR_C", "", "" },
-  { IDC_EDT_SR_L, "IDC_EDT_SR_L", "", "" },
-  { IDC_EDT_SR_LFE, "IDC_EDT_SR_LFE", "", "" },
-  { IDC_EDT_SR_R, "IDC_EDT_SR_R", "", "" },
-  { IDC_EDT_SR_SL, "IDC_EDT_SR_SL", "", "" },
-  { IDC_EDT_SR_SR, "IDC_EDT_SR_SR", "", "" },
-  /* TRANSLATORS: C */
-  { IDC_LBL_MATRIX_IN_C, N_("IDC_LBL_MATRIX_IN_C"), "C", "" },
-  /* TRANSLATORS: L */
-  { IDC_LBL_MATRIX_IN_L, N_("IDC_LBL_MATRIX_IN_L"), "L", "" },
-  /* TRANSLATORS: LFE */
-  { IDC_LBL_MATRIX_IN_LFE, N_("IDC_LBL_MATRIX_IN_LFE"), "LFE", "" },
-  /* TRANSLATORS: R */
-  { IDC_LBL_MATRIX_IN_R, N_("IDC_LBL_MATRIX_IN_R"), "R", "" },
-  /* TRANSLATORS: SL */
-  { IDC_LBL_MATRIX_IN_SL, N_("IDC_LBL_MATRIX_IN_SL"), "SL", "" },
-  /* TRANSLATORS: SR */
-  { IDC_LBL_MATRIX_IN_SR, N_("IDC_LBL_MATRIX_IN_SR"), "SR", "" },
-  /* TRANSLATORS: C' */
-  { IDC_LBL_MATRIX_OUT_C, N_("IDC_LBL_MATRIX_OUT_C"), "C'", "" },
-  /* TRANSLATORS: L' */
-  { IDC_LBL_MATRIX_OUT_L, N_("IDC_LBL_MATRIX_OUT_L"), "L'", "" },
-  /* TRANSLATORS: R' */
-  { IDC_LBL_MATRIX_OUT_R, N_("IDC_LBL_MATRIX_OUT_R"), "R'", "" },
-  /* TRANSLATORS: SL' */
-  { IDC_LBL_MATRIX_OUT_SL, N_("IDC_LBL_MATRIX_OUT_SL"), "SL'", "" },
-  /* TRANSLATORS: SR' */
-  { IDC_LBL_MATRIX_OUT_SR, N_("IDC_LBL_MATRIX_OUT_SR"), "SR'", "" },
-  /* TRANSLATORS: Sub */
-  { IDC_LBL_MATRIX_OUT_SW, N_("IDC_LBL_MATRIX_OUT_SW"), "Sub", "" },
+  { IDC_EDT_MATRIX11, "IDC_EDT_MATRIX11", "", "" },
+  { IDC_EDT_MATRIX12, "IDC_EDT_MATRIX12", "", "" },
+  { IDC_EDT_MATRIX13, "IDC_EDT_MATRIX13", "", "" },
+  { IDC_EDT_MATRIX14, "IDC_EDT_MATRIX14", "", "" },
+  { IDC_EDT_MATRIX15, "IDC_EDT_MATRIX15", "", "" },
+  { IDC_EDT_MATRIX16, "IDC_EDT_MATRIX16", "", "" },
+  { IDC_EDT_MATRIX17, "IDC_EDT_MATRIX17", "", "" },
+  { IDC_EDT_MATRIX18, "IDC_EDT_MATRIX18", "", "" },
+  { IDC_EDT_MATRIX21, "IDC_EDT_MATRIX21", "", "" },
+  { IDC_EDT_MATRIX22, "IDC_EDT_MATRIX22", "", "" },
+  { IDC_EDT_MATRIX23, "IDC_EDT_MATRIX23", "", "" },
+  { IDC_EDT_MATRIX24, "IDC_EDT_MATRIX24", "", "" },
+  { IDC_EDT_MATRIX25, "IDC_EDT_MATRIX25", "", "" },
+  { IDC_EDT_MATRIX26, "IDC_EDT_MATRIX26", "", "" },
+  { IDC_EDT_MATRIX27, "IDC_EDT_MATRIX27", "", "" },
+  { IDC_EDT_MATRIX28, "IDC_EDT_MATRIX28", "", "" },
+  { IDC_EDT_MATRIX31, "IDC_EDT_MATRIX31", "", "" },
+  { IDC_EDT_MATRIX32, "IDC_EDT_MATRIX32", "", "" },
+  { IDC_EDT_MATRIX33, "IDC_EDT_MATRIX33", "", "" },
+  { IDC_EDT_MATRIX34, "IDC_EDT_MATRIX34", "", "" },
+  { IDC_EDT_MATRIX35, "IDC_EDT_MATRIX35", "", "" },
+  { IDC_EDT_MATRIX36, "IDC_EDT_MATRIX36", "", "" },
+  { IDC_EDT_MATRIX37, "IDC_EDT_MATRIX37", "", "" },
+  { IDC_EDT_MATRIX38, "IDC_EDT_MATRIX38", "", "" },
+  { IDC_EDT_MATRIX41, "IDC_EDT_MATRIX41", "", "" },
+  { IDC_EDT_MATRIX42, "IDC_EDT_MATRIX42", "", "" },
+  { IDC_EDT_MATRIX43, "IDC_EDT_MATRIX43", "", "" },
+  { IDC_EDT_MATRIX44, "IDC_EDT_MATRIX44", "", "" },
+  { IDC_EDT_MATRIX45, "IDC_EDT_MATRIX45", "", "" },
+  { IDC_EDT_MATRIX46, "IDC_EDT_MATRIX46", "", "" },
+  { IDC_EDT_MATRIX47, "IDC_EDT_MATRIX47", "", "" },
+  { IDC_EDT_MATRIX48, "IDC_EDT_MATRIX48", "", "" },
+  { IDC_EDT_MATRIX51, "IDC_EDT_MATRIX51", "", "" },
+  { IDC_EDT_MATRIX52, "IDC_EDT_MATRIX52", "", "" },
+  { IDC_EDT_MATRIX53, "IDC_EDT_MATRIX53", "", "" },
+  { IDC_EDT_MATRIX54, "IDC_EDT_MATRIX54", "", "" },
+  { IDC_EDT_MATRIX55, "IDC_EDT_MATRIX55", "", "" },
+  { IDC_EDT_MATRIX56, "IDC_EDT_MATRIX56", "", "" },
+  { IDC_EDT_MATRIX57, "IDC_EDT_MATRIX57", "", "" },
+  { IDC_EDT_MATRIX58, "IDC_EDT_MATRIX58", "", "" },
+  { IDC_EDT_MATRIX61, "IDC_EDT_MATRIX61", "", "" },
+  { IDC_EDT_MATRIX62, "IDC_EDT_MATRIX62", "", "" },
+  { IDC_EDT_MATRIX63, "IDC_EDT_MATRIX63", "", "" },
+  { IDC_EDT_MATRIX64, "IDC_EDT_MATRIX64", "", "" },
+  { IDC_EDT_MATRIX65, "IDC_EDT_MATRIX65", "", "" },
+  { IDC_EDT_MATRIX66, "IDC_EDT_MATRIX66", "", "" },
+  { IDC_EDT_MATRIX67, "IDC_EDT_MATRIX67", "", "" },
+  { IDC_EDT_MATRIX68, "IDC_EDT_MATRIX68", "", "" },
+  { IDC_EDT_MATRIX71, "IDC_EDT_MATRIX71", "", "" },
+  { IDC_EDT_MATRIX72, "IDC_EDT_MATRIX72", "", "" },
+  { IDC_EDT_MATRIX73, "IDC_EDT_MATRIX73", "", "" },
+  { IDC_EDT_MATRIX74, "IDC_EDT_MATRIX74", "", "" },
+  { IDC_EDT_MATRIX75, "IDC_EDT_MATRIX75", "", "" },
+  { IDC_EDT_MATRIX76, "IDC_EDT_MATRIX76", "", "" },
+  { IDC_EDT_MATRIX77, "IDC_EDT_MATRIX77", "", "" },
+  { IDC_EDT_MATRIX78, "IDC_EDT_MATRIX78", "", "" },
+  { IDC_EDT_MATRIX81, "IDC_EDT_MATRIX81", "", "" },
+  { IDC_EDT_MATRIX82, "IDC_EDT_MATRIX82", "", "" },
+  { IDC_EDT_MATRIX83, "IDC_EDT_MATRIX83", "", "" },
+  { IDC_EDT_MATRIX84, "IDC_EDT_MATRIX84", "", "" },
+  { IDC_EDT_MATRIX85, "IDC_EDT_MATRIX85", "", "" },
+  { IDC_EDT_MATRIX86, "IDC_EDT_MATRIX86", "", "" },
+  { IDC_EDT_MATRIX87, "IDC_EDT_MATRIX87", "", "" },
+  { IDC_EDT_MATRIX88, "IDC_EDT_MATRIX88", "", "" },
+  { IDC_LBL_MATRIX_IN1, "IDC_LBL_MATRIX_IN1", "", "" },
+  { IDC_LBL_MATRIX_IN2, "IDC_LBL_MATRIX_IN2", "", "" },
+  { IDC_LBL_MATRIX_IN3, "IDC_LBL_MATRIX_IN3", "", "" },
+  { IDC_LBL_MATRIX_IN4, "IDC_LBL_MATRIX_IN4", "", "" },
+  { IDC_LBL_MATRIX_IN5, "IDC_LBL_MATRIX_IN5", "", "" },
+  { IDC_LBL_MATRIX_IN6, "IDC_LBL_MATRIX_IN6", "", "" },
+  { IDC_LBL_MATRIX_IN7, "IDC_LBL_MATRIX_IN7", "", "" },
+  { IDC_LBL_MATRIX_IN8, "IDC_LBL_MATRIX_IN8", "", "" },
+  { IDC_LBL_MATRIX_OUT1, "IDC_LBL_MATRIX_OUT1", "", "" },
+  { IDC_LBL_MATRIX_OUT2, "IDC_LBL_MATRIX_OUT2", "", "" },
+  { IDC_LBL_MATRIX_OUT3, "IDC_LBL_MATRIX_OUT3", "", "" },
+  { IDC_LBL_MATRIX_OUT4, "IDC_LBL_MATRIX_OUT4", "", "" },
+  { IDC_LBL_MATRIX_OUT5, "IDC_LBL_MATRIX_OUT5", "", "" },
+  { IDC_LBL_MATRIX_OUT6, "IDC_LBL_MATRIX_OUT6", "", "" },
+  { IDC_LBL_MATRIX_OUT7, "IDC_LBL_MATRIX_OUT7", "", "" },
+  { IDC_LBL_MATRIX_OUT8, "IDC_LBL_MATRIX_OUT8", "", "" },
 
   // Matrix preset
   /* TRANSLATORS: Matrix preset */
@@ -468,34 +482,22 @@ static const ControlDesc dialog_controls[] =
   // Output gains
   /* TRANSLATORS: Output gains */
   { IDC_GRP_OUTPUT_GAINS, N_("IDC_GRP_OUTPUT_GAINS"), "Output gains", "" },
-  { IDC_EDT_OUT_C, "IDC_EDT_OUT_C", "", "" },
-  { IDC_EDT_OUT_L, "IDC_EDT_OUT_L", "", "" },
-  { IDC_EDT_OUT_LFE, "IDC_EDT_OUT_LFE", "", "" },
-  { IDC_EDT_OUT_R, "IDC_EDT_OUT_R", "", "" },
-  { IDC_EDT_OUT_SL, "IDC_EDT_OUT_SL", "", "" },
-  { IDC_EDT_OUT_SR, "IDC_EDT_OUT_SR", "", "" },
-  { IDC_SLI_OUT_C, "IDC_SLI_OUT_C", "", "" },
-  { IDC_SLI_OUT_L, "IDC_SLI_OUT_L", "", "" },
-  { IDC_SLI_OUT_LFE, "IDC_SLI_OUT_LFE", "", "" },
-  { IDC_SLI_OUT_R, "IDC_SLI_OUT_R", "", "" },
-  { IDC_SLI_OUT_SL, "IDC_SLI_OUT_SL", "", "" },
-  { IDC_SLI_OUT_SR, "IDC_SLI_OUT_SR", "", "" },
-
-  // Output levels
-  /* TRANSLATORS: Output levels */
-  { IDC_GRP_OUTPUT_LEVELS, N_("IDC_GRP_OUTPUT_LEVELS"), "Output levels", "" },
-  /* TRANSLATORS: C */
-  { IDC_LBL_OUT_C, N_("IDC_LBL_OUT_C"), "C", "" },
-  /* TRANSLATORS: L */
-  { IDC_LBL_OUT_L, N_("IDC_LBL_OUT_L"), "L", "" },
-  /* TRANSLATORS: R */
-  { IDC_LBL_OUT_R, N_("IDC_LBL_OUT_R"), "R", "" },
-  /* TRANSLATORS: SL */
-  { IDC_LBL_OUT_SL, N_("IDC_LBL_OUT_SL"), "SL", "" },
-  /* TRANSLATORS: SR */
-  { IDC_LBL_OUT_SR, N_("IDC_LBL_OUT_SR"), "SR", "" },
-  /* TRANSLATORS: Sub */
-  { IDC_LBL_OUT_SW, N_("IDC_LBL_OUT_SW"), "Sub", "" },
+  { IDC_EDT_GAIN_OUT1, "IDC_EDT_GAIN_OUT1", "", "" },
+  { IDC_EDT_GAIN_OUT2, "IDC_EDT_GAIN_OUT2", "", "" },
+  { IDC_EDT_GAIN_OUT3, "IDC_EDT_GAIN_OUT3", "", "" },
+  { IDC_EDT_GAIN_OUT4, "IDC_EDT_GAIN_OUT4", "", "" },
+  { IDC_EDT_GAIN_OUT5, "IDC_EDT_GAIN_OUT5", "", "" },
+  { IDC_EDT_GAIN_OUT6, "IDC_EDT_GAIN_OUT6", "", "" },
+  { IDC_EDT_GAIN_OUT7, "IDC_EDT_GAIN_OUT7", "", "" },
+  { IDC_EDT_GAIN_OUT8, "IDC_EDT_GAIN_OUT8", "", "" },
+  { IDC_LBL_GAIN_OUT1, "IDC_LBL_GAIN_OUT1", "", "" },
+  { IDC_LBL_GAIN_OUT2, "IDC_LBL_GAIN_OUT2", "", "" },
+  { IDC_LBL_GAIN_OUT3, "IDC_LBL_GAIN_OUT3", "", "" },
+  { IDC_LBL_GAIN_OUT4, "IDC_LBL_GAIN_OUT4", "", "" },
+  { IDC_LBL_GAIN_OUT5, "IDC_LBL_GAIN_OUT5", "", "" },
+  { IDC_LBL_GAIN_OUT6, "IDC_LBL_GAIN_OUT6", "", "" },
+  { IDC_LBL_GAIN_OUT7, "IDC_LBL_GAIN_OUT7", "", "" },
+  { IDC_LBL_GAIN_OUT8, "IDC_LBL_GAIN_OUT8", "", "" },
   { IDC_LEVEL_OUT1, "IDC_LEVEL_OUT1", "", "" },
   { IDC_LEVEL_OUT2, "IDC_LEVEL_OUT2", "", "" },
   { IDC_LEVEL_OUT3, "IDC_LEVEL_OUT3", "", "" },
@@ -504,12 +506,18 @@ static const ControlDesc dialog_controls[] =
   { IDC_LEVEL_OUT6, "IDC_LEVEL_OUT6", "", "" },
   { IDC_LEVEL_OUT7, "IDC_LEVEL_OUT7", "", "" },
   { IDC_LEVEL_OUT8, "IDC_LEVEL_OUT8", "", "" },
-  { IDC_OUT_C, "IDC_OUT_C", "", "" },
-  { IDC_OUT_L, "IDC_OUT_L", "", "" },
-  { IDC_OUT_R, "IDC_OUT_R", "", "" },
-  { IDC_OUT_SL, "IDC_OUT_SL", "", "" },
-  { IDC_OUT_SR, "IDC_OUT_SR", "", "" },
-  { IDC_OUT_SW, "IDC_OUT_SW", "", "" },
+  { IDC_SLI_GAIN_OUT1, "IDC_SLI_GAIN_OUT1", "", "" },
+  { IDC_SLI_GAIN_OUT2, "IDC_SLI_GAIN_OUT2", "", "" },
+  { IDC_SLI_GAIN_OUT3, "IDC_SLI_GAIN_OUT3", "", "" },
+  { IDC_SLI_GAIN_OUT4, "IDC_SLI_GAIN_OUT4", "", "" },
+  { IDC_SLI_GAIN_OUT5, "IDC_SLI_GAIN_OUT5", "", "" },
+  { IDC_SLI_GAIN_OUT6, "IDC_SLI_GAIN_OUT6", "", "" },
+  { IDC_SLI_GAIN_OUT7, "IDC_SLI_GAIN_OUT7", "", "" },
+  { IDC_SLI_GAIN_OUT8, "IDC_SLI_GAIN_OUT8", "", "" },
+
+  // Output levels
+  /* TRANSLATORS: Output levels */
+  { IDC_GRP_OUTPUT_LEVELS, N_("IDC_GRP_OUTPUT_LEVELS"), "Output levels", "" },
 
   // Preset
   /* TRANSLATORS: Preset */
@@ -529,6 +537,28 @@ static const ControlDesc dialog_controls[] =
   { IDC_RBT_RENDER_DS, N_("IDC_RBT_RENDER_DS"), "Use Direct Sound by default", "" },
   /* TRANSLATORS: Use Wave Out by default */
   { IDC_RBT_RENDER_WO, N_("IDC_RBT_RENDER_WO"), "Use Wave Out by default", "" },
+
+  // Channel routing
+  /* TRANSLATORS: Channel routing */
+  { IDC_GRP_ROUTE, N_("IDC_GRP_ROUTE"), "Channel routing", "" },
+  /* TRANSLATORS: Reset */
+  { IDC_BTN_ROUTE_RESET, N_("IDC_BTN_ROUTE_RESET"), "Reset", "" },
+  { IDC_CMB_ROUTE1, "IDC_CMB_ROUTE1", "", "" },
+  { IDC_CMB_ROUTE2, "IDC_CMB_ROUTE2", "", "" },
+  { IDC_CMB_ROUTE3, "IDC_CMB_ROUTE3", "", "" },
+  { IDC_CMB_ROUTE4, "IDC_CMB_ROUTE4", "", "" },
+  { IDC_CMB_ROUTE5, "IDC_CMB_ROUTE5", "", "" },
+  { IDC_CMB_ROUTE6, "IDC_CMB_ROUTE6", "", "" },
+  { IDC_CMB_ROUTE7, "IDC_CMB_ROUTE7", "", "" },
+  { IDC_CMB_ROUTE8, "IDC_CMB_ROUTE8", "", "" },
+  { IDC_LBL_ROUTE1, "IDC_LBL_ROUTE1", "", "" },
+  { IDC_LBL_ROUTE2, "IDC_LBL_ROUTE2", "", "" },
+  { IDC_LBL_ROUTE3, "IDC_LBL_ROUTE3", "", "" },
+  { IDC_LBL_ROUTE4, "IDC_LBL_ROUTE4", "", "" },
+  { IDC_LBL_ROUTE5, "IDC_LBL_ROUTE5", "", "" },
+  { IDC_LBL_ROUTE6, "IDC_LBL_ROUTE6", "", "" },
+  { IDC_LBL_ROUTE7, "IDC_LBL_ROUTE7", "", "" },
+  { IDC_LBL_ROUTE8, "IDC_LBL_ROUTE8", "", "" },
 
   // SPDIF options
   /* TRANSLATORS: SPDIF options */
