@@ -1,3 +1,7 @@
+v1.70a - unreleased
+  * 8 channels support.
+  * Bass redirection options added (bass gain, high-pass filter, where to route the bass)
+
 v1.64b - unreleased
   * Dutch language (thanks to Ernst Klamer)
 

@@ -150,9 +150,17 @@
 #define IDC_CHK_EXPAND_STEREO          50805
 
 // Bass redirection (513)
-#define IDC_CHK_BASS_REDIR             51301
-#define IDC_EDT_BASS_FREQ              51302
+#define IDC_GRP_BASS                   51301
+#define IDC_CHK_BASS_ENABLE            51302
 #define IDC_LBL_BASS_FREQ              51303
+#define IDC_EDT_BASS_FREQ              51304
+#define IDC_LBL_BASS_GAIN              51305
+#define IDC_EDT_BASS_GAIN              51306
+#define IDC_SLI_BASS_GAIN              51307
+#define IDC_LBL_BASS_ROUTE             51308
+#define IDC_RBT_BASS_FRONT             51309
+#define IDC_RBT_BASS_SUB               51310
+#define IDC_CHK_BASS_HPF               51311
 
 // Matrix preset (510)
 #define IDC_GRP_MATRIX_PRESET          51001
@@ -327,8 +335,9 @@
 #define IDC_EDT_DELAY8                 51528
 
 // Channel routing (534)
-#define IDC_GRP_ROUTE                  53400
-#define IDC_BTN_ROUTE_RESET            53401
+#define IDC_GRP_ROUTE                  53401
+#define IDC_CHK_ROUTE_ENABLE           53402
+#define IDC_BTN_ROUTE_RESET            53403
 #define IDC_LBL_ROUTE1                 53411
 #define IDC_LBL_ROUTE2                 53412
 #define IDC_LBL_ROUTE3                 53413
@@ -531,3 +540,4 @@
 // Other
 #define IDC_VER                        52901
 #define IDC_BTN_DONATE                 52902
+#define IDC_BTN_HELP                   52903

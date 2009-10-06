@@ -63,7 +63,15 @@ static const int matrix_ch[MATRIX_CHANNELS] = { CH_L, CH_C, CH_R, CH_SL, CH_SR, 
 
 static const double min_gain_level = -20.0;
 static const double max_gain_level = +20.0;
-static const int ticks = 5;
+static const int ticks = 10;
+
+///////////////////////////////////////////////////////////////////////////////
+
+static inline long gain2pos(double gain)
+{ return long((value2db(gain) - min_gain_level) * ticks + 0.5); }
+
+static inline double pos2gain(long pos)
+{ return db2value(double(pos)/ticks + min_gain_level); }
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -91,12 +99,12 @@ void ControlMatrix::init()
     SetDlgItemText(hdlg, out_labels[i], gettext(short_ch_names[matrix_ch[i]]));
   }
 
-  SendDlgItemMessage(hdlg, IDC_SLI_LFE,    TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_LFE,    TBM_SETTIC, 0, 0);
-  SendDlgItemMessage(hdlg, IDC_SLI_VOICE,  TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_VOICE,  TBM_SETTIC, 0, 0);
-  SendDlgItemMessage(hdlg, IDC_SLI_SUR,    TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_SUR,    TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(hdlg, IDC_SLI_LFE,    TBM_SETRANGE, TRUE, MAKELONG(0, max_gain_level - min_gain_level) * ticks);
+  SendDlgItemMessage(hdlg, IDC_SLI_LFE,    TBM_SETTIC, 0, gain2pos(0));
+  SendDlgItemMessage(hdlg, IDC_SLI_VOICE,  TBM_SETRANGE, TRUE, MAKELONG(0, max_gain_level - min_gain_level) * ticks);
+  SendDlgItemMessage(hdlg, IDC_SLI_VOICE,  TBM_SETTIC, 0, gain2pos(0));
+  SendDlgItemMessage(hdlg, IDC_SLI_SUR,    TBM_SETRANGE, TRUE, MAKELONG(0, max_gain_level - min_gain_level) * ticks);
+  SendDlgItemMessage(hdlg, IDC_SLI_SUR,    TBM_SETTIC, 0, gain2pos(0));
 
   edt_voice .link(hdlg, IDC_EDT_VOICE);
   edt_sur   .link(hdlg, IDC_EDT_SUR);
@@ -124,9 +132,9 @@ void ControlMatrix::update()
   EnableWindow(GetDlgItem(hdlg, IDC_CHK_VOICE_CONTROL), auto_matrix);
   EnableWindow(GetDlgItem(hdlg, IDC_CHK_NORM_MATRIX), auto_matrix);
 
-  SendDlgItemMessage(hdlg, IDC_SLI_VOICE, TBM_SETPOS, TRUE, long(-value2db(clev)   * ticks));
-  SendDlgItemMessage(hdlg, IDC_SLI_SUR,   TBM_SETPOS, TRUE, long(-value2db(slev)   * ticks));
-  SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_SETPOS, TRUE, long(-value2db(lfelev) * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_VOICE, TBM_SETPOS, TRUE, gain2pos(clev));
+  SendDlgItemMessage(hdlg, IDC_SLI_SUR,   TBM_SETPOS, TRUE, gain2pos(slev));
+  SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_SETPOS, TRUE, gain2pos(lfelev));
 
   edt_voice.update_value(value2db(clev));
   edt_sur  .update_value(value2db(slev));
@@ -218,9 +226,10 @@ ControlMatrix::cmd_result ControlMatrix::command(int control, int message)
     case IDC_SLI_LFE:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        clev   = db2value(-double(SendDlgItemMessage(hdlg, IDC_SLI_VOICE, TBM_GETPOS, 0, 0))/ticks);
-        slev   = db2value(-double(SendDlgItemMessage(hdlg, IDC_SLI_SUR,   TBM_GETPOS, 0, 0))/ticks);
-        lfelev = db2value(-double(SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_GETPOS, 0, 0))/ticks);
+        int pos = SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_GETPOS, 0, 0);
+        clev   = pos2gain(SendDlgItemMessage(hdlg, IDC_SLI_VOICE, TBM_GETPOS, 0, 0));
+        slev   = pos2gain(SendDlgItemMessage(hdlg, IDC_SLI_SUR,   TBM_GETPOS, 0, 0));
+        lfelev = pos2gain(SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_GETPOS, 0, 0));
         proc->set_clev(clev);
         proc->set_slev(slev);
         proc->set_lfelev(lfelev);
