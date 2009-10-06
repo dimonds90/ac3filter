@@ -3,9 +3,17 @@
 
 static const int controls[] =
 {
-  IDC_CHK_BASS_REDIR,
-  IDC_EDT_BASS_FREQ,
+  IDC_GRP_BASS,
+  IDC_CHK_BASS_ENABLE,
   IDC_LBL_BASS_FREQ,
+  IDC_EDT_BASS_FREQ,
+  IDC_LBL_BASS_GAIN,
+  IDC_EDT_BASS_GAIN,
+  IDC_SLI_BASS_GAIN,
+  IDC_LBL_BASS_ROUTE,
+  IDC_RBT_BASS_FRONT,
+  IDC_RBT_BASS_SUB,
+  IDC_CHK_BASS_HPF,
   0
 };
 
@@ -32,7 +40,7 @@ void ControlBass::update()
   proc->get_bass_redir(&bass_redir);
   proc->get_bass_freq(&bass_freq);
 
-  CheckDlgButton(hdlg, IDC_CHK_BASS_REDIR, bass_redir? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_BASS_ENABLE, bass_redir? BST_CHECKED: BST_UNCHECKED);
   edt_bass_freq.update_value(bass_freq);
 };
 
@@ -40,9 +48,9 @@ ControlBass::cmd_result ControlBass::command(int control, int message)
 {
   switch (control)
   {
-    case IDC_CHK_BASS_REDIR:
+    case IDC_CHK_BASS_ENABLE:
     {
-      bass_redir = IsDlgButtonChecked(hdlg, IDC_CHK_BASS_REDIR) == BST_CHECKED;
+      bass_redir = IsDlgButtonChecked(hdlg, IDC_CHK_BASS_ENABLE) == BST_CHECKED;
       proc->set_bass_redir(bass_redir);
       update();
       return cmd_ok;

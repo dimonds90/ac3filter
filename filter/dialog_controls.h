@@ -12,8 +12,8 @@ struct ControlDesc
   const char *tip;
 };
 
-// Total groups: 36
-// Total controls: 398
+// Total groups: 37
+// Total controls: 407
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -21,6 +21,8 @@ static const ControlDesc dialog_controls[] =
   { IDCANCEL, N_("IDCANCEL"), "Cancel", "" },
   /* TRANSLATORS: Donate */
   { IDC_BTN_DONATE, N_("IDC_BTN_DONATE"), "Donate", "" },
+  /* TRANSLATORS: Help */
+  { IDC_BTN_HELP, N_("IDC_BTN_HELP"), "Help", "" },
   /* TRANSLATORS: Log scale spectrum */
   { IDC_CHK_EQ_LOG, N_("IDC_CHK_EQ_LOG"), "Log scale spectrum", "" },
   { IDC_EDT_EQ_FREQ1, "IDC_EDT_EQ_FREQ1", "", "" },
@@ -78,6 +80,27 @@ static const ControlDesc dialog_controls[] =
   /* TRANSLATORS: Attack/release speed (dB/s): */
   { IDC_LBL_ATTACK_RELEASE, N_("IDC_LBL_ATTACK_RELEASE"), "Attack/release speed (dB/s):", "" },
 
+  // Bass redirection
+  /* TRANSLATORS: Bass redirection */
+  { IDC_GRP_BASS, N_("IDC_GRP_BASS"), "Bass redirection", "" },
+  /* TRANSLATORS: Enable */
+  { IDC_CHK_BASS_ENABLE, N_("IDC_CHK_BASS_ENABLE"), "Enable", "" },
+  /* TRANSLATORS: High-pass filter */
+  { IDC_CHK_BASS_HPF, N_("IDC_CHK_BASS_HPF"), "High-pass filter", "" },
+  { IDC_EDT_BASS_FREQ, "IDC_EDT_BASS_FREQ", "", "" },
+  { IDC_EDT_BASS_GAIN, "IDC_EDT_BASS_GAIN", "", "" },
+  /* TRANSLATORS: Cutoff frequency */
+  { IDC_LBL_BASS_FREQ, N_("IDC_LBL_BASS_FREQ"), "Cutoff frequency", "" },
+  /* TRANSLATORS: Bass gain */
+  { IDC_LBL_BASS_GAIN, N_("IDC_LBL_BASS_GAIN"), "Bass gain", "" },
+  /* TRANSLATORS: Redirect bass to: */
+  { IDC_LBL_BASS_ROUTE, N_("IDC_LBL_BASS_ROUTE"), "Redirect bass to:", "" },
+  /* TRANSLATORS: Front speakers */
+  { IDC_RBT_BASS_FRONT, N_("IDC_RBT_BASS_FRONT"), "Front speakers", "" },
+  /* TRANSLATORS: Subwoofer */
+  { IDC_RBT_BASS_SUB, N_("IDC_RBT_BASS_SUB"), "Subwoofer", "" },
+  { IDC_SLI_BASS_GAIN, "IDC_SLI_BASS_GAIN", "", "" },
+
   // Contact author
   /* TRANSLATORS: Contact author */
   { IDC_GRP_CONTACT, N_("IDC_GRP_CONTACT"), "Contact author", "" },
@@ -116,8 +139,6 @@ static const ControlDesc dialog_controls[] =
   { IDC_GRP_DELAYS, N_("IDC_GRP_DELAYS"), "Delays", "" },
   /* TRANSLATORS: Reset */
   { IDC_BTN_DELAYS_RESET, N_("IDC_BTN_DELAYS_RESET"), "Reset", "" },
-  /* TRANSLATORS: Enable */
-  { IDC_CHK_DELAYS, N_("IDC_CHK_DELAYS"), "Enable", "" },
   { IDC_CMB_DELAY_UNITS, "IDC_CMB_DELAY_UNITS", "", "" },
   { IDC_EDT_DELAY1, "IDC_EDT_DELAY1", "", "" },
   { IDC_EDT_DELAY2, "IDC_EDT_DELAY2", "", "" },
@@ -450,8 +471,6 @@ static const ControlDesc dialog_controls[] =
   { IDC_CHK_AUTO_GAIN, N_("IDC_CHK_AUTO_GAIN"), "Auto gain control", "" },
   /* TRANSLATORS: Auto matrix */
   { IDC_CHK_AUTO_MATRIX, N_("IDC_CHK_AUTO_MATRIX"), "Auto matrix", "" },
-  /* TRANSLATORS: Bass redirection */
-  { IDC_CHK_BASS_REDIR, N_("IDC_CHK_BASS_REDIR"), "Bass redirection", "" },
   /* TRANSLATORS: Expand stereo */
   { IDC_CHK_EXPAND_STEREO, N_("IDC_CHK_EXPAND_STEREO"), "Expand stereo", "" },
   /* TRANSLATORS: One-pass norm */
@@ -460,9 +479,6 @@ static const ControlDesc dialog_controls[] =
   { IDC_CHK_NORM_MATRIX, N_("IDC_CHK_NORM_MATRIX"), "Normalize matrix", "" },
   /* TRANSLATORS: Voice control */
   { IDC_CHK_VOICE_CONTROL, N_("IDC_CHK_VOICE_CONTROL"), "Voice control", "" },
-  { IDC_EDT_BASS_FREQ, "IDC_EDT_BASS_FREQ", "", "" },
-  /* TRANSLATORS: Cutoff frequency */
-  { IDC_LBL_BASS_FREQ, N_("IDC_LBL_BASS_FREQ"), "Cutoff frequency", "" },
 
   // Output format
   /* TRANSLATORS: Output format */
@@ -543,6 +559,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_GRP_ROUTE, N_("IDC_GRP_ROUTE"), "Channel routing", "" },
   /* TRANSLATORS: Reset */
   { IDC_BTN_ROUTE_RESET, N_("IDC_BTN_ROUTE_RESET"), "Reset", "" },
+  /* TRANSLATORS: Enable */
+  { IDC_CHK_ROUTE_ENABLE, N_("IDC_CHK_ROUTE_ENABLE"), "Enable", "" },
   { IDC_CMB_ROUTE1, "IDC_CMB_ROUTE1", "", "" },
   { IDC_CMB_ROUTE2, "IDC_CMB_ROUTE2", "", "" },
   { IDC_CMB_ROUTE3, "IDC_CMB_ROUTE3", "", "" },
