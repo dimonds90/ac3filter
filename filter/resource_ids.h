@@ -158,8 +158,8 @@
 #define IDC_EDT_BASS_GAIN              51306
 #define IDC_SLI_BASS_GAIN              51307
 #define IDC_LBL_BASS_ROUTE             51308
-#define IDC_RBT_BASS_FRONT             51309
-#define IDC_RBT_BASS_SUB               51310
+#define IDC_CHK_BASS_FRONT             51309
+#define IDC_CHK_BASS_SUB               51310
 #define IDC_CHK_BASS_HPF               51311
 
 // Matrix preset (510)

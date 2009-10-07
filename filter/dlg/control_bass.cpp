@@ -12,8 +12,8 @@ static const int controls[] =
   IDC_EDT_BASS_GAIN,
   IDC_SLI_BASS_GAIN,
   IDC_LBL_BASS_ROUTE,
-  IDC_RBT_BASS_FRONT,
-  IDC_RBT_BASS_SUB,
+  IDC_CHK_BASS_FRONT,
+  IDC_CHK_BASS_SUB,
   IDC_CHK_BASS_HPF,
   0
 };
@@ -49,8 +49,8 @@ void ControlBass::update()
 
   CheckDlgButton(hdlg, IDC_CHK_BASS_ENABLE, bass_redir? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(hdlg, IDC_CHK_BASS_HPF, bass_hpf? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_RBT_BASS_FRONT, front? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_RBT_BASS_SUB, sub? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_BASS_FRONT, front? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_BASS_SUB, sub? BST_CHECKED: BST_UNCHECKED);
   edt_bass_freq.update_value(bass_freq);
   edt_bass_gain.update_value(value2db(bass_gain));
 };
@@ -95,13 +95,16 @@ ControlBass::cmd_result ControlBass::command(int control, int message)
       return cmd_ok;
     }
 
-    case IDC_RBT_BASS_FRONT:
-    case IDC_RBT_BASS_SUB:
+    case IDC_CHK_BASS_FRONT:
+    case IDC_CHK_BASS_SUB:
     {
-      bool front = IsDlgButtonChecked(hdlg, IDC_RBT_BASS_FRONT) == BST_CHECKED;
-      bool sub   = IsDlgButtonChecked(hdlg, IDC_RBT_BASS_SUB) == BST_CHECKED;
-      if (front) bass_channels = CH_MASK_L | CH_MASK_R;
-      if (sub) bass_channels = CH_MASK_LFE;
+      bool front = IsDlgButtonChecked(hdlg, IDC_CHK_BASS_FRONT) == BST_CHECKED;
+      bool sub   = IsDlgButtonChecked(hdlg, IDC_CHK_BASS_SUB) == BST_CHECKED;
+
+      bass_channels = 0;
+      if (front) bass_channels |= CH_MASK_L | CH_MASK_R;
+      if (sub) bass_channels |= CH_MASK_LFE;
+
       proc->set_bass_channels(bass_channels);
       update();
       return cmd_ok;

@@ -12,8 +12,8 @@ struct ControlDesc
   const char *tip;
 };
 
-// Total groups: 37
-// Total controls: 407
+// Total groups: 35
+// Total controls: 386
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -46,18 +46,30 @@ static const ControlDesc dialog_controls[] =
   { IDC_EDT_EQ_GAIN8, "IDC_EDT_EQ_GAIN8", "", "" },
   { IDC_EDT_EQ_GAIN9, "IDC_EDT_EQ_GAIN9", "", "" },
   { IDC_EDT_EQ_LEN, "IDC_EDT_EQ_LEN", "", "" },
+  { IDC_EDT_LFE, "IDC_EDT_LFE", "", "" },
+  { IDC_EDT_SUR, "IDC_EDT_SUR", "", "" },
+  { IDC_EDT_VOICE, "IDC_EDT_VOICE", "", "" },
   /* TRANSLATORS: Frequency (Hz) */
   { IDC_LBL_EQ_FREQ, N_("IDC_LBL_EQ_FREQ"), "Frequency (Hz)", "" },
   /* TRANSLATORS: Gain (dB) */
   { IDC_LBL_EQ_GAIN, N_("IDC_LBL_EQ_GAIN"), "Gain (dB)", "" },
   /* TRANSLATORS: Filter length: */
   { IDC_LBL_EQ_LEN, N_("IDC_LBL_EQ_LEN"), "Filter length:", "" },
+  /* TRANSLATORS: LFE */
+  { IDC_LBL_LFE, N_("IDC_LBL_LFE"), "LFE", "" },
+  /* TRANSLATORS: Surround */
+  { IDC_LBL_SUR, N_("IDC_LBL_SUR"), "Surround", "" },
+  /* TRANSLATORS: Voice */
+  { IDC_LBL_VOICE, N_("IDC_LBL_VOICE"), "Voice", "" },
   /* TRANSLATORS: Save all (multichannel and master equalizers). */
   { IDC_RBT_EQ_ALL, N_("IDC_RBT_EQ_ALL"), "Save all (multichannel and master equalizers).", "" },
   /* TRANSLATORS: Save current channel only, so you can apply this preset to any channel. */
   { IDC_RBT_EQ_CUR, N_("IDC_RBT_EQ_CUR"), "Save current channel only, so you can apply this preset to any channel.", "" },
   /* TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later. */
   { IDC_RBT_EQ_MCH, N_("IDC_RBT_EQ_MCH"), "Save all channels (except Master), so you can restore multichannel setup later.", "" },
+  { IDC_SLI_LFE, "IDC_SLI_LFE", "", "" },
+  { IDC_SLI_SUR, "IDC_SLI_SUR", "", "" },
+  { IDC_SLI_VOICE, "IDC_SLI_VOICE", "", "" },
   { IDC_SPECTRUM, "IDC_SPECTRUM", "", "" },
   /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky */
   { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky", "" },
@@ -85,8 +97,12 @@ static const ControlDesc dialog_controls[] =
   { IDC_GRP_BASS, N_("IDC_GRP_BASS"), "Bass redirection", "" },
   /* TRANSLATORS: Enable */
   { IDC_CHK_BASS_ENABLE, N_("IDC_CHK_BASS_ENABLE"), "Enable", "" },
+  /* TRANSLATORS: Front channels */
+  { IDC_CHK_BASS_FRONT, N_("IDC_CHK_BASS_FRONT"), "Front channels", "" },
   /* TRANSLATORS: High-pass filter */
   { IDC_CHK_BASS_HPF, N_("IDC_CHK_BASS_HPF"), "High-pass filter", "" },
+  /* TRANSLATORS: Subwoofer */
+  { IDC_CHK_BASS_SUB, N_("IDC_CHK_BASS_SUB"), "Subwoofer", "" },
   { IDC_EDT_BASS_FREQ, "IDC_EDT_BASS_FREQ", "", "" },
   { IDC_EDT_BASS_GAIN, "IDC_EDT_BASS_GAIN", "", "" },
   /* TRANSLATORS: Cutoff frequency */
@@ -95,11 +111,6 @@ static const ControlDesc dialog_controls[] =
   { IDC_LBL_BASS_GAIN, N_("IDC_LBL_BASS_GAIN"), "Bass gain", "" },
   /* TRANSLATORS: Redirect bass to: */
   { IDC_LBL_BASS_ROUTE, N_("IDC_LBL_BASS_ROUTE"), "Redirect bass to:", "" },
-  /* TRANSLATORS: Front speakers */
-  { IDC_RBT_BASS_FRONT, N_("IDC_RBT_BASS_FRONT"), "Front speakers", "" },
-  /* TRANSLATORS: Subwoofer */
-  { IDC_RBT_BASS_SUB, N_("IDC_RBT_BASS_SUB"), "Subwoofer", "" },
-  { IDC_SLI_BASS_GAIN, "IDC_SLI_BASS_GAIN", "", "" },
 
   // Contact author
   /* TRANSLATORS: Contact author */
@@ -287,22 +298,6 @@ static const ControlDesc dialog_controls[] =
   { IDC_LBL_MASTER, N_("IDC_LBL_MASTER"), "Master", "" },
   { IDC_SLI_GAIN, "IDC_SLI_GAIN", "", "" },
   { IDC_SLI_MASTER, "IDC_SLI_MASTER", "", "" },
-
-  // Gains
-  /* TRANSLATORS: Gains */
-  { IDC_GRP_GAINS, N_("IDC_GRP_GAINS"), "Gains", "" },
-  { IDC_EDT_LFE, "IDC_EDT_LFE", "", "" },
-  { IDC_EDT_SUR, "IDC_EDT_SUR", "", "" },
-  { IDC_EDT_VOICE, "IDC_EDT_VOICE", "", "" },
-  /* TRANSLATORS: LFE */
-  { IDC_LBL_LFE, N_("IDC_LBL_LFE"), "LFE", "" },
-  /* TRANSLATORS: Surround */
-  { IDC_LBL_SUR, N_("IDC_LBL_SUR"), "Surround", "" },
-  /* TRANSLATORS: Voice */
-  { IDC_LBL_VOICE, N_("IDC_LBL_VOICE"), "Voice", "" },
-  { IDC_SLI_LFE, "IDC_SLI_LFE", "", "" },
-  { IDC_SLI_SUR, "IDC_SLI_SUR", "", "" },
-  { IDC_SLI_VOICE, "IDC_SLI_VOICE", "", "" },
 
   // Input gains
   /* TRANSLATORS: Input gains */
@@ -553,30 +548,6 @@ static const ControlDesc dialog_controls[] =
   { IDC_RBT_RENDER_DS, N_("IDC_RBT_RENDER_DS"), "Use Direct Sound by default", "" },
   /* TRANSLATORS: Use Wave Out by default */
   { IDC_RBT_RENDER_WO, N_("IDC_RBT_RENDER_WO"), "Use Wave Out by default", "" },
-
-  // Channel routing
-  /* TRANSLATORS: Channel routing */
-  { IDC_GRP_ROUTE, N_("IDC_GRP_ROUTE"), "Channel routing", "" },
-  /* TRANSLATORS: Reset */
-  { IDC_BTN_ROUTE_RESET, N_("IDC_BTN_ROUTE_RESET"), "Reset", "" },
-  /* TRANSLATORS: Enable */
-  { IDC_CHK_ROUTE_ENABLE, N_("IDC_CHK_ROUTE_ENABLE"), "Enable", "" },
-  { IDC_CMB_ROUTE1, "IDC_CMB_ROUTE1", "", "" },
-  { IDC_CMB_ROUTE2, "IDC_CMB_ROUTE2", "", "" },
-  { IDC_CMB_ROUTE3, "IDC_CMB_ROUTE3", "", "" },
-  { IDC_CMB_ROUTE4, "IDC_CMB_ROUTE4", "", "" },
-  { IDC_CMB_ROUTE5, "IDC_CMB_ROUTE5", "", "" },
-  { IDC_CMB_ROUTE6, "IDC_CMB_ROUTE6", "", "" },
-  { IDC_CMB_ROUTE7, "IDC_CMB_ROUTE7", "", "" },
-  { IDC_CMB_ROUTE8, "IDC_CMB_ROUTE8", "", "" },
-  { IDC_LBL_ROUTE1, "IDC_LBL_ROUTE1", "", "" },
-  { IDC_LBL_ROUTE2, "IDC_LBL_ROUTE2", "", "" },
-  { IDC_LBL_ROUTE3, "IDC_LBL_ROUTE3", "", "" },
-  { IDC_LBL_ROUTE4, "IDC_LBL_ROUTE4", "", "" },
-  { IDC_LBL_ROUTE5, "IDC_LBL_ROUTE5", "", "" },
-  { IDC_LBL_ROUTE6, "IDC_LBL_ROUTE6", "", "" },
-  { IDC_LBL_ROUTE7, "IDC_LBL_ROUTE7", "", "" },
-  { IDC_LBL_ROUTE8, "IDC_LBL_ROUTE8", "", "" },
 
   // SPDIF options
   /* TRANSLATORS: SPDIF options */
