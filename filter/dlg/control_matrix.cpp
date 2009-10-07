@@ -68,10 +68,10 @@ static const int ticks = 10;
 ///////////////////////////////////////////////////////////////////////////////
 
 static inline long gain2pos(double gain)
-{ return long((value2db(gain) - min_gain_level) * ticks + 0.5); }
+{ return long((-value2db(gain) + max_gain_level) * ticks + 0.5); }
 
 static inline double pos2gain(long pos)
-{ return db2value(double(pos)/ticks + min_gain_level); }
+{ return db2value(-double(pos)/ticks + max_gain_level); }
 
 ///////////////////////////////////////////////////////////////////////////////
 
