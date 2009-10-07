@@ -13,9 +13,14 @@ class ControlBass : public Controller
 protected:
   IAudioProcessor *proc;
 
-  bool bass_redir;
-  int  bass_freq;
+  bool     bass_redir;
+  int      bass_freq;
+  sample_t bass_gain;
+  bool     bass_hpf;
+  int      bass_channels;
+
   DoubleEdit edt_bass_freq;
+  DoubleEdit edt_bass_gain;
 
 public:
   ControlBass(HWND dlg, IAudioProcessor *proc);

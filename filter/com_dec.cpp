@@ -550,10 +550,43 @@ STDMETHODIMP COMDecoder::get_bass_freq(int *_bass_freq)
   if (_bass_freq) *_bass_freq = dvd.proc.get_bass_freq();
   return S_OK;
 }
-STDMETHODIMP COMDecoder::set_bass_freq(int bass_freq)
+STDMETHODIMP COMDecoder::set_bass_freq(int _bass_freq)
 {
   AutoLock config_lock(&config);
-  dvd.proc.set_bass_freq(bass_freq);
+  dvd.proc.set_bass_freq(_bass_freq);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_bass_gain(sample_t *_bass_gain)
+{
+  if (_bass_gain) *_bass_gain = dvd.proc.get_bass_gain();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_bass_gain(sample_t _bass_gain)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_bass_gain(_bass_gain);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_bass_hpf(bool *_bass_hpf)
+{
+  if (_bass_hpf) *_bass_hpf = dvd.proc.get_bass_hpf();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_bass_hpf(bool _bass_hpf)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_bass_hpf(_bass_hpf);
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::get_bass_channels(int *_bass_channels)
+{
+  if (_bass_channels) *_bass_channels = dvd.proc.get_bass_channels();
+  return S_OK;
+}
+STDMETHODIMP COMDecoder::set_bass_channels(int _bass_channels)
+{
+  AutoLock config_lock(&config);
+  dvd.proc.set_bass_channels(_bass_channels);
   return S_OK;
 }
 
@@ -1108,6 +1141,9 @@ void COMDecoder::save_proc(Config *conf, AudioProcessorState *state)
   // Bass redirection
   conf->set_bool ("bass_redir"       ,state->bass_redir      );
   conf->set_int32("bass_freq"        ,state->bass_freq       );
+  conf->set_float("bass_gain"        ,state->bass_gain       );
+  conf->set_bool ("bass_hpf"         ,state->bass_hpf        );
+  conf->set_int32("bass_channels"    ,state->bass_channels   );
 }
 
 void COMDecoder::load_proc(Config *conf, AudioProcessorState *state)
@@ -1130,6 +1166,9 @@ void COMDecoder::load_proc(Config *conf, AudioProcessorState *state)
   // Bass redirection
   conf->get_bool ("bass_redir"       ,state->bass_redir      );
   conf->get_int32("bass_freq"        ,state->bass_freq       );
+  conf->get_float("bass_gain"        ,state->bass_gain       );
+  conf->get_bool ("bass_hpf"         ,state->bass_hpf        );
+  conf->get_int32("bass_channels"    ,state->bass_channels   );
 }
 
 void COMDecoder::save_gains(Config *conf, AudioProcessorState *state)
