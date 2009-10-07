@@ -37,9 +37,9 @@ BEGIN
     LTEXT           "Cutoff frequency",IDC_LBL_BASS_FREQ,37,32,63,8
     EDITTEXT        IDC_EDT_BASS_GAIN,14,44,21,12,ES_AUTOHSCROLL
     LTEXT           "Bass gain",IDC_LBL_BASS_GAIN,37,46,63,8
-    LTEXT           "Redirect bass to:",IDC_LBL_BASS_ROUTE,14,58,69,8
-    CONTROL         "Front speakers",IDC_RBT_BASS_FRONT,"Button",BS_AUTORADIOBUTTON | WS_GROUP,14,67,69,10
-    CONTROL         "Subwoofer",IDC_RBT_BASS_SUB,"Button",BS_AUTORADIOBUTTON,14,77,69,10
+    LTEXT           "Redirect bass to:",IDC_LBL_BASS_ROUTE,14,58,86,8
+    CONTROL         "Front channels",IDC_CHK_BASS_FRONT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,22,67,78,10
+    CONTROL         "Subwoofer",IDC_CHK_BASS_SUB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,22,77,78,10
     CONTROL         "High-pass filter",IDC_CHK_BASS_HPF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,89,69,10
     GROUPBOX        "Delays",IDC_GRP_DELAYS,8,104,99,96
     CTEXT           "",IDC_LBL_DELAY4,14,115,27,8
