@@ -1,5 +1,6 @@
 v1.64b - unreleased
   * Dutch language (thanks to Ernst Klamer)
+  * Set filter language from the installer
 
 v1.63b - 11.08.2009
   * AC3 decoding bug fixed (Issue 1)
