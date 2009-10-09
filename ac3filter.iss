@@ -17,26 +17,29 @@ LanguageDetectionMethod=locale
 MinVersion=0, 4.0
 
 [Languages]
-Name: en; MessagesFile: "compiler:Default.isl"
-Name: eu; MessagesFile: "compiler:Languages\Basque.isl"
-Name: pt_br; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
-Name: ca; MessagesFile: "compiler:Languages\Catalan.isl"
-Name: cs; MessagesFile: "compiler:Languages\Czech.isl"
-Name: da; MessagesFile: "compiler:Languages\Danish.isl"
-Name: nl; MessagesFile: "compiler:Languages\Dutch.isl"
-Name: fi; MessagesFile: "compiler:Languages\Finnish.isl"
-Name: fr; MessagesFile: "compiler:Languages\French.isl"
-Name: de; MessagesFile: "compiler:Languages\German.isl"
-Name: he; MessagesFile: "compiler:Languages\Hebrew.isl"
-Name: hu; MessagesFile: "compiler:Languages\Hungarian.isl"
-Name: it; MessagesFile: "compiler:Languages\Italian.isl"
-Name: nn; MessagesFile: "compiler:Languages\Norwegian.isl"
-Name: pl; MessagesFile: "compiler:Languages\Polish.isl"
-Name: pt; MessagesFile: "compiler:Languages\Portuguese.isl"
-Name: ru; MessagesFile: "compiler:Languages\Russian.isl"
-Name: sk; MessagesFile: "compiler:Languages\Slovak.isl"
-Name: sl; MessagesFile: "compiler:Languages\Slovenian.isl"
-Name: es; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: eng; MessagesFile: "compiler:Default.isl"
+Name: cze; MessagesFile: "compiler:Languages\Czech.isl"
+Name: dan; MessagesFile: "compiler:Languages\Danish.isl"
+Name: dut; MessagesFile: "compiler:Languages\Dutch.isl"
+Name: fin; MessagesFile: "compiler:Languages\Finnish.isl"
+Name: fre; MessagesFile: "compiler:Languages\French.isl"
+Name: ger; MessagesFile: "compiler:Languages\German.isl"
+Name: gre; MessagesFile: "compiler:Default.isl,lang\isl\Greek-4-5.1.11.isl"
+Name: heb; MessagesFile: "compiler:Languages\Hebrew.isl"
+Name: hun; MessagesFile: "compiler:Languages\Hungarian.isl"
+Name: ind; MessagesFile: "compiler:Default.isl,lang\isl\Indonesian-5.1.11.isl"
+Name: ita; MessagesFile: "compiler:Languages\Italian.isl"
+Name: jpn; MessagesFile: "compiler:Default.isl,lang\isl\Japanese-5-5.1.11.isl"
+Name: kor; MessagesFile: "compiler:Default.isl,lang\isl\Korean-5-5.1.11.isl"
+Name: pol; MessagesFile: "compiler:Languages\Polish.isl"
+Name: pt_BR; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
+Name: rus; MessagesFile: "compiler:Languages\Russian.isl"
+Name: slo; MessagesFile: "compiler:Languages\Slovak.isl"
+Name: slv; MessagesFile: "compiler:Languages\Slovenian.isl"
+Name: spa; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: swe; MessagesFile: "compiler:Default.isl,lang\isl\Swedish-10-5.1.12.isl"
+Name: "zh_at_Simplified";  MessagesFile: "compiler:Default.isl,lang\isl\ChineseSimp-12-5.1.11.isl"
+Name: "zh_at_Traditional"; MessagesFile: "compiler:Default.isl,lang\isl\ChineseTrad-2-5.1.11.isl"
 
 [Components]
 Name: "prog";          Description: "Program files:"; Types: full compact
@@ -106,6 +109,9 @@ Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Lang_Di
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "tray"; ValueData: 1
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "refresh_time"; ValueData: 50
 
+; Language
+Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Language"; ValueData: {code:lang_code}
+
 ; Version
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Version"; ValueData: "{#appver}"
 
@@ -121,3 +127,10 @@ Root: HKLM64; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc
 [Run]
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg""";
+
+[code]
+function lang_code(param: string): string;
+begin
+  result := ExpandConstant('{language}');
+  StringChangeEx(result, '_at_', '@', false);
+end;
