@@ -4,8 +4,6 @@
 #include "../resource_ids.h"
 #include "control_levels.h"
 
-#define NLEVELS 8
-
 static const int controls[] =
 {
   IDC_GRP_LEVELS,
@@ -32,11 +30,20 @@ static const COLORREF overflow_color = RGB(255, 0, 0);
 
 ///////////////////////////////////////////////////////////////////////////////
 
+static inline long slider_level(double level, bool invert)
+{
+  if (invert)
+    return level > 0? long(-value2db(level) * ticks): long(-min_level * ticks);
+  return level > 0? long((value2db(level) - min_level) * ticks): 0;
+}
+
 ControlLevels::ControlLevels(HWND _dlg, IAC3Filter *_filter, IAudioProcessor *_proc, bool _invert_levels): 
 Controller(_dlg, ::controls), filter(_filter), proc(_proc), invert_levels(_invert_levels)
 {
   filter->AddRef();
   proc->AddRef();
+  for (int ch = 0; ch < NLEVELS; ch++)
+    overflow[ch] = false;
 }
 
 ControlLevels::~ControlLevels()
@@ -67,20 +74,15 @@ void ControlLevels::update_dynamic()
 
   for (int ch = 0; ch < NLEVELS; ch++)
   {
-    long in, out;
     int ch_name = ch_map322[ch];
-    if (invert_levels)
+    SendDlgItemMessage(hdlg, idc_level_in[ch],  PBM_SETPOS, slider_level(input_levels[ch_name], invert_levels), 0);
+    SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETPOS, slider_level(output_levels[ch_name], invert_levels), 0);
+
+    bool is_overflow = output_levels[ch_name] > 0.99;
+    if (is_overflow || overflow[ch])
     {
-      in = input_levels[ch_name]  > 0? long(-value2db(input_levels[ch_name]) * ticks): long(-min_level * ticks);
-      out = output_levels[ch_name]  > 0? long(-value2db(output_levels[ch_name]) * ticks): long(-min_level * ticks);
+      SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETBARCOLOR, 0, is_overflow? overflow_color: levels_color);
+      overflow[ch] = is_overflow;
     }
-    else
-    {
-      in = input_levels[ch_name]  > 0? long((value2db(input_levels[ch_name]) - min_level) * ticks): 0;
-      out = output_levels[ch_name]  > 0? long((value2db(output_levels[ch_name]) - min_level) * ticks): 0;
-    }
-    SendDlgItemMessage(hdlg, idc_level_in[ch],  PBM_SETPOS, in, 0);
-    SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETPOS, out, 0);
-    SendDlgItemMessage(hdlg, idc_level_out[ch], PBM_SETBARCOLOR, 0, (output_levels[ch] > 0.99)? overflow_color: levels_color);
   }
 };
