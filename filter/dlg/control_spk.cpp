@@ -41,7 +41,8 @@ static const struct {int format; const char *text; } fmtlist[] =
   { FORMAT_PCM16, N_("PCM 16bit") },
   { FORMAT_PCM24, N_("PCM 24bit") },
   { FORMAT_PCM32, N_("PCM 32bit") },
-  { FORMAT_PCMFLOAT, N_("PCM Float") },
+  { FORMAT_PCMFLOAT,  N_("PCM Float") },
+  { FORMAT_PCMDOUBLE, N_("PCM Double") },
 };
 
 static const int rates_list[] =
@@ -112,6 +113,7 @@ void ControlSpk::init()
   for (i = 0; i < array_size(fmtlist); i++)
     SendDlgItemMessage(hdlg, IDC_CMB_FORMAT, CB_ADDSTRING, 0, (LPARAM) gettext(fmtlist[i].text));
 
+  SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_RESETCONTENT, 0, 0);
   SendDlgItemMessage(hdlg, IDC_CMB_RATE, CB_ADDSTRING, 0, (LPARAM)_("Do not change"));
   for (i = 1; i < array_size(rates_list); i++)
   {
