@@ -1,6 +1,9 @@
 v1.70a - unreleased
-  * 8 channels support.
-  * Bass redirection options added (bass gain, high-pass filter, where to route the bass)
+  * 8 channels support
+  * PCM Double output support
+  * Completely new bass redirection completely:
+    * better filtering (4th order Linkwitz-Riley)
+    * redirection to front channels option
 
 v1.64b - unreleased
   * Dutch language (thanks to Ernst Klamer)

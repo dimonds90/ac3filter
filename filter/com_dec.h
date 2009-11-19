@@ -222,10 +222,6 @@ public:
   STDMETHODIMP set_bass_redir   (bool  bass_redir);
   STDMETHODIMP get_bass_freq    (int  *bass_freq);
   STDMETHODIMP set_bass_freq    (int   bass_freq);
-  STDMETHODIMP get_bass_gain    (sample_t *bass_gain);
-  STDMETHODIMP set_bass_gain    (sample_t  bass_gain);
-  STDMETHODIMP get_bass_hpf     (bool *bass_hpf);
-  STDMETHODIMP set_bass_hpf     (bool  bass_hpf);
   STDMETHODIMP get_bass_channels(int  *bass_channels);
   STDMETHODIMP set_bass_channels(int   bass_channels);
   // SRC

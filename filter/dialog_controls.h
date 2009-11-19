@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 386
+// Total controls: 384
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -99,16 +99,11 @@ static const ControlDesc dialog_controls[] =
   { IDC_CHK_BASS_ENABLE, N_("IDC_CHK_BASS_ENABLE"), "Enable", "" },
   /* TRANSLATORS: Front channels */
   { IDC_CHK_BASS_FRONT, N_("IDC_CHK_BASS_FRONT"), "Front channels", "" },
-  /* TRANSLATORS: High-pass filter */
-  { IDC_CHK_BASS_HPF, N_("IDC_CHK_BASS_HPF"), "High-pass filter", "" },
   /* TRANSLATORS: Subwoofer */
   { IDC_CHK_BASS_SUB, N_("IDC_CHK_BASS_SUB"), "Subwoofer", "" },
   { IDC_EDT_BASS_FREQ, "IDC_EDT_BASS_FREQ", "", "" },
-  { IDC_EDT_BASS_GAIN, "IDC_EDT_BASS_GAIN", "", "" },
   /* TRANSLATORS: Cutoff frequency */
   { IDC_LBL_BASS_FREQ, N_("IDC_LBL_BASS_FREQ"), "Cutoff frequency", "" },
-  /* TRANSLATORS: Bass gain */
-  { IDC_LBL_BASS_GAIN, N_("IDC_LBL_BASS_GAIN"), "Bass gain", "" },
   /* TRANSLATORS: Redirect bass to: */
   { IDC_LBL_BASS_ROUTE, N_("IDC_LBL_BASS_ROUTE"), "Redirect bass to:", "" },
 
@@ -150,6 +145,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_GRP_DELAYS, N_("IDC_GRP_DELAYS"), "Delays", "" },
   /* TRANSLATORS: Reset */
   { IDC_BTN_DELAYS_RESET, N_("IDC_BTN_DELAYS_RESET"), "Reset", "" },
+  /* TRANSLATORS: Enable */
+  { IDC_CHK_DELAYS, N_("IDC_CHK_DELAYS"), "Enable", "" },
   { IDC_CMB_DELAY_UNITS, "IDC_CMB_DELAY_UNITS", "", "" },
   { IDC_EDT_DELAY1, "IDC_EDT_DELAY1", "", "" },
   { IDC_EDT_DELAY2, "IDC_EDT_DELAY2", "", "" },
