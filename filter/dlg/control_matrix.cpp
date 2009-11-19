@@ -67,10 +67,10 @@ static const int ticks = 10;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-static inline long gain2pos(double gain)
-{ return long((-value2db(gain) + max_gain_level) * ticks + 0.5); }
+static inline LRESULT gain2pos(double gain)
+{ return LRESULT((-value2db(gain) + max_gain_level) * ticks + 0.5); }
 
-static inline double pos2gain(long pos)
+static inline double pos2gain(LRESULT pos)
 { return db2value(-double(pos)/ticks + max_gain_level); }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -226,7 +226,6 @@ ControlMatrix::cmd_result ControlMatrix::command(int control, int message)
     case IDC_SLI_LFE:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        int pos = SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_GETPOS, 0, 0);
         clev   = pos2gain(SendDlgItemMessage(hdlg, IDC_SLI_VOICE, TBM_GETPOS, 0, 0));
         slev   = pos2gain(SendDlgItemMessage(hdlg, IDC_SLI_SUR,   TBM_GETPOS, 0, 0));
         lfelev = pos2gain(SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_GETPOS, 0, 0));
