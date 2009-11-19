@@ -322,7 +322,7 @@ AC3FilterTray::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
       break;
 
     case WM_PRESET:
-      iam->preset(lParam);
+      iam->preset(int(lParam));
       return 0;
 
     ///////////////////////////////////
