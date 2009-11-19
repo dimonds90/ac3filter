@@ -315,10 +315,6 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_bass_redir)   (bool  bass_redir) = 0;
   STDMETHOD (get_bass_freq)    (int  *bass_freq) = 0;
   STDMETHOD (set_bass_freq)    (int   bass_freq) = 0;
-  STDMETHOD (get_bass_gain)    (sample_t *bass_gain) = 0;
-  STDMETHOD (set_bass_gain)    (sample_t  bass_gain) = 0;
-  STDMETHOD (get_bass_hpf)     (bool *bass_hpf) = 0;
-  STDMETHOD (set_bass_hpf)     (bool  bass_hpf) = 0;
   STDMETHOD (get_bass_channels)(int  *bass_channels) = 0;
   STDMETHOD (set_bass_channels)(int   bass_channels) = 0;
 
