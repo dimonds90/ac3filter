@@ -14,6 +14,7 @@ pdflatex %1
 pdflatex %1
 call clean_temp.cmd
 if not exist %~dpn1.pdf goto err_pdf
+goto end
 
 :build_all
 echo Building all .tex files
