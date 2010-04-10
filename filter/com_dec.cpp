@@ -47,12 +47,12 @@ bool COMDecoder::is_ofdd() const
 }
 bool COMDecoder::query_input(Speakers _spk) const
 {
-  return ((FORMAT_MASK(_spk.format) & formats) != 0) && dvd.query_input(_spk);
+  return ((FORMAT_MASK(_spk.format) & formats) != 0) && dvd->query_input(_spk);
 }
 bool COMDecoder::set_input(Speakers _spk)
 {
   AutoLock config_lock(&config);
-  return dvd.set_input(_spk);
+  return dvd->set_input(_spk);
 }
 Speakers COMDecoder::get_input() const
 {
@@ -61,20 +61,20 @@ Speakers COMDecoder::get_input() const
 bool COMDecoder::process(const Chunk *_chunk)
 {
   AutoLock config_lock(&config);
-  return dvd.process(_chunk);
+  return dvd->process(_chunk);
 }
 Speakers COMDecoder::get_output() const
 {
-  return dvd.get_output();
+  return dvd->get_output();
 }
 bool COMDecoder::is_empty() const
 {
-  return dvd.is_empty();
+  return dvd->is_empty();
 }
 bool COMDecoder::get_chunk(Chunk *_chunk)
 {
   AutoLock config_lock(&config);
-  return dvd.get_chunk(_chunk);
+  return dvd->get_chunk(_chunk);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

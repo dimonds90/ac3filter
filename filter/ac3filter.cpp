@@ -83,7 +83,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   }
 
   // init decoder
-  dec.set_sink(sink);
+  dec.set_sink(*sink);
   dec.load_params(0, AC3FILTER_ALL);
   *phr = S_OK;
 }
@@ -227,7 +227,7 @@ AC3Filter::process_chunk(const Chunk *_chunk)
     }
 #endif
 
-    if (!sink->process(&chunk))
+    if (!(*sink)->process(&chunk))
     {
       DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): sink->process() failed!", this));
       return false;
@@ -532,7 +532,7 @@ AC3Filter::Run(REFERENCE_TIME tStart)
 
     BeginFlush();
     EndFlush();
-    sink->process(&chunk);
+    (*sink)->process(&chunk);
     BeginFlush();
     EndFlush();
   }
