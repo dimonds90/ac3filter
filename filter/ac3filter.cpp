@@ -83,7 +83,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   }
 
   // init decoder
-  dec.set_sink(*sink);
+  dec.set_sink(sink);
   dec.load_params(0, AC3FILTER_ALL);
   *phr = S_OK;
 }
@@ -136,23 +136,23 @@ AC3Filter::reset()
 }
 
 bool        
-AC3Filter::set_input(const CMediaType &_mt)
+AC3Filter::open(const CMediaType &_mt)
 {
   Speakers spk_tmp;
-  return mt2spk(_mt, spk_tmp) && set_input(spk_tmp);
+  return mt2spk(_mt, spk_tmp) && open(spk_tmp);
 }
 
 bool        
-AC3Filter::set_input(Speakers _in_spk)
+AC3Filter::open(Speakers _in_spk)
 {
-  if (!dec.query_input(_in_spk))
+  if (!dec.can_open(_in_spk))
   {
     DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): format refused", this,
       _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
     return false;
   }
 
-  if (!dec.set_input(_in_spk))
+  if (!dec.open(_in_spk))
   {
     DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): failed", this,
       _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
@@ -165,7 +165,7 @@ AC3Filter::set_input(Speakers _in_spk)
 }
 
 bool
-AC3Filter::process_chunk(const Chunk *_chunk)
+AC3Filter::process(const Chunk *chunk)
 {
   // Here we want to measure processor time used by filter only
   // so we cannot use just dec->process_to(_chunk, sink)
@@ -190,25 +190,26 @@ AC3Filter::process_chunk(const Chunk *_chunk)
   }
 #endif
 
-  cpu.start();
-  if (!dec.process(_chunk))
-  {
-    cpu.stop();
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): dec.process() failed!", this));
-    return false;
-  }
-  cpu.stop();
+  Chunk in(*chunk), out;
 
-  Chunk chunk;
-  while (!dec.is_empty())
+  cpu.start();
+
+  while (dec.process(in, out))
   {
-    cpu.start();
-    if (!dec.get_chunk(&chunk))
+    if (dec.new_stream())
     {
-      cpu.stop();
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): dec.get_chunk() failed!", this));
-      return false;
+      Speakers spk = dec.get_output();
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): new stream (%s, %s, %i)", this,
+        spk.format_text(), spk.mode_text(), spk.sample_rate));
+
+      if (!sink->open(spk))
+      {
+        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): sink->open(%s, %s, %i) failed!", this,
+          spk.format_text(), spk.mode_text(), spk.sample_rate));
+        throw ProcError("AC3Filter", string(), 0, "Open a new stream failed");
+      }
     }
+
     cpu.stop();
 
 #ifdef LOG_TIMING
@@ -227,21 +228,56 @@ AC3Filter::process_chunk(const Chunk *_chunk)
     }
 #endif
 
-    if (!(*sink)->process(&chunk))
-    {
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): sink->process() failed!", this));
-      return false;
-    }
+    sink->process(out);
+    cpu.start();
   }
+
   return true;
 }
 
 bool
 AC3Filter::flush()
 {
-  Chunk chunk;
-  chunk.set_empty(dec.get_input(), false, 0, true);
-  return process_chunk(&chunk);
+  Chunk out;
+  while (dec.flush(out))
+  {
+    if (dec.new_stream())
+    {
+      Speakers spk = dec.get_output();
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): new stream (%s, %s, %i)", this,
+        spk.format_text(), spk.mode_text(), spk.sample_rate));
+
+      if (!sink->open(spk))
+      {
+        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): sink->open(%s, %s, %i) failed!", this,
+          spk.format_text(), spk.mode_text(), spk.sample_rate));
+        throw ProcError("AC3Filter", string(), 0, "Open a new stream failed");
+      }
+    }
+
+    cpu.stop();
+
+#ifdef LOG_TIMING
+    if (chunk.sync)
+    {
+      vtime_t time = local_time() - time_start;
+      REFERENCE_TIME clock = 0;
+      vtime_t latency = 0;
+      if (m_pClock)
+        if SUCCEEDED(m_pClock->GetTime(&clock))
+        {
+          clock -= m_tStart;
+          latency = chunk.time - vtime_t(clock) / 10000000;
+        }
+      DbgLog((LOG_TRACE, 3, "<- time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims", int(time * 1000), int(clock / 10000), int(chunk.time * 1000), int(latency * 1000)));
+    }
+#endif
+
+    sink->process(out);
+    cpu.start();
+  }
+
+  return true;
 }
 
 
@@ -278,7 +314,6 @@ AC3Filter::Receive(IMediaSample *in)
 
   uint8_t *buf;
   int buf_size;
-  vtime_t time;
 
   Chunk chunk;
 
@@ -309,12 +344,10 @@ AC3Filter::Receive(IMediaSample *in)
       reset();
       sink->send_discontinuity();
 
-      if (!set_input(in_spk))
+      if (!open(in_spk))
         return VFW_E_INVALIDMEDIATYPE;
     }
   }
-
-  Speakers in_spk = dec.get_input();
 
   /////////////////////////////////////////////////////////
   // Discontinuity
@@ -345,7 +378,7 @@ AC3Filter::Receive(IMediaSample *in)
   /////////////////////////////////////////////////////////
   // Fill chunk
 
-  chunk.set_rawdata(in_spk, buf, buf_size);
+  chunk.set_rawdata(buf, buf_size);
 
   /////////////////////////////////////////////////////////
   // Timing
@@ -355,8 +388,7 @@ AC3Filter::Receive(IMediaSample *in)
   {
     case S_OK:
     case VFW_S_NO_STOP_TIME:
-      time = vtime_t(begin) / 10000000;
-      chunk.set_sync(true, time);
+      chunk.set_sync(true, vtime_t(begin) / 10000000);
       break;
   }
 
@@ -364,7 +396,7 @@ AC3Filter::Receive(IMediaSample *in)
   // Process
 
   sink->reset_hresult();
-  process_chunk(&chunk);
+  process(&chunk);
 
   if FAILED(sink->get_hresult())
     return sink->get_hresult();
@@ -525,14 +557,17 @@ AC3Filter::Run(REFERENCE_TIME tStart)
     Rawdata buf(reinit * 4);
     buf.zero();
 
-    Chunk chunk;
-    chunk.set_rawdata(
-      Speakers(FORMAT_PCM16, MODE_STEREO, dec.get_input().sample_rate),
-      buf, buf.size());
-
     BeginFlush();
     EndFlush();
-    (*sink)->process(&chunk);
+
+    Chunk chunk;
+    chunk.set_rawdata(buf, buf.size());
+    Speakers spk = sink->get_input();
+
+    sink->open(Speakers(FORMAT_PCM16, MODE_STEREO, spk.sample_rate));
+    sink->process(chunk);
+    sink->open(spk);
+
     BeginFlush();
     EndFlush();
   }
@@ -662,7 +697,7 @@ AC3Filter::CheckInputType(const CMediaType *mt)
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
-  if (!dec.query_input(spk_tmp))
+  if (!dec.can_open(spk_tmp))
   {
     DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(%s %s %iHz): format refused by decoder", this, spk_tmp.mode_text(), spk_tmp.format_text(), spk_tmp.sample_rate));
     return VFW_E_TYPE_NOT_ACCEPTED;
@@ -795,7 +830,7 @@ AC3Filter::SetMediaType(PIN_DIRECTION direction, const CMediaType *mt)
     if FAILED(CheckInputType(mt))
       return E_FAIL;
 
-    if (!set_input(*mt))
+    if (!open(*mt))
       return E_FAIL;
   }
 

@@ -29,13 +29,13 @@ protected:
   int  reinit;          // force audio renderer to reinit sound card
                         // the number means number of PCM samples to send
 
-  bool set_input(const CMediaType &mt);
-  bool set_input(Speakers in_spk);
+  bool open(const CMediaType &mt);
+  bool open(Speakers in_spk);
 
   Speakers guess_pcm_output();
   Speakers guess_spdif_output();
 
-  bool process_chunk(const Chunk *chunk);
+  bool process(const Chunk *chunk);
   bool flush();
   void reset();
 
