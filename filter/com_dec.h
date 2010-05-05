@@ -53,7 +53,9 @@ protected:
   void load_matrix(Config *conf, AudioProcessorState *state);
 
 public:
-  CritSec config;
+  // Must be mutable because we should be able
+  // to take the lock in const methods.
+  mutable CritSec config;
 
   COMDecoder(IUnknown *_outer, int nsamples);
 
@@ -64,20 +66,28 @@ public:
   const Sink *get_sink() const;
 
   /////////////////////////////////////////////////////////
-  // Filter interface
-  // (protect state-changing functions)
+  // Open/close the filter
+
+  virtual bool can_open(Speakers spk) const;
+  virtual bool open(Speakers spk);
+  virtual void close();
+
+  /////////////////////////////////////////////////////////
+  // Processing
 
   virtual void reset();
+  virtual bool process(Chunk &in, Chunk &out);
+  virtual bool flush(Chunk &out);
+  virtual bool new_stream() const;
 
-  virtual bool is_ofdd() const;
-  virtual bool query_input(Speakers spk) const;
-  virtual bool set_input(Speakers spk);
+  // Filter state
+  virtual bool     is_open() const;
+  virtual bool     is_ofdd() const;
   virtual Speakers get_input() const;
-
-  virtual bool process(const Chunk *chunk);
   virtual Speakers get_output() const;
-  virtual bool is_empty() const;
-  virtual bool get_chunk(Chunk *chunk);
+
+  // Filter info
+  virtual string info() const;
 
   /////////////////////////////////////////////////////////
   // IDecoder

@@ -36,45 +36,77 @@ const Sink *COMDecoder::get_sink() const
 ///////////////////////////////////////////////////////////////////////////////
 // Filter interface
 
-void COMDecoder::reset()
+bool
+COMDecoder::can_open(Speakers spk) const
+{
+  AutoLock config_lock(&config);
+  return dvd.can_open(spk);
+}
+bool
+COMDecoder::open(Speakers spk)
+{
+  AutoLock config_lock(&config);
+  return dvd.open(spk);
+}
+void
+COMDecoder::close()
+{
+  AutoLock config_lock(&config);
+  dvd.close();
+}
+void
+COMDecoder::reset()
 {
   AutoLock config_lock(&config);
   dvd.reset();
 }
-bool COMDecoder::is_ofdd() const
+bool
+COMDecoder::process(Chunk &in, Chunk &out)
 {
+  AutoLock config_lock(&config);
+  return dvd.process(in, out);
+}
+bool
+COMDecoder::flush(Chunk &out)
+{
+  AutoLock config_lock(&config);
+  return dvd.flush(out);
+}
+bool
+COMDecoder::new_stream() const
+{
+  AutoLock config_lock(&config);
+  return dvd.new_stream();
+}
+bool
+COMDecoder::is_open() const
+{
+  AutoLock config_lock(&config);
+  return dvd.is_open();
+}
+bool
+COMDecoder::is_ofdd() const
+{
+  AutoLock config_lock(&config);
   return dvd.is_ofdd();
 }
-bool COMDecoder::query_input(Speakers _spk) const
-{
-  return ((FORMAT_MASK(_spk.format) & formats) != 0) && dvd->query_input(_spk);
-}
-bool COMDecoder::set_input(Speakers _spk)
+Speakers
+COMDecoder::get_input() const
 {
   AutoLock config_lock(&config);
-  return dvd->set_input(_spk);
-}
-Speakers COMDecoder::get_input() const
-{
   return dvd.get_input();
 }
-bool COMDecoder::process(const Chunk *_chunk)
+Speakers
+COMDecoder::get_output() const
 {
   AutoLock config_lock(&config);
-  return dvd->process(_chunk);
+  return dvd.get_output();
 }
-Speakers COMDecoder::get_output() const
-{
-  return dvd->get_output();
-}
-bool COMDecoder::is_empty() const
-{
-  return dvd->is_empty();
-}
-bool COMDecoder::get_chunk(Chunk *_chunk)
+string
+COMDecoder::info() const
 {
   AutoLock config_lock(&config);
-  return dvd->get_chunk(_chunk);
+  return dvd.info();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
