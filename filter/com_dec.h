@@ -82,7 +82,6 @@ public:
 
   // Filter state
   virtual bool     is_open() const;
-  virtual bool     is_ofdd() const;
   virtual Speakers get_input() const;
   virtual Speakers get_output() const;
 

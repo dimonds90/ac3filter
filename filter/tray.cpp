@@ -256,9 +256,7 @@ AC3FilterTray::preset(int hash)
     DWORD len = preset_size;
     while (RegEnumKeyEx(key, i++, (LPTSTR)preset_buf, &len, 0, 0, 0, 0) == ERROR_SUCCESS)
     {
-      preset_hash = 0;
-      preset_hash = crc32.calc(preset_hash, (uint8_t *)preset_buf, len);
-      preset_hash = crc32.crc_get(preset_hash);
+      preset_hash = crc32.calc(0, (uint8_t *)preset_buf, len);
       len = preset_size;
       if (preset_hash == hash)
         break;
