@@ -84,12 +84,6 @@ COMDecoder::is_open() const
   AutoLock config_lock(&config);
   return dvd.is_open();
 }
-bool
-COMDecoder::is_ofdd() const
-{
-  AutoLock config_lock(&config);
-  return dvd.is_ofdd();
-}
 Speakers
 COMDecoder::get_input() const
 {
@@ -857,7 +851,7 @@ void COMDecoder::load_spk(Config *conf)
   conf->get_int32("relation",    relation);
   conf->get_bool ("use_spdif",   use_spdif);
 
-  user_spk.set(format, mask, sample_rate, -1, relation);
+  user_spk = Speakers(format, mask, sample_rate, -1, relation);
 
   dvd.set_user(user_spk);
   dvd.set_use_spdif(use_spdif);

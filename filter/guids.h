@@ -75,6 +75,9 @@ DEFINE_GUID(MEDIASUBTYPE_AVI_AC3,
 DEFINE_GUID(MEDIASUBTYPE_AVI_DTS, 
 0x00002001, 0x0000, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71);
 
+DEFINE_GUID(MEDIASUBTYPE_AVI_AAC, 
+0x000000ff, 0x0000, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71);
+
 ///////////////////////////////////////////////////////////////////////////////
 // Interface GUIDs
 ///////////////////////////////////////////////////////////////////////////////

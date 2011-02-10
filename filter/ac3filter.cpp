@@ -1,7 +1,20 @@
 #include "guids.h"
 #include "ac3filter.h"
 #include "ac3filter_intl.h"
+#include "logging.h"
 #include "decss\DeCSSInputPin.h"
+
+class AC3FilterError : public ValibException
+{
+public:
+  AC3FilterError(int code_, string text_):
+  ValibException("AC3Filter", code_, text_)
+  {}
+
+  AC3FilterError(string text_):
+  ValibException("AC3Filter", text_)
+  {}
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 // Define number of buffers and max buffer size sent to downstream.
@@ -147,20 +160,17 @@ AC3Filter::open(Speakers _in_spk)
 {
   if (!dec.can_open(_in_spk))
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): format refused", this,
-      _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s): format refused", this, _in_spk.print().c_str() ));
     return false;
   }
 
   if (!dec.open(_in_spk))
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): failed", this,
-      _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s): failed", this, _in_spk.print().c_str() ));
     return false;
   }
 
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s %s %iHz): succeeded", this,
-    _in_spk.mode_text(), _in_spk.format_text(), _in_spk.sample_rate));
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s): succeeded", this, _in_spk.print().c_str() ));
   return true;
 }
 
@@ -174,20 +184,7 @@ AC3Filter::process(const Chunk *chunk)
   // It's also useful because of extended error reporting.
 
 #ifdef LOG_TIMING
-  static vtime_t time_start = local_time();
-  if (_chunk->sync)
-  {
-    vtime_t time = local_time() - time_start;
-    REFERENCE_TIME clock = 0;
-    vtime_t latency = 0;
-    if (m_pClock)
-      if SUCCEEDED(m_pClock->GetTime(&clock))
-      {
-        clock -= m_tStart;
-        latency =  _chunk->time - vtime_t(clock) / 10000000;
-      }
-    DbgLog((LOG_TRACE, 3, "-> time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims", int(time * 1000), int(clock / 10000), int(_chunk->time * 1000), int(latency * 1000)));
-  }
+  log_input_chunk(chunk);
 #endif
 
   Chunk in(*chunk), out;
@@ -199,33 +196,19 @@ AC3Filter::process(const Chunk *chunk)
     if (dec.new_stream())
     {
       Speakers spk = dec.get_output();
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): new stream (%s, %s, %i)", this,
-        spk.format_text(), spk.mode_text(), spk.sample_rate));
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process(): new stream (%s)", this, spk.print().c_str() ));
 
       if (!sink->open(spk))
       {
-        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process_chunk(): sink->open(%s, %s, %i) failed!", this,
-          spk.format_text(), spk.mode_text(), spk.sample_rate));
-        throw ProcError("AC3Filter", string(), 0, "Open a new stream failed");
+        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process(): sink->open(%s) failed!", this, spk.print().c_str() ));
+        throw AC3FilterError("Open a new stream failed");
       }
     }
 
     cpu.stop();
 
 #ifdef LOG_TIMING
-    if (chunk.sync)
-    {
-      vtime_t time = local_time() - time_start;
-      REFERENCE_TIME clock = 0;
-      vtime_t latency = 0;
-      if (m_pClock)
-        if SUCCEEDED(m_pClock->GetTime(&clock))
-        {
-          clock -= m_tStart;
-          latency = chunk.time - vtime_t(clock) / 10000000;
-        }
-      DbgLog((LOG_TRACE, 3, "<- time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims", int(time * 1000), int(clock / 10000), int(chunk.time * 1000), int(latency * 1000)));
-    }
+    log_output_chunk(chunk);
 #endif
 
     sink->process(out);
@@ -244,33 +227,19 @@ AC3Filter::flush()
     if (dec.new_stream())
     {
       Speakers spk = dec.get_output();
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): new stream (%s, %s, %i)", this,
-        spk.format_text(), spk.mode_text(), spk.sample_rate));
+      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): new stream (%s)", this, spk.print().c_str() ));
 
       if (!sink->open(spk))
       {
-        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): sink->open(%s, %s, %i) failed!", this,
-          spk.format_text(), spk.mode_text(), spk.sample_rate));
-        throw ProcError("AC3Filter", string(), 0, "Open a new stream failed");
+        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): sink->open(%s) failed!", this, spk.print().c_str() ));
+        throw AC3FilterError("Open a new stream failed");
       }
     }
 
     cpu.stop();
 
 #ifdef LOG_TIMING
-    if (chunk.sync)
-    {
-      vtime_t time = local_time() - time_start;
-      REFERENCE_TIME clock = 0;
-      vtime_t latency = 0;
-      if (m_pClock)
-        if SUCCEEDED(m_pClock->GetTime(&clock))
-        {
-          clock -= m_tStart;
-          latency = chunk.time - vtime_t(clock) / 10000000;
-        }
-      DbgLog((LOG_TRACE, 3, "<- time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims", int(time * 1000), int(clock / 10000), int(chunk.time * 1000), int(latency * 1000)));
-    }
+    log_output_chunk(chunk);
 #endif
 
     sink->process(out);
@@ -699,7 +668,7 @@ AC3Filter::CheckInputType(const CMediaType *mt)
 
   if (!dec.can_open(spk_tmp))
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(%s %s %iHz): format refused by decoder", this, spk_tmp.mode_text(), spk_tmp.format_text(), spk_tmp.sample_rate));
+    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(%s): format refused by decoder", this, spk_tmp.print().c_str() ));
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
