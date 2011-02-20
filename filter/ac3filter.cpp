@@ -165,7 +165,7 @@ AC3Filter::open(Speakers _in_spk)
   return true;
 }
 
-bool
+void
 AC3Filter::process(const Chunk *chunk)
 {
   // Here we want to measure processor time used by filter only
@@ -178,64 +178,63 @@ AC3Filter::process(const Chunk *chunk)
   log_input_chunk(chunk);
 #endif
 
-  Chunk in(*chunk), out;
-
-  cpu.start();
-  while (dec.process(in, out))
-  {
-    if (dec.new_stream())
-    {
-      Speakers spk = dec.get_output();
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process(): new stream (%s)", this, spk.print().c_str() ));
-
-      if (!sink->open(spk))
-      {
-        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process(): sink->open(%s) failed!", this, spk.print().c_str() ));
-        THROW(EOpenSink() << errinfo_spk(spk));
-      }
-    }
-
-#ifdef LOG_TIMING
-    log_output_chunk(chunk);
-#endif
-
-    cpu.stop();
-    sink->process(out);
+  try {
     cpu.start();
-  }
+    Chunk in(*chunk), out;
+    while (dec.process(in, out))
+    {
+      if (dec.new_stream())
+      {
+        Speakers spk = dec.get_output();
+        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process(): new stream (%s)", this, spk.print().c_str() ));
 
-  return true;
+        if (!sink->open(spk))
+          THROW(EOpenSink() << errinfo_spk(spk));
+      }
+#ifdef LOG_TIMING
+      log_output_chunk(chunk);
+#endif
+      cpu.stop();
+      sink->process(out);
+      cpu.start();
+    }
+  }
+  catch (ValibException &e)
+  {
+    DbgLog((LOG_ERROR, 3, "AC3Filter(%x)::process(): exception:\n%s", this, boost::diagnostic_information(e).c_str() ));
+    reset();
+  }
 }
 
-bool
+void
 AC3Filter::flush()
 {
-  Chunk out;
-  while (dec.flush(out))
-  {
-    if (dec.new_stream())
-    {
-      Speakers spk = dec.get_output();
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): new stream (%s)", this, spk.print().c_str() ));
-
-      if (!sink->open(spk))
-      {
-        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): sink->open(%s) failed!", this, spk.print().c_str() ));
-        THROW(EOpenSink() << errinfo_spk(spk));
-      }
-    }
-
-    cpu.stop();
-
-#ifdef LOG_TIMING
-    log_output_chunk(chunk);
-#endif
-
-    sink->process(out);
+  try {
+    Chunk out;
     cpu.start();
-  }
+    while (dec.flush(out))
+    {
+      if (dec.new_stream())
+      {
+        Speakers spk = dec.get_output();
+        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): new stream (%s)", this, spk.print().c_str() ));
 
-  return true;
+        if (!sink->open(spk))
+          THROW(EOpenSink() << errinfo_spk(spk));
+      }
+#ifdef LOG_TIMING
+      log_output_chunk(chunk);
+#endif
+      cpu.stop();
+      sink->process(out);
+      cpu.start();
+    }
+  }
+  catch (ValibException &e)
+  {
+    DbgLog((LOG_ERROR, 3, "AC3Filter(%x)::flush(): exception:\n%s", this, boost::diagnostic_information(e).c_str() ));
+    reset();
+  }
 }
 
 
@@ -355,11 +354,7 @@ AC3Filter::Receive(IMediaSample *in)
 
   sink->reset_hresult();
   process(&chunk);
-
-  if FAILED(sink->get_hresult())
-    return sink->get_hresult();
-  else
-    return S_OK;
+  return FAILED(sink->get_hresult())? sink->get_hresult(): S_OK;
 }
 
 HRESULT 
