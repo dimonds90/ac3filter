@@ -32,13 +32,9 @@ protected:
   bool open(const CMediaType &mt);
   bool open(Speakers in_spk);
 
-  Speakers guess_pcm_output();
-  Speakers guess_spdif_output();
-
-  bool process(const Chunk *chunk);
-  bool flush();
+  void process(const Chunk *chunk);
+  void flush();
   void reset();
-
 
 private:
   AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr);
