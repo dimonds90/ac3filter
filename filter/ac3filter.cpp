@@ -4,17 +4,8 @@
 #include "logging.h"
 #include "decss\DeCSSInputPin.h"
 
-class AC3FilterError : public ValibException
-{
-public:
-  AC3FilterError(int code_, string text_):
-  ValibException("AC3Filter", code_, text_)
-  {}
-
-  AC3FilterError(string text_):
-  ValibException("AC3Filter", text_)
-  {}
-};
+struct AC3FilterError : public ValibException {};
+struct EOpenSink : public AC3FilterError {};
 
 ///////////////////////////////////////////////////////////////////////////////
 // Define number of buffers and max buffer size sent to downstream.
@@ -190,7 +181,6 @@ AC3Filter::process(const Chunk *chunk)
   Chunk in(*chunk), out;
 
   cpu.start();
-
   while (dec.process(in, out))
   {
     if (dec.new_stream())
@@ -201,16 +191,15 @@ AC3Filter::process(const Chunk *chunk)
       if (!sink->open(spk))
       {
         DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process(): sink->open(%s) failed!", this, spk.print().c_str() ));
-        throw AC3FilterError("Open a new stream failed");
+        THROW(EOpenSink() << errinfo_spk(spk));
       }
     }
-
-    cpu.stop();
 
 #ifdef LOG_TIMING
     log_output_chunk(chunk);
 #endif
 
+    cpu.stop();
     sink->process(out);
     cpu.start();
   }
@@ -232,7 +221,7 @@ AC3Filter::flush()
       if (!sink->open(spk))
       {
         DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): sink->open(%s) failed!", this, spk.print().c_str() ));
-        throw AC3FilterError("Open a new stream failed");
+        THROW(EOpenSink() << errinfo_spk(spk));
       }
     }
 
