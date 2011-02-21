@@ -4,8 +4,7 @@
 #include "logging.h"
 #include "decss\DeCSSInputPin.h"
 
-struct AC3FilterError : public ValibException {};
-struct EOpenSink : public AC3FilterError {};
+struct EOpenSink : public ValibException {};
 
 ///////////////////////////////////////////////////////////////////////////////
 // Define number of buffers and max buffer size sent to downstream.
