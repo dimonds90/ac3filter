@@ -20,7 +20,7 @@ struct EOpenSink : public ValibException {};
 
 
 // uncomment this to log timing information into DirectShow log
-//#define LOG_TIMING
+#define LOG_TIMING
 
 // uncomment this to register the graph at running objects table
 //#ifdef _DEBUG
@@ -174,7 +174,7 @@ AC3Filter::process(const Chunk *chunk)
   // It's also useful because of extended error reporting.
 
 #ifdef LOG_TIMING
-  log_input_chunk(chunk);
+  log_input_chunk(*chunk, m_tStart, m_pClock);
 #endif
 
   try {
@@ -191,7 +191,7 @@ AC3Filter::process(const Chunk *chunk)
           THROW(EOpenSink() << errinfo_spk(spk));
       }
 #ifdef LOG_TIMING
-      log_output_chunk(chunk);
+      log_output_chunk(*chunk, m_tStart, m_pClock);
 #endif
       cpu.stop();
       sink->process(out);
@@ -222,7 +222,7 @@ AC3Filter::flush()
           THROW(EOpenSink() << errinfo_spk(spk));
       }
 #ifdef LOG_TIMING
-      log_output_chunk(chunk);
+      log_output_chunk(out, m_tStart, m_pClock);
 #endif
       cpu.stop();
       sink->process(out);
