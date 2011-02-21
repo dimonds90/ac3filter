@@ -416,6 +416,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\logging.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\logging.h"
+				>
+			</File>
+			<File
 				RelativePath=".\register.cpp"
 				>
 			</File>

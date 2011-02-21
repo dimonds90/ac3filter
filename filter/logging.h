@@ -3,7 +3,7 @@
 
 #include "chunk.h"
 
-void log_input_chunk(Chunk &chunk);
-void log_output_chunk(Chunk &chunk);
+void log_input_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *clock);
+void log_output_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *clock);
 
 #endif
