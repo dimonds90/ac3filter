@@ -319,7 +319,12 @@ STDMETHODIMP COMDecoder::get_frames(int *_frames, int *_errors)
 
 STDMETHODIMP COMDecoder::get_info(char *_info, size_t _len)
 {
-  dvd.get_info(_info, _len);
+  string info = dvd.info();
+  size_t str_len = _len;
+  if (info.length() + 1 < _len)
+    str_len = info.length() + 1;
+  memcpy(_info, info.c_str(), str_len - 1);
+  _info[_len - 1] = 0;
   cr2crlf(_info, _len);
   return S_OK;
 }
