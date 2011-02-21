@@ -40,7 +40,7 @@ bool
 COMDecoder::can_open(Speakers spk) const
 {
   AutoLock config_lock(&config);
-  return dvd.can_open(spk);
+  return ((FORMAT_MASK(spk.format) & formats) != 0) && dvd.can_open(spk);
 }
 bool
 COMDecoder::open(Speakers spk)
