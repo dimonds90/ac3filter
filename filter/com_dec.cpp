@@ -312,13 +312,16 @@ STDMETHODIMP COMDecoder::get_spdif_status(int *_spdif_status)
 
 STDMETHODIMP COMDecoder::get_frames(int *_frames, int *_errors)
 {
-  *_frames = dvd.dec.get_frames() + dvd.spdifer_pt.get_frames() + dvd.spdifer_enc.get_frames();
-  *_errors = dvd.dec.get_errors() + dvd.spdifer_pt.get_errors() + dvd.spdifer_enc.get_errors();
+  if (_frames) *_frames = 0;
+  if (_errors) *_errors = 0;
+//  *_frames = dvd.dec.get_frames() + dvd.spdifer_pt.get_frames() + dvd.spdifer_enc.get_frames();
+//  *_errors = dvd.dec.get_errors() + dvd.spdifer_pt.get_errors() + dvd.spdifer_enc.get_errors();
   return S_OK;
 }
 
 STDMETHODIMP COMDecoder::get_info(char *_info, size_t _len)
 {
+  AutoLock config_lock(&config);
   string info = dvd.info();
   size_t str_len = _len;
   if (info.length() + 1 < _len)
