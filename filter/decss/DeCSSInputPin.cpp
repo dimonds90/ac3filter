@@ -17,10 +17,7 @@
  *
  */
 
-#include <stdio.h>
-#include <dshow.h>
 #include <streams.h>
-#include <uuids.h>
 #include <dvdmedia.h>
 #include "DeCSSInputPin.h"
 
