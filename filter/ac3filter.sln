@@ -4,12 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ac3filter", "ac3filter.vcproj", "{060A26A6-D362-4643-94FE-580D718DB40C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{30FCD216-1CAD-48FD-BF4B-337572F7EC9C} = {30FCD216-1CAD-48FD-BF4B-337572F7EC9C}
+		{11F10C24-A2EC-4514-AD78-85CF2FEF698D} = {11F10C24-A2EC-4514-AD78-85CF2FEF698D}
 		{B8D9A742-1BED-4B8D-BC46-3D1669F3405E} = {B8D9A742-1BED-4B8D-BC46-3D1669F3405E}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "valib", "..\..\valib\lib\valib.vcproj", "{30FCD216-1CAD-48FD-BF4B-337572F7EC9C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aac", "..\..\valib\lib\aac.vcproj", "{B8D9A742-1BED-4B8D-BC46-3D1669F3405E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpa", "..\..\valib\lib\mpa.vcproj", "{11F10C24-A2EC-4514-AD78-85CF2FEF698D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +46,14 @@ Global
 		{B8D9A742-1BED-4B8D-BC46-3D1669F3405E}.Release|Win32.Build.0 = Release|Win32
 		{B8D9A742-1BED-4B8D-BC46-3D1669F3405E}.Release|x64.ActiveCfg = Release|x64
 		{B8D9A742-1BED-4B8D-BC46-3D1669F3405E}.Release|x64.Build.0 = Release|x64
+		{11F10C24-A2EC-4514-AD78-85CF2FEF698D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{11F10C24-A2EC-4514-AD78-85CF2FEF698D}.Debug|Win32.Build.0 = Debug|Win32
+		{11F10C24-A2EC-4514-AD78-85CF2FEF698D}.Debug|x64.ActiveCfg = Debug|x64
+		{11F10C24-A2EC-4514-AD78-85CF2FEF698D}.Debug|x64.Build.0 = Debug|x64
+		{11F10C24-A2EC-4514-AD78-85CF2FEF698D}.Release|Win32.ActiveCfg = Release|Win32
+		{11F10C24-A2EC-4514-AD78-85CF2FEF698D}.Release|Win32.Build.0 = Release|Win32
+		{11F10C24-A2EC-4514-AD78-85CF2FEF698D}.Release|x64.ActiveCfg = Release|x64
+		{11F10C24-A2EC-4514-AD78-85CF2FEF698D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
