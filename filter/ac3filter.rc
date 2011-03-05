@@ -9,6 +9,7 @@
 //
 #include "afxres.h"
 #include "resource_ids.h"
+#include "ac3filter_ver.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
@@ -124,7 +125,7 @@ BEGIN
     CONTROL         "",IDC_LEVEL_OUT8,"msctls_progress32",PBS_SMOOTH | PBS_VERTICAL,355,122,7,60
     CONTROL         "",IDC_SLI_GAIN_OUT8,"msctls_trackbar32",TBS_VERT | TBS_BOTH | WS_TABSTOP,362,122,27,60
     EDITTEXT        IDC_EDT_GAIN_OUT8,364,183,23,12,ES_AUTOHSCROLL
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Help",IDC_BTN_HELP,342,204,50,12,BS_FLAT
     CONTROL         "Enable",IDC_CHK_DELAYS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,101,90,10
 END
@@ -177,7 +178,7 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,177,182,8
     CONTROL         "Disallow PCM output in SPDIF mode",IDC_CHK_SPDIF_NO_PCM,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,187,182,8
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Help",IDC_BTN_HELP,342,204,50,12,BS_FLAT
     CONTROL         "LPCM",IDC_CHK_LPCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,27,58,8
     CONTROL         "AAC",IDC_CHK_AAC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,35,30,10
@@ -228,7 +229,7 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,177,182,8
     CONTROL         "Disallow PCM output in SPDIF mode",IDC_CHK_SPDIF_NO_PCM,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,187,182,8
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Help",IDC_BTN_HELP,342,204,50,12,BS_FLAT
 END
 
@@ -252,7 +253,7 @@ BEGIN
     EDITTEXT        IDC_EDT_ENV,210,17,177,56,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
     GROUPBOX        "Thanks to",IDC_GRP_CREDITS,204,76,188,124
     EDITTEXT        IDC_EDT_CREDITS,210,85,177,112,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Donate",IDC_BTN_DONATE,342,204,50,12,BS_FLAT
 END
 
@@ -318,7 +319,7 @@ BEGIN
     CONTROL         "Progress1",IDC_LEVEL_OUT6,"msctls_progress32",PBS_SMOOTH | PBS_VERTICAL,355,117,10,39
     CONTROL         "",IDC_LEVEL_OUT7,"msctls_progress32",PBS_SMOOTH | PBS_VERTICAL,373,147,10,39
     CONTROL         "",IDC_LEVEL_OUT8,"msctls_progress32",PBS_SMOOTH | PBS_VERTICAL,355,157,10,39
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Help",IDC_BTN_HELP,342,204,50,12,BS_FLAT
 END
 
@@ -368,7 +369,7 @@ BEGIN
     EDITTEXT        IDC_EDT_EQ10,361,86,23,12,ES_AUTOHSCROLL
     CTEXT           "",IDC_SPECTRUM,8,107,384,93,SS_CENTERIMAGE | SS_SUNKEN | WS_BORDER
     CONTROL         "Log scale spectrum",IDC_CHK_EQ_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,204,85,10
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",IDC_VER,97,204,239,12,SS_CENTERIMAGE
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky",IDC_VER,97,204,239,12,SS_CENTERIMAGE
     PUSHBUTTON      "Help",IDC_BTN_HELP,342,204,50,12,BS_FLAT
 END
 
@@ -549,7 +550,7 @@ BEGIN
     CONTROL         "",IDC_LEVEL_OUT6,"msctls_progress32",PBS_SMOOTH | PBS_VERTICAL,355,117,10,39
     CONTROL         "",IDC_LEVEL_OUT7,"msctls_progress32",PBS_SMOOTH | PBS_VERTICAL,373,147,10,39
     CONTROL         "",IDC_LEVEL_OUT8,"msctls_progress32",PBS_SMOOTH | PBS_VERTICAL,355,157,10,39
-    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
+    RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Help",IDC_BTN_HELP,342,204,50,12,BS_FLAT
 END
 
@@ -678,12 +679,12 @@ BEGIN
         BEGIN
             VALUE "Comments", "Direct show audio decoder and processor filter"
             VALUE "FileDescription", "ac3filter"
-            VALUE "FileVersion", "1.31b"
+            VALUE "FileVersion", AC3FILTER_VER
             VALUE "InternalName", "ac3filter"
-            VALUE "LegalCopyright", "Copyright c 2002-2007 by Alexander Vigovsky"
+            VALUE "LegalCopyright", "Copyright c 2002-2011 by Alexander Vigovsky"
             VALUE "OriginalFilename", "ac3filter.ax"
             VALUE "ProductName", "AC3Filter"
-            VALUE "ProductVersion", "1.31b"
+            VALUE "ProductVersion", AC3FILTER_VER
         END
     END
     BLOCK "VarFileInfo"
