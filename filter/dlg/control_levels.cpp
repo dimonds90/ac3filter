@@ -85,4 +85,4 @@ void ControlLevels::update_dynamic()
       overflow[ch] = is_overflow;
     }
   }
-};
+}
