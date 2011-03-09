@@ -109,11 +109,13 @@ COMDecoder::info() const
 // Input/output format
 STDMETHODIMP COMDecoder::get_in_spk(Speakers *_spk)
 {
+  AutoLock config_lock(&config);
   if (_spk) *_spk = dvd.get_input();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_out_spk(Speakers *_spk)
 {
+  AutoLock config_lock(&config);
   if (_spk) *_spk = dvd.get_output();
   return S_OK;
 }
@@ -121,11 +123,13 @@ STDMETHODIMP COMDecoder::get_out_spk(Speakers *_spk)
 // User format
 STDMETHODIMP COMDecoder::get_user_spk(Speakers *_spk)
 {
+  AutoLock config_lock(&config);
   if (_spk) *_spk = dvd.get_user();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_user_spk(Speakers  _spk)
 {
+  AutoLock config_lock(&config);
   return dvd.set_user(_spk)? S_OK: E_FAIL;
 }
 
@@ -144,11 +148,13 @@ STDMETHODIMP COMDecoder::set_formats(int  _formats)
 // Query sink about output format support
 STDMETHODIMP COMDecoder::get_query_sink(bool *_query_sink)
 {
+  AutoLock config_lock(&config);
   if (_query_sink) *_query_sink = dvd.get_query_sink();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_query_sink(bool  _query_sink)
 {
+  AutoLock config_lock(&config);
   dvd.set_query_sink(_query_sink);
   return S_OK;
 }
@@ -156,11 +162,13 @@ STDMETHODIMP COMDecoder::set_query_sink(bool  _query_sink)
 // Use detector
 STDMETHODIMP COMDecoder::get_use_detector(bool *_use_detector)
 {
+  AutoLock config_lock(&config);
   if (_use_detector) *_use_detector = dvd.get_use_detector();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_use_detector(bool  _use_detector)
 {
+  AutoLock config_lock(&config);
   dvd.set_use_detector(_use_detector);
   return S_OK;
 }
@@ -168,11 +176,13 @@ STDMETHODIMP COMDecoder::set_use_detector(bool  _use_detector)
 // Use SPDIF if possible
 STDMETHODIMP COMDecoder::get_use_spdif(bool *_use_spdif)
 {
+  AutoLock config_lock(&config);
   if (_use_spdif) *_use_spdif = dvd.get_use_spdif();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_use_spdif(bool  _use_spdif)
 {
+  AutoLock config_lock(&config);
   dvd.set_use_spdif(_use_spdif);
   return S_OK;
 }
@@ -180,11 +190,13 @@ STDMETHODIMP COMDecoder::set_use_spdif(bool  _use_spdif)
 // SPDIF passthrough (formats bitmask)
 STDMETHODIMP COMDecoder::get_spdif_pt(int *_spdif_pt)
 {
+  AutoLock config_lock(&config);
   if (_spdif_pt) *_spdif_pt = dvd.get_spdif_pt();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_spdif_pt(int  _spdif_pt)
 {
+  AutoLock config_lock(&config);
   dvd.set_spdif_pt(_spdif_pt);
   return S_OK;
 }
@@ -192,11 +204,13 @@ STDMETHODIMP COMDecoder::set_spdif_pt(int  _spdif_pt)
 // SPDIF as PCM output
 STDMETHODIMP COMDecoder::get_spdif_as_pcm(bool *_spdif_as_pcm)
 {
+  AutoLock config_lock(&config);
   if (_spdif_as_pcm) *_spdif_as_pcm = dvd.get_spdif_as_pcm();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_spdif_as_pcm(bool  _spdif_as_pcm)
 {
+  AutoLock config_lock(&config);
   dvd.set_spdif_as_pcm(_spdif_as_pcm);
   return S_OK;
 }
@@ -204,11 +218,13 @@ STDMETHODIMP COMDecoder::set_spdif_as_pcm(bool  _spdif_as_pcm)
 // SPDIF encode
 STDMETHODIMP COMDecoder::get_spdif_encode(bool *_spdif_encode)
 {
+  AutoLock config_lock(&config);
   if (_spdif_encode) *_spdif_encode = dvd.get_spdif_encode();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_spdif_encode(bool  _spdif_encode)
 {
+  AutoLock config_lock(&config);
   dvd.set_spdif_encode(_spdif_encode);
   return S_OK;
 }
@@ -216,11 +232,13 @@ STDMETHODIMP COMDecoder::set_spdif_encode(bool  _spdif_encode)
 // SPDIF stereo PCM passthrough
 STDMETHODIMP COMDecoder::get_spdif_stereo_pt(bool *_spdif_stereo_pt)
 {
+  AutoLock config_lock(&config);
   if (_spdif_stereo_pt) *_spdif_stereo_pt = dvd.get_spdif_stereo_pt();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_spdif_stereo_pt(bool  _spdif_stereo_pt)
 {
+  AutoLock config_lock(&config);
   dvd.set_spdif_stereo_pt(_spdif_stereo_pt);
   return S_OK;
 }
@@ -228,11 +246,13 @@ STDMETHODIMP COMDecoder::set_spdif_stereo_pt(bool  _spdif_stereo_pt)
 // SPDIF bitrate
 STDMETHODIMP COMDecoder::get_spdif_bitrate(int *_spdif_bitrate)
 {
+  AutoLock config_lock(&config);
   if (_spdif_bitrate) *_spdif_bitrate = dvd.get_spdif_bitrate();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_spdif_bitrate(int  _spdif_bitrate)
 {
+  AutoLock config_lock(&config);
   dvd.set_spdif_bitrate(_spdif_bitrate);
   return S_OK;
 }
@@ -240,41 +260,49 @@ STDMETHODIMP COMDecoder::set_spdif_bitrate(int  _spdif_bitrate)
 // SPDIF check sample rate
 STDMETHODIMP COMDecoder::get_spdif_check_sr(bool *_spdif_check_sr)
 {
+  AutoLock config_lock(&config);
   if (_spdif_check_sr) *_spdif_check_sr = dvd.get_spdif_check_sr();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_spdif_check_sr(bool  _spdif_check_sr)
 {
+  AutoLock config_lock(&config);
   dvd.set_spdif_check_sr(_spdif_check_sr);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_spdif_allow_48(bool *_spdif_allow_48)
 {
+  AutoLock config_lock(&config);
   if (_spdif_allow_48) *_spdif_allow_48 = dvd.get_spdif_allow_48();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_spdif_allow_48(bool  _spdif_allow_48)
 {
+  AutoLock config_lock(&config);
   dvd.set_spdif_allow_48(_spdif_allow_48);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_spdif_allow_44(bool *_spdif_allow_44)
 {
+  AutoLock config_lock(&config);
   if (_spdif_allow_44) *_spdif_allow_44 = dvd.get_spdif_allow_44();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_spdif_allow_44(bool  _spdif_allow_44)
 {
+  AutoLock config_lock(&config);
   dvd.set_spdif_allow_44(_spdif_allow_44);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_spdif_allow_32(bool *_spdif_allow_32)
 {
+  AutoLock config_lock(&config);
   if (_spdif_allow_32) *_spdif_allow_32 = dvd.get_spdif_allow_32();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_spdif_allow_32(bool  _spdif_allow_32)
 {
+  AutoLock config_lock(&config);
   dvd.set_spdif_allow_32(_spdif_allow_32);
   return S_OK;
 }
@@ -282,11 +310,13 @@ STDMETHODIMP COMDecoder::set_spdif_allow_32(bool  _spdif_allow_32)
 // SPDIF/DTS output mode
 STDMETHODIMP COMDecoder::get_dts_mode(int *_dts_mode)
 {
+  AutoLock config_lock(&config);
   if (_dts_mode) *_dts_mode = dvd.get_dts_mode();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_dts_mode(int  _dts_mode)
 {
+  AutoLock config_lock(&config);
   dvd.set_dts_mode(_dts_mode);
   return S_OK;
 }
@@ -294,11 +324,13 @@ STDMETHODIMP COMDecoder::set_dts_mode(int  _dts_mode)
 // SPDIF/DTS conversion
 STDMETHODIMP COMDecoder::get_dts_conv(int *_dts_conv)
 {
+  AutoLock config_lock(&config);
   if (_dts_conv) *_dts_conv = dvd.get_dts_conv();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_dts_conv(int  _dts_conv)
 {
+  AutoLock config_lock(&config);
   dvd.set_dts_conv(_dts_conv);
   return S_OK;
 }
@@ -306,12 +338,14 @@ STDMETHODIMP COMDecoder::set_dts_conv(int  _dts_conv)
 // SPDIF status
 STDMETHODIMP COMDecoder::get_spdif_status(int *_spdif_status)
 {
+  AutoLock config_lock(&config);
   if (_spdif_status) *_spdif_status = dvd.get_spdif_status();
   return S_OK;
 }
 
 STDMETHODIMP COMDecoder::get_frames(int *_frames, int *_errors)
 {
+  AutoLock config_lock(&config);
   if (_frames) *_frames = 0;
   if (_errors) *_errors = 0;
 //  *_frames = dvd.dec.get_frames() + dvd.spdifer_pt.get_frames() + dvd.spdifer_enc.get_frames();
@@ -338,12 +372,14 @@ STDMETHODIMP COMDecoder::get_info(char *_info, size_t _len)
 // Formats
 STDMETHODIMP COMDecoder::get_proc_in_spk(Speakers *spk)
 {
+  AutoLock config_lock(&config);
   if (spk) *spk = dvd.proc.get_input();
   return S_OK;
 }
 
 STDMETHODIMP COMDecoder::get_proc_out_spk(Speakers *spk)
 {
+  AutoLock config_lock(&config);
   if (spk) *spk = dvd.proc.get_output();
   return S_OK;
 }
@@ -351,6 +387,7 @@ STDMETHODIMP COMDecoder::get_proc_out_spk(Speakers *spk)
 // AGC options
 STDMETHODIMP COMDecoder::get_auto_gain (bool *_auto_gain)
 {
+  AutoLock config_lock(&config);
   if (_auto_gain) *_auto_gain = dvd.proc.get_auto_gain();
   return S_OK;
 }
@@ -362,6 +399,7 @@ STDMETHODIMP COMDecoder::set_auto_gain (bool _auto_gain)
 }
 STDMETHODIMP COMDecoder::get_normalize (bool *_normalize)
 {
+  AutoLock config_lock(&config);
   if (_normalize) *_normalize = dvd.proc.get_normalize();
   return S_OK;
 }
@@ -373,6 +411,7 @@ STDMETHODIMP COMDecoder::set_normalize (bool _normalize)
 }
 STDMETHODIMP COMDecoder::get_attack(sample_t *_attack)
 {
+  AutoLock config_lock(&config);
   if (_attack) *_attack = dvd.proc.get_attack();
   return S_OK;
 }
@@ -384,6 +423,7 @@ STDMETHODIMP COMDecoder::set_attack(sample_t _attack)
 }
 STDMETHODIMP COMDecoder::get_release(sample_t *_release)
 {
+  AutoLock config_lock(&config);
   if (_release) *_release = dvd.proc.get_release();
   return S_OK;
 }
@@ -397,6 +437,7 @@ STDMETHODIMP COMDecoder::set_release(sample_t _release)
 // Matrix options
 STDMETHODIMP COMDecoder::get_auto_matrix(bool *_auto_matrix)
 {
+  AutoLock config_lock(&config);
   if (_auto_matrix) *_auto_matrix = dvd.proc.get_auto_matrix();
   return S_OK;
 }
@@ -408,6 +449,7 @@ STDMETHODIMP COMDecoder::set_auto_matrix(bool _auto_matrix)
 }
 STDMETHODIMP COMDecoder::get_normalize_matrix(bool *_normalize_matrix)
 {
+  AutoLock config_lock(&config);
   if (_normalize_matrix) *_normalize_matrix = dvd.proc.get_normalize_matrix();
   return S_OK;
 }
@@ -419,6 +461,7 @@ STDMETHODIMP COMDecoder::set_normalize_matrix(bool _normalize_matrix)
 }
 STDMETHODIMP COMDecoder::get_voice_control(bool *_voice_control)
 {
+  AutoLock config_lock(&config);
   if (_voice_control) *_voice_control = dvd.proc.get_voice_control();
   return S_OK;
 }
@@ -430,6 +473,7 @@ STDMETHODIMP COMDecoder::set_voice_control(bool _voice_control)
 }
 STDMETHODIMP COMDecoder::get_expand_stereo(bool *_expand_stereo)
 {
+  AutoLock config_lock(&config);
   if (_expand_stereo) *_expand_stereo = dvd.proc.get_expand_stereo();
   return S_OK;
 }
@@ -443,6 +487,7 @@ STDMETHODIMP COMDecoder::set_expand_stereo(bool _expand_stereo)
 // Master gain
 STDMETHODIMP COMDecoder::get_master(sample_t *_master)
 {
+  AutoLock config_lock(&config);
   if (_master) *_master = dvd.proc.get_master();
   return S_OK;
 }
@@ -454,6 +499,7 @@ STDMETHODIMP COMDecoder::set_master(sample_t _master)
 }
 STDMETHODIMP COMDecoder::get_gain(sample_t *_gain)
 {
+  AutoLock config_lock(&config);
   if (_gain) *_gain = dvd.proc.get_gain();
   return S_OK;
 }
@@ -461,6 +507,7 @@ STDMETHODIMP COMDecoder::get_gain(sample_t *_gain)
 // Mix levels
 STDMETHODIMP COMDecoder::get_clev(sample_t *_clev)
 {
+  AutoLock config_lock(&config);
   if (_clev) *_clev = dvd.proc.get_clev();
   return S_OK;
 }
@@ -472,6 +519,7 @@ STDMETHODIMP COMDecoder::set_clev(sample_t _clev)
 }
 STDMETHODIMP COMDecoder::get_slev(sample_t *_slev)
 {
+  AutoLock config_lock(&config);
   if (_slev) *_slev = dvd.proc.get_slev();
   return S_OK;
 }
@@ -483,6 +531,7 @@ STDMETHODIMP COMDecoder::set_slev(sample_t _slev)
 }
 STDMETHODIMP COMDecoder::get_lfelev(sample_t *_lfelev)
 {
+  AutoLock config_lock(&config);
   if (_lfelev) *_lfelev = dvd.proc.get_lfelev();
   return S_OK;
 }
@@ -496,6 +545,7 @@ STDMETHODIMP COMDecoder::set_lfelev(sample_t _lfelev)
 // Input/output gains
 STDMETHODIMP COMDecoder::get_input_gains(sample_t *_input_gains)
 {
+  AutoLock config_lock(&config);
   if (_input_gains) dvd.proc.get_input_gains(_input_gains);
   return S_OK;
 }
@@ -507,6 +557,7 @@ STDMETHODIMP COMDecoder::set_input_gains(sample_t *_input_gains)
 }
 STDMETHODIMP COMDecoder::get_output_gains(sample_t *_output_gains)
 {
+  AutoLock config_lock(&config);
   if (_output_gains) dvd.proc.get_output_gains(_output_gains);
   return S_OK;
 }
@@ -520,6 +571,7 @@ STDMETHODIMP COMDecoder::set_output_gains(sample_t *_output_gains)
 // Input/output levels
 STDMETHODIMP COMDecoder::get_levels(vtime_t _time, sample_t *_input_levels, sample_t *_output_levels)
 {
+  AutoLock config_lock(&config);
   if (_input_levels)  dvd.proc.get_input_levels(_time, _input_levels);
   if (_output_levels) dvd.proc.get_output_levels(_time, _output_levels);
   return S_OK;
@@ -528,6 +580,7 @@ STDMETHODIMP COMDecoder::get_levels(vtime_t _time, sample_t *_input_levels, samp
 // Matrix
 STDMETHODIMP COMDecoder::get_matrix(matrix_t *_matrix)
 {
+  AutoLock config_lock(&config);
   if (_matrix) dvd.proc.get_matrix(*_matrix);
   return S_OK;
 }
@@ -541,6 +594,7 @@ STDMETHODIMP COMDecoder::set_matrix(matrix_t *_matrix)
 // DRC
 STDMETHODIMP COMDecoder::get_drc(bool *_drc)
 {
+  AutoLock config_lock(&config);
   if (_drc) *_drc = dvd.proc.get_drc();
   return S_OK;
 }
@@ -552,6 +606,7 @@ STDMETHODIMP COMDecoder::set_drc(bool _drc)
 }
 STDMETHODIMP COMDecoder::get_drc_power(sample_t *_drc_power)
 {
+  AutoLock config_lock(&config);
   if (_drc_power) *_drc_power = dvd.proc.get_drc_power();
   return S_OK;
 }
@@ -563,6 +618,7 @@ STDMETHODIMP COMDecoder::set_drc_power(sample_t _drc_power)
 }
 STDMETHODIMP COMDecoder::get_drc_level(sample_t *_drc_level)
 {
+  AutoLock config_lock(&config);
   if (_drc_level) *_drc_level = dvd.proc.get_drc_level();
   return S_OK;
 }
@@ -570,6 +626,7 @@ STDMETHODIMP COMDecoder::get_drc_level(sample_t *_drc_level)
 // Bass redirection
 STDMETHODIMP COMDecoder::get_bass_redir(bool *_bass_redir)
 {
+  AutoLock config_lock(&config);
   if (_bass_redir) *_bass_redir = dvd.proc.get_bass_redir();
   return S_OK;
 }
@@ -581,6 +638,7 @@ STDMETHODIMP COMDecoder::set_bass_redir(bool _bass_redir)
 }
 STDMETHODIMP COMDecoder::get_bass_freq(int *_bass_freq)
 {
+  AutoLock config_lock(&config);
   if (_bass_freq) *_bass_freq = dvd.proc.get_bass_freq();
   return S_OK;
 }
@@ -592,6 +650,7 @@ STDMETHODIMP COMDecoder::set_bass_freq(int _bass_freq)
 }
 STDMETHODIMP COMDecoder::get_bass_channels(int *_bass_channels)
 {
+  AutoLock config_lock(&config);
   if (_bass_channels) *_bass_channels = dvd.proc.get_bass_channels();
   return S_OK;
 }
@@ -605,6 +664,7 @@ STDMETHODIMP COMDecoder::set_bass_channels(int _bass_channels)
 // SRC
 STDMETHODIMP COMDecoder::get_src_quality(double *_src_quality)
 {
+  AutoLock config_lock(&config);
   if (_src_quality) *_src_quality = dvd.proc.get_src_quality();
   return S_OK;
 }
@@ -616,6 +676,7 @@ STDMETHODIMP COMDecoder::set_src_quality(double _src_quality)
 }
 STDMETHODIMP COMDecoder::get_src_att(double *_src_att)
 {
+  AutoLock config_lock(&config);
   if (_src_att) *_src_att = dvd.proc.get_src_att();
   return S_OK;
 }
@@ -629,6 +690,7 @@ STDMETHODIMP COMDecoder::set_src_att(double _src_att)
 // Equalizer
 STDMETHODIMP COMDecoder::get_eq(bool *_eq)
 {
+  AutoLock config_lock(&config);
   if (_eq) *_eq = dvd.proc.get_eq();
   return S_OK;
 }
@@ -640,11 +702,13 @@ STDMETHODIMP COMDecoder::set_eq(bool _eq)
 }
 STDMETHODIMP COMDecoder::get_eq_nbands(int ch_name, size_t *nbands)
 {
+  AutoLock config_lock(&config);
   if (nbands) *nbands = dvd.proc.get_eq_nbands(ch_name);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_eq_bands(int ch_name, EqBand *bands, size_t first_band, size_t nbands)
 {
+  AutoLock config_lock(&config);
   dvd.proc.get_eq_bands(ch_name, bands, first_band, nbands);
   return S_OK;
 }
@@ -656,11 +720,13 @@ STDMETHODIMP COMDecoder::set_eq_bands(int ch_name, EqBand *bands, size_t nbands)
 }
 STDMETHODIMP COMDecoder::get_eq_channel(int *_ch)
 {
+  AutoLock config_lock(&config);
   if (_ch) *_ch = cur_ch;
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_eq_channel(int _ch)
 {
+  AutoLock config_lock(&config);
   if (_ch == CH_NONE || _ch >= 0 && _ch < CH_NAMES)
     cur_ch = _ch;
   return S_OK;
@@ -670,6 +736,7 @@ STDMETHODIMP COMDecoder::set_eq_channel(int _ch)
 // Delay
 STDMETHODIMP COMDecoder::get_delay(bool *_delay)
 {
+  AutoLock config_lock(&config);
   if (_delay) *_delay = dvd.proc.get_delay();
   return S_OK;
 }
@@ -681,6 +748,7 @@ STDMETHODIMP COMDecoder::set_delay(bool _delay)
 }
 STDMETHODIMP COMDecoder::get_delay_units(int *_delay_units)
 {
+  AutoLock config_lock(&config);
   if (_delay_units) *_delay_units = dvd.proc.get_delay_units();
   return S_OK;
 }
@@ -692,6 +760,7 @@ STDMETHODIMP COMDecoder::set_delay_units(int _delay_units)
 }
 STDMETHODIMP COMDecoder::get_delays(float *_delays)
 {
+  AutoLock config_lock(&config);
   if (_delays) dvd.proc.get_delays(_delays);
   return S_OK;
 }
@@ -705,6 +774,7 @@ STDMETHODIMP COMDecoder::set_delays(float *_delays)
 // Dithering
 STDMETHODIMP COMDecoder::get_dithering(int *_dithering)
 {
+  AutoLock config_lock(&config);
   if (_dithering) *_dithering = dvd.proc.get_dithering();
   return S_OK;
 }
@@ -718,60 +788,66 @@ STDMETHODIMP COMDecoder::set_dithering(int _dithering)
 // Syncronization
 STDMETHODIMP COMDecoder::get_time_shift(vtime_t *_time_shift)
 {
-  if (_time_shift) *_time_shift = dvd.syncer.get_time_shift();
+  AutoLock config_lock(&config);
+  if (_time_shift) *_time_shift = dvd.dejitter.get_time_shift();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_time_shift(vtime_t _time_shift)
 {
   AutoLock config_lock(&config);
-  dvd.syncer.set_time_shift(_time_shift);
+  dvd.dejitter.set_time_shift(_time_shift);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_time_factor(vtime_t *_time_factor)
 {
-  if (_time_factor) *_time_factor = dvd.syncer.get_time_factor();
+  AutoLock config_lock(&config);
+  if (_time_factor) *_time_factor = dvd.dejitter.get_time_factor();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_time_factor(vtime_t _time_factor)
 {
   AutoLock config_lock(&config);
-  dvd.syncer.set_time_factor(_time_factor);
+  dvd.dejitter.set_time_factor(_time_factor);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_dejitter(bool *_dejitter)
 {
-  if (_dejitter) *_dejitter = dvd.syncer.get_dejitter();
+  AutoLock config_lock(&config);
+  if (_dejitter) *_dejitter = dvd.dejitter.get_dejitter();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_dejitter(bool _dejitter)
 {
   AutoLock config_lock(&config);
-  dvd.syncer.set_dejitter(_dejitter);
+  dvd.dejitter.set_dejitter(_dejitter);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_threshold(vtime_t *_threshold)
 {
-  if (_threshold) *_threshold = dvd.syncer.get_threshold();
+  AutoLock config_lock(&config);
+  if (_threshold) *_threshold = dvd.dejitter.get_threshold();
   return S_OK;
 }
 STDMETHODIMP COMDecoder::set_threshold(vtime_t _threshold)
 {
   AutoLock config_lock(&config);
-  dvd.syncer.set_threshold(_threshold);
+  dvd.dejitter.set_threshold(_threshold);
   return S_OK;
 }
 STDMETHODIMP COMDecoder::get_jitter(vtime_t *_input_mean, vtime_t *_input_stddev, vtime_t *_output_mean, vtime_t *_output_stddev)
 {
-  if (_input_mean)    *_input_mean    = dvd.syncer.get_input_mean();
-  if (_input_stddev)  *_input_stddev  = dvd.syncer.get_input_stddev();
-  if (_output_mean)   *_output_mean   = dvd.syncer.get_output_mean();
-  if (_output_stddev) *_output_stddev = dvd.syncer.get_output_stddev();
+  AutoLock config_lock(&config);
+  if (_input_mean)    *_input_mean    = dvd.dejitter.get_input_mean();
+  if (_input_stddev)  *_input_stddev  = dvd.dejitter.get_input_stddev();
+  if (_output_mean)   *_output_mean   = dvd.dejitter.get_output_mean();
+  if (_output_stddev) *_output_stddev = dvd.dejitter.get_output_stddev();
   return S_OK;
 }
 
 // Cache
 STDMETHODIMP COMDecoder::get_input_cache_size(vtime_t *size)
 {
+  AutoLock config_lock(&config);
   if (size) *size = dvd.proc.get_input_cache_size();
   return S_OK;
 }
@@ -785,6 +861,7 @@ STDMETHODIMP COMDecoder::set_input_cache_size(vtime_t size)
 
 STDMETHODIMP COMDecoder::get_output_cache_size(vtime_t *size)
 {
+  AutoLock config_lock(&config);
   if (size) *size = dvd.proc.get_output_cache_size();
   return S_OK;
 }
@@ -798,12 +875,14 @@ STDMETHODIMP COMDecoder::set_output_cache_size(vtime_t size)
 
 STDMETHODIMP COMDecoder::get_input_cache_time(vtime_t *time)
 {
+  AutoLock config_lock(&config);
   if (time) *time = dvd.proc.get_input_cache_time();
   return S_OK;
 }
 
 STDMETHODIMP COMDecoder::get_output_cache_time(vtime_t *time)
 {
+  AutoLock config_lock(&config);
   if (time) *time = dvd.proc.get_output_cache_time();
   return S_OK;
 }
@@ -976,10 +1055,10 @@ void COMDecoder::load_eq(Config *conf)
 
 void COMDecoder::save_sync(Config *conf)
 {
-  vtime_t time_shift  = dvd.syncer.get_time_shift();
-  vtime_t time_factor = dvd.syncer.get_time_factor();
-  bool    dejitter    = dvd.syncer.get_dejitter();
-  vtime_t threshold   = dvd.syncer.get_threshold();
+  vtime_t time_shift  = dvd.dejitter.get_time_shift();
+  vtime_t time_factor = dvd.dejitter.get_time_factor();
+  bool    dejitter    = dvd.dejitter.get_dejitter();
+  vtime_t threshold   = dvd.dejitter.get_threshold();
 
   conf->set_float("time_shift",  time_shift);
   conf->set_float("time_factor", time_factor);
@@ -989,20 +1068,20 @@ void COMDecoder::save_sync(Config *conf)
 
 void COMDecoder::load_sync(Config *conf)
 {
-  vtime_t time_shift  = dvd.syncer.get_time_shift();
-  vtime_t time_factor = dvd.syncer.get_time_factor();
-  bool    dejitter    = dvd.syncer.get_dejitter();
-  vtime_t threshold   = dvd.syncer.get_threshold();
+  vtime_t time_shift  = dvd.dejitter.get_time_shift();
+  vtime_t time_factor = dvd.dejitter.get_time_factor();
+  bool    dejitter    = dvd.dejitter.get_dejitter();
+  vtime_t threshold   = dvd.dejitter.get_threshold();
 
   conf->get_float("time_shift",  time_shift);
   conf->get_float("time_factor", time_factor);
   conf->get_bool ("dejitter",    dejitter);
   conf->get_float("threshold",   threshold);
 
-  dvd.syncer.set_time_shift(time_shift);
-  dvd.syncer.set_time_factor(time_factor);
-  dvd.syncer.set_dejitter(dejitter);
-  dvd.syncer.set_threshold(threshold);
+  dvd.dejitter.set_time_shift(time_shift);
+  dvd.dejitter.set_time_factor(time_factor);
+  dvd.dejitter.set_dejitter(dejitter);
+  dvd.dejitter.set_threshold(threshold);
 }
 
 void COMDecoder::save_sys(Config *conf)
