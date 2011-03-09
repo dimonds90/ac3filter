@@ -71,8 +71,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_SLI_SUR, "IDC_SLI_SUR", "", "" },
   { IDC_SLI_VOICE, "IDC_SLI_VOICE", "", "" },
   { IDC_SPECTRUM, "IDC_SPECTRUM", "", "" },
-  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky */
-  { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky", "" },
+  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-20011 by Alexander Vigovsky */
+  { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky", "" },
   /* TRANSLATORS: OK */
   { IDOK, N_("IDOK"), "OK", "" },
 
