@@ -21,7 +21,7 @@ void log_input_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *c
         clock_time -= start_time;
         latency =  chunk.time - vtime_t(clock_time) / 10000000;
       }
-    DbgLog((LOG_TRACE, 3, "-> time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims", int(time * 1000), int(clock_time / 10000), int(chunk.time * 1000), int(latency * 1000)));
+    DbgLog((LOG_TRACE, 3, "-> time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims\tsize: %i", int(time * 1000), int(clock_time / 10000), int(chunk.time * 1000), int(latency * 1000), chunk.size));
   }
 }
 
@@ -38,6 +38,6 @@ void log_output_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *
         clock_time -= start_time;
         latency = chunk.time - vtime_t(clock_time) / 10000000;
       }
-    DbgLog((LOG_TRACE, 3, "<- time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims", int(time * 1000), int(clock_time / 10000), int(chunk.time * 1000), int(latency * 1000)));
+    DbgLog((LOG_TRACE, 3, "<- time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims\tsize: %i", int(time * 1000), int(clock_time / 10000), int(chunk.time * 1000), int(latency * 1000), chunk.size));
   }
 }

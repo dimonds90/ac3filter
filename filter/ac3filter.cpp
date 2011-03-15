@@ -191,7 +191,7 @@ AC3Filter::process(const Chunk *chunk)
           THROW(EOpenSink() << errinfo_spk(spk));
       }
 #ifdef LOG_TIMING
-      log_output_chunk(*chunk, m_tStart, m_pClock);
+      log_output_chunk(out, m_tStart, m_pClock);
 #endif
       cpu.stop();
       sink->process(out);
