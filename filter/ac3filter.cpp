@@ -655,7 +655,7 @@ AC3Filter::CheckInputType(const CMediaType *mt)
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(): Ok...", this));
+  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(%s): Ok...", this, spk_tmp.print().c_str()));
   return S_OK;
 } 
 

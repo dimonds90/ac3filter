@@ -30,6 +30,8 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;"
+				Outputs="avcodec-52.dll;avutil-50.dll"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -180,6 +182,8 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)"
+				Outputs="avcodec-52.dll;avutil-50.dll"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"

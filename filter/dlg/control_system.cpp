@@ -157,7 +157,7 @@ void ControlSystem::update()
   CheckDlgButton(hdlg, IDC_CHK_LPCM,  (formats & FORMAT_CLASS_LPCM) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(hdlg, IDC_CHK_MPA,   (formats & FORMAT_MASK_MPA) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(hdlg, IDC_CHK_AAC,   (formats & FORMAT_MASK(FORMAT_AAC_FRAME)) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_AC3,   (formats & FORMAT_MASK_AC3) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_AC3,   (formats & FORMAT_MASK(FORMAT_AC3_EAC3)) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(hdlg, IDC_CHK_DTS,   (formats & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(hdlg, IDC_CHK_PES,   (formats & FORMAT_MASK_PES) != 0? BST_CHECKED: BST_UNCHECKED);
   CheckDlgButton(hdlg, IDC_CHK_SPDIF, (formats & FORMAT_MASK_SPDIF) != 0? BST_CHECKED: BST_UNCHECKED);
@@ -215,7 +215,7 @@ ControlSystem::cmd_result ControlSystem::command(int control, int message)
       formats |= IsDlgButtonChecked(hdlg, IDC_CHK_LPCM)  == BST_CHECKED? FORMAT_CLASS_LPCM | FORMAT_MASK_PCM16_BE: 0;
       formats |= IsDlgButtonChecked(hdlg, IDC_CHK_MPA)   == BST_CHECKED? FORMAT_MASK_MPA: 0;
       formats |= IsDlgButtonChecked(hdlg, IDC_CHK_AAC)   == BST_CHECKED? FORMAT_MASK(FORMAT_AAC_FRAME): 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_AC3)   == BST_CHECKED? FORMAT_MASK_AC3: 0;
+      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_AC3)   == BST_CHECKED? FORMAT_MASK(FORMAT_AC3_EAC3): 0;
       formats |= IsDlgButtonChecked(hdlg, IDC_CHK_DTS)   == BST_CHECKED? FORMAT_MASK_DTS: 0;
       formats |= IsDlgButtonChecked(hdlg, IDC_CHK_PES)   == BST_CHECKED? FORMAT_MASK_PES: 0;
       formats |= IsDlgButtonChecked(hdlg, IDC_CHK_SPDIF) == BST_CHECKED? FORMAT_MASK_SPDIF: 0;
