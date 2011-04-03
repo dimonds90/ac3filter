@@ -128,42 +128,42 @@ Controller *AC3FilterDlg::ctrl_about(HWND hdlg, IAC3Filter *filter, IDecoder *de
 CUnknown * WINAPI AC3FilterDlg::CreateMain(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: Main */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Main page", lpunk, phr, IDD_MAIN, N_("IDD_MAIN"), "Main", &AC3FilterDlg::ctrl_main);
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Main page", lpunk, phr, IDD_MAIN, N_("IDD_MAIN"), "Main", "http://ac3filter.net/wiki/AC3Filter:Main_page", &AC3FilterDlg::ctrl_main);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateMixer(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: Mixer */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Mixer page", lpunk, phr, IDD_MIXER, N_("IDD_MIXER"), "Mixer", &AC3FilterDlg::ctrl_mixer);
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Mixer page", lpunk, phr, IDD_MIXER, N_("IDD_MIXER"), "Mixer", "http://ac3filter.net/wiki/AC3Filter:Mixer_page", &AC3FilterDlg::ctrl_mixer);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateGains(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: Gains */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Gains page", lpunk, phr, IDD_GAINS, N_("IDD_GAINS"), "Gains", &AC3FilterDlg::ctrl_gains);
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Gains page", lpunk, phr, IDD_GAINS, N_("IDD_GAINS"), "Gains", "http://ac3filter.net/wiki/AC3Filter:Gains_page", &AC3FilterDlg::ctrl_gains);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateEq(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: Equalizer */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter Equzlizer page", lpunk, phr, IDD_EQ, N_("IDD_EQ"), "Equalizer", &AC3FilterDlg::ctrl_eq);
+  CUnknown *punk = new AC3FilterDlg("AC3Filter Equzlizer page", lpunk, phr, IDD_EQ, N_("IDD_EQ"), "Equalizer", "http://ac3filter.net/wiki/AC3Filter:Equalizer_page", &AC3FilterDlg::ctrl_eq);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateSPDIF(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: SPDIF */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter SPDIF page", lpunk, phr, IDD_SPDIF, N_("IDD_SPDIF"), "SPDIF", &AC3FilterDlg::ctrl_spdif);
+  CUnknown *punk = new AC3FilterDlg("AC3Filter SPDIF page", lpunk, phr, IDD_SPDIF, N_("IDD_SPDIF"), "SPDIF", "http://ac3filter.net/wiki/AC3Filter:SPDIF_page", &AC3FilterDlg::ctrl_spdif);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
 CUnknown * WINAPI AC3FilterDlg::CreateSystem(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: System */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter System page", lpunk, phr, IDD_SYSTEM, N_("IDD_SYSTEM"), "System", &AC3FilterDlg::ctrl_system);
+  CUnknown *punk = new AC3FilterDlg("AC3Filter System page", lpunk, phr, IDD_SYSTEM, N_("IDD_SYSTEM"), "System", "http://ac3filter.net/wiki/AC3Filter:System_page", &AC3FilterDlg::ctrl_system);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
@@ -171,7 +171,7 @@ CUnknown * WINAPI AC3FilterDlg::CreateSystem(LPUNKNOWN lpunk, HRESULT *phr)
 CUnknown * WINAPI AC3FilterDlg::CreateAbout(LPUNKNOWN lpunk, HRESULT *phr)
 {
   /* TRANSLATORS: About */
-  CUnknown *punk = new AC3FilterDlg("AC3Filter About property page", lpunk, phr, IDD_ABOUT, N_("IDD_ABOUT"), "About", &AC3FilterDlg::ctrl_about);
+  CUnknown *punk = new AC3FilterDlg("AC3Filter About property page", lpunk, phr, IDD_ABOUT, N_("IDD_ABOUT"), "About", "http://ac3filter.net/wiki/AC3Filter:About_page", &AC3FilterDlg::ctrl_about);
   if (punk == NULL) *phr = E_OUTOFMEMORY;
   return punk;
 }
@@ -180,12 +180,13 @@ CUnknown * WINAPI AC3FilterDlg::CreateAbout(LPUNKNOWN lpunk, HRESULT *phr)
 // Dialog class
 ///////////////////////////////////////////////////////////////////////////////
 
-AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def, ctrl_maker maker_)
+AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def, const char *help_link_, ctrl_maker maker_)
 :CBasePropertyPage(pName, pUnk, DialogId, 0), maker(maker_)
 {
   DbgLog((LOG_TRACE, 3, "AC3FilterDlg::AC3FilterDlg(%s)", pName));
 
   title = gettext_id(title_id, title_def);
+  help_link = help_link_;
   filter = 0;
   proc   = 0;
   InitCommonControls();
@@ -626,6 +627,11 @@ AC3FilterDlg::command(int control, int message)
     case IDC_BTN_DONATE:
       if (message == BN_CLICKED)
         ShellExecute(0, 0, "http://order.kagi.com/?6CZJZ", 0, 0, SW_SHOWMAXIMIZED);
+      break;
+
+    case IDC_BTN_HELP:
+      if (message == BN_CLICKED)
+        ShellExecute(0, 0, help_link, 0, 0, SW_SHOWMAXIMIZED);
       break;
   }
 }

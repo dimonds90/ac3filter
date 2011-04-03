@@ -33,6 +33,7 @@ public:
 
 private:
   const char      *title;
+  const char      *help_link;
   IAC3Filter      *filter;
   IDecoder        *dec;
   IAudioProcessor *proc;
@@ -62,7 +63,7 @@ private:
   // Links
   LinkButton  lnk_donate;
 
-  AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def, ctrl_maker maker);
+  AC3FilterDlg(TCHAR *pName, LPUNKNOWN lpunk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def, const char *help_link, ctrl_maker maker);
 
   INT_PTR OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
