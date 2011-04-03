@@ -323,7 +323,7 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (set_bass_freq)    (int   bass_freq) = 0;
   STDMETHOD (get_bass_channels)(int  *bass_channels) = 0;
   STDMETHOD (set_bass_channels)(int   bass_channels) = 0;
-
+  STDMETHOD (get_bass_level)   (sample_t *bass_level) = 0;
   // SRC
   STDMETHOD (get_src_quality)  (double *src_quality) = 0;
   STDMETHOD (set_src_quality)  (double  src_quality) = 0;

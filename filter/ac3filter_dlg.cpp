@@ -62,7 +62,7 @@ Controller *AC3FilterDlg::ctrl_gains(HWND hdlg, IAC3Filter *filter, IDecoder *de
   ctrl->add(new ControlPreset(hdlg, dec, proc));
   ctrl->add(new ControlLevels(hdlg, filter, proc, invert_levels));
   ctrl->add(new ControlAGC(hdlg, proc));
-  ctrl->add(new ControlBass(hdlg, proc));
+  ctrl->add(new ControlBass(hdlg, proc, invert_levels));
   ctrl->add(new ControlMatrix(hdlg, proc));
   ctrl->add(new ControlDelay(hdlg, proc));
   ctrl->add(new ControlIOGains(hdlg, proc));

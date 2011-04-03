@@ -233,6 +233,7 @@ public:
   STDMETHODIMP set_bass_freq    (int   bass_freq);
   STDMETHODIMP get_bass_channels(int  *bass_channels);
   STDMETHODIMP set_bass_channels(int   bass_channels);
+  STDMETHODIMP get_bass_level   (sample_t *bass_level);
   // SRC
   STDMETHODIMP get_src_quality  (double *src_quality);
   STDMETHODIMP set_src_quality  (double  src_quality);
