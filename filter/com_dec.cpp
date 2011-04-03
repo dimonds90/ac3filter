@@ -660,6 +660,12 @@ STDMETHODIMP COMDecoder::set_bass_channels(int _bass_channels)
   dvd.proc.set_bass_channels(_bass_channels);
   return S_OK;
 }
+STDMETHODIMP COMDecoder::get_bass_level(sample_t *_bass_level)
+{
+  AutoLock config_lock(&config);
+  if (_bass_level) *_bass_level = dvd.proc.get_bass_level();
+  return S_OK;
+}
 
 // SRC
 STDMETHODIMP COMDecoder::get_src_quality(double *_src_quality)

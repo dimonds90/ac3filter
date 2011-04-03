@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 384
+// Total controls: 386
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -71,7 +71,7 @@ static const ControlDesc dialog_controls[] =
   { IDC_SLI_SUR, "IDC_SLI_SUR", "", "" },
   { IDC_SLI_VOICE, "IDC_SLI_VOICE", "", "" },
   { IDC_SPECTRUM, "IDC_SPECTRUM", "", "" },
-  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-20011 by Alexander Vigovsky */
+  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky */
   { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky", "" },
   /* TRANSLATORS: OK */
   { IDOK, N_("IDOK"), "OK", "" },
@@ -97,15 +97,16 @@ static const ControlDesc dialog_controls[] =
   { IDC_GRP_BASS, N_("IDC_GRP_BASS"), "Bass redirection", "" },
   /* TRANSLATORS: Enable */
   { IDC_CHK_BASS_ENABLE, N_("IDC_CHK_BASS_ENABLE"), "Enable", "" },
-  /* TRANSLATORS: Front channels */
-  { IDC_CHK_BASS_FRONT, N_("IDC_CHK_BASS_FRONT"), "Front channels", "" },
-  /* TRANSLATORS: Subwoofer */
-  { IDC_CHK_BASS_SUB, N_("IDC_CHK_BASS_SUB"), "Subwoofer", "" },
   { IDC_EDT_BASS_FREQ, "IDC_EDT_BASS_FREQ", "", "" },
   /* TRANSLATORS: Cutoff frequency */
   { IDC_LBL_BASS_FREQ, N_("IDC_LBL_BASS_FREQ"), "Cutoff frequency", "" },
-  /* TRANSLATORS: Redirect bass to: */
-  { IDC_LBL_BASS_ROUTE, N_("IDC_LBL_BASS_ROUTE"), "Redirect bass to:", "" },
+  /* TRANSLATORS: Bass destination: */
+  { IDC_LBL_BASS_ROUTE, N_("IDC_LBL_BASS_ROUTE"), "Bass destination:", "" },
+  /* TRANSLATORS: Front channels */
+  { IDC_RBT_BASS_FRONT, N_("IDC_RBT_BASS_FRONT"), "Front channels", "" },
+  /* TRANSLATORS: Subwoofer */
+  { IDC_RBT_BASS_SUB, N_("IDC_RBT_BASS_SUB"), "Subwoofer", "" },
+  { IDC_SLI_BASS_LEVEL, "IDC_SLI_BASS_LEVEL", "", "" },
 
   // Contact author
   /* TRANSLATORS: Contact author */
@@ -269,6 +270,8 @@ static const ControlDesc dialog_controls[] =
   // Use AC3Filter for:
   /* TRANSLATORS: Use AC3Filter for: */
   { IDC_GRP_FORMATS, N_("IDC_GRP_FORMATS"), "Use AC3Filter for:", "" },
+  /* TRANSLATORS: AAC */
+  { IDC_CHK_AAC, N_("IDC_CHK_AAC"), "AAC", "" },
   /* TRANSLATORS: AC3 */
   { IDC_CHK_AC3, N_("IDC_CHK_AC3"), "AC3", "" },
   /* TRANSLATORS: DTS */
