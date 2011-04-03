@@ -1,0 +1,15 @@
+[repository]
+native = LF
+
+[patterns]
+**.exe = bin
+**.dll = bin
+**.lib = bin
+
+**.jpg = bin
+**.png = bin
+**.gif = bin
+**.bmp = bin
+**.ico = bin
+
+** = native
