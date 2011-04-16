@@ -114,7 +114,6 @@ INT APIENTRY WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR pCmdLine,
       uint32_t preset_hash = 0;
       size_t len = strlen(remote_preset);
       preset_hash = crc32.calc(preset_hash, (uint8_t *)remote_preset, len);
-      preset_hash = crc32.crc_get(preset_hash);
       PostMessage(control_wnd, WM_PRESET, 0, preset_hash);
     }
   }
