@@ -47,20 +47,15 @@ Name: "prog\acm32";    Description: "AC3Filter ACM driver (32bit)"; Types: full 
 
 Name: "lang"; Description: "Language files"; Types: full
 
-Name: "doc";     Description: "Documentation"; Types: full
-Name: "doc\eng"; Description: "English"; Types: full
-Name: "doc\rus"; Description: "Russian"; Types: full
-
 [Files]
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\Release\avcodec-52.dll";           DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\Release\avutil-50.dll";            DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "intl\Release\ac3filter_intl.dll";         DestDir: "{app}"; Components: prog\filter32 and lang; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 
 Source: "acm\Release_Libc\ac3filter.acm";       DestDir: "{sys}"; Components: prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
-
-Source: "doc\*_rus.pdf"; DestDir: "{app}\doc"; Components: doc\rus
-Source: "doc\*_eng.pdf"; DestDir: "{app}\doc"; Components: doc\eng
 
 Source: "lang\lang\*"; DestDir: "{app}\lang"; Components: lang; Flags: recursesubdirs
 
@@ -70,15 +65,8 @@ Source: "Changes.txt"; DestDir: "{app}"
 Source: "GPL.txt";     DestDir: "{app}"
 
 [Icons]
-Name: "{group}\Documentation (eng)\AC3Filter User's Manual"; Filename: "{app}\doc\ac3filter_eng.pdf"; Components: doc\eng
-Name: "{group}\Documentation (eng)\AC3Filter & SPDIF"; Filename: "{app}\doc\spdif_eng.pdf"; Components: doc\eng
-Name: "{group}\Documentation (eng)\Loudness and dynamic range"; Filename: "{app}\doc\loudness_eng.pdf"; Components: doc\eng
-
-Name: "{group}\Documentation (rus)\AC3Filter - Руководство пользователя"; Filename: "{app}\doc\ac3filter_rus.pdf"; Components: doc\rus
-Name: "{group}\Documentation (rus)\AC3Filter & SPDIF"; Filename: "{app}\doc\spdif_rud.pdf"; Components: doc\rus
-Name: "{group}\Documentation (rus)\Громкость и динамический диапазон"; Filename: "{app}\doc\loudness_rus.pdf"; Components: doc\rus
-
-Name: "{group}\AC3Filter home"; Filename: "http://ac3filter.net"
+Name: "{group}\Home"; Filename: "http://ac3filter.net"
+Name: "{group}\Documentation"; Filename: "http://ac3filter.net/wiki/AC3Filter_Help"
 Name: "{group}\AC3Filter Config"; Filename: "{app}\ac3config.exe"; Components: prog\filter32
 Name: "{group}\SPDIF test (32bit)"; Filename: "{app}\spdif_test.exe"; Components: prog\filter32
 
@@ -113,6 +101,7 @@ Root: HKLM32; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc
 [Run]
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg""";
+Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&product/969409773073/0/quantity=10"; Description: "Donate"; Flags: postinstall shellexec;
 
 [code]
 function lang_code(param: string): string;

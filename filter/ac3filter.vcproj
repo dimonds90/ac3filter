@@ -30,8 +30,8 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;"
-				Outputs="avcodec-52.dll;avutil-50.dll"
+				CommandLine=""
+				Outputs=""
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -91,7 +91,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="register.cmd $(ConfigurationName)"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -166,7 +166,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="register.cmd $(PlatformName)\$(ConfigurationName)"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -182,8 +182,8 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)"
-				Outputs="avcodec-52.dll;avutil-50.dll"
+				CommandLine=""
+				Outputs=""
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -246,7 +246,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="register.cmd $(ConfigurationName)"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)"
 			/>
 		</Configuration>
 		<Configuration
@@ -325,7 +325,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="register.cmd $(PlatformName)\$(ConfigurationName)"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)"
 			/>
 		</Configuration>
 	</Configurations>

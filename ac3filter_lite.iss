@@ -47,6 +47,8 @@ Name: "prog\filter32"; Description: "AC3Filter (32bit)"; Types: full compact
 
 [Files]
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\Release\avcodec-52.dll";           DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\Release\avutil-50.dll";            DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 
@@ -56,7 +58,8 @@ Source: "Changes.txt"; DestDir: "{app}"
 Source: "GPL.txt";     DestDir: "{app}"
 
 [Icons]
-Name: "{group}\AC3Filter home"; Filename: "http://ac3filter.net"
+Name: "{group}\Home"; Filename: "http://ac3filter.net"
+Name: "{group}\Documentation"; Filename: "http://ac3filter.net/wiki/AC3Filter_Help"
 Name: "{group}\AC3Filter Config"; Filename: "{app}\ac3config.exe"; Components: prog\filter32
 Name: "{group}\SPDIF test (32bit)"; Filename: "{app}\spdif_test.exe"; Components: prog\filter32
 
@@ -87,6 +90,7 @@ Root: HKCU; Subkey: "Software\Microsoft\Multimedia\ActiveMovie\Filter Cache"; Fl
 [Run]
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg""";
+Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&product/969409773073/0/quantity=10"; Description: "Donate"; Flags: postinstall shellexec;
 
 [code]
 function lang_code(param: string): string;
