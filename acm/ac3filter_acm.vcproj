@@ -30,6 +30,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -88,8 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
-				CommandLine="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
+				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)"
 			/>
 		</Configuration>
 		<Configuration
@@ -104,6 +104,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -163,8 +164,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
-				CommandLine="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
+				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)"
 			/>
 		</Configuration>
 		<Configuration
@@ -180,6 +180,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -240,8 +241,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
-				CommandLine="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
+				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)"
 			/>
 		</Configuration>
 		<Configuration
@@ -257,6 +257,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -318,8 +319,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				Description="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
-				CommandLine="install.cmd $(PlatformName) $(OutDir)\$(TargetFileName)"
+				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)"
 			/>
 		</Configuration>
 	</Configurations>

@@ -18,7 +18,7 @@ StreamDecoder::open(Speakers _in_spk, Speakers _out_spk)
 {
   if (is_open) close();
 
-  if (!dec.set_input(_in_spk) || !dec.set_user(_out_spk))
+  if (!dec.open(_in_spk) || !dec.proc.set_user(_out_spk))
     return false;
 
   in_spk = _in_spk; 
@@ -43,7 +43,7 @@ StreamDecoder::close()
 void
 StreamDecoder::reset()
 {
-  chunk.set_empty(out_spk);
+  chunk.clear();
   dec.reset();
 }
 
@@ -53,46 +53,42 @@ StreamDecoder::decode(
   uint8_t *dst, size_t dst_len,
   size_t *src_gone, size_t *dst_gone)
 {
-  size_t size;
-  while (src_len && dst_len)
-    if (dec.is_empty() && chunk.is_empty())
-    {
-      size = MIN(buf.size(), src_len);
-      memcpy(buf.data(), src, size);
-      chunk.set_rawdata(in_spk, buf.data(), size);
-      if (!dec.process(&chunk))
-      {
-        dbglog("error in process()");
-        reset();
-        return false;
-      }
+  if ((!src && src_len) || (!dst && dst_len) || !src_gone || !dst_gone)
+  {
+    dbglog("StreamDecoder::decode(): null parameter");
+    return false;
+  }
 
-      chunk.set_empty(out_spk);
-      src += size;
-      src_len -= size;
-      *src_gone += size;
-      continue;
-    }
-    else if (chunk.is_empty())
-    {
-      if (!dec.get_chunk(&chunk))
+  *src_gone = 0;
+  *dst_gone = 0;
+  bool process = true;
+  Chunk src_chunk(src, src_len);
+
+  try
+  {
+    while (dst_len && process)
+      if (!chunk.is_empty())
       {
-        dbglog("error in get_chunk()");
-        reset();
-        return false;
+        size_t size = MIN(chunk.size, dst_len);
+        memcpy(dst, chunk.rawdata, size);
+        chunk.drop_rawdata(size);
+        dst += size;
+        dst_len -= size;
+        *dst_gone += size;
       }
-      continue;
-    }
-    else
-    {
-      size = MIN(chunk.size, dst_len);
-      memcpy(dst, chunk.rawdata, size);
-      chunk.drop(size);
-      dst += size;
-      dst_len -= size;
-      *dst_gone += size;
-      continue;
-    }
-  // while (src_len && dst_len)
+      else
+      {
+        process = dec.process(src_chunk, chunk);
+        if (!process)
+          chunk.clear();
+      }
+  }
+  catch (ValibException &e)
+  {
+    dbglog(boost::diagnostic_information(e).c_str());
+    reset();
+  }
+
+  *src_gone = src_chunk.size? src_chunk.rawdata - src: src_len;
   return true;
 }
