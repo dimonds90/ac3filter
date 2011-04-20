@@ -8,14 +8,6 @@ call cmd\build_all %* %PROJECTS%
 if errorlevel 1 goto fail
 
 rem -------------------------------------------------------
-echo Building docs...
-
-cd doc
-call build_pdf.cmd
-if errorlevel 1 goto fail
-cd ..
-
-rem -------------------------------------------------------
 echo Building translations...
 
 cd lang

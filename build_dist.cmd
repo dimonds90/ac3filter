@@ -33,15 +33,6 @@ cd ac3filter
 
 
 rem -------------------------------------------------------
-rem Build docs
-:build_docs
-
-cd doc
-call build_pdf.cmd
-if errorlevel 1 goto fail
-cd ..
-
-rem -------------------------------------------------------
 rem Build projects
 :build_projects
 
