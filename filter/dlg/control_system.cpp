@@ -18,6 +18,7 @@ static int controls[] =
   IDC_GRP_MERIT,
   IDC_RBT_MERIT_PREFERRED,
   IDC_RBT_MERIT_UNLIKELY,
+  IDC_RBT_MERIT_DO_NOT_USE,
 
   IDC_GRP_RENDERER,
   IDC_RBT_RENDER_DS,
@@ -183,8 +184,9 @@ void ControlSystem::update()
 
   if (filter_merit)
   {
-    SendDlgItemMessage(hdlg, IDC_RBT_MERIT_PREFERRED, BM_SETCHECK, filter_merit >  MERIT_NORMAL? BST_CHECKED: BST_UNCHECKED, 1);
-    SendDlgItemMessage(hdlg, IDC_RBT_MERIT_UNLIKELY,  BM_SETCHECK, filter_merit <= MERIT_NORMAL? BST_CHECKED: BST_UNCHECKED, 1);
+    SendDlgItemMessage(hdlg, IDC_RBT_MERIT_PREFERRED,  BM_SETCHECK, filter_merit >  MERIT_NORMAL? BST_CHECKED: BST_UNCHECKED, 1);
+    SendDlgItemMessage(hdlg, IDC_RBT_MERIT_UNLIKELY,   BM_SETCHECK, filter_merit <= MERIT_NORMAL && filter_merit > MERIT_DO_NOT_USE? BST_CHECKED: BST_UNCHECKED, 1);
+    SendDlgItemMessage(hdlg, IDC_RBT_MERIT_DO_NOT_USE, BM_SETCHECK, filter_merit <= MERIT_DO_NOT_USE? BST_CHECKED: BST_UNCHECKED, 1);
   }
     
   if (wo_merit && ds_merit)
@@ -315,6 +317,18 @@ ControlSystem::cmd_result ControlSystem::command(int control, int message)
       if (message == BN_CLICKED)
       {
         set_merit(HKEY_CLASSES_ROOT, "CLSID\\{083863F1-70DE-11d0-BD40-00A0C911CE86}\\Instance\\{A753A1EC-973E-4718-AF8E-A3F554D45C44}", MERIT_UNLIKELY);
+        // Clear filter cache
+        delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
+
+        update();
+        return cmd_ok;
+      }
+      return cmd_not_processed;
+
+    case IDC_RBT_MERIT_DO_NOT_USE:
+      if (message == BN_CLICKED)
+      {
+        set_merit(HKEY_CLASSES_ROOT, "CLSID\\{083863F1-70DE-11d0-BD40-00A0C911CE86}\\Instance\\{A753A1EC-973E-4718-AF8E-A3F554D45C44}", MERIT_DO_NOT_USE);
         // Clear filter cache
         delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 

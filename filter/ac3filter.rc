@@ -9,7 +9,6 @@
 //
 #include "afxres.h"
 #include "resource_ids.h"
-#include "ac3filter_ver.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
@@ -142,12 +141,12 @@ BEGIN
     CONTROL         "MPEG Audio",IDC_CHK_MPA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,63,58,10
     CONTROL         "DVD",IDC_CHK_PES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,73,58,8
     CONTROL         "SPDIF",IDC_CHK_SPDIF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,82,58,8
-    GROUPBOX        "Filter merit",IDC_GRP_MERIT,80,8,116,40
-    RADIOBUTTON     "Prefer AC3Filter",IDC_RBT_MERIT_PREFERRED,85,21,108,8,WS_TABSTOP
-    RADIOBUTTON     "Prefer other decoder",IDC_RBT_MERIT_UNLIKELY,85,33,108,8,WS_TABSTOP
-    GROUPBOX        "Default audio renderer",IDC_GRP_RENDERER,80,52,116,40
-    RADIOBUTTON     "Use Direct Sound by default",IDC_RBT_RENDER_DS,85,65,108,8,WS_TABSTOP
-    RADIOBUTTON     "Use Wave Out by default",IDC_RBT_RENDER_WO,85,77,108,8,WS_TABSTOP
+    GROUPBOX        "Filter merit",IDC_GRP_MERIT,80,8,116,46
+    RADIOBUTTON     "Prefer AC3Filter",IDC_RBT_MERIT_PREFERRED,85,20,108,8,WS_TABSTOP
+    RADIOBUTTON     "Prefer other decoder",IDC_RBT_MERIT_UNLIKELY,85,31,108,8,WS_TABSTOP
+    GROUPBOX        "Default audio renderer",IDC_GRP_RENDERER,80,54,116,38
+    RADIOBUTTON     "Use Direct Sound by default",IDC_RBT_RENDER_DS,85,67,108,8,WS_TABSTOP
+    RADIOBUTTON     "Use Wave Out by default",IDC_RBT_RENDER_WO,85,79,108,8,WS_TABSTOP
     GROUPBOX        "Audio/Video sync",IDC_GRP_SYNC,8,92,188,82
     LTEXT           "Time shift (ms):",IDC_LBL_TIME_SHIFT,15,103,174,8
     CONTROL         "Slider1",IDC_SLI_TIME_SHIFT,"msctls_trackbar32",WS_TABSTOP,15,112,174,12
@@ -183,6 +182,7 @@ BEGIN
     PUSHBUTTON      "Help",IDC_BTN_HELP,342,204,50,12,BS_FLAT
     CONTROL         "LPCM",IDC_CHK_LPCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,27,58,8
     CONTROL         "AAC",IDC_CHK_AAC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,35,30,10
+    RADIOBUTTON     "Disable AC3Filter",IDC_RBT_MERIT_DO_NOT_USE,85,42,108,8,WS_TABSTOP
 END
 
 IDD_SPDIF DIALOGEX 0, 0, 400, 224

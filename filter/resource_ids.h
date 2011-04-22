@@ -368,6 +368,7 @@
 #define IDC_GRP_MERIT                  51701
 #define IDC_RBT_MERIT_PREFERRED        51702
 #define IDC_RBT_MERIT_UNLIKELY         51703
+#define IDC_RBT_MERIT_DO_NOT_USE       51704
 
 // Default renderer (518)
 #define IDC_GRP_RENDERER               51801
