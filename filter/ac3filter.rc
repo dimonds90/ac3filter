@@ -658,45 +658,6 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Version
-//
-
-VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,3,1,0
- PRODUCTVERSION 1,3,1,0
- FILEFLAGSMASK 0x3fL
-#ifdef _DEBUG
- FILEFLAGS 0x1L
-#else
- FILEFLAGS 0x0L
-#endif
- FILEOS 0x4L
- FILETYPE 0x2L
- FILESUBTYPE 0x0L
-BEGIN
-    BLOCK "StringFileInfo"
-    BEGIN
-        BLOCK "000004b0"
-        BEGIN
-            VALUE "Comments", "Direct show audio decoder and processor filter"
-            VALUE "FileDescription", "ac3filter"
-            VALUE "FileVersion", AC3FILTER_VER
-            VALUE "InternalName", "ac3filter"
-            VALUE "LegalCopyright", "Copyright c 2002-2011 by Alexander Vigovsky"
-            VALUE "OriginalFilename", "ac3filter.ax"
-            VALUE "ProductName", "AC3Filter"
-            VALUE "ProductVersion", AC3FILTER_VER
-        END
-    END
-    BLOCK "VarFileInfo"
-    BEGIN
-        VALUE "Translation", 0x0, 1200
-    END
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Icon
 //
 
@@ -755,14 +716,12 @@ END
 2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
-    "#include ""resource_ids.h""\r\n"
-    "\0"
+    "#include ""resource_ids.h""\r\0"
 END
 
 3 TEXTINCLUDE 
 BEGIN
-    "\r\n"
-    "\0"
+    "\r\0"
 END
 
 #endif    // APSTUDIO_INVOKED
