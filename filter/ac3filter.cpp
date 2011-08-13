@@ -200,6 +200,7 @@ AC3Filter::process(const Chunk *chunk)
   }
   catch (ValibException &e)
   {
+    e; // Dummy use to avoid warning C4101: 'e' : unreferenced local variable (release build)
     DbgLog((LOG_ERROR, 3, "AC3Filter(%x)::process(): exception:\n%s", this, boost::diagnostic_information(e).c_str() ));
     reset();
   }
@@ -231,6 +232,7 @@ AC3Filter::flush()
   }
   catch (ValibException &e)
   {
+    e; // Dummy use to avoid warning C4101: 'e' : unreferenced local variable (release build)
     DbgLog((LOG_ERROR, 3, "AC3Filter(%x)::flush(): exception:\n%s", this, boost::diagnostic_information(e).c_str() ));
     reset();
   }
