@@ -34,8 +34,16 @@
 
 ///////////////////////////////////////////////////////////
 // Logos (100)
+
 #define IDC_LOGO                       10001
 #define IDB_LOGO                       10002
+
+///////////////////////////////////////////////////////////
+// Bitmaps (200)
+
+#define IDB_PAUSE_ICON                 20001
+#define IDB_PLAY_ICON                  20002
+#define IDB_STOP_ICON                  20003
 
 ///////////////////////////////////////////////////////////
 // Audio processing controls

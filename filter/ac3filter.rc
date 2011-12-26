@@ -9,6 +9,7 @@
 //
 #include "afxres.h"
 #include "resource_ids.h"
+#include "ac3filter_ver.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
@@ -671,6 +672,9 @@ IDI_AC3FILTER           ICON                    "ac3filter.ico"
 //
 
 IDB_LOGO                BITMAP                  "ac3filter.bmp"
+IDB_PAUSE_ICON          BITMAP                  "pause.bmp"
+IDB_PLAY_ICON           BITMAP                  "play.bmp"
+IDB_STOP_ICON           BITMAP                  "stop.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -717,6 +721,7 @@ END
 BEGIN
     "#include ""afxres.h""\r\n"
     "#include ""resource_ids.h""\r\0"
+    "#include ""ac3filter_ver.h""\r\n"
 END
 
 3 TEXTINCLUDE 

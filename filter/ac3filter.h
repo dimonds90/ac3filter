@@ -17,8 +17,7 @@
 class AC3Filter : public CTransformFilter, public IAC3Filter, public ISpecifyPropertyPages
 {
 protected:
-  bool          tray;     // show tray icon
-  AC3FilterTray tray_ctl; // tray icon control
+  bool tray;            // show tray icon
 
   CPUMeter   cpu;       // CPU usage meter
   COMDecoder dec;       // decoder & processor

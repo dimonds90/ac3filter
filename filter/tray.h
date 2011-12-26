@@ -4,38 +4,34 @@
 #include <windows.h>
 #include "guids.h"
 
-class PropThread;
+class AC3FilterTrayImpl;
 
 class AC3FilterTray
 {
 protected:
-  IAC3Filter *filter;
-
-  PropThread *dialog;
-  bool visible;
-
-  HWND  hwnd;
-  HICON hicon;
-  HMENU hmenu;
-  NOTIFYICONDATA nid;
-
-  HMENU create_menu() const;
-
-  static LRESULT CALLBACK TrayProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+  AC3FilterTrayImpl *pimpl;
 
 public:
-  AC3FilterTray(IAC3Filter *filter);
+  AC3FilterTray();
   ~AC3FilterTray();
 
   // tray icon control
   void show();
   void hide();
 
+  // Filter registration
+  void register_filter(IAC3Filter *filter);
+  void unregister_filter(IAC3Filter *filter);
+
+  // Filter state
+  void play(IAC3Filter *filter);
+  void pause(IAC3Filter *filter);
+  void stop(IAC3Filter *filter);
+
   // control actions
-  void config();
-  void popup_menu();
   void preset(const char *preset);
-  void preset(int hash);
 };
+
+extern AC3FilterTray ac3filter_tray;
 
 #endif
