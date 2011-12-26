@@ -2,6 +2,8 @@
 #include <ocidl.h>
 #include <olectl.h>
 #include <stdio.h>
+#include <vector>
+#include <boost/lexical_cast.hpp>
 
 #include "guids.h"
 #include "tray.h"
@@ -10,7 +12,8 @@
 #include "wincomp.h"
 #include "crc.h"
 
-#define CMD_CONFIG       (100)
+#define CMD_FIRST_TRACK  (100)
+#define CMD_LAST_TRACK   (200)
 #define CMD_FIRST_PRESET (200)
 #define CMD_LAST_PRESET  (300)
 
@@ -92,20 +95,96 @@ public:
 
 ///////////////////////////////////////////////////////////////////////////////
 // AC3Filter tray
-//
-// Tray icon to display for each AC3Filter instance.
 
-AC3FilterTray::AC3FilterTray(IAC3Filter *_filter)
+class AC3FilterTrayImpl
 {
-  filter = _filter;
+protected:
+  enum state_t { state_stop, state_play, state_pause };
 
+  struct FilterData
+  {
+    FilterData(IAC3Filter *filter_ = 0, int id_ = 0)
+    {
+      id = id_;
+      filter = filter_;
+      state = state_stop;
+    }
+
+    int id;
+    IAC3Filter *filter;
+    state_t state;
+    string desc;
+  };
+
+  std::vector<FilterData> filters;
+  PropThread *dialog;
+  bool visible;
+  int id;
+
+  HWND  hwnd;
+  HICON hicon;
+  HMENU hmenu;
+  NOTIFYICONDATA nid;
+  HBITMAP icon_stop;
+  HBITMAP icon_pause;
+  HBITMAP icon_play;
+
+  void init();
+  HMENU create_menu() const;
+
+  static LRESULT CALLBACK TrayProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+public:
+  AC3FilterTrayImpl();
+  ~AC3FilterTrayImpl();
+
+  // tray icon control
+  void show();
+  void hide();
+
+  // Filter registration
+  void register_filter(IAC3Filter *filter);
+  void unregister_filter(IAC3Filter *filter);
+
+  // Filter state
+  void play(IAC3Filter *filter);
+  void pause(IAC3Filter *filter);
+  void stop(IAC3Filter *filter);
+
+  // control actions
+  void popup_menu();
+  void preset(const char *preset);
+  void preset(int hash);
+};
+
+AC3FilterTrayImpl::AC3FilterTrayImpl()
+{
   dialog = new PropThread();
   visible = false;
+  id = 1;
 
   hmenu = 0;
   hicon = 0;
   hwnd = 0;
+}
 
+AC3FilterTrayImpl::~AC3FilterTrayImpl()
+{
+  if (visible)
+    hide();
+
+  if (hmenu)  DestroyMenu(hmenu);
+  if (hwnd)   DestroyWindow(hwnd);
+  if (hicon)  DestroyIcon(hicon);
+  if (icon_stop)  DeleteObject(icon_stop);
+  if (icon_pause) DeleteObject(icon_pause);
+  if (icon_play)  DeleteObject(icon_play);
+  if (dialog) delete dialog;
+}
+
+void
+AC3FilterTrayImpl::init()
+{
   /////////////////////////////////////////////////////////
   // Window to receive messages
 
@@ -140,9 +219,12 @@ AC3FilterTray::AC3FilterTray(IAC3Filter *_filter)
     SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)this); 
 
   /////////////////////////////////////////////////////////
-  // Tray icon itself
+  // Resources
 
-  hicon = LoadIcon(ac3filter_instance, MAKEINTRESOURCE(IDI_AC3FILTER));
+  hicon      = LoadIcon(ac3filter_instance, MAKEINTRESOURCE(IDI_AC3FILTER));
+  icon_stop  = LoadBitmap(ac3filter_instance, MAKEINTRESOURCE(IDB_STOP_ICON));
+  icon_pause = LoadBitmap(ac3filter_instance, MAKEINTRESOURCE(IDB_PAUSE_ICON));
+  icon_play  = LoadBitmap(ac3filter_instance, MAKEINTRESOURCE(IDB_PLAY_ICON));
 
   /////////////////////////////////////////////////////////
   // NOTIFYICONDATA used to control tray icon
@@ -157,19 +239,8 @@ AC3FilterTray::AC3FilterTray(IAC3Filter *_filter)
   lstrcpy(nid.szTip, "AC3Filter configuration");
 }
 
-AC3FilterTray::~AC3FilterTray()
-{
-  if (visible)
-    hide();
-
-  if (hmenu)  DestroyMenu(hmenu);
-  if (hwnd)   DestroyWindow(hwnd);
-  if (hicon)  DestroyIcon(hicon);
-  if (dialog) delete dialog;
-}
-
 HMENU
-AC3FilterTray::create_menu() const
+AC3FilterTrayImpl::create_menu() const
 {
   HMENU menu = CreatePopupMenu();
   if (!menu) return 0;
@@ -188,33 +259,51 @@ AC3FilterTray::create_menu() const
     while (i < npresets && RegEnumKeyEx(key, i++, (LPTSTR)buf, &len, 0, 0, 0, 0) == ERROR_SUCCESS)
     {
       if (strcmp(buf, "Default"))
-        AppendMenu(menu, MF_BYPOSITION | MF_STRING, CMD_FIRST_PRESET + i, (LPCTSTR)buf);
+        AppendMenu(menu, MF_STRING, CMD_FIRST_PRESET + i, (LPCTSTR)buf);
       len = sizeof(buf);
     }
     RegCloseKey(key);
-    AppendMenu(menu, MF_BYPOSITION | MF_SEPARATOR, 0, 0);
+    AppendMenu(menu, MF_SEPARATOR, 0, 0);
   }
 
-  /////////////////////////////////////////////////////////
-  // Add 'Config' command (default)
+  for (size_t i = 0; i < filters.size(); i++)
+  {
+    AppendMenu(menu, MF_STRING, 
+      CMD_FIRST_TRACK + filters[i].id, 
+      (LPCTSTR)filters[i].desc.c_str());
 
-  AppendMenu(menu, MF_BYPOSITION | MF_STRING, CMD_CONFIG, (LPCTSTR)"AC3Filter config");
-  SetMenuDefaultItem(menu, CMD_CONFIG, FALSE);
+    switch (filters[i].state)
+    {
+      case state_pause:
+        SetMenuItemBitmaps(menu, CMD_FIRST_TRACK + filters[i].id, MF_BITMAP | MF_BYCOMMAND, icon_pause, icon_pause);
+        break;
+      case state_play:
+        SetMenuItemBitmaps(menu, CMD_FIRST_TRACK + filters[i].id, MF_BITMAP | MF_BYCOMMAND, icon_play, icon_play);
+        break;
+      default:
+        SetMenuItemBitmaps(menu, CMD_FIRST_TRACK + filters[i].id, MF_BITMAP | MF_BYCOMMAND, icon_stop, icon_stop);
+        break;
+    }
+  }
+
   return menu;
 }
 
 void
-AC3FilterTray::show()
+AC3FilterTrayImpl::show()
 {
   if (visible)
     return;
+
+  if (!hwnd)
+    init();
 
   Shell_NotifyIcon(NIM_ADD, &nid);
   visible = true;
 }
 
 void
-AC3FilterTray::hide()
+AC3FilterTrayImpl::hide()
 {
   if (!visible)
     return;
@@ -227,23 +316,101 @@ AC3FilterTray::hide()
 }
 
 void
-AC3FilterTray::preset(const char *preset)
+AC3FilterTrayImpl::register_filter(IAC3Filter *filter)
 {
-  if (!filter) return;
-
-  IDecoder *dec;
-  if FAILED(filter->QueryInterface(IID_IDecoder, (void **)&dec))
+  if (id >= CMD_LAST_TRACK - CMD_FIRST_TRACK)
+    // no more ids
     return;
 
-  char buf[256];
-  sprintf(buf, REG_KEY_PRESET"\\%s", preset);
-  RegistryKey reg(buf);
-  dec->load_params(&reg, AC3FILTER_ALL);
-  dec->Release();
+  // Check for duplicates
+  for (size_t i = 0; i < filters.size(); i++)
+    if (filters[i].filter == filter)
+      return;
+
+  FilterData data(filter);
+  data.id = id++;
+  data.desc = string("Track ") + boost::lexical_cast<string>(data.id);
+  filters.push_back(data);
+
+  if (!hwnd)
+    init();
+
+  if (!visible)
+  {
+    bool tray = false;
+    RegistryKey reg(REG_KEY);
+    reg.get_bool("tray", tray);
+    if (tray)
+      show();
+  }
 }
 
 void
-AC3FilterTray::preset(int hash)
+AC3FilterTrayImpl::unregister_filter(IAC3Filter *filter)
+{
+  for (size_t i = 0; i < filters.size(); i++)
+    if (filters[i].filter == filter)
+    {
+      filters.erase(filters.begin() + i);
+      break;
+    }
+}
+
+void
+AC3FilterTrayImpl::play(IAC3Filter *filter)
+{
+  for (size_t i = 0; i < filters.size(); i++)
+    if (filters[i].filter == filter)
+    {
+      filters[i].state = state_play;
+      break;
+    }
+}
+
+void
+AC3FilterTrayImpl::pause(IAC3Filter *filter)
+{
+  for (size_t i = 0; i < filters.size(); i++)
+    if (filters[i].filter == filter)
+    {
+      filters[i].state = state_pause;
+      break;
+    }
+}
+
+void
+AC3FilterTrayImpl::stop(IAC3Filter *filter)
+{
+  for (size_t i = 0; i < filters.size(); i++)
+    if (filters[i].filter == filter)
+    {
+      filters[i].state = state_stop;
+      break;
+    }
+}
+
+void
+AC3FilterTrayImpl::preset(const char *preset)
+{
+  char buf[256];
+  sprintf(buf, REG_KEY_PRESET"\\%s", preset);
+  RegistryKey reg(buf);
+
+  for (size_t i = 0; i < filters.size(); i++)
+  {
+    if (!filters[i].filter) return;
+
+    IDecoder *dec = 0;
+    if FAILED(filters[i].filter->QueryInterface(IID_IDecoder, (void **)&dec))
+      continue;
+
+    dec->load_params(&reg, AC3FILTER_ALL);
+    dec->Release();
+  }
+}
+
+void
+AC3FilterTrayImpl::preset(int hash)
 {
   HKEY key;
   const int preset_size = 256;
@@ -269,19 +436,7 @@ AC3FilterTray::preset(int hash)
 }
 
 void
-AC3FilterTray::config()
-{
-  if (!dialog || !filter)
-    return;
-
-  if (dialog->is_visible())
-    dialog->stop();
-  else
-    dialog->start(0, filter);
-}
-
-void
-AC3FilterTray::popup_menu()
+AC3FilterTrayImpl::popup_menu()
 {
   POINT mouse;
 
@@ -296,9 +451,9 @@ AC3FilterTray::popup_menu()
 
 
 LRESULT CALLBACK 
-AC3FilterTray::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+AC3FilterTrayImpl::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
-  AC3FilterTray *iam = (AC3FilterTray *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+  AC3FilterTrayImpl *self = (AC3FilterTrayImpl *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
   int cmd_id;
 
   switch (Msg)
@@ -310,17 +465,14 @@ AC3FilterTray::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
       switch (lParam)
       {
         case WM_LBUTTONDOWN:
-          iam->config();
-          return 0;
-
         case WM_RBUTTONDOWN:
-          iam->popup_menu();
+          self->popup_menu();
           return 0;
       }
       break;
 
     case WM_PRESET:
-      iam->preset(int(lParam));
+      self->preset(int(lParam));
       return 0;
 
     ///////////////////////////////////
@@ -331,21 +483,63 @@ AC3FilterTray::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
       if (cmd_id >= CMD_FIRST_PRESET && cmd_id < CMD_LAST_PRESET)
       {
         char buf[256];
-        if (!GetMenuString(iam->hmenu, cmd_id, (LPTSTR)buf, sizeof(buf), MF_BYCOMMAND))
+        if (!GetMenuString(self->hmenu, cmd_id, (LPTSTR)buf, sizeof(buf), MF_BYCOMMAND))
           return 0;
 
-        iam->preset(buf);
+        self->preset(buf);
         return 0;
       }
 
-      switch (cmd_id)
+      if (cmd_id >= CMD_FIRST_TRACK && cmd_id < CMD_LAST_TRACK)
       {
-        case CMD_CONFIG:
-          iam->config();
-          return 0;
+        for (size_t i = 0; i < self->filters.size(); i++)
+          if (self->filters[i].id == cmd_id - CMD_FIRST_TRACK && self->filters[i].filter && self->dialog)
+          {
+            if (self->dialog->is_visible())
+              self->dialog->stop();
+            else
+              self->dialog->start(0, self->filters[i].filter);
+          }
+        return 0;
       }
       break;
   }
 
   return DefWindowProc(hwnd, Msg, wParam, lParam);
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+AC3FilterTray::AC3FilterTray()
+{ pimpl = new AC3FilterTrayImpl(); }
+
+AC3FilterTray::~AC3FilterTray()
+{ delete pimpl; }
+
+void AC3FilterTray::show()
+{ pimpl->show(); }
+
+void AC3FilterTray::hide()
+{ pimpl->hide(); }
+
+void AC3FilterTray::register_filter(IAC3Filter *filter)
+{ pimpl->register_filter(filter); }
+
+void AC3FilterTray::unregister_filter(IAC3Filter *filter)
+{ pimpl->unregister_filter(filter); }
+
+void AC3FilterTray::play(IAC3Filter *filter)
+{ pimpl->play(filter); }
+
+void AC3FilterTray::pause(IAC3Filter *filter)
+{ pimpl->pause(filter); }
+
+void AC3FilterTray::stop(IAC3Filter *filter)
+{ pimpl->stop(filter); }
+
+void AC3FilterTray::preset(const char *preset)
+{ pimpl->preset(preset); }
+
+///////////////////////////////////////////////////////////////////////////////
+
+AC3FilterTray ac3filter_tray;

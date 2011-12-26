@@ -39,7 +39,7 @@ AC3Filter::CreateInstance(LPUNKNOWN punk, HRESULT *phr)
 
 AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   CTransformFilter(tszName, punk, CLSID_AC3Filter), 
-  dec((IAC3Filter*)this, BUF_SAMPLES), tray_ctl((IAC3Filter*)this)
+  dec((IAC3Filter*)this, BUF_SAMPLES)
 {
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x, %s)::AC3Filter", this, tszName));
 
@@ -112,7 +112,7 @@ AC3Filter::JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName)
   // and then filter may be removed (not used). Because of
   // this flicking tray icon(s) may appear.
   //
-  // Instead we should shoy tray icon when filter has
+  // Instead we should show tray icon when filter has
   // actually connected both input and output pins.
   //
   // But when filter is removed from the graph we must
@@ -124,7 +124,7 @@ AC3Filter::JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName)
   // destruct.
 
   if (!pGraph)
-    tray_ctl.hide();
+    ac3filter_tray.unregister_filter(this);
 
   return CTransformFilter::JoinFilterGraph(pGraph, pName);
 }
@@ -270,6 +270,12 @@ AC3Filter::Receive(IMediaSample *in)
 {
   CAutoLock lock(&m_csReceive);
 
+  // MPC: In multitrack mode it runs all tracks (all filters are in Running
+  // state), but only one filter receives data. Thus, only Receive() indicates
+  // actual filter activity and only here we can show playing state.
+  if (m_State == State_Running)
+    ac3filter_tray.play(this);
+
   uint8_t *buf;
   int buf_size;
 
@@ -329,9 +335,11 @@ AC3Filter::Receive(IMediaSample *in)
   in->GetPointer((BYTE**)&buf);
   buf_size = in->GetActualDataLength();
 
-  // Do not process preroll data
+  // Mark output as preroll
   if (in->IsPreroll() == S_OK)
-    buf_size = 0;
+    sink->set_preroll();
+  else
+    sink->unset_preroll();
 
   /////////////////////////////////////////////////////////
   // Fill chunk
@@ -371,7 +379,10 @@ AC3Filter::StartStreaming()
   // Application may construct several graphs,
   // but we're interested only in working graphs...
   if (tray)
-    tray_ctl.show();
+  {
+    ac3filter_tray.register_filter(this);
+    ac3filter_tray.pause(this);
+  }
 
   return CTransformFilter::StartStreaming();
 }
@@ -461,12 +472,14 @@ AC3Filter::EndFlush()
 STDMETHODIMP 
 AC3Filter::Stop()
 {
+  ac3filter_tray.stop(this);
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Stop()", this));
   return CTransformFilter::Stop();
 }
 STDMETHODIMP 
 AC3Filter::Pause()
 {
+  ac3filter_tray.pause(this);
   DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Pause()", this));
   return CTransformFilter::Pause();
 }
@@ -884,7 +897,7 @@ AC3Filter::set_tray(bool  _tray)
 {
   tray = _tray;
   RegistryKey reg(REG_KEY);
-  reg.set_int32("tray", tray);
+  reg.set_bool("tray", tray);
 
   /////////////////////////////////////////////////////////
   // Show tray icon if enabled.
@@ -896,7 +909,7 @@ AC3Filter::set_tray(bool  _tray)
   // invalid.
 
   if (tray && (m_pInput->IsConnected() == TRUE) && (m_pOutput->IsConnected() == TRUE))
-    tray_ctl.show();
+    ac3filter_tray.show();
 
   return S_OK;
 }
