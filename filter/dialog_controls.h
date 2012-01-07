@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 386
+// Total controls: 388
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -276,14 +276,16 @@ static const ControlDesc dialog_controls[] =
   { IDC_CHK_AC3, N_("IDC_CHK_AC3"), "AC3", "" },
   /* TRANSLATORS: DTS */
   { IDC_CHK_DTS, N_("IDC_CHK_DTS"), "DTS", "" },
+  /* TRANSLATORS: FLAC */
+  { IDC_CHK_FLAC, N_("IDC_CHK_FLAC"), "FLAC", "" },
   /* TRANSLATORS: LPCM */
   { IDC_CHK_LPCM, N_("IDC_CHK_LPCM"), "LPCM", "" },
   /* TRANSLATORS: MPEG Audio */
   { IDC_CHK_MPA, N_("IDC_CHK_MPA"), "MPEG Audio", "" },
   /* TRANSLATORS: PCM */
   { IDC_CHK_PCM, N_("IDC_CHK_PCM"), "PCM", "" },
-  /* TRANSLATORS: DVD */
-  { IDC_CHK_PES, N_("IDC_CHK_PES"), "DVD", "" },
+  /* TRANSLATORS: MPEG PS */
+  { IDC_CHK_PES, N_("IDC_CHK_PES"), "MPEG PS", "" },
   /* TRANSLATORS: SPDIF */
   { IDC_CHK_SPDIF, N_("IDC_CHK_SPDIF"), "SPDIF", "" },
 
@@ -454,6 +456,8 @@ static const ControlDesc dialog_controls[] =
   // Filter merit
   /* TRANSLATORS: Filter merit */
   { IDC_GRP_MERIT, N_("IDC_GRP_MERIT"), "Filter merit", "" },
+  /* TRANSLATORS: Disable AC3Filter */
+  { IDC_RBT_MERIT_DO_NOT_USE, N_("IDC_RBT_MERIT_DO_NOT_USE"), "Disable AC3Filter", "" },
   /* TRANSLATORS: Prefer AC3Filter */
   { IDC_RBT_MERIT_PREFERRED, N_("IDC_RBT_MERIT_PREFERRED"), "Prefer AC3Filter", "" },
   /* TRANSLATORS: Prefer other decoder */

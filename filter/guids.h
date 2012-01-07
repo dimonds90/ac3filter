@@ -81,6 +81,10 @@ DEFINE_GUID(MEDIASUBTYPE_AVI_AAC,
 DEFINE_GUID(MEDIASUBTYPE_AVI_MP3, 
 0x00000055, 0x0000, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71);
 
+// {1541C5C0-CDDF-477d-BC0A-86F8AE7F8354}
+DEFINE_GUID(MEDIASUBTYPE_FLAC_FRAME,
+0x1541c5c0, 0xcddf, 0x477d, 0xbc, 0x0a, 0x86, 0xf8, 0xae, 0x7f, 0x83, 0x54);
+
 ///////////////////////////////////////////////////////////////////////////////
 // Interface GUIDs
 ///////////////////////////////////////////////////////////////////////////////

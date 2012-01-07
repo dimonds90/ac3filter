@@ -31,6 +31,7 @@ const AMOVIESETUP_MEDIATYPE sudInPinTypes[] =
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_DTS               },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_MPEG1AudioPayload },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_MPEG2_AUDIO       },
+{&MEDIATYPE_Audio,              &MEDIASUBTYPE_FLAC_FRAME        },
 // SPDIF formats
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_DOLBY_AC3_SPDIF   },
 };

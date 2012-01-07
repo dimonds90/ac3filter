@@ -9,8 +9,6 @@
 //
 #include "afxres.h"
 #include "resource_ids.h"
-#include "ac3filter_ver.h"
-
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
@@ -136,12 +134,12 @@ STYLE DS_SETFONT | WS_CHILD
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     GROUPBOX        "Use AC3Filter for:",IDC_GRP_FORMATS,8,8,68,84
-    CONTROL         "PCM",IDC_CHK_PCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,18,58,8
-    CONTROL         "AC3",IDC_CHK_AC3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,45,58,8
-    CONTROL         "DTS",IDC_CHK_DTS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,54,58,8
-    CONTROL         "MPEG Audio",IDC_CHK_MPA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,63,58,10
-    CONTROL         "DVD",IDC_CHK_PES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,73,58,8
-    CONTROL         "SPDIF",IDC_CHK_SPDIF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,82,58,8
+    CONTROL         "PCM",IDC_CHK_PCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,19,31,8
+    CONTROL         "AC3",IDC_CHK_AC3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,45,31,31,8
+    CONTROL         "DTS",IDC_CHK_DTS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,43,31,8
+    CONTROL         "MPEG Audio",IDC_CHK_MPA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,55,58,10
+    CONTROL         "MPEG PS",IDC_CHK_PES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,67,59,8
+    CONTROL         "SPDIF",IDC_CHK_SPDIF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,79,31,8
     GROUPBOX        "Filter merit",IDC_GRP_MERIT,80,8,116,46
     RADIOBUTTON     "Prefer AC3Filter",IDC_RBT_MERIT_PREFERRED,85,20,108,8,WS_TABSTOP
     RADIOBUTTON     "Prefer other decoder",IDC_RBT_MERIT_UNLIKELY,85,31,108,8,WS_TABSTOP
@@ -181,9 +179,10 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,207,187,182,8
     RTEXT           "AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky",IDC_VER,8,204,328,12,SS_CENTERIMAGE
     PUSHBUTTON      "Help",IDC_BTN_HELP,342,204,50,12,BS_FLAT
-    CONTROL         "LPCM",IDC_CHK_LPCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,27,58,8
-    CONTROL         "AAC",IDC_CHK_AAC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,35,30,10
+    CONTROL         "LPCM",IDC_CHK_LPCM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,45,19,31,8
+    CONTROL         "AAC",IDC_CHK_AAC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,31,31,10
     RADIOBUTTON     "Disable AC3Filter",IDC_RBT_MERIT_DO_NOT_USE,85,42,108,8,WS_TABSTOP
+    CONTROL         "FLAC",IDC_CHK_FLAC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,45,43,31,8
 END
 
 IDD_SPDIF DIALOGEX 0, 0, 400, 224
@@ -721,7 +720,7 @@ END
 BEGIN
     "#include ""afxres.h""\r\n"
     "#include ""resource_ids.h""\r\0"
-    "#include ""ac3filter_ver.h""\r\n"
+    "#include ""ac3filter_ver.h""\r\0"
 END
 
 3 TEXTINCLUDE 
@@ -741,7 +740,6 @@ END
 //
 // Generated from the TEXTINCLUDE 3 resource.
 //
-
 
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED

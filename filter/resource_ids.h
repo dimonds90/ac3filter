@@ -371,6 +371,7 @@
 #define IDC_CHK_PES                    51607
 #define IDC_CHK_SPDIF                  51608
 #define IDC_CHK_LPCM                   51609
+#define IDC_CHK_FLAC                   51610
 
 // Filter merit (517)
 #define IDC_GRP_MERIT                  51701
