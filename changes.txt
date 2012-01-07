@@ -1,11 +1,11 @@
 v2.00a - unreleased
   * 8 channels support
   * PCM Double output support
-  * AAC, EAC3, MP3 decoding support
+  * DTS-MA (core only), AAC, EAC3, FLAC, MP3 decoding support
   * Completely new bass redirection:
     * better filtering (4th order Linkwitz-Riley)
     * option to redirect bass to front speakers
-
+  * Single icon per application
   * Online help
   * Dutch language (thanks to Ernst Klamer)
   * Set filter language from the installer

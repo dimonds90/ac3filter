@@ -685,7 +685,19 @@
 			>
 		</File>
 		<File
+			RelativePath=".\pause.bmp"
+			>
+		</File>
+		<File
+			RelativePath=".\play.bmp"
+			>
+		</File>
+		<File
 			RelativePath=".\resource.h"
+			>
+		</File>
+		<File
+			RelativePath=".\stop.bmp"
 			>
 		</File>
 	</Files>
