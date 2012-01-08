@@ -473,6 +473,27 @@ AC3FilterTrayImpl::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
       switch (lParam)
       {
         case WM_LBUTTONDOWN:
+        {
+          // If only one filter working, show the config dialog
+          // for this filter. Show popup menu otherwise.
+          int playing = 0;
+          IAC3Filter *filter = 0;
+
+          for (size_t i = 0; i < self->filters.size(); i++)
+            if (self->filters[i].state == state_play)
+            {
+              playing++;
+              filter = self->filters[i].filter;
+            }
+
+          if (playing == 1)
+            self->dialog->start(0, filter);
+          else
+            self->popup_menu();
+
+          return 0;
+        }
+
         case WM_RBUTTONDOWN:
           self->popup_menu();
           return 0;
