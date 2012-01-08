@@ -17,6 +17,19 @@
 #define CMD_FIRST_PRESET (200)
 #define CMD_LAST_PRESET  (300)
 
+static Speakers get_input_format(IAC3Filter *filter)
+{
+  IDecoder *dec;
+  if (filter->QueryInterface(IID_IDecoder, (void **)&dec) == S_OK)
+  {
+    Speakers result;
+    dec->get_in_spk(&result);
+    dec->Release();
+    return result;
+  }
+  return Speakers();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // PropThread
 //
@@ -335,6 +348,9 @@ AC3FilterTrayImpl::register_filter(IAC3Filter *filter)
   FilterData data(filter);
   data.id = id++;
   data.desc = string("Track ") + boost::lexical_cast<string>(data.id);
+  Speakers format = get_input_format(filter);
+  if (!format.is_unknown())
+    data.desc += string(" (") + format.print() + string(")");
   filters.push_back(data);
 
   if (!hwnd)
