@@ -83,13 +83,18 @@ public:
     if (thread_exists())
     {
       PostThreadMessage(thread_id(), WM_QUIT, 0, 0);
-      terminate();
+      terminate(1000);
     }
   }
 
   bool is_visible()
   {
     return thread_exists();
+  }
+
+  const IUnknown *get_filter() const
+  {
+    return filter;
   }
 };
 
@@ -348,6 +353,9 @@ AC3FilterTrayImpl::register_filter(IAC3Filter *filter)
 void
 AC3FilterTrayImpl::unregister_filter(IAC3Filter *filter)
 {
+  if (filter == dialog->get_filter())
+    dialog->stop();
+
   for (size_t i = 0; i < filters.size(); i++)
     if (filters[i].filter == filter)
     {
