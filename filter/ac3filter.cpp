@@ -4,8 +4,6 @@
 #include "logging.h"
 #include "decss\DeCSSInputPin.h"
 
-struct EOpenSink : public ValibException {};
-
 ///////////////////////////////////////////////////////////////////////////////
 // Define number of buffers and max buffer size sent to downstream.
 // So these numbers define total buffer length. For buffer with 2048 samples:
@@ -186,9 +184,7 @@ AC3Filter::process(const Chunk *chunk)
       {
         Speakers spk = dec.get_output();
         DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process(): new stream (%s)", this, spk.print().c_str() ));
-
-        if (!sink->open(spk))
-          THROW(EOpenSink() << errinfo_spk(spk));
+        sink->open_throw(spk);
       }
 #ifdef LOG_TIMING
       log_output_chunk(out, m_tStart, m_pClock);
@@ -218,9 +214,7 @@ AC3Filter::flush()
       {
         Speakers spk = dec.get_output();
         DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): new stream (%s)", this, spk.print().c_str() ));
-
-        if (!sink->open(spk))
-          THROW(EOpenSink() << errinfo_spk(spk));
+        sink->open_throw(spk);
       }
 #ifdef LOG_TIMING
       log_output_chunk(out, m_tStart, m_pClock);
