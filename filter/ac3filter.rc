@@ -9,6 +9,7 @@
 //
 #include "afxres.h"
 #include "resource_ids.h"
+#include "ac3filter_ver.h"
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
