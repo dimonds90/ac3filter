@@ -11,6 +11,7 @@
 #include "resource_ids.h"
 #include "wincomp.h"
 #include "crc.h"
+#include "ac3filter_intl.h"
 
 #define CMD_FIRST_TRACK  (100)
 #define CMD_LAST_TRACK   (200)
@@ -254,7 +255,7 @@ AC3FilterTrayImpl::init()
   nid.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE;
   nid.uCallbackMessage = WM_TRAY_ICON;
   nid.hIcon = hicon;
-  lstrcpy(nid.szTip, "AC3Filter configuration");
+  lstrcpy(nid.szTip, _("AC3Filter configuration"));
 }
 
 HMENU
@@ -347,7 +348,7 @@ AC3FilterTrayImpl::register_filter(IAC3Filter *filter)
 
   FilterData data(filter);
   data.id = id++;
-  data.desc = string("Track ") + boost::lexical_cast<string>(data.id);
+  data.desc = string(_("Adjust track")) + string(" ") + boost::lexical_cast<string>(data.id);
   Speakers format = get_input_format(filter);
   if (!format.is_unknown())
     data.desc += string(" (") + format.print() + string(")");
@@ -490,17 +491,29 @@ AC3FilterTrayImpl::TrayProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
       {
         case WM_LBUTTONDOWN:
         {
-          // If only one filter working, show the config dialog
+          // If only one filter is working, show the config dialog
           // for this filter. Show popup menu otherwise.
           int playing = 0;
           IAC3Filter *filter = 0;
 
-          for (size_t i = 0; i < self->filters.size(); i++)
-            if (self->filters[i].state == state_play)
-            {
-              playing++;
-              filter = self->filters[i].filter;
-            }
+          if (self->filters.size() == 1)
+          {
+            // Single track:
+            // Always show config dialog for this track even when it is inactive
+            playing = 1;
+            filter = self->filters[0].filter;
+          }
+          else
+          {
+            // Multiple tracks:
+            // Count active tracks.
+            for (size_t i = 0; i < self->filters.size(); i++)
+              if (self->filters[i].state == state_play)
+              {
+                playing++;
+                filter = self->filters[i].filter;
+              }
+          }
 
           if (playing == 1)
             self->dialog->start(0, filter);
