@@ -91,7 +91,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)&#x0D;&#x0A;"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;copy /b ..\BugTrap\$(ConfigurationName)\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -166,7 +166,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)&#x0D;&#x0A;"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;copy /b ..\BugTrap\x64\$(ConfigurationName)\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -246,7 +246,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)&#x0D;&#x0A;"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;copy /b ..\BugTrap\$(ConfigurationName)\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -325,7 +325,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)&#x0D;&#x0A;"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;copy /b ..\BugTrap\x64\$(ConfigurationName)\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
