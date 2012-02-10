@@ -368,6 +368,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\bug_trap.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ch_names.cpp"
 				>
 			</File>
