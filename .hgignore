@@ -23,6 +23,14 @@ intl\gnu\include
 intl\gnu\lib
 intl\gnu\usr
 
+# zlib build files
+zlib\bin
+zlib\stat-debug
+zlib\stat-release
+zlib\stat-debug-x64
+zlib\stat-release-x64
+
+
 # Doc build files
 doc\*.tmp
 doc\*.4tc
