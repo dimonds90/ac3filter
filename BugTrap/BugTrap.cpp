@@ -1381,9 +1381,8 @@ extern "C" BUGTRAP_API BOOL APIENTRY BT_CloseLogFile(INT_PTR iHandle)
 	BT_FlushLogFile(iHandle);
 	// remove file entry from the list
 	EnterCriticalSection(&g_csMutualLogAccess);
-	size_t iLogFilePos = g_arrLogFiles.LSearch((CLogFile*)iHandle);
-	if (iLogFilePos != MAXSIZE_T)
-		g_arrLogFiles.DeleteItem(iLogFilePos);
+	if (iHandle >= 1 && iHandle <= (INT_PTR)g_arrLogFiles.GetCount())
+		g_arrLogFiles.DeleteItem(iHandle-1);
 	LeaveCriticalSection(&g_csMutualLogAccess);
 	return TRUE;
 }
