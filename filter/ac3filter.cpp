@@ -29,7 +29,7 @@
 CUnknown * WINAPI 
 AC3Filter::CreateInstance(LPUNKNOWN punk, HRESULT *phr)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter::CreateInstance"));
+  trace.AppendF(BTLL_INFO, "AC3Filter::CreateInstance");
   AC3Filter *pobj = new AC3Filter("AC3Filter", punk, phr);
   if (!pobj) *phr = E_OUTOFMEMORY;
   return pobj;
@@ -39,7 +39,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   CTransformFilter(tszName, punk, CLSID_AC3Filter), 
   dec((IAC3Filter*)this, BUF_SAMPLES)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x, %s)::AC3Filter", this, tszName));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x, %s)::AC3Filter", this, tszName);
 
   if (!(m_pInput = new CDeCSSInputPin(this, phr))) 
   {
@@ -91,13 +91,13 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
 
 AC3Filter::~AC3Filter()
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::~AC3Filter", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::~AC3Filter", this);
 }
 
 STDMETHODIMP 
 AC3Filter::JoinFilterGraph(IFilterGraph *pGraph, LPCWSTR pName)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::JoinFilterGraph(%x)", this, pGraph));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::JoinFilterGraph(%x)", this, pGraph);
 
   // Register graph at running objects table
   #ifdef REGISTER_FILTERGRAPH
@@ -148,17 +148,17 @@ AC3Filter::open(Speakers _in_spk)
 {
   if (!dec.can_open(_in_spk))
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s): format refused", this, _in_spk.print().c_str() ));
+    trace.AppendF(BTLL_INFO, "AC3Filter(%x)::set_input(%s): format refused", this, _in_spk.print().c_str());
     return false;
   }
 
   if (!dec.open(_in_spk))
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s): failed", this, _in_spk.print().c_str() ));
+    trace.AppendF(BTLL_INFO, "AC3Filter(%x)::set_input(%s): failed", this, _in_spk.print().c_str());
     return false;
   }
 
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::set_input(%s): succeeded", this, _in_spk.print().c_str() ));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::set_input(%s): succeeded", this, _in_spk.print().c_str());
   return true;
 }
 
@@ -172,7 +172,7 @@ AC3Filter::process(const Chunk *chunk)
   // It's also useful because of extended error reporting.
 
 #ifdef LOG_TIMING
-  log_input_chunk(*chunk, m_tStart, m_pClock);
+  trace.input_chunk(*chunk, m_tStart, m_pClock);
 #endif
 
   try {
@@ -183,11 +183,11 @@ AC3Filter::process(const Chunk *chunk)
       if (dec.new_stream())
       {
         Speakers spk = dec.get_output();
-        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::process(): new stream (%s)", this, spk.print().c_str() ));
+        trace.AppendF(BTLL_INFO, "AC3Filter(%x)::process(): new stream (%s)", this, spk.print().c_str());
         sink->open_throw(spk);
       }
 #ifdef LOG_TIMING
-      log_output_chunk(out, m_tStart, m_pClock);
+      trace.output_chunk(out, m_tStart, m_pClock);
 #endif
       cpu.stop();
       sink->process(out);
@@ -196,8 +196,7 @@ AC3Filter::process(const Chunk *chunk)
   }
   catch (ValibException &e)
   {
-    e; // Dummy use to avoid warning C4101: 'e' : unreferenced local variable (release build)
-    DbgLog((LOG_ERROR, 3, "AC3Filter(%x)::process(): exception:\n%s", this, boost::diagnostic_information(e).c_str() ));
+    trace.AppendF(BTLL_ERROR, "AC3Filter(%x)::process(): exception:\n%s", this, boost::diagnostic_information(e).c_str());
     reset();
   }
 }
@@ -213,11 +212,11 @@ AC3Filter::flush()
       if (dec.new_stream())
       {
         Speakers spk = dec.get_output();
-        DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::flush(): new stream (%s)", this, spk.print().c_str() ));
+        trace.AppendF(BTLL_INFO, "AC3Filter(%x)::flush(): new stream (%s)", this, spk.print().c_str());
         sink->open_throw(spk);
       }
 #ifdef LOG_TIMING
-      log_output_chunk(out, m_tStart, m_pClock);
+      trace.output_chunk(out, m_tStart, m_pClock);
 #endif
       cpu.stop();
       sink->process(out);
@@ -226,8 +225,7 @@ AC3Filter::flush()
   }
   catch (ValibException &e)
   {
-    e; // Dummy use to avoid warning C4101: 'e' : unreferenced local variable (release build)
-    DbgLog((LOG_ERROR, 3, "AC3Filter(%x)::flush(): exception:\n%s", this, boost::diagnostic_information(e).c_str() ));
+    trace.AppendF(BTLL_ERROR, "AC3Filter(%x)::flush(): exception:\n%s", this, boost::diagnostic_information(e).c_str());
     reset();
   }
 }
@@ -283,20 +281,20 @@ AC3Filter::Receive(IMediaSample *in)
   {
     if (*mt->FormatType() != FORMAT_WaveFormatEx)
     {
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change to non-audio format", this));
+      trace.AppendF(BTLL_INFO, "AC3Filter(%x)::Receive(): Input format change to non-audio format", this);
       return E_FAIL;
     }
 
     Speakers in_spk;
     if (!mt2spk(*mt, in_spk))
     {
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change to unsupported format", this));
+      trace.AppendF(BTLL_INFO, "AC3Filter(%x)::Receive(): Input format change to unsupported format", this);
       return E_FAIL;
     }
 
     if (dec.get_input() != in_spk)
     {
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Input format change", this));
+      trace.AppendF(BTLL_INFO, "AC3Filter(%x)::Receive(): Input format change", this);
 
       flush();
       reset();
@@ -316,7 +314,7 @@ AC3Filter::Receive(IMediaSample *in)
 
   if (in->IsDiscontinuity() == S_OK)
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Receive(): Discontinuity", this));
+    trace.AppendF(BTLL_INFO, "AC3Filter(%x)::Receive(): Discontinuity", this);
 
     flush();
     reset();
@@ -363,7 +361,7 @@ AC3Filter::Receive(IMediaSample *in)
 HRESULT 
 AC3Filter::StartStreaming()
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StartStreaming()", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::StartStreaming()", this);
 
   // Reset before starting a new stream
   CAutoLock lock(&m_csReceive);
@@ -384,14 +382,14 @@ AC3Filter::StartStreaming()
 HRESULT 
 AC3Filter::StopStreaming()
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::StopStreaming()", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::StopStreaming()", this);
   return CTransformFilter::StopStreaming();
 }
 
 HRESULT 
 AC3Filter::NewSegment(REFERENCE_TIME tStart, REFERENCE_TIME tStop, double dRate)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::NewSegment(%ims, %ims)", this, int(tStart/10000), int(tStop/10000)));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::NewSegment(%ims, %ims)", this, int(tStart/10000), int(tStop/10000));
 
   // We have to reset because we may need to 
   // drop incomplete frame in the decoder
@@ -405,7 +403,7 @@ AC3Filter::NewSegment(REFERENCE_TIME tStart, REFERENCE_TIME tStop, double dRate)
 HRESULT 
 AC3Filter::EndOfStream()
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndOfStream()", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::EndOfStream()", this);
 
   // Syncronize with streaming thread 
   // (wait for all data to process)
@@ -426,7 +424,7 @@ AC3Filter::EndOfStream()
 HRESULT 
 AC3Filter::BeginFlush()
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::BeginFlush()", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::BeginFlush()", this);
 
   // Serialize with state changes
   CAutoLock filter_lock(&m_csFilter);
@@ -454,7 +452,7 @@ AC3Filter::BeginFlush()
 HRESULT 
 AC3Filter::EndFlush()
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::EndFlush()", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::EndFlush()", this);
 
   // Syncronize with streaming thread 
   // (wait for all data to process)
@@ -467,20 +465,20 @@ STDMETHODIMP
 AC3Filter::Stop()
 {
   ac3filter_tray.stop(this);
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Stop()", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::Stop()", this);
   return CTransformFilter::Stop();
 }
 STDMETHODIMP 
 AC3Filter::Pause()
 {
   ac3filter_tray.pause(this);
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Pause()", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::Pause()", this);
   return CTransformFilter::Pause();
 }
 STDMETHODIMP 
 AC3Filter::Run(REFERENCE_TIME tStart)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::Run(%ims)", this, int(tStart/10000)));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::Run(%ims)", this, int(tStart/10000));
   HRESULT hr = CTransformFilter::Run(tStart);
   if FAILED(hr)
     return hr;
@@ -545,7 +543,7 @@ AC3Filter::Run(REFERENCE_TIME tStart)
 HRESULT 
 AC3Filter::GetMediaType(int i, CMediaType *_mt)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::GetMediaType #%i", this, i));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::GetMediaType #%i", this, i);
 
   if (m_pInput->IsConnected() == FALSE)
     return E_UNEXPECTED;
@@ -645,7 +643,7 @@ AC3Filter::CheckInputType(const CMediaType *mt)
     m_pInput->ConnectionMediaType(&out_mt);
     if (*mt == out_mt)
     {
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType: No change...", this));
+      trace.AppendF(BTLL_INFO, "AC3Filter(%x)::CheckInputType: No change...", this);
       return S_OK;
     }
   }
@@ -654,17 +652,17 @@ AC3Filter::CheckInputType(const CMediaType *mt)
 
   if (!mt2spk(*mt, spk_tmp))
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(): cannot determine format", this));
+    trace.AppendF(BTLL_INFO, "AC3Filter(%x)::CheckInputType(): cannot determine format", this);
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
   if (!dec.can_open(spk_tmp))
   {
-    DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(%s): format refused by decoder", this, spk_tmp.print().c_str() ));
+    trace.AppendF(BTLL_INFO, "AC3Filter(%x)::CheckInputType(%s): format refused by decoder", this, spk_tmp.print().c_str() );
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckInputType(%s): Ok...", this, spk_tmp.print().c_str()));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::CheckInputType(%s): Ok...", this, spk_tmp.print().c_str());
   return S_OK;
 } 
 
@@ -678,7 +676,7 @@ AC3Filter::CheckOutputType(const CMediaType *mt)
     m_pOutput->ConnectionMediaType(&out_mt);
     if (*mt == out_mt)
     {
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: No change...", this));
+      trace.AppendF(BTLL_INFO, "AC3Filter(%x)::CheckOutputType: No change...", this);
       return S_OK;
     }
   }
@@ -689,32 +687,32 @@ AC3Filter::CheckOutputType(const CMediaType *mt)
   while (GetMediaType(i++, &out_mt) == S_OK)
     if (*mt == out_mt)
     {
-      DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType: Ok...", this));
+      trace.AppendF(BTLL_INFO, "AC3Filter(%x)::CheckOutputType: Ok...", this);
       return S_OK;
     }
 
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CheckOutputType(): Not our type", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::CheckOutputType(): Not our type", this);
   return VFW_E_TYPE_NOT_ACCEPTED;
 }
 
 HRESULT 
 AC3Filter::CheckTransform(const CMediaType *mt_in, const CMediaType *mt_out)
 {
-  DbgLog((LOG_TRACE, 3, "> AC3Filter(%x)::CheckTransform", this));
+  trace.AppendF(BTLL_INFO, "> AC3Filter(%x)::CheckTransform", this);
 
   if FAILED(CheckInputType(mt_in))
   {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::CheckTransform(): Input type rejected", this));
+    trace.AppendF(BTLL_INFO, "< AC3Filter(%x)::CheckTransform(): Input type rejected", this);
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
   if FAILED(CheckOutputType(mt_out))
   {
-    DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::CheckTransform(): Output type rejected", this));
+    trace.AppendF(BTLL_INFO, "< AC3Filter(%x)::CheckTransform(): Output type rejected", this);
     return VFW_E_TYPE_NOT_ACCEPTED;
   }
 
-  DbgLog((LOG_TRACE, 3, "< AC3Filter(%x)::CheckTransform: Ok...", this));
+  trace.AppendF(BTLL_INFO, "< AC3Filter(%x)::CheckTransform: Ok...", this);
   return S_OK;
 }
 
@@ -784,7 +782,7 @@ AC3Filter::CheckConnect(PIN_DIRECTION dir, IPin *pin)
 HRESULT 
 AC3Filter::SetMediaType(PIN_DIRECTION direction, const CMediaType *mt)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::SetMediaType(%s)", this, direction == PINDIR_INPUT? "input": "output"));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::SetMediaType(%s)", this, direction == PINDIR_INPUT? "input": "output");
 
   if (direction == PINDIR_INPUT)
   {
@@ -807,7 +805,7 @@ AC3Filter::SetMediaType(PIN_DIRECTION direction, const CMediaType *mt)
 HRESULT 
 AC3Filter::CompleteConnect(PIN_DIRECTION direction, IPin *pin)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::CompleteConnect(%s)", this, direction == PINDIR_INPUT? "input": "output"));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::CompleteConnect(%s)", this, direction == PINDIR_INPUT? "input": "output");
 
   // Applicaqtion may construct several graphs,
   // therefore if we enable the tray icon here we may get several
@@ -821,7 +819,7 @@ AC3Filter::CompleteConnect(PIN_DIRECTION direction, IPin *pin)
 HRESULT                     
 AC3Filter::DecideBufferSize(IMemAllocator *pAlloc, ALLOCATOR_PROPERTIES *pProperties)
 {
-  DbgLog((LOG_TRACE, 3, "AC3Filter(%x)::DecideBufferSize", this));
+  trace.AppendF(BTLL_INFO, "AC3Filter(%x)::DecideBufferSize", this);
 
   ASSERT(pAlloc);
   ASSERT(pProperties);

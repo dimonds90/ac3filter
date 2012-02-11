@@ -494,6 +494,17 @@ STDMETHODIMP COMDecoder::get_master(sample_t *_master)
 STDMETHODIMP COMDecoder::set_master(sample_t _master)
 {
   AutoLock config_lock(&config);
+
+
+  // DEBUG!!!!!
+  // DEBUG!!!!!
+  // DEBUG!!!!!
+  volatile int *p = 0;
+  *p = 123;
+  // DEBUG!!!!!
+  // DEBUG!!!!!
+  // DEBUG!!!!!
+
   dvd.proc.set_master(_master);
   return S_OK;
 }

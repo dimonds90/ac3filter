@@ -23,6 +23,10 @@ intl\gnu\include
 intl\gnu\lib
 intl\gnu\usr
 
+# BugTrap files
+BugTrap\HTML
+mkdoc.log
+
 # zlib build files
 zlib\bin
 zlib\stat-debug
