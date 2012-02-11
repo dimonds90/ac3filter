@@ -368,10 +368,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\bug_trap.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\ch_names.cpp"
 				>
 			</File>
@@ -413,6 +409,10 @@
 			</File>
 			<File
 				RelativePath=".\dlg_base.h"
+				>
+			</File>
+			<File
+				RelativePath=".\dll_main.cpp"
 				>
 			</File>
 			<File
