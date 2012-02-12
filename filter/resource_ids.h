@@ -363,15 +363,7 @@
 
 // Allowed formats (516)
 #define IDC_GRP_FORMATS                51601
-#define IDC_CHK_PCM                    51602
-#define IDC_CHK_AAC                    51603
-#define IDC_CHK_AC3                    51604
-#define IDC_CHK_DTS                    51605
-#define IDC_CHK_MPA                    51606
-#define IDC_CHK_PES                    51607
-#define IDC_CHK_SPDIF                  51608
-#define IDC_CHK_LPCM                   51609
-#define IDC_CHK_FLAC                   51610
+#define IDC_LST_FORMATS                51602
 
 // Filter merit (517)
 #define IDC_GRP_MERIT                  51701

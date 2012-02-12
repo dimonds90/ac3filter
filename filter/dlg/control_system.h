@@ -27,6 +27,7 @@ public:
   ControlSystem(HWND dlg, IAC3Filter *filter, IDecoder *dec);
   ~ControlSystem();
 
+  virtual void init();
   virtual void update();
   virtual cmd_result command(int control, int message);
 };

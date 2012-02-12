@@ -1,3 +1,5 @@
+#include <windows.h>
+#include <commctrl.h>
 #include <streams.h>
 #include "../ac3filter_intl.h"
 #include "../resource_ids.h"
@@ -6,15 +8,7 @@
 static int controls[] =
 {
   IDC_GRP_FORMATS,
-  IDC_CHK_PCM,
-  IDC_CHK_LPCM,
-  IDC_CHK_AAC,
-  IDC_CHK_AC3,
-  IDC_CHK_DTS,
-  IDC_CHK_FLAC,
-  IDC_CHK_MPA,
-  IDC_CHK_PES,
-  IDC_CHK_SPDIF,
+  IDC_LST_FORMATS,
 
   IDC_GRP_MERIT,
   IDC_RBT_MERIT_PREFERRED,
@@ -31,6 +25,23 @@ static int controls[] =
   IDC_CHK_SPDIF_NO_PCM,
 
   0
+};
+
+static struct
+{
+  int format_mask;
+  const char *name;
+} format_list[] =
+{
+  { FORMAT_CLASS_PCM,  "PCM" },
+  { FORMAT_CLASS_LPCM, "LPCM" },
+  { FORMAT_MASK_MPA,   "MPEG Audio" },
+  { FORMAT_MASK(FORMAT_AC3_EAC3),  "AC3" },
+  { FORMAT_MASK(FORMAT_AAC_FRAME), "AAC" },
+  { FORMAT_MASK_DTS,   "DTS" },
+  { FORMAT_MASK_FLAC,  "Flac" },
+  { FORMAT_MASK_PES,   "MPEG PES" },
+  { FORMAT_MASK_SPDIF, "SPDIF" },
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -145,6 +156,47 @@ ControlSystem::~ControlSystem()
   dec->Release();
 }
 
+void ControlSystem::init()
+{
+  /////////////////////////////////////////////////////////
+  // List of formats
+
+  HWND formats_hwnd = GetDlgItem(hdlg, IDC_LST_FORMATS);
+  DWORD style = ListView_GetExtendedListViewStyle(formats_hwnd);
+  style |= LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT;
+  ListView_SetExtendedListViewStyle(formats_hwnd, style);
+
+  LVITEM item;
+  item.mask = LVIF_TEXT | LVIF_PARAM;
+  item.state = 0;
+  item.iItem = 0;
+  item.stateMask = 0;
+  item.iSubItem = 0;
+  for (int i = 0; i < array_size(format_list); i++)
+  {
+    item.iItem = i + 1;
+    item.pszText = (LPSTR)format_list[i].name;
+    item.lParam = format_list[i].format_mask;
+    ListView_InsertItem(formats_hwnd, &item);
+  }
+
+  // Set background color
+  ListView_SetBkColor(formats_hwnd, GetSysColor(CTLCOLOR_DLG));
+  ListView_SetTextBkColor(formats_hwnd, GetSysColor(CTLCOLOR_DLG));
+
+  // Create main column
+  RECT rect;
+  GetClientRect(formats_hwnd, &rect);
+
+  LVCOLUMN col;
+  col.mask = LVCF_FMT | LVCF_TEXT | LVCF_WIDTH| LVCF_SUBITEM;
+  col.iSubItem = 0;
+  col.pszText = "Format";
+  col.cx = rect.right - rect.top;
+  col.fmt = LVCFMT_LEFT;
+  ListView_InsertColumn(formats_hwnd, 0, &col);
+}
+
 void ControlSystem::update()
 {
   dec->get_formats(&formats);
@@ -155,15 +207,19 @@ void ControlSystem::update()
   /////////////////////////////////////
   // Formats
 
-  CheckDlgButton(hdlg, IDC_CHK_PCM,   (formats & FORMAT_CLASS_PCM_LE) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_LPCM,  (formats & FORMAT_CLASS_LPCM) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_MPA,   (formats & FORMAT_MASK_MPA) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_AAC,   (formats & FORMAT_MASK(FORMAT_AAC_FRAME)) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_AC3,   (formats & FORMAT_MASK(FORMAT_AC3_EAC3)) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_DTS,   (formats & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_FLAC,  (formats & FORMAT_MASK_FLAC) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_PES,   (formats & FORMAT_MASK_PES) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_SPDIF, (formats & FORMAT_MASK_SPDIF) != 0? BST_CHECKED: BST_UNCHECKED);
+  LVITEM item;
+  HWND formats_hwnd = GetDlgItem(hdlg, IDC_LST_FORMATS);
+  int count = ListView_GetItemCount(formats_hwnd);
+  for (int i = 0; i < count; i++)
+  {
+    item.iItem = i;
+    item.iSubItem = 0;
+    if (ListView_GetItem(formats_hwnd, &item))
+    {
+      int mask = item.lParam;
+      ListView_SetCheckState(formats_hwnd, i, (formats & mask) == mask);
+    }
+  }
 
   /////////////////////////////////////
   // DirectShow
@@ -205,26 +261,21 @@ ControlSystem::cmd_result ControlSystem::command(int control, int message)
     /////////////////////////////////////
     // Formats
 
-    case IDC_CHK_PCM:
-    case IDC_CHK_LPCM:
-    case IDC_CHK_MPA:
-    case IDC_CHK_AAC:
-    case IDC_CHK_AC3:
-    case IDC_CHK_DTS:
-    case IDC_CHK_FLAC:
-    case IDC_CHK_PES:
-    case IDC_CHK_SPDIF:
+    case IDC_LST_FORMATS:
     {
       formats = 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_PCM)   == BST_CHECKED? FORMAT_CLASS_PCM: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_LPCM)  == BST_CHECKED? FORMAT_CLASS_LPCM | FORMAT_MASK_PCM16_BE: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_MPA)   == BST_CHECKED? FORMAT_MASK_MPA: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_AAC)   == BST_CHECKED? FORMAT_MASK(FORMAT_AAC_FRAME): 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_AC3)   == BST_CHECKED? FORMAT_MASK(FORMAT_AC3_EAC3): 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_DTS)   == BST_CHECKED? FORMAT_MASK_DTS: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_FLAC)  == BST_CHECKED? FORMAT_MASK_FLAC: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_PES)   == BST_CHECKED? FORMAT_MASK_PES: 0;
-      formats |= IsDlgButtonChecked(hdlg, IDC_CHK_SPDIF) == BST_CHECKED? FORMAT_MASK_SPDIF: 0;
+
+      LVITEM item;
+      HWND formats_hwnd = GetDlgItem(hdlg, IDC_LST_FORMATS);
+      int count = ListView_GetItemCount(formats_hwnd);
+      for (int i = 0; i < count; i++)
+      {
+        item.iItem = i;
+        item.iSubItem = 0;
+        if (ListView_GetItem(formats_hwnd, &item))
+          formats |= item.lParam;
+      }
+
       dec->set_formats(formats);
       update();
       return cmd_ok;

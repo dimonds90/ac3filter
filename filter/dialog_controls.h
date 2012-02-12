@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 388
+// Total controls: 379
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -270,24 +270,6 @@ static const ControlDesc dialog_controls[] =
   // Use AC3Filter for:
   /* TRANSLATORS: Use AC3Filter for: */
   { IDC_GRP_FORMATS, N_("IDC_GRP_FORMATS"), "Use AC3Filter for:", "" },
-  /* TRANSLATORS: AAC */
-  { IDC_CHK_AAC, N_("IDC_CHK_AAC"), "AAC", "" },
-  /* TRANSLATORS: AC3 */
-  { IDC_CHK_AC3, N_("IDC_CHK_AC3"), "AC3", "" },
-  /* TRANSLATORS: DTS */
-  { IDC_CHK_DTS, N_("IDC_CHK_DTS"), "DTS", "" },
-  /* TRANSLATORS: FLAC */
-  { IDC_CHK_FLAC, N_("IDC_CHK_FLAC"), "FLAC", "" },
-  /* TRANSLATORS: LPCM */
-  { IDC_CHK_LPCM, N_("IDC_CHK_LPCM"), "LPCM", "" },
-  /* TRANSLATORS: MPEG Audio */
-  { IDC_CHK_MPA, N_("IDC_CHK_MPA"), "MPEG Audio", "" },
-  /* TRANSLATORS: PCM */
-  { IDC_CHK_PCM, N_("IDC_CHK_PCM"), "PCM", "" },
-  /* TRANSLATORS: MPEG PS */
-  { IDC_CHK_PES, N_("IDC_CHK_PES"), "MPEG PS", "" },
-  /* TRANSLATORS: SPDIF */
-  { IDC_CHK_SPDIF, N_("IDC_CHK_SPDIF"), "SPDIF", "" },
 
   // Gain
   /* TRANSLATORS: Gain */
