@@ -164,7 +164,7 @@ void ControlMatrix::update_dynamic()
   }
 };
 
-ControlMatrix::cmd_result ControlMatrix::command(int control, int message)
+ControlMatrix::cmd_result ControlMatrix::command(int control, int message, LPARAM data)
 {
   if (message == CB_ENTER)
   {

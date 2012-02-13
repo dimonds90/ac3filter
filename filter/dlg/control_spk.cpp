@@ -198,7 +198,7 @@ void ControlSpk::update_dynamic()
   }
 }
 
-ControlSpk::cmd_result ControlSpk::command(int control, int message)
+ControlSpk::cmd_result ControlSpk::command(int control, int message, LPARAM data)
 {
   switch (control)
   {
