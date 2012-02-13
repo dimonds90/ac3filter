@@ -379,6 +379,10 @@ AC3FilterTrayImpl::unregister_filter(IAC3Filter *filter)
       filters.erase(filters.begin() + i);
       break;
     }
+
+  // Hide tray icon after removing the last filter
+  if (visible && filters.size() == 0)
+    hide();
 }
 
 void
