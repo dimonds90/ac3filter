@@ -1,3 +1,4 @@
+#include <shlwapi.h>
 #include <stdio.h>
 #include <streams.h>
 #include <tchar.h>
@@ -8,9 +9,12 @@ AC3FilterTrace trace;
 
 AC3FilterTrace::AC3FilterTrace()
 {
+  TCHAR full_name[MAX_PATH];
   TCHAR file_name[MAX_PATH];
   GetLogFileName(file_name, MAX_PATH);
-  Open(file_name, BTLF_TEXT);
+  GetTempPath(MAX_PATH, full_name);
+  PathAppend(full_name, file_name);
+  Open(full_name, BTLF_TEXT);
   SetLogFlags(BTLF_SHOWLOGLEVEL | BTLF_SHOWTIMESTAMP);
   SetLogLevel(BTLL_VERBOSE);
 }
