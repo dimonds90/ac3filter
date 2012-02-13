@@ -65,7 +65,7 @@ public:
     return false;
   }
 
-  virtual cmd_result command(int control, int message) { return cmd_not_processed; }
+  virtual cmd_result command(int control, int message, LPARAM data) { return cmd_not_processed; }
 };
 
 

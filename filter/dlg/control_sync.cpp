@@ -74,7 +74,7 @@ void ControlSync::update_dynamic()
   }
 }
 
-ControlSync::cmd_result ControlSync::command(int control, int message)
+ControlSync::cmd_result ControlSync::command(int control, int message, LPARAM data)
 {
   switch (control)
   {

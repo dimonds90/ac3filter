@@ -147,7 +147,7 @@ void ControlSPDIF::update()
 
 };
 
-ControlSPDIF::cmd_result ControlSPDIF::command(int control, int message)
+ControlSPDIF::cmd_result ControlSPDIF::command(int control, int message, LPARAM data)
 {
   switch (control)
   {

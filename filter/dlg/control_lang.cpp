@@ -256,7 +256,7 @@ void ControlLang::update()
 #endif
 }
 
-ControlLang::cmd_result ControlLang::command(int control, int message)
+ControlLang::cmd_result ControlLang::command(int control, int message, LPARAM data)
 {
   switch (control)
   {

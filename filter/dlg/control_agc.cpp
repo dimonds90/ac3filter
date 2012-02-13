@@ -116,7 +116,7 @@ void ControlAGC::update_dynamic()
   edt_drc_level.update_value(value2db(drc_level));
 };
 
-ControlAGC::cmd_result ControlAGC::command(int control, int message)
+ControlAGC::cmd_result ControlAGC::command(int control, int message, LPARAM data)
 {
   switch (control)
   {

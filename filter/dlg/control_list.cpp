@@ -47,10 +47,10 @@ bool ControlList::own_control(int control)
   return false;
 }
 
-ControlList::cmd_result ControlList::command(int control, int message)
+ControlList::cmd_result ControlList::command(int control, int message, LPARAM data)
 {
   for (VCtrl::iterator iter = ctrl.begin(); iter < ctrl.end(); iter++)
     if ((*iter)->own_control(control))
-      return (*iter)->command(control, message);
+      return (*iter)->command(control, message, data);
   return cmd_not_processed;
 }

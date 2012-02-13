@@ -28,7 +28,7 @@ public:
   virtual void update();
   virtual void update_dynamic();
 
-  virtual cmd_result command(int control, int message);
+  virtual cmd_result command(int control, int message, LPARAM data);
 };
 
 #endif
