@@ -259,29 +259,6 @@ ControlSystem::cmd_result ControlSystem::command(int control, int message)
   switch (control)
   {
     /////////////////////////////////////
-    // Formats
-
-    case IDC_LST_FORMATS:
-    {
-      formats = 0;
-
-      LVITEM item;
-      HWND formats_hwnd = GetDlgItem(hdlg, IDC_LST_FORMATS);
-      int count = ListView_GetItemCount(formats_hwnd);
-      for (int i = 0; i < count; i++)
-      {
-        item.iItem = i;
-        item.iSubItem = 0;
-        if (ListView_GetItem(formats_hwnd, &item))
-          formats |= item.lParam;
-      }
-
-      dec->set_formats(formats);
-      update();
-      return cmd_ok;
-    }
-
-    /////////////////////////////////////
     // Query sink
 
     case IDC_CHK_QUERY_SINK:
@@ -388,6 +365,49 @@ ControlSystem::cmd_result ControlSystem::command(int control, int message)
         delete_reg_key("Software\\Microsoft\\Multimedia\\ActiveMovie\\Filter Cache", HKEY_CURRENT_USER);
 
         update();
+        return cmd_ok;
+      }
+      return cmd_not_processed;
+  }
+  return cmd_not_processed;
+}
+
+ControlSystem::cmd_result
+ControlSystem::notify(int control, int message, LPNMHDR nmhdr, INT_PTR &result)
+{
+  switch (control)
+  {
+    /////////////////////////////////////
+    // Formats
+
+    case IDC_LST_FORMATS:
+      if (message == LVN_ITEMCHANGED)
+      {
+        LPNMLISTVIEW nmlistview = (LPNMLISTVIEW)nmhdr;
+        if ((nmlistview->uChanged & LVIF_STATE) == 0 || // State did not change
+            (nmlistview->uOldState & LVIS_STATEIMAGEMASK) == 0 || // Item initialize
+            (nmlistview->uOldState & LVIS_STATEIMAGEMASK) == (nmlistview->uNewState & LVIS_STATEIMAGEMASK)) // Check state did not change
+          return cmd_not_processed;
+
+        LVITEM item;
+        HWND formats_hwnd = GetDlgItem(hdlg, IDC_LST_FORMATS);
+        item.iItem = nmlistview->iItem;
+        item.iSubItem = 0;
+        if (!ListView_GetItem(formats_hwnd, &item))
+          return cmd_not_processed;
+
+        int mask = item.lParam;
+        bool checked = ListView_GetCheckState(formats_hwnd, nmlistview->iItem) == TRUE;
+        if (checked && (formats & mask) != mask)
+        {
+          formats |= mask;
+          dec->set_formats(formats);
+        }
+        if (!checked && (formats & mask) != 0)
+        {
+          formats &= ~mask;
+          dec->set_formats(formats);
+        }
         return cmd_ok;
       }
       return cmd_not_processed;

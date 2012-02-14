@@ -125,7 +125,8 @@ private:
   /////////////////////////////////////////////////////////////////////////////
   // Handle control notifications
 
-  void command(int control, int message);
+  bool command(int control, int message);
+  bool notify(int control, int message, LPNMHDR nmhdr, INT_PTR &result);
 };
 
 #endif

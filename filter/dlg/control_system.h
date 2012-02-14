@@ -30,6 +30,7 @@ public:
   virtual void init();
   virtual void update();
   virtual cmd_result command(int control, int message);
+  virtual cmd_result notify(int control, int message, LPNMHDR nmhdr, INT_PTR &result);
 };
 
 #endif
