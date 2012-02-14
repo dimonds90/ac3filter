@@ -66,6 +66,7 @@ public:
   }
 
   virtual cmd_result command(int control, int message) { return cmd_not_processed; }
+  virtual cmd_result notify(int control, int message, LPNMHDR nmhdr, INT_PTR &result) { return cmd_not_processed; }
 };
 
 

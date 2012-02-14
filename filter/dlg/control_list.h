@@ -28,6 +28,7 @@ public:
   virtual void update_dynamic();
   virtual bool own_control(int control);
   virtual cmd_result command(int control, int message);
+  virtual cmd_result notify(int control, int message, LPNMHDR nmhdr, INT_PTR &result);
 };
 
 #endif

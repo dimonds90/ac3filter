@@ -54,3 +54,12 @@ ControlList::cmd_result ControlList::command(int control, int message)
       return (*iter)->command(control, message);
   return cmd_not_processed;
 }
+
+ControlList::cmd_result ControlList::notify(int control, int message, LPNMHDR nmhdr, INT_PTR &result)
+{
+  for (VCtrl::iterator iter = ctrl.begin(); iter < ctrl.end(); iter++)
+    if ((*iter)->own_control(control))
+      return (*iter)->notify(control, message, nmhdr, result);
+  return cmd_not_processed;
+}
+
