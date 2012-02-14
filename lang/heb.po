@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-16 22:11+0400\n"
+"POT-Creation-Date: 2012-02-14 22:09+0400\n"
 "PO-Revision-Date: 2007-09-14 18:31+0200\n"
 "Last-Translator: PhistucK UnRuleD <sorrybi@hotmail.com>\n"
 "Language-Team: Hebrew <LL@li.org>\n"
@@ -43,6 +43,72 @@ msgstr "מערכת"
 msgid "IDD_ABOUT"
 msgstr "אודות"
 
+msgid "L"
+msgstr ""
+
+msgid "C"
+msgstr ""
+
+msgid "R"
+msgstr ""
+
+msgid "SL"
+msgstr ""
+
+msgid "SR"
+msgstr ""
+
+msgid "LF"
+msgstr ""
+
+msgid "CL"
+msgstr ""
+
+msgid "CR"
+msgstr ""
+
+msgid "BL"
+msgstr ""
+
+msgid "BC"
+msgstr ""
+
+msgid "BR"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Left surround"
+msgstr ""
+
+msgid "Right surround"
+msgstr ""
+
+msgid "Low frequency"
+msgstr ""
+
+msgid "Left of center"
+msgstr ""
+
+msgid "Right of center"
+msgstr ""
+
+msgid "Left back"
+msgstr ""
+
+msgid "Center back"
+msgstr ""
+
+msgid "Right back"
+msgstr ""
+
 msgid "kHz"
 msgstr ""
 
@@ -52,6 +118,12 @@ msgstr ""
 msgid "Hz"
 msgstr ""
 
+msgid "AC3Filter configuration"
+msgstr ""
+
+msgid "Adjust track"
+msgstr ""
+
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
 msgstr ""
@@ -59,6 +131,10 @@ msgstr ""
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
 msgstr "לתרום"
+
+#. TRANSLATORS: Help
+msgid "IDC_BTN_HELP"
+msgstr ""
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
@@ -76,6 +152,18 @@ msgstr ""
 msgid "IDC_LBL_EQ_LEN"
 msgstr ""
 
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_LFE"
+msgstr "באס"
+
+#. TRANSLATORS: Surround
+msgid "IDC_LBL_SUR"
+msgstr "אחוריים"
+
+#. TRANSLATORS: Voice
+msgid "IDC_LBL_VOICE"
+msgstr "קול"
+
 #. TRANSLATORS: Save all (multichannel and master equalizers).
 msgid "IDC_RBT_EQ_ALL"
 msgstr ""
@@ -88,7 +176,7 @@ msgstr ""
 msgid "IDC_RBT_EQ_MCH"
 msgstr ""
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter גרסה %s כל הזכויות שמורות (c) 2002-2007 על ידי אלכסנדר ויגובסקי"
 
@@ -115,6 +203,30 @@ msgstr "ויסות אלקטרוני אוטומטי"
 #. TRANSLATORS: Attack/release speed (dB/s):
 msgid "IDC_LBL_ATTACK_RELEASE"
 msgstr "מהירות התקפה/שחרור (בדציבלים) -"
+
+#. TRANSLATORS: Bass redirection
+msgid "IDC_GRP_BASS"
+msgstr ""
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_BASS_ENABLE"
+msgstr ""
+
+#. TRANSLATORS: Cutoff frequency
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "תדירות קיצוץ"
+
+#. TRANSLATORS: Bass destination:
+msgid "IDC_LBL_BASS_ROUTE"
+msgstr ""
+
+#. TRANSLATORS: Front channels
+msgid "IDC_RBT_BASS_FRONT"
+msgstr ""
+
+#. TRANSLATORS: Subwoofer
+msgid "IDC_RBT_BASS_SUB"
+msgstr ""
 
 #. TRANSLATORS: Contact author
 msgid "IDC_GRP_CONTACT"
@@ -160,33 +272,13 @@ msgstr "פריימים / שגיאות"
 msgid "IDC_GRP_DELAYS"
 msgstr "השהיות"
 
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_DELAYS_RESET"
+msgstr ""
+
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DELAYS"
 msgstr "אפשר"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_DELAY_C"
-msgstr "מרכז"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_DELAY_L"
-msgstr "שמאל"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_DELAY_R"
-msgstr "ימין"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_DELAY_SL"
-msgstr "שמאל אחורי"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_DELAY_SR"
-msgstr "ימין אחורי"
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_DELAY_SW"
-msgstr "סאב"
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
@@ -288,57 +380,17 @@ msgstr ""
 msgid "IDC_GRP_FORMATS"
 msgstr "השתמש בAC3Filter עם"
 
-#. TRANSLATORS: AC3
-msgid "IDC_CHK_AC3"
-msgstr "AC3"
-
-#. TRANSLATORS: DTS
-msgid "IDC_CHK_DTS"
-msgstr "DTS"
-
-#. TRANSLATORS: MPEG Audio
-msgid "IDC_CHK_MPA"
-msgstr "MPEG Audio"
-
-#. TRANSLATORS: PCM
-msgid "IDC_CHK_PCM"
-msgstr "PCM"
-
-#. TRANSLATORS: DVD
-msgid "IDC_CHK_PES"
-msgstr "DVD"
-
-#. TRANSLATORS: SPDIF
-msgid "IDC_CHK_SPDIF"
-msgstr "SPDIF"
-
 #. TRANSLATORS: Gain
 msgid "IDC_GRP_GAIN"
 msgstr "עוצמה"
-
-#. TRANSLATORS: Gains
-msgid "IDC_GRP_GAINS"
-msgstr "עוצמות"
 
 #. TRANSLATORS: Gain
 msgid "IDC_LBL_GAIN"
 msgstr "עוצמה"
 
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_LFE"
-msgstr "באס"
-
 #. TRANSLATORS: Master
 msgid "IDC_LBL_MASTER"
 msgstr "ראשי"
-
-#. TRANSLATORS: Surround
-msgid "IDC_LBL_SUR"
-msgstr "אחוריים"
-
-#. TRANSLATORS: Voice
-msgid "IDC_LBL_VOICE"
-msgstr "קול"
 
 #. TRANSLATORS: Input gains
 msgid "IDC_GRP_INPUT_GAINS"
@@ -347,30 +399,6 @@ msgstr "עוצמות קלט"
 #. TRANSLATORS: Input levels
 msgid "IDC_GRP_INPUT_LEVELS"
 msgstr "רמות קלט"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_IN_C"
-msgstr "מרכז"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_IN_L"
-msgstr "שמאל"
-
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_IN_LFE"
-msgstr "באס"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_IN_R"
-msgstr "ימין"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_IN_SL"
-msgstr "שמאל אחורי"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_IN_SR"
-msgstr "ימין אחורי"
 
 #. TRANSLATORS: Interface options
 msgid "IDC_GRP_INTERFACE"
@@ -404,54 +432,6 @@ msgstr "תכנית זו הנה תוכנה חינמית ויכולה להיות מופצת לפי התנאים של הרשיון הציבור
 msgid "IDC_GRP_MATRIX"
 msgstr "טבלת ערבול"
 
-#. TRANSLATORS: C
-msgid "IDC_LBL_MATRIX_IN_C"
-msgstr "מרכז"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_MATRIX_IN_L"
-msgstr "שמאל"
-
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_MATRIX_IN_LFE"
-msgstr "סאב"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_MATRIX_IN_R"
-msgstr "ימין"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_MATRIX_IN_SL"
-msgstr "שמאל אחורי"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_MATRIX_IN_SR"
-msgstr "ימין אחורי"
-
-#. TRANSLATORS: C'
-msgid "IDC_LBL_MATRIX_OUT_C"
-msgstr "מרכז'"
-
-#. TRANSLATORS: L'
-msgid "IDC_LBL_MATRIX_OUT_L"
-msgstr "שמאל'"
-
-#. TRANSLATORS: R'
-msgid "IDC_LBL_MATRIX_OUT_R"
-msgstr "ימין'"
-
-#. TRANSLATORS: SL'
-msgid "IDC_LBL_MATRIX_OUT_SL"
-msgstr "שמאל אחורי'"
-
-#. TRANSLATORS: SR'
-msgid "IDC_LBL_MATRIX_OUT_SR"
-msgstr "ימין אחורי'"
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_MATRIX_OUT_SW"
-msgstr "סאב"
-
 #. TRANSLATORS: Matrix preset
 msgid "IDC_GRP_MATRIX_PRESET"
 msgstr "הגדרת טבלה מראש"
@@ -467,6 +447,10 @@ msgstr "שמור"
 #. TRANSLATORS: Filter merit
 msgid "IDC_GRP_MERIT"
 msgstr "Filter Merit"
+
+#. TRANSLATORS: Disable AC3Filter
+msgid "IDC_RBT_MERIT_DO_NOT_USE"
+msgstr ""
 
 #. TRANSLATORS: Prefer AC3Filter
 msgid "IDC_RBT_MERIT_PREFERRED"
@@ -488,10 +472,6 @@ msgstr "בקרת עוצמה אוטומטית"
 msgid "IDC_CHK_AUTO_MATRIX"
 msgstr "טבלה אוטומטית"
 
-#. TRANSLATORS: Bass redirection
-msgid "IDC_CHK_BASS_REDIR"
-msgstr "הכוונת באס מחודשת"
-
 #. TRANSLATORS: Expand stereo
 msgid "IDC_CHK_EXPAND_STEREO"
 msgstr "הרחב סטריאו"
@@ -507,10 +487,6 @@ msgstr "נורמליזציה לטבלה"
 #. TRANSLATORS: Voice control
 msgid "IDC_CHK_VOICE_CONTROL"
 msgstr "בקרת קול"
-
-#. TRANSLATORS: Cutoff frequency
-msgid "IDC_LBL_BASS_FREQ"
-msgstr "תדירות קיצוץ"
 
 #. TRANSLATORS: Output format
 msgid "IDC_GRP_OUTPUT"
@@ -539,30 +515,6 @@ msgstr "עוצמות פלט"
 #. TRANSLATORS: Output levels
 msgid "IDC_GRP_OUTPUT_LEVELS"
 msgstr "רמות פלט"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_OUT_C"
-msgstr "מרכז"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_OUT_L"
-msgstr "שמאל"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_OUT_R"
-msgstr "ימין"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_OUT_SL"
-msgstr "שמאל אחורי"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_OUT_SR"
-msgstr "ימין אחורי"
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_OUT_SW"
-msgstr "סאב"
 
 #. TRANSLATORS: Preset
 msgid "IDC_GRP_PRESET"
@@ -702,25 +654,7 @@ msgstr "רגל"
 msgid "Inches"
 msgstr "אינצ'ים"
 
-msgid "Master"
-msgstr ""
-
-msgid "Left"
-msgstr ""
-
-msgid "Center"
-msgstr ""
-
-msgid "Right"
-msgstr ""
-
-msgid "Surround Left"
-msgstr ""
-
-msgid "Surround Right"
-msgstr ""
-
-msgid "Subwoofer"
+msgid "All channels"
 msgstr ""
 
 #, c-format
@@ -761,53 +695,32 @@ msgstr ""
 msgid "Spectrum: %s"
 msgstr ""
 
-msgid "All channels"
+msgid "Do not change"
 msgstr ""
 
-msgid "AS IS (no change)"
-msgstr "כמו שהוא (ללא שינוי)"
+msgid "Mono"
+msgstr ""
 
-msgid "1/0 - mono"
-msgstr "1/0 - מונו"
+msgid "Stereo"
+msgstr ""
 
-msgid "2/0 - stereo"
-msgstr "2/0 - סטריאו"
+msgid "Quadro"
+msgstr ""
 
-msgid "3/0 - 3 front"
-msgstr "3/0 - 3 קדמיים"
+msgid "5 channels"
+msgstr ""
 
-msgid "2/1 - surround"
-msgstr "2/1 - היקפי"
+msgid "2.1 Stereo"
+msgstr ""
 
-msgid "3/1 - surround"
-msgstr "3/1 - היקפי"
+msgid "4.1 Quadro"
+msgstr ""
 
-msgid "2/2 - quadro"
-msgstr "2/2 - מרובע"
+msgid "5.1 (6 channels)"
+msgstr ""
 
-msgid "3/2 - 5 channels"
-msgstr "3/2 - 5 ערוצים"
-
-msgid "1/0+SW 1.1 mono"
-msgstr "1.0+סאב 1.1 מונו"
-
-msgid "2/0+SW 2.1 stereo"
-msgstr "2/0+סאב 2.1 סטריאו"
-
-msgid "3/0+SW 3.1 front"
-msgstr "3/0+סאב 3.1 קדמיים"
-
-msgid "2/1+SW 3.1 surround"
-msgstr "2/1+סאב 3.1 היקפי"
-
-msgid "3/1+SW 4.1 surround"
-msgstr "3/1+סאב 4.1 היקפי"
-
-msgid "2/2+SW 4.1 quadro"
-msgstr "2/2+סאב 4.1 מרובע"
-
-msgid "3/2+SW 5.1 channels"
-msgstr "3/2+סאב 5.1 ערוצים"
+msgid "7.1 (8 channels)"
+msgstr ""
 
 msgid "Dolby Surround/ProLogic"
 msgstr "Dolby Surround/ProLogic"
@@ -826,6 +739,9 @@ msgstr "PCM 32 סיביות"
 
 msgid "PCM Float"
 msgstr "PCM צף"
+
+msgid "PCM Double"
+msgstr ""
 
 #, c-format
 msgid "%s %s %iHz"
@@ -858,6 +774,165 @@ msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr "האפשרות הזו מסוכנת! הוידאו אולי יצא מהתאום כשהאפשרות הזו מאופשרת.לחץ על 'לא' כדי לאפשר את האפשרות הזו."
+
+#~ msgid "IDC_LBL_DELAY_C"
+#~ msgstr "מרכז"
+
+#~ msgid "IDC_LBL_DELAY_L"
+#~ msgstr "שמאל"
+
+#~ msgid "IDC_LBL_DELAY_R"
+#~ msgstr "ימין"
+
+#~ msgid "IDC_LBL_DELAY_SL"
+#~ msgstr "שמאל אחורי"
+
+#~ msgid "IDC_LBL_DELAY_SR"
+#~ msgstr "ימין אחורי"
+
+#~ msgid "IDC_LBL_DELAY_SW"
+#~ msgstr "סאב"
+
+#~ msgid "IDC_CHK_AC3"
+#~ msgstr "AC3"
+
+#~ msgid "IDC_CHK_DTS"
+#~ msgstr "DTS"
+
+#~ msgid "IDC_CHK_MPA"
+#~ msgstr "MPEG Audio"
+
+#~ msgid "IDC_CHK_PCM"
+#~ msgstr "PCM"
+
+#~ msgid "IDC_CHK_PES"
+#~ msgstr "DVD"
+
+#~ msgid "IDC_CHK_SPDIF"
+#~ msgstr "SPDIF"
+
+#~ msgid "IDC_GRP_GAINS"
+#~ msgstr "עוצמות"
+
+#~ msgid "IDC_LBL_IN_C"
+#~ msgstr "מרכז"
+
+#~ msgid "IDC_LBL_IN_L"
+#~ msgstr "שמאל"
+
+#~ msgid "IDC_LBL_IN_LFE"
+#~ msgstr "באס"
+
+#~ msgid "IDC_LBL_IN_R"
+#~ msgstr "ימין"
+
+#~ msgid "IDC_LBL_IN_SL"
+#~ msgstr "שמאל אחורי"
+
+#~ msgid "IDC_LBL_IN_SR"
+#~ msgstr "ימין אחורי"
+
+#~ msgid "IDC_LBL_MATRIX_IN_C"
+#~ msgstr "מרכז"
+
+#~ msgid "IDC_LBL_MATRIX_IN_L"
+#~ msgstr "שמאל"
+
+#~ msgid "IDC_LBL_MATRIX_IN_LFE"
+#~ msgstr "סאב"
+
+#~ msgid "IDC_LBL_MATRIX_IN_R"
+#~ msgstr "ימין"
+
+#~ msgid "IDC_LBL_MATRIX_IN_SL"
+#~ msgstr "שמאל אחורי"
+
+#~ msgid "IDC_LBL_MATRIX_IN_SR"
+#~ msgstr "ימין אחורי"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_C"
+#~ msgstr "מרכז'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_L"
+#~ msgstr "שמאל'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_R"
+#~ msgstr "ימין'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SL"
+#~ msgstr "שמאל אחורי'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SR"
+#~ msgstr "ימין אחורי'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SW"
+#~ msgstr "סאב"
+
+#~ msgid "IDC_CHK_BASS_REDIR"
+#~ msgstr "הכוונת באס מחודשת"
+
+#~ msgid "IDC_LBL_OUT_C"
+#~ msgstr "מרכז"
+
+#~ msgid "IDC_LBL_OUT_L"
+#~ msgstr "שמאל"
+
+#~ msgid "IDC_LBL_OUT_R"
+#~ msgstr "ימין"
+
+#~ msgid "IDC_LBL_OUT_SL"
+#~ msgstr "שמאל אחורי"
+
+#~ msgid "IDC_LBL_OUT_SR"
+#~ msgstr "ימין אחורי"
+
+#~ msgid "IDC_LBL_OUT_SW"
+#~ msgstr "סאב"
+
+#~ msgid "AS IS (no change)"
+#~ msgstr "כמו שהוא (ללא שינוי)"
+
+#~ msgid "1/0 - mono"
+#~ msgstr "1/0 - מונו"
+
+#~ msgid "2/0 - stereo"
+#~ msgstr "2/0 - סטריאו"
+
+#~ msgid "3/0 - 3 front"
+#~ msgstr "3/0 - 3 קדמיים"
+
+#~ msgid "2/1 - surround"
+#~ msgstr "2/1 - היקפי"
+
+#~ msgid "3/1 - surround"
+#~ msgstr "3/1 - היקפי"
+
+#~ msgid "2/2 - quadro"
+#~ msgstr "2/2 - מרובע"
+
+#~ msgid "3/2 - 5 channels"
+#~ msgstr "3/2 - 5 ערוצים"
+
+#~ msgid "1/0+SW 1.1 mono"
+#~ msgstr "1.0+סאב 1.1 מונו"
+
+#~ msgid "2/0+SW 2.1 stereo"
+#~ msgstr "2/0+סאב 2.1 סטריאו"
+
+#~ msgid "3/0+SW 3.1 front"
+#~ msgstr "3/0+סאב 3.1 קדמיים"
+
+#~ msgid "2/1+SW 3.1 surround"
+#~ msgstr "2/1+סאב 3.1 היקפי"
+
+#~ msgid "3/1+SW 4.1 surround"
+#~ msgstr "3/1+סאב 4.1 היקפי"
+
+#~ msgid "2/2+SW 4.1 quadro"
+#~ msgstr "2/2+סאב 4.1 מרובע"
+
+#~ msgid "3/2+SW 5.1 channels"
+#~ msgstr "3/2+סאב 5.1 ערוצים"
 
 #~ msgid "IDC_LBL_UNITS"
 #~ msgstr "יחידות"

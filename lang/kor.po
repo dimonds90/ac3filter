@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-16 22:11+0400\n"
+"POT-Creation-Date: 2012-02-14 22:09+0400\n"
 "PO-Revision-Date: 2007-11-13 16:37+0900\n"
 "Last-Translator: starcodec <starcodec@gmail.com>\n"
 "Language-Team: starcodec <starcodec@gmail.com>\n"
@@ -41,6 +41,72 @@ msgstr "시스템"
 msgid "IDD_ABOUT"
 msgstr "정보"
 
+msgid "L"
+msgstr ""
+
+msgid "C"
+msgstr ""
+
+msgid "R"
+msgstr ""
+
+msgid "SL"
+msgstr ""
+
+msgid "SR"
+msgstr ""
+
+msgid "LF"
+msgstr ""
+
+msgid "CL"
+msgstr ""
+
+msgid "CR"
+msgstr ""
+
+msgid "BL"
+msgstr ""
+
+msgid "BC"
+msgstr ""
+
+msgid "BR"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Left surround"
+msgstr ""
+
+msgid "Right surround"
+msgstr ""
+
+msgid "Low frequency"
+msgstr ""
+
+msgid "Left of center"
+msgstr ""
+
+msgid "Right of center"
+msgstr ""
+
+msgid "Left back"
+msgstr ""
+
+msgid "Center back"
+msgstr ""
+
+msgid "Right back"
+msgstr ""
+
 msgid "kHz"
 msgstr ""
 
@@ -50,6 +116,12 @@ msgstr ""
 msgid "Hz"
 msgstr ""
 
+msgid "AC3Filter configuration"
+msgstr ""
+
+msgid "Adjust track"
+msgstr ""
+
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
 msgstr ""
@@ -57,6 +129,10 @@ msgstr ""
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
 msgstr "기부하기"
+
+#. TRANSLATORS: Help
+msgid "IDC_BTN_HELP"
+msgstr ""
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
@@ -74,6 +150,18 @@ msgstr ""
 msgid "IDC_LBL_EQ_LEN"
 msgstr ""
 
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_LFE"
+msgstr ""
+
+#. TRANSLATORS: Surround
+msgid "IDC_LBL_SUR"
+msgstr ""
+
+#. TRANSLATORS: Voice
+msgid "IDC_LBL_VOICE"
+msgstr "음성"
+
 #. TRANSLATORS: Save all (multichannel and master equalizers).
 msgid "IDC_RBT_EQ_ALL"
 msgstr ""
@@ -86,7 +174,7 @@ msgstr ""
 msgid "IDC_RBT_EQ_MCH"
 msgstr ""
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr ""
 
@@ -119,6 +207,30 @@ msgstr ""
 #. TRANSLATORS: Attack/release speed (dB/s):
 msgid "IDC_LBL_ATTACK_RELEASE"
 msgstr "수행/해제 속도 (dB/s):"
+
+#. TRANSLATORS: Bass redirection
+msgid "IDC_GRP_BASS"
+msgstr ""
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_BASS_ENABLE"
+msgstr ""
+
+#. TRANSLATORS: Cutoff frequency
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "설정 주파수"
+
+#. TRANSLATORS: Bass destination:
+msgid "IDC_LBL_BASS_ROUTE"
+msgstr ""
+
+#. TRANSLATORS: Front channels
+msgid "IDC_RBT_BASS_FRONT"
+msgstr ""
+
+#. TRANSLATORS: Subwoofer
+msgid "IDC_RBT_BASS_SUB"
+msgstr ""
 
 #. TRANSLATORS: Contact author
 msgid "IDC_GRP_CONTACT"
@@ -167,33 +279,13 @@ msgstr "프레임 / 에러"
 msgid "IDC_GRP_DELAYS"
 msgstr "딜레이"
 
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_DELAYS_RESET"
+msgstr ""
+
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DELAYS"
 msgstr "사용"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_DELAY_C"
-msgstr ""
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_DELAY_L"
-msgstr ""
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_DELAY_R"
-msgstr ""
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_DELAY_SL"
-msgstr ""
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_DELAY_SR"
-msgstr ""
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_DELAY_SW"
-msgstr ""
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
@@ -295,57 +387,17 @@ msgstr ""
 msgid "IDC_GRP_FORMATS"
 msgstr "AC3Filter 사용:"
 
-#. TRANSLATORS: AC3
-msgid "IDC_CHK_AC3"
-msgstr ""
-
-#. TRANSLATORS: DTS
-msgid "IDC_CHK_DTS"
-msgstr ""
-
-#. TRANSLATORS: MPEG Audio
-msgid "IDC_CHK_MPA"
-msgstr "MPEG 오디오"
-
-#. TRANSLATORS: PCM
-msgid "IDC_CHK_PCM"
-msgstr ""
-
-#. TRANSLATORS: DVD
-msgid "IDC_CHK_PES"
-msgstr ""
-
-#. TRANSLATORS: SPDIF
-msgid "IDC_CHK_SPDIF"
-msgstr ""
-
 #. TRANSLATORS: Gain
 msgid "IDC_GRP_GAIN"
-msgstr "증폭"
-
-#. TRANSLATORS: Gains
-msgid "IDC_GRP_GAINS"
 msgstr "증폭"
 
 #. TRANSLATORS: Gain
 msgid "IDC_LBL_GAIN"
 msgstr "증폭"
 
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_LFE"
-msgstr ""
-
 #. TRANSLATORS: Master
 msgid "IDC_LBL_MASTER"
 msgstr "마스터"
-
-#. TRANSLATORS: Surround
-msgid "IDC_LBL_SUR"
-msgstr ""
-
-#. TRANSLATORS: Voice
-msgid "IDC_LBL_VOICE"
-msgstr "음성"
 
 #. TRANSLATORS: Input gains
 msgid "IDC_GRP_INPUT_GAINS"
@@ -354,30 +406,6 @@ msgstr "입력 증폭"
 #. TRANSLATORS: Input levels
 msgid "IDC_GRP_INPUT_LEVELS"
 msgstr "입력 레벨"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_IN_C"
-msgstr ""
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_IN_L"
-msgstr ""
-
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_IN_LFE"
-msgstr ""
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_IN_R"
-msgstr ""
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_IN_SL"
-msgstr ""
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_IN_SR"
-msgstr ""
 
 #. TRANSLATORS: Interface options
 msgid "IDC_GRP_INTERFACE"
@@ -413,54 +441,6 @@ msgstr ""
 msgid "IDC_GRP_MATRIX"
 msgstr "믹싱 매트릭스"
 
-#. TRANSLATORS: C
-msgid "IDC_LBL_MATRIX_IN_C"
-msgstr ""
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_MATRIX_IN_L"
-msgstr ""
-
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_MATRIX_IN_LFE"
-msgstr ""
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_MATRIX_IN_R"
-msgstr ""
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_MATRIX_IN_SL"
-msgstr ""
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_MATRIX_IN_SR"
-msgstr ""
-
-#. TRANSLATORS: C'
-msgid "IDC_LBL_MATRIX_OUT_C"
-msgstr ""
-
-#. TRANSLATORS: L'
-msgid "IDC_LBL_MATRIX_OUT_L"
-msgstr ""
-
-#. TRANSLATORS: R'
-msgid "IDC_LBL_MATRIX_OUT_R"
-msgstr ""
-
-#. TRANSLATORS: SL'
-msgid "IDC_LBL_MATRIX_OUT_SL"
-msgstr ""
-
-#. TRANSLATORS: SR'
-msgid "IDC_LBL_MATRIX_OUT_SR"
-msgstr ""
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_MATRIX_OUT_SW"
-msgstr ""
-
 #. TRANSLATORS: Matrix preset
 msgid "IDC_GRP_MATRIX_PRESET"
 msgstr "매트릭스 프리셋"
@@ -476,6 +456,10 @@ msgstr "저장"
 #. TRANSLATORS: Filter merit
 msgid "IDC_GRP_MERIT"
 msgstr "필터 선호도"
+
+#. TRANSLATORS: Disable AC3Filter
+msgid "IDC_RBT_MERIT_DO_NOT_USE"
+msgstr ""
 
 #. TRANSLATORS: Prefer AC3Filter
 msgid "IDC_RBT_MERIT_PREFERRED"
@@ -497,10 +481,6 @@ msgstr "자동 증폭 조절"
 msgid "IDC_CHK_AUTO_MATRIX"
 msgstr "자동 매트릭스"
 
-#. TRANSLATORS: Bass redirection
-msgid "IDC_CHK_BASS_REDIR"
-msgstr "베이스 리다이렉션"
-
 #. TRANSLATORS: Expand stereo
 msgid "IDC_CHK_EXPAND_STEREO"
 msgstr "스테레오 확장"
@@ -516,10 +496,6 @@ msgstr "매트릭스 정규화"
 #. TRANSLATORS: Voice control
 msgid "IDC_CHK_VOICE_CONTROL"
 msgstr "음성 조절"
-
-#. TRANSLATORS: Cutoff frequency
-msgid "IDC_LBL_BASS_FREQ"
-msgstr "설정 주파수"
 
 #. TRANSLATORS: Output format
 msgid "IDC_GRP_OUTPUT"
@@ -548,30 +524,6 @@ msgstr "출력 증폭"
 #. TRANSLATORS: Output levels
 msgid "IDC_GRP_OUTPUT_LEVELS"
 msgstr "출력 레벨"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_OUT_C"
-msgstr ""
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_OUT_L"
-msgstr ""
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_OUT_R"
-msgstr ""
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_OUT_SL"
-msgstr ""
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_OUT_SR"
-msgstr ""
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_OUT_SW"
-msgstr ""
 
 #. TRANSLATORS: Preset
 msgid "IDC_GRP_PRESET"
@@ -711,25 +663,7 @@ msgstr "피트"
 msgid "Inches"
 msgstr "인치"
 
-msgid "Master"
-msgstr ""
-
-msgid "Left"
-msgstr ""
-
-msgid "Center"
-msgstr ""
-
-msgid "Right"
-msgstr ""
-
-msgid "Surround Left"
-msgstr ""
-
-msgid "Surround Right"
-msgstr ""
-
-msgid "Subwoofer"
+msgid "All channels"
 msgstr ""
 
 #, c-format
@@ -772,53 +706,32 @@ msgstr ""
 msgid "Spectrum: %s"
 msgstr ""
 
-msgid "All channels"
+msgid "Do not change"
 msgstr ""
 
-msgid "AS IS (no change)"
-msgstr "그대로 (변경 없음)"
+msgid "Mono"
+msgstr ""
 
-msgid "1/0 - mono"
-msgstr "1/0 - 모노"
+msgid "Stereo"
+msgstr ""
 
-msgid "2/0 - stereo"
-msgstr "2/0 - 스테레오"
+msgid "Quadro"
+msgstr ""
 
-msgid "3/0 - 3 front"
-msgstr "3/0 - 3 프론트"
+msgid "5 channels"
+msgstr ""
 
-msgid "2/1 - surround"
-msgstr "2/1 - 서라운드"
+msgid "2.1 Stereo"
+msgstr ""
 
-msgid "3/1 - surround"
-msgstr "3/1 - 서라운드"
+msgid "4.1 Quadro"
+msgstr ""
 
-msgid "2/2 - quadro"
-msgstr "2/2 - 쿼드로"
+msgid "5.1 (6 channels)"
+msgstr ""
 
-msgid "3/2 - 5 channels"
-msgstr "3/2 - 5 채널"
-
-msgid "1/0+SW 1.1 mono"
-msgstr "1/0+SW 1.1 모노"
-
-msgid "2/0+SW 2.1 stereo"
-msgstr "2/0+SW 2.1 스테레오"
-
-msgid "3/0+SW 3.1 front"
-msgstr "3/0+SW 3.1 프론트"
-
-msgid "2/1+SW 3.1 surround"
-msgstr "2/1+SW 3.1 서라운드"
-
-msgid "3/1+SW 4.1 surround"
-msgstr "3/1+SW 4.1 서라운드"
-
-msgid "2/2+SW 4.1 quadro"
-msgstr "2/2+SW 4.1 쿼드로"
-
-msgid "3/2+SW 5.1 channels"
-msgstr "3/2+SW 5.1 채널"
+msgid "7.1 (8 channels)"
+msgstr ""
 
 msgid "Dolby Surround/ProLogic"
 msgstr "돌비 Surround/ProLogic"
@@ -836,6 +749,9 @@ msgid "PCM 32bit"
 msgstr ""
 
 msgid "PCM Float"
+msgstr ""
+
+msgid "PCM Double"
 msgstr ""
 
 #, c-format
@@ -871,6 +787,60 @@ msgid ""
 msgstr ""
 "이 옵션은 위험합니다! 이 옵션을 활성화하면 비디오의 동기가 안 맞을 수 있습니"
 "다. 이 옵션을 활성화하려면 '아니오'를 선택하세요."
+
+#~ msgid "IDC_CHK_MPA"
+#~ msgstr "MPEG 오디오"
+
+#~ msgid "IDC_GRP_GAINS"
+#~ msgstr "증폭"
+
+#~ msgid "IDC_CHK_BASS_REDIR"
+#~ msgstr "베이스 리다이렉션"
+
+#~ msgid "AS IS (no change)"
+#~ msgstr "그대로 (변경 없음)"
+
+#~ msgid "1/0 - mono"
+#~ msgstr "1/0 - 모노"
+
+#~ msgid "2/0 - stereo"
+#~ msgstr "2/0 - 스테레오"
+
+#~ msgid "3/0 - 3 front"
+#~ msgstr "3/0 - 3 프론트"
+
+#~ msgid "2/1 - surround"
+#~ msgstr "2/1 - 서라운드"
+
+#~ msgid "3/1 - surround"
+#~ msgstr "3/1 - 서라운드"
+
+#~ msgid "2/2 - quadro"
+#~ msgstr "2/2 - 쿼드로"
+
+#~ msgid "3/2 - 5 channels"
+#~ msgstr "3/2 - 5 채널"
+
+#~ msgid "1/0+SW 1.1 mono"
+#~ msgstr "1/0+SW 1.1 모노"
+
+#~ msgid "2/0+SW 2.1 stereo"
+#~ msgstr "2/0+SW 2.1 스테레오"
+
+#~ msgid "3/0+SW 3.1 front"
+#~ msgstr "3/0+SW 3.1 프론트"
+
+#~ msgid "2/1+SW 3.1 surround"
+#~ msgstr "2/1+SW 3.1 서라운드"
+
+#~ msgid "3/1+SW 4.1 surround"
+#~ msgstr "3/1+SW 4.1 서라운드"
+
+#~ msgid "2/2+SW 4.1 quadro"
+#~ msgstr "2/2+SW 4.1 쿼드로"
+
+#~ msgid "3/2+SW 5.1 channels"
+#~ msgstr "3/2+SW 5.1 채널"
 
 #~ msgid "IDC_LBL_UNITS"
 #~ msgstr "단위:"

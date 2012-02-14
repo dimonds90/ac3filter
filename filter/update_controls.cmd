@@ -108,7 +108,7 @@ foreach my $block ($res =~ /^BEGIN$(.*?)^END$/gsm)
     (($type, $id, $x, $y) = /(EDITTEXT|COMBOBOX)\s+(\w+),\s*(\d+),\s*(\d+)/gs) ||
     print "Strange control $_\n" && next;
 
-    next if ($id eq "IDC_STATIC");
+    next if ($id eq "IDC_STATIC" || !$label);
 
     undef $label if ($type eq "CONTROL" && $label eq "Slider1");   # not a label...
     undef $label if ($type eq "CONTROL" && $label eq "Slider3");   # not a label...

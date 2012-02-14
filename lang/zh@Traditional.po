@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-16 22:11+0400\n"
+"POT-Creation-Date: 2012-02-14 22:09+0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: AlexW <wang867@gmail.com>\n"
 "Language-Team: AlexW <wang867@gmail.com>\n"
@@ -45,6 +45,72 @@ msgstr "系統"
 msgid "IDD_ABOUT"
 msgstr "關於"
 
+msgid "L"
+msgstr ""
+
+msgid "C"
+msgstr ""
+
+msgid "R"
+msgstr ""
+
+msgid "SL"
+msgstr ""
+
+msgid "SR"
+msgstr ""
+
+msgid "LF"
+msgstr ""
+
+msgid "CL"
+msgstr ""
+
+msgid "CR"
+msgstr ""
+
+msgid "BL"
+msgstr ""
+
+msgid "BC"
+msgstr ""
+
+msgid "BR"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Left surround"
+msgstr ""
+
+msgid "Right surround"
+msgstr ""
+
+msgid "Low frequency"
+msgstr ""
+
+msgid "Left of center"
+msgstr ""
+
+msgid "Right of center"
+msgstr ""
+
+msgid "Left back"
+msgstr ""
+
+msgid "Center back"
+msgstr ""
+
+msgid "Right back"
+msgstr ""
+
 msgid "kHz"
 msgstr ""
 
@@ -54,6 +120,12 @@ msgstr ""
 msgid "Hz"
 msgstr ""
 
+msgid "AC3Filter configuration"
+msgstr ""
+
+msgid "Adjust track"
+msgstr ""
+
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
 msgstr ""
@@ -61,6 +133,10 @@ msgstr ""
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
 msgstr "贊助"
+
+#. TRANSLATORS: Help
+msgid "IDC_BTN_HELP"
+msgstr ""
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
@@ -78,6 +154,18 @@ msgstr ""
 msgid "IDC_LBL_EQ_LEN"
 msgstr ""
 
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_LFE"
+msgstr "低頻"
+
+#. TRANSLATORS: Surround
+msgid "IDC_LBL_SUR"
+msgstr "環繞"
+
+#. TRANSLATORS: Voice
+msgid "IDC_LBL_VOICE"
+msgstr "語音"
+
 #. TRANSLATORS: Save all (multichannel and master equalizers).
 msgid "IDC_RBT_EQ_ALL"
 msgstr ""
@@ -90,7 +178,7 @@ msgstr ""
 msgid "IDC_RBT_EQ_MCH"
 msgstr ""
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 by Alexander Vigovsky"
 
@@ -121,6 +209,30 @@ msgstr "自動增益控制(AGC)"
 #. TRANSLATORS: Attack/release speed (dB/s):
 msgid "IDC_LBL_ATTACK_RELEASE"
 msgstr "突發/釋放速度 (dB/秒):"
+
+#. TRANSLATORS: Bass redirection
+msgid "IDC_GRP_BASS"
+msgstr ""
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_BASS_ENABLE"
+msgstr ""
+
+#. TRANSLATORS: Cutoff frequency
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "截斷頻率"
+
+#. TRANSLATORS: Bass destination:
+msgid "IDC_LBL_BASS_ROUTE"
+msgstr ""
+
+#. TRANSLATORS: Front channels
+msgid "IDC_RBT_BASS_FRONT"
+msgstr ""
+
+#. TRANSLATORS: Subwoofer
+msgid "IDC_RBT_BASS_SUB"
+msgstr ""
 
 #. TRANSLATORS: Contact author
 msgid "IDC_GRP_CONTACT"
@@ -169,33 +281,13 @@ msgstr "格 / 錯誤"
 msgid "IDC_GRP_DELAYS"
 msgstr "延遲"
 
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_DELAYS_RESET"
+msgstr ""
+
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DELAYS"
 msgstr "啟用"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_DELAY_C"
-msgstr "中"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_DELAY_L"
-msgstr "左"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_DELAY_R"
-msgstr "右"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_DELAY_SL"
-msgstr "環左"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_DELAY_SR"
-msgstr "環右"
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_DELAY_SW"
-msgstr "重低"
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
@@ -297,57 +389,17 @@ msgstr ""
 msgid "IDC_GRP_FORMATS"
 msgstr "使用 AC3Filter 在:"
 
-#. TRANSLATORS: AC3
-msgid "IDC_CHK_AC3"
-msgstr "AC3"
-
-#. TRANSLATORS: DTS
-msgid "IDC_CHK_DTS"
-msgstr "DTS"
-
-#. TRANSLATORS: MPEG Audio
-msgid "IDC_CHK_MPA"
-msgstr "MPEG 音效"
-
-#. TRANSLATORS: PCM
-msgid "IDC_CHK_PCM"
-msgstr "PCM"
-
-#. TRANSLATORS: DVD
-msgid "IDC_CHK_PES"
-msgstr "DVD"
-
-#. TRANSLATORS: SPDIF
-msgid "IDC_CHK_SPDIF"
-msgstr "SPDIF"
-
 #. TRANSLATORS: Gain
 msgid "IDC_GRP_GAIN"
-msgstr "放大"
-
-#. TRANSLATORS: Gains
-msgid "IDC_GRP_GAINS"
 msgstr "放大"
 
 #. TRANSLATORS: Gain
 msgid "IDC_LBL_GAIN"
 msgstr "放大"
 
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_LFE"
-msgstr "低頻"
-
 #. TRANSLATORS: Master
 msgid "IDC_LBL_MASTER"
 msgstr "主聲道"
-
-#. TRANSLATORS: Surround
-msgid "IDC_LBL_SUR"
-msgstr "環繞"
-
-#. TRANSLATORS: Voice
-msgid "IDC_LBL_VOICE"
-msgstr "語音"
 
 #. TRANSLATORS: Input gains
 msgid "IDC_GRP_INPUT_GAINS"
@@ -356,30 +408,6 @@ msgstr "輸入音量"
 #. TRANSLATORS: Input levels
 msgid "IDC_GRP_INPUT_LEVELS"
 msgstr "輸入音量"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_IN_C"
-msgstr "中"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_IN_L"
-msgstr "左"
-
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_IN_LFE"
-msgstr "低頻"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_IN_R"
-msgstr "右"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_IN_SL"
-msgstr "環左"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_IN_SR"
-msgstr "環右"
 
 #. TRANSLATORS: Interface options
 msgid "IDC_GRP_INTERFACE"
@@ -414,54 +442,6 @@ msgstr ""
 msgid "IDC_GRP_MATRIX"
 msgstr "矩陣混音"
 
-#. TRANSLATORS: C
-msgid "IDC_LBL_MATRIX_IN_C"
-msgstr "中"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_MATRIX_IN_L"
-msgstr "左"
-
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_MATRIX_IN_LFE"
-msgstr "低頻"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_MATRIX_IN_R"
-msgstr "右"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_MATRIX_IN_SL"
-msgstr "環左"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_MATRIX_IN_SR"
-msgstr "環右"
-
-#. TRANSLATORS: C'
-msgid "IDC_LBL_MATRIX_OUT_C"
-msgstr "中'"
-
-#. TRANSLATORS: L'
-msgid "IDC_LBL_MATRIX_OUT_L"
-msgstr "左'"
-
-#. TRANSLATORS: R'
-msgid "IDC_LBL_MATRIX_OUT_R"
-msgstr "右'"
-
-#. TRANSLATORS: SL'
-msgid "IDC_LBL_MATRIX_OUT_SL"
-msgstr "環左'"
-
-#. TRANSLATORS: SR'
-msgid "IDC_LBL_MATRIX_OUT_SR"
-msgstr "環右'"
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_MATRIX_OUT_SW"
-msgstr "重低"
-
 #. TRANSLATORS: Matrix preset
 msgid "IDC_GRP_MATRIX_PRESET"
 msgstr "矩陣方案"
@@ -477,6 +457,10 @@ msgstr "儲存"
 #. TRANSLATORS: Filter merit
 msgid "IDC_GRP_MERIT"
 msgstr "解碼器偏好"
+
+#. TRANSLATORS: Disable AC3Filter
+msgid "IDC_RBT_MERIT_DO_NOT_USE"
+msgstr ""
 
 #. TRANSLATORS: Prefer AC3Filter
 msgid "IDC_RBT_MERIT_PREFERRED"
@@ -498,10 +482,6 @@ msgstr "自動增益控制"
 msgid "IDC_CHK_AUTO_MATRIX"
 msgstr "自動矩陣"
 
-#. TRANSLATORS: Bass redirection
-msgid "IDC_CHK_BASS_REDIR"
-msgstr "低音改向"
-
 #. TRANSLATORS: Expand stereo
 msgid "IDC_CHK_EXPAND_STEREO"
 msgstr "擴展立體聲"
@@ -517,10 +497,6 @@ msgstr "矩陣標準化"
 #. TRANSLATORS: Voice control
 msgid "IDC_CHK_VOICE_CONTROL"
 msgstr "語音控制"
-
-#. TRANSLATORS: Cutoff frequency
-msgid "IDC_LBL_BASS_FREQ"
-msgstr "截斷頻率"
 
 #. TRANSLATORS: Output format
 msgid "IDC_GRP_OUTPUT"
@@ -549,30 +525,6 @@ msgstr "輸出放大"
 #. TRANSLATORS: Output levels
 msgid "IDC_GRP_OUTPUT_LEVELS"
 msgstr "輸出音量"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_OUT_C"
-msgstr "中"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_OUT_L"
-msgstr "左"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_OUT_R"
-msgstr "右"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_OUT_SL"
-msgstr "環左"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_OUT_SR"
-msgstr "環右"
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_OUT_SW"
-msgstr "重低"
 
 #. TRANSLATORS: Preset
 msgid "IDC_GRP_PRESET"
@@ -712,25 +664,7 @@ msgstr "英尺"
 msgid "Inches"
 msgstr "英吋"
 
-msgid "Master"
-msgstr ""
-
-msgid "Left"
-msgstr ""
-
-msgid "Center"
-msgstr ""
-
-msgid "Right"
-msgstr ""
-
-msgid "Surround Left"
-msgstr ""
-
-msgid "Surround Right"
-msgstr ""
-
-msgid "Subwoofer"
+msgid "All channels"
 msgstr ""
 
 #, c-format
@@ -772,53 +706,32 @@ msgstr ""
 msgid "Spectrum: %s"
 msgstr ""
 
-msgid "All channels"
+msgid "Do not change"
 msgstr ""
 
-msgid "AS IS (no change)"
-msgstr "AS IS (不改變)"
+msgid "Mono"
+msgstr ""
 
-msgid "1/0 - mono"
-msgstr "1/0 - 單聲道"
+msgid "Stereo"
+msgstr ""
 
-msgid "2/0 - stereo"
-msgstr "2/0 - 立體聲"
+msgid "Quadro"
+msgstr ""
 
-msgid "3/0 - 3 front"
-msgstr "3/0 - 3 前置"
+msgid "5 channels"
+msgstr ""
 
-msgid "2/1 - surround"
-msgstr "2/1 - 環繞"
+msgid "2.1 Stereo"
+msgstr ""
 
-msgid "3/1 - surround"
-msgstr "3/1 - 環繞"
+msgid "4.1 Quadro"
+msgstr ""
 
-msgid "2/2 - quadro"
-msgstr "2/2 - 矩陣"
+msgid "5.1 (6 channels)"
+msgstr ""
 
-msgid "3/2 - 5 channels"
-msgstr "3/2 - 5 聲道"
-
-msgid "1/0+SW 1.1 mono"
-msgstr "1/0+SW 1.1 單聲道"
-
-msgid "2/0+SW 2.1 stereo"
-msgstr "2/0+SW 2.1 立體聲"
-
-msgid "3/0+SW 3.1 front"
-msgstr "3/0+SW 3.1 前置"
-
-msgid "2/1+SW 3.1 surround"
-msgstr "2/1+SW 3.1 環繞"
-
-msgid "3/1+SW 4.1 surround"
-msgstr "3/1+SW 4.1 環繞"
-
-msgid "2/2+SW 4.1 quadro"
-msgstr "2/2+SW 4.1 矩陣"
-
-msgid "3/2+SW 5.1 channels"
-msgstr "3/2+SW 5.1 聲道"
+msgid "7.1 (8 channels)"
+msgstr ""
 
 msgid "Dolby Surround/ProLogic"
 msgstr "杜比環繞 / 定向邏輯"
@@ -837,6 +750,9 @@ msgstr "PCM 32位元"
 
 msgid "PCM Float"
 msgstr "PCM 浮點"
+
+msgid "PCM Double"
+msgstr ""
 
 #, c-format
 msgid "%s %s %iHz"
@@ -869,6 +785,165 @@ msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
 msgstr "這個選項是危險的! 啟用後可能造成影音不同步.如要啟用請按下\"否\"的按鈕."
+
+#~ msgid "IDC_LBL_DELAY_C"
+#~ msgstr "中"
+
+#~ msgid "IDC_LBL_DELAY_L"
+#~ msgstr "左"
+
+#~ msgid "IDC_LBL_DELAY_R"
+#~ msgstr "右"
+
+#~ msgid "IDC_LBL_DELAY_SL"
+#~ msgstr "環左"
+
+#~ msgid "IDC_LBL_DELAY_SR"
+#~ msgstr "環右"
+
+#~ msgid "IDC_LBL_DELAY_SW"
+#~ msgstr "重低"
+
+#~ msgid "IDC_CHK_AC3"
+#~ msgstr "AC3"
+
+#~ msgid "IDC_CHK_DTS"
+#~ msgstr "DTS"
+
+#~ msgid "IDC_CHK_MPA"
+#~ msgstr "MPEG 音效"
+
+#~ msgid "IDC_CHK_PCM"
+#~ msgstr "PCM"
+
+#~ msgid "IDC_CHK_PES"
+#~ msgstr "DVD"
+
+#~ msgid "IDC_CHK_SPDIF"
+#~ msgstr "SPDIF"
+
+#~ msgid "IDC_GRP_GAINS"
+#~ msgstr "放大"
+
+#~ msgid "IDC_LBL_IN_C"
+#~ msgstr "中"
+
+#~ msgid "IDC_LBL_IN_L"
+#~ msgstr "左"
+
+#~ msgid "IDC_LBL_IN_LFE"
+#~ msgstr "低頻"
+
+#~ msgid "IDC_LBL_IN_R"
+#~ msgstr "右"
+
+#~ msgid "IDC_LBL_IN_SL"
+#~ msgstr "環左"
+
+#~ msgid "IDC_LBL_IN_SR"
+#~ msgstr "環右"
+
+#~ msgid "IDC_LBL_MATRIX_IN_C"
+#~ msgstr "中"
+
+#~ msgid "IDC_LBL_MATRIX_IN_L"
+#~ msgstr "左"
+
+#~ msgid "IDC_LBL_MATRIX_IN_LFE"
+#~ msgstr "低頻"
+
+#~ msgid "IDC_LBL_MATRIX_IN_R"
+#~ msgstr "右"
+
+#~ msgid "IDC_LBL_MATRIX_IN_SL"
+#~ msgstr "環左"
+
+#~ msgid "IDC_LBL_MATRIX_IN_SR"
+#~ msgstr "環右"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_C"
+#~ msgstr "中'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_L"
+#~ msgstr "左'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_R"
+#~ msgstr "右'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SL"
+#~ msgstr "環左'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SR"
+#~ msgstr "環右'"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SW"
+#~ msgstr "重低"
+
+#~ msgid "IDC_CHK_BASS_REDIR"
+#~ msgstr "低音改向"
+
+#~ msgid "IDC_LBL_OUT_C"
+#~ msgstr "中"
+
+#~ msgid "IDC_LBL_OUT_L"
+#~ msgstr "左"
+
+#~ msgid "IDC_LBL_OUT_R"
+#~ msgstr "右"
+
+#~ msgid "IDC_LBL_OUT_SL"
+#~ msgstr "環左"
+
+#~ msgid "IDC_LBL_OUT_SR"
+#~ msgstr "環右"
+
+#~ msgid "IDC_LBL_OUT_SW"
+#~ msgstr "重低"
+
+#~ msgid "AS IS (no change)"
+#~ msgstr "AS IS (不改變)"
+
+#~ msgid "1/0 - mono"
+#~ msgstr "1/0 - 單聲道"
+
+#~ msgid "2/0 - stereo"
+#~ msgstr "2/0 - 立體聲"
+
+#~ msgid "3/0 - 3 front"
+#~ msgstr "3/0 - 3 前置"
+
+#~ msgid "2/1 - surround"
+#~ msgstr "2/1 - 環繞"
+
+#~ msgid "3/1 - surround"
+#~ msgstr "3/1 - 環繞"
+
+#~ msgid "2/2 - quadro"
+#~ msgstr "2/2 - 矩陣"
+
+#~ msgid "3/2 - 5 channels"
+#~ msgstr "3/2 - 5 聲道"
+
+#~ msgid "1/0+SW 1.1 mono"
+#~ msgstr "1/0+SW 1.1 單聲道"
+
+#~ msgid "2/0+SW 2.1 stereo"
+#~ msgstr "2/0+SW 2.1 立體聲"
+
+#~ msgid "3/0+SW 3.1 front"
+#~ msgstr "3/0+SW 3.1 前置"
+
+#~ msgid "2/1+SW 3.1 surround"
+#~ msgstr "2/1+SW 3.1 環繞"
+
+#~ msgid "3/1+SW 4.1 surround"
+#~ msgstr "3/1+SW 4.1 環繞"
+
+#~ msgid "2/2+SW 4.1 quadro"
+#~ msgstr "2/2+SW 4.1 矩陣"
+
+#~ msgid "3/2+SW 5.1 channels"
+#~ msgstr "3/2+SW 5.1 聲道"
 
 #~ msgid "IDC_LBL_UNITS"
 #~ msgstr "單位:"
