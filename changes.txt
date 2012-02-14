@@ -12,6 +12,7 @@ v2.00a - unreleased
     * Portuguese, thanks to Manuela Silva
     * Turkish, thanks to AltanEdip
     * Dutch, thanks to Ernst Klamer
+    * Bulgarian, thanks to Георги Бързев
 
 v1.63b - 11.08.2009
   * AC3 decoding bug fixed (Issue 1)
