@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.62b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-16 22:11+0400\n"
+"POT-Creation-Date: 2012-02-14 22:09+0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Niclas <igelkotten78@hotmail.com>\n"
 "Language-Team: \n"
@@ -40,6 +40,72 @@ msgstr "System"
 msgid "IDD_ABOUT"
 msgstr "Om"
 
+msgid "L"
+msgstr ""
+
+msgid "C"
+msgstr ""
+
+msgid "R"
+msgstr ""
+
+msgid "SL"
+msgstr ""
+
+msgid "SR"
+msgstr ""
+
+msgid "LF"
+msgstr ""
+
+msgid "CL"
+msgstr ""
+
+msgid "CR"
+msgstr ""
+
+msgid "BL"
+msgstr ""
+
+msgid "BC"
+msgstr ""
+
+msgid "BR"
+msgstr ""
+
+msgid "Left"
+msgstr "Vänster"
+
+msgid "Center"
+msgstr "Center"
+
+msgid "Right"
+msgstr "Höger"
+
+msgid "Left surround"
+msgstr ""
+
+msgid "Right surround"
+msgstr ""
+
+msgid "Low frequency"
+msgstr ""
+
+msgid "Left of center"
+msgstr ""
+
+msgid "Right of center"
+msgstr ""
+
+msgid "Left back"
+msgstr ""
+
+msgid "Center back"
+msgstr ""
+
+msgid "Right back"
+msgstr ""
+
 msgid "kHz"
 msgstr "kHz"
 
@@ -49,6 +115,12 @@ msgstr "dB"
 msgid "Hz"
 msgstr "Hz"
 
+msgid "AC3Filter configuration"
+msgstr ""
+
+msgid "Adjust track"
+msgstr ""
+
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
 msgstr "Avbryt"
@@ -56,6 +128,10 @@ msgstr "Avbryt"
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
 msgstr "Donera"
+
+#. TRANSLATORS: Help
+msgid "IDC_BTN_HELP"
+msgstr ""
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
@@ -73,19 +149,35 @@ msgstr "Förstärkning"
 msgid "IDC_LBL_EQ_LEN"
 msgstr "Filterlängd:"
 
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_LFE"
+msgstr "Bas"
+
+#. TRANSLATORS: Surround
+msgid "IDC_LBL_SUR"
+msgstr "Bakre"
+
+#. TRANSLATORS: Voice
+msgid "IDC_LBL_VOICE"
+msgstr "Röst"
+
 #. TRANSLATORS: Save all (multichannel and master equalizers).
 msgid "IDC_RBT_EQ_ALL"
 msgstr "Spara allt (flerkanalsinställningar och generell equalizer)."
 
 #. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
 msgid "IDC_RBT_EQ_CUR"
-msgstr "Spara endast den aktuella kanalen, så att förinställningen kan användas till valfri kanal."
+msgstr ""
+"Spara endast den aktuella kanalen, så att förinställningen kan användas till "
+"valfri kanal."
 
 #. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
 msgid "IDC_RBT_EQ_MCH"
-msgstr "Spara alla kanaler (förutom generell), så att du kan återställa flerkanalsinställningar senare."
+msgstr ""
+"Spara alla kanaler (förutom generell), så att du kan återställa "
+"flerkanalsinställningar senare."
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter 1.62b Copyright (c) 2002-2009 av Alexander Vigovsky"
 
@@ -99,11 +191,16 @@ msgstr "Vad är detta?"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filter är ett gratis DirectShow-filter av hög kvalité som används för att avkoda och bearbeta ljud i realtid. Filtret prioriterar bred funktionalitet och bekväma inställningar. Stödjer flerkanalig och digital utdata (SPDIF)."
+msgstr ""
+"AC3Filter är ett gratis DirectShow-filter av hög kvalité som används för att "
+"avkoda och bearbeta ljud i realtid. Filtret prioriterar bred funktionalitet "
+"och bekväma inställningar. Stödjer flerkanalig och digital utdata (SPDIF)."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr "Filtret används automatiskt av de flesta mediaspelarna. Krävs för att spela upp AC3 och DTS i AVI-filer. Kan även användas för uppspelning av DVD."
+msgstr ""
+"Filtret används automatiskt av de flesta mediaspelarna. Krävs för att spela "
+"upp AC3 och DTS i AVI-filer. Kan även användas för uppspelning av DVD."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -113,13 +210,40 @@ msgstr "Automatisk nivåkontroll"
 msgid "IDC_LBL_ATTACK_RELEASE"
 msgstr "Attack/release (dB/s)"
 
+#. TRANSLATORS: Bass redirection
+msgid "IDC_GRP_BASS"
+msgstr ""
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_BASS_ENABLE"
+msgstr ""
+
+#. TRANSLATORS: Cutoff frequency
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "Brytningsfrekvens"
+
+#. TRANSLATORS: Bass destination:
+msgid "IDC_LBL_BASS_ROUTE"
+msgstr ""
+
+#. TRANSLATORS: Front channels
+msgid "IDC_RBT_BASS_FRONT"
+msgstr ""
+
+#. TRANSLATORS: Subwoofer
+msgid "IDC_RBT_BASS_SUB"
+msgstr ""
+
 #. TRANSLATORS: Contact author
 msgid "IDC_GRP_CONTACT"
 msgstr "Kontakta upphovsman"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
-msgstr "Rapportera gärna alla buggar. Skicka e-post till upphovsmannen med idéer, kritik m.m. Skriv på engelska eller ryska. Ange \"AC3Filter\" i ämnesraden (automatisk filtrering)."
+msgstr ""
+"Rapportera gärna alla buggar. Skicka e-post till upphovsmannen med idéer, "
+"kritik m.m. Skriv på engelska eller ryska. Ange \"AC3Filter\" i ämnesraden "
+"(automatisk filtrering)."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
@@ -157,33 +281,13 @@ msgstr "Ljudramar / Fel:"
 msgid "IDC_GRP_DELAYS"
 msgstr "Fördröjningar"
 
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_DELAYS_RESET"
+msgstr ""
+
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DELAYS"
 msgstr "Aktivera"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_DELAY_C"
-msgstr "Center"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_DELAY_L"
-msgstr "V"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_DELAY_R"
-msgstr "H"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_DELAY_SL"
-msgstr "V Bak"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_DELAY_SR"
-msgstr "H Bak"
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_DELAY_SW"
-msgstr "Bas"
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
@@ -285,57 +389,17 @@ msgstr "Spara"
 msgid "IDC_GRP_FORMATS"
 msgstr "Använd AC3Filter:"
 
-#. TRANSLATORS: AC3
-msgid "IDC_CHK_AC3"
-msgstr "AC3"
-
-#. TRANSLATORS: DTS
-msgid "IDC_CHK_DTS"
-msgstr "DTS"
-
-#. TRANSLATORS: MPEG Audio
-msgid "IDC_CHK_MPA"
-msgstr "MPEG-ljud"
-
-#. TRANSLATORS: PCM
-msgid "IDC_CHK_PCM"
-msgstr "PCM"
-
-#. TRANSLATORS: DVD
-msgid "IDC_CHK_PES"
-msgstr "DVD"
-
-#. TRANSLATORS: SPDIF
-msgid "IDC_CHK_SPDIF"
-msgstr "SPDIF"
-
 #. TRANSLATORS: Gain
 msgid "IDC_GRP_GAIN"
 msgstr "Förstärkning"
-
-#. TRANSLATORS: Gains
-msgid "IDC_GRP_GAINS"
-msgstr "Förstärkningar"
 
 #. TRANSLATORS: Gain
 msgid "IDC_LBL_GAIN"
 msgstr "Förstä."
 
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_LFE"
-msgstr "Bas"
-
 #. TRANSLATORS: Master
 msgid "IDC_LBL_MASTER"
 msgstr "Generell"
-
-#. TRANSLATORS: Surround
-msgid "IDC_LBL_SUR"
-msgstr "Bakre"
-
-#. TRANSLATORS: Voice
-msgid "IDC_LBL_VOICE"
-msgstr "Röst"
 
 #. TRANSLATORS: Input gains
 msgid "IDC_GRP_INPUT_GAINS"
@@ -344,30 +408,6 @@ msgstr "Indata: förstärkning"
 #. TRANSLATORS: Input levels
 msgid "IDC_GRP_INPUT_LEVELS"
 msgstr "Indata: nivåer"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_IN_C"
-msgstr "C"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_IN_L"
-msgstr "V"
-
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_IN_LFE"
-msgstr "Bas"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_IN_R"
-msgstr "H"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_IN_SL"
-msgstr "VB"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_IN_SR"
-msgstr "HB"
 
 #. TRANSLATORS: Interface options
 msgid "IDC_GRP_INTERFACE"
@@ -395,59 +435,13 @@ msgstr "Licens"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
-msgstr "Programmet är fritt och distribueras under villkoren i GNU General Public License v2."
+msgstr ""
+"Programmet är fritt och distribueras under villkoren i GNU General Public "
+"License v2."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
 msgstr "Mixermatris"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_MATRIX_IN_C"
-msgstr "C"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_MATRIX_IN_L"
-msgstr "V"
-
-#. TRANSLATORS: LFE
-msgid "IDC_LBL_MATRIX_IN_LFE"
-msgstr "Bas"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_MATRIX_IN_R"
-msgstr "H"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_MATRIX_IN_SL"
-msgstr "VB"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_MATRIX_IN_SR"
-msgstr "HB"
-
-#. TRANSLATORS: C'
-msgid "IDC_LBL_MATRIX_OUT_C"
-msgstr "C"
-
-#. TRANSLATORS: L'
-msgid "IDC_LBL_MATRIX_OUT_L"
-msgstr "V"
-
-#. TRANSLATORS: R'
-msgid "IDC_LBL_MATRIX_OUT_R"
-msgstr "H"
-
-#. TRANSLATORS: SL'
-msgid "IDC_LBL_MATRIX_OUT_SL"
-msgstr "VB"
-
-#. TRANSLATORS: SR'
-msgid "IDC_LBL_MATRIX_OUT_SR"
-msgstr "HB"
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_MATRIX_OUT_SW"
-msgstr "Bas"
 
 #. TRANSLATORS: Matrix preset
 msgid "IDC_GRP_MATRIX_PRESET"
@@ -464,6 +458,10 @@ msgstr "Spara"
 #. TRANSLATORS: Filter merit
 msgid "IDC_GRP_MERIT"
 msgstr "Filterprioritet"
+
+#. TRANSLATORS: Disable AC3Filter
+msgid "IDC_RBT_MERIT_DO_NOT_USE"
+msgstr ""
 
 #. TRANSLATORS: Prefer AC3Filter
 msgid "IDC_RBT_MERIT_PREFERRED"
@@ -485,10 +483,6 @@ msgstr "Automatisk förstärkning"
 msgid "IDC_CHK_AUTO_MATRIX"
 msgstr "Automatisk matris"
 
-#. TRANSLATORS: Bass redirection
-msgid "IDC_CHK_BASS_REDIR"
-msgstr "Omdirigera bas"
-
 #. TRANSLATORS: Expand stereo
 msgid "IDC_CHK_EXPAND_STEREO"
 msgstr "Stereobreddning"
@@ -504,10 +498,6 @@ msgstr "Normalisera"
 #. TRANSLATORS: Voice control
 msgid "IDC_CHK_VOICE_CONTROL"
 msgstr "Röstkontroll"
-
-#. TRANSLATORS: Cutoff frequency
-msgid "IDC_LBL_BASS_FREQ"
-msgstr "Brytningsfrekvens"
 
 #. TRANSLATORS: Output format
 msgid "IDC_GRP_OUTPUT"
@@ -536,30 +526,6 @@ msgstr "Utdata: förstärkning"
 #. TRANSLATORS: Output levels
 msgid "IDC_GRP_OUTPUT_LEVELS"
 msgstr "Utdata: nivåer"
-
-#. TRANSLATORS: C
-msgid "IDC_LBL_OUT_C"
-msgstr "C"
-
-#. TRANSLATORS: L
-msgid "IDC_LBL_OUT_L"
-msgstr "V"
-
-#. TRANSLATORS: R
-msgid "IDC_LBL_OUT_R"
-msgstr "H"
-
-#. TRANSLATORS: SL
-msgid "IDC_LBL_OUT_SL"
-msgstr "VB"
-
-#. TRANSLATORS: SR
-msgid "IDC_LBL_OUT_SR"
-msgstr "HB"
-
-#. TRANSLATORS: Sub
-msgid "IDC_LBL_OUT_SW"
-msgstr "Bas"
 
 #. TRANSLATORS: Preset
 msgid "IDC_GRP_PRESET"
@@ -699,26 +665,8 @@ msgstr "Fot"
 msgid "Inches"
 msgstr "Tum"
 
-msgid "Master"
-msgstr "Generell"
-
-msgid "Left"
-msgstr "Vänster"
-
-msgid "Center"
-msgstr "Center"
-
-msgid "Right"
-msgstr "Höger"
-
-msgid "Surround Left"
-msgstr "Vänster Bak"
-
-msgid "Surround Right"
-msgstr "Höger Bak"
-
-msgid "Subwoofer"
-msgstr "Subwoofer"
+msgid "All channels"
+msgstr "Alla kanaler"
 
 #, c-format
 msgid "%ikHz"
@@ -743,8 +691,12 @@ msgstr "Är du säker på att du vill ta bort matrisen \"%s\"?"
 msgid "Are you sure you want to delete '%s' equalizer preset?"
 msgstr "Är du säker på att du vill ta bort förinställningen \"%s\"?"
 
-msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
-msgstr "Denna inställning är FARLIG! Filtret kan skapa höga oljud. Klicka på \"Nej\" för att aktivera inställningen."
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Denna inställning är FARLIG! Filtret kan skapa höga oljud. Klicka på \"Nej\" "
+"för att aktivera inställningen."
 
 msgid "Dangerous option!"
 msgstr "Farlig inställning!"
@@ -756,53 +708,32 @@ msgstr "Graf: ingen data"
 msgid "Spectrum: %s"
 msgstr "Graf: %s"
 
-msgid "All channels"
-msgstr "Alla kanaler"
+msgid "Do not change"
+msgstr ""
 
-msgid "AS IS (no change)"
-msgstr "Indata (oförändrad)"
+msgid "Mono"
+msgstr ""
 
-msgid "1/0 - mono"
-msgstr "1.0: Mono"
+msgid "Stereo"
+msgstr ""
 
-msgid "2/0 - stereo"
-msgstr "2.0: Stereo"
+msgid "Quadro"
+msgstr ""
 
-msgid "3/0 - 3 front"
-msgstr "3.0: 2 Front+Center"
+msgid "5 channels"
+msgstr ""
 
-msgid "2/1 - surround"
-msgstr "3.0: 2 Front+1 Bak"
+msgid "2.1 Stereo"
+msgstr ""
 
-msgid "3/1 - surround"
-msgstr "4.0: 2 Front+Center+1 Bak"
+msgid "4.1 Quadro"
+msgstr ""
 
-msgid "2/2 - quadro"
-msgstr "4.0: 2 Front+2 Bak"
+msgid "5.1 (6 channels)"
+msgstr ""
 
-msgid "3/2 - 5 channels"
-msgstr "5.0: 2 Front+Center+2 Bak"
-
-msgid "1/0+SW 1.1 mono"
-msgstr "1.1: Mono"
-
-msgid "2/0+SW 2.1 stereo"
-msgstr "2.1: Stereo"
-
-msgid "3/0+SW 3.1 front"
-msgstr "3.1: 2 Front+Center"
-
-msgid "2/1+SW 3.1 surround"
-msgstr "3.1: 2 Front+1 Bak"
-
-msgid "3/1+SW 4.1 surround"
-msgstr "4.1: 2 Front+Center+1 Bak"
-
-msgid "2/2+SW 4.1 quadro"
-msgstr "4.1: 2 Front+2 Bak"
-
-msgid "3/2+SW 5.1 channels"
-msgstr "5.1: 2 Front+Center+2 Bak"
+msgid "7.1 (8 channels)"
+msgstr ""
 
 msgid "Dolby Surround/ProLogic"
 msgstr "Dolby Surround/ProLogic"
@@ -821,6 +752,9 @@ msgstr "PCM (32 bitar)"
 
 msgid "PCM Float"
 msgstr "PCM (flyttal)"
+
+msgid "PCM Double"
+msgstr ""
 
 #, c-format
 msgid "%s %s %iHz"
@@ -849,6 +783,180 @@ msgstr ""
 "Indata\tSnitt: %ims\t  Std.avvikelse: %ims\n"
 "Utdata\tSnitt: %ims\t  Std.avvikelse: %ims"
 
-msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
-msgstr "Denna inställning är FARLIG! Videon kan bli osynkad. Klicka på \"Nej\" för att aktivera inställningen."
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+"Denna inställning är FARLIG! Videon kan bli osynkad. Klicka på \"Nej\" för "
+"att aktivera inställningen."
 
+#~ msgid "IDC_LBL_DELAY_C"
+#~ msgstr "Center"
+
+#~ msgid "IDC_LBL_DELAY_L"
+#~ msgstr "V"
+
+#~ msgid "IDC_LBL_DELAY_R"
+#~ msgstr "H"
+
+#~ msgid "IDC_LBL_DELAY_SL"
+#~ msgstr "V Bak"
+
+#~ msgid "IDC_LBL_DELAY_SR"
+#~ msgstr "H Bak"
+
+#~ msgid "IDC_LBL_DELAY_SW"
+#~ msgstr "Bas"
+
+#~ msgid "IDC_CHK_AC3"
+#~ msgstr "AC3"
+
+#~ msgid "IDC_CHK_DTS"
+#~ msgstr "DTS"
+
+#~ msgid "IDC_CHK_MPA"
+#~ msgstr "MPEG-ljud"
+
+#~ msgid "IDC_CHK_PCM"
+#~ msgstr "PCM"
+
+#~ msgid "IDC_CHK_PES"
+#~ msgstr "DVD"
+
+#~ msgid "IDC_CHK_SPDIF"
+#~ msgstr "SPDIF"
+
+#~ msgid "IDC_GRP_GAINS"
+#~ msgstr "Förstärkningar"
+
+#~ msgid "IDC_LBL_IN_C"
+#~ msgstr "C"
+
+#~ msgid "IDC_LBL_IN_L"
+#~ msgstr "V"
+
+#~ msgid "IDC_LBL_IN_LFE"
+#~ msgstr "Bas"
+
+#~ msgid "IDC_LBL_IN_R"
+#~ msgstr "H"
+
+#~ msgid "IDC_LBL_IN_SL"
+#~ msgstr "VB"
+
+#~ msgid "IDC_LBL_IN_SR"
+#~ msgstr "HB"
+
+#~ msgid "IDC_LBL_MATRIX_IN_C"
+#~ msgstr "C"
+
+#~ msgid "IDC_LBL_MATRIX_IN_L"
+#~ msgstr "V"
+
+#~ msgid "IDC_LBL_MATRIX_IN_LFE"
+#~ msgstr "Bas"
+
+#~ msgid "IDC_LBL_MATRIX_IN_R"
+#~ msgstr "H"
+
+#~ msgid "IDC_LBL_MATRIX_IN_SL"
+#~ msgstr "VB"
+
+#~ msgid "IDC_LBL_MATRIX_IN_SR"
+#~ msgstr "HB"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_C"
+#~ msgstr "C"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_L"
+#~ msgstr "V"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_R"
+#~ msgstr "H"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SL"
+#~ msgstr "VB"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SR"
+#~ msgstr "HB"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SW"
+#~ msgstr "Bas"
+
+#~ msgid "IDC_CHK_BASS_REDIR"
+#~ msgstr "Omdirigera bas"
+
+#~ msgid "IDC_LBL_OUT_C"
+#~ msgstr "C"
+
+#~ msgid "IDC_LBL_OUT_L"
+#~ msgstr "V"
+
+#~ msgid "IDC_LBL_OUT_R"
+#~ msgstr "H"
+
+#~ msgid "IDC_LBL_OUT_SL"
+#~ msgstr "VB"
+
+#~ msgid "IDC_LBL_OUT_SR"
+#~ msgstr "HB"
+
+#~ msgid "IDC_LBL_OUT_SW"
+#~ msgstr "Bas"
+
+#~ msgid "Master"
+#~ msgstr "Generell"
+
+#~ msgid "Surround Left"
+#~ msgstr "Vänster Bak"
+
+#~ msgid "Surround Right"
+#~ msgstr "Höger Bak"
+
+#~ msgid "Subwoofer"
+#~ msgstr "Subwoofer"
+
+#~ msgid "AS IS (no change)"
+#~ msgstr "Indata (oförändrad)"
+
+#~ msgid "1/0 - mono"
+#~ msgstr "1.0: Mono"
+
+#~ msgid "2/0 - stereo"
+#~ msgstr "2.0: Stereo"
+
+#~ msgid "3/0 - 3 front"
+#~ msgstr "3.0: 2 Front+Center"
+
+#~ msgid "2/1 - surround"
+#~ msgstr "3.0: 2 Front+1 Bak"
+
+#~ msgid "3/1 - surround"
+#~ msgstr "4.0: 2 Front+Center+1 Bak"
+
+#~ msgid "2/2 - quadro"
+#~ msgstr "4.0: 2 Front+2 Bak"
+
+#~ msgid "3/2 - 5 channels"
+#~ msgstr "5.0: 2 Front+Center+2 Bak"
+
+#~ msgid "1/0+SW 1.1 mono"
+#~ msgstr "1.1: Mono"
+
+#~ msgid "2/0+SW 2.1 stereo"
+#~ msgstr "2.1: Stereo"
+
+#~ msgid "3/0+SW 3.1 front"
+#~ msgstr "3.1: 2 Front+Center"
+
+#~ msgid "2/1+SW 3.1 surround"
+#~ msgstr "3.1: 2 Front+1 Bak"
+
+#~ msgid "3/1+SW 4.1 surround"
+#~ msgstr "4.1: 2 Front+Center+1 Bak"
+
+#~ msgid "2/2+SW 4.1 quadro"
+#~ msgstr "4.1: 2 Front+2 Bak"
+
+#~ msgid "3/2+SW 5.1 channels"
+#~ msgstr "5.1: 2 Front+Center+2 Bak"
