@@ -97,7 +97,7 @@ void ControlDelay::update()
   EnableWindow(GetDlgItem(hdlg, IDC_CMB_DELAY_UNITS), delay);
 };
 
-ControlDelay::cmd_result ControlDelay::command(int control, int message, LPARAM data)
+ControlDelay::cmd_result ControlDelay::command(int control, int message)
 {
   switch (control)
   {

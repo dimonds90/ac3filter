@@ -151,7 +151,7 @@ void ControlEq::update()
   }
 };
 
-ControlEq::cmd_result ControlEq::command(int control, int message, LPARAM data)
+ControlEq::cmd_result ControlEq::command(int control, int message)
 {
   size_t band;
 

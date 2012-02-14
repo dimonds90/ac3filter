@@ -125,7 +125,7 @@ private:
   /////////////////////////////////////////////////////////////////////////////
   // Handle control notifications
 
-  bool command(int control, int message, LPARAM data);
+  void command(int control, int message);
 };
 
 #endif

@@ -368,22 +368,13 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
   switch (uMsg)
   {
     case WM_COMMAND:
-      if (command(LOWORD(wParam), HIWORD(wParam), lParam))
-        // If an application processes this message, it should return zero.
-        return 0;
-      break;
+      command(LOWORD(wParam), HIWORD(wParam));
+      return 1;
 
     case WM_HSCROLL:
     case WM_VSCROLL:
-      if (command(GetDlgCtrlID((HWND)lParam), LOWORD(wParam), lParam))
-        // If an application processes this message, it should return zero. 
-        return 0;
-      break;
-
-    case WM_NOTIFY:
-      if (lParam && command(((LPNMHDR)lParam)->idFrom, ((LPNMHDR)lParam)->code, lParam))
-        return 0;
-      break;
+      command(GetDlgCtrlID((HWND)lParam), LOWORD(wParam));
+      return 1;
 
     case WM_TIMER:
       /////////////////////////////////////////////////////
@@ -578,18 +569,18 @@ AC3FilterDlg::update_static_controls()
 // Commands
 ///////////////////////////////////////////////////////////////////////////////
 
-bool 
-AC3FilterDlg::command(int control, int message, LPARAM data)
+void 
+AC3FilterDlg::command(int control, int message)
 {
   /////////////////////////////////////
   // Dispatch message to controllers
 
   if (ctrl && ctrl->own_control(control))
   {
-    Controller::cmd_result result = ctrl->command(control, message, data);
+    Controller::cmd_result result = ctrl->command(control, message);
     if (result == Controller::cmd_init) { init(); update(); }
     if (result == Controller::cmd_update) update();
-    return result != Controller::cmd_not_processed;
+    return;
   }
 
   switch (control)
@@ -643,5 +634,4 @@ AC3FilterDlg::command(int control, int message, LPARAM data)
         ShellExecute(0, 0, help_link, 0, 0, SW_SHOWMAXIMIZED);
       break;
   }
-  return false;
 }

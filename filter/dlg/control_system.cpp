@@ -189,7 +189,7 @@ void ControlSystem::init()
   GetClientRect(formats_hwnd, &rect);
 
   LVCOLUMN col;
-  col.mask = LVCF_FMT | LVCF_TEXT | LVCF_WIDTH | LVCF_SUBITEM;
+  col.mask = LVCF_FMT | LVCF_TEXT | LVCF_WIDTH| LVCF_SUBITEM;
   col.iSubItem = 0;
   col.pszText = "Format";
   col.cx = rect.right - rect.top;
@@ -254,7 +254,7 @@ void ControlSystem::update()
   }
 };
 
-ControlSystem::cmd_result ControlSystem::command(int control, int message, LPARAM data)
+ControlSystem::cmd_result ControlSystem::command(int control, int message)
 {
   switch (control)
   {
@@ -262,36 +262,24 @@ ControlSystem::cmd_result ControlSystem::command(int control, int message, LPARA
     // Formats
 
     case IDC_LST_FORMATS:
-      if (message == LVN_ITEMCHANGED)
+    {
+      formats = 0;
+
+      LVITEM item;
+      HWND formats_hwnd = GetDlgItem(hdlg, IDC_LST_FORMATS);
+      int count = ListView_GetItemCount(formats_hwnd);
+      for (int i = 0; i < count; i++)
       {
-        LPNMLISTVIEW nmlistview = (LPNMLISTVIEW)data;
-        if ((nmlistview->uChanged & LVIF_STATE) == 0 || // State did not change
-            (nmlistview->uOldState & LVIS_STATEIMAGEMASK) == 0 || // Item initialize
-            (nmlistview->uOldState & LVIS_STATEIMAGEMASK) == (nmlistview->uNewState & LVIS_STATEIMAGEMASK)) // Check state did not change
-          return cmd_not_processed;
-
-        LVITEM item;
-        HWND formats_hwnd = GetDlgItem(hdlg, IDC_LST_FORMATS);
-        item.iItem = nmlistview->iItem;
+        item.iItem = i;
         item.iSubItem = 0;
-        if (!ListView_GetItem(formats_hwnd, &item))
-          return cmd_not_processed;
-
-        int mask = item.lParam;
-        bool checked = ListView_GetCheckState(formats_hwnd, nmlistview->iItem) == TRUE;
-        if (checked && (formats & mask) != mask)
-        {
-          formats |= mask;
-          dec->set_formats(formats);
-        }
-        if (!checked && (formats & mask) != 0)
-        {
-          formats &= ~mask;
-          dec->set_formats(formats);
-        }
-        return cmd_ok;
+        if (ListView_GetItem(formats_hwnd, &item))
+          formats |= item.lParam;
       }
-      return cmd_not_processed;
+
+      dec->set_formats(formats);
+      update();
+      return cmd_ok;
+    }
 
     /////////////////////////////////////
     // Query sink

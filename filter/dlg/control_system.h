@@ -29,7 +29,7 @@ public:
 
   virtual void init();
   virtual void update();
-  virtual cmd_result command(int control, int message, LPARAM data);
+  virtual cmd_result command(int control, int message);
 };
 
 #endif
