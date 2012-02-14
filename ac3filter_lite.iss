@@ -17,6 +17,7 @@ LanguageDetectionMethod=locale
 MinVersion=0, 4.0
 
 [Languages]
+Name: bul; MessagesFile: "compiler:Default.isl,lang\isl\Bulgarian-5.1.11.isl"
 Name: eng; MessagesFile: "compiler:Default.isl"
 Name: cze; MessagesFile: "compiler:Languages\Czech.isl"
 Name: dan; MessagesFile: "compiler:Languages\Danish.isl"
@@ -33,11 +34,13 @@ Name: jpn; MessagesFile: "compiler:Default.isl,lang\isl\Japanese-5-5.1.11.isl"
 Name: kor; MessagesFile: "compiler:Default.isl,lang\isl\Korean-5-5.1.11.isl"
 Name: pol; MessagesFile: "compiler:Languages\Polish.isl"
 Name: pt_BR; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
+Name: pt_PT; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: rus; MessagesFile: "compiler:Languages\Russian.isl"
 Name: slo; MessagesFile: "compiler:Languages\Slovak.isl"
 Name: slv; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: spa; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: swe; MessagesFile: "compiler:Default.isl,lang\isl\Swedish-10-5.1.12.isl"
+Name: tur; MessagesFile: "compiler:Default.isl,lang\isl\Turkish-3-5.1.11.isl"
 Name: "zh_at_Simplified";  MessagesFile: "compiler:Default.isl,lang\isl\ChineseSimp-12-5.1.11.isl"
 Name: "zh_at_Traditional"; MessagesFile: "compiler:Default.isl,lang\isl\ChineseTrad-2-5.1.11.isl"
 
