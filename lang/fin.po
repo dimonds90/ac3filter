@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.46\n"
+"Project-Id-Version: AC3Filter 1.63b\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-16 22:11+0400\n"
-"PO-Revision-Date: 2008-02-14 15:15+0200\n"
-"Last-Translator: Jesse <jesse.jaara@gmail.com>\n"
+"PO-Revision-Date: 2009-11-08 20:59+0200\n"
+"Last-Translator: Freeze <vjuusola@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -18,19 +18,19 @@ msgstr "Pää"
 
 #. TRANSLATORS: Mixer
 msgid "IDD_MIXER"
-msgstr "Mixeri"
+msgstr "Mikseri"
 
 #. TRANSLATORS: Gains
 msgid "IDD_GAINS"
-msgstr "Saanti"
+msgstr "Vahvistus"
 
 #. TRANSLATORS: Equalizer
 msgid "IDD_EQ"
-msgstr ""
+msgstr "Taajuuskorjain"
 
 #. TRANSLATORS: SPDIF
 msgid "IDD_SPDIF"
-msgstr ""
+msgstr "SPDIF"
 
 #. TRANSLATORS: System
 msgid "IDD_SYSTEM"
@@ -41,17 +41,17 @@ msgid "IDD_ABOUT"
 msgstr "Tietoja"
 
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 msgid "dB"
-msgstr ""
+msgstr "dB"
 
 msgid "Hz"
-msgstr ""
+msgstr "Hz"
 
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
-msgstr ""
+msgstr "Peruuta"
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -59,182 +59,171 @@ msgstr "Lahjoita"
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
-msgstr ""
+msgstr "Logaritminen skaalaus"
 
 #. TRANSLATORS: Frequency (Hz)
 msgid "IDC_LBL_EQ_FREQ"
-msgstr ""
+msgstr "Taajuus (Hz)"
 
 #. TRANSLATORS: Gain (dB)
 msgid "IDC_LBL_EQ_GAIN"
-msgstr ""
+msgstr "Vahvistus (dB)"
 
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
-msgstr ""
+msgstr "Filtterin pituus:"
 
 #. TRANSLATORS: Save all (multichannel and master equalizers).
 msgid "IDC_RBT_EQ_ALL"
-msgstr ""
+msgstr "Tallenna kaikki (moniääni ja päätaajuuskorjain)."
 
 #. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
 msgid "IDC_RBT_EQ_CUR"
-msgstr ""
+msgstr "Tallenna vain nykyinen kanava myöhempää käyttöä varten."
 
 #. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
 msgid "IDC_RBT_EQ_MCH"
-msgstr ""
+msgstr "tallenna kaikki paitsi pääkanava myöhempää palautusta varten."
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
 msgid "IDC_VER"
-msgstr "AC3Filter versio %s Copyright (c) 2002-2007 by Alexander Vigovsky"
+msgstr "AC3Filter versio %s Copyright (c) 2002-2009 Alexander Vigovsky"
 
 #. TRANSLATORS: OK
 msgid "IDOK"
-msgstr ""
+msgstr "OK"
 
 #. TRANSLATORS: What is it?
 msgid "IDC_GRP_ABOUT"
-msgstr "Mikä tämä on?"
+msgstr " Mikä tämä on? "
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr ""
-"AC3Filter on korkea laatuinen, ilmainen DirectShow filteri tehty "
-"realiaikaiseen audion koodaamiseen ja prosessointiin. Asetus vaihtoehtoja on "
-"paljon. Tukee monikanavaisia ääniä ja digitaalisia (SPDIF) ulostuloja."
+msgstr "AC3Filter on korkealaatuinen, reaaliaikaiseen äänen koodaamiseen ja prosessointiin tarkoitettu filtteri jossa on lukuisia asetuksia ja tuki moniäänikanaville sekä SPDIF-ulostuloille."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr ""
-"Monet multimedia soittimet käyttävät sitä automaattisesti. Tarvitaan AC3 ja "
-"DTS ääni raitoja sisältävien video tiedostojen toistoon. Voidaan myös "
-"käyttää DVD:n toistoon."
+msgstr "Useimmat mediasoittimet käyttävät sitä automaattisesti. Tarvitaan AC3- ja DTS-ääniraitoja sisältävien videotiedostojen toistoon. Voidaan myös käyttää DVD:n toistoon."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
-msgstr "AGC"
+msgstr " AGC "
 
 #. TRANSLATORS: Attack/release speed (dB/s):
 msgid "IDC_LBL_ATTACK_RELEASE"
-msgstr ""
+msgstr "Aloitus / vapautus -nopeus (dB/s):"
 
 #. TRANSLATORS: Contact author
 msgid "IDC_GRP_CONTACT"
-msgstr "Ota yhteyttä."
+msgstr " Ota yhteyttä "
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
-msgstr ""
-"Reportoi kaikista bugeista (virheistä ohjelmassa). Voit lähettää vapaasti "
-"ideoita, kritiikkiä ja muuta valmistajan S-posti osoitteeseen. Ole hyvä ja "
-"kirjoita vain englanniksi tai venäjäksi. Aiheen/otsikon tulisi sisältää "
-"AC3Filter sana automaattisen suodatuksen vuoksi."
+msgstr "Reportoi kaikista virheistä ohjelmassa. Voit lähettää vapaasti ideoita, kritiikkiä ja muuta valmistajan sähköpostiosoitteeseen. Ole hyvä ja kirjoita vain englanniksi tai venäjäksi. Viestin otsikon on sisällettävä sana 'AC3Filter' sähköpostin suodatuksen vuoksi."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
-msgstr "Lähetä postia osoitteeseen |mailto:xvalex@mail.ru?Subject=AC3Filter"
+msgstr "e-mail|mailto:ac3filter@gmail.com?Subject=AC3Filter"
 
 #. TRANSLATORS: Project forum|http://ac3filter.net/forum/
 msgid "IDC_LNK_FORUM"
-msgstr "Projektin foorumi: |http://ac3filter.net/forum/"
+msgstr "Projektifoorumi|http://ac3filter.net/forum/"
 
 #. TRANSLATORS: Homepage|http://ac3filter.net/
 msgid "IDC_LNK_HOME"
-msgstr "Kotisivu: |http://ac3filter.net/"
+msgstr "Kotisivu|http://ac3filter.net/"
 
 #. TRANSLATORS: CPU
 msgid "IDC_GRP_CPU"
-msgstr "CPU"
+msgstr " CPU "
 
 #. TRANSLATORS: 0%
 msgid "IDC_CPU_LABEL"
-msgstr ""
+msgstr "0%"
 
 #. TRANSLATORS: Thanks to
 msgid "IDC_GRP_CREDITS"
-msgstr "Kiitokset"
+msgstr " Kiitokset "
 
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
-msgstr "Decooderin info"
+msgstr " Dekooderin tiedot "
 
 #. TRANSLATORS: Frames / Errors
 msgid "IDC_LBL_FRAMES_ERRORS"
-msgstr "Kuvat(frames) / Virheet"
+msgstr "Kehykset / virheet"
 
 #. TRANSLATORS: Delays
 msgid "IDC_GRP_DELAYS"
-msgstr "Ajoitus"
+msgstr " Viive "
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DELAYS"
-msgstr "Mahdollista"
+msgstr "Käytä"
 
 #. TRANSLATORS: C
 msgid "IDC_LBL_DELAY_C"
-msgstr ""
+msgstr "K"
 
 #. TRANSLATORS: L
 msgid "IDC_LBL_DELAY_L"
-msgstr ""
+msgstr "V"
 
 #. TRANSLATORS: R
 msgid "IDC_LBL_DELAY_R"
-msgstr ""
+msgstr "O"
 
 #. TRANSLATORS: SL
 msgid "IDC_LBL_DELAY_SL"
-msgstr ""
+msgstr "SV"
 
 #. TRANSLATORS: SR
 msgid "IDC_LBL_DELAY_SR"
-msgstr ""
+msgstr "SO"
 
 #. TRANSLATORS: Sub
 msgid "IDC_LBL_DELAY_SW"
-msgstr "Tekstitys"
+msgstr "sub"
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
-msgstr ""
+msgstr "Yksikkö:"
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
-msgstr ""
+msgstr " DRC "
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DRC"
-msgstr "Mahdollista"
+msgstr "Käytä"
 
 #. TRANSLATORS: DirectShow options
 msgid "IDC_GRP_DSHOW"
-msgstr "DirectShow asetukset"
+msgstr " DirectShow-asetukset "
 
 #. TRANSLATORS: Check output format support
 msgid "IDC_CHK_QUERY_SINK"
-msgstr "Tarkista ulostulon formaatti tuki"
+msgstr "Tarkista ulostulon formaattituki"
 
 #. TRANSLATORS: Force sound card to reinit after seek / pause
 msgid "IDC_CHK_REINIT"
-msgstr ""
-"Pakota äänikortti uudelleen aloittamaan toisto kelauksen / pausen jälkeen."
+msgstr "Pakota äänikortin uudelleenalustus tauon jälkeen"
 
 #. TRANSLATORS: Disallow PCM output in SPDIF mode
 msgid "IDC_CHK_SPDIF_NO_PCM"
-msgstr "Älä salli PCM:ää ulostuloksi SPDIF moodiin"
+msgstr "Älä salli PCM-ulostuloa SPDIF-moodissa"
 
 #. TRANSLATORS: SPDIF/DTS conversion
 msgid "IDC_GRP_DTS_CONV"
-msgstr "SPDIF / DTS muunto"
+msgstr " SPDIF / DTS muunnos "
 
 #. TRANSLATORS: Convert to DTS14
 msgid "IDC_RBT_DTS_CONV_14BIT"
-msgstr "Muunna DTS14:toista"
+msgstr "Muunna DTS14:ään"
 
 #. TRANSLATORS: Convert to DTS16
 msgid "IDC_RBT_DTS_CONV_16BIT"
-msgstr "Muunna DTS16:toista"
+msgstr "Muunna DTS16:ään"
 
 #. TRANSLATORS: Do not convert
 msgid "IDC_RBT_DTS_CONV_NONE"
@@ -242,7 +231,7 @@ msgstr "Älä muunna"
 
 #. TRANSLATORS: SPDIF/DTS mode
 msgid "IDC_GRP_DTS_MODE"
-msgstr "SPDIF / DTS moodi"
+msgstr " SPDIF / DTS moodi "
 
 #. TRANSLATORS: Auto
 msgid "IDC_RBT_DTS_MODE_AUTO"
@@ -250,99 +239,99 @@ msgstr "Automaattinen"
 
 #. TRANSLATORS: Padded DTS
 msgid "IDC_RBT_DTS_MODE_PADDED"
-msgstr "Tassuteltu DTS (Padded DTS)"
+msgstr "Täytetty DTS"
 
 #. TRANSLATORS: SPDIF wrapped
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
-msgstr "SPDIF pakkaus"
+msgstr "SPDIF-paketointi"
 
 #. TRANSLATORS: Build info
 msgid "IDC_GRP_ENV"
-msgstr ""
+msgstr " Versiotiedot "
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
-msgstr ""
+msgstr " Taajuuskorjain "
 
 #. TRANSLATORS: Equalizer options
 msgid "IDC_GRP_EQ_OPTIONS"
-msgstr ""
+msgstr " Asetukset "
 
 #. TRANSLATORS: Custom
 msgid "IDC_BTN_EQ_CUSTOM"
-msgstr ""
+msgstr "Muokattu"
 
 #. TRANSLATORS: Reset
 msgid "IDC_BTN_EQ_RESET"
-msgstr ""
+msgstr "Nollaa"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_EQ"
-msgstr ""
+msgstr "Käytä"
 
 #. TRANSLATORS: Equalizer preset
 msgid "IDC_GRP_EQ_PRESET"
-msgstr ""
+msgstr " Muistipaikat "
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_EQ_DELETE"
-msgstr ""
+msgstr "Poista"
 
 #. TRANSLATORS: Save
 msgid "IDC_BTN_EQ_SAVE"
-msgstr ""
+msgstr "Tallenna"
 
 #. TRANSLATORS: Use AC3Filter for:
 msgid "IDC_GRP_FORMATS"
-msgstr "Käytä AC3Filter:iä:"
+msgstr " Käytä AC3Filteriä "
 
 #. TRANSLATORS: AC3
 msgid "IDC_CHK_AC3"
-msgstr ""
+msgstr "AC3"
 
 #. TRANSLATORS: DTS
 msgid "IDC_CHK_DTS"
-msgstr ""
+msgstr "DTS"
 
 #. TRANSLATORS: MPEG Audio
 msgid "IDC_CHK_MPA"
-msgstr "MPEG ääni"
+msgstr "MPEG-ääni"
 
 #. TRANSLATORS: PCM
 msgid "IDC_CHK_PCM"
-msgstr ""
+msgstr "PCM"
 
 #. TRANSLATORS: DVD
 msgid "IDC_CHK_PES"
-msgstr ""
+msgstr "DVD"
 
 #. TRANSLATORS: SPDIF
 msgid "IDC_CHK_SPDIF"
-msgstr ""
+msgstr "SPDIF"
 
 #. TRANSLATORS: Gain
 msgid "IDC_GRP_GAIN"
-msgstr ""
+msgstr " Vahvistus "
 
 #. TRANSLATORS: Gains
 msgid "IDC_GRP_GAINS"
-msgstr ""
+msgstr " Vahvistukset "
 
 #. TRANSLATORS: Gain
 msgid "IDC_LBL_GAIN"
-msgstr ""
+msgstr "Vahvista"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
-msgstr ""
+msgstr "LFE"
 
 #. TRANSLATORS: Master
 msgid "IDC_LBL_MASTER"
-msgstr "Masteri"
+msgstr "Pää"
 
 #. TRANSLATORS: Surround
 msgid "IDC_LBL_SUR"
-msgstr ""
+msgstr "Surround"
 
 #. TRANSLATORS: Voice
 msgid "IDC_LBL_VOICE"
@@ -350,121 +339,119 @@ msgstr "Ääni"
 
 #. TRANSLATORS: Input gains
 msgid "IDC_GRP_INPUT_GAINS"
-msgstr "Sisääntulo saannit"
+msgstr " Sisääntulon vahvistus "
 
 #. TRANSLATORS: Input levels
 msgid "IDC_GRP_INPUT_LEVELS"
-msgstr "Sisääntulo tasot"
+msgstr " Sisääntulon tasot "
 
 #. TRANSLATORS: C
 msgid "IDC_LBL_IN_C"
-msgstr ""
+msgstr "K"
 
 #. TRANSLATORS: L
 msgid "IDC_LBL_IN_L"
-msgstr ""
+msgstr "V"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_IN_LFE"
-msgstr ""
+msgstr "LFE"
 
 #. TRANSLATORS: R
 msgid "IDC_LBL_IN_R"
-msgstr ""
+msgstr "O"
 
 #. TRANSLATORS: SL
 msgid "IDC_LBL_IN_SL"
-msgstr ""
+msgstr "SV"
 
 #. TRANSLATORS: SR
 msgid "IDC_LBL_IN_SR"
-msgstr ""
+msgstr "SO"
 
 #. TRANSLATORS: Interface options
 msgid "IDC_GRP_INTERFACE"
-msgstr "Käyttö liittymän asetukset"
+msgstr " Käyttöliittymän asetukset "
 
 #. TRANSLATORS: Invert levels
 msgid "IDC_CHK_INVERT_LEVELS"
-msgstr "Invertointi tasot"
+msgstr "Invertoi äänitasot"
 
 #. TRANSLATORS: Show tooltips
 msgid "IDC_CHK_TOOLTIPS"
-msgstr "Näytä vihje kuplat"
+msgstr "Näytä työkaluvinkit"
 
 #. TRANSLATORS: Show tray icon
 msgid "IDC_CHK_TRAY"
-msgstr "Näytä ilmaisu alueen kuvake"
+msgstr "Näytä ilmaisualueen kuvake"
 
 #. TRANSLATORS: Interface update rate (ms)
 msgid "IDC_LBL_REFRESH_TIME"
-msgstr "Käyttö liittymän päivitys nopeus (ms)"
+msgstr "Käyttöliittymän päivitysnopeus (ms)"
 
 #. TRANSLATORS: License
 msgid "IDC_GRP_LICENSE"
-msgstr "Lisenssi"
+msgstr " Lisenssi "
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
-msgstr ""
-"Tämä on ilmainen ohjelma jota voidaan jakaa GNU General Public License "
-"version 2:n nimissä."
+msgstr "Tämä on ilmainen ohjelma, jota voidaan jakaa GNU General Public License version 2 alaisuudessa."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
-msgstr "Sekoitus MATRIX"
+msgstr " Miksausmatriisi "
 
 #. TRANSLATORS: C
 msgid "IDC_LBL_MATRIX_IN_C"
-msgstr ""
+msgstr "K"
 
 #. TRANSLATORS: L
 msgid "IDC_LBL_MATRIX_IN_L"
-msgstr ""
+msgstr "V"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_MATRIX_IN_LFE"
-msgstr ""
+msgstr "LFE"
 
 #. TRANSLATORS: R
 msgid "IDC_LBL_MATRIX_IN_R"
-msgstr ""
+msgstr "O"
 
 #. TRANSLATORS: SL
 msgid "IDC_LBL_MATRIX_IN_SL"
-msgstr ""
+msgstr "SV"
 
 #. TRANSLATORS: SR
 msgid "IDC_LBL_MATRIX_IN_SR"
-msgstr ""
+msgstr "SO"
 
 #. TRANSLATORS: C'
 msgid "IDC_LBL_MATRIX_OUT_C"
-msgstr ""
+msgstr "K'"
 
 #. TRANSLATORS: L'
 msgid "IDC_LBL_MATRIX_OUT_L"
-msgstr ""
+msgstr "V'"
 
 #. TRANSLATORS: R'
 msgid "IDC_LBL_MATRIX_OUT_R"
-msgstr ""
+msgstr "O'"
 
 #. TRANSLATORS: SL'
 msgid "IDC_LBL_MATRIX_OUT_SL"
-msgstr ""
+msgstr "SV'"
 
 #. TRANSLATORS: SR'
 msgid "IDC_LBL_MATRIX_OUT_SR"
-msgstr ""
+msgstr "SO'"
 
 #. TRANSLATORS: Sub
 msgid "IDC_LBL_MATRIX_OUT_SW"
-msgstr "Tekstitys"
+msgstr "sub"
 
 #. TRANSLATORS: Matrix preset
 msgid "IDC_GRP_MATRIX_PRESET"
-msgstr "Matrix mallinne"
+msgstr " Matriisimalli "
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_MATRIX_DELETE"
@@ -476,63 +463,63 @@ msgstr "Tallenna"
 
 #. TRANSLATORS: Filter merit
 msgid "IDC_GRP_MERIT"
-msgstr ""
+msgstr " Filtterien suosinta "
 
 #. TRANSLATORS: Prefer AC3Filter
 msgid "IDC_RBT_MERIT_PREFERRED"
-msgstr "Pitää AC3Filter:istä"
+msgstr "Suosi AC3Filteriä"
 
 #. TRANSLATORS: Prefer other decoder
 msgid "IDC_RBT_MERIT_UNLIKELY"
-msgstr "Pitää toisesta decooderista"
+msgstr "Suosi toista dekooderia"
 
 #. TRANSLATORS: Options
 msgid "IDC_GRP_MIXER_OPTIONS"
-msgstr "Asetukset"
+msgstr " Asetukset "
 
 #. TRANSLATORS: Auto gain control
 msgid "IDC_CHK_AUTO_GAIN"
-msgstr "Automaattinen saannin kontrolointi"
+msgstr "Automaattinen vahvistus"
 
 #. TRANSLATORS: Auto matrix
 msgid "IDC_CHK_AUTO_MATRIX"
-msgstr "Automaattinen matrix"
+msgstr "Automaattinen matriisi"
 
 #. TRANSLATORS: Bass redirection
 msgid "IDC_CHK_BASS_REDIR"
-msgstr "Basson uudellen ohjaus"
+msgstr "Basson uudeellenohjaus"
 
 #. TRANSLATORS: Expand stereo
 msgid "IDC_CHK_EXPAND_STEREO"
-msgstr "Laajenna stereota"
+msgstr "Laajennettu stereo"
 
 #. TRANSLATORS: One-pass norm
 msgid "IDC_CHK_NORMALIZE"
-msgstr "Yksikertoiminen normalisointi"
+msgstr "1x-normalisointi"
 
 #. TRANSLATORS: Normalize matrix
 msgid "IDC_CHK_NORM_MATRIX"
-msgstr "Normalisoi matrix"
+msgstr "Normalisoi matriiisi"
 
 #. TRANSLATORS: Voice control
 msgid "IDC_CHK_VOICE_CONTROL"
-msgstr "Äänen kontrolointi"
+msgstr "Äänenhallinta"
 
 #. TRANSLATORS: Cutoff frequency
 msgid "IDC_LBL_BASS_FREQ"
-msgstr "Rajataajuus"
+msgstr "Leikkaustaajuus"
 
 #. TRANSLATORS: Output format
 msgid "IDC_GRP_OUTPUT"
-msgstr "Ulostulon muoto"
+msgstr " Ulostulon muoto "
 
 #. TRANSLATORS: Use SPDIF
 msgid "IDC_CHK_USE_SPDIF"
-msgstr "Käytä SPDIF:iä"
+msgstr "Käytä SPDIF:ää"
 
 #. TRANSLATORS: Format
 msgid "IDC_LBL_FORMAT"
-msgstr ""
+msgstr "Formaatti"
 
 #. TRANSLATORS: input format
 msgid "IDC_LBL_INPUT"
@@ -540,11 +527,11 @@ msgstr "Sisääntulon muoto"
 
 #. TRANSLATORS: Rate
 msgid "IDC_LBL_RATE"
-msgstr ""
+msgstr "Taajuus"
 
 #. TRANSLATORS: Output gains
 msgid "IDC_GRP_OUTPUT_GAINS"
-msgstr ""
+msgstr "Ulostulon vahvistukset"
 
 #. TRANSLATORS: Output levels
 msgid "IDC_GRP_OUTPUT_LEVELS"
@@ -552,35 +539,35 @@ msgstr "Ulostulon tasot"
 
 #. TRANSLATORS: C
 msgid "IDC_LBL_OUT_C"
-msgstr ""
+msgstr "K"
 
 #. TRANSLATORS: L
 msgid "IDC_LBL_OUT_L"
-msgstr ""
+msgstr "V"
 
 #. TRANSLATORS: R
 msgid "IDC_LBL_OUT_R"
-msgstr ""
+msgstr "O"
 
 #. TRANSLATORS: SL
 msgid "IDC_LBL_OUT_SL"
-msgstr ""
+msgstr "SV"
 
 #. TRANSLATORS: SR
 msgid "IDC_LBL_OUT_SR"
-msgstr ""
+msgstr "SO"
 
 #. TRANSLATORS: Sub
 msgid "IDC_LBL_OUT_SW"
-msgstr "Tekstitus"
+msgstr "sub"
 
 #. TRANSLATORS: Preset
 msgid "IDC_GRP_PRESET"
-msgstr "Mallinne"
+msgstr "Malli"
 
 #. TRANSLATORS: Delete
 msgid "IDC_BTN_PRESET_DELETE"
-msgstr "posta"
+msgstr "Poista"
 
 #. TRANSLATORS: File
 msgid "IDC_BTN_PRESET_FILE"
@@ -592,79 +579,79 @@ msgstr "Tallenna"
 
 #. TRANSLATORS: Default audio renderer
 msgid "IDC_GRP_RENDERER"
-msgstr "Oletus arvoinen äänen renderöinti"
+msgstr "Äänirenderöinnin oletus"
 
 #. TRANSLATORS: Use Direct Sound by default
 msgid "IDC_RBT_RENDER_DS"
-msgstr "Käytä Drirect ääntä oletus arvoisesti"
+msgstr "Oletuksena DirectSound"
 
 #. TRANSLATORS: Use Wave Out by default
 msgid "IDC_RBT_RENDER_WO"
-msgstr "Käytä Wave ulos oletus arvoisesti"
+msgstr "Oletuksena Wave Out"
 
 #. TRANSLATORS: SPDIF options
 msgid "IDC_GRP_SPDIF"
-msgstr "SPDIF asetukset"
+msgstr "SPDIF-asetukset"
 
 #. TRANSLATORS: 32kHz
 msgid "IDC_CHK_SPDIF_ALLOW_32"
-msgstr ""
+msgstr "32 kHz"
 
 #. TRANSLATORS: 44kHz
 msgid "IDC_CHK_SPDIF_ALLOW_44"
-msgstr ""
+msgstr "44 kHz"
 
 #. TRANSLATORS: 48kHz
 msgid "IDC_CHK_SPDIF_ALLOW_48"
-msgstr ""
+msgstr "48 kHz"
 
 #. TRANSLATORS: Output SPDIF as PCM
 msgid "IDC_CHK_SPDIF_AS_PCM"
-msgstr "Ulostuloinen SPDIF PCM:änä"
+msgstr "Ulostulossa SPDIF PCM:nä"
 
 #. TRANSLATORS: Restrict SPDIF sample rate
 msgid "IDC_CHK_SPDIF_CHECK_SR"
-msgstr "Rajoita SPDIF:in näyte taajuutta"
+msgstr "Rajoita SPDIF-näytetaajuutta"
 
 #. TRANSLATORS: Use AC3 encoder
 msgid "IDC_CHK_SPDIF_ENCODE"
-msgstr "Käytä AC3 koodainta"
+msgstr "Käytä AC3-kooderia"
 
 #. TRANSLATORS: Do not encode stereo PCM
 msgid "IDC_CHK_SPDIF_STEREO_PT"
-msgstr "Älä koodaa stereo PCM:ä"
+msgstr "Älä koodaa stereo-PCM:ää"
 
 #. TRANSLATORS: Detect SPDIF stream in PCM data
 msgid "IDC_CHK_USE_DETECTOR"
-msgstr "Havaitse SPDIF raidat PCM datassa"
+msgstr "Havaitse SPDIF-raidat PCM-datassa"
 
 #. TRANSLATORS: AC3 encoder bitrate (kbps)
 msgid "IDC_LBL_SPDIF_BITRATE"
-msgstr "AC3 koodaimen bittinopeus (kbps)"
+msgstr "AC3-kooderin bittinopeus (kbps)"
 
 #. TRANSLATORS: SPDIF passthrough
 msgid "IDC_GRP_SPDIF_PT"
-msgstr ""
+msgstr "SPDIF-läpivienti"
 
 #. TRANSLATORS: AC3
 msgid "IDC_CHK_SPDIF_AC3"
-msgstr ""
+msgstr "AC3"
 
 #. TRANSLATORS: DTS
 msgid "IDC_CHK_SPDIF_DTS"
-msgstr ""
+msgstr "DTS"
 
 #. TRANSLATORS: MPEG Audio
 msgid "IDC_CHK_SPDIF_MPA"
-msgstr "MPEG ääni"
+msgstr "MPEG-ääni"
 
 #. TRANSLATORS: Audio/Video sync
 msgid "IDC_GRP_SYNC"
-msgstr "Äänen ja videon syncronointi"
+msgstr "Äänen ja videon synkronointi"
 
 #. TRANSLATORS: Jitter correction.
 msgid "IDC_CHK_JITTER"
-msgstr "Tärinän korjaus"
+msgstr "Värinän korjaus"
 
 #. TRANSLATORS: Current jitter:
 msgid "IDC_LBL_JITTER"
@@ -672,11 +659,11 @@ msgstr "Nykyinen värinä"
 
 #. TRANSLATORS: Time shift (ms):
 msgid "IDC_LBL_TIME_SHIFT"
-msgstr "Ajan muutos (ms):"
+msgstr "Ajansiirto (ms):"
 
 #. TRANSLATORS: <- sound lags
 msgid "IDC_LBL_TIME_SHIFT_MINUS"
-msgstr "<- äänä on jäljessä"
+msgstr "<- ääni jää jälkeen"
 
 #. TRANSLATORS: sound hastes ->
 msgid "IDC_LBL_TIME_SHIFT_PLUS"
@@ -684,7 +671,7 @@ msgstr "Ääni on edellä ->"
 
 #. TRANSLATORS: Localization
 msgid "IDC_GRP_TRANS"
-msgstr ""
+msgstr "Lokalisointi"
 
 #. TRANSLATORS: Language:
 msgid "IDC_LBL_LANG"
@@ -692,180 +679,179 @@ msgstr "Kieli:"
 
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
-msgstr ""
+msgstr "Miten teen käännöksen?|http://ac3filter.net/guides/how_to_translate"
 
 msgid "Samples"
-msgstr ""
+msgstr "Näytteitä"
 
 msgid "Millisecs"
-msgstr ""
+msgstr "Millisekuntia"
 
 msgid "Meters"
-msgstr ""
+msgstr "Metriä"
 
 msgid "Centimeters"
-msgstr ""
+msgstr "Senttimetriä"
 
 msgid "Feet"
-msgstr ""
+msgstr "Jalkaa"
 
 msgid "Inches"
-msgstr ""
+msgstr "Tuumaa"
 
 msgid "Master"
-msgstr ""
+msgstr "Pää"
 
 msgid "Left"
-msgstr ""
+msgstr "Vasen"
 
 msgid "Center"
-msgstr ""
+msgstr "Keski"
 
 msgid "Right"
-msgstr ""
+msgstr "Oikea"
 
 msgid "Surround Left"
-msgstr ""
+msgstr "Surround vasen"
 
 msgid "Surround Right"
-msgstr ""
+msgstr "Surround oikea"
 
 msgid "Subwoofer"
-msgstr ""
+msgstr "Subwoofer"
 
 #, c-format
 msgid "%ikHz"
-msgstr ""
+msgstr "%i KHz"
 
 #, c-format
 msgid "%iHz"
-msgstr ""
+msgstr "%i Hz"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' preset?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa muistipaikan '%s' ?"
 
 msgid "Delete confirmation"
-msgstr ""
+msgstr "Vahvista poistaminen"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' matrix?"
-msgstr ""
+msgstr "haluatko varmasti poistaa matriisin '%s' ?"
 
 #, c-format
 msgid "Are you sure you want to delete '%s' equalizer preset?"
-msgstr ""
+msgstr "haluatko varmasti poistaa taajuuskorjaimen muistipaikan '%s' ?"
 
-msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
+msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
+msgstr "Tämä valinta on VAARALLINEN! Filtteri voi aikaansaada voimakkaita äänentasoja tämän asetuksen ollessa käytössä. Vahvista valintasi painamalla painiketta 'Ei'."
 
 msgid "Dangerous option!"
-msgstr ""
+msgstr "Huomautus mahdollisesta vaarasta"
 
 msgid "Spectrum: no data"
-msgstr ""
+msgstr "Spektri: ei dataa"
 
 #, c-format
 msgid "Spectrum: %s"
-msgstr ""
+msgstr "Spektri: %s"
 
 msgid "All channels"
-msgstr ""
+msgstr "Kaikki kanavat"
 
 msgid "AS IS (no change)"
-msgstr ""
+msgstr "Ei muutosta"
 
 msgid "1/0 - mono"
-msgstr ""
+msgstr "1/0 - mono"
 
 msgid "2/0 - stereo"
-msgstr ""
+msgstr "2/0 - stereo"
 
 msgid "3/0 - 3 front"
-msgstr ""
+msgstr "3/0 - 3 etu"
 
 msgid "2/1 - surround"
-msgstr ""
+msgstr "2/1 - surround"
 
 msgid "3/1 - surround"
-msgstr ""
+msgstr "3/1 - surround"
 
 msgid "2/2 - quadro"
-msgstr ""
+msgstr "2/2 - neli"
 
 msgid "3/2 - 5 channels"
-msgstr ""
+msgstr "3/2 - 5 kanavaa"
 
 msgid "1/0+SW 1.1 mono"
-msgstr ""
+msgstr "1/0+SW 1.1 mono"
 
 msgid "2/0+SW 2.1 stereo"
-msgstr ""
+msgstr "2/0+SW 2.1 stereo"
 
 msgid "3/0+SW 3.1 front"
-msgstr ""
+msgstr "3/0+SW 3.1 etu"
 
 msgid "2/1+SW 3.1 surround"
-msgstr ""
+msgstr "2/1+SW 3.1 surround"
 
 msgid "3/1+SW 4.1 surround"
-msgstr ""
+msgstr "3/1+SW 4.1 surround"
 
 msgid "2/2+SW 4.1 quadro"
-msgstr ""
+msgstr "2/2+SW 4.1 neli"
 
 msgid "3/2+SW 5.1 channels"
-msgstr ""
+msgstr "3/2+SW 5.1 kanavaa"
 
 msgid "Dolby Surround/ProLogic"
-msgstr ""
+msgstr "Dolby Surround/ProLogic"
 
 msgid "Dolby ProLogic II"
-msgstr ""
+msgstr "Dolby ProLogic II"
 
 msgid "PCM 16bit"
-msgstr ""
+msgstr "PCM 16 bit"
 
 msgid "PCM 24bit"
-msgstr ""
+msgstr "PCM 24 bit"
 
 msgid "PCM 32bit"
-msgstr ""
+msgstr "PCM 32 bit"
 
 msgid "PCM Float"
-msgstr ""
+msgstr "PCM Float"
 
 #, c-format
 msgid "%s %s %iHz"
-msgstr ""
+msgstr "%s %s %i Hz"
 
 msgid "Use SPDIF"
-msgstr ""
+msgstr "Käytä SPDIF"
 
 msgid "Use SPDIF (disabled)"
-msgstr ""
+msgstr "Käytä SPDIF (ei käytössä)"
 
 msgid "Use SPDIF (passthrough)"
-msgstr ""
+msgstr "Käytä SPDIF (läpivienti)"
 
 msgid "Use SPDIF (AC3 encode)"
-msgstr ""
+msgstr "Käytä SPDIF (AC3-kooderi)"
 
 msgid "Use SPDIF (Unknown)"
-msgstr ""
+msgstr "Käytä SPDIF (tuntematon)"
 
 #, c-format
 msgid ""
 "Input\tmean: %ims\tstddev: %ims\n"
 "Output\tmean: %ims\tstddev: %ims"
 msgstr ""
+"Sisään\tkeski: %i ms\thajonta: %i ms\n"
+"Ulos\tkeski: %i ms\thajonta: %i ms"
 
-msgid ""
-"This option is DANGEROUS! Video may go out of sync with this option enabled. "
-"Press 'No' to enable this option."
-msgstr ""
+msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
+msgstr "Tämä valinta on VAARALLINEN! Videon synkronointi saattaa hävitä tämän asetuksen ollessa käytössä. Vahvista valintasi painamalla painiketta 'Ei'."
 
 #~ msgid "IDC_LBL_UNITS"
 #~ msgstr "Yksiköt:"
+
