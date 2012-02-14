@@ -7,8 +7,11 @@ v2.00a - unreleased
     * option to redirect bass to front speakers
   * Single icon per application
   * Online help
-  * Dutch language (thanks to Ernst Klamer)
   * Set filter language from the installer
+  * Translations:
+    * Portuguese, thanks to Manuela Silva
+    * Turkish, thanks to AltanEdip
+    * Dutch, thanks to Ernst Klamer
 
 v1.63b - 11.08.2009
   * AC3 decoding bug fixed (Issue 1)

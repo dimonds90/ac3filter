@@ -1,0 +1,859 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AC3Filter 1.62b Full\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-05-16 22:11+0400\n"
+"PO-Revision-Date: 2011-02-20 15:10-0000\n"
+"Last-Translator: AAMRS <alfredo.silva@sky.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: PORTUGAL\n"
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Principal"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "Misturador"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "Ganhos"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr "Equalizador"
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Sistema"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "Sobre o ..."
+
+msgid "kHz"
+msgstr "kHz"
+
+msgid "dB"
+msgstr "dB"
+
+msgid "Hz"
+msgstr "Hz"
+
+#. TRANSLATORS: Cancel
+msgid "IDCANCEL"
+msgstr "Cancelar"
+
+#. TRANSLATORS: Donate
+msgid "IDC_BTN_DONATE"
+msgstr "Donativo"
+
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr "Registar espetro"
+
+#. TRANSLATORS: Frequency (Hz)
+msgid "IDC_LBL_EQ_FREQ"
+msgstr "Frequência (Hz)"
+
+#. TRANSLATORS: Gain (dB)
+msgid "IDC_LBL_EQ_GAIN"
+msgstr "Ganho (dB)"
+
+#. TRANSLATORS: Filter length:
+msgid "IDC_LBL_EQ_LEN"
+msgstr "Filtro Duração:"
+
+#. TRANSLATORS: Save all (multichannel and master equalizers).
+msgid "IDC_RBT_EQ_ALL"
+msgstr "Guardar Tudo"
+
+#. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
+msgid "IDC_RBT_EQ_CUR"
+msgstr "Guardar apenas o canal atual, e assim pode aplicar esta predefinição a qualquer canal"
+
+#. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
+msgid "IDC_RBT_EQ_MCH"
+msgstr "Guardar todos os canais (exceto Master), e assim pode restaurar mais tarde a configuração do canal múltiplo."
+
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
+msgid "IDC_VER"
+msgstr "AC3Filter ver. %s Direitos de Autor (c) 2002-2011 por Alexander Vigovsky"
+
+#. TRANSLATORS: OK
+msgid "IDOK"
+msgstr "OK"
+
+#. TRANSLATORS: What is it?
+msgid "IDC_GRP_ABOUT"
+msgstr "Sobre o ..."
+
+#. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
+msgid "IDC_LBL_ABOUT1"
+msgstr "O  AC3Filter é um filtro DirectShow gratuito e de elevada qualidade, criado para descodificação e processamento em tempo real. Este tem uma prioridade de funcionalidade ampla e ajustes necessários. Suporta canais-múltiplos e saída digital (SPDIF)."
+
+#. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
+msgid "IDC_LBL_ABOUT2"
+msgstr "Este é usado pela maioria dos leitores multimedia. Necessário para reproduzir ficheiros AVI com áudio AC3 ou DTS. Também pode ser usado para reproduzir DVD."
+
+#. TRANSLATORS: AGC
+msgid "IDC_GRP_AGC"
+msgstr "AGC"
+
+#. TRANSLATORS: Attack/release speed (dB/s):
+msgid "IDC_LBL_ATTACK_RELEASE"
+msgstr "Veloc. Lanç./Assalto (dB/s):"
+
+#. TRANSLATORS: Contact author
+msgid "IDC_GRP_CONTACT"
+msgstr "Contactar o Autor"
+
+#. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
+msgid "IDC_LBL_CONTACT"
+msgstr "Por favor, reporte todos os \"bugs\". Envie um e-mail para o autor com as suas ideias, críticas, etc. Por favor, escreva apenas em Inglês ou Russo. O assunto deverá conter a palavra \"AC3Filter\" (devido à filtragem automática)."
+
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
+msgid "IDC_LNK_EMAIL"
+msgstr "Enviar e-mail Autor|mailto:ac3filter@gmail.com?Subject=AC3Filter"
+
+#. TRANSLATORS: Project forum|http://ac3filter.net/forum/
+msgid "IDC_LNK_FORUM"
+msgstr "Fórum do Projeto|http://ac3filter.net/forum/"
+
+#. TRANSLATORS: Homepage|http://ac3filter.net/
+msgid "IDC_LNK_HOME"
+msgstr "Site da Web|http://ac3filter.net/"
+
+#. TRANSLATORS: CPU
+msgid "IDC_GRP_CPU"
+msgstr "CPU"
+
+#. TRANSLATORS: 0%
+msgid "IDC_CPU_LABEL"
+msgstr "0%"
+
+#. TRANSLATORS: Thanks to
+msgid "IDC_GRP_CREDITS"
+msgstr " Agradecimentos "
+
+#. TRANSLATORS: Decoder info
+msgid "IDC_GRP_DECODER_INFO"
+msgstr "Informação do Descodificador"
+
+#. TRANSLATORS: Frames / Errors
+msgid "IDC_LBL_FRAMES_ERRORS"
+msgstr "Frequência/Erros"
+
+#. TRANSLATORS: Delays
+msgid "IDC_GRP_DELAYS"
+msgstr "Atrasos"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_DELAYS"
+msgstr "Ativar"
+
+#. TRANSLATORS: C
+msgid "IDC_LBL_DELAY_C"
+msgstr "C"
+
+#. TRANSLATORS: L
+msgid "IDC_LBL_DELAY_L"
+msgstr "E"
+
+#. TRANSLATORS: R
+msgid "IDC_LBL_DELAY_R"
+msgstr "D"
+
+#. TRANSLATORS: SL
+msgid "IDC_LBL_DELAY_SL"
+msgstr "SE"
+
+#. TRANSLATORS: SR
+msgid "IDC_LBL_DELAY_SR"
+msgstr "SD"
+
+#. TRANSLATORS: Sub
+msgid "IDC_LBL_DELAY_SW"
+msgstr "Sub"
+
+#. TRANSLATORS: Units:
+msgid "IDC_LBL_DELAY_UNITS"
+msgstr "Unidades:"
+
+#. TRANSLATORS: DRC
+msgid "IDC_GRP_DRC"
+msgstr "DRC"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_DRC"
+msgstr "Ativar"
+
+#. TRANSLATORS: DirectShow options
+msgid "IDC_GRP_DSHOW"
+msgstr "Opções do DirectShow"
+
+#. TRANSLATORS: Check output format support
+msgid "IDC_CHK_QUERY_SINK"
+msgstr "Verificar suporte do formato de saída"
+
+#. TRANSLATORS: Force sound card to reinit after seek / pause
+msgid "IDC_CHK_REINIT"
+msgstr "Forçar reínicio placa de som depois procurar / pausar"
+
+#. TRANSLATORS: Disallow PCM output in SPDIF mode
+msgid "IDC_CHK_SPDIF_NO_PCM"
+msgstr "Anular saída PCM no modo SPDIF"
+
+#. TRANSLATORS: SPDIF/DTS conversion
+msgid "IDC_GRP_DTS_CONV"
+msgstr "Conversão SPDIF/DTS"
+
+#. TRANSLATORS: Convert to DTS14
+msgid "IDC_RBT_DTS_CONV_14BIT"
+msgstr "Converter p/ DTS-14"
+
+#. TRANSLATORS: Convert to DTS16
+msgid "IDC_RBT_DTS_CONV_16BIT"
+msgstr "Converter p/ DTS 16"
+
+#. TRANSLATORS: Do not convert
+msgid "IDC_RBT_DTS_CONV_NONE"
+msgstr "Não converter"
+
+#. TRANSLATORS: SPDIF/DTS mode
+msgid "IDC_GRP_DTS_MODE"
+msgstr "Modo"
+
+#. TRANSLATORS: Auto
+msgid "IDC_RBT_DTS_MODE_AUTO"
+msgstr "Automático"
+
+#. TRANSLATORS: Padded DTS
+msgid "IDC_RBT_DTS_MODE_PADDED"
+msgstr "Padded DTS"
+
+#. TRANSLATORS: SPDIF wrapped
+msgid "IDC_RBT_DTS_MODE_WRAPPED"
+msgstr "SPDIF wrapped"
+
+#. TRANSLATORS: Build info
+msgid "IDC_GRP_ENV"
+msgstr "Informação da Programação"
+
+#. TRANSLATORS: Equalizer
+msgid "IDC_GRP_EQ"
+msgstr "Equalizador"
+
+#. TRANSLATORS: Equalizer options
+msgid "IDC_GRP_EQ_OPTIONS"
+msgstr "Opções"
+
+#. TRANSLATORS: Custom
+msgid "IDC_BTN_EQ_CUSTOM"
+msgstr "Personal."
+
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_EQ_RESET"
+msgstr "Reiniciar"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_EQ"
+msgstr "Equalizador"
+
+#. TRANSLATORS: Equalizer preset
+msgid "IDC_GRP_EQ_PRESET"
+msgstr "Definir Equalizador"
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_EQ_DELETE"
+msgstr "Apagar"
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_EQ_SAVE"
+msgstr "Guardar"
+
+#. TRANSLATORS: Use AC3Filter for:
+msgid "IDC_GRP_FORMATS"
+msgstr "Usar AC3Filter:"
+
+#. TRANSLATORS: AC3
+msgid "IDC_CHK_AC3"
+msgstr "AC3"
+
+#. TRANSLATORS: DTS
+msgid "IDC_CHK_DTS"
+msgstr "DTS"
+
+#. TRANSLATORS: MPEG Audio
+msgid "IDC_CHK_MPA"
+msgstr "Áudio MPEG"
+
+#. TRANSLATORS: PCM
+msgid "IDC_CHK_PCM"
+msgstr "PCM"
+
+#. TRANSLATORS: DVD
+msgid "IDC_CHK_PES"
+msgstr "DVD"
+
+#. TRANSLATORS: SPDIF
+msgid "IDC_CHK_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: Gain
+msgid "IDC_GRP_GAIN"
+msgstr "Ganho"
+
+#. TRANSLATORS: Gains
+msgid "IDC_GRP_GAINS"
+msgstr "Ganhos"
+
+#. TRANSLATORS: Gain
+msgid "IDC_LBL_GAIN"
+msgstr "Ganho"
+
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_LFE"
+msgstr "LFE"
+
+#. TRANSLATORS: Master
+msgid "IDC_LBL_MASTER"
+msgstr "Master"
+
+#. TRANSLATORS: Surround
+msgid "IDC_LBL_SUR"
+msgstr "Surround"
+
+#. TRANSLATORS: Voice
+msgid "IDC_LBL_VOICE"
+msgstr "Voz"
+
+#. TRANSLATORS: Input gains
+msgid "IDC_GRP_INPUT_GAINS"
+msgstr "Ganhos"
+
+#. TRANSLATORS: Input levels
+msgid "IDC_GRP_INPUT_LEVELS"
+msgstr "Níveis"
+
+#. TRANSLATORS: C
+msgid "IDC_LBL_IN_C"
+msgstr "C"
+
+#. TRANSLATORS: L
+msgid "IDC_LBL_IN_L"
+msgstr "E"
+
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_IN_LFE"
+msgstr "LFE"
+
+#. TRANSLATORS: R
+msgid "IDC_LBL_IN_R"
+msgstr "D"
+
+#. TRANSLATORS: SL
+msgid "IDC_LBL_IN_SL"
+msgstr "SE"
+
+#. TRANSLATORS: SR
+msgid "IDC_LBL_IN_SR"
+msgstr "SD"
+
+#. TRANSLATORS: Interface options
+msgid "IDC_GRP_INTERFACE"
+msgstr "Interface"
+
+#. TRANSLATORS: Invert levels
+msgid "IDC_CHK_INVERT_LEVELS"
+msgstr "Inverter Nívies"
+
+#. TRANSLATORS: Show tooltips
+msgid "IDC_CHK_TOOLTIPS"
+msgstr "Dicas da Ferramenta"
+
+#. TRANSLATORS: Show tray icon
+msgid "IDC_CHK_TRAY"
+msgstr "Bandeja"
+
+#. TRANSLATORS: Interface update rate (ms)
+msgid "IDC_LBL_REFRESH_TIME"
+msgstr "Taxa de Atualização Interface (ms)"
+
+#. TRANSLATORS: License
+msgid "IDC_GRP_LICENSE"
+msgstr "Licença"
+
+#. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
+msgid "IDC_LBL_LICENSE"
+msgstr "Licença"
+
+#. TRANSLATORS: Mixing matrix
+msgid "IDC_GRP_MATRIX"
+msgstr "Mistura Matrix"
+
+#. TRANSLATORS: C
+msgid "IDC_LBL_MATRIX_IN_C"
+msgstr "C"
+
+#. TRANSLATORS: L
+msgid "IDC_LBL_MATRIX_IN_L"
+msgstr "E"
+
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_MATRIX_IN_LFE"
+msgstr "LFE"
+
+#. TRANSLATORS: R
+msgid "IDC_LBL_MATRIX_IN_R"
+msgstr "D"
+
+#. TRANSLATORS: SL
+msgid "IDC_LBL_MATRIX_IN_SL"
+msgstr "SSL"
+
+#. TRANSLATORS: SR
+msgid "IDC_LBL_MATRIX_IN_SR"
+msgstr "SD"
+
+#. TRANSLATORS: C'
+msgid "IDC_LBL_MATRIX_OUT_C"
+msgstr "C'"
+
+#. TRANSLATORS: L'
+msgid "IDC_LBL_MATRIX_OUT_L"
+msgstr "E'"
+
+#. TRANSLATORS: R'
+msgid "IDC_LBL_MATRIX_OUT_R"
+msgstr "D'"
+
+#. TRANSLATORS: SL'
+msgid "IDC_LBL_MATRIX_OUT_SL"
+msgstr "SE'"
+
+#. TRANSLATORS: SR'
+msgid "IDC_LBL_MATRIX_OUT_SR"
+msgstr "SD'"
+
+#. TRANSLATORS: Sub
+msgid "IDC_LBL_MATRIX_OUT_SW"
+msgstr "Sub"
+
+#. TRANSLATORS: Matrix preset
+msgid "IDC_GRP_MATRIX_PRESET"
+msgstr "Defenir Matrix"
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_MATRIX_DELETE"
+msgstr "Apagar"
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_MATRIX_SAVE"
+msgstr "Guardar"
+
+#. TRANSLATORS: Filter merit
+msgid "IDC_GRP_MERIT"
+msgstr "Filtro"
+
+#. TRANSLATORS: Prefer AC3Filter
+msgid "IDC_RBT_MERIT_PREFERRED"
+msgstr "Usar AC3Filter"
+
+#. TRANSLATORS: Prefer other decoder
+msgid "IDC_RBT_MERIT_UNLIKELY"
+msgstr "Usar outro descodificador"
+
+#. TRANSLATORS: Options
+msgid "IDC_GRP_MIXER_OPTIONS"
+msgstr "Opções"
+
+#. TRANSLATORS: Auto gain control
+msgid "IDC_CHK_AUTO_GAIN"
+msgstr "Ganho"
+
+#. TRANSLATORS: Auto matrix
+msgid "IDC_CHK_AUTO_MATRIX"
+msgstr "Matrix Automático"
+
+#. TRANSLATORS: Bass redirection
+msgid "IDC_CHK_BASS_REDIR"
+msgstr "Redirecionar Baixo"
+
+#. TRANSLATORS: Expand stereo
+msgid "IDC_CHK_EXPAND_STEREO"
+msgstr "Estéreo"
+
+#. TRANSLATORS: One-pass norm
+msgid "IDC_CHK_NORMALIZE"
+msgstr "Normalizar"
+
+#. TRANSLATORS: Normalize matrix
+msgid "IDC_CHK_NORM_MATRIX"
+msgstr "Normalizar Matrix"
+
+#. TRANSLATORS: Voice control
+msgid "IDC_CHK_VOICE_CONTROL"
+msgstr "Controlo"
+
+#. TRANSLATORS: Cutoff frequency
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "Limite frequência"
+
+#. TRANSLATORS: Output format
+msgid "IDC_GRP_OUTPUT"
+msgstr "Saída"
+
+#. TRANSLATORS: Use SPDIF
+msgid "IDC_CHK_USE_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: Format
+msgid "IDC_LBL_FORMAT"
+msgstr "Formato"
+
+#. TRANSLATORS: input format
+msgid "IDC_LBL_INPUT"
+msgstr "Formato de Entrada"
+
+#. TRANSLATORS: Rate
+msgid "IDC_LBL_RATE"
+msgstr "Freq."
+
+#. TRANSLATORS: Output gains
+msgid "IDC_GRP_OUTPUT_GAINS"
+msgstr "Ganhos de Saída"
+
+#. TRANSLATORS: Output levels
+msgid "IDC_GRP_OUTPUT_LEVELS"
+msgstr "Níveis de Saída"
+
+#. TRANSLATORS: C
+msgid "IDC_LBL_OUT_C"
+msgstr "C"
+
+#. TRANSLATORS: L
+msgid "IDC_LBL_OUT_L"
+msgstr "E"
+
+#. TRANSLATORS: R
+msgid "IDC_LBL_OUT_R"
+msgstr "D"
+
+#. TRANSLATORS: SL
+msgid "IDC_LBL_OUT_SL"
+msgstr "SE"
+
+#. TRANSLATORS: SR
+msgid "IDC_LBL_OUT_SR"
+msgstr "SD"
+
+#. TRANSLATORS: Sub
+msgid "IDC_LBL_OUT_SW"
+msgstr "Sub"
+
+#. TRANSLATORS: Preset
+msgid "IDC_GRP_PRESET"
+msgstr "Definir"
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_PRESET_DELETE"
+msgstr "Apagar"
+
+#. TRANSLATORS: File
+msgid "IDC_BTN_PRESET_FILE"
+msgstr "Ficheiro"
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_PRESET_SAVE"
+msgstr "Guardar"
+
+#. TRANSLATORS: Default audio renderer
+msgid "IDC_GRP_RENDERER"
+msgstr "Renderiz. áudio predefinida"
+
+#. TRANSLATORS: Use Direct Sound by default
+msgid "IDC_RBT_RENDER_DS"
+msgstr "Usar Direct Sound (Predef.)"
+
+#. TRANSLATORS: Use Wave Out by default
+msgid "IDC_RBT_RENDER_WO"
+msgstr "Usar saída Wave (Predef.)"
+
+#. TRANSLATORS: SPDIF options
+msgid "IDC_GRP_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: 32kHz
+msgid "IDC_CHK_SPDIF_ALLOW_32"
+msgstr "32kHz"
+
+#. TRANSLATORS: 44kHz
+msgid "IDC_CHK_SPDIF_ALLOW_44"
+msgstr "44kHz"
+
+#. TRANSLATORS: 48kHz
+msgid "IDC_CHK_SPDIF_ALLOW_48"
+msgstr "48kHz"
+
+#. TRANSLATORS: Output SPDIF as PCM
+msgid "IDC_CHK_SPDIF_AS_PCM"
+msgstr "Saída SPDIF como PCM"
+
+#. TRANSLATORS: Restrict SPDIF sample rate
+msgid "IDC_CHK_SPDIF_CHECK_SR"
+msgstr "Limitar frequência SPDIF"
+
+#. TRANSLATORS: Use AC3 encoder
+msgid "IDC_CHK_SPDIF_ENCODE"
+msgstr "Usar codificador AC3"
+
+#. TRANSLATORS: Do not encode stereo PCM
+msgid "IDC_CHK_SPDIF_STEREO_PT"
+msgstr "Não codificar estéreo PCM"
+
+#. TRANSLATORS: Detect SPDIF stream in PCM data
+msgid "IDC_CHK_USE_DETECTOR"
+msgstr "Detetar fluxo SPDIF nos dados PCM"
+
+#. TRANSLATORS: AC3 encoder bitrate (kbps)
+msgid "IDC_LBL_SPDIF_BITRATE"
+msgstr "Nr. de Bits"
+
+#. TRANSLATORS: SPDIF passthrough
+msgid "IDC_GRP_SPDIF_PT"
+msgstr "SPDIF - Passagem"
+
+#. TRANSLATORS: AC3
+msgid "IDC_CHK_SPDIF_AC3"
+msgstr "AC3"
+
+#. TRANSLATORS: DTS
+msgid "IDC_CHK_SPDIF_DTS"
+msgstr "DTS"
+
+#. TRANSLATORS: MPEG Audio
+msgid "IDC_CHK_SPDIF_MPA"
+msgstr "Áudio MPEG"
+
+#. TRANSLATORS: Audio/Video sync
+msgid "IDC_GRP_SYNC"
+msgstr " Sincronização de Áudio/Vídeo "
+
+#. TRANSLATORS: Jitter correction.
+msgid "IDC_CHK_JITTER"
+msgstr "Correção Jitter"
+
+#. TRANSLATORS: Current jitter:
+msgid "IDC_LBL_JITTER"
+msgstr "Jitter Atual"
+
+#. TRANSLATORS: Time shift (ms):
+msgid "IDC_LBL_TIME_SHIFT"
+msgstr "Cálculo Duração (ms)"
+
+#. TRANSLATORS: <- sound lags
+msgid "IDC_LBL_TIME_SHIFT_MINUS"
+msgstr "<- retardar som"
+
+#. TRANSLATORS: sound hastes ->
+msgid "IDC_LBL_TIME_SHIFT_PLUS"
+msgstr "acelerar som ->"
+
+#. TRANSLATORS: Localization
+msgid "IDC_GRP_TRANS"
+msgstr " Localização "
+
+#. TRANSLATORS: Language:
+msgid "IDC_LBL_LANG"
+msgstr "Idioma"
+
+#. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
+msgid "IDC_LNK_TRANSLATE"
+msgstr "Traduzir"
+
+msgid "Samples"
+msgstr "Amostras"
+
+msgid "Millisecs"
+msgstr "Milissegundos"
+
+msgid "Meters"
+msgstr "Metros"
+
+msgid "Centimeters"
+msgstr "Centimetros"
+
+msgid "Feet"
+msgstr "Pé"
+
+msgid "Inches"
+msgstr "Polegadas"
+
+msgid "Master"
+msgstr "Master"
+
+msgid "Left"
+msgstr "Esquerda"
+
+msgid "Center"
+msgstr "Centro"
+
+msgid "Right"
+msgstr "Direita"
+
+msgid "Surround Left"
+msgstr "Surround Esquerda"
+
+msgid "Surround Right"
+msgstr "Surround Direita"
+
+msgid "Subwoofer"
+msgstr "Subwoofer"
+
+#, c-format
+msgid "%ikHz"
+msgstr "%ikHz"
+
+#, c-format
+msgid "%iHz"
+msgstr "%iHz"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Tem a certeza que deseja apagar '%s'?"
+
+msgid "Delete confirmation"
+msgstr "Confirmação da Eliminação"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Tem a certeza que deseja apagar o matrix '%s'?"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' equalizer preset?"
+msgstr "Tem a certeza que deseja apagar o equalizador '%s' predefinido?"
+
+msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
+msgstr "Esta opção é PERIGOSA! O filtro pode produzir um ruído muito alto com esta opção ativada. Pressione 'Não' para ativar esta opção."
+
+msgid "Dangerous option!"
+msgstr "Opção Perigosa!"
+
+msgid "Spectrum: no data"
+msgstr "Espetro: sem dados"
+
+#, c-format
+msgid "Spectrum: %s"
+msgstr "Espetro: %s"
+
+msgid "All channels"
+msgstr "Todos os Canais"
+
+msgid "AS IS (no change)"
+msgstr "AS IS (sem alteração)"
+
+msgid "1/0 - mono"
+msgstr "1/0 - mono"
+
+msgid "2/0 - stereo"
+msgstr "2/0 - estéreo"
+
+msgid "3/0 - 3 front"
+msgstr "3/0 - 3 frente"
+
+msgid "2/1 - surround"
+msgstr "2/1 - surround"
+
+msgid "3/1 - surround"
+msgstr "3/1 - surround"
+
+msgid "2/2 - quadro"
+msgstr "2/2 - quatro"
+
+msgid "3/2 - 5 channels"
+msgstr "3/2 - 5 canais"
+
+msgid "1/0+SW 1.1 mono"
+msgstr "1/0+SW 1.1 mono"
+
+msgid "2/0+SW 2.1 stereo"
+msgstr "2/0+SW 2.1 estéreo"
+
+msgid "3/0+SW 3.1 front"
+msgstr "3/0+SW 3.1 frente"
+
+msgid "2/1+SW 3.1 surround"
+msgstr "2/1+SW 3.1 surround"
+
+msgid "3/1+SW 4.1 surround"
+msgstr "3/1+SW 4.1 surround"
+
+msgid "2/2+SW 4.1 quadro"
+msgstr "2/2+SW 4.1 quatro"
+
+msgid "3/2+SW 5.1 channels"
+msgstr "3/2+SW 5.1 canais"
+
+msgid "Dolby Surround/ProLogic"
+msgstr "Dolby Surround/ProLogic"
+
+msgid "Dolby ProLogic II"
+msgstr "Dolby ProLogic II"
+
+msgid "PCM 16bit"
+msgstr "PCM 16bits"
+
+msgid "PCM 24bit"
+msgstr "PCM 24bits"
+
+msgid "PCM 32bit"
+msgstr "PCM 32bits"
+
+msgid "PCM Float"
+msgstr "PCM Float"
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
+
+msgid "Use SPDIF"
+msgstr "Usar SPDIF"
+
+msgid "Use SPDIF (disabled)"
+msgstr "Usar SPDIF (desativado)"
+
+msgid "Use SPDIF (passthrough)"
+msgstr "Usar SPDIF (passagem)"
+
+msgid "Use SPDIF (AC3 encode)"
+msgstr "Usar SPDIF (codificação AC3)"
+
+msgid "Use SPDIF (Unknown)"
+msgstr "Usar SPDIF (Desconhecido)"
+
+#, c-format
+msgid ""
+"Input\tmean: %ims\tstddev: %ims\n"
+"Output\tmean: %ims\tstddev: %ims"
+msgstr ""
+"Entrada\tmeio: %ims\tstddev: %ims\n"
+"Saída\tmeio: %ims\tstddev: %ims"
+
+msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
+msgstr "Esta opção é PERIGOSA! O vídeo pode ficar fora da sinc. com esta opção ativada. Pressione 'Não' para ativar esta opção."
+
