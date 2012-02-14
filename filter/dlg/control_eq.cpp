@@ -77,10 +77,10 @@ ControlEq::~ControlEq()
   proc->Release();
 }
 
-void ControlEq::init()
+void ControlEq::init_channels_list()
 {
-  eq_ch = CH_NONE;
   proc->get_eq_channel(&eq_ch);
+  proc->get_proc_out_spk(&out_spk);
 
   LRESULT cmb_index;
   SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_RESETCONTENT, 0, 0);
@@ -91,12 +91,20 @@ void ControlEq::init()
     SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, cmb_index, 0);
 
   for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
-  {
-    cmb_index = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)gettext(long_ch_names[ch_name]));
-    SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, cmb_index, (LPARAM)ch_name);
-    if (ch_name == eq_ch)
-      SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, cmb_index, 0);
-  }
+    if ((out_spk.format == FORMAT_UNKNOWN) || (out_spk.mask & CH_MASK(ch_name)))
+    {
+      cmb_index = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)gettext(long_ch_names[ch_name]));
+      SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, cmb_index, (LPARAM)ch_name);
+      if (ch_name == eq_ch)
+        SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, cmb_index, 0);
+    }
+}
+
+void ControlEq::init()
+{
+  eq_ch = CH_NONE;
+
+  init_channels_list();
 
   for (size_t band = 0; band < EQ_BANDS; band++)
   {
@@ -187,7 +195,14 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
     }
 
     case IDC_CMB_EQ_CH:
-      if (message == CBN_SELENDOK)
+      if (message == CBN_DROPDOWN)
+      {
+        Speakers new_out_spk;
+        proc->get_proc_out_spk(&new_out_spk);
+        if (out_spk != new_out_spk)
+          init_channels_list();
+      }
+      else if (message == CBN_SELENDOK)
       {
         LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_GETCURSEL, 0, 0);
         if (idx != CB_ERR)

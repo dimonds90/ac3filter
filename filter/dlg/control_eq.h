@@ -20,6 +20,9 @@ protected:
   size_t nbands;
   EqBand bands[EQ_BANDS];
   DoubleEdit edt_gain[EQ_BANDS];
+  Speakers out_spk;
+
+  void init_channels_list();
 
 public:
   ControlEq(HWND dlg, IAudioProcessor *proc);
