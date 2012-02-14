@@ -116,7 +116,7 @@ void ControlPreset::update()
   fill_combobox(IDC_CMB_EQ_PRESET, REG_KEY_EQ);
 };
 
-ControlPreset::cmd_result ControlPreset::command(int control, int message, LPARAM data)
+ControlPreset::cmd_result ControlPreset::command(int control, int message)
 {
   switch (control)
   {

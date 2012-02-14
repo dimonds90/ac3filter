@@ -152,7 +152,7 @@ void ControlSpectrum::update_dynamic()
     spectrum.draw_lin(buf, length/2, double(spk.sample_rate)/length, label);
 }
 
-ControlSpectrum::cmd_result ControlSpectrum::command(int control, int message, LPARAM data)
+ControlSpectrum::cmd_result ControlSpectrum::command(int control, int message)
 {
   switch (control)
   {

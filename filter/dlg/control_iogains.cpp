@@ -77,7 +77,7 @@ void ControlIOGains::update()
   }
 };
 
-ControlIOGains::cmd_result ControlIOGains::command(int control, int message, LPARAM data)
+ControlIOGains::cmd_result ControlIOGains::command(int control, int message)
 {
   switch (control)
   {

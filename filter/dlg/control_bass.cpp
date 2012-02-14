@@ -69,7 +69,7 @@ void ControlBass::update_dynamic()
   SendDlgItemMessage(hdlg, IDC_SLI_BASS_LEVEL, PBM_SETPOS, slider_level(level, invert_levels), 0);
 }
 
-ControlBass::cmd_result ControlBass::command(int control, int message, LPARAM data)
+ControlBass::cmd_result ControlBass::command(int control, int message)
 {
   switch (control)
   {

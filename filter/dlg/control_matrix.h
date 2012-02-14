@@ -34,7 +34,7 @@ public:
   virtual void update_matrix();
   virtual void update_dynamic();
 
-  virtual cmd_result command(int control, int message, LPARAM data);
+  virtual cmd_result command(int control, int message);
 };
 
 #endif
