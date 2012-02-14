@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="strmbasd.lib winmm.lib"
+				AdditionalDependencies="strmbasd_mbcs.lib winmm.lib"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -131,7 +131,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="strmbasd.lib winmm.lib"
+				AdditionalDependencies="strmbasd_mbcs.lib winmm.lib"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -201,7 +201,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="strmbase.lib winmm.lib"
+				AdditionalDependencies="strmbase_mbcs.lib winmm.lib"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -274,7 +274,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="strmbase.lib winmm.lib"
+				AdditionalDependencies="strmbase_mbcs.lib winmm.lib"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
