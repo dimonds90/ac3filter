@@ -63,6 +63,7 @@ static EqBand default_bands[EQ_BANDS] =
 static const double min_gain_level = -12.0;
 static const double max_gain_level = +12.0;
 static const int ticks = 5;
+static const char *equalized_mark = " (*)";
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -85,7 +86,13 @@ void ControlEq::init_channels_list()
   LRESULT cmb_index;
   SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_RESETCONTENT, 0, 0);
 
-  cmb_index = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)_("All channels"));
+  bool equalized = false;
+  proc->get_eq_equalized(CH_NONE, &equalized);
+  string s = _("All channels");
+  if (equalized)
+    s += equalized_mark;
+
+  cmb_index = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)s.c_str());
   SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, cmb_index, (LPARAM)CH_NONE);
   if (CH_NONE == eq_ch)
     SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, cmb_index, 0);
@@ -93,7 +100,13 @@ void ControlEq::init_channels_list()
   for (int ch_name = 0; ch_name < CH_NAMES; ch_name++)
     if ((out_spk.format == FORMAT_UNKNOWN) || (out_spk.mask & CH_MASK(ch_name)))
     {
-      cmb_index = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)gettext(long_ch_names[ch_name]));
+      equalized = false;
+      proc->get_eq_equalized(ch_name, &equalized);
+      s = gettext(long_ch_names[ch_name]);
+      if (equalized)
+        s += equalized_mark;
+
+      cmb_index = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_ADDSTRING, 0, (LPARAM)s.c_str());
       SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETITEMDATA, cmb_index, (LPARAM)ch_name);
       if (ch_name == eq_ch)
         SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_SETCURSEL, cmb_index, 0);
@@ -120,6 +133,8 @@ void ControlEq::update()
   proc->get_eq_channel(&eq_ch);
   proc->get_eq_nbands(eq_ch, &nbands);
   proc->get_eq_bands(eq_ch, bands, 0, EQ_BANDS);
+
+  init_channels_list();
 
   // set the default scale if no bands defined
   if (nbands == 0)
@@ -196,12 +211,7 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
 
     case IDC_CMB_EQ_CH:
       if (message == CBN_DROPDOWN)
-      {
-        Speakers new_out_spk;
-        proc->get_proc_out_spk(&new_out_spk);
-        if (out_spk != new_out_spk)
-          init_channels_list();
-      }
+        init_channels_list();
       else if (message == CBN_SELENDOK)
       {
         LRESULT idx = SendDlgItemMessage(hdlg, IDC_CMB_EQ_CH, CB_GETCURSEL, 0, 0);

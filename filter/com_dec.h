@@ -245,6 +245,7 @@ public:
   STDMETHODIMP get_eq_nbands    (int ch, size_t *nbands);
   STDMETHODIMP get_eq_bands     (int ch, EqBand *bands, size_t first_band, size_t nbands);
   STDMETHODIMP set_eq_bands     (int ch, EqBand *bands, size_t nbands);
+  STDMETHODIMP get_eq_equalized (int ch, bool *is_equalized);
   STDMETHODIMP get_eq_channel   (int *ch);
   STDMETHODIMP set_eq_channel   (int  ch);
   // Delay
