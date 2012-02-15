@@ -339,6 +339,7 @@ DECLARE_INTERFACE_(IAudioProcessor, IUnknown)
   STDMETHOD (get_eq_nbands)    (int ch, size_t *nbands) = 0;
   STDMETHOD (get_eq_bands)     (int ch, EqBand *bands, size_t first_band, size_t nbands) = 0;
   STDMETHOD (set_eq_bands)     (int ch, EqBand *bands, size_t nbands) = 0;
+  STDMETHOD (get_eq_equalized) (int ch, bool *is_equalized) = 0;
   STDMETHOD (get_eq_channel)   (int *ch) = 0;
   STDMETHOD (set_eq_channel)   (int  ch) = 0;
   // Delay

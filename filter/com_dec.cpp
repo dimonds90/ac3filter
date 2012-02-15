@@ -724,6 +724,12 @@ STDMETHODIMP COMDecoder::set_eq_bands(int ch_name, EqBand *bands, size_t nbands)
   dvd.proc.set_eq_bands(ch_name, bands, nbands);
   return S_OK;
 }
+STDMETHODIMP COMDecoder::get_eq_equalized(int ch_name, bool *is_equalized)
+{
+  AutoLock config_lock(&config);
+  if (is_equalized) *is_equalized = dvd.proc.get_eq_equalized(ch_name);
+  return S_OK;
+}
 STDMETHODIMP COMDecoder::get_eq_channel(int *_ch)
 {
   AutoLock config_lock(&config);
