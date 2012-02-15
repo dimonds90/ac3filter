@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.63b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-14 22:09+0400\n"
+"POT-Creation-Date: 2012-02-15 16:49+0400\n"
 "PO-Revision-Date: 2009-11-08 20:59+0200\n"
 "Last-Translator: Freeze <vjuusola@gmail.com>\n"
 "Language-Team: \n"
@@ -173,7 +173,7 @@ msgstr "Tallenna vain nykyinen kanava myöhempää käyttöä varten."
 msgid "IDC_RBT_EQ_MCH"
 msgstr "tallenna kaikki paitsi pääkanava myöhempää palautusta varten."
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter versio %s Copyright (c) 2002-2009 Alexander Vigovsky"
 

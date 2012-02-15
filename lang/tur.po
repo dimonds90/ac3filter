@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ac3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-14 22:09+0400\n"
+"POT-Creation-Date: 2012-02-15 16:49+0400\n"
 "PO-Revision-Date: 2010-08-25 14:01+0200\n"
 "Last-Translator: altan edip yazgan <aeyazgan@hotmail.com>\n"
 "Language-Team: \n"
@@ -182,7 +182,7 @@ msgstr ""
 "Tüm Kanalları Kaydet (anakanal hariç), böylelikle daha sonra multi-kanal "
 "kurulumunu tekrardan yapabilirsiniz. "
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr ""
 
