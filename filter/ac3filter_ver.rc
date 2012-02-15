@@ -49,7 +49,7 @@ BEGIN
             VALUE "FileDescription", "ac3filter"
             VALUE "FileVersion", AC3FILTER_VER
             VALUE "InternalName", "ac3filter"
-            VALUE "LegalCopyright", "Copyright (c) 2002-2011 by Alexander Vigovsky"
+            VALUE "LegalCopyright", "Copyright (c) 2002-2012 by Alexander Vigovsky"
             VALUE "OriginalFilename", "ac3filter.ax"
             VALUE "ProductName", "AC3Filter"
             VALUE "ProductVersion", AC3FILTER_VER

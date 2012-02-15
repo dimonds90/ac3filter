@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.51a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-14 22:09+0400\n"
+"POT-Creation-Date: 2012-02-15 16:49+0400\n"
 "PO-Revision-Date: 2009-05-13 16:54+0300\n"
 "Last-Translator: Valex <xvalex.ru>\n"
 "Language-Team: \n"
@@ -173,7 +173,7 @@ msgstr ""
 msgid "IDC_RBT_EQ_MCH"
 msgstr ""
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2011 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter wer. %s Copyright (c) 2002-2008 by Alexander Vigovsky"
 
