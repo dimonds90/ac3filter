@@ -167,11 +167,11 @@ void ControlSystem::init()
   ListView_SetExtendedListViewStyle(formats_hwnd, style);
 
   LVITEM item;
+  item.iItem = 0;
+  item.iSubItem = 0;
   item.mask = LVIF_TEXT | LVIF_PARAM;
   item.state = 0;
-  item.iItem = 0;
   item.stateMask = 0;
-  item.iSubItem = 0;
   for (int i = 0; i < array_size(format_list); i++)
   {
     item.iItem = i + 1;
@@ -189,7 +189,7 @@ void ControlSystem::init()
   GetClientRect(formats_hwnd, &rect);
 
   LVCOLUMN col;
-  col.mask = LVCF_FMT | LVCF_TEXT | LVCF_WIDTH| LVCF_SUBITEM;
+  col.mask = LVCF_FMT | LVCF_TEXT | LVCF_WIDTH | LVCF_SUBITEM;
   col.iSubItem = 0;
   col.pszText = "Format";
   col.cx = rect.right - rect.top;
@@ -214,6 +214,7 @@ void ControlSystem::update()
   {
     item.iItem = i;
     item.iSubItem = 0;
+    item.mask = LVIF_PARAM;
     if (ListView_GetItem(formats_hwnd, &item))
     {
       int mask = item.lParam;
@@ -393,6 +394,7 @@ ControlSystem::notify(int control, int message, LPNMHDR nmhdr, INT_PTR &result)
         HWND formats_hwnd = GetDlgItem(hdlg, IDC_LST_FORMATS);
         item.iItem = nmlistview->iItem;
         item.iSubItem = 0;
+        item.mask = LVIF_PARAM;
         if (!ListView_GetItem(formats_hwnd, &item))
           return cmd_not_processed;
 
