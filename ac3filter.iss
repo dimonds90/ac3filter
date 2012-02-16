@@ -1,5 +1,5 @@
 #ifndef appver
-#define appver "test"
+#define appver GetStringFileInfo("filter\Release\ac3filter.ax", "ProductVersion")
 #endif
 
 [Setup]
@@ -14,7 +14,7 @@ DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
 SolidCompression=yes
 LanguageDetectionMethod=locale
-MinVersion=0, 4.0
+MinVersion=0, 5.0
 
 [Languages]
 Name: bul; MessagesFile: "compiler:Default.isl,lang\isl\Bulgarian-5.1.11.isl"
@@ -55,15 +55,15 @@ Name: "lang"; Description: "Language files"; Types: full
 
 [Files]
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\Release\avcodec-52.dll";           DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\Release\avutil-50.dll";            DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\Release\avcodec-53.dll";           DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\Release\avutil-51.dll";            DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "intl\Release\ac3filter_intl.dll";         DestDir: "{app}"; Components: prog\filter32 and lang; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 
 Source: "filter\x64\Release\ac3filter64.ax";           DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\x64\Release\avcodec64-52.dll";         DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\x64\Release\avutil64-50.dll";          DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\x64\Release\avcodec64-53.dll";         DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\x64\Release\avutil64-51.dll";          DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "intl\x64\Release\ac3filter64_intl.dll";       DestDir: "{app}\x64"; Components: prog\filter64 and lang; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\x64\Release\ac3config.exe";   DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\spdif_test\x64\Release\spdif_test.exe"; DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
@@ -118,9 +118,10 @@ Root: HKLM64; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers32"; 
 Root: HKLM64; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc"; ValueType: string; ValueName: "ac3filter.acm"; ValueData: "AC3Filter ACM codec"; Components: prog\acm64; Flags: uninsdeletevalue
 
 [Run]
-Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
-Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg""";
-Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&product/969409773073/0/quantity=10"; Description: "Donate"; Flags: postinstall shellexec;
+Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg"""; Flags: waituntilterminated
+Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg"""; Flags: waituntilterminated
+Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&product/969409773073/0/quantity=10"; Flags: nowait postinstall shellexec skipifsilent; Description: "Donate"
+Filename: "{app}\ac3config.exe"; Flags: nowait postinstall skipifsilent; Description: "Configure AC3Filter"
 
 [code]
 function lang_code(param: string): string;

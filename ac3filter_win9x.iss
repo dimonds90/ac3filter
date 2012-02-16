@@ -1,5 +1,5 @@
 #ifndef appver
-#define appver "test"
+#define appver GetFileVersion("filter\Release\ac3filter.ax")
 #endif
 
 [Setup]
@@ -52,8 +52,8 @@ Name: "lang"; Description: "Language files"; Types: full
 
 [Files]
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\Release\avcodec-52.dll";           DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\Release\avutil-50.dll";            DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\Release\avcodec-53.dll";           DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\Release\avutil-51.dll";            DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "intl\Release\ac3filter_intl.dll";         DestDir: "{app}"; Components: prog\filter32 and lang; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
@@ -104,7 +104,8 @@ Root: HKLM32; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc
 [Run]
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg""";
-Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&product/969409773073/0/quantity=10"; Description: "Donate"; Flags: postinstall shellexec;
+Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&product/969409773073/0/quantity=10"; Flags: nowait postinstall shellexec skipifsilent; Description: "Donate"
+Filename: "{app}\ac3config.exe"; Flags: nowait postinstall skipifsilent; Description: "Configure AC3Filter"
 
 [code]
 function lang_code(param: string): string;
