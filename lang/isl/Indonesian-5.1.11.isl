@@ -282,7 +282,7 @@ ErrorReplacingExistingFile=Kesalahan muncul saat mencoba me-replace berkas:
 ErrorRestartReplace=RestartReplace gagal:
 ErrorRenamingTemp=Kesalahan muncul saat mencoba me-rename berkas pada direktori tujuan:
 ErrorRegisterServer=Gagal meregister berkas DLL/OCX: %1
-ErrorRegisterServerMissingExport=DllRegisterServer export tidak ditemukan
+; ErrorRegisterServerMissingExport=DllRegisterServer export tidak ditemukan
 ErrorRegisterTypeLib=Gagal meregister type library: %1
 
 ; *** Post-installation errors

@@ -37,21 +37,11 @@ rem Build projects
 :build_projects
 
 rem -------------------------
-rem Update version info
-
-cd filter
-if not exist "ac3filter_ver.old" ren ac3filter_ver.h ac3filter_ver.old
-echo #ifndef AC3FILTER_VER>ac3filter_ver.h
-echo #define AC3FILTER_VER "%ver_text%">>ac3filter_ver.h
-echo #endif>>ac3filter_ver.h
-cd ..
-
-rem -------------------------
 rem Build projects
 
 set PROJECTS=acm filter intl tools\ac3config tools\spdif_test
 
-call cmd\build_all vc9 x86 %PROJECTS%
+call cmd\build_all vc9 Win32 %PROJECTS%
 if errorlevel 1 goto fail
 
 call cmd\build_all vc9 x64 %PROJECTS%
