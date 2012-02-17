@@ -121,11 +121,63 @@ Root: HKLM64; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg"""; Flags: waituntilterminated
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg"""; Flags: waituntilterminated
 Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&product/969409773073/0/quantity=10"; Flags: nowait postinstall shellexec skipifsilent; Description: "Donate"
-Filename: "{app}\ac3config.exe"; Flags: nowait postinstall skipifsilent; Description: "Configure AC3Filter"
 
 [code]
+var
+  SendReportIndex : integer;
+  PrevVersion : string;
+  
 function lang_code(param: string): string;
 begin
   result := ExpandConstant('{language}');
   StringChangeEx(result, '_at_', '@', false);
+end;
+
+procedure SendReport(reportType: string);
+var
+  WinHttpReq: Variant;
+begin
+try
+  WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
+  WinHttpReq.Open('POST', 'http://ac3filter.net/install.php', false);
+  WinHttpReq.SetRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  WinHttpReq.Send(
+    'reportType=' + reportType + '&' +
+    'appName=AC3Filter&' +
+    ExpandConstant('appVersion={#appver}&') +
+    'prevVersion=' + PrevVersion + '&' +
+    'language=' + ActiveLanguage + '&' +
+    'windowsVersion=' + GetWindowsVersionString
+  );
+except
+end;
+end;
+
+////////////////////////////////////////////////////////////
+
+function InitializeSetup(): Boolean;
+begin
+  SendReportIndex := -1;
+  PrevVersion := '';
+  RegQueryStringValue(HKEY_CURRENT_USER, 'Software\AC3Filter', 'Version', PrevVersion);
+  Result := true;
+end;
+
+procedure CurPageChanged(CurPageID: Integer);
+begin
+  if CurPageID=wpFinished then
+    SendReportIndex := WizardForm.RunList.AddCheckbox('Send installation report', '', 0, true, true, false, false, nil);
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if (CurStep = ssDone) and
+     (SendReportIndex <> -1) and
+     (WizardForm.RunList.Checked[SendReportIndex]) then
+  begin
+    if PrevVersion = '' then
+      SendReport('install')
+    else
+      SendReport('upgrade');
+  end;
 end;
