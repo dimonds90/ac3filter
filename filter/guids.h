@@ -20,7 +20,7 @@ void cr2crlf(char *buf, size_t size);
 #define APP_NAME      "AC3Filter"
 #define SUPPORT_EMAIL "support@ac3filter.net"
 #define WEB_SITE_URL  "http://ac3filter.net"
-#define BUG_TRAP_URL  "http://ac3filter.net/bug_trap.php"
+#define BUG_TRAP_URL  "http://ac3filter.net/bugtrap.php"
 #define FORUM_URL     "http://ac3filter.net/forum"
 
 // Registry keys
