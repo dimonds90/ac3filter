@@ -6,7 +6,7 @@
 #include "resource_ids.h"
 #include "ac3filter_intl.h"
 #include "dialog_controls.h"
-#include "logging.h"
+#include "log.h"
 
 #include "ac3filter_dlg.h"
 #include "dlg/control_all.h"

@@ -1,7 +1,7 @@
 #include "guids.h"
 #include "ac3filter.h"
 #include "ac3filter_intl.h"
-#include "logging.h"
+#include "log.h"
 #include "decss\DeCSSInputPin.h"
 
 static const string log_module = "AC3Filter";
