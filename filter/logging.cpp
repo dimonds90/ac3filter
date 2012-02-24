@@ -11,118 +11,78 @@
   * high-detailed (not filtered), but limited in size.
 */
 
-#include <string>
-#include <vector>
 #include <windows.h>
-#include <shlwapi.h>
 #include <tchar.h>
-#include "log.h"
+#include <shlwapi.h>
+#include <DbgHelp.h>
+#include "../BugTrap/BugTrap.h"
+#include "ac3filter_ver.h"
 #include "logging.h"
+#include "guids.h"
 
-using std::string;
+static const size_t log_size = 1000;
 
-///////////////////////////////////////////////////////////////////////////////
+LogMem event_log(log_size);
+LogMem trace_log(log_size);
 
-AC3FilterEventLog event_log;
-AC3FilterTraceLog trace_log;
-
-///////////////////////////////////////////////////////////////////////////////
-
-static string log_filename()
+static std::string event_log_file_name()
 {
   TCHAR file_name[MAX_PATH];
-  TCHAR temp_name[MAX_PATH];
   GetTempPath(MAX_PATH, file_name);
-  GetTempFileName(file_name, "ac3filter_", 0, temp_name);
-  PathAppend(file_name, temp_name);
-  return string(file_name);
+  PathAppend(file_name, "ac3filter_event.log");
+  return std::string(file_name);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-AC3FilterEventLog::AC3FilterEventLog()
-{}
-
-AC3FilterEventLog::~AC3FilterEventLog()
+static std::string trace_log_file_name()
 {
-  LogFile::close();
-#ifndef _DEBUG
-  remove(filename.c_str());
-#endif
+  TCHAR file_name[MAX_PATH];
+  GetTempPath(MAX_PATH, file_name);
+  PathAppend(file_name, "ac3filter_trace.log");
+  return std::string(file_name);
 }
 
-void
-AC3FilterEventLog::init(LogDispatcher *source)
+static void flush_log(LogMem &log, const string &file_name)
 {
-  filename = log_filename();
-  LogFile::open(filename.c_str());
-  LogFile::subscribe(source);
-}
-
-void
-AC3FilterEventLog::receive(const LogEntry &entry)
-{
-  if (entry.level <= log_event)
-    LogFile::receive(entry);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-class AC3FilterTraceLog::EntryList : public std::vector<LogEntry>
-{};
-
-AC3FilterTraceLog::AC3FilterTraceLog():
-entries(new AC3FilterTraceLog::EntryList)
-{
-  pos = 0;
-  max_events = 0;
-}
-
-AC3FilterTraceLog::~AC3FilterTraceLog()
-{
-#ifdef _DEBUG
-  flush();
-#endif
-  LogFile::close();
-#ifndef _DEBUG
-  remove(filename.c_str());
-#endif
-}
-
-void
-AC3FilterTraceLog::init(LogDispatcher *source, size_t max_events_)
-{
-  pos = 0;
-  max_events = max_events_;
-  entries->resize(0);
-  filename = log_filename();
-  LogFile::subscribe(source);
-}
-
-void
-AC3FilterTraceLog::receive(const LogEntry &entry)
-{
-  if (entries->size() < max_events)
-    entries->push_back(entry);
-  else if (max_events != 0)
+  static const string endl = "\n";
+  AutoFile f(file_name.c_str(), "w");
+  for (size_t i = 0; i < log.size(); i++)
   {
-    (*entries)[pos++] = entry;
-    if (pos >= entries->size())
-      pos = 0;
+    string s = log[i].print() + endl;
+    f.write(s.c_str(), s.size());
   }
 }
 
-void
-AC3FilterTraceLog::flush()
+static void CALLBACK pre_error(INT_PTR param)
 {
-  size_t i;
-  if (LogFile::open(filename.c_str()))
-  {
-    for (i = pos; i < entries->size(); i++)
-      LogFile::receive((*entries)[i]);
-    for (i = 0; i < pos; i++)
-      LogFile::receive((*entries)[i]);
-    LogFile::close();
-  }
+  flush_log(event_log, event_log_file_name());
+  flush_log(trace_log, trace_log_file_name());
+}
+
+void init_logging()
+{
+  event_log.subscribe(&valib_log_dispatcher);
+  trace_log.subscribe(&valib_log_dispatcher);
+  event_log.set_max_log_level(log_event);
+  trace_log.set_max_log_level(log_all);
+
+  // Init BugTrap
+  BT_SetAppName(_T(APP_NAME));
+  BT_SetAppVersion(_T(AC3FILTER_VER));
+  BT_SetSupportEMail(_T(SUPPORT_EMAIL));
+  BT_SetFlags(BTF_DETAILEDMODE | BTF_EDITMAIL);
+  BT_SetDumpType(MiniDumpNormal);
+  BT_SetSupportServer(_T(BUG_TRAP_URL), 80);
+  BT_SetSupportURL(_T(WEB_SITE_URL));
+  BT_AddRegFile(_T("Settings.reg"), _T("HKEY_CURRENT_USER\\"REG_KEY));
+  BT_AddLogFile(event_log_file_name().c_str());
+  BT_AddLogFile(trace_log_file_name().c_str());
+  BT_SetPreErrHandler(pre_error, 0);
+  BT_SetModule(ac3filter_instance);
+
+  BT_InstallSehFilter();
+}
+
+void uninit_logging()
+{
+  BT_UninstallSehFilter();
 }

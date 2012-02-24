@@ -1,11 +1,8 @@
 #include <windows.h>
 #include <tchar.h>
-#include <DbgHelp.h>
-#include "../BugTrap/BugTrap.h"
 #include "guids.h"
 #include "logging.h"
 #include "ac3filter_intl.h"
-#include "ac3filter_ver.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Truncate the last element of the path with the trailing slash
@@ -52,27 +49,11 @@ BOOL WINAPI DllMain(HINSTANCE hinst, DWORD reason, LPVOID reserved)
         init_nls(path);
 
     // Init logging
-    event_log.init(&valib_log_dispatcher);
-    trace_log.init(&valib_log_dispatcher);
-
-    // Init BugTrap
-    BT_InstallSehFilter();
-    BT_SetAppName(_T(APP_NAME));
-    BT_SetAppVersion(_T(AC3FILTER_VER));
-    BT_SetSupportEMail(_T(SUPPORT_EMAIL));
-    BT_SetFlags(BTF_DETAILEDMODE | BTF_EDITMAIL);
-    BT_SetDumpType(MiniDumpNormal);
-    BT_SetSupportServer(_T(BUG_TRAP_URL), 80);
-    BT_SetSupportURL(_T(WEB_SITE_URL));
-    BT_AddRegFile(_T("Settings.reg"), _T("HKEY_CURRENT_USER\\"REG_KEY));
-    BT_AddLogFile(event_log.get_filename().c_str());
-    BT_AddLogFile(trace_log.get_filename().c_str());
-    BT_SetModule(ac3filter_instance);
+    init_logging();
   }
   if (reason == DLL_PROCESS_DETACH)
   {
-    // On DLL unload we should uninstall our filter
-    BT_UninstallSehFilter();
+    uninit_logging();
   }
   return DllEntryPoint(hinst, reason, reserved);
 }
