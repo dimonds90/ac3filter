@@ -7,6 +7,7 @@ v2.0.0a - unreleased
     * option to redirect bass to front speakers
   * Single icon per application
   * Online help
+  * Crash report
   * Set filter language from the installer
   * Translations:
     * Portuguese, thanks to Manuela Silva

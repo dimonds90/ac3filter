@@ -16,7 +16,14 @@ extern HINSTANCE ac3filter_instance;
 
 void cr2crlf(char *buf, size_t size);
 
-// registry key
+// Application info
+#define APP_NAME      "AC3Filter"
+#define SUPPORT_EMAIL "support@ac3filter.net"
+#define WEB_SITE_URL  "http://ac3filter.net"
+#define BUG_TRAP_URL  "http://ac3filter.net/bugtrap.php"
+#define FORUM_URL     "http://ac3filter.net/forum"
+
+// Registry keys
 #define REG_KEY        "Software\\AC3Filter"
 #define REG_KEY_PRESET "Software\\AC3Filter\\preset"
 #define REG_KEY_MATRIX "Software\\AC3Filter\\matrix"

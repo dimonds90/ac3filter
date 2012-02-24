@@ -1,9 +1,12 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
-#include "chunk.h"
+#include "log.h"
 
-void log_input_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *clock);
-void log_output_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *clock);
+extern LogMem event_log;
+extern LogMem trace_log;
+
+void init_logging();
+void uninit_logging();
 
 #endif
