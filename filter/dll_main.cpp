@@ -51,10 +51,11 @@ BOOL WINAPI DllMain(HINSTANCE hinst, DWORD reason, LPVOID reserved)
       if (cut_last_name(path, path_size))
         init_nls(path);
 
-    // Init BugTrap
-    TCHAR file_name[MAX_PATH];
-    AC3FilterTrace::GetLogFileName(file_name, MAX_PATH);
+    // Init logging
+    event_log.init(&valib_log_dispatcher);
+    trace_log.init(&valib_log_dispatcher);
 
+    // Init BugTrap
     BT_InstallSehFilter();
     BT_SetAppName(_T(APP_NAME));
     BT_SetAppVersion(_T(AC3FILTER_VER));
@@ -64,7 +65,8 @@ BOOL WINAPI DllMain(HINSTANCE hinst, DWORD reason, LPVOID reserved)
     BT_SetSupportServer(_T(BUG_TRAP_URL), 80);
     BT_SetSupportURL(_T(WEB_SITE_URL));
     BT_AddRegFile(_T("Settings.reg"), _T("HKEY_CURRENT_USER\\"REG_KEY));
-    BT_AddLogFile(trace.GetFileName());
+    BT_AddLogFile(event_log.get_filename().c_str());
+    BT_AddLogFile(trace_log.get_filename().c_str());
     BT_SetModule(ac3filter_instance);
   }
   if (reason == DLL_PROCESS_DETACH)

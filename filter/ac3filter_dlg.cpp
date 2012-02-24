@@ -11,7 +11,7 @@
 #include "ac3filter_dlg.h"
 #include "dlg/control_all.h"
 
-
+static const string log_module = "AC3FilterDlg";
 
 #define SAFE_RELEASE(p) { if (p) p->Release(); p = 0; }
 
@@ -184,7 +184,7 @@ CUnknown * WINAPI AC3FilterDlg::CreateAbout(LPUNKNOWN lpunk, HRESULT *phr)
 AC3FilterDlg::AC3FilterDlg(TCHAR *pName, LPUNKNOWN pUnk, HRESULT *phr, int DialogId, const char *title_id, const char *title_def, const char *help_link_, ctrl_maker maker_)
 :CBasePropertyPage(pName, pUnk, DialogId, 0), maker(maker_)
 {
-  trace.AppendF(BTLL_INFO, "AC3FilterDlg::AC3FilterDlg(%s)", pName);
+  valib_log(log_event, log_module, "AC3FilterDlg(this=%x, pName=%s)", this, pName);
 
   title = gettext_id(title_id, title_def);
   help_link = help_link_;
@@ -225,14 +225,14 @@ AC3FilterDlg::GetPageInfo(LPPROPPAGEINFO pPageInfo)
 HRESULT 
 AC3FilterDlg::OnConnect(IUnknown *pUnknown)
 {
-  trace.AppendF(BTLL_INFO, "AC3FilterDlg::OnConnect()");
+  valib_log(log_event, log_module, "OnConnect(this=%x)", this);
 
   pUnknown->QueryInterface(IID_IAC3Filter, (void **)&filter);
   pUnknown->QueryInterface(IID_IDecoder, (void **)&dec);
   pUnknown->QueryInterface(IID_IAudioProcessor, (void **)&proc);
   if (!filter || !dec || !proc)
   {
-    trace.AppendF(BTLL_ERROR, "AC3FilterDlg::OnConnect() Failed!");
+    valib_log(log_error, log_module, "OnConnect(this=%x): Cannot get required interfaces", this);
     SAFE_RELEASE(filter);
     SAFE_RELEASE(dec);
     SAFE_RELEASE(proc);
@@ -249,7 +249,7 @@ AC3FilterDlg::OnConnect(IUnknown *pUnknown)
 HRESULT 
 AC3FilterDlg::OnDisconnect()
 {
-  trace.AppendF(BTLL_INFO, "AC3FilterDlg::OnDisconnect()");
+  valib_log(log_event, log_module, "OnDisconnect(this=%x)", this);
 
   if (filter)
     dec->save_params(0, AC3FILTER_ALL);
@@ -264,7 +264,7 @@ AC3FilterDlg::OnDisconnect()
 HRESULT 
 AC3FilterDlg::OnActivate()
 {
-  trace.AppendF(BTLL_INFO, "AC3FilterDlg::OnActivate()");
+  valib_log(log_event, log_module, "OnActivate(this=%x)", this);
 
   visible = true;
   refresh = true;
@@ -294,7 +294,7 @@ AC3FilterDlg::OnActivate()
 HRESULT 
 AC3FilterDlg::OnDeactivate()
 {
-  trace.AppendF(BTLL_INFO, "AC3FilterDlg::OnDeactivate()");
+  valib_log(log_event, log_module, "OnDeactivate(this=%x)", this);
 
   KillTimer(m_hwnd, 1);
   KillTimer(m_hwnd, 2);
@@ -493,7 +493,7 @@ AC3FilterDlg::reload_state()
 void 
 AC3FilterDlg::init_controls()
 {
-  trace.AppendF(BTLL_INFO, "AC3FilterDlg::init_controls()");
+  valib_log(log_event, log_module, "init_controls(this=%x)", this);
 
   /////////////////////////////////////
   // Init controllers
