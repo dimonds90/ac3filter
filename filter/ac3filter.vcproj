@@ -64,7 +64,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib "
+				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib  shlwapi.lib"
 				OutputFile="$(OutDir)\$(ProjectName).ax"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
@@ -91,7 +91,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)&#x0D;&#x0A;"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;copy /b ..\BugTrap\$(ConfigurationName)\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -139,7 +139,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib "
+				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib  shlwapi.lib"
 				OutputFile="$(OutDir)\$(ProjectName)64.ax"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
@@ -166,7 +166,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)&#x0D;&#x0A;"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;copy /b ..\BugTrap\x64\$(ConfigurationName)\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -217,7 +217,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib "
+				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib shlwapi.lib"
 				OutputFile="$(OutDir)\$(ProjectName).ax"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
@@ -246,7 +246,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)&#x0D;&#x0A;"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;copy /b ..\BugTrap\$(ConfigurationName)\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -325,7 +325,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)&#x0D;&#x0A;"
+				CommandLine="copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;copy /b ..\BugTrap\x64\$(ConfigurationName)\*.dll $(OutDir)&#x0D;&#x0A;call register.cmd $(PlatformName)\$(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -409,6 +409,10 @@
 			</File>
 			<File
 				RelativePath=".\dlg_base.h"
+				>
+			</File>
+			<File
+				RelativePath=".\dll_main.cpp"
 				>
 			</File>
 			<File

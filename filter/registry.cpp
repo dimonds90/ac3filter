@@ -2,9 +2,10 @@
 #include <stdio.h>
 #include <memory.h>
 #include <math.h>
-#include <streams.h>
+#include "log.h"
 #include "registry.h"
 
+static const std::string log_module = "RegistryKey";
 
 RegistryKey::RegistryKey()
 {
@@ -110,7 +111,7 @@ RegistryKey::get_bool(LPCTSTR name, bool &value)
     return false;
 
   value = v != 0;
-  DbgLog((LOG_TRACE, 3, "RegistryKey::get_bool(\"%s\") = %s", name, value? "true": "false"));
+  valib_log(log_trace, log_module, "get_bool(\"%s\") = %s", name, value? "true": "false");
   return true;
 }
 
@@ -130,7 +131,7 @@ RegistryKey::get_int32(LPCTSTR name, int32_t &value)
     return false;
 
   value = v;
-  DbgLog((LOG_TRACE, 3, "RegistryKey::get_int32(\"%s\") = %i", name, value));
+  valib_log(log_trace, log_module, "get_int32(\"%s\") = %i", name, value);
   return true;
 }
 
@@ -153,12 +154,12 @@ RegistryKey::get_float(LPCTSTR name, double &value)
   char tmp;
   if (sscanf(buf, "%lg%c", &v, &tmp) != 1)
   {
-    DbgLog((LOG_TRACE, 3, "RegistryKey::get_float(\"%s\"): cannot convert \"%s\" to float!", name, buf));
+    valib_log(log_warning, log_module, "get_float(\"%s\"): cannot convert \"%s\" to float!", name, buf);
     return false;
   }
 
   value = v;
-  DbgLog((LOG_TRACE, 3, "RegistryKey::get_float(\"%s\") = %lg", name, value));
+  valib_log(log_trace, log_module, "get_float(\"%s\") = %lg", name, value);
   return true;
 }
 
@@ -176,7 +177,7 @@ RegistryKey::get_text(LPCTSTR name, char *value, int size)
   if (type != REG_SZ)
     return false;
   
-  DbgLog((LOG_TRACE, 3, "RegistryKey::get_text(\"%s\") = \"%s\"", name, value));
+  valib_log(log_trace, log_module, "get_text(\"%s\") = \"%s\"", name, value);
   return true;
 }
 
@@ -187,7 +188,7 @@ RegistryKey::set_bool(LPCTSTR name, bool _value)
 
   DWORD value = _value;
   RegSetValueEx(key, name, NULL, REG_DWORD, (LPBYTE)&value, 4);
-//  DbgLog((LOG_TRACE, 3, "RegistryKey::set_bool(\"%s\", %s", name, _value? "true": "false"));
+  valib_log(log_trace, log_module, "set_bool(\"%s\", %s", name, _value? "true)": "false)");
 }
 
 void
@@ -197,7 +198,7 @@ RegistryKey::set_int32(LPCTSTR name, int32_t _value)
 
   DWORD value = _value;
   RegSetValueEx(key, name, NULL, REG_DWORD, (LPBYTE)&value, 4);
-//  DbgLog((LOG_TRACE, 3, "RegistryKey::set_int32(\"%s\", %i)", name, _value));
+  valib_log(log_trace, log_module, "set_int32(\"%s\", %i)", name, _value);
 }
 
 void
@@ -208,7 +209,7 @@ RegistryKey::set_float(LPCTSTR name, double _value)
   char buf[256];
   sprintf(buf, "%lg", _value);
   RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)&buf, (DWORD)strlen(buf)+1);
-//  DbgLog((LOG_TRACE, 3, "RegistryKey::set_float(\"%s\", %lg = \"%s\")", name, _value, buf));
+  valib_log(log_trace, log_module, "set_float(\"%s\", %lg = \"%s\")", name, _value, buf);
 }
 
 void
@@ -220,7 +221,7 @@ RegistryKey::set_text(LPCTSTR name, const char *_value)
     RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)_value, (DWORD)strlen(_value)+1);
   else
     RegSetValueEx(key, name, NULL, REG_SZ, (LPBYTE)"", 1);
-//  DbgLog((LOG_TRACE, 3, "RegistryKey::set_text(\"%s\", \"%s\")", name, _value? _value: ""));
+  valib_log(log_trace, log_module, "set_text(\"%s\", \"%s\")", name, _value? _value: "");
 }
 
 
@@ -268,6 +269,7 @@ FileConfig::get_bool(LPCTSTR name, bool &value)
   if (!strcmp(buf, "false")) { value = false; return true; }
   if (!strcmp(buf, "False")) { value = false; return true; }
   if (!strcmp(buf, "FALSE")) { value = false; return true; }
+  valib_log(log_warning, "FileConfig", "get_bool(\"%s\"): cannot convert \"%s\" to bool!", name, buf);
   return false;
 }
 
@@ -283,7 +285,7 @@ FileConfig::get_int32(LPCTSTR name, int32_t &value)
   char tmp;
   if (sscanf(buf, "%i%c", &v, &tmp) != 1)
   {
-    DbgLog((LOG_TRACE, 3, "FileConfig::get_int32(\"%s\"): cannot convert \"%s\" to integer!", name, buf));
+    valib_log(log_warning, "FileConfig", "get_int32(\"%s\"): cannot convert \"%s\" to integer!", name, buf);
     return false;
   }
 
@@ -303,7 +305,7 @@ FileConfig::get_double(LPCTSTR name, double &value)
   char tmp;
   if (sscanf(buf, "%lg%c", &v, &tmp) != 1)
   {
-    DbgLog((LOG_TRACE, 3, "FileConfig::get_float(\"%s\"): cannot convert \"%s\" to float!", name, buf));
+    valib_log(log_warning, "FileConfig", "get_float(\"%s\"): cannot convert \"%s\" to float!", name, buf);
     return false;
   }
 
