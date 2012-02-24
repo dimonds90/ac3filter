@@ -1,24 +1,47 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
-#include <windows.h>
-#include <streams.h>
-#include "../bugtrap/bugtrap.h"
-#include "../bugtrap/bttrace.h"
-#include "chunk.h"
+#include "log.h"
 
-class AC3FilterTrace : public BTTrace
+class AC3FilterEventLog : public LogFile
 {
 public:
-  AC3FilterTrace();
-  ~AC3FilterTrace();
+  AC3FilterEventLog();
+  ~AC3FilterEventLog();
 
-  static void GetLogFileName(LPTSTR lpFilename, DWORD nSize);
+  void init(LogDispatcher *source);
+  std::string get_filename() const
+  { return filename; }
 
-  void input_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *clock);
-  void output_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *clock);
+  virtual void receive(const LogEntry &entry);
+
+protected:
+  std::string filename;
 };
 
-extern AC3FilterTrace trace;
+class AC3FilterTraceLog : public LogFile
+{
+public:
+  AC3FilterTraceLog();
+  ~AC3FilterTraceLog();
+
+  void init(LogDispatcher *source, size_t max_events = 1000);
+  std::string get_filename() const
+  { return filename; }
+
+  virtual void receive(const LogEntry &entry);
+  void flush();
+
+protected:
+  std::string filename;
+  size_t max_events;
+  size_t pos;
+
+  class EntryList;
+  EntryList *entries;
+};
+
+extern AC3FilterEventLog event_log;
+extern AC3FilterTraceLog trace_log;
 
 #endif

@@ -1,96 +1,128 @@
+/*
+  Good log should be:
+  * small enough for fast reporting
+  * very detailed to help with debugging
+
+  AC3Filter can make tens and hundreds megabytes trace logs. Of course, it is
+  unacceptable for end user. But low-detailed logs may not help at all.\
+  
+  As a tradeoff TWO log files are produced:
+  * low-detailed (log_event and lower).
+  * high-detailed (not filtered), but limited in size.
+*/
+
+#include <string>
+#include <vector>
+#include <windows.h>
 #include <shlwapi.h>
-#include <stdio.h>
-#include <streams.h>
 #include <tchar.h>
+#include "log.h"
 #include "logging.h"
-#include "vtime.h"
 
-AC3FilterTrace trace;
+using std::string;
 
-AC3FilterTrace::AC3FilterTrace()
+///////////////////////////////////////////////////////////////////////////////
+
+AC3FilterEventLog event_log;
+AC3FilterTraceLog trace_log;
+
+///////////////////////////////////////////////////////////////////////////////
+
+static string log_filename()
 {
-  TCHAR full_name[MAX_PATH];
   TCHAR file_name[MAX_PATH];
-  GetLogFileName(file_name, MAX_PATH);
-  GetTempPath(MAX_PATH, full_name);
-  PathAppend(full_name, file_name);
-  Open(full_name, BTLF_TEXT);
-  SetLogFlags(BTLF_SHOWLOGLEVEL | BTLF_SHOWTIMESTAMP);
-  SetLogLevel(BTLL_VERBOSE);
+  TCHAR temp_name[MAX_PATH];
+  GetTempPath(MAX_PATH, file_name);
+  GetTempFileName(file_name, "ac3filter_", 0, temp_name);
+  PathAppend(file_name, temp_name);
+  return string(file_name);
 }
 
-AC3FilterTrace::~AC3FilterTrace()
-{
-  // Running AC3Filter many times may create hundreds megabytes of logs.
-  // Do not leave logs on disk.
-  TCHAR file_name[MAX_PATH];
-  _tcscpy_s(file_name, MAX_PATH, GetFileName());
+///////////////////////////////////////////////////////////////////////////////
 
-  Close();
+AC3FilterEventLog::AC3FilterEventLog()
+{}
+
+AC3FilterEventLog::~AC3FilterEventLog()
+{
+  LogFile::close();
 #ifndef _DEBUG
-  DeleteFile(file_name);
+  remove(filename.c_str());
 #endif
 }
 
 void
-AC3FilterTrace::GetLogFileName(LPTSTR lpFilename, DWORD nSize)
+AC3FilterEventLog::init(LogDispatcher *source)
 {
-  // Several applications may load AC3Filter at the same time.
-  // To prevent mess in logs append process id to the file name.
-  _stprintf_s(lpFilename, nSize, _T("ac3filter_%i.log"), GetCurrentProcessId());
+  filename = log_filename();
+  LogFile::open(filename.c_str());
+  LogFile::subscribe(source);
 }
 
-static vtime_t time_from_start()
+void
+AC3FilterEventLog::receive(const LogEntry &entry)
 {
-  static vtime_t time_start = local_time();
-  return local_time() - time_start;
+  if (entry.level <= log_event)
+    LogFile::receive(entry);
 }
 
-void 
-AC3FilterTrace::input_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *clock)
+///////////////////////////////////////////////////////////////////////////////
+
+
+class AC3FilterTraceLog::EntryList : public std::vector<LogEntry>
+{};
+
+AC3FilterTraceLog::AC3FilterTraceLog():
+entries(new AC3FilterTraceLog::EntryList)
 {
-  if (chunk.sync)
+  pos = 0;
+  max_events = 0;
+}
+
+AC3FilterTraceLog::~AC3FilterTraceLog()
+{
+#ifdef _DEBUG
+  flush();
+#endif
+  LogFile::close();
+#ifndef _DEBUG
+  remove(filename.c_str());
+#endif
+}
+
+void
+AC3FilterTraceLog::init(LogDispatcher *source, size_t max_events_)
+{
+  pos = 0;
+  max_events = max_events_;
+  entries->resize(0);
+  filename = log_filename();
+  LogFile::subscribe(source);
+}
+
+void
+AC3FilterTraceLog::receive(const LogEntry &entry)
+{
+  if (entries->size() < max_events)
+    entries->push_back(entry);
+  else if (max_events != 0)
   {
-    vtime_t time = time_from_start();
-    REFERENCE_TIME clock_time = 0;
-    vtime_t latency = 0;
-    if (clock)
-      if SUCCEEDED(clock->GetTime(&clock_time))
-      {
-        clock_time -= start_time;
-        latency =  chunk.time - vtime_t(clock_time) / 10000000;
-      }
-
-    trace.AppendF(BTLL_VERBOSE,
-      "-> time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims\tsize: %i",
-      int(time * 1000),
-      int(clock_time / 10000),
-      int(chunk.time * 1000),
-      int(latency * 1000),
-      chunk.size);
+    (*entries)[pos++] = entry;
+    if (pos >= entries->size())
+      pos = 0;
   }
 }
 
 void
-AC3FilterTrace::output_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *clock)
+AC3FilterTraceLog::flush()
 {
-  if (chunk.sync)
+  size_t i;
+  if (LogFile::open(filename.c_str()))
   {
-    vtime_t time = time_from_start();
-    REFERENCE_TIME clock_time = 0;
-    vtime_t latency = 0;
-    if (clock)
-      if SUCCEEDED(clock->GetTime(&clock_time))
-      {
-        clock_time -= start_time;
-        latency = chunk.time - vtime_t(clock_time) / 10000000;
-      }
-    trace.AppendF(BTLL_VERBOSE,
-      "<- time: %ims\tclock: %ims\ttimestamp: %ims\tlatency: %ims\tsize: %i",
-      int(time * 1000),
-      int(clock_time / 10000),
-      int(chunk.time * 1000),
-      int(latency * 1000),
-      chunk.size);
+    for (i = pos; i < entries->size(); i++)
+      LogFile::receive((*entries)[i]);
+    for (i = 0; i < pos; i++)
+      LogFile::receive((*entries)[i]);
+    LogFile::close();
   }
 }
