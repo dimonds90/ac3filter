@@ -15,7 +15,7 @@ protected:
 
   int      frames;
   int      errors;
-  char     info[2048];
+  char     info[4096];
 
 public:
   ControlInfo(HWND dlg, IDecoder *dec);
