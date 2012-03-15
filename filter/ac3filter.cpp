@@ -183,6 +183,7 @@ AC3Filter::process(const Chunk *chunk)
       {
         Speakers spk = dec.get_output();
         valib_log(log_event, log_module, "process(this=%x): new stream (%s)", this, spk.print().c_str());
+        valib_log(log_event, log_module, dec.info());
         sink->open_throw(spk);
       }
 
