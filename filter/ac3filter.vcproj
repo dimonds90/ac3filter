@@ -548,6 +548,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\dlg\control_debug.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\dlg\control_debug.h"
+				>
+			</File>
+			<File
 				RelativePath=".\dlg\control_delay.cpp"
 				>
 			</File>

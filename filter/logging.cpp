@@ -17,6 +17,7 @@
 #include <DbgHelp.h>
 #include "../BugTrap/BugTrap.h"
 #include "ac3filter_ver.h"
+#include "registry.h"
 #include "logging.h"
 #include "guids.h"
 
@@ -85,4 +86,13 @@ void init_logging()
 void uninit_logging()
 {
   BT_UninstallSehFilter();
+
+  bool save_logs = false;
+  RegistryKey reg(REG_KEY);
+  reg.get_bool("save_logs", save_logs);
+  if (save_logs)
+  {
+    flush_log(event_log, event_log_file_name());
+    flush_log(trace_log, trace_log_file_name());
+  }
 }

@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 150
+// Total controls: 154
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -99,6 +99,18 @@ static const ControlDesc dialog_controls[] =
   /* TRANSLATORS: Thanks to */
   { IDC_GRP_CREDITS, N_("IDC_GRP_CREDITS"), "Thanks to", "" },
 
+  // Debug
+  /* TRANSLATORS: Debug */
+  { IDC_GRP_DEBUG, N_("IDC_GRP_DEBUG"), "Debug", "" },
+  /* TRANSLATORS: Crash */
+  { IDC_BTN_CRASH, N_("IDC_BTN_CRASH"), "Crash", "" },
+  /* TRANSLATORS: Debug info */
+  { IDC_BTN_DEBUG_INFO, N_("IDC_BTN_DEBUG_INFO"), "Debug info", "" },
+  /* TRANSLATORS: Save logs on exit */
+  { IDC_CHK_SAVE_LOGS, N_("IDC_CHK_SAVE_LOGS"), "Save logs on exit", "" },
+  /* TRANSLATORS: Feedback email: */
+  { IDC_LBL_FEEDBACK, N_("IDC_LBL_FEEDBACK"), "Feedback email:", "" },
+
   // Decoder info
   /* TRANSLATORS: Decoder info */
   { IDC_GRP_DECODER_INFO, N_("IDC_GRP_DECODER_INFO"), "Decoder info", "" },
@@ -152,10 +164,6 @@ static const ControlDesc dialog_controls[] =
   { IDC_RBT_DTS_MODE_PADDED, N_("IDC_RBT_DTS_MODE_PADDED"), "Padded DTS", "" },
   /* TRANSLATORS: SPDIF wrapped */
   { IDC_RBT_DTS_MODE_WRAPPED, N_("IDC_RBT_DTS_MODE_WRAPPED"), "SPDIF wrapped", "" },
-
-  // Build info
-  /* TRANSLATORS: Build info */
-  { IDC_GRP_ENV, N_("IDC_GRP_ENV"), "Build info", "" },
 
   // Equalizer
   /* TRANSLATORS: Equalizer */

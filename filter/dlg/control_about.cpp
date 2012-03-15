@@ -12,8 +12,6 @@ static const int controls[] =
   IDC_LBL_LICENSE,
   IDC_GRP_CONTACT,
   IDC_LBL_CONTACT,
-  IDC_GRP_ENV,
-  IDC_EDT_ENV,
   IDC_GRP_CREDITS,
   IDC_EDT_CREDITS,
 
@@ -42,11 +40,6 @@ void ControlAbout::init()
   // Build credits and environment info
 
   char info[1024];
-
-  strncpy(info, valib_build_info(), sizeof(info));
-  info[sizeof(info)-1] = 0;
-  cr2crlf(info, sizeof(info));
-  SetDlgItemText(hdlg, IDC_EDT_ENV, info);
 
   strncpy(info, valib_credits(), sizeof(info));
   info[sizeof(info)-1] = 0;

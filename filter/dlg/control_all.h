@@ -9,6 +9,7 @@
 #include "control_agc.h"
 #include "control_bass.h"
 #include "control_cpu.h"
+#include "control_debug.h"
 #include "control_delay.h"
 #include "control_eq.h"
 #include "control_info.h"

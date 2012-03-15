@@ -447,10 +447,8 @@
 #define IDC_LBL_LICENSE                52805
 #define IDC_GRP_CONTACT                52806
 #define IDC_LBL_CONTACT                52807
-#define IDC_GRP_ENV                    52808
-#define IDC_EDT_ENV                    52809
-#define IDC_GRP_CREDITS                52810
-#define IDC_EDT_CREDITS                52811
+#define IDC_GRP_CREDITS                52808
+#define IDC_EDT_CREDITS                52809
 
 // Link controls (525)
 #define IDC_LNK_HOME                   52501
@@ -536,6 +534,14 @@
 #define IDC_RBT_EQ_CUR                 53201
 #define IDC_RBT_EQ_MCH                 53202
 #define IDC_RBT_EQ_ALL                 53203
+
+// Debug
+#define IDC_GRP_DEBUG                  53501
+#define IDC_LBL_FEEDBACK               53502
+#define IDC_EDT_FEEDBACK               53503
+#define IDC_CHK_SAVE_LOGS              53504
+#define IDC_BTN_CRASH                  53505
+#define IDC_BTN_DEBUG_INFO             53506
 
 // Other
 #define IDC_VER                        52901
