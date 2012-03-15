@@ -119,6 +119,7 @@ Controller *AC3FilterDlg::ctrl_about(HWND hdlg, IAC3Filter *filter, IDecoder *de
 
   ctrl->add(new ControlVer(hdlg));
   ctrl->add(new ControlAbout(hdlg));
+  ctrl->add(new ControlDebug(hdlg));
   return ctrl;
 }
 

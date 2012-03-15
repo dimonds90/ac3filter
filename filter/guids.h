@@ -183,9 +183,6 @@ DECLARE_INTERFACE_(IAC3Filter, IUnknown)
 
   // CPU usage
   STDMETHOD (get_cpu_usage)(double *cpu_usage) = 0;
-
-  // Build and environment info
-  STDMETHOD (get_env) (char *buf, size_t size) = 0;
 };
 
 DECLARE_INTERFACE_(IDecoder, IUnknown)
