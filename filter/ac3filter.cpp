@@ -1004,6 +1004,20 @@ static void log_input_chunk(const Chunk &chunk, CRefTime start_time, IReferenceC
       int(latency * 1000),
       chunk.size);
   }
+  else
+  {
+    vtime_t time = time_from_start();
+    REFERENCE_TIME clock_time = 0;
+    if (clock)
+      if SUCCEEDED(clock->GetTime(&clock_time))
+        clock_time -= start_time;
+
+    valib_log(log_trace, log_module,
+      "-> time: %ims\tclock: %ims\tsize: %i",
+      int(time * 1000),
+      int(clock_time / 10000),
+      chunk.size);
+  }
 }
 
 static void log_output_chunk(const Chunk &chunk, CRefTime start_time, IReferenceClock *clock)
@@ -1026,6 +1040,20 @@ static void log_output_chunk(const Chunk &chunk, CRefTime start_time, IReference
       int(clock_time / 10000),
       int(chunk.time * 1000),
       int(latency * 1000),
+      chunk.size);
+  }
+  else
+  {
+    vtime_t time = time_from_start();
+    REFERENCE_TIME clock_time = 0;
+    if (clock)
+      if SUCCEEDED(clock->GetTime(&clock_time))
+        clock_time -= start_time;
+
+    valib_log(log_trace, log_module,
+      "<- time: %ims\tclock: %ims\tsize: %i",
+      int(time * 1000),
+      int(clock_time / 10000),
       chunk.size);
   }
 }
