@@ -102,8 +102,8 @@ static const ControlDesc dialog_controls[] =
   // Debug
   /* TRANSLATORS: Debug */
   { IDC_GRP_DEBUG, N_("IDC_GRP_DEBUG"), "Debug", "" },
-  /* TRANSLATORS: Crash */
-  { IDC_BTN_CRASH, N_("IDC_BTN_CRASH"), "Crash", "" },
+  /* TRANSLATORS: Error report */
+  { IDC_BTN_CRASH, N_("IDC_BTN_CRASH"), "Error report", "" },
   /* TRANSLATORS: Debug info */
   { IDC_BTN_DEBUG_INFO, N_("IDC_BTN_DEBUG_INFO"), "Debug info", "" },
   /* TRANSLATORS: Save logs on exit */

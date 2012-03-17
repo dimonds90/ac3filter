@@ -1,3 +1,5 @@
+#include <windows.h>
+#include "../../BugTrap/BugTrap.h"
 #include "../resource_ids.h"
 #include "../registry.h"
 #include "../guids.h"
@@ -61,9 +63,11 @@ ControlDebug::cmd_result ControlDebug::command(int control, int message)
       }
 
     case IDC_BTN_CRASH:
-    {
-
-    }
+      if (message == BN_CLICKED)
+      {
+        BT_CallSehFilter();
+        return cmd_ok;
+      }
   }
   return cmd_not_processed;
 }
