@@ -1,0 +1,421 @@
+v2.0.0a - unreleased
+  * 8 channels support
+  * PCM Double output support
+  * DTS-MA (core only), AAC, EAC3, FLAC, MP3 decoding support
+  * Completely new bass redirection:
+    * better filtering (4th order Linkwitz-Riley)
+    * option to redirect bass to front speakers
+  * Single icon per application
+  * Online help
+  * Crash report
+  * Set filter language from the installer
+  * Translations:
+    * Portuguese, thanks to Manuela Silva
+    * Turkish, thanks to AltanEdip
+    * Dutch, thanks to Ernst Klamer
+    * Bulgarian, thanks to Георги Бързев
+
+v1.63b - 11.08.2009
+  * AC3 decoding bug fixed (Issue 1)
+  * Channel order bug fixed (issue 43)
+  + Remote control using messages
+  + Write version number to the registry on install (issue 17)
+  + Command line interface for AC3Config utility (run ac3config /? for help)
+
+  + Swedish translation added (thanks to Niclas Burgren)
+  * French language updated (thanks to Philippe AGUESSE)
+
+
+v1.62b - 17.07.2009
+  * Precise PCM passthrough
+  ! Fixed: Noise on LPCM 20/24bit tracks
+  ! Fixed: Delay settings did not work after restart.
+  + German translation updated (thanks to Philipp Wode)
+  + Japan translation added (thanks to tnetsixenon)
+
+
+v1.61b - 01.06.2009
+  * Clear DirectShow filter cache on install and uninstall
+  ! Fixed: Matrix was not saved
+  ! Fixed: Popping sound when seeking DTS/WAV or AC3/WAV file
+  * Translations updated: Slovak (thanks to Artam), Spanish (thanks to Ferny)
+
+
+v1.60b - 17.05.2009
+  + 64bit filter
+  + Lite filter version
+  + Multichannel equalizer
+  + Customize equalizer dialog with frequency response of the equalizer
+  * Equalizer rewrited
+  * Spectrum synchronized with audio playback
+  * Localized installer
+  ! Fixed: ACM driver sometimes crashed
+  ! Fixed: equalizer can mute the sound sometimes
+  ! Fixed: "incorrect value" error message may appear under the settings dialog
+  ! Fixed: tab key now works at edit controls
+
+  New Translations:
+  * Slovenian, thanks to DarkHand
+  * Greek, thanks to Peter Perdik and Dimitrios Topouzidis
+
+
+v1.51a - 09.07.2008
+  * CPU usage takes in account number of processors
+  * Center, Voice and LFE levels are syncronized across Mixer and Gains pages
+  * 'Decoder info' box did not work sometimes
+  * Slovak, Spanish and Italian translations updated
+
+
+v1.50a - 30.06.2008
+  + Equalizer
+  + Spectrum analyzer
+  + Sample rate conversion
+  + spdif_test utility
+  * New and updated translations
+  * Old bugs killed, new made :)
+
+
+v1.46 stable - 09.08.2007
+  + AC3 encoder bitrate is now ajustable
+  + Korean translation added (thanks to starcodec)
+  ! Upmixing of Dolby Surround files works now (thanks to Stefan Schott)
+  ! MPEG Audio Joint stereo playback fixed (thanks to Daniel Bechter)
+  ! Problem with decimal point in mixing matrix on some non-english Windows (thanks to Marcin Hencz)
+
+
+v1.45b - 07.06.2007
+  + ACM codec is now included into the package
+  + Tab labels are now translatable
+  + All languages available so far integrated
+  * Avoid poEdit '\r' warning when creating a translation file
+  + Warning messages about dangerous options
+  ! Loud noise was possible after output format switch or SPDIF state change
+  ! Audio skips problem fixed once more
+
+
+v1.40b - 30.05.2007
+  + Localization support!
+  + Localization procedure is easy and can by done by everyone!
+  + Russian translation
+
+  ! Fixed bug in AC3 decoder (audio skips). Thanks to Chris Meadowcroft!
+  ! User manual fixed (broken in v1.35b)
+
+  * Mixing LFE channel into several channels preserves resulting loudness.
+    LFE level now means gain relative to front channles.
+
+
+v1.35b - 24.05.2007
+  ! Fixed a bug in AC3 decoder (decoding of 4.1 and 3.1 AC3 files was affected). Thanks to Dietmar Kleiner for reporting and testing!
+  ! Fixed a bug with fast playback of mono files in WMP
+  ! Delay units works correctly in offline config utility
+
+  + SPDIF page added, all SPDIF-related options are moved there
+  + AC3Config utility supports themes
+  + Invert levels option to fix a bug with levels display in 3rd-party themes
+
+  * Default output format changed to stereo (Much of people with stereo setup cannot hear center channel with default multichannel output)
+
+
+v1.30b - 27.03.07
+  * AC3 decoding level made louder by +6dB
+
+  * Fixed: sometimes 2 tray icons appear in WMP
+  * Fixed: Matrix editing did not work in Vista
+  * Fixed: Gains was not saved in Vista
+
+
+v1.20b - 20.03.07
+  * Fixed bug with some 14bit DTS streams
+  + SPDIF input support
+  + Autodetection of SPDIF stream in PCM16 data
+  + New SPDIF/DTS passthrough mode
+  + DTS conversion to 14bit to decrease the level of possible noise
+
+
+v1.11 - 28.10.06
+  Stable version.
+
+  * Now filter saves output settings to preset 
+    (so now you can create presets with different output configurations)
+  * Tray icon and some other options display fixed
+  * Fixed crash with TMPEnc
+
+
+v1.10b - 27.09.06
+  Work on stability continues. Now filter shows good stability, therefore its
+  status changes to beta and it may be recommended to replace any previous
+  version.
+
+  Some additional work was done:
+  * Sometimes SPDIF mode cannot be set because of post-processing filters
+    that do not support spdif output. Now it's an additional option to force
+    this problem. Read here for more info: 
+    http://ac3filter.net/forum/viewtopic.php?t=10
+    (thanks to LESAGE Aurelien for testing)
+  * DivX player now works with SPDIF
+  * Some players do not allow to configure filters. Now AC3Filter has tray icon
+    to access filter's settings.
+
+  Known problems:
+  * AC3 encode does not work with some receivers
+  * Incorrect playback of some 14bit DTS files
+
+  Changelog:
+  + Tray icon
+  + 'Disallow PCM in SPDIF mode' option added
+  * Divx Player now works with SPDIF output
+  * AC3Config app does not crash, but reports an error when filter is uninstalled.
+
+
+v1.09a - 09.08.06
+  * DivX Player compatibility
+  * Audio/Video sync option works again
+
+
+v1.08a - 07.08.06
+  * More work with player compatibility
+
+
+v1.07a - 02.08.06
+  > Thanks to Marcelo Castagna for patience with testing.
+  * BSPlayer crash fixed
+  * No sound in some players fixed
+  * AGC fixed: was limited to -6dB
+
+
+v1.06a - 01.08.06
+  * AGC fixed: overflow check did not work sometimes
+
+
+v1.05a - 31.07.06
+  * Extended AC3 sainty checks disabled
+    How it recognizes AC3 files produced with buggy encoder
+
+v1.04a - 30.07.06
+  > Bugfix release
+  > Valex thanks Alex for a great job with testing ;-)
+
+  * SPDIF passthrough did not work with Program Stream (DVD)
+  * SPDIF had jitter with DVD
+  * Cannot enable SPDIF with some sound cards (found on HDSP 9632)
+  * Uninstall now deletes pis folder
+
+
+v1.03a - 23.07.06
+  + As-is output mode (without change of number of channgels)
+  + SPDIF output options:
+  +   Enable/disable AC3 encoder
+  +   Enable/disable encoding of stereo PCM
+  +   Option to output SPDIF stream as PCM
+  +   Sample rate check
+  + Option to check output format support
+  + Sound card reinit after pause
+  * Extended decoder inforation
+  * SPDIF disabled reason indication
+  * Time shift and jitter correction work with SPDIF output
+  * Extended jitter statistics
+  * Attack/Release speed adjust
+
+
+v1.02a (unofficial release)
+  * Documentation was fully rewrited 
+    (much of information about how to setup and tune the filter)
+  * updated DRC algorithm (reduced noise)
+  * DRC bug fixed (sound disappeared sometimes)
+  * AC3 encoder bug fixed
+  + Added AC3 CRC check
+
+
+v1.01a (unofficial release)
+  * First working alfa for new filter generation
+  * Totally rewrited
+  * 10%-20% less CPU usage
+  * Level meters are now syncronized with playback
+  + DTS decoding support (including AVI/DTS and WAV/DTS)
+  + MPEG1/2 Audio Layer I/II decoding support
+  + DVD/LPCM decoding support
+  + Audio processing for any kind of audio track
+  + AC3/DTS/MPEG Audio SPDIF passthrough
+  + Real-time AC3 encoding for multichannel SPDIF output
+  + More powerful dynamic range compression
+  + Bass redirection crossover frequency
+  + Per-channel gain control
+  - equalizer
+  - save configuration to file
+
+
+v0.70b - 18.07.2003
+  ! Serious bug in decoder fixed. Sound is _much_ better now
+    especially on low bitrates.
+  * Some optimizations.
+  * Updated DPLII downmix matrix according to 
+    http://forum.doom9.org/showthread.php?s=&threadid=57988
+    (thanks to bleo!)
+
+
+v0.69b - 09.07.2003
+  + Jitter correction (more smooth playback)
+  + Italian translation added
+  ! Sometimes sound disappeared in MPC.
+  ! 'File' button now works at stand-alone configuration.
+
+
+v0.68b - 03.04.2003
+  ! Speaker configuration switched to spdif with
+    auto load of config file enabled. Fixed
+
+
+v0.67b - 31.03.2003
+  - Auto switch to stereo was a bad idea... Removed.
+  + Delete preset buttons added for all preset boxes.
+  + Save/load settings to file.
+  + Auto load setting from file with the same name as media 
+    file (so it is possible to create individual settings
+    for each movie).
+  + System configuration property page.
+  + Output levels indicate overflow.
+  + Time shifting for audio/video sync.
+  ! Video stuttering again. Now it is possible to choose
+    sync method between v0.63 method and v0.64 method.
+
+
+v0.66b - 19.03.2003
+  ! Switch from SPDIF to stereo after seek fixed. 
+
+
+v0.65b - 18.03.2003
+  ! DVD playback is back
+
+
+v0.64b - 17.03.2003
+  * Much of testing
+  + Speaker configuation can be changed when playing
+    (no more need to stop playback). Thanks to Gabest for ideas
+  + Bass redirection option
+  + 100Hz-7000Hz filter for Dolby Surround/ProLogic downmix
+  + Automatic switching speakers to PCM 16bit stereo
+    if selected mode is not supported. ('Some streams 
+    are in unsupported format' error message)
+  + Time delay can be specified as diatance to speakers
+  + You can now switch using ac3filter or other installed
+    decoder (for NVDVD)
+  ! Reject to work with SPDIF on some systems bug fixed.
+    ('Some streams are in unsupported format' error message)
+  ! Video stuttering with SPDIF fixed
+  ! Silent center/surround (-3dB gain removed for center/surround)
+  ! Surround decoding matrix changed
+  ! W98/ME config crash fixed
+  ! W98/ME ControlPanel icon is working now
+  ! W98/ME 'Use WaveOut' & 'Use DirectShound' files fixed.
+
+
+v0.63b - 23.12.2002
+  ! fixed SPDIF mute issue
+
+
+v0.62b - 22.12.2002
+  + Signal clipping on overflow
+  + Auto gain control can be turned off now
+  * filter_merit now accepts common abbrevations for root registry keys
+    instead of senseless codes
+  * More error-tolerante
+  ! Seeking bug fixed.
+  ! Bug fixed: sometimes timestamps may be lost.
+  ! Bug with SPDIF output fixed (incorrect frame size)
+  ! WaveOut/DirectSound switching is now working more correct in W98
+    (thanks to Mario *LigH* Rohkramer!)
+  ! Fixed little bug in uninstaller
+
+
+v0.61b - 20.12.2002
+  + Installer
+  * Changed syncronization algorithm
+  ! Crash with WaveOut and ReClock renderers fixed
+
+
+v0.6b - 17.12.2002
+  + Equalizer
+  + Audio delay adjust
+  + Support for different output sample formats: PCM16, PCM 24, Float
+  + Dolby Surround/ProLogic/ProLogicII downmix.
+  + Control Panel icon
+  ! Mono output bug fixed
+  ! Bug with WMP9 playback fixed
+  * Mixer page is redesigned
+  * Made filter code smaller
+
+
+v0.55b - 25.11.2002
+  ! Bug fixed: surround and voice gain controls
+    did not work in 5 channel mode
+  ! Bug with decoding stereo files fixed
+
+
+v0.54b - 01.10.2002
+  + SPDIF pass-through output.
+  + Preset loading and several standart presets added.
+  * Speaker configuration is now saved to registry.
+  + Speaker configuration program added.
+  + Patch for dialog size in Win98 Chieneese
+  ! Bug filxed - in some cases filter settings was not saved.
+
+
+v0.53b - 14.09.2002
+  * Filter is distributed under GPL lisence now.
+  + Save settings to registy.
+  + Mixer control page with mixer matrix added.
+  * LFE channel is now mixed only to front speakers.
+  * 'Normalize' checkbox on main page means now 
+    one-pass normalization.
+  ! Some bug fixed and new added.
+
+
+v0.52b - 01.09.2002
+  ! Bug fixed - hang on corrupted PES streams.
+  + Sound volume increased.
+  + Overflow control and automatic gain control added.
+  + Master gain control added.
+  + DRC power control added.
+
+
+v0.51b - 18.07.2002
+  ! Bug fixed (crash on some ac3 formats)
+
+
+v0.5b - 07.07.2002
+  * AC3 decoder code was fully rewritten
+  + PES support added.
+  + Levels for LFE, Surround and Voice locked to BSI by default.
+  + CPU usage indicator
+  + Input and output levels inidicators.
+  + DRC level indicator.
+  + Some information about stream added.
+  ! Some bug fixes.
+
+
+v0.4a - 23.06.2002
+  + LFE support and LFE gain added.
+  + Added buttons for reset all gains to BSI values.
+  + Stereo now transmitted in standart format, so now filter can work
+    with sustems with no multi-channel support (Win9x/WinNT).
+  + DVD decoding added.
+  ! Syncronization problem fixed.
+  + Option to enable/disable dynamic range compression added.
+
+
+v0.3a - 03.04.2002
+  + Volume gain for central (voice) and surround channels.
+  + Speaker configuration change support added. Only works when 
+    all intermediate filters support dynamic reconfiguring and only
+    in stopped (not paused!) state.
+
+
+v0.2a - 01.04.2002
+  * LibA52 code was rewritten for multitasing, so now possible to 
+    create many instances of the filter in a filtergraph. It is primary
+    used for multi-language films.
+  + Information panel added (but settings are not working now).
+
+
+v0.1a - first working alfa

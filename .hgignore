@@ -1,0 +1,63 @@
+syntax:glob
+
+# Build files
+**\Debug
+**\Release
+**\Debug_Libc
+**\Release_Libc
+
+# Visual studio intermediate files
+*.aps
+*.ncb
+*.plg
+*.opt
+*.dep
+*.suo
+*.user
+
+# Libintl build files
+
+intl\gnu\gettext-0.13.1-mod
+intl\gnu\libiconv-1.9.2-mod
+intl\gnu\include
+intl\gnu\lib
+intl\gnu\usr
+
+# BugTrap files
+BugTrap\HTML
+mkdoc.log
+
+# zlib build files
+zlib\bin
+zlib\stat-debug
+zlib\stat-release
+zlib\stat-debug-x64
+zlib\stat-release-x64
+
+
+# Doc build files
+doc\*.tmp
+doc\*.4tc
+doc\*.dvi
+doc\*.4ct
+doc\*.idv
+doc\*.lg
+doc\*.log
+doc\*.aux
+doc\*.out
+doc\*.toc
+doc\*.blg
+doc\*.bbl
+doc\*.xref
+
+# Doc resulting files
+doc\*.pdf
+doc\*.html
+doc\*.htm
+doc\*.css
+
+# Language build files
+lang\lang
+
+# Config
+cmd/config.cmd

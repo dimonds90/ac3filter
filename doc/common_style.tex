@@ -1,0 +1,84 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links
+
+\newcommand{\urlhome}[1]{\href{http://ac3filter.net}{#1}}
+\newcommand{\urlforum}[1]{\href{http://ac3filter.net/forum}{#1}}
+\newcommand{\urldonate}[1]{\href{http://order.kagi.com/?6CZJZ}{#1}}
+\newcommand{\urldownload}[1]{\href{http://sourceforge.net/project/showfiles.php?group_id=66022&package_id=63808}{#1}}
+\newcommand{\filterlinks}
+{
+  \begin{center}
+    \urlhome{AC3Filter home} :: 
+    \urldonate{Donate} :: 
+    \urldownload{Download} :: 
+    \urlforum{Support forum}
+  \end{center}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Style of text elements
+
+% name of an AC3Filter option
+\newcommand{\optname}[1]{\textbf{``\textsf{#1}''}}
+
+% value of an option
+\newcommand{\optval}[1]{\textbf{\textsf{#1}}}
+
+% definition
+\newcommand{\definition}[1]{\textbf{\textit{#1}}}
+
+% notes
+\newcommand{\note}[1]{\smallskip{\footnotesize #1}\smallskip}
+
+% warnings
+\newcommand{\warning}[1]
+{
+  \begin{center}
+    \fbox{\parbox{0.8\hsize}{\textcolor{red}{#1}}}
+  \end{center}
+}
+
+% tell user to do something
+\newcommand{\action}[1]{\textbf{\textsf{#1}}}
+
+% file names
+\newcommand{\file}[1]{\textbf{\textsf{#1}}}
+
+% registry keys
+\newcommand{\registry}[1]{\textbf{\textsf{#1}}}
+
+% insert an image
+\newcommand{\img}[1] % {filename}
+{
+  \begin{center}
+    \includegraphics[width=10cm]{#1}
+  \end{center}
+}
+
+% insert a figure
+\newcommand{\fig}[3] % {filename}{caption}{label}
+{
+  \begin{center}
+    \label{fig:#3}
+    \caption{#2}
+    \includegraphics[width=10cm]{#1}
+  \end{center}
+}
+
+% reference
+\newcommand{\myref}[1] % {label}
+{
+  \ref{#1} \nameref{#1}
+}
+
+% section
+\newcommand{\mysection}[2] % {label}{name}
+{
+  \section{#2} \label{sec:#1}
+}
+
+% subsection
+\newcommand{\mysubsection}[2] % {label}{name}
+{
+  \subsection{#2} \label{ss:#1}
+}
