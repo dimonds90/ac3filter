@@ -8,8 +8,6 @@
 #include "../resource_ids.h"
 #include "control_eq.h"
 
-#define EQ_CHANNELS 6
-
 static const int controls[] =
 {
   IDC_GRP_EQ,
@@ -60,10 +58,34 @@ static EqBand default_bands[EQ_BANDS] =
   { 30, 1.0 }, { 60, 1.0 }, { 125, 1.0 }, { 250, 1.0 }, { 500, 1.0 }, { 1000, 1.0 }, { 2000, 1.0 }, { 4000, 1.0 }, { 8000, 1.0 }, { 16000, 1.0 }
 };
 
-static const double min_gain_level = -12.0;
-static const double max_gain_level = +12.0;
-static const int ticks = 5;
+static const double min_gain_level = -12.0; // dB
+static const double max_gain_level = +12.0; // dB
+static const double step_size = 1;          // dB
+static const double page_size = 1;          // dB
+static const int ticks = 10; // steps per dB
+
 static const char *equalized_mark = " (*)";
+
+static inline int db2pos(double db)
+{
+  return int(-db * ticks);
+}
+
+static inline double pos2db(int pos)
+{
+  double db = double(-pos) / ticks;
+  return floor(db / step_size + 0.5) * step_size;
+}
+
+static inline int gain2pos(double gain)
+{
+  return db2pos(value2db(gain));
+}
+
+static inline double pos2gain(int pos)
+{
+  return db2value(pos2db(pos));
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -122,8 +144,10 @@ void ControlEq::init()
   for (size_t band = 0; band < EQ_BANDS; band++)
   {
     edt_gain[band].link(hdlg, idc_edt_eq[band]);
-    SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-    SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETTIC, 0, 0);
+    SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETRANGE, TRUE, MAKELONG(db2pos(max_gain_level), db2pos(min_gain_level)));
+    SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETLINESIZE, 0, LONG(step_size * ticks));
+    SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETPAGESIZE, 0, LONG(page_size * ticks));
+    SendDlgItemMessage(hdlg, idc_sli_eq[band], TBM_SETTIC, 0, db2pos(0));
   }
 }
 
@@ -160,7 +184,7 @@ void ControlEq::update()
       ShowWindow(GetDlgItem(hdlg, idc_lbl_eq[band_reorder[nbands][band]]), SW_SHOW);
 
       edt_gain[band_reorder[nbands][band]].update_value(value2db(bands[band].gain));
-      SendDlgItemMessage(hdlg, idc_sli_eq[band_reorder[nbands][band]], TBM_SETPOS, TRUE, long(-value2db(bands[band].gain) * ticks));
+      SendDlgItemMessage(hdlg, idc_sli_eq[band_reorder[nbands][band]], TBM_SETPOS, TRUE, gain2pos(bands[band].gain));
       SetDlgItemText(hdlg, idc_lbl_eq[band_reorder[nbands][band]], buf);
     }
     else
@@ -193,8 +217,9 @@ ControlEq::cmd_result ControlEq::command(int control, int message)
     for (band = 0; band < EQ_BANDS; band++)
       if (control == idc_sli_eq[band_reorder[nbands][band]])
       {
+        LRESULT pos = SendDlgItemMessage(hdlg, idc_sli_eq[band_reorder[nbands][band]],TBM_GETPOS, 0, 0);
         proc->get_eq_bands(eq_ch, bands, 0, EQ_BANDS);
-        bands[band].gain = db2value(-double(SendDlgItemMessage(hdlg, idc_sli_eq[band_reorder[nbands][band]],TBM_GETPOS, 0, 0))/ticks);
+        bands[band].gain = pos2gain(pos);
         proc->set_eq_bands(eq_ch, bands, EQ_BANDS);
         update();
         return cmd_ok;

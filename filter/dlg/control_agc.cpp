@@ -25,9 +25,33 @@ static const int controls[] =
   0
 };
 
-static const double min_gain_level = -20.0;
-static const double max_gain_level = +20.0;
-static const int ticks = 5;
+static const double min_gain_level = -20.0; // dB
+static const double max_gain_level = +20.0; // dB
+static const double step_size = 1;          // dB
+static const double page_size = 1;          // dB
+static const int ticks = 10; // steps per dB
+
+static inline int db2pos(double db)
+{
+  return int(-db * ticks);
+}
+
+static inline double pos2db(int pos)
+{
+  // round to the nearest step_size
+  double db = double(-pos) / ticks;
+  return floor(db / step_size + 0.5) * step_size;
+}
+
+static inline int gain2pos(double gain)
+{
+  return db2pos(value2db(gain));
+}
+
+static inline double pos2gain(int pos)
+{
+  return db2value(pos2db(pos));
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -46,10 +70,12 @@ void ControlAGC::init()
 {
   // AGC
 
-  SendDlgItemMessage(hdlg, IDC_SLI_MASTER, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_MASTER, TBM_SETTIC, 0, 0);
-  SendDlgItemMessage(hdlg, IDC_SLI_GAIN,   TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_GAIN,   TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(hdlg, IDC_SLI_MASTER, TBM_SETRANGE, TRUE, MAKELONG(db2pos(max_gain_level), db2pos(min_gain_level)));
+  SendDlgItemMessage(hdlg, IDC_SLI_MASTER, TBM_SETLINESIZE, 0, LONG(step_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_MASTER, TBM_SETPAGESIZE, 0, LONG(page_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_MASTER, TBM_SETTIC, 0, db2pos(0));
+  SendDlgItemMessage(hdlg, IDC_SLI_GAIN,   TBM_SETRANGE, TRUE, MAKELONG(db2pos(max_gain_level), db2pos(min_gain_level)));
+  SendDlgItemMessage(hdlg, IDC_SLI_GAIN,   TBM_SETTIC, 0, db2pos(0));
 
   edt_master.link(hdlg, IDC_EDT_MASTER);
   edt_gain  .link(hdlg, IDC_EDT_GAIN);
@@ -60,10 +86,12 @@ void ControlAGC::init()
 
   // DRC
 
-  SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_SETTIC, 0, 0);
-  SendDlgItemMessage(hdlg, IDC_SLI_DRC_LEVEL, TBM_SETRANGE, TRUE, MAKELONG(min_gain_level, max_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_DRC_LEVEL, TBM_SETTIC, 0, 0);
+  SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_SETRANGE, TRUE, MAKELONG(db2pos(max_gain_level), db2pos(min_gain_level)));
+  SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_SETLINESIZE, 0, LONG(step_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_SETPAGESIZE, 0, LONG(page_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_SETTIC, 0, db2pos(0));
+  SendDlgItemMessage(hdlg, IDC_SLI_DRC_LEVEL, TBM_SETRANGE, TRUE, MAKELONG(db2pos(max_gain_level), db2pos(min_gain_level)));
+  SendDlgItemMessage(hdlg, IDC_SLI_DRC_LEVEL, TBM_SETTIC, 0, db2pos(0));
 
   edt_drc_power.link(hdlg, IDC_EDT_DRC_POWER);
   edt_drc_level.link(hdlg, IDC_EDT_DRC_LEVEL);
@@ -81,7 +109,7 @@ void ControlAGC::update()
 
   // AGC
 
-  SendDlgItemMessage(hdlg, IDC_SLI_MASTER, TBM_SETPOS, TRUE, long(-value2db(master) * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_MASTER, TBM_SETPOS, TRUE, gain2pos(master));
   edt_master.update_value(value2db(master));
 
   CheckDlgButton(hdlg, IDC_CHK_AUTO_GAIN, auto_gain? BST_CHECKED: BST_UNCHECKED);
@@ -94,7 +122,7 @@ void ControlAGC::update()
   // DRC
 
   CheckDlgButton(hdlg, IDC_CHK_DRC, drc? BST_CHECKED: BST_UNCHECKED);
-  SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_SETPOS, TRUE, long(-drc_power * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_SETPOS, TRUE, db2pos(drc_power));
   edt_drc_power.update_value(drc_power);
 
   update_dynamic();
@@ -107,12 +135,12 @@ void ControlAGC::update_dynamic()
 
   // AGC
 
-  SendDlgItemMessage(hdlg, IDC_SLI_GAIN, TBM_SETPOS, TRUE, long(-value2db(gain) * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_GAIN, TBM_SETPOS, TRUE, gain2pos(gain));
   edt_gain.update_value(value2db(gain));
 
   // DRC
 
-  SendDlgItemMessage(hdlg, IDC_SLI_DRC_LEVEL, TBM_SETPOS, TRUE, long(-value2db(drc_level) * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_DRC_LEVEL, TBM_SETPOS, TRUE, db2pos(drc_level));
   edt_drc_level.update_value(value2db(drc_level));
 };
 
@@ -126,7 +154,8 @@ ControlAGC::cmd_result ControlAGC::command(int control, int message)
     case IDC_SLI_MASTER:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        master = db2value(-double(SendDlgItemMessage(hdlg, IDC_SLI_MASTER,TBM_GETPOS, 0, 0))/ticks);
+        LRESULT pos = SendDlgItemMessage(hdlg, IDC_SLI_MASTER,TBM_GETPOS, 0, 0);
+        master = pos2gain(pos);
         proc->set_master(master);
         update();
         return cmd_ok;
@@ -192,7 +221,8 @@ ControlAGC::cmd_result ControlAGC::command(int control, int message)
     case IDC_SLI_DRC_POWER:
       if (message == TB_THUMBPOSITION || message == TB_ENDTRACK)
       {
-        drc_power = -double(SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_GETPOS, 0, 0)) / ticks;
+        LRESULT pos = SendDlgItemMessage(hdlg, IDC_SLI_DRC_POWER, TBM_GETPOS, 0, 0);
+        drc_power = pos2db(pos);
         proc->set_drc_power(drc_power);
         update();
         return cmd_ok;

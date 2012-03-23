@@ -61,17 +61,32 @@ static const int out_labels[MATRIX_CHANNELS] =
 
 static const int matrix_ch[MATRIX_CHANNELS] = { CH_L, CH_C, CH_R, CH_SL, CH_SR, CH_BL, CH_BR, CH_LFE };
 
-static const double min_gain_level = -20.0;
-static const double max_gain_level = +20.0;
-static const int ticks = 10;
+static const double min_gain_level = -20.0; // dB
+static const double max_gain_level = +20.0; // dB
+static const double step_size = 1;          // dB
+static const double page_size = 1;          // dB
+static const int ticks = 10; // steps per dB
 
-///////////////////////////////////////////////////////////////////////////////
+static inline int db2pos(double db)
+{
+  return int(-db * ticks);
+}
 
-static inline LRESULT gain2pos(double gain)
-{ return LRESULT((-value2db(gain) + max_gain_level) * ticks + 0.5); }
+static inline double pos2db(int pos)
+{
+  double db = double(-pos) / ticks;
+  return floor(db / step_size + 0.5) * step_size;
+}
 
-static inline double pos2gain(LRESULT pos)
-{ return db2value(-double(pos)/ticks + max_gain_level); }
+static inline int gain2pos(double gain)
+{
+  return db2pos(value2db(gain));
+}
+
+static inline double pos2gain(int pos)
+{
+  return db2value(pos2db(pos));
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -99,12 +114,18 @@ void ControlMatrix::init()
     SetDlgItemText(hdlg, out_labels[i], gettext(short_ch_names[matrix_ch[i]]));
   }
 
-  SendDlgItemMessage(hdlg, IDC_SLI_LFE,    TBM_SETRANGE, TRUE, MAKELONG(0, max_gain_level - min_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_LFE,    TBM_SETTIC, 0, gain2pos(0));
-  SendDlgItemMessage(hdlg, IDC_SLI_VOICE,  TBM_SETRANGE, TRUE, MAKELONG(0, max_gain_level - min_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_VOICE,  TBM_SETTIC, 0, gain2pos(0));
-  SendDlgItemMessage(hdlg, IDC_SLI_SUR,    TBM_SETRANGE, TRUE, MAKELONG(0, max_gain_level - min_gain_level) * ticks);
-  SendDlgItemMessage(hdlg, IDC_SLI_SUR,    TBM_SETTIC, 0, gain2pos(0));
+  SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_SETRANGE, TRUE, MAKELONG(db2pos(max_gain_level), db2pos(min_gain_level)));
+  SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_SETLINESIZE, 0, LONG(step_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_SETPAGESIZE, 0, LONG(page_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_LFE,   TBM_SETTIC, 0, db2pos(0));
+  SendDlgItemMessage(hdlg, IDC_SLI_VOICE, TBM_SETRANGE, TRUE, MAKELONG(db2pos(max_gain_level), db2pos(min_gain_level)));
+  SendDlgItemMessage(hdlg, IDC_SLI_VOICE, TBM_SETLINESIZE, 0, LONG(step_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_VOICE, TBM_SETPAGESIZE, 0, LONG(page_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_VOICE, TBM_SETTIC, 0, db2pos(0));
+  SendDlgItemMessage(hdlg, IDC_SLI_SUR,   TBM_SETRANGE, TRUE, MAKELONG(db2pos(max_gain_level), db2pos(min_gain_level)));
+  SendDlgItemMessage(hdlg, IDC_SLI_SUR,   TBM_SETLINESIZE, 0, LONG(step_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_SUR,   TBM_SETPAGESIZE, 0, LONG(page_size * ticks));
+  SendDlgItemMessage(hdlg, IDC_SLI_SUR,   TBM_SETTIC, 0, db2pos(0));
 
   edt_voice .link(hdlg, IDC_EDT_VOICE);
   edt_sur   .link(hdlg, IDC_EDT_SUR);
