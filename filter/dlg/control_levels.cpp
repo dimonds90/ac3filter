@@ -25,7 +25,7 @@ static const int ch_map52[NLEVELS]  = { CH_LFE, CH_SL, CH_L, CH_CL, CH_C, CH_CR,
 static const double min_level = -50.0;
 static const int ticks = 5;
 
-static const COLORREF levels_color = RGB(0, 128, 0);
+static const COLORREF levels_color = RGB(0, 0, 128);
 static const COLORREF overflow_color = RGB(255, 0, 0);
 
 ///////////////////////////////////////////////////////////////////////////////
