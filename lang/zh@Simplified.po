@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.45b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-15 16:49+0400\n"
+"POT-Creation-Date: 2012-03-24 16:53+0400\n"
 "PO-Revision-Date: 2007-06-08 20:33+0800\n"
 "Last-Translator: FSYX <fsyx@qq.com>\n"
 "Language-Team: ChongQing Mobile\n"
@@ -269,6 +269,22 @@ msgstr "0%"
 msgid "IDC_GRP_CREDITS"
 msgstr "感谢"
 
+#. TRANSLATORS: Debug
+msgid "IDC_GRP_DEBUG"
+msgstr ""
+
+#. TRANSLATORS: Error report
+msgid "IDC_BTN_ERROR_REPORT"
+msgstr ""
+
+#. TRANSLATORS: Save logs on exit
+msgid "IDC_CHK_SAVE_LOGS"
+msgstr ""
+
+#. TRANSLATORS: Feedback email:
+msgid "IDC_LBL_FEEDBACK"
+msgstr ""
+
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
 msgstr "解码器信息"
@@ -348,10 +364,6 @@ msgstr "填补 DTS"
 #. TRANSLATORS: SPDIF wrapped
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
 msgstr "SPDIF 封包"
-
-#. TRANSLATORS: Build info
-msgid "IDC_GRP_ENV"
-msgstr "编译信息"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
@@ -787,6 +799,9 @@ msgid ""
 msgstr ""
 "这个选项存在风险! 启用后可能造成音频和视频不同步.要启用该选项,请点击按钮\"否"
 "\"."
+
+#~ msgid "IDC_GRP_ENV"
+#~ msgstr "编译信息"
 
 #~ msgid "IDC_LBL_DELAY_C"
 #~ msgstr "C"

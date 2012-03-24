@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.60b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-15 16:49+0400\n"
+"POT-Creation-Date: 2012-03-24 16:53+0400\n"
 "PO-Revision-Date: 2009-05-20 14:38+0100\n"
 "Last-Translator: Artam <peterki@hotmail.com>\n"
 "Language-Team: \n"
@@ -270,6 +270,22 @@ msgstr "0%"
 msgid "IDC_GRP_CREDITS"
 msgstr "Poďakovanie pre"
 
+#. TRANSLATORS: Debug
+msgid "IDC_GRP_DEBUG"
+msgstr ""
+
+#. TRANSLATORS: Error report
+msgid "IDC_BTN_ERROR_REPORT"
+msgstr ""
+
+#. TRANSLATORS: Save logs on exit
+msgid "IDC_CHK_SAVE_LOGS"
+msgstr ""
+
+#. TRANSLATORS: Feedback email:
+msgid "IDC_LBL_FEEDBACK"
+msgstr ""
+
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
 msgstr "Dekóder info"
@@ -349,10 +365,6 @@ msgstr "Padded DTS"
 #. TRANSLATORS: SPDIF wrapped
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
 msgstr "SPDIF wrapped"
-
-#. TRANSLATORS: Build info
-msgid "IDC_GRP_ENV"
-msgstr "Build info"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
@@ -790,6 +802,9 @@ msgid ""
 msgstr ""
 "Táto voľba je NEBEZPEČNÁ! Ak ju zapnete, zvuk a obraz môžu stratiť "
 "synchronizáciu. Na zapnutie tejto voľby stlačte 'Nie'."
+
+#~ msgid "IDC_GRP_ENV"
+#~ msgstr "Build info"
 
 #~ msgid "IDC_LBL_DELAY_C"
 #~ msgstr "C"

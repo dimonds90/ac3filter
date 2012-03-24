@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.62b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-15 16:49+0400\n"
+"POT-Creation-Date: 2012-03-24 16:53+0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Niclas <igelkotten78@hotmail.com>\n"
 "Language-Team: \n"
@@ -269,6 +269,22 @@ msgstr "0%"
 msgid "IDC_GRP_CREDITS"
 msgstr "Tack"
 
+#. TRANSLATORS: Debug
+msgid "IDC_GRP_DEBUG"
+msgstr ""
+
+#. TRANSLATORS: Error report
+msgid "IDC_BTN_ERROR_REPORT"
+msgstr ""
+
+#. TRANSLATORS: Save logs on exit
+msgid "IDC_CHK_SAVE_LOGS"
+msgstr ""
+
+#. TRANSLATORS: Feedback email:
+msgid "IDC_LBL_FEEDBACK"
+msgstr ""
+
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
 msgstr "Avkodarinformation"
@@ -348,10 +364,6 @@ msgstr "Skyddad DTS"
 #. TRANSLATORS: SPDIF wrapped
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
 msgstr "Omsluten SPDIF"
-
-#. TRANSLATORS: Build info
-msgid "IDC_GRP_ENV"
-msgstr "Bygge"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
@@ -789,6 +801,9 @@ msgid ""
 msgstr ""
 "Denna inställning är FARLIG! Videon kan bli osynkad. Klicka på \"Nej\" för "
 "att aktivera inställningen."
+
+#~ msgid "IDC_GRP_ENV"
+#~ msgstr "Bygge"
 
 #~ msgid "IDC_LBL_DELAY_C"
 #~ msgstr "Center"

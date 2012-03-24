@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-15 16:49+0400\n"
+"POT-Creation-Date: 2012-03-24 16:53+0400\n"
 "PO-Revision-Date: 2009-05-13 16:54+0300\n"
 "Last-Translator: Valex <xvalex.ru>\n"
 "Language-Team: \n"
@@ -268,6 +268,22 @@ msgstr "0%"
 msgid "IDC_GRP_CREDITS"
 msgstr "Ringraziamenti"
 
+#. TRANSLATORS: Debug
+msgid "IDC_GRP_DEBUG"
+msgstr ""
+
+#. TRANSLATORS: Error report
+msgid "IDC_BTN_ERROR_REPORT"
+msgstr ""
+
+#. TRANSLATORS: Save logs on exit
+msgid "IDC_CHK_SAVE_LOGS"
+msgstr ""
+
+#. TRANSLATORS: Feedback email:
+msgid "IDC_LBL_FEEDBACK"
+msgstr ""
+
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
 msgstr "Informazioni sulla decodifica"
@@ -347,10 +363,6 @@ msgstr "DTS padded"
 #. TRANSLATORS: SPDIF wrapped
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
 msgstr "S/PDIF wrapped"
-
-#. TRANSLATORS: Build info
-msgid "IDC_GRP_ENV"
-msgstr "Info build"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
@@ -795,6 +807,9 @@ msgstr ""
 "Se abilitata potrebbe mandare il Video fuori sincronia.\n"
 "\n"
 "Premi 'No' per abilitare questa opzione. "
+
+#~ msgid "IDC_GRP_ENV"
+#~ msgstr "Info build"
 
 #~ msgid "IDC_LBL_DELAY_C"
 #~ msgstr "C"

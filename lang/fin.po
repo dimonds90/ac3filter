@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.63b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-15 16:49+0400\n"
+"POT-Creation-Date: 2012-03-24 16:53+0400\n"
 "PO-Revision-Date: 2009-11-08 20:59+0200\n"
 "Last-Translator: Freeze <vjuusola@gmail.com>\n"
 "Language-Team: \n"
@@ -267,6 +267,22 @@ msgstr "0%"
 msgid "IDC_GRP_CREDITS"
 msgstr " Kiitokset "
 
+#. TRANSLATORS: Debug
+msgid "IDC_GRP_DEBUG"
+msgstr ""
+
+#. TRANSLATORS: Error report
+msgid "IDC_BTN_ERROR_REPORT"
+msgstr ""
+
+#. TRANSLATORS: Save logs on exit
+msgid "IDC_CHK_SAVE_LOGS"
+msgstr ""
+
+#. TRANSLATORS: Feedback email:
+msgid "IDC_LBL_FEEDBACK"
+msgstr ""
+
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
 msgstr " Dekooderin tiedot "
@@ -346,10 +362,6 @@ msgstr "Täytetty DTS"
 #. TRANSLATORS: SPDIF wrapped
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
 msgstr "SPDIF-paketointi"
-
-#. TRANSLATORS: Build info
-msgid "IDC_GRP_ENV"
-msgstr " Versiotiedot "
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
@@ -788,6 +800,9 @@ msgid ""
 msgstr ""
 "Tämä valinta on VAARALLINEN! Videon synkronointi saattaa hävitä tämän "
 "asetuksen ollessa käytössä. Vahvista valintasi painamalla painiketta 'Ei'."
+
+#~ msgid "IDC_GRP_ENV"
+#~ msgstr " Versiotiedot "
 
 #~ msgid "IDC_LBL_DELAY_C"
 #~ msgstr "K"
