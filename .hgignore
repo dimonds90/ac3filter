@@ -58,6 +58,7 @@ doc\*.css
 
 # Language build files
 lang\lang
+lang\*.mo
 
 # Config
 cmd/config.cmd
