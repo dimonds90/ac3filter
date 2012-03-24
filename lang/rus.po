@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: AC3Filter 2.0a\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-24 16:53+0400\n"
-"PO-Revision-Date: 2012-02-14 22:20+0400\n"
-"Last-Translator: Valex <xvalex@mail.ru>\n"
+"PO-Revision-Date: 2012-03-24 20:35+0400\n"
+"Last-Translator: \n"
 "Language-Team: AC3Filter <ac3filter@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -167,15 +167,11 @@ msgstr "Записать всё (главный и многоканальный 
 
 #. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
 msgid "IDC_RBT_EQ_CUR"
-msgstr ""
-"Записать только текущий канал, эти настройки можно будет применить к любому "
-"каналу."
+msgstr "Записать только текущий канал, эти настройки можно будет применить к любому каналу."
 
 #. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
 msgid "IDC_RBT_EQ_MCH"
-msgstr ""
-"Записать все каналы (кроме Главного), т.о. можно будет восстановить "
-"многоканальные настройки."
+msgstr "Записать все каналы (кроме Главного), т.о. можно будет восстановить многоканальные настройки."
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
 msgid "IDC_VER"
@@ -183,7 +179,7 @@ msgstr ""
 
 #. TRANSLATORS: OK
 msgid "IDOK"
-msgstr ""
+msgstr "Принять"
 
 #. TRANSLATORS: What is it?
 msgid "IDC_GRP_ABOUT"
@@ -191,17 +187,11 @@ msgstr "Что это?"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr ""
-"AC3Filter - это высококачественный бесплатный DirectShow фильтр, "
-"предназначенный для декодирования и обработки звука в реальном времени. "
-"Поддерживает многоканальный и цифровой (SPDIF) вывод."
+msgstr "AC3Filter - это высококачественный бесплатный DirectShow фильтр, предназначенный для декодирования и обработки звука в реальном времени. Поддерживает многоканальный и цифровой (SPDIF) вывод."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr ""
-"Используется автоматически большинством проигрывателей. Необходим для "
-"проигрывания AVI файлов с AC3 и DTS звуком. Может быть использован для "
-"проигрывания звука на DVD."
+msgstr "Используется автоматически большинством проигрывателей. Необходим для проигрывания AVI файлов с AC3 и DTS звуком. Может быть использован для проигрывания звука на DVD."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -269,19 +259,19 @@ msgstr "Благодарности"
 
 #. TRANSLATORS: Debug
 msgid "IDC_GRP_DEBUG"
-msgstr ""
+msgstr "Отладка"
 
 #. TRANSLATORS: Error report
 msgid "IDC_BTN_ERROR_REPORT"
-msgstr ""
+msgstr "Отчет об ошибке"
 
 #. TRANSLATORS: Save logs on exit
 msgid "IDC_CHK_SAVE_LOGS"
-msgstr ""
+msgstr "Сохранять логи при выходе из программы"
 
 #. TRANSLATORS: Feedback email:
 msgid "IDC_LBL_FEEDBACK"
-msgstr ""
+msgstr "Адрес электронной почты"
 
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
@@ -445,9 +435,7 @@ msgstr "Лицензия"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
-msgstr ""
-"Эта программа - свободное программное обеспечение и может распространяться "
-"свободно, в соответствии с условиями лицензии GNU GPL v2."
+msgstr "Эта программа - свободное программное обеспечение и может распространяться свободно, в соответствии с условиями лицензии GNU GPL v2."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
@@ -655,7 +643,7 @@ msgstr "Язык:"
 
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
-msgstr ""
+msgstr "Как переводить?|http://ac3filter.net/guides/how_to_translate"
 
 msgid "Samples"
 msgstr "Сэмплы"
@@ -701,12 +689,8 @@ msgstr "Вы уверены, что хотите удалить матрицу %
 msgid "Are you sure you want to delete '%s' equalizer preset?"
 msgstr "Вы уверены, что хотите удалить эквалайзер '%s'?"
 
-msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
-"Эта опция опасна! При включенной опции фильтр может создавать очень громкий "
-"шум. Нажмите \"Нет\" для включения опции."
+msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
+msgstr "Эта опция опасна! При включенной опции фильтр может создавать очень громкий шум. Нажмите \"Нет\" для включения опции."
 
 msgid "Dangerous option!"
 msgstr "Опасная опция!"
@@ -793,12 +777,8 @@ msgstr ""
 "Вход\tсреднее: %iмс\tдевиация: %iмс\n"
 "Выход\tсреднее: %iмс\tдевиация: %iмс"
 
-msgid ""
-"This option is DANGEROUS! Video may go out of sync with this option enabled. "
-"Press 'No' to enable this option."
-msgstr ""
-"Эта опция опасна! При включенной опции видео может быть "
-"рассинхронизированно. Нажмите \"Нет\" для включения опции."
+msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
+msgstr "Эта опция опасна! При включенной опции видео может быть рассинхронизированно. Нажмите \"Нет\" для включения опции."
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "Информация о сборке"
