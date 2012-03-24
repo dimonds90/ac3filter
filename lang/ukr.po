@@ -1,0 +1,785 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AC3Filter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-24 16:53+0400\n"
+"PO-Revision-Date: 2012-03-24 19:58+0300\n"
+"Last-Translator: Michael Vigovsky <upliner@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Головна"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "Мікшер"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "Канали"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr "Еквалайзер"
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Система"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "Про програму"
+
+msgid "L"
+msgstr ""
+
+msgid "C"
+msgstr ""
+
+msgid "R"
+msgstr ""
+
+msgid "SL"
+msgstr ""
+
+msgid "SR"
+msgstr ""
+
+msgid "LF"
+msgstr ""
+
+msgid "CL"
+msgstr ""
+
+msgid "CR"
+msgstr ""
+
+msgid "BL"
+msgstr ""
+
+msgid "BC"
+msgstr ""
+
+msgid "BR"
+msgstr ""
+
+msgid "Left"
+msgstr "Лівий"
+
+msgid "Center"
+msgstr "Центр"
+
+msgid "Right"
+msgstr "Правий"
+
+msgid "Left surround"
+msgstr "Лівий навколишній"
+
+msgid "Right surround"
+msgstr "Правий навколишній"
+
+msgid "Low frequency"
+msgstr "Низькочастотний"
+
+msgid "Left of center"
+msgstr "Ліворуч від центру"
+
+msgid "Right of center"
+msgstr "Праворуч від центру"
+
+msgid "Left back"
+msgstr "Лівий задній"
+
+msgid "Center back"
+msgstr "Задній"
+
+msgid "Right back"
+msgstr "Правий задній"
+
+msgid "kHz"
+msgstr "кГц"
+
+msgid "dB"
+msgstr "дБ"
+
+msgid "Hz"
+msgstr "Гц"
+
+msgid "AC3Filter configuration"
+msgstr "Налаштування AC3Filter"
+
+msgid "Adjust track"
+msgstr "Налаштувати доріжку"
+
+#. TRANSLATORS: Cancel
+msgid "IDCANCEL"
+msgstr "Скасувати"
+
+#. TRANSLATORS: Donate
+msgid "IDC_BTN_DONATE"
+msgstr "Підтримати"
+
+#. TRANSLATORS: Help
+msgid "IDC_BTN_HELP"
+msgstr "Допомога"
+
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr "Лог. спектр"
+
+#. TRANSLATORS: Frequency (Hz)
+msgid "IDC_LBL_EQ_FREQ"
+msgstr "Частота (Гц)"
+
+#. TRANSLATORS: Gain (dB)
+msgid "IDC_LBL_EQ_GAIN"
+msgstr "Підсилення (дБ)"
+
+#. TRANSLATORS: Filter length:
+msgid "IDC_LBL_EQ_LEN"
+msgstr "Довжина фільтру"
+
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_LFE"
+msgstr "НЧ"
+
+#. TRANSLATORS: Surround
+msgid "IDC_LBL_SUR"
+msgstr "Навкол."
+
+#. TRANSLATORS: Voice
+msgid "IDC_LBL_VOICE"
+msgstr "Голос"
+
+#. TRANSLATORS: Save all (multichannel and master equalizers).
+msgid "IDC_RBT_EQ_ALL"
+msgstr "Зберегти все (головний і багатоканальний еквалайзери)."
+
+#. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
+msgid "IDC_RBT_EQ_CUR"
+msgstr "Зберегти тільки поточний канал, ці налаштування можна буде застосувати до будь-якого каналу."
+
+#. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
+msgid "IDC_RBT_EQ_MCH"
+msgstr "Зберегти всі канали (крім Головного), таким чином можна буде відновити багатоканальні налаштування."
+
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
+msgid "IDC_VER"
+msgstr ""
+
+#. TRANSLATORS: OK
+msgid "IDOK"
+msgstr "Гаразд"
+
+#. TRANSLATORS: What is it?
+msgid "IDC_GRP_ABOUT"
+msgstr "Що це?"
+
+#. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
+msgid "IDC_LBL_ABOUT1"
+msgstr "AC3Filter - це високоякісний безкоштовний DirectShow фільтр, призначений для декодування та обробки звуку в реальному часі. Підтримує багатоканальний та цифровий (SPDIF) вивід."
+
+#. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
+msgid "IDC_LBL_ABOUT2"
+msgstr "Використовується автоматично більшістю програвачів. Необхідний для програвання AVI файлів із AC3 чи DTS звуком. Може бути викориристаний для програвання звуку на DVD."
+
+#. TRANSLATORS: AGC
+msgid "IDC_GRP_AGC"
+msgstr "АРП"
+
+#. TRANSLATORS: Attack/release speed (dB/s):
+msgid "IDC_LBL_ATTACK_RELEASE"
+msgstr "Швидкість атаки/затухання (дБ/с)"
+
+#. TRANSLATORS: Bass redirection
+msgid "IDC_GRP_BASS"
+msgstr "Перенаправлення басу"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_BASS_ENABLE"
+msgstr "Увімкнути"
+
+#. TRANSLATORS: Cutoff frequency
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "Частота зрізу"
+
+#. TRANSLATORS: Bass destination:
+msgid "IDC_LBL_BASS_ROUTE"
+msgstr "Перенаправити в:"
+
+#. TRANSLATORS: Front channels
+msgid "IDC_RBT_BASS_FRONT"
+msgstr "Передні канали"
+
+#. TRANSLATORS: Subwoofer
+msgid "IDC_RBT_BASS_SUB"
+msgstr "Сабвуфер"
+
+#. TRANSLATORS: Contact author
+msgid "IDC_GRP_CONTACT"
+msgstr "Зв’язок з автором"
+
+#. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
+msgid "IDC_LBL_CONTACT"
+msgstr "Будь ласка, повідомляйте про всі помилки. Сміливо посилайте автору свої ідеї, критику, тощо. Будь ласка, пишіть тільки английською чи російською. Тема листа повинна містити слово \"AC3Filter\" (через автоматичне фільтрування)."
+
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
+msgid "IDC_LNK_EMAIL"
+msgstr "Лист автору|mailto:ac3filter@gmail.com?Subject=AC3Filter"
+
+#. TRANSLATORS: Project forum|http://ac3filter.net/forum/
+msgid "IDC_LNK_FORUM"
+msgstr "Форум проекту|http://ac3filter.net/forum/"
+
+#. TRANSLATORS: Homepage|http://ac3filter.net/
+msgid "IDC_LNK_HOME"
+msgstr "Дом. сторінка|http://ac3filter.net/"
+
+#. TRANSLATORS: CPU
+msgid "IDC_GRP_CPU"
+msgstr "Проц."
+
+#. TRANSLATORS: 0%
+msgid "IDC_CPU_LABEL"
+msgstr "0%"
+
+#. TRANSLATORS: Thanks to
+msgid "IDC_GRP_CREDITS"
+msgstr "Подяки"
+
+#. TRANSLATORS: Debug
+msgid "IDC_GRP_DEBUG"
+msgstr "Відладка"
+
+#. TRANSLATORS: Error report
+msgid "IDC_BTN_ERROR_REPORT"
+msgstr "Звіт про помилку"
+
+#. TRANSLATORS: Save logs on exit
+msgid "IDC_CHK_SAVE_LOGS"
+msgstr "Зберігати логи при виході з програми"
+
+#. TRANSLATORS: Feedback email:
+msgid "IDC_LBL_FEEDBACK"
+msgstr "Адреса електроної пошти"
+
+#. TRANSLATORS: Decoder info
+msgid "IDC_GRP_DECODER_INFO"
+msgstr "Інформація декодера"
+
+#. TRANSLATORS: Frames / Errors
+msgid "IDC_LBL_FRAMES_ERRORS"
+msgstr "Фрейми/помилки"
+
+#. TRANSLATORS: Delays
+msgid "IDC_GRP_DELAYS"
+msgstr "Затримки"
+
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_DELAYS_RESET"
+msgstr ""
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_DELAYS"
+msgstr "Увімкнути"
+
+#. TRANSLATORS: Units:
+msgid "IDC_LBL_DELAY_UNITS"
+msgstr "Одиниці:"
+
+#. TRANSLATORS: DRC
+msgid "IDC_GRP_DRC"
+msgstr "Компресія"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_DRC"
+msgstr "Увімкнути"
+
+#. TRANSLATORS: DirectShow options
+msgid "IDC_GRP_DSHOW"
+msgstr "Опції DirectShow"
+
+#. TRANSLATORS: Check output format support
+msgid "IDC_CHK_QUERY_SINK"
+msgstr "Перевіряти підтримку вихідного формату"
+
+#. TRANSLATORS: Force sound card to reinit after seek / pause
+msgid "IDC_CHK_REINIT"
+msgstr "Примусова переініціалізація звукової карти"
+
+#. TRANSLATORS: Disallow PCM output in SPDIF mode
+msgid "IDC_CHK_SPDIF_NO_PCM"
+msgstr "Заборонити PCM-вивід в режимі SPDIF"
+
+#. TRANSLATORS: SPDIF/DTS conversion
+msgid "IDC_GRP_DTS_CONV"
+msgstr "Конверсія SPDIF/DTS"
+
+#. TRANSLATORS: Convert to DTS14
+msgid "IDC_RBT_DTS_CONV_14BIT"
+msgstr "Конв. в DTS14"
+
+#. TRANSLATORS: Convert to DTS16
+msgid "IDC_RBT_DTS_CONV_16BIT"
+msgstr "Конв. в DTS16"
+
+#. TRANSLATORS: Do not convert
+msgid "IDC_RBT_DTS_CONV_NONE"
+msgstr "Не конвертувати"
+
+#. TRANSLATORS: SPDIF/DTS mode
+msgid "IDC_GRP_DTS_MODE"
+msgstr "Режим SPDIF/DTS"
+
+#. TRANSLATORS: Auto
+msgid "IDC_RBT_DTS_MODE_AUTO"
+msgstr "Авто"
+
+#. TRANSLATORS: Padded DTS
+msgid "IDC_RBT_DTS_MODE_PADDED"
+msgstr "Вирівняний DTS"
+
+#. TRANSLATORS: SPDIF wrapped
+msgid "IDC_RBT_DTS_MODE_WRAPPED"
+msgstr ""
+
+#. TRANSLATORS: Equalizer
+msgid "IDC_GRP_EQ"
+msgstr "Еквалайзер"
+
+#. TRANSLATORS: Equalizer options
+msgid "IDC_GRP_EQ_OPTIONS"
+msgstr "Опції еквалайзера"
+
+#. TRANSLATORS: Custom
+msgid "IDC_BTN_EQ_CUSTOM"
+msgstr "Змінити"
+
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_EQ_RESET"
+msgstr "Скинути"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_EQ"
+msgstr "Увімкнути"
+
+#. TRANSLATORS: Equalizer preset
+msgid "IDC_GRP_EQ_PRESET"
+msgstr "Пресет еквалайзера"
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_EQ_DELETE"
+msgstr "Видалити"
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_EQ_SAVE"
+msgstr "Зберегти"
+
+#. TRANSLATORS: Use AC3Filter for:
+msgid "IDC_GRP_FORMATS"
+msgstr "Вик. AC3Filter для:"
+
+#. TRANSLATORS: Gain
+msgid "IDC_GRP_GAIN"
+msgstr "Підсилення"
+
+#. TRANSLATORS: Gain
+msgid "IDC_LBL_GAIN"
+msgstr "Поточ."
+
+#. TRANSLATORS: Master
+msgid "IDC_LBL_MASTER"
+msgstr "Головн."
+
+#. TRANSLATORS: Input gains
+msgid "IDC_GRP_INPUT_GAINS"
+msgstr "Вхідні рівні"
+
+#. TRANSLATORS: Input levels
+msgid "IDC_GRP_INPUT_LEVELS"
+msgstr "Вхідні рівні"
+
+#. TRANSLATORS: Interface options
+msgid "IDC_GRP_INTERFACE"
+msgstr "Налаштування інтерфейсу"
+
+#. TRANSLATORS: Invert levels
+msgid "IDC_CHK_INVERT_LEVELS"
+msgstr "Перевернути рівні"
+
+#. TRANSLATORS: Show tooltips
+msgid "IDC_CHK_TOOLTIPS"
+msgstr "Показувати підказки"
+
+#. TRANSLATORS: Show tray icon
+msgid "IDC_CHK_TRAY"
+msgstr "Іконка в треї"
+
+#. TRANSLATORS: Interface update rate (ms)
+msgid "IDC_LBL_REFRESH_TIME"
+msgstr "Швидкість оновлення інтерфейсу (мс)"
+
+#. TRANSLATORS: License
+msgid "IDC_GRP_LICENSE"
+msgstr "Ліцензія"
+
+#. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
+msgid "IDC_LBL_LICENSE"
+msgstr "Ця программа - вільне програмне забеспечення й може розповсюджуватися вільно, відповідно до умов ліцензії GNU GPL v2."
+
+#. TRANSLATORS: Mixing matrix
+msgid "IDC_GRP_MATRIX"
+msgstr "Матриця мікшування"
+
+#. TRANSLATORS: Matrix preset
+msgid "IDC_GRP_MATRIX_PRESET"
+msgstr "Матриці"
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_MATRIX_DELETE"
+msgstr "Видал."
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_MATRIX_SAVE"
+msgstr "Збер."
+
+#. TRANSLATORS: Filter merit
+msgid "IDC_GRP_MERIT"
+msgstr "Пріоритет"
+
+#. TRANSLATORS: Disable AC3Filter
+msgid "IDC_RBT_MERIT_DO_NOT_USE"
+msgstr "Вимкнути AC3Filter"
+
+#. TRANSLATORS: Prefer AC3Filter
+msgid "IDC_RBT_MERIT_PREFERRED"
+msgstr "Перевага AC3Filter-а"
+
+#. TRANSLATORS: Prefer other decoder
+msgid "IDC_RBT_MERIT_UNLIKELY"
+msgstr "Перевага інш. декодера"
+
+#. TRANSLATORS: Options
+msgid "IDC_GRP_MIXER_OPTIONS"
+msgstr "Опції"
+
+#. TRANSLATORS: Auto gain control
+msgid "IDC_CHK_AUTO_GAIN"
+msgstr "Авто. рег. підсил."
+
+#. TRANSLATORS: Auto matrix
+msgid "IDC_CHK_AUTO_MATRIX"
+msgstr "Автоматриця"
+
+#. TRANSLATORS: Expand stereo
+msgid "IDC_CHK_EXPAND_STEREO"
+msgstr "Кер. оточенням"
+
+#. TRANSLATORS: One-pass norm
+msgid "IDC_CHK_NORMALIZE"
+msgstr "Нормалізація"
+
+#. TRANSLATORS: Normalize matrix
+msgid "IDC_CHK_NORM_MATRIX"
+msgstr "Норм. матрицю"
+
+#. TRANSLATORS: Voice control
+msgid "IDC_CHK_VOICE_CONTROL"
+msgstr "Кер. центром"
+
+#. TRANSLATORS: Output format
+msgid "IDC_GRP_OUTPUT"
+msgstr "Вихідний формат"
+
+#. TRANSLATORS: Use SPDIF
+msgid "IDC_CHK_USE_SPDIF"
+msgstr "Вик. SPDIF"
+
+#. TRANSLATORS: Format
+msgid "IDC_LBL_FORMAT"
+msgstr "Формат"
+
+#. TRANSLATORS: input format
+msgid "IDC_LBL_INPUT"
+msgstr "Вхідний формат:"
+
+#. TRANSLATORS: Rate
+msgid "IDC_LBL_RATE"
+msgstr "Частота"
+
+#. TRANSLATORS: Output gains
+msgid "IDC_GRP_OUTPUT_GAINS"
+msgstr "Вихідні рівні"
+
+#. TRANSLATORS: Output levels
+msgid "IDC_GRP_OUTPUT_LEVELS"
+msgstr "Вихідні рівні"
+
+#. TRANSLATORS: Preset
+msgid "IDC_GRP_PRESET"
+msgstr "Пресет"
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_PRESET_DELETE"
+msgstr "Видал."
+
+#. TRANSLATORS: File
+msgid "IDC_BTN_PRESET_FILE"
+msgstr "Файл"
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_PRESET_SAVE"
+msgstr "Збер."
+
+#. TRANSLATORS: Default audio renderer
+msgid "IDC_GRP_RENDERER"
+msgstr "Пристрій виводу"
+
+#. TRANSLATORS: Use Direct Sound by default
+msgid "IDC_RBT_RENDER_DS"
+msgstr "DirectSound"
+
+#. TRANSLATORS: Use Wave Out by default
+msgid "IDC_RBT_RENDER_WO"
+msgstr "WaveOut"
+
+#. TRANSLATORS: SPDIF options
+msgid "IDC_GRP_SPDIF"
+msgstr "Налаштування SPDIF"
+
+#. TRANSLATORS: 32kHz
+msgid "IDC_CHK_SPDIF_ALLOW_32"
+msgstr "32кГц"
+
+#. TRANSLATORS: 44kHz
+msgid "IDC_CHK_SPDIF_ALLOW_44"
+msgstr "44кГц"
+
+#. TRANSLATORS: 48kHz
+msgid "IDC_CHK_SPDIF_ALLOW_48"
+msgstr "48кГц"
+
+#. TRANSLATORS: Output SPDIF as PCM
+msgid "IDC_CHK_SPDIF_AS_PCM"
+msgstr "Виводити SPDIF як PCM"
+
+#. TRANSLATORS: Restrict SPDIF sample rate
+msgid "IDC_CHK_SPDIF_CHECK_SR"
+msgstr "Перевіряти частоту дискретизації"
+
+#. TRANSLATORS: Use AC3 encoder
+msgid "IDC_CHK_SPDIF_ENCODE"
+msgstr "Використовувати AC3 кодер"
+
+#. TRANSLATORS: Do not encode stereo PCM
+msgid "IDC_CHK_SPDIF_STEREO_PT"
+msgstr "Не кодувати стерео"
+
+#. TRANSLATORS: Detect SPDIF stream in PCM data
+msgid "IDC_CHK_USE_DETECTOR"
+msgstr "Детектувати SPDIF у PCM"
+
+#. TRANSLATORS: AC3 encoder bitrate (kbps)
+msgid "IDC_LBL_SPDIF_BITRATE"
+msgstr "Бітрейт AC3 кодера (кбіт/с)"
+
+#. TRANSLATORS: SPDIF passthrough
+msgid "IDC_GRP_SPDIF_PT"
+msgstr ""
+
+#. TRANSLATORS: AC3
+msgid "IDC_CHK_SPDIF_AC3"
+msgstr "AC3"
+
+#. TRANSLATORS: DTS
+msgid "IDC_CHK_SPDIF_DTS"
+msgstr "DTS"
+
+#. TRANSLATORS: MPEG Audio
+msgid "IDC_CHK_SPDIF_MPA"
+msgstr "MPEG Audio"
+
+#. TRANSLATORS: Audio/Video sync
+msgid "IDC_GRP_SYNC"
+msgstr "Синхронізація аудіо/відео"
+
+#. TRANSLATORS: Jitter correction.
+msgid "IDC_CHK_JITTER"
+msgstr "Корекція  джитера"
+
+#. TRANSLATORS: Current jitter:
+msgid "IDC_LBL_JITTER"
+msgstr "Поточний джитер:"
+
+#. TRANSLATORS: Time shift (ms):
+msgid "IDC_LBL_TIME_SHIFT"
+msgstr "Корекція часу (мс):"
+
+#. TRANSLATORS: <- sound lags
+msgid "IDC_LBL_TIME_SHIFT_MINUS"
+msgstr "<- звук відстає"
+
+#. TRANSLATORS: sound hastes ->
+msgid "IDC_LBL_TIME_SHIFT_PLUS"
+msgstr "звук поспішає ->"
+
+#. TRANSLATORS: Localization
+msgid "IDC_GRP_TRANS"
+msgstr "Локалізація"
+
+#. TRANSLATORS: Language:
+msgid "IDC_LBL_LANG"
+msgstr "Мова:"
+
+#. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
+msgid "IDC_LNK_TRANSLATE"
+msgstr "Як перекласти?|http://ac3filter.net/guides/how_to_translate"
+
+msgid "Samples"
+msgstr "Семпли"
+
+msgid "Millisecs"
+msgstr "Мілісекунди"
+
+msgid "Meters"
+msgstr "Метри"
+
+msgid "Centimeters"
+msgstr "Сантиметри"
+
+msgid "Feet"
+msgstr "Фути"
+
+msgid "Inches"
+msgstr "Дюйми"
+
+msgid "All channels"
+msgstr "Всі канали"
+
+#, c-format
+msgid "%ikHz"
+msgstr "%iкГц"
+
+#, c-format
+msgid "%iHz"
+msgstr "%iГц"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Ви впевнені, що хочете видалити пресет %s?"
+
+msgid "Delete confirmation"
+msgstr "Підтвердіть видалення"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Ви впевнені, що хочете видалити матрицю %s?"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' equalizer preset?"
+msgstr "Ви впевнені, що хочете видалити еквалайзер %s?"
+
+msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
+msgstr "Ця опція небезпечна! За ввімкненої опції фільтр може створювати дуже гучний шум. Натисніть \"Ні\" для ввімкнення опції."
+
+msgid "Dangerous option!"
+msgstr "Небезпечна опція!"
+
+msgid "Spectrum: no data"
+msgstr "Спектр: нема даних"
+
+#, c-format
+msgid "Spectrum: %s"
+msgstr "Спектр: %s"
+
+msgid "Do not change"
+msgstr "Без змін"
+
+msgid "Mono"
+msgstr "Моно"
+
+msgid "Stereo"
+msgstr "Стерео"
+
+msgid "Quadro"
+msgstr "Квадро"
+
+msgid "5 channels"
+msgstr "5 каналів"
+
+msgid "2.1 Stereo"
+msgstr "2.1 Стерео"
+
+msgid "4.1 Quadro"
+msgstr "4.1 Квадро"
+
+msgid "5.1 (6 channels)"
+msgstr "5.1 (6 каналів)"
+
+msgid "7.1 (8 channels)"
+msgstr "7.1 (8 каналів)"
+
+msgid "Dolby Surround/ProLogic"
+msgstr "Dolby Surround/ProLogic"
+
+msgid "Dolby ProLogic II"
+msgstr "Dolby ProLogic II"
+
+msgid "PCM 16bit"
+msgstr "PCM 16bit"
+
+msgid "PCM 24bit"
+msgstr "PCM 24bit"
+
+msgid "PCM 32bit"
+msgstr "PCM 32bit"
+
+msgid "PCM Float"
+msgstr "PCM Float"
+
+msgid "PCM Double"
+msgstr "PCM Double"
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iГц"
+
+msgid "Use SPDIF"
+msgstr "Вик. SPDIF"
+
+msgid "Use SPDIF (disabled)"
+msgstr "Вик. SPDIF (вимкнено)"
+
+msgid "Use SPDIF (passthrough)"
+msgstr "Вик. SPDIF (скрізне пропускання)"
+
+msgid "Use SPDIF (AC3 encode)"
+msgstr "Вик. SPDIF (AC3-кодування)"
+
+msgid "Use SPDIF (Unknown)"
+msgstr "Вик. SPDIF (Невідомо)"
+
+#, c-format
+msgid ""
+"Input\tmean: %ims\tstddev: %ims\n"
+"Output\tmean: %ims\tstddev: %ims"
+msgstr ""
+"Вхід\tсередній: %iмс\tдевіація: %iмс\n"
+"Вихід\tсередній: %iмс\tдевіація: %iмс"
+
+msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
+msgstr "Ця опція небезпечна! За ввімкненої опції відео може бути розсинхронізоване. Натисніть \"Ні\" для ввімкнення опції."
+
