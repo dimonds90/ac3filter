@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.60b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-15 16:49+0400\n"
+"POT-Creation-Date: 2012-03-24 16:53+0400\n"
 "PO-Revision-Date: 2009-05-18 20:30+0100\n"
 "Last-Translator: Ferny <mundodivx@gmail.com>\n"
 "Language-Team: MundoDivX.com <mundodivx@gmail.com>\n"
@@ -271,6 +271,22 @@ msgstr "0%"
 msgid "IDC_GRP_CREDITS"
 msgstr "Agradecimientos"
 
+#. TRANSLATORS: Debug
+msgid "IDC_GRP_DEBUG"
+msgstr ""
+
+#. TRANSLATORS: Error report
+msgid "IDC_BTN_ERROR_REPORT"
+msgstr ""
+
+#. TRANSLATORS: Save logs on exit
+msgid "IDC_CHK_SAVE_LOGS"
+msgstr ""
+
+#. TRANSLATORS: Feedback email:
+msgid "IDC_LBL_FEEDBACK"
+msgstr ""
+
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
 msgstr "Información decodificador"
@@ -350,10 +366,6 @@ msgstr "Padded DTS"
 #. TRANSLATORS: SPDIF wrapped
 msgid "IDC_RBT_DTS_MODE_WRAPPED"
 msgstr "Envolver SPDIF"
-
-#. TRANSLATORS: Build info
-msgid "IDC_GRP_ENV"
-msgstr "Información de compilación"
 
 #. TRANSLATORS: Equalizer
 msgid "IDC_GRP_EQ"
@@ -791,6 +803,9 @@ msgid ""
 msgstr ""
 "¡Esta opción es PELIGROSA! El vídeo puede desincronizarse con esta opción "
 "habilitada. Presione 'No' para habilitar esta opción."
+
+#~ msgid "IDC_GRP_ENV"
+#~ msgstr "Información de compilación"
 
 #~ msgid "IDC_LBL_DELAY_C"
 #~ msgstr "C"
