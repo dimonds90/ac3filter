@@ -1,3 +1,5 @@
+#include <windows.h>
+#include "../../BugTrap/BugTrap.h"
 #include "../resource_ids.h"
 #include "../registry.h"
 #include "../guids.h"
@@ -9,8 +11,7 @@ static const int controls[] =
   IDC_LBL_FEEDBACK,
   IDC_EDT_FEEDBACK,
   IDC_CHK_SAVE_LOGS,
-  IDC_BTN_CRASH,
-  IDC_BTN_DEBUG_INFO,
+  IDC_BTN_ERROR_REPORT,
 
   0
 };
@@ -59,11 +60,15 @@ ControlDebug::cmd_result ControlDebug::command(int control, int message)
         reg.set_text("feedback", edt_feedback.get_text());
         return cmd_ok;
       }
+      break;
 
-    case IDC_BTN_CRASH:
-    {
-
-    }
+    case IDC_BTN_ERROR_REPORT:
+      if (message == BN_CLICKED)
+      {
+        BT_CallSehFilter();
+        return cmd_ok;
+      }
+      break;
   }
   return cmd_not_processed;
 }

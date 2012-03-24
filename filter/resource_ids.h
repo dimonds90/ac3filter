@@ -540,8 +540,7 @@
 #define IDC_LBL_FEEDBACK               53502
 #define IDC_EDT_FEEDBACK               53503
 #define IDC_CHK_SAVE_LOGS              53504
-#define IDC_BTN_CRASH                  53505
-#define IDC_BTN_DEBUG_INFO             53506
+#define IDC_BTN_ERROR_REPORT           53505
 
 // Other
 #define IDC_VER                        52901

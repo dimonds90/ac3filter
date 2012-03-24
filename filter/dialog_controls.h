@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 154
+// Total controls: 153
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -102,10 +102,8 @@ static const ControlDesc dialog_controls[] =
   // Debug
   /* TRANSLATORS: Debug */
   { IDC_GRP_DEBUG, N_("IDC_GRP_DEBUG"), "Debug", "" },
-  /* TRANSLATORS: Crash */
-  { IDC_BTN_CRASH, N_("IDC_BTN_CRASH"), "Crash", "" },
-  /* TRANSLATORS: Debug info */
-  { IDC_BTN_DEBUG_INFO, N_("IDC_BTN_DEBUG_INFO"), "Debug info", "" },
+  /* TRANSLATORS: Error report */
+  { IDC_BTN_ERROR_REPORT, N_("IDC_BTN_ERROR_REPORT"), "Error report", "" },
   /* TRANSLATORS: Save logs on exit */
   { IDC_CHK_SAVE_LOGS, N_("IDC_CHK_SAVE_LOGS"), "Save logs on exit", "" },
   /* TRANSLATORS: Feedback email: */
