@@ -74,7 +74,7 @@ REGEDIT4
 "lfelev"="1"
 "drc"=dword:00000000
 "drc_power"="0"
-"bass_redir"=dword:00000000
+"bass_redir"=dword:00000001
 "bass_freq"=dword:00000078
 "bass_channels"=dword:00000020
 "gain_input_L"="1"
@@ -309,7 +309,7 @@ REGEDIT4
 "lfelev"="1"
 "drc"=dword:00000000
 "drc_power"="0"
-"bass_redir"=dword:00000000
+"bass_redir"=dword:00000001
 "bass_freq"=dword:00000078
 "bass_channels"=dword:00000020
 "gain_input_L"="1"
