@@ -121,7 +121,8 @@ try
     ExpandConstant('appVersion={#appver}&') +
     'prevVersion=' + PrevVersion + '&' +
     'language=' + ActiveLanguage + '&' +
-    'windowsVersion=' + GetWindowsVersionString
+    'windowsVersion=' + GetWindowsVersionString + '&' +
+    'CPU=' + GetEnv('PROCESSOR_IDENTIFIER')
   );
 except
 end;
