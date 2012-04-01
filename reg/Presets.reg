@@ -152,7 +152,6 @@ REGEDIT4
 
 [HKEY_CURRENT_USER\Software\AC3Filter\preset\Bass redirection on]
 "bass_redir"=dword:00000001
-"bass_freq"=dword:00000078
 
 [HKEY_CURRENT_USER\Software\AC3Filter\preset\Bass redirection off]
 "bass_redir"=dword:00000000
