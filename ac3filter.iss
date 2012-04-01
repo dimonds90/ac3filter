@@ -41,6 +41,7 @@ Name: slv; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: spa; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: swe; MessagesFile: "compiler:Default.isl,lang\isl\Swedish-10-5.1.12.isl"
 Name: tur; MessagesFile: "compiler:Default.isl,lang\isl\Turkish-3-5.1.11.isl"
+Name: ukr; MessagesFile: "compiler:Languages\Ukrainian.isl"
 Name: "zh_at_Simplified";  MessagesFile: "compiler:Default.isl,lang\isl\ChineseSimp-12-5.1.11.isl"
 Name: "zh_at_Traditional"; MessagesFile: "compiler:Default.isl,lang\isl\ChineseTrad-2-5.1.11.isl"
 
