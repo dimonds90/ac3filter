@@ -123,7 +123,7 @@ Root: HKLM64; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\Drivers.desc
 [Run]
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg"""; Flags: waituntilterminated
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg"""; Flags: waituntilterminated
-Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&product/969409773073/0/quantity=10"; Flags: nowait postinstall shellexec skipifsilent; Description: "Donate"
+Filename: "http://ac3filter.net/donate"; Flags: nowait postinstall shellexec skipifsilent; Description: "Donate"
 
 [code]
 var
