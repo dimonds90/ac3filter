@@ -94,7 +94,7 @@ Root: HKCU; Subkey: "Software\Microsoft\Multimedia\ActiveMovie\Filter Cache"; Fl
 [Run]
 Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg""";
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg""";
-Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&product/969409773073/0/quantity=10"; Flags: nowait postinstall shellexec skipifsilent; Description: "Donate"
+Filename: "http://ac3filter.net/donate"; Flags: nowait postinstall shellexec skipifsilent; Description: "Donate"
 
 [code]
 var
