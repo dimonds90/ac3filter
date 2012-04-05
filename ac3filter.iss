@@ -51,8 +51,8 @@ Name: "prog\filter32"; Description: "AC3Filter (32bit)"; Types: full compact
 Name: "prog\filter64"; Description: "AC3Filter (64bit)"; Check: IsWin64; Types: full compact
 Name: "prog\acm32";    Description: "AC3Filter ACM driver (32bit)"; Types: full compact
 Name: "prog\acm64";    Description: "AC3Filter ACM driver (64bit)"; Check: IsWin64; Types: full compact
-
-Name: "lang"; Description: "Language files"; Types: full
+Name: "debug";         Description: "Debugging files"; Types: full
+Name: "lang";          Description: "Language files"; Types: full
 
 [Files]
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
@@ -73,6 +73,9 @@ Source: "tools\spdif_test\x64\Release\spdif_test.exe"; DestDir: "{app}\x64"; Com
 
 Source: "acm\Release\ac3filter.acm";       DestDir: "{sys}"; Components: prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "acm\x64\Release\ac3filter64.acm"; DestDir: "{sys}"; Components: prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
+
+Source: "DbgHelp\dbghelp.dll";     DestDir: "{app}";     Components: debug and prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "DbgHelp\x64\dbghelp.dll"; DestDir: "{app}\x64"; Components: debug and prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 
 Source: "lang\lang\*"; DestDir: "{app}\lang"; Components: lang; Flags: recursesubdirs
 
