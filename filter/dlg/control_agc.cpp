@@ -36,7 +36,7 @@ static inline int db2pos(double db)
   return int(-db * ticks);
 }
 
-static inline double pos2db(int pos)
+static inline double pos2db(LRESULT pos)
 {
   // round to the nearest step_size
   double db = double(-pos) / ticks;
@@ -48,7 +48,7 @@ static inline int gain2pos(double gain)
   return db2pos(value2db(gain));
 }
 
-static inline double pos2gain(int pos)
+static inline double pos2gain(LRESULT pos)
 {
   return db2value(pos2db(pos));
 }
