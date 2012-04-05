@@ -20,6 +20,7 @@ call clean.cmd
 del ..\ac3filter_%ver_file%.exe
 del ..\ac3filter_%ver_file%_lite.exe
 del ..\ac3filter_%ver_file%_src.zip
+del ..\ac3filter_%ver_file%_pdb.zip
 
 set src_arc="ac3filter_%ver_file%_src.zip"
 set src_files=ac3filter\*.* valib\*.*
@@ -27,7 +28,7 @@ set src_files=ac3filter\*.* valib\*.*
 call vars.cmd
 cd ..
 if exist "%src_arc%" del "%src_arc%"
-%make_src%
+%pkzip% -add -rec -dir -excl=.hg -excl=Debug -excl=Release -excl=x64 -excl=*.ncb -lev=9 %src_arc% %src_files%
 if errorlevel 1 goto fail
 cd ac3filter
 
@@ -46,16 +47,6 @@ if errorlevel 1 goto fail
 
 call cmd\build_all vc9 x64 %PROJECTS%
 if errorlevel 1 goto fail
-
-rem -------------------------
-rem Revert version info
-
-cd filter
-if exist ac3filter_ver.old (
-  del ac3filter_ver.h
-  ren ac3filter_ver.old ac3filter_ver.h
-)
-cd ..
 
 rem -------------------------------------------------------
 rem Build translations
@@ -81,6 +72,16 @@ if not exist "%inno_setup%" goto err_iss
 if errorlevel 1 goto fail
 
 "%inno_setup%" /Dappver="%ver_text%" /o".." /f"ac3filter_%ver_file%_lite" ac3filter_lite.iss
+if errorlevel 1 goto fail
+
+rem -------------------------------------------------------
+rem Build PDB archive
+:build_pdb
+
+set pdb_arc="..\ac3filter_%ver_file%_pdb.zip"
+set pdb_files=filter\release\ac3filter.pdb filter\x64\release\ac3filter64.pdb
+
+%pkzip% -add -lev=9 %pdb_arc% %pdb_files%
 if errorlevel 1 goto fail
 
 rem -------------------------------------------------------

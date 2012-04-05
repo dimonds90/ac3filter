@@ -1,4 +1,4 @@
-v2.0.0a - unreleased
+v2.0a - unreleased
   * 8 channels support
   * PCM Double output support
   * DTS-MA (core only), AAC, EAC3, FLAC, MP3 decoding support
