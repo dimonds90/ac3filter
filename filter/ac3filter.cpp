@@ -58,7 +58,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   else
     m_pOutput = sink;
 
-  tray = false;
+  tray = true;
   reinit = 0;
   spdif_no_pcm = false;
 
