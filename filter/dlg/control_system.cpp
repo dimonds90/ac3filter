@@ -217,7 +217,7 @@ void ControlSystem::update()
     item.mask = LVIF_PARAM;
     if (ListView_GetItem(formats_hwnd, &item))
     {
-      int mask = item.lParam;
+      int mask = (int)item.lParam;
       ListView_SetCheckState(formats_hwnd, i, (formats & mask) == mask);
     }
   }
@@ -398,7 +398,7 @@ ControlSystem::notify(int control, int message, LPNMHDR nmhdr, INT_PTR &result)
         if (!ListView_GetItem(formats_hwnd, &item))
           return cmd_not_processed;
 
-        int mask = item.lParam;
+        int mask = (int)item.lParam;
         bool checked = ListView_GetCheckState(formats_hwnd, nmlistview->iItem) == TRUE;
         if (checked && (formats & mask) != mask)
         {

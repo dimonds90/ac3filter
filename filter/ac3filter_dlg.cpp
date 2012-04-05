@@ -386,7 +386,7 @@ AC3FilterDlg::OnReceiveMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
     {
       LPNMHDR nmhdr = (LPNMHDR)lParam;
       INT_PTR result = 0;
-      if (lParam && notify(nmhdr->idFrom, nmhdr->code, nmhdr, result))
+      if (lParam && notify((int)nmhdr->idFrom, nmhdr->code, nmhdr, result))
         // If message was processed, return result code if it was set
         return result;
       break;
