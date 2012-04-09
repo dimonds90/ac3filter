@@ -1,3 +1,6 @@
+v2.1a - unreleased
+  * Equalizer crash fixed.
+
 v2.0a - 09.04.2012
   * 8 channels support
   * PCM Double output support

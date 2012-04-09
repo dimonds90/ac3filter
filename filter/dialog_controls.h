@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 153
+// Total controls: 154
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -108,6 +108,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_CHK_SAVE_LOGS, N_("IDC_CHK_SAVE_LOGS"), "Save logs on exit", "" },
   /* TRANSLATORS: Feedback email: */
   { IDC_LBL_FEEDBACK, N_("IDC_LBL_FEEDBACK"), "Feedback email:", "" },
+  /* TRANSLATORS: How to report a bug?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug */
+  { IDC_LNK_ERROR_REPORT, N_("IDC_LNK_ERROR_REPORT"), "How to report a bug?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug", "" },
 
   // Decoder info
   /* TRANSLATORS: Decoder info */
