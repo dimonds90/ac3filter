@@ -11,6 +11,7 @@ class ControlDebug : public Controller
 {
 protected:
   TextEdit edt_feedback;
+  LinkButton lnk_error_report;
 
 public:
   ControlDebug(HWND dlg);

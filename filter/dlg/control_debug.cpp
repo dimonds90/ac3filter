@@ -12,6 +12,7 @@ static const int controls[] =
   IDC_EDT_FEEDBACK,
   IDC_CHK_SAVE_LOGS,
   IDC_BTN_ERROR_REPORT,
+  IDC_LNK_ERROR_REPORT,
 
   0
 };
@@ -25,6 +26,7 @@ Controller(_dlg, ::controls)
 void ControlDebug::init()
 {
   edt_feedback.link(hdlg, IDC_EDT_FEEDBACK);
+  lnk_error_report.link(hdlg, IDC_LNK_ERROR_REPORT);
 }
 
 void ControlDebug::update()
