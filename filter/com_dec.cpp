@@ -9,6 +9,24 @@
 static const char *ch_names[CH_NAMES] = 
 { "L", "C", "R", "SL", "SR", "LFE", "CL", "CR", "BL", "BC", "BR" };
 
+static struct
+{
+  int format_mask;
+  const char *reg_key;
+} format_list[] =
+{
+  { FORMAT_CLASS_PCM,  "format_pcm" },
+  { FORMAT_CLASS_LPCM, "format_lpcm" },
+  { FORMAT_MASK_MPA,   "format_mpa" },
+  { FORMAT_MASK(FORMAT_AC3_EAC3),  "format_dolby" },
+  { FORMAT_MASK(FORMAT_AAC_FRAME), "format_aac" },
+  { FORMAT_MASK_DTS,   "format_dts" },
+  { FORMAT_MASK_FLAC,  "format_flac" },
+  { FORMAT_MASK_PES,   "format_mpeg_pes" },
+  { FORMAT_MASK_SPDIF, "fomrat_spdif" },
+};
+
+
 COMDecoder::COMDecoder(IUnknown *_outer, int _nsamples): dvd(_nsamples)
 { 
   outer = _outer; 
@@ -1124,7 +1142,8 @@ void COMDecoder::save_sys(Config *conf)
   double src_quality = dvd.proc.get_src_quality();
   double src_att = dvd.proc.get_src_att();
 
-  conf->set_int32("formats"          ,formats         );
+  for (int i = 0; i < array_size(format_list); i++)
+    conf->set_bool(format_list[i].reg_key, (formats & format_list[i].format_mask) != 0);
   conf->set_bool ("query_sink"       ,query_sink      );
   conf->set_bool ("use_detector"     ,use_detector    );
 
@@ -1176,7 +1195,15 @@ void COMDecoder::load_sys(Config *conf)
   double src_quality = dvd.proc.get_src_quality();
   double src_att = dvd.proc.get_src_att();
 
-  conf->get_int32("formats"          ,formats         );
+  for (int i = 0; i < array_size(format_list); i++)
+  {
+    bool enabled = (formats & format_list[i].format_mask) != 0;
+    conf->get_bool(format_list[i].reg_key, enabled);
+    if (enabled)
+      formats |= format_list[i].format_mask;
+    else
+      formats &= ~format_list[i].format_mask;
+  }
   conf->get_bool ("query_sink"       ,query_sink      );
   conf->get_bool ("use_detector"     ,use_detector    );
 
