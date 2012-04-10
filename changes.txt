@@ -1,4 +1,4 @@
-v2.1a - unreleased
+v2.1a - 10.04.2012
   * Equalizer crash fixed. Thanks to all who report bugs.
   * HDMV LPCM support.
 
