@@ -1,4 +1,5 @@
 #include "guids.h"
+#include "win32/guids.h"
 #include "ac3filter.h"
 #include "ac3filter_dlg.h"
 
@@ -28,6 +29,7 @@ const AMOVIESETUP_MEDIATYPE sudInPinTypes[] =
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_PCM               },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_IEEE_FLOAT        },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_DVD_LPCM_AUDIO    },
+{&MEDIATYPE_Audio,              &MEDIASUBTYPE_HDMV_LPCM_AUDIO   },
 // Compressed formats
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_AVI_AC3           },
 {&MEDIATYPE_Audio,              &MEDIASUBTYPE_AVI_DTS           },
