@@ -10,7 +10,6 @@ REGEDIT4
 "time_factor"="1"
 "dejitter"=dword:00000001
 "threshold"="0.1"
-"formats"=dword:002ffffc
 "query_sink"=dword:00000001
 "use_detector"=dword:00000001
 "spdif_pt"=dword:00002000
@@ -234,6 +233,15 @@ REGEDIT4
 "matrix_BR_BR"="0"
 "eq"=dword:00000000
 "delay"=dword:00000000
+"format_pcm"=dword:00000001
+"format_lpcm"=dword:00000001
+"format_mpa"=dword:00000001
+"format_dolby"=dword:00000001
+"format_aac"=dword:00000001
+"format_dts"=dword:00000001
+"format_flac"=dword:00000001
+"format_mpeg_pes"=dword:00000001
+"fomrat_spdif"=dword:00000001
 
 [HKEY_CURRENT_USER\Software\AC3Filter\preset\Standard]
 "format"=dword:00000002
@@ -245,7 +253,6 @@ REGEDIT4
 "time_factor"="1"
 "dejitter"=dword:00000001
 "threshold"="0.1"
-"formats"=dword:002ffffc
 "query_sink"=dword:00000001
 "use_detector"=dword:00000001
 "spdif_pt"=dword:00002000
@@ -469,4 +476,13 @@ REGEDIT4
 "matrix_BR_BR"="0"
 "eq"=dword:00000000
 "delay"=dword:00000000
+"format_pcm"=dword:00000001
+"format_lpcm"=dword:00000001
+"format_mpa"=dword:00000001
+"format_dolby"=dword:00000001
+"format_aac"=dword:00000001
+"format_dts"=dword:00000001
+"format_flac"=dword:00000001
+"format_mpeg_pes"=dword:00000001
+"fomrat_spdif"=dword:00000001
 
