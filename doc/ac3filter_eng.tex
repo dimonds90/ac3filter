@@ -1,0 +1,707 @@
+\documentclass[12pt]{article}
+
+\usepackage{a4wide}
+\usepackage[english]{babel}
+
+\input{common_packages}
+\input{common_style}
+
+\title{AC3Filter\\User's manual}
+\author{Alexander Vigovsky}
+\date{}
+\setcounter{tocdepth}{2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGIN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\filterlinks
+
+\section*{}
+
+AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Filter can decode following audio formats: AC3/DTS/MPEG Audio. It also supports multi-channel and digital (SPDIF) outputs.
+
+\note{This documentation was written for AC3Filter v1.01a. Newer versions may have new options or some options removed. Refer to the \urlforum{Support forum} for comments about these changes.}
+
+\pagebreak \section*{Main features}
+
+\begin{itemize}
+\item Decoding of AC3/DTS/MPEG1/2 Audio Layer I/II formats
+\item Support of DVD, AVI/AC3, AVI/DTS, WAV/AC3 and WAV/DTS
+\item Audio processing for any source
+\item Decomposition of any source to 6 channels
+\item Full information about audio track format
+\item Support of SPDIF passthrough mode
+\item Multi-channel audio output from all sources on SPDIF (on-the-fly AC3 encoding)
+\item Per-channel amplification for all input/output channels
+\item Per-channel delays (for compensation of distance difference to speakers)
+\item Automatic gain control
+\item Clipping
+\item Dynamic Range Compression, DRC
+\item Level indication for input and output channels
+\item Matrix mixer and ability of direct modification of mixing matrix
+\item Dolby Surround / Pro Logic / Pro Logic II downmix
+\end{itemize}
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Download & Support
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Download \& Support.}
+\label{sec:download}
+
+\subsection{Download}
+\label{ss:download}
+
+Latest releases (and sources) are always available at the \urldownload{official download location}.
+
+\subsection{Support}
+\label{ss:support}
+
+You may get support at \urlforum{AC3Filter support forum} or directly from the author by email (see Contact author). Note that using of forum is preferred because there're many people with similar problems and possible someone already have found the solution.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Installation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Installation}
+\label{sec:install}
+
+\subsection{Installation}
+\label{ss:install}
+
+Run the installation program and follow the instructions. Additional system settings may be required for using of multi-channel modes and digital output mode (refer to \myref{sec:system-setup}).
+
+\subsection{Uninstallation}
+\label {ss:uninstall}
+
+Run uninstall program from the Start menu or from the Control Panel.
+
+\warning{All saved settings of matrices, equalizers, etc. will be lost!}
+
+Filter can be installed together with other programs (codec-packs, players…). In this case, filter can be uninstalled only together with that program. If you have no idea about what program filter was installed with or you are going to uninstall the filter but not the program you can uninstall the filter independently as follows:
+
+\begin{itemize}
+  \item Download installation package from the \urldownload{official site}.
+  \item Install the package. After that filter will appear in the installed programs list of the Control Panel.
+  \item Uninstall filter from the Control Panel. Filter will be deleted from the system.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% System setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{System setup}
+\label{sec:system-setup}
+
+This section describes one-time settings, which should be made after the filter installation. The most compatible operation mode is 16-bit stereo mode (not multi-channel), which is the default filter operating mode. This mode is compatible with all Windows versions and all audio cards. There is no need for additional settings to operate in this mode. For operating in multi-channel modes and in digital output mode some system settings may be required.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Windows
+
+\subsection{Windows}
+\label{ss:system-setup-windows}
+
+Windows compatibility table
+
+\begin{tabular}{|c|c|c|c|}
+\hline                   & mono/stereo & multichannel & SPDIF \\
+\hline Win95, Win98      &      +      &     - (?)    & - (?) \\
+\hline Win98SE           &      +      &  WaveOut (1) & WaveOut (1) + patch (2) \\
+\hline WinNT (3)         &      +      &      SP6     & - (?) \\
+\hline Win2000           &      +      &       +      &  SP2  \\
+\hline WinXP+            &      +      &       +      &   +   \\
+\hline
+\end{tabular}
+
+\begin{flushleft}{\footnotesize
+  1) refer to \myref{ss:system-page} \\
+  2) You can download the patch from: \\
+     server1:\url{http://ac3filter.sourceforge.net/download/269601USA8.EXE}    \\
+     server2:\url{ftp://download.intel.com/design/motherbd/bt2/269601USA8.EXE} \\
+     server3:\url{ftp://ftp.asus.com.tw/pub/ASUS/beta/mb/driver/269601USA8.EXE}\\
+     patch effect is described at \url{http://www.microsoft.com/hwdev/tech/audio/Non-PCM.asp}.\\
+  3) Sound card must support 48 kHz output mode \\
+}\end{flushleft}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Setup for analog multichannel output mode
+
+\subsection{Setup for analog multichannel output mode}
+\label{ss:system-setup-multichannel}
+
+Configure speakers in filter settings (refer to \myref{ss:main-page}). Some audio cards operates incorrectly with odd number of channels (for instance, \optval{2/2+SW 4.1 quadro} or \optval{3/0 3 front}). Therefore, such modes should be avoided, if possible. \optval{Dolby Surround/ProLogic} and \optval{Dolby ProLogic2} modes are not multi-channel modes. Moreover, modes with subwoofer (\optval{2/0+SW 2.1 stereo}, \optval{4/0+SW 4.1 quadro)} should not be used if acoustics has no separate input for subwoofer (refer to \myref{sec:about-lfe}).
+
+Set speakers mode in \action{Control Panel - Sounds and Multimedia - Audio - Sound Playback - Advanced}. Furthermore, audio card drivers often have their own utilities for switching of speakers configuration. It is necessary to set the proper configuration at both locations - within audio card driver settings and within the Control Panel.
+
+For Creative audio card it is necessary to switch off all sound effects and equalizers, otherwise there can be a loss of central/rear channels.
+
+Audio card can operate in two modes: DirectSound and WaveOut. In some cases, the multi-channel mode can operate only in one of those modes and cannot operate in another one. If that is the case, output device should be changed in player settings. To get information whether the player supports the device changing function, refer to \myref{ss:player-setup-compatibility}. If the player has no such function, it is possible to change the default system output device (refer to \myref{ss:system-page}). However, this option changes the global system settings; therefore, it is recommended to use it only if the player does not support the mentioned function.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Setup for digital (SPDIF) output mode
+
+\subsection{Setup for digital (SPDIF) output mode}
+\label{ss:system-setup-spdif}
+
+\note{It is recommended to read 7.3 SPDIF section firstly}
+
+SPDIF mode is required only in case of digital connection to external decoder/receiver exist. It is important previously to ensure whether the receiver connected correctly (refer to audio card and receiver documentation).
+
+It is necessary to check \optname{SPDIF} box in filter settings to switch the SPDIF mode on (refer to \myref{ss:main-page})
+
+Digital connection supports different formats of data transfer (PCM, AC3, DTS, MPEG Audio). Refer to receiver documentation to get information about the formats supported by receiver. In most cases only AC3 format is supported - if that is the case, there is no need for additional settings (it is active by default). If the receiver supports some other formats, they can be indicated in filter settings (refer to \myref{ss:system-page}).
+
+Some drivers have an ability of AC3 decoding. If such option is available it should be disabled (refer to audio card manual).
+
+Audio card can operate in two modes: DirectSound and WaveOut. In some cases, the SPDIF mode can operate only in one of those modes and cannot operate in another one. If that is the case, output device should be changed in player settings. To get information whether the player supports the device changing function, refer to \myref{ss:player-setup-compatibility}. If the player has no such function, it is possible to change the default system output device (refer to \myref{ss:system-page}). However, this option changes the global system settings; therefore, it is recommended to use it only if the player does not support the mentioned function.
+
+Most of audio cards can operate in digital transfer mode only with 48000 Hz sample rate. Therefore, in all other cases the digital transfer is impossible at all. Current digital output mode can be checked during playback on the Main page of filter settings (refer to \myref{ss:main-page})
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Subwoofer setup
+
+\subsection{Subwoofer setup}
+\label{ss:system-setup-subwoofer}
+
+\note{It is recommended to read \myref{sec:about-lfe} firstly)}
+
+If acoustics has no separate input for subwoofer, modes with subwoofer ( 2/0+SW, 4/0+SW) should not be used (refer to \myref{sec:about-lfe}).
+
+It is recommended to activate bass redirection for the modes with subwoofer. In acoustics documentation, information about bandwidth of speakers and subwoofer should be found; it is recommended to set the cutoff frequency equal to lower bound for main speakers and to upper bound of subwoofer. For instance, if the bandwidth of main speakers is 100 Hz - 20 kHz and that of subwoofer is 30 Hz - 100 Hz then the cutoff frequency must be set at 100 Hz. In most cases, the default setting is satisfactory, so there is no need to change anything.
+
+Some audio cards have their own bass redirection control settings. It is not recommended to activate both options at the same time! This can result in significant distortions. Bass redirection must be switched on either in filter only or in audio card settings only. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Filter setup
+
+\subsection{Filter setup}
+\label{ss:system-setup-filter}
+
+After installation filter has already all settings and in general, it does not require any additional settings. Therefore, if you are not familiar with it, do not make any changes. It is recommended to modify settings only if there are some problems with sound. However, if you are inquisitive and you like to play with settings, please, refer to 7. Theory section.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Player setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Player setup}
+\label{sec:player-setup}
+
+This section briefly describes the most known players and possibility of their operation together with AC3Filter, abilities of players and required settings.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Compatibility table
+
+\subsection{Players compatibility table}
+\label{ss:player-setup-compatibility}
+
+\begin{tabular}{|l|c|c|c|c|c|c|c|l|}
+  \hline
+    \bf Player &
+    \bf License & \bf AVI & \bf DVD & \bf F & \bf O & \bf D & \bf A & \bf Setup \\
+  \hline
+    \href{http://sourceforge.net/projects/guliverkli}{Media Player Classics} &
+    GPL       & + & + & + & + & + & + & sec. \ref{ss:player-setup-mpc} \\
+  \hline
+    \href{http://download.microsoft.com}{Windows Media Player 6.4} &
+    Freeware  & + & - & + & - & - & + & sec. \ref{ss:player-setup-wmp64} \\
+  \hline
+    \href{http://download.microsoft.com}{Windows Media Player 7+} &
+    Freeware  & + & + & - & - & - & + & sec. \ref{ss:player-setup-wmp} \\
+  \hline
+    \href{http://www.bsplayer.org/}{BSPlayer} &
+    Freeware  & + & - & + & + & + & + & sec. \ref{ss:player-setup-bsp} \\
+  \hline
+    \href{http://www.inmatrix.com/}{ZoomPlayer} &
+    Freeware  & + & - & + & + & + & + & sec. \ref{ss:player-setup-zp} \\
+  \hline
+    \href{http://www.inmatrix.com/}{ZoomPlayer Pro} &
+    Shareware & + & + & + & + & + & + & sec. \ref{ss:player-setup-zp} \\
+  \hline
+    \href{http://www.softella.com/index.en.htm}{LightAlloy} &
+    Freeware  & + & + & + & + & - & + & sec. \ref{ss:player-setup-la} \\
+  \hline
+    \href{http://www.gocyberlink.com}{PowerDVD} &
+    Shareware & + & + & - & - & - & AVI & sec. \ref{ss:player-setup-xdvd} \\
+  \hline
+    \href{http://www.intervideo.com}{WinDVD} &
+    Shareware  & + & + & - & - & - & AVI & sec. \ref{ss:player-setup-xdvd} \\
+  \hline
+\end{tabular}
+
+\begin{footnotesize}\bigskip\noindent
+AVI - ability to play AVI files\\
+DVD - ability to play DVD files\\
+F - player supports filter configuring feature\\
+O - player supports output device changing feature\\
+D - player supports decoder changing feature\\
+A - player has an ability to use AC3Filter\\
+\end{footnotesize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Media Player Classics
+
+\subsection{Media Player Classics}
+\label{ss:player-setup-mpc}
+
+It is one of the most multifunctional players. Though it has a simple look and a small memory size (~1Mb), of player surrenders only ZoomPlayer by functionality. Furthermore the player has a great number of internal decoders (there is no need to install any codec-packs and other external decoders). It supports DVD playing, Flash animation (with rewind function!), RealVideo/RealAudio, QuickTime and many others. This player is reliable, stable and has no special requirements for resources (my favorite player :-).
+
+During watching filter settings can be called by right button click on the frame, then select \action{Filters->AC3Filter} in drop-down menu:
+
+\img{pic_ac3filter/players/mpc_filters.png}
+
+Player settings can be called from \action{View->Options menu}. To make the player to use AC3Filter player settings should be changed as shown in the figure:
+
+\img{pic_ac3filter/players/mpc_options1.png}
+
+If there are several decoders installed in the system, decoder with the highest priority will be in use. To modify the filter priority, refer to \myref{ss:system-page}. The player can be configured for continuous use of AC3Filter independently of current system settings. For that, enter the Overrides section of player settings, press \action{AddFilter} button and then select \action{AC3Filter} from the list. That will result as follows:
+
+\img{pic_ac3filter/players/mpc_options2.png}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Windows Media Player 6.4
+
+\subsection{Windows Media Player 6.4}
+\label{ss:player-setup-wmp64}
+
+Simple player delivered within all Windows versions from Win98 (Win98, WinME, Win2000, WinXP, ...). Player is located at \file{C:/Program files/Windows Media Player/mplayer2.exe}. This player is extremely reliable, has no special requirements for resources and utilizes standard playback methods only; therefore, it is essential for detection of different problems. Many functions are not available but the player excellently copes with its general task - file playing. If there, any playing problems appear when using other players it is recommended to try this player.
+
+During watching filter settings can be called from \action{File->Properties->Advanced} menu: 
+
+\img{pic_ac3filter/players/wmp64_filters.png}
+
+Player has no settings for specific AC3Filter use, therefore if there are several decoders installed in the system, the decoder with the highest priority will be in use. To modify the filter priority, refer to \myref{ss:system-page}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Windows Media Player 7+
+
+\subsection{Windows Media Player 7+}
+\label{ss:player-setup-wmp}
+
+This family of players has no ability of calling the filter settings during watching. Thus, you cannot know whether AC3Filter or some other decoder is in use. Also, you cannot change the settings and monitor the current activity (properties of current audio stream, input/output levels, DRC activity, etc.) during playing. The single exception is the Windows Media Player 9 in DVD playing mode only. In this case, the filter settings can be called from \action{Tools->Options} menu (this option will not take effect when watching .avi files or files of other formats).
+
+\img{pic_ac3filter/players/wmp9_dvd.png}
+
+ In all other cases, it is possible to configure the filter only by configuration utility before watching the film.
+
+Player has no settings for specific AC3Filter use, therefore if there are several decoders installed in the system, the decoder with the highest priority will be in use. To modify the filter priority, refer to \myref{ss:system-page}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BSPlayer
+
+\subsection{BSPlayer}
+\label{ss:player-setup-bsp}
+
+Multifunctional player with skins support.
+
+Filter settings can be called by right button click on the frame. Then select \action{Options->Filters->AC3Filter} in drop-down menu:
+
+\img{pic_ac3filter/players/bsp_filters.png}
+
+Player settings can be called from \action{Options->Preferences} menu. To make the player to use AC3Filter you should change player settings as shown in the figure:
+
+\img{pic_ac3filter/players/bsp_options.png}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ZoomPlayer
+
+\subsection{ZoomPlayer}
+\label{ss:player-setup-zp}
+
+This is the most multifunctional player. There is no sense to specify all functions because of their great number.
+
+Filter settings can be called by right button click on the frame. Then select \action{Filter Properties->AC3Filter} in drop-down menu: 
+
+\img{pic_ac3filter/players/zoom_filters.png}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LightAlloy
+
+\subsection{LightAlloy}
+\label{ss:player-setup-la}
+
+Filter settings calling is shown in the picture:
+
+\img{pic_ac3filter/players/la_filters.png}
+
+Player has no settings for specific AC3Filter use, therefore if there were several decoders installed in the system, the decoder with the highest priority will be in use. To modify filter priority refer to \myref{ss:system-page}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PowerDVD/WinDVD
+
+\subsection{PowerDVD/WinDVD}
+\label{ss:player-setup-xdvd}
+
+Both players cannot use the AC3Filter to play DVD. \emph{It’s concerned with the players features, therefore it is impossible to force them to use AC3Filter.} That is no ways in principle to force those players to operate with AC3Filter! So to watch DVD with AC3Filter use it is recommended to use other players - Media Player Classics, LightAlloy or ZoomPlayer.
+
+When playing AVI-files by these players you can use AC3Filter both for post-processing and for AC3/DTS audio track decoding. However, the player cannot call the filter settings, so you should configure the filter by configuration utility before watching only. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Filter settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Filter settings}
+\label{sec:filter-settings}
+
+After installation filter is already well-configured and in general, it does not require additional setup. Therefore, if you are not familiar with it, do not make any changes. It is recommended to modify the settings only if there are some problems with sound. However, if you are inquisitive and you like to play with settings, please, refer to 7. Theory section.
+
+There are two principal rules of configuring:
+\begin{itemize}
+\item If you have no idea what does this setting make - do not change it.
+\item If something has broken load the 'standard' preset (Main page->Preset->Standard).
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Filter settings window opening
+
+\subsection{Filter settings window opening}
+\label{ss:filter-settings}
+
+You should enter the filter property window to configure the filter. There are two ways to do that:
+\begin{itemize}
+\item Directly during playing. Here you can monitor the filter activity and change settings directly during playing. Player must be able to configure the filters. Refer to \myref{sec:player-setup} to know whether the player supports this function or not. The mentioned section also describes actions required to call the settings window. When changing settings, changes take effect immediately (or rather with a little delay of 0.5..2 s depending on player buffer size).
+\item If the player has no ability to configure the filter you can adjust settings by configuration utility (from the Start menu):
+
+\img{pic_ac3filter/config.png}
+
+\warning{When configuring by the utility the current statistics cannot be displayed in the settings window. All settings will take effect after the settings window is closed and the player restarted!}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main settings
+
+\subsection{Main settings}
+\label{ss:main-page}
+
+This page contains most essential filter settings and information about audio playing. Information and levels are displayed when calling the settings from the player only:
+
+\img{pic_ac3filter/dlg_main.png}
+
+\subsubsection{Output}
+
+This section describes the settings of filter output format. Filter will automatically convert all input formats into defined configuration. Speakers' configuration is represented in the form of front/rear+subwoofer. There are conventional names for some configurations. For instance, \optval{2/0 - stereo} means 2 front speakers, i.e. stereo. \optval{2/2 - quadro} means 2 front and 2 rear speakers, i.e. quadro. \optval{3/2+SW 5.1 channels} - 3 front speakers, 2 rear speakers and subwoofer - 5.1 configuration. It is desirable for defined configuration to be in accordant with the system settings (refer to \myref{ss:system-setup-multichannel}), which in turn must match with the actual number of speakers. To know the difference for subwoofer and for LFE channel, and how to set configuration, refer to \myref{sec:about-lfe}.
+
+\optval{Dolby Surround/ProLogic} and \optval{Dolby ProLogic II} modes are required only when computer has stereo output only and is connected to Dolby ProLogic decoder. In this case, central and rear channels are mixed into two channels to let external decoder to extract them from those two channels backwards. \emph{This is not a multi-channel mode!} This is a special type of stereo mode required only if the external Dolby ProLogic decoder exists.
+
+The second selection list sets the sample output format. Filter will automatically convert any input format into defined one. When decoding the filter defines decoding precision. At present 16/24/32 bit and floating-point formats are supported.
+
+\optname{SPDIF} checkbox switches the digital output mode. This mode is required only when digital (SPDIF) connection and external hardware decoder/receiver exists. In this case the coded stream will be transferred to external decoder without any modifications (if the decoder supports this format) or will be recoded into the format clear for decoder (for more information refer to 7.3. SPDIF ). Current digital output mode status is shown in parentheses:
+
+\begin{description}
+\item [disabled] digital output mode is inactive, there is an ordinary decoded PCM stream transferred to the output. When SPDIF is on, the filter always attempts to use digital transfer. And only in case when digital transfer is impossible (audio card driver rejects to process the indicated format) ordinary PCM is transferred. For instance, many audio cards support digital transfer only when the sample rate is 48000 Hz but do not support widespread format of 44100 Hz.
+\item [passthrough] pass-through transfer mode (for AC3, DTS and MPEG Audio formats only). In this case, encoded digital stream is transferred without any modifications and decoding is performed by external decoder. In this mode the filer does not display current activity and all filter settings do not affect sound (since sound is not decoded and the coded data is transferred ‘as is’).
+\item [AC3 encode] AC3 encoding mode. In this mode filter performs decoding of the input stream and post-processing (all filter options are active including changing of speakers number). Then the resulted signal is encoded into AC3 and transfer into external hardware decoder in digital format. This mode is required to transfer multi-channel audio in formats, which are not supported by external decoder (e.g., AAC or OGG Vorbis) or in case when the external decoder does not support stereo decomposition into multi-channel format. Remember that AC3 encoding leads to quality loss, therefore it is preferable to use analogue connection for multi-channel formats.
+\end{description}
+
+Formats supported by the external decoder are shown in the system settings page in \optname{SPDIF passthrough} section (refer to \myref{ss:system-page}).
+
+Note that the current mode can be changed during watching when the input stream format is changed. For instance, when watching DVD there is a possibility of audio tracks switching. At that, the track format can be changed. If the receiver supports only AC3 format then when switching from audio track of AC3 format to track of DTS format there will be switching from passthrough mode to AC3 encode mode. 
+
+\subsubsection{Preset}
+
+All filter settings can be recorded as single composition of settings (preset) for fast uploading them later. There are several standard presets installed together with the filter:
+
+\begin{description}
+\item [Standard] no additional processing performed, signal is transferred without any modifications.
+\item [Loud] maximum loudness.
+\item [Default] it is loaded during the filter loading.
+\end{description}
+
+\subsubsection{Gains}
+
+You should not use this option instead of player volume or system volume. An overflow and a noticeable decrease of playing quality can take place when there is a high gain. For more information, refer to 7.1. Loudness and dynamic range.
+
+\optname{Master} level defines the desirable gain level in dB. If the existing scale is insufficient, you can set the desirable gain level in the entry field without any restrictions.
+
+\optname{Gain} level reflects the current gain level. If there is no overflow then the \optname{Gain} level coincides with the \optname{Master} level. When an overflow takes place, the automatic gain control system decreases this level. Thus, changing of gain level can indicate too high \optname{Master} level set.
+
+Refer to \optname{Auto gain control} and \optname{One-pass norm} options of \myref{ss:mixer-page}. 
+
+\subsubsection{Dynamic range compression (DRC)}
+
+\optname{DRC Enabled} checkbox switches dynamic range compression function. The first level defines compression level of the dynamic range. The second level reflects the current gain level. For more information, refer to 7.1. Loudness and dynamic range. 
+
+\subsubsection{Decoder info}
+
+It displays type and parameters of the current audio stream. \optname{Input} row reflects type of input stream. Text box displays the format information. Decoders for different formats display different information, including:
+
+\begin{itemize}
+\item speakers - channel configuration of the stream
+\item sample rate
+\item bitrate
+\item stream - bit stream type (8/14/16 bit big/little endian)
+\item frame size
+\item nsamples - number of samples per frame
+\end{itemize}
+
+\optname{Frames/errors} fields reflect the decoder statistics: number of decoded frames / number of error frames. There must be no errors in normal operating mode!
+
+\subsubsection{Processor usage (CPU)}
+
+This indicator shows the usage of CPU resources by the filter. 
+
+\subsubsection{Levels}
+
+Here the current input and output peak levels of signal are displayed. They are shown in a logarithmic form. When there is an overflow output level indicators become red. In this case, it is recommended to reduce gain (\optname{Gain} level), since overflow means appearing of distortions (refer to 7.1. Loudness and dynamic range). 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mixer settings
+
+\subsection{Mixer settings)}
+\label{ss:mixer-page}
+
+This page contains settings for mixing control.
+
+\img{pic_ac3filter/dlg_mixer.png}
+
+\subsubsection{Matrix}
+
+The main element of this page is mixing matrix. It is represented in a form of matrix multiplication:
+
+\img{pic_ac3filter/matrix.png}
+
+Simpler it means that there is a following rule for every cell: we mix the channel given by the column into the channel given by the row with gain given by the cell. Therefore, if we want to direct left channel into right channel we should set the value of cell on the cross of 'L' column and 'R' row as 1. Then we will hear both left and right channels from right channel.
+
+It is necessary to clear the difference between input and output channels. Input channel is information that was encoded in original stream. Output channel is that of we will hear from speakers.
+
+Matrix row defines the contents of output channel (speaker) given by this row. Therefore, the first row of the matrix above indicates sound, which will be heard from the left speaker:
+
+\verb|L' = 1 * L + 0.7071 * C + 1 * SL + 1 * LFE|
+
+i.e. from the left speaker we will hear the left channel, part of the central channel, the left rear and the low frequency effects channel. Thus, mixing from 6 original channels into 2 stereo channels is performed (downmix).
+
+One important property of matrix is that when swapping contents of two matrix rows we can 'interchange' appropriate speakers. Therefore, swapping of the first and the third rows results in 'interchange' between the left and right speakers. This property can be used to rearrange speakers without their physical switching.
+
+Values of the matrix column show the target of the channel mixing. Therefore, the central channel is directed both to the left and right speakers with the 0.7 factor (otherwise the center outgoing from two speakers, will sound louder than if we would have the real third speaker). Thus, we will hear the central channel in the middle of the left and right speakers. Changing factor of the left or right channel you can 'move' the center. Thus, setting ' Ñ ' column value of the 'L' row as 1 will result in louder sound effect of the center from the left channel. The center will seem to be moved to the left.
+
+In most cases there’s no need to change the matrix manually: when the \optname{AutoMatrix} option is on the mixing matrix is calculated automatically based on the following parameters: speakers mode, \optname{Voice}, \optname{Surround}, \optname{LFE} levels, \optname{Normalize matrix}, \optname{Voice control} and \optname{Expand stereo} options. Thus, level changing for the central (voice) channel will result in changes of matrix coefficients (column 'C'). 
+
+\subsubsection{Gains}
+
+\begin{description}
+
+\item [\optname{Master}/\optname{Gain}] - desirable and current gain level (refer to \myref{ss:main-page}).
+
+\item [\optname{Voice}] gain level of the center channel. If the input signal contains real central channel, then this level affects only on this channel. If there is no central channel but Voice control flag is set, this level controls the level of 'virtual' center. This level is a matrix parameter, so it makes sense only when the Auto matrix option is on. When changing level the matrix is recalculated.
+
+\item [\optname{Surround}] rear gain level. If there are rear channels in input signal then this level affects only on them both in case of down mixing (in this case level of rear channels mixing into front channels is controlled) or without it (i.e. just control channel levels in respect of the frontal channels). If there are no rear channels in source but Expand stereo flag is set, then this level controls the level of 'virtual' rear. This level is a matrix parameter, so it makes sense only when the Auto matrix option is on. When changing level the matrix is recalculated.
+
+\item [\optname{LFE}] LFE channel level. This level is a matrix parameter, so it makes sense only when the Auto matrix option is on. The matrix is recalculated when changing the level. 
+
+\end{description}
+
+\subsubsection{Options}
+
+\begin{description}
+
+\item [\optname{Auto gain control}] this option reduces the current gain level to avoid an overflow. \optname{Gain} indicator displays the current gain level. When this option is off the extremely strong signal will be cut off resulting in distortions, which are unpleasant to hear. If the option is on then in case of overflow the sound becomes quieter thereby excluding overflow. System behavior after overflow is defined by \optname{One-pass norm} option. If this option is off the current level will return to adjusted \optname{Master} level. At that, this level specifies an average gain level. If there are many locations with overflows such behavior may result in unpleasant leaps of loudness, therefore you should not set the \optname{Master} level at extremely high value. It is recommended to use this mode when overflow is not expected or when it appear relatively rarely. If \optname{One-pass norm} option is on gain level is not recovered after overflow. Thus, every overflow reduces probability and 'intensity' of next overflows, therefore after some time the gain level adjusts to a certain average value and keeps around it thereafter. As a rule, level becomes stable (and the current level is displayed by the \optname{Gain} level) after ~10 minutes of film playing. This mode is used to reach the highest possible loudness with minimum of possible artifacts. In this case, the \optname{Master} level acts as an initial gain value for the one-pass normalization operation; therefore, usually it is adjusted at maximum. For more information, refer to 7.1. Loudness and dynamic range.
+
+\item [\optname{One-pass norm}] one-pass normalization. Refer to \optname{Auto gain control}.
+
+\item [\optname{Auto matrix}] automatic calculation of the mixing matrix. When this option is on you cannot edit the matrix directly. \optname{LFE}, \optname{Voice} and \optname{Surround} gain levels are parameters for matrix calculation; when changing them matrix is changed immediately. When this option is off the following control elements loose their effect: \optname{LFE}, \optname{Voice} and \optname{Surround} gain levels, \optname{Normalize matrix}, \optname{Expand stereo}, \optname{Voice control} options. Then ability of direct editing of the mixing matrix is available.
+
+\item [\optname{Normalize matrix}] When this option is active, the mixing matrix is normalized to ensure that no overflows occur in output channels (the sum of the output channels ? 1). But at the same time, changing of \optname{LFE}, \optname{Voice} and \optname{Surround} gain levels may lead to loudness redistribution (for instance, when increasing LFE loudness , loudness of other channels will decrease) that is not always convenient. Besides, in most cases matrix normalization strongly reduces total loudness. Switching this option off allows to avoid those effects, however possibility of overflow appears at the same time.
+
+\item [\optname{Expand stereo}] takes effect only if there are no rear channels in input signal. This option allows to control gain level of the virtual environment by means of \optname{Surround} level. If there are rear speakers in output speakers configuration the separated environment information is redirected that way.
+
+\item [\optname{Voice control}] takes effect only if there is no central channel in input signal. This option allows to control gain level of the virtual center by means of \optname{Voice} level. If there is a central channel in output speakers configuration, the separated virtual center is redirected that way. This option together with \optname{Expand stereo} option allows to decompose the stereo signal to 5 speakers.
+
+\item [\optname{Bass redirection}] bass redirection from all channels to subwoofer. It takes effect only if there is a subwoofer in output speakers configuration. This option is recommended for systems with separate subwoofer (refer to \myref{sec:about-lfe}). You can set the cutoff frequency (Hz) in entry field.
+
+\end{description}
+
+\subsubsection{Matrix}
+
+Matrix selection list allows to save and upload matrices. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Gains
+
+\subsection{Gains}
+\label{ss:gains-page}
+
+This page contains gain level settings:
+
+\img{pic_ac3filter/dlg_gains.png}
+
+\subsubsection{Gains}
+
+\optname{Master}/\optname{Gain} - desirable and current gain level (refer to \myref{ss:main-page}). 
+
+\subsubsection{Dynamic range compression (DRC)}
+
+\optname{DRC Enabled} checkbox switches dynamic range compression function. The first level defines compression level of the dynamic range. The second level reflects current gain level. For more information, refer to 7.1. Loudness and dynamic range. 
+
+\subsubsection{Delays}
+
+These are delays for each output channel. Delay values can be set in different units (Units selection list). Positive values for time units mean that positive delay will be introduced, i.e. the sound will be delayed. Conversely, positive values for distance units mean negative delay, i.e. the sound will be played 'in advance'. In both cases, there can be negative delay values. There are two main applications of delays:
+
+\begin{itemize}
+\item Compensating of distance difference between speakers. Acoustic wave needs certain time to reach listener, therefore, ideally all speakers must be located at equal distance from listener, so as the sound simultaneously produced by all speakers at a certain time could reach listener simultaneously. Otherwise, sounds will be in wrong positions. However, the distance to speakers may differ in practice. The farther the speaker, the earlier sound produced by it must be played. To compensate this defect you can set distances to speakers directly.
+\item Ambisonic effect creation when decomposing stereo record to multi-channel system. Introduction of additional delay to rear channels can enhance the ambisonic effect.
+\end{itemize}
+
+\subsubsection{Input gains}
+
+Gain levels of input channels. Sometimes it is required to change gain levels namely of input channels. That's the case when the input signal has a central channel while the output one has no central channel (the center is mixed to front channels), and it is required to change dialog level namely. I.e. these levels are intended for record defects compensation.
+
+\subsubsection{Output gains}
+
+Gain levels of output channels. These levels serve for speakers loudness equalization (if speakers are located asymmetrically). In other words, they serve for compensation of acoustic system defects.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% System settings
+
+\subsection{System settings}
+\label{ss:system-page}
+
+This page reflects system settings (which have no direct influence on sound):
+
+\img{pic_ac3filter/dlg_system.png}
+
+\subsubsection{Use AC3Filter for ...}
+
+It defines the cases of AC3Filter use.
+
+\begin{description}
+\item [PCM] use AC3Filter for post-processing of all audio streams. To use this mode the filter must have high priority (refer to Filter merit option further in this section).
+\item [AC3] use AC3Filter for AC3 decoding
+\item [DTS] use AC3Filter for DTS decoding
+\item [MPEG Audio] use of AC3Filter for MPEG Audio decoding
+\item [PES (DVD)] use AC3Filter for audio decoding in MPEG1/MPEG2 PES streams. This mode is required for DVD/VideoCD playing.
+\end{description}
+
+\subsubsection{SPDIF passthrough}
+
+This setting defines formats supported by external decoder and being transferred without any modifications when digital output is used. It makes sense only if the SPDIF option is on (refer to \myref{ss:main-page}). 
+
+\subsubsection{Filter merit}
+
+The filter is installed into the system with the highest priority, i.e. it will be used instead of any other decoders installed. If it is required to use other decoders by any reasons, the priority can be decreased to minimum using the \optname{Prefer other decoder} option. Filter will stay in system and will be used only if there are no other decoders installed. \optname{Prefer AC3Filter} option means the high priority. 
+
+\subsubsection{Default audio renderer}
+
+Audio card can operate in two modes: DirectSound and WaveOut. If there are some problems occur when using the filter (e.g. SPDIF is inoperative), sometimes they can be solved by switching of operating mode. Some players have settings to change output device (refer to \myref{sec:player-setup}), others use the default system settings. To switch the operating mode use \optname{Use DirectSound} option for DirectSound interface, and \optname{Use WaveOut} option for WaveOut interface. This option changes the system global settings! Thus, it is preferably to use native settings of player if possible.
+
+This option takes effect only if the player uses the default output device or if it has appropriate settings. 
+
+\subsubsection{Audio/Video sync}
+
+In some cases, audio and video can be non-synchronized. Generally, this can occur due to incorrect mixing of video file, but the hardware causes of desynchronization are possible too. This option is intended to solve hardware problems. It can be used for defect correction of certain file, but do not forget to change it back! Here shift between audio and video is specified in ms. If sound is heard before video you should increase this value. If sound occurs after picture on the screen, you should decrease the value. This option helps to correct constant time shift only.
+
+Option takes effect immediately. When changing the delay value the picture can freeze or jerk within several seconds. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% What is LFE?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What is LFE?}
+\label{sec:about-lfe}
+
+The first that should be noted: \emph{LFE is not the same as a subwoofer!} In addition, the designation '5.1' for AC3 does not coincide with '5.1' for an acoustic system. Thus, let us begin from considering this difference.
+
+The AC3 format was created for cinema and not at all for a computer. At cinemas, quality acoustics may reproduce low frequencies quite adequately, whereas LFE was designed as a channel for powerful low-frequency effects that is effects, with which usual acoustics cannot cope any more. It is used in order to make walls to shake, people to cry from a horror and weak-nerved young ladies to faint. Thus, all channels of the ac-3 stream contain low frequencies and only sometime (in especially explosive moments) the LFE channel begins to operate, just to help the basic acoustics to shake wal ls. It may quite happen so that the LFE channel will never be switched on during the entire movie. This also will be normal.
+
+The computer acoustics has quite another specific character. Most of contemporary 5.1 acoustics just is not able to reproduce low frequency through main speakers (satellites) and subwoofer should be entirely responsible for its reproduction. Thus, if we connect 5.1 acoustics and begin to watch movie with sound track of the 5.1 format assigning the LFE channel to the subwoofer (without redirection of low frequencies from main channels) we risk not to hear low frequencies at all!
+
+Acoustic systems with subwoofer may be divided into several categories. First, an acoustic system may have a subwoofer, and, however, not have separate input for it. In this case, the acoustic system itself separates input signal into low-frequency signal for the subwoofer and signal for main speakers. It is necessary for such systems that all low-frequency information is already contained in the signal for main speakers, i.e. it is necessary to mix the LFE channel into all main channels. Thus, output mode should be indicated without subwoofer. (From the point of view of operating system and sound card, the acoustic system has no subwoofer, as the acoustic system has no separate input for it).
+
+Systems where subwoofer is controlled separately may be divided into two categories.
+
+\begin{itemize}
+\item Main speakers cannot reproduce low frequencies, thus only subwoofer is responsible for reproduction of low frequencies. In this case, bass redirection from main channels to subwoofer is necessary! Cutoff frequency of subwoofer may be found in the acoustic system's documentation. Cutoff frequency, equal to 120 Hz and set as default, is suitable for most of such systems.
+\item Main speakers are broad-banded and are capable to reproduce low frequencies independently, and subwoofer plays a supporting role only. In this case, bass redirection is optional, but it may be used for the lowest frequencies (~40 Hz).
+\end{itemize}
+
+To obtain more detailed information on purposes of channels, subwoofer and bass control, address the Dolby site: \url{http://www.dolby.com/tech/c.in.0011.LFE.pdf} (Eng).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Distribution 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Distribution}
+\label{sec:distribution}
+
+This software product is distributed under the GNU General Public License v2, the text is appended as the \file{GNU\_eng.txt} file in English and the \file{GNU\_rus.txt} in Russian. The variant in Russian is provided as a reference only; in case of any discrepancies, the English version prevails.
+
+This software product may be used only for demonstration and training purposes. Any use for other purposes may be prohibited in some countries. This product may be distributed freely, except for cases prohibited by the legislation.
+
+This software product is distributed exceptionally with a hope that it will be useful; however, without any guarantees of operation on a specific equipment, of meeting any conditions, standards or needs. I do not undertake an assurance of twenty-four-hour (or any) support, of an error correction, of recovery of data lost due to operation of the program, of liability for spoilt hardware as well as for lost working time. I am not responsible for legality of multimedia products reproduced by this program. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contact author
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Contact author}
+\label{sec:contact-author}
+
+All questions relating to the filter operation, errors, new ideas, proposals, etc. should be addressed to the following address : AC3Filter   . Due to a vast number of spam, filtering is used, so the subject of the message itself should contain AC3Filter word and the message size should not exceed 20K. If you wish to send files send a preliminary notice.
+
+If you have a problem, describe it in detail, up to a sequence of pressed keys. Information on the system's configuration (OS version, sound card), the player being used, filter settings (it is desirable to indicate fields) is required. Here is an example of a style that should not be used in a letter (a real message):
+
+\begin{quotation}
+   You have a cool prog, but I failed toanderstand anything. I have such stuff Topdevice 440D/5.1 and tsenter does not plough with AC-3 only 5.1? big requezt wha should be done for a tsentor to play (Winamp playr). One more requezt if you can this all quicker (a big desire that everything work "OK").
+\end{quotation}
+
+Such letters will be simply ignored. And now this is an example of a well-made message, which helped to solve the problem quickly:
+
+\begin{quotation}
+  Good day,
+  
+  I have found a link to your codec at the IXBT forum, downloaded it, installed and a problem arouse.
+
+  To begin with, I inform you on my configuration.\\
+  Windows 98SE, C-Media 8738 (PCI) card, speaker mode - 5.1
+    
+  I used 3 different players: WMP 6.01.05.0217, ZoomPlayer 2.5, BsPlayer 0.86.
+    
+  The problem is: while playing DivX+AC-3 a sound is reproduced, but not AC-3, to be more precise, not a full-fledged AC-3. In the Output levels of codec's properties level of only three channels can be changed: two front and the central ones (see the figure). The subwoofer sound exists, but it is quiet and very "dirty", and there is no subwoofer level in Output levels. Rear speakers are silent.
+    
+  Default WaveOut Device properties are:
+  \begin{verbatim}
+  wFormatTag: 65534
+  nChannels: 6
+  \end{verbatim}
+  
+  I wish to warn right away, that I downloaded and installed a patch for W98, a reference to which you gave on the project page.
+  
+  I send registry branch and the Main page of codec's properties as attached files. 
+\end{quotation}  
+
+Before writing on an existence of a problem, make sure that the problem is really caused by the filter: uninstall the filter. If the problem remains, the filter has no connection to it - during deinstallation, the filter completely removes itself from the system leaving no traces.
+
+I try to review all incoming problems, but simply do not have a physical capacity to deal with every problem individually. However, in any case, your messages are not lost for nothing - using accumulated statistics often leads to a successful solution of very knotty cases.
+
+Read the documentation! Many "problems" are successfully solved by available settings.
+
+Besides, I recommend to use the forum: you may find people with similar problems, which were successfully solved. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Donate
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Donate}
+\label{sec:donate}
+
+The project needs your help! If you like the program, it enables you to solve your problems, you will use it at home or in your professional activities, and if you have ideas how to improve it, you may support the further project development.
+
+A financial support is accepted at this address:
+
+\begin{center} \huge \urldonate{Donate!} \end{center}
+
+Any sum is important; this is not only money, but a moral support too.
+
+You may support the project not only financially, I accept any help. In the first place, I need equipment for testing. E.g., a large number of problems relating to the SPDIF mode are caused by fact that I have absolutely no SPDIF equipment.
+
+Besides, the project needs a site and its maintenance. In addition, first of all, a support of the forum is needed to provide a patient help to beginners as well as to identify really serious problems.
+
+It is required to translate the documentation, as for large number of users neither Russian, nor English languages are the native ones. Unfortunately, interface translation is not planned yet, but translation of documentation is necessary. 
+
+\end{document}

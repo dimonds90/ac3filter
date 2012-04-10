@@ -1,0 +1,25 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+
+\usepackage{ifpdf}           % ifpdf macro
+\usepackage[usenames]{color} % allows to change text color
+\usepackage{tabularx}        % extended tables
+\usepackage{indentfirst}     % ident first paragraph
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graphics
+
+\ifpdf
+  \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex,unicode]{hyperref}
+  \DeclareGraphicsExtensions{.pdf,.jpg,.png}
+\else
+  \usepackage{graphicx}
+  \usepackage{hyperref}
+
+  % section name reference \nameref is required for HTML output
+  % and must be included AFTER hyperref package
+  \usepackage{nameref}
+
+  \DeclareGraphicsExtensions{.pdf,.jpg,.png}
+\fi

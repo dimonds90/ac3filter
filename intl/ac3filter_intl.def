@@ -1,0 +1,10 @@
+EXPORTS
+  set_lang
+  get_lang
+  gettext_wrapper
+  lang_index
+  lang_by_code
+  lang_by_index
+  country_index
+  country_by_code
+  country_by_index

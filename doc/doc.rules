@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualStudioToolFile
+	Name="Documentation build rules"
+	Version="8.00"
+	>
+	<Rules>
+		<CustomBuildRule
+			Name="TeX to PDF"
+			DisplayName="TeX to PDF"
+			CommandLine="call build_pdf.cmd [inputs]"
+			Outputs="$(InputName).pdf"
+			FileExtensions="*.tex"
+			>
+			<Properties>
+			</Properties>
+		</CustomBuildRule>
+	</Rules>
+</VisualStudioToolFile>
