@@ -1,6 +1,7 @@
 syntax:glob
 
 # Build files
+**.pyc
 **\Debug
 **\Release
 **\Debug_Libc
@@ -62,3 +63,4 @@ lang\*.mo
 
 # Config
 cmd/config.cmd
+config.py

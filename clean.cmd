@@ -5,3 +5,5 @@ for /d %%d in (*) do if exist %%d\clean.cmd (
   call clean.cmd
   cd ..
 )
+
+del *.pyc
