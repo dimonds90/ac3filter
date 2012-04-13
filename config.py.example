@@ -1,0 +1,5 @@
+# pkzip executable
+pkzip = 'pkzip25'
+
+# Inno setup compiler executable
+innosetup = 'C:\Devel\Inno Setup 5\iscc.exe'
