@@ -13,7 +13,7 @@ struct ControlDesc
 };
 
 // Total groups: 35
-// Total controls: 154
+// Total controls: 155
 static const ControlDesc dialog_controls[] =
 {
   // Controls without a group
@@ -31,6 +31,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_LBL_EQ_GAIN, N_("IDC_LBL_EQ_GAIN"), "Gain (dB)", "" },
   /* TRANSLATORS: Filter length: */
   { IDC_LBL_EQ_LEN, N_("IDC_LBL_EQ_LEN"), "Filter length:", "" },
+  /* TRANSLATORS: Problem description: */
+  { IDC_LBL_ERROR_DESC, N_("IDC_LBL_ERROR_DESC"), "Problem description:", "" },
   /* TRANSLATORS: LFE */
   { IDC_LBL_LFE, N_("IDC_LBL_LFE"), "LFE", "" },
   /* TRANSLATORS: Surround */
