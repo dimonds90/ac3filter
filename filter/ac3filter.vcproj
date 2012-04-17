@@ -675,6 +675,14 @@
 				RelativePath=".\dlg\control_ver.h"
 				>
 			</File>
+			<File
+				RelativePath=".\dlg\error_report.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\dlg\error_report.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ac3filter.bmp"

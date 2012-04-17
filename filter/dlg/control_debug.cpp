@@ -4,6 +4,7 @@
 #include "../registry.h"
 #include "../guids.h"
 #include "control_debug.h"
+#include "error_report.h"
 
 static const int controls[] =
 {
@@ -67,7 +68,8 @@ ControlDebug::cmd_result ControlDebug::command(int control, int message)
     case IDC_BTN_ERROR_REPORT:
       if (message == BN_CLICKED)
       {
-        BT_CallSehFilter();
+        ErrorReportDlg dlg;
+        dlg.exec(ac3filter_instance, MAKEINTRESOURCE(IDD_ERROR_REPORT), hdlg);
         return cmd_ok;
       }
       break;

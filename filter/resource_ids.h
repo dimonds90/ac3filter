@@ -28,6 +28,7 @@
 #define IDD_ABOUT                       108
 #define IDD_EQ_CUSTOM                   109
 #define IDD_EQ_SAVE                     110
+#define IDD_ERROR_REPORT                111
 
 #define IDD_SIMPLE                      200
 #define IDD_TEMPL                       201
@@ -542,6 +543,9 @@
 #define IDC_CHK_SAVE_LOGS              53504
 #define IDC_BTN_ERROR_REPORT           53505
 #define IDC_LNK_ERROR_REPORT           53506
+#define IDC_LBL_ERROR_DESC             53507
+#define IDC_EDT_ERROR_DESC             53508
+
 
 // Other
 #define IDC_VER                        52901
