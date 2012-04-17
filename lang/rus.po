@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 2.0a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 02:44+0400\n"
-"PO-Revision-Date: 2012-04-10 02:44+0400\n"
+"POT-Creation-Date: 2012-04-17 15:09+0400\n"
+"PO-Revision-Date: 2012-04-17 15:11+0400\n"
 "Last-Translator: Valex <xvalex@mail.ru>\n"
 "Language-Team: AC3Filter <ac3filter@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -148,6 +148,10 @@ msgstr "Усиление (дБ)"
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
 msgstr "Длина фильтра:"
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
+msgstr "Описание проблемы:"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -783,6 +787,15 @@ msgstr ""
 
 msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
 msgstr "Эта опция опасна! При включенной опции видео может быть рассинхронизированно. Нажмите \"Нет\" для включения опции."
+
+msgid "Enter you email."
+msgstr "Введите ваш адрес электронной почты."
+
+msgid "Please..."
+msgstr "Пожалуйста..."
+
+msgid "Describe your proiblem."
+msgstr "Опишите ваше проблему."
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "Информация о сборке"

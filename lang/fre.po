@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.62b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 02:44+0400\n"
+"POT-Creation-Date: 2012-04-17 15:09+0400\n"
 "PO-Revision-Date: 2009-07-20 06:06+0100\n"
 "Last-Translator: Philippe AGUESSE <nantesph@hotmail.fr>\n"
 "Language-Team: Philippe AGUESSE <nantesph@hotmail.fr>\n"
@@ -147,6 +147,10 @@ msgstr ""
 
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
+msgstr ""
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
 msgstr ""
 
 #. TRANSLATORS: LFE
@@ -803,6 +807,15 @@ msgid ""
 msgstr ""
 "Cette option est DANGEROUS ! Vidéo peut aller hors synchronisation avec "
 "cette option activée. Appuyez sur 'Non' pour activer cette option."
+
+msgid "Enter you email."
+msgstr ""
+
+msgid "Please..."
+msgstr ""
+
+msgid "Describe your proiblem."
+msgstr ""
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "Information compilation"

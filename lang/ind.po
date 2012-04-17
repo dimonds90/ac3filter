@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.40b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 02:44+0400\n"
+"POT-Creation-Date: 2012-04-17 15:09+0400\n"
 "PO-Revision-Date: 2008-06-20 17:36+0300\n"
 "Last-Translator: Alexander Vigovsky <xvalex@mail.ru>\n"
 "Language-Team: \n"
@@ -147,6 +147,10 @@ msgstr ""
 
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
+msgstr ""
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
 msgstr ""
 
 #. TRANSLATORS: LFE
@@ -797,6 +801,15 @@ msgstr ""
 msgid ""
 "This option is DANGEROUS! Video may go out of sync with this option enabled. "
 "Press 'No' to enable this option."
+msgstr ""
+
+msgid "Enter you email."
+msgstr ""
+
+msgid "Please..."
+msgstr ""
+
+msgid "Describe your proiblem."
 msgstr ""
 
 #~ msgid "AS IS (no change)"

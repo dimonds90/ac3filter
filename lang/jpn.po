@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.60b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 02:44+0400\n"
+"POT-Creation-Date: 2012-04-17 15:09+0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: tnetsixenon <tnetsixenon@gmail.com>\n"
 "Language-Team: tnetsixenon <tnetsixenon@gmail.com>\n"
@@ -148,6 +148,10 @@ msgstr "ゲイン (dB)"
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
 msgstr "フィルター長:"
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
+msgstr ""
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -806,6 +810,15 @@ msgstr ""
 "このオプションは注意が必要です。オプションを有効にすると、映像との同期が取れ"
 "なくなる場合があります。オプションを有効にするには「いいえ」を押してくださ"
 "い。"
+
+msgid "Enter you email."
+msgstr ""
+
+msgid "Please..."
+msgstr ""
+
+msgid "Describe your proiblem."
+msgstr ""
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "ビルド情報"

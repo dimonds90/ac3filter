@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.45b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 02:44+0400\n"
+"POT-Creation-Date: 2012-04-17 15:09+0400\n"
 "PO-Revision-Date: 2007-06-08 20:33+0800\n"
 "Last-Translator: FSYX <fsyx@qq.com>\n"
 "Language-Team: ChongQing Mobile\n"
@@ -152,6 +152,10 @@ msgstr ""
 
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
+msgstr ""
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
 msgstr ""
 
 #. TRANSLATORS: LFE
@@ -803,6 +807,15 @@ msgid ""
 msgstr ""
 "这个选项存在风险! 启用后可能造成音频和视频不同步.要启用该选项,请点击按钮\"否"
 "\"."
+
+msgid "Enter you email."
+msgstr ""
+
+msgid "Please..."
+msgstr ""
+
+msgid "Describe your proiblem."
+msgstr ""
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "编译信息"
