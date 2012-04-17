@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.60b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 02:44+0400\n"
+"POT-Creation-Date: 2012-04-17 15:09+0400\n"
 "PO-Revision-Date: 2009-05-18 20:30+0100\n"
 "Last-Translator: Ferny <mundodivx@gmail.com>\n"
 "Language-Team: MundoDivX.com <mundodivx@gmail.com>\n"
@@ -148,6 +148,10 @@ msgstr "Ganancia (dB)"
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
 msgstr "Longitud del filtro:"
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
+msgstr ""
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -807,6 +811,15 @@ msgid ""
 msgstr ""
 "¡Esta opción es PELIGROSA! El vídeo puede desincronizarse con esta opción "
 "habilitada. Presione 'No' para habilitar esta opción."
+
+msgid "Enter you email."
+msgstr ""
+
+msgid "Please..."
+msgstr ""
+
+msgid "Describe your proiblem."
+msgstr ""
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "Información de compilación"

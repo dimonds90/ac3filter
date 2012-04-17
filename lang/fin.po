@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.63b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 02:44+0400\n"
+"POT-Creation-Date: 2012-04-17 15:09+0400\n"
 "PO-Revision-Date: 2009-11-08 20:59+0200\n"
 "Last-Translator: Freeze <vjuusola@gmail.com>\n"
 "Language-Team: \n"
@@ -148,6 +148,10 @@ msgstr "Vahvistus (dB)"
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
 msgstr "Filtterin pituus:"
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
+msgstr ""
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -804,6 +808,15 @@ msgid ""
 msgstr ""
 "Tämä valinta on VAARALLINEN! Videon synkronointi saattaa hävitä tämän "
 "asetuksen ollessa käytössä. Vahvista valintasi painamalla painiketta 'Ei'."
+
+msgid "Enter you email."
+msgstr ""
+
+msgid "Please..."
+msgstr ""
+
+msgid "Describe your proiblem."
+msgstr ""
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr " Versiotiedot "

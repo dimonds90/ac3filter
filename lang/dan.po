@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.61b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 02:44+0400\n"
+"POT-Creation-Date: 2012-04-17 15:09+0400\n"
 "PO-Revision-Date: 2009-09-09 00:42+0100\n"
 "Last-Translator: NimmerSoft <nimmer@dbmail.dk>\n"
 "Language-Team: \n"
@@ -148,6 +148,10 @@ msgstr "Gain (dB)"
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
 msgstr "Filterlængde:"
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
+msgstr ""
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -805,6 +809,15 @@ msgid ""
 msgstr ""
 "ADVARSEL!! Videoen kan løbe asynkront, når denne indstilling er aktiveret. "
 "Klik på 'Nej' for at aktivere denne indstilling."
+
+msgid "Enter you email."
+msgstr ""
+
+msgid "Please..."
+msgstr ""
+
+msgid "Describe your proiblem."
+msgstr ""
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "Build Info"

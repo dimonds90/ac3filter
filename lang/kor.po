@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-10 02:44+0400\n"
+"POT-Creation-Date: 2012-04-17 15:09+0400\n"
 "PO-Revision-Date: 2007-11-13 16:37+0900\n"
 "Last-Translator: starcodec <starcodec@gmail.com>\n"
 "Language-Team: starcodec <starcodec@gmail.com>\n"
@@ -148,6 +148,10 @@ msgstr ""
 
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
+msgstr ""
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
 msgstr ""
 
 #. TRANSLATORS: LFE
@@ -803,6 +807,15 @@ msgid ""
 msgstr ""
 "이 옵션은 위험합니다! 이 옵션을 활성화하면 비디오의 동기가 안 맞을 수 있습니"
 "다. 이 옵션을 활성화하려면 '아니오'를 선택하세요."
+
+msgid "Enter you email."
+msgstr ""
+
+msgid "Please..."
+msgstr ""
+
+msgid "Describe your proiblem."
+msgstr ""
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "빌드 정보"
