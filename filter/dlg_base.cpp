@@ -30,19 +30,6 @@ DialogBase::DialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
       dlg->on_create();
       return TRUE;
 
-    case WM_COMMAND:
-      switch (LOWORD(wParam))
-      {
-      case IDOK:
-        EndDialog(hwnd, IDOK);
-        return TRUE;
-
-      case IDCANCEL:
-        EndDialog(hwnd, IDCANCEL);
-        return TRUE;
-      }
-      break;
-
     case WM_DESTROY:
       dlg->on_destroy();
       dlg->hwnd = 0;
@@ -58,7 +45,26 @@ DialogBase::DialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
       return TRUE;
   }
 
-  return dlg->on_message(hwnd, uMsg, wParam, lParam);
+  BOOL result = dlg->on_message(hwnd, uMsg, wParam, lParam);
+  if (result == TRUE)
+    return TRUE;
+
+  // Default processing for OK and Cancel buttons
+  switch (uMsg)
+  {
+    case WM_COMMAND:
+      switch (LOWORD(wParam))
+      {
+      case IDOK:
+        EndDialog(hwnd, IDOK);
+        return TRUE;
+
+      case IDCANCEL:
+        EndDialog(hwnd, IDCANCEL);
+        return TRUE;
+      }
+  }
+  return FALSE;
 }
 
 DialogBase::DialogBase()
