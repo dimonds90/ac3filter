@@ -58,7 +58,7 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
   else
     m_pOutput = sink;
 
-  tray = true;
+  tray = false;
   reinit = 0;
   spdif_no_pcm = false;
 
@@ -580,23 +580,23 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
   // that do not understand WAVEFORMATEXTENSIBLE format 
   // (Vortex-based cards for example).
 
-  CMediaType mt;
-  Speakers spk;
+  bool use_spdif;
   Speakers in_spk;
+  Speakers spk;
+  dec.get_use_spdif(&use_spdif);
+  dec.get_in_spk(&in_spk);
 
   /////////////////////////////////////////////////////////
   // Publish SPDIF format
 
-  bool use_spdif;
-  dec.get_use_spdif(&use_spdif);
-  dec.get_in_spk(&in_spk);
-
   if (use_spdif)
   {
-    // dummy spdif formats
+    // dummy spdif format
     spk = Speakers(FORMAT_SPDIF, 0, in_spk.sample_rate);
-    if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
-    if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
+    int j = 0;
+    while (spk2mt(spk, *_mt, j++))
+      if (!i--)
+        return NOERROR;
   }
 
   /////////////////////////////////////////////////////////
@@ -619,14 +619,18 @@ AC3Filter::GetMediaType(int i, CMediaType *_mt)
     if (!spk.sample_rate)
       spk.sample_rate = in_spk.sample_rate;
 
-    if ((spk.mask != MODE_MONO && spk.mask != MODE_STEREO) || spk.format != FORMAT_PCM16)
-    {
-      // mt_pcm_wfx
-      if (!i--) return spk2mt(spk, *_mt, true)? NOERROR: E_FAIL;
-    }
+    bool simple_format = 
+      (spk.mask == MODE_MONO || spk.mask == MODE_STEREO) &&
+      spk.format == FORMAT_PCM16;
 
-    // mt_pcm_wf
-    if (!i--) return spk2mt(spk, *_mt, false)? NOERROR: E_FAIL;
+    if (!i--) return spk2mt(spk, *_mt, 0)? NOERROR: E_FAIL;
+    if (!simple_format)
+    {
+      int j = 1;
+      while (spk2mt(spk, *_mt, j++))
+        if (!i--)
+          return NOERROR;
+    }
   }
 
   return VFW_S_NO_MORE_ITEMS;
