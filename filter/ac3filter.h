@@ -31,8 +31,8 @@ protected:
   bool open(const CMediaType &mt);
   bool open(Speakers in_spk);
 
-  void process(const Chunk *chunk);
-  void flush();
+  HRESULT process(const Chunk *chunk);
+  HRESULT flush();
   void reset();
 
 private:

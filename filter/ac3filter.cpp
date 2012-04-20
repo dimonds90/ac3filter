@@ -2,7 +2,9 @@
 #include "ac3filter.h"
 #include "ac3filter_intl.h"
 #include "log.h"
-#include "decss\DeCSSInputPin.h"
+#include "win32/dshow_spk.h"
+#include "win32/hresult_exception.h"
+#include "decss/DeCSSInputPin.h"
 
 static const string log_module = "AC3Filter";
 
@@ -147,23 +149,42 @@ AC3Filter::open(const CMediaType &_mt)
 bool        
 AC3Filter::open(Speakers _in_spk)
 {
-  if (!dec.can_open(_in_spk))
+  try {
+    if (!dec.can_open(_in_spk))
+    {
+      valib_log(log_warning, log_module, "open(this=%x, spk=%s): format refused", this, _in_spk.print().c_str());
+      return false;
+    }
+
+    if (!dec.open(_in_spk))
+    {
+      valib_log(log_error, log_module, "open(this=%x, spk=%s): failed", this, _in_spk.print().c_str());
+      return false;
+    }
+
+    valib_log(log_event, log_module, "open(this=%x, spk=%s): ok", this, _in_spk.print().c_str());
+    return true;
+  }
+  catch (ValibException &e)
   {
-    valib_log(log_warning, log_module, "open(this=%x, spk=%s): format refused", this, _in_spk.print().c_str());
+    valib_log(log_exception, log_module, "open(this=%x) exception:\n%s", this, boost::diagnostic_information(e).c_str());
+    // valib exception is restorable using reset()
+    // Thus we can just return false
     return false;
   }
-
-  if (!dec.open(_in_spk))
+  catch (boost::exception &e)
   {
-    valib_log(log_error, log_module, "open(this=%x, spk=%s): failed", this, _in_spk.print().c_str());
-    return false;
+    valib_log(log_exception, log_module, "open(this=%x) exception:\n%s", this, boost::diagnostic_information(e).c_str());
+    throw;
   }
-
-  valib_log(log_event, log_module, "open(this=%x, spk=%s): ok", this, _in_spk.print().c_str());
-  return true;
+  catch (std::exception &e)
+  {
+    valib_log(log_exception, log_module, "open(this=%x) exception:\n%s", this, e.what());
+    throw;
+  }
 }
 
-void
+HRESULT
 AC3Filter::process(const Chunk *chunk)
 {
   // Here we want to measure processor time used by filter only
@@ -193,15 +214,32 @@ AC3Filter::process(const Chunk *chunk)
       sink->process(out);
       cpu.start();
     }
+    return S_OK;
   }
   catch (ValibException &e)
   {
-    valib_log(log_event, log_module, "process(this=%x) exception:\n%s", this, boost::diagnostic_information(e).c_str());
+    valib_log(log_exception, log_module, "process(this=%x) exception:\n%s", this, boost::diagnostic_information(e).c_str());
+
+    // valib exception is restorable using reset()
+    // Thus we can resolve the situation and do not pass the exception further.
     reset();
+    HRESULT *hr = boost::get_error_info<errinfo_hresult>(e);
+    if (hr) return *hr;
+    return E_FAIL;
+  }
+  catch (boost::exception &e)
+  {
+    valib_log(log_exception, log_module, "process(this=%x) exception:\n%s", this, boost::diagnostic_information(e).c_str());
+    throw;
+  }
+  catch (std::exception &e)
+  {
+    valib_log(log_exception, log_module, "process(this=%x) exception:\n%s", this, e.what());
+    throw;
   }
 }
 
-void
+HRESULT
 AC3Filter::flush()
 {
   try {
@@ -222,11 +260,28 @@ AC3Filter::flush()
       sink->process(out);
       cpu.start();
     }
+    return S_OK;
   }
   catch (ValibException &e)
   {
-    valib_log(log_event, log_module, "flush(this=%x) exception:\n%s", this, boost::diagnostic_information(e).c_str());
+    valib_log(log_exception, log_module, "flush(this=%x) exception:\n%s", this, boost::diagnostic_information(e).c_str());
+
+    // valib exception is restorable using reset()
+    // Thus we can resolve the situation and do not pass the exception further.
     reset();
+    HRESULT *hr = boost::get_error_info<errinfo_hresult>(e);
+    if (hr) return *hr;
+    return E_FAIL;
+  }
+  catch (boost::exception &e)
+  {
+    valib_log(log_exception, log_module, "flush(this=%x) exception:\n%s", this, boost::diagnostic_information(e).c_str());
+    throw;
+  }
+  catch (std::exception &e)
+  {
+    valib_log(log_exception, log_module, "flush(this=%x) exception:\n%s", this, e.what());
+    throw;
   }
 }
 
@@ -296,7 +351,9 @@ AC3Filter::Receive(IMediaSample *in)
     {
       valib_log(log_event, log_module, "Receive(this=%x): Input format change, new format is %s", this, in_spk.print().c_str());
 
-      flush();
+      HRESULT hr = flush();
+      if FAILED(hr) return hr;
+
       reset();
       sink->send_discontinuity();
 
@@ -353,9 +410,7 @@ AC3Filter::Receive(IMediaSample *in)
   /////////////////////////////////////////////////////////
   // Process
 
-  sink->reset_hresult();
-  process(&chunk);
-  return FAILED(sink->get_hresult())? sink->get_hresult(): S_OK;
+  return process(&chunk);
 }
 
 HRESULT 
@@ -523,9 +578,17 @@ AC3Filter::Run(REFERENCE_TIME tStart)
     chunk.set_rawdata(buf, buf.size());
     Speakers spk = sink->get_input();
 
-    sink->open(Speakers(FORMAT_PCM16, MODE_STEREO, spk.sample_rate));
-    sink->process(chunk);
-    sink->open(spk);
+    try {
+      sink->open_throw(Speakers(FORMAT_PCM16, MODE_STEREO, spk.sample_rate));
+      sink->process(chunk);
+      sink->open_throw(spk);
+    }
+    catch (DShowSink::Error &e)
+    {
+      HRESULT *hr = boost::get_error_info<errinfo_hresult>(e);
+      if (hr) return *hr;
+      return E_FAIL;
+    }
 
     BeginFlush();
     EndFlush();
