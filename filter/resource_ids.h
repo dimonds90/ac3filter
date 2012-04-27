@@ -545,6 +545,7 @@
 #define IDC_LNK_ERROR_REPORT           53506
 #define IDC_LBL_ERROR_DESC             53507
 #define IDC_EDT_ERROR_DESC             53508
+#define IDC_CHK_SEND_AUDIO_DATA        53509
 
 
 // Other

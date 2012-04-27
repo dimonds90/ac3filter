@@ -421,19 +421,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\error_reporting.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\error_reporting.h"
+				>
+			</File>
+			<File
 				RelativePath=".\guids.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\guids.h"
-				>
-			</File>
-			<File
-				RelativePath=".\logging.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\logging.h"
 				>
 			</File>
 			<File

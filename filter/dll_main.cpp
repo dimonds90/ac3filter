@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <tchar.h>
 #include "guids.h"
-#include "logging.h"
+#include "error_reporting.h"
 #include "ac3filter_intl.h"
 
 ///////////////////////////////////////////////////////////////////////////////

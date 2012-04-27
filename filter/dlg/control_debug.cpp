@@ -14,6 +14,7 @@ static const int controls[] =
   IDC_CHK_SAVE_LOGS,
   IDC_BTN_ERROR_REPORT,
   IDC_LNK_ERROR_REPORT,
+  IDC_CHK_SEND_AUDIO_DATA,
 
   0
 };
@@ -33,14 +34,17 @@ void ControlDebug::init()
 void ControlDebug::update()
 {
   bool save_logs = false;
+  bool send_audio_data = false;
   char feedback[256];
   feedback[0] = 0;
 
   RegistryKey reg(REG_KEY);
   reg.get_bool("save_logs", save_logs);
+  reg.get_bool("send_audio_data", send_audio_data);
   reg.get_text("feedback", feedback, sizeof(feedback));
 
   CheckDlgButton(hdlg, IDC_CHK_SAVE_LOGS, save_logs? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_SEND_AUDIO_DATA, send_audio_data? BST_CHECKED: BST_UNCHECKED);
   edt_feedback.set_text(feedback);
 };
 
@@ -53,6 +57,14 @@ ControlDebug::cmd_result ControlDebug::command(int control, int message)
       bool save_logs = IsDlgButtonChecked(hdlg, IDC_CHK_SAVE_LOGS) == BST_CHECKED;
       RegistryKey reg(REG_KEY);
       reg.set_bool("save_logs", save_logs);
+      return cmd_ok;
+    }
+
+    case IDC_CHK_SEND_AUDIO_DATA:
+    {
+      bool send_audio_data = IsDlgButtonChecked(hdlg, IDC_CHK_SEND_AUDIO_DATA) == BST_CHECKED;
+      RegistryKey reg(REG_KEY);
+      reg.set_bool("send_audio_data", send_audio_data);
       return cmd_ok;
     }
 

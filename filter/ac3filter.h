@@ -10,6 +10,7 @@
 #include "win32\cpu.h"
 #include "sink\sink_dshow.h"
 #include "com_dec.h"
+#include "error_reporting.h"
 #include "tray.h"
 
 #include "rot.h"
@@ -27,6 +28,8 @@ protected:
   bool spdif_no_pcm;    // do not publish pcm in spdif mode
   int  reinit;          // force audio renderer to reinit sound card
                         // the number means number of PCM samples to send
+
+  AudioLog audio_log;
 
   bool open(const CMediaType &mt);
   bool open(Speakers in_spk);
