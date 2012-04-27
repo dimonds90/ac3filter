@@ -162,6 +162,7 @@ AC3Filter::open(Speakers _in_spk)
       return false;
     }
 
+    audio_log.open(_in_spk);
     valib_log(log_event, log_module, "open(this=%x, spk=%s): ok", this, _in_spk.print().c_str());
     return true;
   }
@@ -194,6 +195,7 @@ AC3Filter::process(const Chunk *chunk)
   // It's also useful because of extended error reporting.
 
   log_input_chunk(*chunk, m_tStart, m_pClock);
+  audio_log.log(*chunk);
 
   try {
     cpu.start();
