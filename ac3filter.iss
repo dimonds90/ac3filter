@@ -56,17 +56,21 @@ Name: "lang";          Description: "Language files"; Types: full
 
 [Files]
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\Release\ac3filter.map";            DestDir: "{app}"; Components: prog\filter32; Flags: RestartReplace UninsRestartDelete
 Source: "filter\Release\avcodec-53.dll";           DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "filter\Release\avutil-51.dll";            DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "BugTrap\Release\BugTrap.dll";             DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "BugTrap\Release\BugTrap.map";             DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: RestartReplace UninsRestartDelete
 Source: "intl\Release\ac3filter_intl.dll";         DestDir: "{app}"; Components: prog\filter32 and lang; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 
 Source: "filter\x64\Release\ac3filter64.ax";           DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
+Source: "filter\x64\Release\ac3filter64.map";          DestDir: "{app}\x64"; Components: prog\filter64; Flags: RestartReplace UninsRestartDelete
 Source: "filter\x64\Release\avcodec64-53.dll";         DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "filter\x64\Release\avutil64-51.dll";          DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "BugTrap\x64\Release\BugTrap-x64.dll";         DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
+Source: "BugTrap\x64\Release\BugTrap-x64.map";         DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: RestartReplace UninsRestartDelete
 Source: "intl\x64\Release\ac3filter64_intl.dll";       DestDir: "{app}\x64"; Components: prog\filter64 and lang; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\x64\Release\ac3config.exe";   DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\spdif_test\x64\Release\spdif_test.exe"; DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion

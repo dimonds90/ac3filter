@@ -69,6 +69,8 @@
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
 				GenerateDebugInformation="true"
+				GenerateMapFile="true"
+				MapExports="true"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -144,6 +146,7 @@
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
 				GenerateDebugInformation="true"
+				GenerateMapFile="true"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -222,6 +225,7 @@
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
 				GenerateDebugInformation="true"
+				GenerateMapFile="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
@@ -301,6 +305,7 @@
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
 				GenerateDebugInformation="true"
+				GenerateMapFile="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="17"
