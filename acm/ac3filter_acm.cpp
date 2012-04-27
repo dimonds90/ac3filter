@@ -511,13 +511,15 @@ AC3FilterACM::stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
     return ACMERR_NOTPOSSIBLE;
   }
 
-  if (!wfx2spk(src, in_spk))
+  in_spk = wf2spk(src, sizeof(WAVEFORMATEX) + src->cbSize);
+  if (in_spk.is_unknown())
   {
     dbglog("AC3FilterACM::stream_open() error: wrong input format");
     return ACMERR_NOTPOSSIBLE;
   }
 
-  if (!wfx2spk(dst, out_spk))
+  out_spk = wf2spk(dst, sizeof(WAVEFORMATEX) + dst->cbSize);
+  if (out_spk.is_unknown())
   {
     dbglog("AC3FilterACM::stream_open() error: wrong output format");
     return ACMERR_NOTPOSSIBLE;
