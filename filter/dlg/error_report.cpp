@@ -31,13 +31,6 @@ ErrorReportDlg::on_message(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
   {
     int control = LOWORD(wParam);
     int message = HIWORD(wParam);
-
-    if (control == IDC_EDT_FEEDBACK && message == CB_ENTER)
-    {
-      RegistryKey reg(REG_KEY);
-      reg.set_text("feedback", edt_feedback.get_text());
-    }
-
     if (control == IDOK && message == BN_CLICKED)
     {
       if (strlen(edt_feedback.get_text()) == 0)
@@ -52,7 +45,8 @@ ErrorReportDlg::on_message(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         SetFocus(GetDlgItem(hwnd, IDC_EDT_ERROR_DESC));
         return TRUE;
       }
-      BT_CallSehFilter();
+      // Close the dialog
+      return FALSE;
     }
   }
 

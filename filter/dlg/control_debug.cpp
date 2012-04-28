@@ -81,7 +81,14 @@ ControlDebug::cmd_result ControlDebug::command(int control, int message)
       if (message == BN_CLICKED)
       {
         ErrorReportDlg dlg;
-        dlg.exec(ac3filter_instance, MAKEINTRESOURCE(IDD_ERROR_REPORT), hdlg);
+        if (dlg.exec(ac3filter_instance, MAKEINTRESOURCE(IDD_ERROR_REPORT), hdlg) == IDOK)
+        {
+          RegistryKey reg(REG_KEY);
+          reg.set_text("feedback", dlg.edt_feedback.get_text());
+
+          BT_SetUserMessage(dlg.edt_desc.get_text());
+          BT_CallSehFilter();
+        }
         return cmd_ok;
       }
       break;
