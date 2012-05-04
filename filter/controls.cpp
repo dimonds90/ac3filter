@@ -140,6 +140,12 @@ Edit::wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
   return SubclassedControl::wndproc(hwnd, msg, wParam, lParam);
 }
 
+void
+Edit::on_link()
+{
+  write_value();
+}
+
 bool
 IntEdit::read_value()
 {
