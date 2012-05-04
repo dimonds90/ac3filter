@@ -147,6 +147,7 @@
 				ModuleDefinitionFile="ac3filter.def"
 				GenerateDebugInformation="true"
 				GenerateMapFile="true"
+				MapExports="true"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -226,6 +227,7 @@
 				ModuleDefinitionFile="ac3filter.def"
 				GenerateDebugInformation="true"
 				GenerateMapFile="true"
+				MapExports="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
@@ -306,6 +308,7 @@
 				ModuleDefinitionFile="ac3filter.def"
 				GenerateDebugInformation="true"
 				GenerateMapFile="true"
+				MapExports="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="17"
