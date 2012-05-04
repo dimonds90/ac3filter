@@ -104,6 +104,7 @@ protected:
   virtual void write_value() = 0;
   virtual const char *incorrect_value() { return "Incorrect value"; }
   virtual LRESULT CALLBACK wndproc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+  virtual void on_link();
 
 public:
   Edit(): editing(false) {};
