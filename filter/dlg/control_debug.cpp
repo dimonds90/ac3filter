@@ -81,10 +81,13 @@ ControlDebug::cmd_result ControlDebug::command(int control, int message)
       if (message == BN_CLICKED)
       {
         ErrorReportDlg dlg;
+        dlg.send_audio_data = (IsDlgButtonChecked(hdlg, IDC_CHK_SEND_AUDIO_DATA) == BST_CHECKED);
+        dlg.edt_feedback.set_text(edt_feedback.get_text());
         if (dlg.exec(ac3filter_instance, MAKEINTRESOURCE(IDD_ERROR_REPORT), hdlg) == IDOK)
         {
           RegistryKey reg(REG_KEY);
           reg.set_text("feedback", dlg.edt_feedback.get_text());
+          reg.set_bool("send_audio_data", dlg.send_audio_data);
 
           BT_SetUserMessage(dlg.edt_desc.get_text());
           BT_CallSehFilter();

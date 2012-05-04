@@ -10,18 +10,7 @@ ErrorReportDlg::on_create()
 {
   edt_feedback.link(hwnd, IDC_EDT_FEEDBACK);
   edt_desc.link(hwnd, IDC_EDT_ERROR_DESC);
-  update();
-}
-
-void
-ErrorReportDlg::update()
-{
-  char feedback[256];
-  feedback[0] = 0;
-
-  RegistryKey reg(REG_KEY);
-  reg.get_text("feedback", feedback, sizeof(feedback));
-  edt_feedback.set_text(feedback);
+  CheckDlgButton(hwnd, IDC_CHK_SEND_AUDIO_DATA, send_audio_data? BST_CHECKED: BST_UNCHECKED);
 }
 
 BOOL
