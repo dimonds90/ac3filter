@@ -7,11 +7,11 @@
 class ErrorReportDlg : public DialogBase
 {
 protected:
-  void update();
   virtual void on_create();
   virtual BOOL on_message(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 public:
+  bool send_audio_data;
   TextEdit edt_feedback;
   TextEdit edt_desc;
 
