@@ -28,8 +28,8 @@
 #include "error_reporting.h"
 #include "guids.h"
 
-static const size_t log_size = 1000;
-static const size_t audio_data_size = 100000;
+static const size_t log_size = 1000; // entries per log
+static const size_t audio_data_size = 200000; // cache size in bytes
 
 LogMem event_log(log_size);
 LogMem trace_log(log_size);
@@ -130,7 +130,7 @@ public:
     f << "File pos\tSize\tTimestamp\n";
     f << std::fixed << std::setprecision(3);
 
-    int pos = (int)buf.size() - int(chunk_data_size); // may be negative!
+    int pos = (int)data_size - int(chunk_data_size); // may be negative!
     for (size_t i = 0; i < chunks.size(); i++)
     {
       f << pos << "\t" << chunks[i].size;
