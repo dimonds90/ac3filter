@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.62b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-17 15:09+0400\n"
+"POT-Creation-Date: 2012-05-12 23:50+0400\n"
 "PO-Revision-Date: 2009-07-20 06:06+0100\n"
 "Last-Translator: Philippe AGUESSE <nantesph@hotmail.fr>\n"
 "Language-Team: Philippe AGUESSE <nantesph@hotmail.fr>\n"
@@ -281,6 +281,10 @@ msgstr ""
 
 #. TRANSLATORS: Save logs on exit
 msgid "IDC_CHK_SAVE_LOGS"
+msgstr ""
+
+#. TRANSLATORS: Send  audio data
+msgid "IDC_CHK_SEND_AUDIO_DATA"
 msgstr ""
 
 #. TRANSLATORS: Feedback email:
