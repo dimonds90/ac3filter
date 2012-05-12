@@ -130,11 +130,11 @@ public:
     f << "File pos\tSize\tTimestamp\n";
     f << std::fixed << std::setprecision(3);
 
-    int pos = (int)data_size - int(chunk_data_size); // may be negative!
+    int pos = (int)data_size - (int)chunk_data_size; // may be negative!
     for (size_t i = 0; i < chunks.size(); i++)
     {
       f << pos << "\t" << chunks[i].size;
-      pos += chunks[i].size;
+      pos += (int)chunks[i].size;
       if (chunks[i].sync)
         f << "\t" << chunks[i].time;
       f << nl;
