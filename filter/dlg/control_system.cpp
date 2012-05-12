@@ -33,13 +33,21 @@ static struct
   const char *name;
 } format_list[] =
 {
+  // PCM formats
   { FORMAT_CLASS_PCM,  "PCM" },
   { FORMAT_CLASS_LPCM, "LPCM" },
+
+  // Lossy formats
   { FORMAT_MASK_MPA,   "MPEG Audio" },
   { FORMAT_MASK(FORMAT_AC3_EAC3),  "AC3" },
   { FORMAT_MASK(FORMAT_AAC_FRAME), "AAC" },
   { FORMAT_MASK_DTS,   "DTS" },
+  { FORMAT_MASK_VORBIS,"Vorbis" },
+
+  // Lossless formats
   { FORMAT_MASK_FLAC,  "Flac" },
+
+  // Containers
   { FORMAT_MASK_PES,   "MPEG PES" },
   { FORMAT_MASK_SPDIF, "SPDIF" },
 };

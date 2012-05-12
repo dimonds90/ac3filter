@@ -21,6 +21,7 @@ static struct
   { FORMAT_MASK(FORMAT_AC3_EAC3),  "format_dolby" },
   { FORMAT_MASK(FORMAT_AAC_FRAME), "format_aac" },
   { FORMAT_MASK_DTS,   "format_dts" },
+  { FORMAT_MASK_VORBIS,"format_vorbis" },
   { FORMAT_MASK_FLAC,  "format_flac" },
   { FORMAT_MASK_PES,   "format_mpeg_pes" },
   { FORMAT_MASK_SPDIF, "fomrat_spdif" },
@@ -32,7 +33,7 @@ COMDecoder::COMDecoder(IUnknown *_outer, int _nsamples): dvd(_nsamples)
   outer = _outer; 
   cur_ch = CH_NONE; // Master is the default equalizer channel
   formats = FORMAT_CLASS_PCM | FORMAT_CLASS_LPCM |
-            FORMAT_MASK_MPA | FORMAT_MASK_DTS |
+            FORMAT_MASK_MPA | FORMAT_MASK_DTS | FORMAT_MASK(FORMAT_VORBIS) |
             FORMAT_MASK(FORMAT_AAC_FRAME) | FORMAT_MASK(FORMAT_AC3_EAC3) |
             FORMAT_MASK_FLAC |
             FORMAT_MASK_PES | FORMAT_MASK_SPDIF;
