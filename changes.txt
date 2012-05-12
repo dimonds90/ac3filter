@@ -1,4 +1,5 @@
 v2.2a
+  * OGG Vorbis support
   * Several bugs leading to crash fixed.
 
 v2.1a - 10.04.2012
