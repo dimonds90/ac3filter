@@ -11,7 +11,7 @@
 #include <msacm.h>
 #include "msacmdrv.h"
 #include "win32\winspk.h"
-#include "dbglog.h"
+#include "log.h"
 
 struct FormatTag
 {
@@ -63,7 +63,7 @@ struct FormatTag
     wfx->nAvgBytesPerSec = bitrate? bitrate[ibitrate] / 8: wfx->wBitsPerSample * wfx->nSamplesPerSec / 8;
     wfx->cbSize          = 0;
 
-    dbglog("FormatTag::format_details(): tag: 0x%04X channles: %i sample rate: %iHz bits/sample: %i bytes/sec: %i", wfx->wFormatTag, wfx->nChannels, wfx->nSamplesPerSec, wfx->wBitsPerSample, wfx->nAvgBytesPerSec);
+    valib_log(log_event, "FormatTag", "format_details(): tag: 0x%04X channles: %i sample rate: %iHz bits/sample: %i bytes/sec: %i", wfx->wFormatTag, wfx->nChannels, wfx->nSamplesPerSec, wfx->wBitsPerSample, wfx->nAvgBytesPerSec);
     return true;
   }
 

@@ -89,7 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)"
+				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -164,7 +164,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)"
+				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -241,7 +241,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)"
+				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -319,7 +319,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)"
+				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -336,14 +336,6 @@
 		</File>
 		<File
 			RelativePath=".\acm_drv.h"
-			>
-		</File>
-		<File
-			RelativePath=".\dbglog.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\dbglog.h"
 			>
 		</File>
 		<File

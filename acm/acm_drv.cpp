@@ -1,5 +1,7 @@
 #include "acm_drv.h"
-#include "dbglog.h"
+#include "log.h"
+
+static const std::string module("ACMDrv");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Memory allocation
@@ -50,14 +52,14 @@ ACMDrv::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARA
   // Sent to determine if the driver can be configured.
   // Zero indicates configuration NOT supported
   case DRV_QUERYCONFIGURE:
-    dbglog("DRV_QUERYCONFIGURE");
+    valib_log(log_event, module, "DRV_QUERYCONFIGURE");
     return query_configure();
     
   // Sent to display the configuration
   // dialog box for the driver.
   // Can return DRVCNF_OK, DRVCNF_CANCEL, DRVCNF_RESTART
   case DRV_CONFIGURE:
-    dbglog("DRV_CONFIGURE");
+    valib_log(log_event, module, "DRV_CONFIGURE");
     return configure((HWND)lParam1, (LPDRVCONFIGINFO)lParam2);
     
   /////////////////////////////////////////////////////////
@@ -65,29 +67,29 @@ ACMDrv::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARA
   /////////////////////////////////////////////////////////
     
   case ACMDM_DRIVER_ABOUT:
-    dbglog("ACMDM_DRIVER_ABOUT");
+    valib_log(log_event, module, "ACMDM_DRIVER_ABOUT");
     return DRVCNF_OK; // about((HWND)lParam1);
  
   // acmDriverDetails
   // Fill-in general informations about the driver/codec
   case ACMDM_DRIVER_DETAILS: 
-    dbglog("ACMDM_DRIVER_DETAILS");
+    valib_log(log_event, module, "ACMDM_DRIVER_DETAILS");
     return driver_details(hdrvr, (LPACMDRIVERDETAILS)lParam1);
     
   // acmFormatTagDetails
   case ACMDM_FORMATTAG_DETAILS: 
-    dbglog("ACMDM_FORMATTAG_DETAILS");
+    valib_log(log_event, module, "ACMDM_FORMATTAG_DETAILS");
     return formattag_details((LPACMFORMATTAGDETAILS)lParam1, lParam2);
     
   // acmFormatDetails
   case ACMDM_FORMAT_DETAILS: 
-    dbglog("ACMDM_FORMAT_DETAILS");
+    valib_log(log_event, module, "ACMDM_FORMAT_DETAILS");
     return format_details((LPACMFORMATDETAILS) lParam1, lParam2);
     
   // acmFormatSuggest
   // Sent to determine if the driver can be configured.
   case ACMDM_FORMAT_SUGGEST: 
-    dbglog("ACMDM_FORMAT_SUGGEST");
+    valib_log(log_event, module, "ACMDM_FORMAT_SUGGEST");
     return format_suggest((LPACMDRVFORMATSUGGEST)lParam1);
     
   /////////////////////////////////////////////////////////
@@ -96,35 +98,35 @@ ACMDrv::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARA
     
   // Sent to determine if the driver can be configured.
   case ACMDM_STREAM_OPEN:
-    dbglog("ACMDM_STREAM_OPEN");
+    valib_log(log_event, module, "ACMDM_STREAM_OPEN");
     return stream_open((LPACMDRVSTREAMINSTANCE)lParam1);
     
   // returns a recommended size for a source 
   // or destination buffer on an ACM stream
   case ACMDM_STREAM_SIZE:
-    dbglog("ACMDM_STREAM_SIZE");
+    valib_log(log_event, module, "ACMDM_STREAM_SIZE");
     return stream_size((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMDRVSTREAMSIZE)lParam2);
     
   // prepares an ACMSTREAMHEADER structure for
   // an ACM stream conversion
   case ACMDM_STREAM_PREPARE:
-    dbglog("ACMDM_STREAM_PREPARE");
+    valib_log(log_event, module, "ACMDM_STREAM_PREPARE");
     return stream_prepare((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMSTREAMHEADER) lParam2);
     
   // cleans up the preparation performed by
   // the ACMDM_STREAM_PREPARE message for an ACM stream
   case ACMDM_STREAM_UNPREPARE:
-    dbglog("ACMDM_STREAM_UNPREPARE");
+    valib_log(log_event, module, "ACMDM_STREAM_UNPREPARE");
     return stream_unprepare((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMSTREAMHEADER) lParam2);
     
   // perform a conversion on the specified conversion stream
   case ACMDM_STREAM_CONVERT:
-    dbglog("ACMDM_STREAM_CONVERT");
+    valib_log(log_trace, module, "ACMDM_STREAM_CONVERT");
     return stream_convert((LPACMDRVSTREAMINSTANCE)lParam1, (LPACMDRVSTREAMHEADER) lParam2);
     
   // closes an ACM conversion stream
   case ACMDM_STREAM_CLOSE:
-    dbglog("ACMDM_STREAM_CLOSE");
+    valib_log(log_event, module, "ACMDM_STREAM_CLOSE");
     return stream_close((LPACMDRVSTREAMINSTANCE)lParam1);
     break;
     
@@ -135,7 +137,7 @@ ACMDrv::DriverProcedure(const HDRVR hdrvr, const UINT msg, LPARAM lParam1, LPARA
   default:
     if (msg >= ACMDM_USER)
     {
-      dbglog("ACM::DriverProc unknown user message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
+      valib_log(log_error, module, "ACM::DriverProc unknown user message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
       return MMSYSERR_NOTSUPPORTED;
     }
     return DefDriverProc ((DWORD_PTR)this, hdrvr, msg, lParam1, lParam2);
@@ -160,11 +162,11 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
     // messages, the dwDriverId will always be zero.
 
     case DRV_LOAD:
-      dbglog("DRV_LOAD");
+      valib_log(log_event, module, "DRV_LOAD");
       return TRUE;
 
     case DRV_FREE:
-      dbglog("DRV_FREE");
+      valib_log(log_event, module, "DRV_FREE");
       return TRUE;
 
     ///////////////////////////////////////////////////////
@@ -174,11 +176,11 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
     case DRV_OPEN: 
     {
       LPACMDRVOPENDESC desc = (LPACMDRVOPENDESC)lParam2;
-      dbglog("DRV_OPEN (ID 0x%08X), pDesc = 0x%08X", dwDriverId, desc);
+      valib_log(log_event, module, "DRV_OPEN (ID 0x%08X), pDesc = 0x%08X", dwDriverId, desc);
 
       if (desc) if (desc->fccType != ACMDRIVERDETAILS_FCCTYPE_AUDIOCODEC) 
       {
-        dbglog("error: wrong desc->fccType (0x%04X)", desc->fccType);
+        valib_log(log_error, module, "wrong desc->fccType (0x%04X)", desc->fccType);
         return FALSE;
       }
 
@@ -187,9 +189,9 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
         desc->dwError = MMSYSERR_NOMEM;
 
       if (acm == 0)
-        dbglog("error: make_acm() returns zero");
+        valib_log(log_error, module, "make_acm() returns zero");
       else
-        dbglog("Instance open (0x%08X)", acm);
+        valib_log(log_event, module, "Instance open (0x%08X)", acm);
 
       return (LRESULT)acm;
     }
@@ -200,14 +202,14 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
 
     case DRV_CLOSE: 
     {
-      dbglog("DRV_CLOSE");
+      valib_log(log_event, module, "DRV_CLOSE");
       if (acm)
       {
-        dbglog("Instance close (0x%08X)", acm);
+        valib_log(log_event, module, "Instance close (0x%08X)", acm);
         delete acm;
       }
       else
-        dbglog("error: cannot close null instance");
+        valib_log(log_error, module, "cannot close null instance");
 
       return TRUE;
     }
@@ -220,7 +222,7 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
     {
       if (acm)
         return acm->DriverProcedure(hdrvr, msg, lParam1, lParam2);
-      dbglog("warning: driver was not open, message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
+      valib_log(log_warning, module, "Driver was not open, message (0x%08X), lParam1 = 0x%08X, lParam2 = 0x%08X", msg, lParam1, lParam2);
       return DefDriverProc (dwDriverId, hdrvr, msg, lParam1, lParam2);
     }
   }
@@ -236,11 +238,11 @@ BOOL WINAPI DllMain(
   switch (fdwReason)
   {
   case DLL_PROCESS_ATTACH:
-    dbglog("DLL_PROCESS_ATTACH");
+    valib_log(log_event, module, "DLL_PROCESS_ATTACH");
     break;
 
   case DLL_PROCESS_DETACH:
-    dbglog("DLL_PROCESS_DETACH");
+    valib_log(log_event, module, "DLL_PROCESS_DETACH");
     break;
   }
   return TRUE;
