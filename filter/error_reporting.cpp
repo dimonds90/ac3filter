@@ -22,8 +22,8 @@
 #include <DbgHelp.h>
 
 #include "../BugTrap/BugTrap.h"
+#include "../ac3filter_ver.h"
 #include "buffer.h"
-#include "ac3filter_ver.h"
 #include "registry.h"
 #include "error_reporting.h"
 #include "guids.h"

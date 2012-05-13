@@ -335,6 +335,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\ac3filter_acm_ver.rc"
+			>
+		</File>
+		<File
 			RelativePath=".\acm_drv.cpp"
 			>
 		</File>
