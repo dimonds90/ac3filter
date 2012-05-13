@@ -1,7 +1,9 @@
 #include "decoder.h"
-#include "dbglog.h"
+#include "log.h"
 
 #define BUFFER_SIZE 4096
+
+static const std::string module("StreamDecoder");
 
 StreamDecoder::StreamDecoder()
 {
@@ -55,7 +57,7 @@ StreamDecoder::decode(
 {
   if ((!src && src_len) || (!dst && dst_len) || !src_gone || !dst_gone)
   {
-    dbglog("StreamDecoder::decode(): null parameter");
+    valib_log(log_error, module, "decode(): null parameter");
     return false;
   }
 
@@ -83,10 +85,22 @@ StreamDecoder::decode(
           chunk.clear();
       }
   }
+  // Log and repair after valib exception
   catch (ValibException &e)
   {
-    dbglog(boost::diagnostic_information(e).c_str());
+    valib_log(log_exception, module, boost::diagnostic_information(e));
     reset();
+  }
+  // Log and pass unknown exceptions
+  catch (std::exception &e)
+  {
+    valib_log(log_exception, module, e.what());
+    throw;
+  }
+  catch (...)
+  {
+    valib_log(log_exception, module, "Unknown exception");
+    throw;
   }
 
   *src_gone = src_chunk.size? src_chunk.rawdata - src: src_len;

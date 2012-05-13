@@ -6,13 +6,15 @@
 #include "acm_drv.h"
 #include "format_tag.h"
 
-#include "dbglog.h"
+#include "log.h"
 #include "decoder.h"
 #include "win32\winspk.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Global defines
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+static const std::string module("AC3FilterACM");
 
 #define VERSION_ACM     MAKE_ACM_VERSION(3, 51, 0)
 #define VERSION_DRIVER  MAKE_ACM_VERSION(0, 2, 0)
@@ -210,7 +212,7 @@ ACMDrv *make_acm(HDRVR hdrvr, LPACMDRVOPENDESC pado)
 LRESULT
 AC3FilterACM::about(HWND parent)
 {
-  MessageBox(parent, "Copyright (c) 2007-2009 by Alexander Vigovsky", "About", MB_OK);
+  MessageBox(parent, "Copyright (c) 2007-2012 by Alexander Vigovsky", "About", MB_OK);
   return DRVCNF_OK;
 }
 
@@ -247,7 +249,7 @@ AC3FilterACM::driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_detail
 
   lstrcpyW(driver_details->szShortName, L"AC3Filter ACM codec");
   lstrcpyW(driver_details->szLongName,  L"Decode AC3 and DTS audio");
-  lstrcpyW(driver_details->szCopyright, L"2007-2009 Alexander Vigovsky");
+  lstrcpyW(driver_details->szCopyright, L"2007-2012 Alexander Vigovsky");
   lstrcpyW(driver_details->szLicensing, L"GPL");
   lstrcpyW(driver_details->szFeatures,  L"Stereo decoding only");
 
@@ -259,7 +261,7 @@ AC3FilterACM::formattag_details(LPACMFORMATTAGDETAILS formattag_details, const L
 {
   if (formattag_details->cbStruct < sizeof(ACMFORMATTAGDETAILS))
   {
-    dbglog("AC3FilterACM::formattag_details() error: formattag_details->cbStruct < sizeof(ACMFORMATTAGDETAILS)");
+    valib_log(log_error, module, "formattag_details(): formattag_details->cbStruct < sizeof(ACMFORMATTAGDETAILS)");
     return MMSYSERR_INVALPARAM;
   }
 
@@ -272,11 +274,11 @@ AC3FilterACM::formattag_details(LPACMFORMATTAGDETAILS formattag_details, const L
   {
     case ACM_FORMATTAGDETAILSF_INDEX:
       // formattag_details->dwFormatTagIndex is given
-      dbglog("AC3FilterACM::formattag_details(): Details for format tag index = %i", formattag_details->dwFormatTagIndex);
+      valib_log(log_event, module, "formattag_details(): Details for format tag index = %i", formattag_details->dwFormatTagIndex);
 
       if (formattag_details->dwFormatTagIndex >= ntags)
       {
-        dbglog("AC3FilterACM::formattag_details() warning: unsupported format tag index #%i", formattag_details->dwFormatTagIndex);
+        valib_log(log_warning, module, "formattag_details(): unsupported format tag index #%i", formattag_details->dwFormatTagIndex);
         return ACMERR_NOTPOSSIBLE;
       }
 
@@ -286,7 +288,7 @@ AC3FilterACM::formattag_details(LPACMFORMATTAGDETAILS formattag_details, const L
 
     case ACM_FORMATTAGDETAILSF_FORMATTAG:
       // formattag_details->dwFormatTag is given
-      dbglog("AC3FilterACM::formattag_details(): Details for format tag = 0x%04X", formattag_details->dwFormatTag);
+      valib_log(log_event, module, "formattag_details(): Details for format tag = 0x%04X", formattag_details->dwFormatTag);
 
       for (itag = 0; itag < ntags; itag++)
         if (tags[itag].format_tag == formattag_details->dwFormatTag)
@@ -294,7 +296,7 @@ AC3FilterACM::formattag_details(LPACMFORMATTAGDETAILS formattag_details, const L
 
       if (itag >= ntags)
       {
-        dbglog("AC3FilterACM::formattag_details() warning: unsupported format tag 0x%04X", formattag_details->dwFormatTag);
+        valib_log(log_warning, module, "formattag_details(): unsupported format tag 0x%04X", formattag_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
@@ -305,7 +307,7 @@ AC3FilterACM::formattag_details(LPACMFORMATTAGDETAILS formattag_details, const L
       break; // case ACM_FORMATTAGDETAILSF_FORMATTAG:
 
     default:
-      dbglog("AC3FilterACM::formattag_details() error: unknown flag: 0x%08X", flags);
+      valib_log(log_error, module, "formattag_details(): unknown flag: 0x%08X", flags);
       return ACMERR_NOTPOSSIBLE;
 
   } // switch (flags & ACM_FORMATTAGDETAILSF_QUERYMASK)
@@ -322,13 +324,13 @@ AC3FilterACM::format_details(LPACMFORMATDETAILS format_details, const LPARAM fla
 {
   if (format_details->cbStruct < sizeof(ACMFORMATDETAILS))
   {
-    dbglog("AC3FilterACM::format_details() error: format_details->cbStruct < sizeof(ACMFORMATDETAILS)");
+    valib_log(log_error, module, "format_details(): format_details->cbStruct < sizeof(ACMFORMATDETAILS)");
     return MMSYSERR_INVALPARAM;
   }
 
   if (format_details->cbwfx < sizeof(WAVEFORMATEX))
   {
-    dbglog("AC3FilterACM::format_details() error: format_detils->cbwfx < sizeof(WAVEOFORMATEX)");
+    valib_log(log_error, module, "format_details(): format_detils->cbwfx < sizeof(WAVEOFORMATEX)");
     return ACMERR_NOTPOSSIBLE;
   }
 
@@ -345,7 +347,7 @@ AC3FilterACM::format_details(LPACMFORMATDETAILS format_details, const LPARAM fla
     // fdwSupport, pwfx, szFormat (optional)
 
     case ACM_FORMATDETAILSF_INDEX:
-      dbglog("AC3FilterACM::format_details() details for format tag 0x%04X index %i", format_details->dwFormatTag, format_details->dwFormatIndex);
+      valib_log(log_event, module, "format_details(): details for format tag 0x%04X index %i", format_details->dwFormatTag, format_details->dwFormatIndex);
 
       for (itag = 0; itag < ntags; itag++)
         if (tags[itag].format_tag == format_details->dwFormatTag)
@@ -353,13 +355,13 @@ AC3FilterACM::format_details(LPACMFORMATDETAILS format_details, const LPARAM fla
 
       if (itag >= ntags)
       {
-        dbglog("AC3FilterACM::format_details() warning: unsupported format tag 0x%04X", format_details->dwFormatTag);
+        valib_log(log_warning, module, "format_details(): unsupported format tag 0x%04X", format_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
       if (format_details->dwFormatIndex > tags[itag].nformats())
       {
-        dbglog("AC3FilterACM::format_details() error: unknown index %i for format tag %i", format_details->dwFormatIndex, format_details->dwFormatTag);
+        valib_log(log_error, module, "format_details(): unknown index %i for format tag %i", format_details->dwFormatIndex, format_details->dwFormatTag);
         return ACMERR_NOTPOSSIBLE;
       }
 
@@ -373,7 +375,7 @@ AC3FilterACM::format_details(LPACMFORMATDETAILS format_details, const LPARAM fla
       return MMSYSERR_NOERROR;
 
     default:
-      dbglog("AC3FilterACM::formattag_details() error: unknown flag: 0x%08X", flags);
+      valib_log(log_error, module, "formattag_details(): unknown flag: 0x%08X", flags);
       return ACMERR_NOTPOSSIBLE;
   }
 
@@ -387,14 +389,14 @@ AC3FilterACM::format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
   WAVEFORMATEX *src = format_suggest->pwfxSrc;
   WAVEFORMATEX *dst = format_suggest->pwfxDst;
 
-  dbglog("Suggest %s%s%s%s (0x%08X)",
+  valib_log(log_event, module, "Suggest %s%s%s%s (0x%08X)",
     (suggest & ACM_FORMATSUGGESTF_NCHANNELS) ? "channels, ":"",
     (suggest & ACM_FORMATSUGGESTF_NSAMPLESPERSEC) ? "samples/sec, ":"",
     (suggest & ACM_FORMATSUGGESTF_WBITSPERSAMPLE) ? "bits/sample, ":"",
     (suggest & ACM_FORMATSUGGESTF_WFORMATTAG) ? "format, ":"",
     suggest);
 
-  dbglog("Suggest for source format = 0x%04X, channels = %d, Samples/s = %d, AvgB/s = %d, BlockAlign = %d, b/sample = %d",
+  valib_log(log_event, module, "Suggest for source format = 0x%04X, channels = %d, Samples/s = %d, AvgB/s = %d, BlockAlign = %d, b/sample = %d",
     src->wFormatTag,
     src->nChannels,
     src->nSamplesPerSec,
@@ -402,7 +404,7 @@ AC3FilterACM::format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
     src->nBlockAlign,
     src->wBitsPerSample);
 
-  dbglog("Suggest for destination format = 0x%04X, channels = %d, Samples/s = %d, AvgB/s = %d, BlockAlign = %d, b/sample = %d",
+  valib_log(log_event, module, "Suggest for destination format = 0x%04X, channels = %d, Samples/s = %d, AvgB/s = %d, BlockAlign = %d, b/sample = %d",
     dst->wFormatTag,
     dst->nChannels,
     dst->nSamplesPerSec,
@@ -465,7 +467,7 @@ AC3FilterACM::format_suggest(LPACMDRVFORMATSUGGEST format_suggest)
   }
  
 
-  dbglog("Suggested destination format = 0x%04X, channels = %d, Samples/s = %d, AvgB/s = %d, BlockAlign = %d, b/sample = %d",
+  valib_log(log_event, module, "Suggested destination format = 0x%04X, channels = %d, Samples/s = %d, AvgB/s = %d, BlockAlign = %d, b/sample = %d",
     dst->wFormatTag,
     dst->nChannels,
     dst->nSamplesPerSec,
@@ -507,21 +509,21 @@ AC3FilterACM::stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
 
   if (stream_instance->fdwOpen & ACM_STREAMOPENF_ASYNC)
   {
-    dbglog("AC3FilterACM::stream_open() error: async mode is not supported");
+    valib_log(log_error, module, "stream_open(): async mode is not supported");
     return ACMERR_NOTPOSSIBLE;
   }
 
   in_spk = wf2spk(src, sizeof(WAVEFORMATEX) + src->cbSize);
   if (in_spk.is_unknown())
   {
-    dbglog("AC3FilterACM::stream_open() error: wrong input format");
+    valib_log(log_error, module, "stream_open(): wrong input format");
     return ACMERR_NOTPOSSIBLE;
   }
 
   out_spk = wf2spk(dst, sizeof(WAVEFORMATEX) + dst->cbSize);
   if (out_spk.is_unknown())
   {
-    dbglog("AC3FilterACM::stream_open() error: wrong output format");
+    valib_log(log_error, module, "stream_open(): wrong output format");
     return ACMERR_NOTPOSSIBLE;
   }
 
@@ -532,7 +534,7 @@ AC3FilterACM::stream_open(LPACMDRVSTREAMINSTANCE stream_instance)
       stream_instance->dwInstance = (LRESULT)dec;  
     else
     {
-      dbglog("AC3FilterACM::stream_open() error: cannot open stream");
+      valib_log(log_error, module, "stream_open(): cannot open stream");
       return ACMERR_NOTPOSSIBLE;
     }
   }
@@ -580,7 +582,7 @@ AC3FilterACM::stream_size(LPACMDRVSTREAMINSTANCE stream_instance, LPACMDRVSTREAM
 LRESULT 
 AC3FilterACM::stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
 {
-  dbglog("AC3FilterACM::stream_prepare(): Src = %d (0x%04X) / %d\tDst = %d (0x%04X) / %d",
+  valib_log(log_event, module, "stream_prepare(): Src = %d (0x%04X) / %d\tDst = %d (0x%04X) / %d",
     stream_header->cbSrcLength,
     stream_header->pbSrc,
     stream_header->cbSrcLengthUsed,
@@ -594,7 +596,7 @@ AC3FilterACM::stream_prepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAM
 LRESULT 
 AC3FilterACM::stream_unprepare(LPACMDRVSTREAMINSTANCE stream_instance, LPACMSTREAMHEADER stream_header)
 {
-  dbglog("AC3FilterACM::stream_unprepare(): Src = %d / %d\tDst = %d / %d",
+  valib_log(log_event, module, "stream_unprepare(): Src = %d / %d\tDst = %d / %d",
     stream_header->cbSrcLength,
     stream_header->cbSrcLengthUsed,
     stream_header->cbDstLength,
