@@ -63,9 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="winmm.lib"
+				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(ConfigurationName)/ffmpeg/avcodec-53.lib ../../valib/lib/$(ConfigurationName)/ffmpeg/avutil-51.lib"
 				OutputFile="$(OutDir)\ac3filter.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
+				DelayLoadDLLs="avcodec-53.dll;avutil-51.dll"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -138,9 +139,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="winmm.lib"
+				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avcodec-53.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avutil-51.lib"
 				OutputFile="$(OutDir)\ac3filter64.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
+				DelayLoadDLLs="avcodec-53.dll;avutil-51.dll"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -213,9 +215,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="winmm.lib"
+				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(ConfigurationName)/ffmpeg/avcodec-53.lib ../../valib/lib/$(ConfigurationName)/ffmpeg/avutil-51.lib"
 				OutputFile="$(OutDir)\ac3filter.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
+				DelayLoadDLLs="avcodec-53.dll;avutil-51.dll"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -291,9 +294,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="winmm.lib"
+				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avcodec-53.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avutil-51.lib"
 				OutputFile="$(OutDir)\ac3filter64.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
+				DelayLoadDLLs="avcodec-53.dll;avutil-51.dll"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
