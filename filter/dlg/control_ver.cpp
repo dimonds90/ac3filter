@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../ac3filter_ver.h"
+#include "../../ac3filter_ver.h"
 #include "../resource_ids.h"
 #include "control_ver.h"
 

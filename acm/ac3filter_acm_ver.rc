@@ -45,12 +45,12 @@ BEGIN
     BEGIN
         BLOCK "000004b0"
         BEGIN
-            VALUE "Comments", "DirectShow audio decoder and processor filter"
+            VALUE "Comments", "AC3Filter ACM codec"
             VALUE "FileDescription", "ac3filter"
             VALUE "FileVersion", AC3FILTER_VER
             VALUE "InternalName", "ac3filter"
             VALUE "LegalCopyright", "Copyright (c) 2002-2012 by Alexander Vigovsky"
-            VALUE "OriginalFilename", "ac3filter.ax"
+            VALUE "OriginalFilename", "ac3filter.acm"
             VALUE "ProductName", "AC3Filter"
             VALUE "ProductVersion", AC3FILTER_VER
         END

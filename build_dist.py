@@ -130,7 +130,7 @@ chdir('../..')
 # Build filter
 
 if ver != ver_test:
-  update_ac3filter_ver('ac3filter/filter/ac3filter_ver.h', ver)
+  update_ac3filter_ver('ac3filter/ac3filter_ver.h', ver)
   update_changelog('ac3filter/changes.txt', ver)
 
 chdir('ac3filter')

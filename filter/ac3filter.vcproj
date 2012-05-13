@@ -372,10 +372,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ac3filter_ver.h"
-				>
-			</File>
-			<File
 				RelativePath=".\ch_names.cpp"
 				>
 			</File>
@@ -706,6 +702,10 @@
 		</File>
 		<File
 			RelativePath=".\ac3filter.rc"
+			>
+		</File>
+		<File
+			RelativePath="..\ac3filter_ver.h"
 			>
 		</File>
 		<File
