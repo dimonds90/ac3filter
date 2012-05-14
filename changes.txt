@@ -1,4 +1,4 @@
-v2.2a
+v2.2a - 2012-05-14
   * OGG Vorbis support.
   * ACM driver works again (was broken in v2.0a).
   * Several bugs leading to crash fixed.
