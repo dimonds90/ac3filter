@@ -1,7 +1,7 @@
 #ifndef AC3FILTER_VER
 
 #define AC3FILTER_VER_MAJOR 2
-#define AC3FILTER_VER_MINOR 1
+#define AC3FILTER_VER_MINOR 2
 #define AC3FILTER_VER_STATE "a"
 
 // Text representation of the version
