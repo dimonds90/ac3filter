@@ -144,7 +144,7 @@
 				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/valib.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/aac/aac.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/mpa/mpa.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avcodec64-53.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avutil64-51.lib"
 				OutputFile="$(OutDir)\ac3filter64.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
-				DelayLoadDLLs="avcodec-53.dll;avutil-51.dll"
+				DelayLoadDLLs="avcodec64-53.dll;avutil64-51.dll"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -301,7 +301,7 @@
 				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/valib.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/aac/aac.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/mpa/mpa.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avcodec64-53.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avutil64-51.lib"
 				OutputFile="$(OutDir)\ac3filter64.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
-				DelayLoadDLLs="avcodec-53.dll;avutil-51.dll"
+				DelayLoadDLLs="avcodec64-53.dll;avutil64-51.dll"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
