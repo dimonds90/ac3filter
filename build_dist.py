@@ -73,6 +73,11 @@ if len(sys.argv) > 1:
   ver = sys.argv[1]
   ver_file = make_filename_ver(ver)
 
+  if not exists('OCKeys.iss'):
+    ans = raw_input('OpenCandy keys file (OCKeys.iss) not found. Continue without OpenCandy integration? (Y/n)?'.format(ver));
+    if ans != 'Y':
+      sys.exit(1)
+
   ans = raw_input('Are you sure you want to commit version {} (Y/n)?'.format(ver));
   if ans != 'Y':
     sys.exit(1)
@@ -159,8 +164,14 @@ run('%s -add -lev=9 "%s" %s' % (pkzip, pdb_arc, ' '.join(pdb_files)))
 ###########################################################
 # Make installer
 
-run_at('ac3filter', '"%s" /Dappver="%s" /o".." /f"ac3filter_%s" ac3filter.iss' % (innosetup, ver, ver_file))
-run_at('ac3filter', '"%s" /Dappver="%s" /o".." /f"ac3filter_%s_lite" ac3filter_lite.iss' % (innosetup, ver, ver_file))
+iss_defines = []
+iss_defines.append('/Dappver="%s"' % ver_file)
+if exists('ac3filter/OCKeys.iss'):
+  iss_defines.append('/DOPENCANDY')
+
+iss_defines = ' '.join(iss_defines)
+run_at('ac3filter', '"%s" %s /o".." ac3filter.iss' % (innosetup, iss_defines))
+run_at('ac3filter', '"%s" %s /o".." ac3filter_lite.iss' % (innosetup, iss_defines))
 
 ###########################################################
 # Commit and tag

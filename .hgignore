@@ -64,3 +64,4 @@ lang\*.mo
 # Config
 cmd/config.cmd
 config.py
+OCKeys.iss

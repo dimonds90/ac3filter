@@ -1,6 +1,7 @@
 #ifndef appver
 #define appver GetFileVersion("filter\Release\ac3filter.ax")
 #endif
+#define filever StringChange(appver, '.', '_')
 
 [Setup]
 AppID=AC3Filter
@@ -10,6 +11,7 @@ AppVerName=AC3Filter {#appver}
 AppPublisher=Alexander Vigovsky
 AppPublisherURL=http://ac3filter.net
 AppCopyright=Copyright (c) 2002-2012 by Alexander Vigovsky
+OutputBaseFilename=ac3filter_{#filever}_win9x
 DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
 SolidCompression=yes
@@ -90,7 +92,7 @@ Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Lang_Di
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "tray"; ValueData: 1
 
 ; Language
-Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Language"; ValueData: {code:lang_code}
+Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Language"; ValueData: {code:AC3FilterLang}
 
 ; Version
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Version"; ValueData: "{#appver}"
@@ -109,8 +111,8 @@ Filename: "http://store.kagi.com/cgi-bin/store.cgi?storeID=6CZJZ_LIVE&view=cart&
 Filename: "{app}\ac3config.exe"; Flags: nowait postinstall skipifsilent; Description: "Configure AC3Filter"
 
 [code]
-function lang_code(param: string): string;
+function AC3FilterLang(param: string): string;
 begin
-  result := ExpandConstant('{language}');
+  result := ActiveLanguage();
   StringChangeEx(result, '_at_', '@', false);
 end;

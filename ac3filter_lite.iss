@@ -1,6 +1,7 @@
 #ifndef appver
 #define appver GetFileVersion("filter\Release\ac3filter.ax")
 #endif
+#define filever StringChange(appver, '.', '_')
 
 [Setup]
 AppID=AC3Filter
@@ -10,11 +11,13 @@ AppVerName=AC3Filter {#appver}
 AppPublisher=Alexander Vigovsky
 AppPublisherURL=http://ac3filter.net
 AppCopyright=Copyright (c) 2002-2012 by Alexander Vigovsky
+OutputBaseFilename=ac3filter_{#filever}_lite
 DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
 SolidCompression=yes
 LanguageDetectionMethod=locale
 MinVersion=0, 5.0
+LicenseFile=GPL.txt
 
 [Languages]
 Name: bul; MessagesFile: "compiler:Default.isl,lang\isl\Bulgarian-5.1.11.isl"
@@ -83,7 +86,7 @@ Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "tray"; 
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "refresh_time"; ValueData: 50
 
 ; Language
-Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Language"; ValueData: {code:lang_code}
+Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Language"; ValueData: {code:AC3FilterLang}
 
 ; Version
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Version"; ValueData: "{#appver}"
@@ -101,9 +104,9 @@ var
   SendReportIndex : integer;
   PrevVersion : string;
   
-function lang_code(param: string): string;
+function AC3FilterLang(param: string): string;
 begin
-  result := ExpandConstant('{language}');
+  result := ActiveLanguage();
   StringChangeEx(result, '_at_', '@', false);
 end;
 
