@@ -1,6 +1,11 @@
 #ifndef appver
 #define appver GetStringFileInfo("filter\Release\ac3filter.ax", "ProductVersion")
 #endif
+#define filever StringChange(appver, '.', '_')
+
+#ifdef OPENCANDY
+#include "OCKeys.iss"
+#endif
 
 [Setup]
 AppID=AC3Filter
@@ -10,11 +15,19 @@ AppVerName=AC3Filter {#appver}
 AppPublisher=Alexander Vigovsky
 AppPublisherURL=http://ac3filter.net
 AppCopyright=Copyright (c) 2002-2012 by Alexander Vigovsky
+OutputBaseFilename=ac3filter_{#filever}
 DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
 SolidCompression=yes
 LanguageDetectionMethod=locale
 MinVersion=0, 5.0
+PrivilegesRequired=admin
+
+#ifdef OPENCANDY
+LicenseFile=OCLicense.txt
+#else
+LicenseFile=GPL.txt
+#endif
 
 [Languages]
 Name: bul; MessagesFile: "compiler:Default.isl,lang\isl\Bulgarian-5.1.11.isl"
@@ -55,6 +68,10 @@ Name: "debug";         Description: "Debugging files"; Types: full
 Name: "lang";          Description: "Language files"; Types: full
 
 [Files]
+#ifdef OPENCANDY
+  Source: "{#OC_OCSETUPHLP_FILE_PATH}"; Flags: dontcopy ignoreversion;
+#endif
+
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
 Source: "filter\Release\ac3filter.map";            DestDir: "{app}"; Components: prog\filter32; Flags: RestartReplace UninsRestartDelete
 Source: "filter\Release\avcodec-53.dll";           DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
@@ -113,7 +130,7 @@ Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "tray"; 
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: dword;  ValueName: "refresh_time"; ValueData: 50
 
 ; Language
-Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Language"; ValueData: {code:lang_code}
+Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Language"; ValueData: {code:AC3FilterLang}
 
 ; Version
 Root: HKCU; Subkey: "Software\AC3Filter"; ValueType: string; ValueName: "Version"; ValueData: "{#appver}"
@@ -132,22 +149,61 @@ Filename: "regedit"; Parameters: "/s ""{app}\Presets.reg"""; Flags: waituntilter
 Filename: "regedit"; Parameters: "/s ""{app}\Reset to defaults.reg"""; Flags: waituntilterminated
 Filename: "http://ac3filter.net/donate"; Flags: nowait postinstall shellexec skipifsilent; Description: "Donate"
 
-[code]
+[Code]
+
+#ifdef OPENCANDY
+  #include "OCSetupHlp.iss"
+#endif
+
 var
   SendReportIndex : integer;
   PrevVersion : string;
   
-function lang_code(param: string): string;
+function AC3FilterLang(param: string): string;
 begin
-  result := ExpandConstant('{language}');
+  result := ActiveLanguage();
   StringChangeEx(result, '_at_', '@', false);
+end;
+
+function OpenCandyLang: string;
+begin
+  case ActiveLanguage() of
+    'bul': result := 'bg';
+    'eng': result := 'en';
+    'cze': result := 'cs';
+    'dan': result := 'da';
+    'dut': result := 'nl';
+    'fin': result := 'fi';
+    'fre': result := 'fr';
+    'ger': result := 'de';
+    'gre': result := 'el';
+    'heb': result := 'he';
+    'hun': result := 'hu';
+    'ind': result := 'id';
+    'ita': result := 'it';
+    'jpn': result := 'ja';
+    'kor': result := 'ko';
+    'pol': result := 'pl';
+    'pt_BR': result := 'pt';
+    'pt_PT': result := 'pt';
+    'rus': result := 'ru';
+    'slo': result := 'sk';
+    'slv': result := 'sl';
+    'spa': result := 'es';
+    'swe': result := 'sv';
+    'tur': result := 'tr';
+    'ukr': result := 'uk';
+    'zh_at_Simplified': result := 'zh';
+    'zh_at_Traditional': result := 'zh';
+  else
+    result := 'en';
+  end;
 end;
 
 procedure SendReport(reportType: string);
 var
   WinHttpReq: Variant;
-begin
-try
+begin try
   WinHttpReq := CreateOleObject('WinHttp.WinHttpRequest.5.1');
   WinHttpReq.Open('POST', 'http://ac3filter.net/install.php', false);
   WinHttpReq.SetRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -161,23 +217,46 @@ try
     'CPU=' + GetEnv('PROCESSOR_IDENTIFIER')
   );
 except
-end;
-end;
+end; end;
 
 ////////////////////////////////////////////////////////////
 
-function InitializeSetup(): Boolean;
+procedure InitializeWizard();
+#ifdef OPENCANDY
+var
+  OCtszInstallerLanguage: OCTString;
+  iOpenCandyNewPageID: Integer;
+#endif
+
 begin
   SendReportIndex := -1;
   PrevVersion := '';
   RegQueryStringValue(HKEY_CURRENT_USER, 'Software\AC3Filter', 'Version', PrevVersion);
-  Result := true;
+
+  #ifdef OPENCANDY
+    OCtszInstallerLanguage := OpenCandyLang();
+
+    // Initialize OpenCandy, check for offers
+    OpenCandyInit('{#OC_STR_MY_PRODUCT_NAME}', '{#OC_STR_KEY}', '{#OC_STR_SECRET}', OCtszInstallerLanguage, {#OC_INIT_MODE_NORMAL});	
+    // Extract and load the OpenCandy Network Client library after the user accepts the EULA
+    iOpenCandyNewPageID := OpenCandyInsertLoadDLLPage(wpLicense);
+    // After loading the client library, connect to the OpenCandy Network to check for recommendations
+    iOpenCandyNewPageID := OpenCandyInsertConnectPage(iOpenCandyNewPageID);
+    // Show a loading screen after the Select Tasks page to allow more time for server connection.
+    iOpenCandyNewPageID := OpenCandyInsertLoadingPage(wpSelectTasks, ' ', ' ', 'Loading...', 'Arial', 100);
+    // After the loading screen insert the OpenCandy offer page
+    iOpenCandyNewPageID := OpenCandyInsertOfferPage(iOpenCandyNewPageID);		
+  #endif
 end;
 
 procedure CurPageChanged(CurPageID: Integer);
 begin
   if CurPageID=wpFinished then
     SendReportIndex := WizardForm.RunList.AddCheckbox('Send installation report', '', 0, true, true, false, false, nil);
+
+  #ifdef OPENCANDY
+    OpenCandyCurPageChanged(CurPageID);
+  #endif
 end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
@@ -191,4 +270,44 @@ begin
     else
       SendReport('upgrade');
   end;
+
+  #ifdef OPENCANDY
+    OpenCandyCurStepChanged(CurStep);
+  #endif
+end;
+
+function ShouldSkipPage(PageID: Integer): Boolean;
+begin
+  Result := false; // Don't skip pages by default
+
+  #ifdef OPENCANDY
+    if OpenCandyShouldSkipPage(PageID) then
+      Result := true;
+  #endif
+end;
+
+function NextButtonClick(CurPageID: Integer): Boolean;
+begin
+  Result := true; // Allow action by default
+
+  #ifdef OPENCANDY
+    if not OpenCandyNextButtonClick(CurPageID) then
+      Result := false;
+  #endif
+end;
+
+function BackButtonClick(CurPageID: Integer): Boolean;
+begin
+  Result := true; // Allow action by default
+
+  #ifdef OPENCANDY
+    OpenCandyBackButtonClick(CurPageID);
+  #endif
+end;
+
+procedure DeinitializeSetup();
+begin
+  #ifdef OPENCANDY
+    OpenCandyDeinitializeSetup();
+  #endif
 end;

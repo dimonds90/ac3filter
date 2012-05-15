@@ -1,0 +1,4 @@
+#define OC_STR_MY_PRODUCT_NAME 'Open Candy Sample'
+#define OC_STR_KEY '748ad6d80864338c9c03b664839d8161'
+#define OC_STR_SECRET 'dfb3a60d6bfdb55c50e1ef53249f1198'
+#define OC_OCSETUPHLP_FILE_PATH ".\OCSetupHlp.dll"

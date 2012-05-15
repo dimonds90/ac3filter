@@ -25,16 +25,13 @@ Main features:
 * Direct access to mixing matrix
 * 32bit and 64bit OS support
   
-Copyright (c) 2002-2009 by Alexander Vigovsky (ac3filter@gmail.com)
+Copyright (c) 2002-2012 by Alexander Vigovsky (support@ac3filter.net)
 
 
 License:
 ========
 
 Distributed under GNU General Public License version 2.
-You may find it in GNU_eng.txt at english language and GNU_rus.txt at russian 
-language. Russain language version is for information purpose only and english 
-version have priority with all variant reading.
 
 This application may solely be used for demonstration and educational purposes. 
 Any other use may be prohibited by law in some coutries. The author has no 
@@ -64,5 +61,5 @@ http://order.kagi.com/?6CZJZ&lang=en
 Contact Author: 
 ===============
 
-mailto:ac3filter@gmail.com
+mailto:support@ac3filter.net
 Please write in English or Russian only.
