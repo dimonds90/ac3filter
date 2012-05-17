@@ -580,20 +580,27 @@ AC3Filter::Run(REFERENCE_TIME tStart)
     chunk.set_rawdata(buf, buf.size());
     Speakers spk = sink->get_input();
 
-    try {
-      sink->open_throw(Speakers(FORMAT_PCM16, MODE_STEREO, spk.sample_rate));
-      sink->process(chunk);
-      sink->open_throw(spk);
+    try
+    {
+      if (sink->open(Speakers(FORMAT_PCM16, MODE_STEREO, spk.sample_rate)))
+      {
+        sink->process(chunk);
+        if (!sink->open(spk))
+          // Cannot continue because we cannot restore the original format
+          return E_FAIL;
+        BeginFlush();
+        EndFlush();
+      }
+      // It's OK to fail the first open() call because
+      // not all players support dynamic format change.
     }
     catch (DShowSink::Error &e)
     {
+      valib_log(log_exception, log_module, "Run(this=%x) exception:\n%s", this, boost::diagnostic_information(e).c_str());
       HRESULT *hr = boost::get_error_info<errinfo_hresult>(e);
       if (hr) return *hr;
       return E_FAIL;
     }
-
-    BeginFlush();
-    EndFlush();
   }
 
   return S_OK;
