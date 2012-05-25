@@ -39,13 +39,14 @@ static struct
 
   // Lossy formats
   { FORMAT_MASK_MPA,   "MPEG Audio" },
-  { FORMAT_MASK(FORMAT_AC3_EAC3),  "AC3" },
+  { FORMAT_MASK(FORMAT_DOLBY), "AC3" },
   { FORMAT_MASK(FORMAT_AAC_FRAME), "AAC" },
   { FORMAT_MASK_DTS,   "DTS" },
   { FORMAT_MASK_VORBIS,"Vorbis" },
 
   // Lossless formats
   { FORMAT_MASK_FLAC,  "Flac" },
+  { FORMAT_MASK_TRUEHD,"TrueHD" },
 
   // Containers
   { FORMAT_MASK_PES,   "MPEG PES" },
