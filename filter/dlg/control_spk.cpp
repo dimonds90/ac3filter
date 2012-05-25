@@ -29,8 +29,10 @@ static const struct { int mask; int relation; const char *text; } spklist[] =
 
   { MODE_2_0_LFE,   0, N_("2.1 Stereo") },
   { MODE_2_2_LFE,   0, N_("4.1 Quadro") },
-  { MODE_3_2_LFE,   0, N_("5.1 (6 channels)") },
-  { MODE_3_2_2_LFE, 0, N_("7.1 (8 channels)") },
+  { MODE_3_2_LFE,   0, N_("5.1 (side)") },
+  { MODE_3_0_2_LFE, 0, N_("5.1 (back)") },
+  { MODE_5_2_LFE,   0, N_("7.1 (wide)") },
+  { MODE_3_2_2_LFE, 0, N_("7.1 (surround)") },
 
   { MODE_2_0, RELATION_DOLBY,  N_("Dolby Surround/ProLogic") },
   { MODE_2_0, RELATION_DOLBY2, N_("Dolby ProLogic II") },

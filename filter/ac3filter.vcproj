@@ -64,7 +64,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib shlwapi.lib"
+				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib shlwapi.lib wmcodecdspuuid.lib"
 				OutputFile="$(OutDir)\$(ProjectName).ax"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
@@ -141,7 +141,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib shlwapi.lib"
+				AdditionalDependencies="libcmtd.lib oldnames.lib libcpmtd.lib strmbasd_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib shlwapi.lib wmcodecdspuuid.lib"
 				OutputFile="$(OutDir)\$(ProjectName)64.ax"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
@@ -221,7 +221,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib shlwapi.lib"
+				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib shlwapi.lib wmcodecdspuuid.lib"
 				OutputFile="$(OutDir)\$(ProjectName).ax"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
@@ -302,7 +302,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib shlwapi.lib"
+				AdditionalDependencies="libcmt.lib oldnames.lib libcpmt.lib strmbase_mbcs.lib dsound.lib winmm.lib comctl32.lib kernel32.lib gdi32.lib shell32.lib user32.lib advapi32.lib uuid.lib ole32.lib oleaut32.lib shlwapi.lib wmcodecdspuuid.lib"
 				OutputFile="$(OutDir)\$(ProjectName)64.ax"
 				IgnoreAllDefaultLibraries="true"
 				ModuleDefinitionFile="ac3filter.def"
