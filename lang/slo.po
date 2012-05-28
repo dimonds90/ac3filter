@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.60b\n"
+"Project-Id-Version: AC3Filter 2.2a\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-29 01:13+0400\n"
-"PO-Revision-Date: 2009-05-20 14:38+0100\n"
-"Last-Translator: Artam <peterki@hotmail.com>\n"
+"PO-Revision-Date: 2012-05-15 13:50+0100\n"
+"Last-Translator: artam <peterki@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Slovak\n"
 "X-Poedit-Country: SLOVAKIA\n"
@@ -22,7 +22,7 @@ msgstr "Mixer"
 
 #. TRANSLATORS: Gains
 msgid "IDD_GAINS"
-msgstr "Hlasitosti"
+msgstr "Hlasitosť"
 
 #. TRANSLATORS: Equalizer
 msgid "IDD_EQ"
@@ -41,37 +41,37 @@ msgid "IDD_ABOUT"
 msgstr "O programe"
 
 msgid "L"
-msgstr ""
+msgstr "L"
 
 msgid "C"
-msgstr ""
+msgstr "C"
 
 msgid "R"
-msgstr ""
+msgstr "R"
 
 msgid "SL"
-msgstr ""
+msgstr "SL"
 
 msgid "SR"
-msgstr ""
+msgstr "SR"
 
 msgid "LF"
-msgstr ""
+msgstr "LFE"
 
 msgid "CL"
-msgstr ""
+msgstr "CL"
 
 msgid "CR"
-msgstr ""
+msgstr "CR"
 
 msgid "BL"
-msgstr ""
+msgstr "BL"
 
 msgid "BC"
-msgstr ""
+msgstr "BC"
 
 msgid "BR"
-msgstr ""
+msgstr "BR"
 
 msgid "Left"
 msgstr "Ľavý"
@@ -83,28 +83,28 @@ msgid "Right"
 msgstr "Pravý"
 
 msgid "Left surround"
-msgstr ""
+msgstr "Ľavý bočný"
 
 msgid "Right surround"
-msgstr ""
+msgstr "Pravý bočný"
 
 msgid "Low frequency"
-msgstr ""
+msgstr "Subwoofer"
 
 msgid "Left of center"
-msgstr ""
+msgstr "Ľavý center"
 
 msgid "Right of center"
-msgstr ""
+msgstr "Pravý center"
 
 msgid "Left back"
-msgstr ""
+msgstr "Ľavý zadný"
 
 msgid "Center back"
-msgstr ""
+msgstr "Center zadný"
 
 msgid "Right back"
-msgstr ""
+msgstr "Pravý zadný"
 
 msgid "kHz"
 msgstr "kHz"
@@ -116,10 +116,10 @@ msgid "Hz"
 msgstr "Hz"
 
 msgid "AC3Filter configuration"
-msgstr ""
+msgstr "AC3Filter konfigurácia"
 
 msgid "Adjust track"
-msgstr ""
+msgstr "Nastaviť stopu"
 
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
@@ -131,7 +131,7 @@ msgstr "Peňažný dar"
 
 #. TRANSLATORS: Help
 msgid "IDC_BTN_HELP"
-msgstr ""
+msgstr "Pomoc"
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
@@ -151,7 +151,7 @@ msgstr "Filter (dĺžka):"
 
 #. TRANSLATORS: Problem description:
 msgid "IDC_LBL_ERROR_DESC"
-msgstr ""
+msgstr "Popis problému:"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -183,7 +183,7 @@ msgstr ""
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
 msgid "IDC_VER"
-msgstr "AC3Filter ver. %s Copyright (c) 2002-2008 by Alexander Vigovsky"
+msgstr "AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky"
 
 #. TRANSLATORS: OK
 msgid "IDOK"
@@ -196,9 +196,9 @@ msgstr "Čo je to?"
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
 msgstr ""
-"AC3Filter je DirectShow filter vysokej kvality pre dekódovanie a spracovanie "
+"AC3Filter je vysoko kvalitný DirectShow filter pre dekódovanie a spracovanie "
 "zvuku v reálnom čase. Jeho prednosťou je rozsiahla funkcionalita a "
-"jednoduché nastavenie. Podporuje viac-kanálový aj digitálny (SPDIF) výstup."
+"jednoduché nastavenie. Podporuje viac-kanálový a digitálny (SPDIF) výstup."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
@@ -217,11 +217,11 @@ msgstr "Rýchlosť nábehu/dobehu (dB/s):"
 
 #. TRANSLATORS: Bass redirection
 msgid "IDC_GRP_BASS"
-msgstr ""
+msgstr "Presmerovanie basov"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_BASS_ENABLE"
-msgstr ""
+msgstr "Zapnúť"
 
 #. TRANSLATORS: Cutoff frequency
 msgid "IDC_LBL_BASS_FREQ"
@@ -229,15 +229,15 @@ msgstr "Horná hranica (Hz)"
 
 #. TRANSLATORS: Bass destination:
 msgid "IDC_LBL_BASS_ROUTE"
-msgstr ""
+msgstr "Basy smerovať do:"
 
 #. TRANSLATORS: Front channels
 msgid "IDC_RBT_BASS_FRONT"
-msgstr ""
+msgstr "Predné kanály"
 
 #. TRANSLATORS: Subwoofer
 msgid "IDC_RBT_BASS_SUB"
-msgstr ""
+msgstr "Subwoofer"
 
 #. TRANSLATORS: Contact author
 msgid "IDC_GRP_CONTACT"
@@ -276,27 +276,28 @@ msgstr "Poďakovanie pre"
 
 #. TRANSLATORS: Debug
 msgid "IDC_GRP_DEBUG"
-msgstr ""
+msgstr "Debug"
 
 #. TRANSLATORS: Error report
 msgid "IDC_BTN_ERROR_REPORT"
-msgstr ""
+msgstr "Chybový report"
 
 #. TRANSLATORS: Save logs on exit
 msgid "IDC_CHK_SAVE_LOGS"
-msgstr ""
+msgstr "Uložiť logy po skončení"
 
 #. TRANSLATORS: Send  audio data
 msgid "IDC_CHK_SEND_AUDIO_DATA"
-msgstr ""
+msgstr "Pošli audio dáta"
 
 #. TRANSLATORS: Feedback email:
 msgid "IDC_LBL_FEEDBACK"
-msgstr ""
+msgstr "Kontaktný e-mail:"
 
 #. TRANSLATORS: How to report a bug?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug
 msgid "IDC_LNK_ERROR_REPORT"
 msgstr ""
+"Ako nahlásiť chybu?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug"
 
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
@@ -312,7 +313,7 @@ msgstr "Oneskorenia"
 
 #. TRANSLATORS: Reset
 msgid "IDC_BTN_DELAYS_RESET"
-msgstr ""
+msgstr "Reset"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DELAYS"
@@ -452,7 +453,7 @@ msgstr "Zobraziť ikonu v sys lište"
 
 #. TRANSLATORS: Interface update rate (ms)
 msgid "IDC_LBL_REFRESH_TIME"
-msgstr "Rýchlosť obnovy zobrazovania údajov (ms)"
+msgstr "Obnova zobrazovaných údajov (ms)"
 
 #. TRANSLATORS: License
 msgid "IDC_GRP_LICENSE"
@@ -461,8 +462,8 @@ msgstr "Licencia"
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
 msgstr ""
-"Tento program je slobodný (free) software a môže byť šírený v súlade s "
-"podmienkami GNU General Public License version 2."
+"Tento program je slobodný software a môže byť šírený v súlade s podmienkami "
+"GNU General Public License version 2."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
@@ -486,7 +487,7 @@ msgstr "Priorita filtra"
 
 #. TRANSLATORS: Disable AC3Filter
 msgid "IDC_RBT_MERIT_DO_NOT_USE"
-msgstr ""
+msgstr "Zakázať AC3Filter"
 
 #. TRANSLATORS: Prefer AC3Filter
 msgid "IDC_RBT_MERIT_PREFERRED"
@@ -734,25 +735,25 @@ msgid "Spectrum: %s"
 msgstr "Spektrum: %s"
 
 msgid "Do not change"
-msgstr ""
+msgstr "Bez zmeny"
 
 msgid "Mono"
-msgstr ""
+msgstr "Mono"
 
 msgid "Stereo"
-msgstr ""
+msgstr "Stereo"
 
 msgid "Quadro"
-msgstr ""
+msgstr "Quadro"
 
 msgid "5 channels"
-msgstr ""
+msgstr "5 kanálov"
 
 msgid "2.1 Stereo"
-msgstr ""
+msgstr "2.1 Stereo"
 
 msgid "4.1 Quadro"
-msgstr ""
+msgstr "4.1 Quadro"
 
 msgid "5.1 (side)"
 msgstr ""
@@ -785,7 +786,7 @@ msgid "PCM Float"
 msgstr "PCM Float"
 
 msgid "PCM Double"
-msgstr ""
+msgstr "PCM Double"
 
 #, c-format
 msgid "%s %s %iHz"
@@ -822,184 +823,16 @@ msgstr ""
 "synchronizáciu. Na zapnutie tejto voľby stlačte 'Nie'."
 
 msgid "Enter you email."
-msgstr ""
+msgstr "Zadaj svoj email:"
 
 msgid "Please..."
-msgstr ""
+msgstr "Prosím..."
 
 msgid "Describe your proiblem."
-msgstr ""
+msgstr "Popíš problém."
 
-#~ msgid "IDC_GRP_ENV"
-#~ msgstr "Build info"
+#~ msgid "5.1 (6 channels)"
+#~ msgstr "5.1 (6 kanálov)"
 
-#~ msgid "IDC_LBL_DELAY_C"
-#~ msgstr "C"
-
-#~ msgid "IDC_LBL_DELAY_L"
-#~ msgstr "L"
-
-#~ msgid "IDC_LBL_DELAY_R"
-#~ msgstr "R"
-
-#~ msgid "IDC_LBL_DELAY_SL"
-#~ msgstr "SL"
-
-#~ msgid "IDC_LBL_DELAY_SR"
-#~ msgstr "SR"
-
-#~ msgid "IDC_LBL_DELAY_SW"
-#~ msgstr "Sub"
-
-#~ msgid "IDC_CHK_AC3"
-#~ msgstr "AC3"
-
-#~ msgid "IDC_CHK_DTS"
-#~ msgstr "DTS"
-
-#~ msgid "IDC_CHK_MPA"
-#~ msgstr "MPEG Audio"
-
-#~ msgid "IDC_CHK_PCM"
-#~ msgstr "PCM"
-
-#~ msgid "IDC_CHK_PES"
-#~ msgstr "DVD"
-
-#~ msgid "IDC_CHK_SPDIF"
-#~ msgstr "SPDIF"
-
-#~ msgid "IDC_GRP_GAINS"
-#~ msgstr "Úrovne hlasitosti"
-
-#~ msgid "IDC_LBL_IN_C"
-#~ msgstr "C"
-
-#~ msgid "IDC_LBL_IN_L"
-#~ msgstr "L"
-
-#~ msgid "IDC_LBL_IN_LFE"
-#~ msgstr "LFE"
-
-#~ msgid "IDC_LBL_IN_R"
-#~ msgstr "R"
-
-#~ msgid "IDC_LBL_IN_SL"
-#~ msgstr "SL"
-
-#~ msgid "IDC_LBL_IN_SR"
-#~ msgstr "SR"
-
-#~ msgid "IDC_LBL_MATRIX_IN_C"
-#~ msgstr "C"
-
-#~ msgid "IDC_LBL_MATRIX_IN_L"
-#~ msgstr "L"
-
-#~ msgid "IDC_LBL_MATRIX_IN_LFE"
-#~ msgstr "LFE"
-
-#~ msgid "IDC_LBL_MATRIX_IN_R"
-#~ msgstr "R"
-
-#~ msgid "IDC_LBL_MATRIX_IN_SL"
-#~ msgstr "SL"
-
-#~ msgid "IDC_LBL_MATRIX_IN_SR"
-#~ msgstr "SR"
-
-#~ msgid "IDC_LBL_MATRIX_OUT_C"
-#~ msgstr "C'"
-
-#~ msgid "IDC_LBL_MATRIX_OUT_L"
-#~ msgstr "L'"
-
-#~ msgid "IDC_LBL_MATRIX_OUT_R"
-#~ msgstr "R'"
-
-#~ msgid "IDC_LBL_MATRIX_OUT_SL"
-#~ msgstr "SL'"
-
-#~ msgid "IDC_LBL_MATRIX_OUT_SR"
-#~ msgstr "SR'"
-
-#~ msgid "IDC_LBL_MATRIX_OUT_SW"
-#~ msgstr "Sub"
-
-#~ msgid "IDC_CHK_BASS_REDIR"
-#~ msgstr "Presmerovať basy"
-
-#~ msgid "IDC_LBL_OUT_C"
-#~ msgstr "C"
-
-#~ msgid "IDC_LBL_OUT_L"
-#~ msgstr "L"
-
-#~ msgid "IDC_LBL_OUT_R"
-#~ msgstr "R"
-
-#~ msgid "IDC_LBL_OUT_SL"
-#~ msgstr "SL"
-
-#~ msgid "IDC_LBL_OUT_SR"
-#~ msgstr "SR"
-
-#~ msgid "IDC_LBL_OUT_SW"
-#~ msgstr "Sub"
-
-#~ msgid "Master"
-#~ msgstr "Master"
-
-#~ msgid "Surround Left"
-#~ msgstr "Zadný Ľavý"
-
-#~ msgid "Surround Right"
-#~ msgstr "Zadný Pravý"
-
-#~ msgid "Subwoofer"
-#~ msgstr "Subwoofer"
-
-#~ msgid "AS IS (no change)"
-#~ msgstr "Bez zmeny (ako vstup)"
-
-#~ msgid "1/0 - mono"
-#~ msgstr "1/0 - mono"
-
-#~ msgid "2/0 - stereo"
-#~ msgstr "2/0 - stereo"
-
-#~ msgid "3/0 - 3 front"
-#~ msgstr "3/0 - 3 predné"
-
-#~ msgid "2/1 - surround"
-#~ msgstr "2/1 - surround"
-
-#~ msgid "3/1 - surround"
-#~ msgstr "3/1 - surround"
-
-#~ msgid "2/2 - quadro"
-#~ msgstr "2/2 - quadro"
-
-#~ msgid "3/2 - 5 channels"
-#~ msgstr "3/2 - 5 kanálov"
-
-#~ msgid "1/0+SW 1.1 mono"
-#~ msgstr "1/0+SW 1.1 mono"
-
-#~ msgid "2/0+SW 2.1 stereo"
-#~ msgstr "2/0+SW 2.1 stereo"
-
-#~ msgid "3/0+SW 3.1 front"
-#~ msgstr "3/0+SW 3.1 predné"
-
-#~ msgid "2/1+SW 3.1 surround"
-#~ msgstr "2/1+SW 3.1 surround"
-
-#~ msgid "3/1+SW 4.1 surround"
-#~ msgstr "3/1+SW 4.1 surround"
-
-#~ msgid "2/2+SW 4.1 quadro"
-#~ msgstr "2/2+SW 4.1 quadro"
-
-#~ msgid "3/2+SW 5.1 channels"
-#~ msgstr "3/2+SW 5.1 kanálov"
+#~ msgid "7.1 (8 channels)"
+#~ msgstr "7.1 (8 kanálov)"
