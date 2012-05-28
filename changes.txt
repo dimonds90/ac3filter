@@ -2,6 +2,7 @@ v2.3a
   * Dolby TrueHD support
   * ACM 64bit works now
   * Several bugs leading to crash fixed.
+  * Translations updated: Slovak (thanks to Artam), French (thanks to Philippe AGUESSE)
 
 v2.2a - 2012-05-14
   * OGG Vorbis support.
