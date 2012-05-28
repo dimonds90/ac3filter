@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.51a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-12 23:50+0400\n"
+"POT-Creation-Date: 2012-05-29 01:13+0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Valex <xvalex.ru>\n"
 "Language-Team: \n"
@@ -749,10 +749,16 @@ msgstr ""
 msgid "4.1 Quadro"
 msgstr ""
 
-msgid "5.1 (6 channels)"
+msgid "5.1 (side)"
 msgstr ""
 
-msgid "7.1 (8 channels)"
+msgid "5.1 (back)"
+msgstr ""
+
+msgid "7.1 (wide)"
+msgstr ""
+
+msgid "7.1 (surround)"
 msgstr ""
 
 msgid "Dolby Surround/ProLogic"

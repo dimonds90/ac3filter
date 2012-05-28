@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-12 23:50+0400\n"
+"POT-Creation-Date: 2012-05-29 01:13+0400\n"
 "PO-Revision-Date: 2012-03-24 19:58+0300\n"
 "Last-Translator: Michael Vigovsky <upliner@gmail.com>\n"
 "Language-Team: \n"
@@ -758,11 +758,17 @@ msgstr "2.1 Стерео"
 msgid "4.1 Quadro"
 msgstr "4.1 Квадро"
 
-msgid "5.1 (6 channels)"
-msgstr "5.1 (6 каналів)"
+msgid "5.1 (side)"
+msgstr ""
 
-msgid "7.1 (8 channels)"
-msgstr "7.1 (8 каналів)"
+msgid "5.1 (back)"
+msgstr ""
+
+msgid "7.1 (wide)"
+msgstr ""
+
+msgid "7.1 (surround)"
+msgstr ""
 
 msgid "Dolby Surround/ProLogic"
 msgstr "Dolby Surround/ProLogic"
@@ -827,3 +833,9 @@ msgstr ""
 
 msgid "Describe your proiblem."
 msgstr ""
+
+#~ msgid "5.1 (6 channels)"
+#~ msgstr "5.1 (6 каналів)"
+
+#~ msgid "7.1 (8 channels)"
+#~ msgstr "7.1 (8 каналів)"
