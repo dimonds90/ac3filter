@@ -94,7 +94,7 @@ chdir('..')
 package_files = (
   r'ac3filter_%s.exe'      % ver_file,
   r'ac3filter_%s_lite.exe' % ver_file,
-  r'ac3filter_%s_pdb.zip'  % ver_file,
+  r'ac3filter_%s_sym.zip'  % ver_file,
   r'ac3filter_%s_src.zip'  % ver_file,
 )
 
@@ -147,19 +147,38 @@ run_at('lang', 'build.cmd')
 chdir('..')
 
 ###########################################################
-# Make PDB archive
+# Make symbols archive
 
-pdb_arc = 'ac3filter_%s_pdb.zip' % ver_file
+sym_arc = 'ac3filter_%s_sym.zip' % ver_file
 
-pdb_files = (
+sym_files = (
+ 'ac3filter/acm/Release/ac3filter.acm',
+ 'ac3filter/acm/Release/ac3filter.pdb',
+ 'ac3filter/acm/x64/Release/ac3filter64.acm',
+ 'ac3filter/acm/x64/Release/ac3filter64.pdb',
+ 'ac3filter/BugTrap/Release/BugTrap.dll',
  'ac3filter/BugTrap/Release/BugTrap.pdb',
+ 'ac3filter/BugTrap/x64/Release/BugTrap-x64.dll',
  'ac3filter/BugTrap/x64/Release/BugTrap-x64.pdb',
+ 'ac3filter/filter/Release/ac3filter.ax',
  'ac3filter/filter/Release/ac3filter.pdb',
+ 'ac3filter/filter/x64/Release/ac3filter64.ax',
  'ac3filter/filter/x64/Release/ac3filter64.pdb',
+ 'ac3filter/intl/Release/ac3filter_intl.dll',
  'ac3filter/intl/Release/ac3filter_intl.pdb',
+ 'ac3filter/intl/x64/Release/ac3filter64_intl.dll',
  'ac3filter/intl/x64/Release/ac3filter64_intl.pdb',
+ 'valib/3rdparty/ffmpeg/bin/avcodec-53.dll',
+ 'valib/3rdparty/ffmpeg/bin/avutil-51.dll',
+ 'valib/3rdparty/ffmpeg/bin/x64/avcodec64-53.dll',
+ 'valib/3rdparty/ffmpeg/bin/x64/avutil64-51.dll',
 )
-run('%s -add -lev=9 "%s" %s' % (pkzip, pdb_arc, ' '.join(pdb_files)))
+
+for f in sym_files:
+  if not exists(f):
+    raise Exception('Symbol file not found: "{}"'.format(f))
+
+run('%s -add -rec -dir -lev=9 "%s" %s' % (pkzip, sym_arc, ' '.join(sym_files)))
 
 ###########################################################
 # Make installer
