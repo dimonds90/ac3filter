@@ -64,6 +64,13 @@ Source: "Readme.txt";  DestDir: "{app}"
 Source: "Changes.txt"; DestDir: "{app}"
 Source: "GPL.txt";     DestDir: "{app}"
 
+[InstallDelete]
+; Delete map files installed by v2.2a
+Type: files; Name: "{app}\ac3filter.map"
+Type: files; Name: "{app}\BugTrap.map"
+Type: files; Name: "{app}\ac3filter64.map"
+Type: files; Name: "{app}\BugTrap-x64.map"
+
 [Icons]
 Name: "{group}\Home"; Filename: "http://ac3filter.net"
 Name: "{group}\Documentation"; Filename: "http://ac3filter.net/wiki/AC3Filter_Help"
