@@ -22,20 +22,34 @@ static int controls[] =
 static const struct { int mask; int relation; const char *text; } spklist[] = 
 {
   { 0,              0, N_("Do not change") },
+  // No subwoofer
   { MODE_1_0,       0, N_("Mono") },
   { MODE_2_0,       0, N_("Stereo") },
   { MODE_2_2,       0, N_("Quadro") },
-  { MODE_3_2,       0, N_("5 channels") },
-
+  { MODE_3_2,       0, N_("5 channels (side)") },
+  { MODE_3_0_2,     0, N_("5 channels (back)") },
+  { MODE_3_2_1,     0, N_("6 channels") },
+  // With subwoofer
   { MODE_2_0_LFE,   0, N_("2.1 Stereo") },
   { MODE_2_2_LFE,   0, N_("4.1 Quadro") },
   { MODE_3_2_LFE,   0, N_("5.1 (side)") },
   { MODE_3_0_2_LFE, 0, N_("5.1 (back)") },
+  { MODE_3_2_1_LFE, 0, N_("6.1 channels") },
   { MODE_5_2_LFE,   0, N_("7.1 (wide)") },
   { MODE_3_2_2_LFE, 0, N_("7.1 (surround)") },
-
+  // Dolby downmixes
   { MODE_2_0, RELATION_DOLBY,  N_("Dolby Surround/ProLogic") },
   { MODE_2_0, RELATION_DOLBY2, N_("Dolby ProLogic II") },
+  // Custom modes
+  { MODE_2_1,       0, "2/1 (L R S)" },
+  { MODE_3_0,       0, "3/0 (L C R)" },
+  { MODE_3_1,       0, "3/1 (L C R S)" },
+  { MODE_5_0,       0, "5/0 (L LC C RC R)" },
+  // Custom with subwoofer
+  { MODE_2_1_LFE,   0, "2/1.1 (L R S LFE)" },
+  { MODE_3_0_LFE,   0, "3/0.1 (L C R LFE)" },
+  { MODE_3_1_LFE,   0, "3/1.1 (L C R S LFE)" },
+  { MODE_5_0_LFE,   0, "5/0.1 (L LC C RC R LFE)" },
 };
 
 static const struct {int format; const char *text; } fmtlist[] = 
