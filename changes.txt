@@ -1,5 +1,6 @@
 v2.4
   * Basque language added (thanks to Xabier Aramendi!)
+  * Finnish translation updated (thanks to Kristian EpÃ¤ilys)
 
 v2.3a - 2012-05-29
   * Dolby TrueHD support
@@ -31,7 +32,7 @@ v2.0a - 09.04.2012
     * Portuguese, thanks to Manuela Silva
     * Turkish, thanks to AltanEdip
     * Dutch, thanks to Ernst Klamer
-    * Bulgarian, thanks to Ãåîğãè Áúğçåâ
+    * Bulgarian, thanks to Ğ“ĞµĞ¾Ñ€Ğ³Ğ¸ Ğ‘ÑŠÑ€Ğ·ĞµĞ²
     * Ukrainian, thanks to Michael Vigovsky
 
 v1.63b - 11.08.2009
