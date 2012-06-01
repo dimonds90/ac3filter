@@ -1,3 +1,6 @@
+v2.4
+  * Basque language added (thanks to Xabier Aramendi!)
+
 v2.3a - 2012-05-29
   * Dolby TrueHD support
   * ACM 64bit works now

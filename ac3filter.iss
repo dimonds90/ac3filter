@@ -30,6 +30,7 @@ LicenseFile=GPL.txt
 #endif
 
 [Languages]
+Name: baq; MessagesFile: "compiler:Default.isl,lang\isl\Basque-1-5.1.11.isl"
 Name: bul; MessagesFile: "compiler:Default.isl,lang\isl\Bulgarian-5.1.11.isl"
 Name: eng; MessagesFile: "compiler:Default.isl"
 Name: cze; MessagesFile: "compiler:Languages\Czech.isl"

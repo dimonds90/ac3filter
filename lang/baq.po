@@ -1,0 +1,991 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AC3Filter 2.1a\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-29 01:13+0400\n"
+"PO-Revision-Date: 2012-04-14 01:15+0400\n"
+"Last-Translator: Valex <xvalex@mail.ru>\n"
+"Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Basque (Euskara)\n"
+"X-Poedit-Country: Basque  Coutry (Navarre)\n"
+
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Nagusia"
+
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "Nahastzailea"
+
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "Irabaziak"
+
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr "Ekualizagailua"
+
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "SPDIF"
+
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Sistema"
+
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "Honi buruz"
+
+msgid "L"
+msgstr "EZ"
+
+msgid "C"
+msgstr "ER"
+
+msgid "R"
+msgstr "ES"
+
+msgid "SL"
+msgstr "IEZ"
+
+msgid "SR"
+msgstr "IES"
+
+msgid "LF"
+msgstr "EZAU"
+
+msgid "CL"
+msgstr "EREZ"
+
+msgid "CR"
+msgstr "ERES"
+
+msgid "BL"
+msgstr "ATEZ"
+
+msgid "BC"
+msgstr "ATER"
+
+msgid "BR"
+msgstr "ATES"
+
+msgid "Left"
+msgstr "Ezkerrekoa"
+
+msgid "Center"
+msgstr "Erdikoa"
+
+msgid "Right"
+msgstr "Eskuinekoa"
+
+msgid "Left surround"
+msgstr "Ezker ingurasoinua"
+
+msgid "Right surround"
+msgstr "Eskuin ingurasoinua"
+
+msgid "Low frequency"
+msgstr "Behe maiztasuna"
+
+msgid "Left of center"
+msgstr "Erdi ezkerra"
+
+msgid "Right of center"
+msgstr "Erdi eskuina"
+
+msgid "Left back"
+msgstr "Ezker atzea"
+
+msgid "Center back"
+msgstr "Erdi atzea"
+
+msgid "Right back"
+msgstr "Eskuin atzea"
+
+msgid "kHz"
+msgstr "kHz"
+
+msgid "dB"
+msgstr "dB"
+
+msgid "Hz"
+msgstr "Hz"
+
+msgid "AC3Filter configuration"
+msgstr "AC3Filter itxurapena"
+
+msgid "Adjust track"
+msgstr "Zehaztu bidea"
+
+#. TRANSLATORS: Cancel
+msgid "IDCANCEL"
+msgstr "Ezeztatu"
+
+#. TRANSLATORS: Donate
+msgid "IDC_BTN_DONATE"
+msgstr "Dirulaguntza"
+
+#. TRANSLATORS: Help
+msgid "IDC_BTN_HELP"
+msgstr "Laguntza"
+
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr "Argilitza eskala oharra"
+
+#. TRANSLATORS: Frequency (Hz)
+msgid "IDC_LBL_EQ_FREQ"
+msgstr "Maiztasuna (Hz)"
+
+#. TRANSLATORS: Gain (dB)
+msgid "IDC_LBL_EQ_GAIN"
+msgstr "Irabazia (dB)"
+
+#. TRANSLATORS: Filter length:
+msgid "IDC_LBL_EQ_LEN"
+msgstr "Iragazki luzera:"
+
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
+msgstr ""
+
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_LFE"
+msgstr "EZAUE"
+
+#. TRANSLATORS: Surround
+msgid "IDC_LBL_SUR"
+msgstr "Inguratua"
+
+#. TRANSLATORS: Voice
+msgid "IDC_LBL_VOICE"
+msgstr "Ahotsa"
+
+#. TRANSLATORS: Save all (multichannel and master equalizers).
+msgid "IDC_RBT_EQ_ALL"
+msgstr "Gorde dena (ekualizagailu Masterra eta bide-anitzekoa)"
+
+#. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
+msgid "IDC_RBT_EQ_CUR"
+msgstr ""
+"Gorde uneko bidea bakarrik, ezaugarri hauek edozein bideri ezartzeko bezala"
+
+#. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
+msgid "IDC_RBT_EQ_MCH"
+msgstr ""
+"Gorde bide guztiak (Masterra ezik), gero bide-anitzeko itxurapena "
+"berreskuratu ahal izateko bezala."
+
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
+msgid "IDC_VER"
+msgstr "AC3Filter ikusi. %s Copyrighta (c) 2002-2009 Alexander Vigovsky"
+
+#. TRANSLATORS: OK
+msgid "IDOK"
+msgstr "Ongi"
+
+#. TRANSLATORS: What is it?
+msgid "IDC_GRP_ABOUT"
+msgstr "Zer da hau?"
+
+#. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
+msgid "IDC_LBL_ABOUT1"
+msgstr ""
+"AC3Filter dohaineko eta ontasun handiko DirectShow iragazki bat da, zuzeneko "
+"audio prozesatze eta dekodeatzerako diseinatua. Bere helburua "
+"erabilgarritasun zabalak eta beharrezko ezarpenak ematea da. Bide-anitzeko "
+"irteerak eta irteera digitalak (SPDIF) sostengatzen ditu."
+
+#. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
+msgid "IDC_LBL_ABOUT2"
+msgstr ""
+"Multimedia irakurgailu gehienek berezgaitasunez erabiltzen dute. Beharrezkoa "
+"da AC3 edo DTS audio bideak dituen AVI agiriak irakurtzeko. DVD-ak "
+"irakurtzeko ere erabili daiteke."
+
+#. TRANSLATORS: AGC
+msgid "IDC_GRP_AGC"
+msgstr "AGC"
+
+#. TRANSLATORS: Attack/release speed (dB/s):
+msgid "IDC_LBL_ATTACK_RELEASE"
+msgstr "Eraso abiadura/askapena (dB/s):"
+
+#. TRANSLATORS: Bass redirection
+msgid "IDC_GRP_BASS"
+msgstr "Behe"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_BASS_ENABLE"
+msgstr "Gaitu"
+
+#. TRANSLATORS: Cutoff frequency
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "Ebaketa maiztasuna"
+
+#. TRANSLATORS: Bass destination:
+msgid "IDC_LBL_BASS_ROUTE"
+msgstr "Ibilidea"
+
+#. TRANSLATORS: Front channels
+msgid "IDC_RBT_BASS_FRONT"
+msgstr "Aurrealdea"
+
+#. TRANSLATORS: Subwoofer
+msgid "IDC_RBT_BASS_SUB"
+msgstr "Beheazpia"
+
+#. TRANSLATORS: Contact author
+msgid "IDC_GRP_CONTACT"
+msgstr "Jarri harremanetan egilearekin"
+
+#. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
+msgid "IDC_LBL_CONTACT"
+msgstr ""
+"Mesedez, jakinarazi akatsak. Sentitu aske egileari zure ideia, irizkizun, "
+"etab. helarazteko. Idatzi ingeleraz edo errusieraz bakarrik. Gaiak  "
+"'AC3Filter' hitza eduki behar du (post@ren berezgaitasuenzko iragazpena dela-"
+"eta)."
+
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
+msgid "IDC_LNK_EMAIL"
+msgstr "Idatzi egileari|mailto:xvalex@mail.ru?Subject=AC3Filter"
+
+#. TRANSLATORS: Project forum|http://ac3filter.net/forum/
+msgid "IDC_LNK_FORUM"
+msgstr "Egitasmo foroa|http://ac3filter.net/forum/"
+
+#. TRANSLATORS: Homepage|http://ac3filter.net/
+msgid "IDC_LNK_HOME"
+msgstr "Webgunea|http://ac3filter.net/"
+
+#. TRANSLATORS: CPU
+msgid "IDC_GRP_CPU"
+msgstr "CPU"
+
+#. TRANSLATORS: 0%
+msgid "IDC_CPU_LABEL"
+msgstr "%0"
+
+#. TRANSLATORS: Thanks to
+msgid "IDC_GRP_CREDITS"
+msgstr "Eskerrak"
+
+#. TRANSLATORS: Debug
+msgid "IDC_GRP_DEBUG"
+msgstr "Garbiketa"
+
+#. TRANSLATORS: Error report
+msgid "IDC_BTN_ERROR_REPORT"
+msgstr "Jakinarazi"
+
+#. TRANSLATORS: Save logs on exit
+msgid "IDC_CHK_SAVE_LOGS"
+msgstr "Gorde oharrak"
+
+#. TRANSLATORS: Send  audio data
+msgid "IDC_CHK_SEND_AUDIO_DATA"
+msgstr ""
+
+#. TRANSLATORS: Feedback email:
+msgid "IDC_LBL_FEEDBACK"
+msgstr "Erantzuna"
+
+#. TRANSLATORS: How to report a bug?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug
+msgid "IDC_LNK_ERROR_REPORT"
+msgstr "Jakinarazi"
+
+#. TRANSLATORS: Decoder info
+msgid "IDC_GRP_DECODER_INFO"
+msgstr "Dekodeatzailearen argibideak"
+
+#. TRANSLATORS: Frames / Errors
+msgid "IDC_LBL_FRAMES_ERRORS"
+msgstr "Frame / Akats"
+
+#. TRANSLATORS: Delays
+msgid "IDC_GRP_DELAYS"
+msgstr "Atzerapenak"
+
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_DELAYS_RESET"
+msgstr "Berrezar"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_DELAYS"
+msgstr "Eragin"
+
+#. TRANSLATORS: Units:
+msgid "IDC_LBL_DELAY_UNITS"
+msgstr "Batas."
+
+#. TRANSLATORS: DRC
+msgid "IDC_GRP_DRC"
+msgstr "DRC"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_DRC"
+msgstr "Eragin"
+
+#. TRANSLATORS: DirectShow options
+msgid "IDC_GRP_DSHOW"
+msgstr "DirectShow aukerak"
+
+#. TRANSLATORS: Check output format support
+msgid "IDC_CHK_QUERY_SINK"
+msgstr "Egiaztatu irteera heuskarrirako sostengua"
+
+#. TRANSLATORS: Force sound card to reinit after seek / pause
+msgid "IDC_CHK_REINIT"
+msgstr "Berrabiarazi soinu txartela bilatu / pausatu ondoren"
+
+#. TRANSLATORS: Disallow PCM output in SPDIF mode
+msgid "IDC_CHK_SPDIF_NO_PCM"
+msgstr "Ezgaitu PCM irteera SPDIF moduan"
+
+#. TRANSLATORS: SPDIF/DTS conversion
+msgid "IDC_GRP_DTS_CONV"
+msgstr "SPDIF/DTS bihurketa"
+
+#. TRANSLATORS: Convert to DTS14
+msgid "IDC_RBT_DTS_CONV_14BIT"
+msgstr "DTS14-ra bihurtu"
+
+#. TRANSLATORS: Convert to DTS16
+msgid "IDC_RBT_DTS_CONV_16BIT"
+msgstr "DTS16-ra bihurtu"
+
+#. TRANSLATORS: Do not convert
+msgid "IDC_RBT_DTS_CONV_NONE"
+msgstr "Ez bihurtu"
+
+#. TRANSLATORS: SPDIF/DTS mode
+msgid "IDC_GRP_DTS_MODE"
+msgstr "SPDIF/DTS modua"
+
+#. TRANSLATORS: Auto
+msgid "IDC_RBT_DTS_MODE_AUTO"
+msgstr "Berezgaitasunezkoa"
+
+#. TRANSLATORS: Padded DTS
+msgid "IDC_RBT_DTS_MODE_PADDED"
+msgstr "DTS Bigungarria"
+
+#. TRANSLATORS: SPDIF wrapped
+msgid "IDC_RBT_DTS_MODE_WRAPPED"
+msgstr "Inguru SPDIF"
+
+#. TRANSLATORS: Equalizer
+msgid "IDC_GRP_EQ"
+msgstr "Ekualizagailua"
+
+#. TRANSLATORS: Equalizer options
+msgid "IDC_GRP_EQ_OPTIONS"
+msgstr "Ekualizagailu aukerak"
+
+#. TRANSLATORS: Custom
+msgid "IDC_BTN_EQ_CUSTOM"
+msgstr "Norberea"
+
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_EQ_RESET"
+msgstr "Berrezarri"
+
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_EQ"
+msgstr "Gaitu"
+
+#. TRANSLATORS: Equalizer preset
+msgid "IDC_GRP_EQ_PRESET"
+msgstr "Ekualizagailu profilak"
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_EQ_DELETE"
+msgstr "Ezabatu"
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_EQ_SAVE"
+msgstr "Gorde"
+
+#. TRANSLATORS: Use AC3Filter for:
+msgid "IDC_GRP_FORMATS"
+msgstr "AC3Filter Erabili:"
+
+#. TRANSLATORS: Gain
+msgid "IDC_GRP_GAIN"
+msgstr "Irabazia"
+
+#. TRANSLATORS: Gain
+msgid "IDC_LBL_GAIN"
+msgstr "Irabazia"
+
+#. TRANSLATORS: Master
+msgid "IDC_LBL_MASTER"
+msgstr "Nagusia"
+
+#. TRANSLATORS: Input gains
+msgid "IDC_GRP_INPUT_GAINS"
+msgstr "Sarrera irabaziak"
+
+#. TRANSLATORS: Input levels
+msgid "IDC_GRP_INPUT_LEVELS"
+msgstr "Sarrera mailak"
+
+#. TRANSLATORS: Interface options
+msgid "IDC_GRP_INTERFACE"
+msgstr "Interfaze aukerak"
+
+#. TRANSLATORS: Invert levels
+msgid "IDC_CHK_INVERT_LEVELS"
+msgstr "Alderantzizkatu mailak"
+
+#. TRANSLATORS: Show tooltips
+msgid "IDC_CHK_TOOLTIPS"
+msgstr "Erakutsi iradokizunak"
+
+#. TRANSLATORS: Show tray icon
+msgid "IDC_CHK_TRAY"
+msgstr "Erakutsi ikurra ordulariaren ondoan"
+
+#. TRANSLATORS: Interface update rate (ms)
+msgid "IDC_LBL_REFRESH_TIME"
+msgstr "Eguneraketa tartea (sm)"
+
+#. TRANSLATORS: License
+msgid "IDC_GRP_LICENSE"
+msgstr "Baimena"
+
+#. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
+msgid "IDC_LBL_LICENSE"
+msgstr ""
+"Programa hau dohainekoa da eta GNU Baimen Publiko Orokorra 2 betsioaren "
+"baldintzatan banatu daiteke."
+
+#. TRANSLATORS: Mixing matrix
+msgid "IDC_GRP_MATRIX"
+msgstr "Nahasketa matrizea"
+
+#. TRANSLATORS: Matrix preset
+msgid "IDC_GRP_MATRIX_PRESET"
+msgstr "Matrize aurrezehaztua"
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_MATRIX_DELETE"
+msgstr "Ezabatu"
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_MATRIX_SAVE"
+msgstr "Gorde"
+
+#. TRANSLATORS: Filter merit
+msgid "IDC_GRP_MERIT"
+msgstr "Iragazki lehentasuna"
+
+#. TRANSLATORS: Disable AC3Filter
+msgid "IDC_RBT_MERIT_DO_NOT_USE"
+msgstr "Ez erabili"
+
+#. TRANSLATORS: Prefer AC3Filter
+msgid "IDC_RBT_MERIT_PREFERRED"
+msgstr "Hobetsi AC3Filter"
+
+#. TRANSLATORS: Prefer other decoder
+msgid "IDC_RBT_MERIT_UNLIKELY"
+msgstr "Hobetsi beste dekodeat. bat"
+
+#. TRANSLATORS: Options
+msgid "IDC_GRP_MIXER_OPTIONS"
+msgstr "Aukerak"
+
+#. TRANSLATORS: Auto gain control
+msgid "IDC_CHK_AUTO_GAIN"
+msgstr "Berezgaitasun irabazia"
+
+#. TRANSLATORS: Auto matrix
+msgid "IDC_CHK_AUTO_MATRIX"
+msgstr "Berezgaitasun matrizea"
+
+#. TRANSLATORS: Expand stereo
+msgid "IDC_CHK_EXPAND_STEREO"
+msgstr "Hedatu esteroa"
+
+#. TRANSLATORS: One-pass norm
+msgid "IDC_CHK_NORMALIZE"
+msgstr "Normaldu 1-pasaldia"
+
+#. TRANSLATORS: Normalize matrix
+msgid "IDC_CHK_NORM_MATRIX"
+msgstr "Normalizatu matrizea"
+
+#. TRANSLATORS: Voice control
+msgid "IDC_CHK_VOICE_CONTROL"
+msgstr "Ahots agintea"
+
+#. TRANSLATORS: Output format
+msgid "IDC_GRP_OUTPUT"
+msgstr "Irtera heuskarria"
+
+#. TRANSLATORS: Use SPDIF
+msgid "IDC_CHK_USE_SPDIF"
+msgstr "Erabili SPDIF"
+
+#. TRANSLATORS: Format
+msgid "IDC_LBL_FORMAT"
+msgstr "Heuskarria"
+
+#. TRANSLATORS: input format
+msgid "IDC_LBL_INPUT"
+msgstr "Sarrera heuskarria"
+
+#. TRANSLATORS: Rate
+msgid "IDC_LBL_RATE"
+msgstr "Abiadura"
+
+#. TRANSLATORS: Output gains
+msgid "IDC_GRP_OUTPUT_GAINS"
+msgstr "Irteera irabaziak"
+
+#. TRANSLATORS: Output levels
+msgid "IDC_GRP_OUTPUT_LEVELS"
+msgstr "Irteera mailak"
+
+#. TRANSLATORS: Preset
+msgid "IDC_GRP_PRESET"
+msgstr "Profilak"
+
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_PRESET_DELETE"
+msgstr "Ezabatu"
+
+#. TRANSLATORS: File
+msgid "IDC_BTN_PRESET_FILE"
+msgstr "Agiria"
+
+#. TRANSLATORS: Save
+msgid "IDC_BTN_PRESET_SAVE"
+msgstr "Gorde"
+
+#. TRANSLATORS: Default audio renderer
+msgid "IDC_GRP_RENDERER"
+msgstr "Berezko audio kudeatzailea"
+
+#. TRANSLATORS: Use Direct Sound by default
+msgid "IDC_RBT_RENDER_DS"
+msgstr "Erabili Direct Sound berez"
+
+#. TRANSLATORS: Use Wave Out by default
+msgid "IDC_RBT_RENDER_WO"
+msgstr "Erabili Wave Out berez"
+
+#. TRANSLATORS: SPDIF options
+msgid "IDC_GRP_SPDIF"
+msgstr "SPDIF aukerak"
+
+#. TRANSLATORS: 32kHz
+msgid "IDC_CHK_SPDIF_ALLOW_32"
+msgstr "32kHz"
+
+#. TRANSLATORS: 44kHz
+msgid "IDC_CHK_SPDIF_ALLOW_44"
+msgstr "44kHz"
+
+#. TRANSLATORS: 48kHz
+msgid "IDC_CHK_SPDIF_ALLOW_48"
+msgstr " 48kHz"
+
+#. TRANSLATORS: Output SPDIF as PCM
+msgid "IDC_CHK_SPDIF_AS_PCM"
+msgstr "SPDIF irteera PCM bezala"
+
+#. TRANSLATORS: Restrict SPDIF sample rate
+msgid "IDC_CHK_SPDIF_CHECK_SR"
+msgstr "Mugatu SPDIF lagin abidura"
+
+#. TRANSLATORS: Use AC3 encoder
+msgid "IDC_CHK_SPDIF_ENCODE"
+msgstr "Erabili AC3 dekodeatzailea"
+
+#. TRANSLATORS: Do not encode stereo PCM
+msgid "IDC_CHK_SPDIF_STEREO_PT"
+msgstr "Ez kodeatu PCM estereoa"
+
+#. TRANSLATORS: Detect SPDIF stream in PCM data
+msgid "IDC_CHK_USE_DETECTOR"
+msgstr "Atzeman SPDIF bidea PCM datuetan"
+
+#. TRANSLATORS: AC3 encoder bitrate (kbps)
+msgid "IDC_LBL_SPDIF_BITRATE"
+msgstr "Bitneurri kodeatzailea AC3 (kbps)"
+
+#. TRANSLATORS: SPDIF passthrough
+msgid "IDC_GRP_SPDIF_PT"
+msgstr "SPDIF bitartez"
+
+#. TRANSLATORS: AC3
+msgid "IDC_CHK_SPDIF_AC3"
+msgstr "AC3"
+
+#. TRANSLATORS: DTS
+msgid "IDC_CHK_SPDIF_DTS"
+msgstr "DTS"
+
+#. TRANSLATORS: MPEG Audio
+msgid "IDC_CHK_SPDIF_MPA"
+msgstr "MPEG Audioa"
+
+#. TRANSLATORS: Audio/Video sync
+msgid "IDC_GRP_SYNC"
+msgstr "Audio/Bideo aldiberetzea"
+
+#. TRANSLATORS: Jitter correction.
+msgid "IDC_CHK_JITTER"
+msgstr "Zuzendu okerdura."
+
+#. TRANSLATORS: Current jitter:
+msgid "IDC_LBL_JITTER"
+msgstr "Oraingo okerdura:"
+
+#. TRANSLATORS: Time shift (ms):
+msgid "IDC_LBL_TIME_SHIFT"
+msgstr "Denbora aldaketa (sm):"
+
+#. TRANSLATORS: <- sound lags
+msgid "IDC_LBL_TIME_SHIFT_MINUS"
+msgstr "<- atzeratu audioa"
+
+#. TRANSLATORS: sound hastes ->
+msgid "IDC_LBL_TIME_SHIFT_PLUS"
+msgstr "azkartu audioa ->"
+
+#. TRANSLATORS: Localization
+msgid "IDC_GRP_TRANS"
+msgstr "Helbidea"
+
+#. TRANSLATORS: Language:
+msgid "IDC_LBL_LANG"
+msgstr "Hizkuntza:"
+
+#. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
+msgid "IDC_LNK_TRANSLATE"
+msgstr "Nola itzuli?|http://ac3filter.net/guides/how_to_translate"
+
+msgid "Samples"
+msgstr "Laginak"
+
+msgid "Millisecs"
+msgstr "Segundumilaen"
+
+msgid "Meters"
+msgstr "Metro"
+
+msgid "Centimeters"
+msgstr "Metroehunen"
+
+msgid "Feet"
+msgstr "Ohin"
+
+msgid "Inches"
+msgstr "Hazbete"
+
+msgid "All channels"
+msgstr "Bide guztiak"
+
+#, c-format
+msgid "%ikHz"
+msgstr "%ikHz"
+
+#, c-format
+msgid "%iHz"
+msgstr "%iHz"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Egitan nahi duzu '%s' aurrezarpena ezabatzea?"
+
+msgid "Delete confirmation"
+msgstr "Ezabapen baieztapena"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Egitan nahi duzu '%s' matrizea ezabatzea?"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' equalizer preset?"
+msgstr "Egitan nahi duzu '%s' ekualizagailu aurrezarpena ezabatzea?"
+
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Aukera hau ARRISKUTSUA da! Iragazkiak zarata handia sortu dezake aukera hau "
+"gaituta badago. Sakatu 'Ez' aukera hau gaitzeko."
+
+msgid "Dangerous option!"
+msgstr "Aukera arriskutsua!"
+
+msgid "Spectrum: no data"
+msgstr "Argilitza: datu gabe"
+
+#, c-format
+msgid "Spectrum: %s"
+msgstr "Argilitza: %s"
+
+msgid "Do not change"
+msgstr "Ez aldatu"
+
+msgid "Mono"
+msgstr "Monoa"
+
+msgid "Stereo"
+msgstr "Esteroa"
+
+msgid "Quadro"
+msgstr "Laukoa"
+
+msgid "5 channels"
+msgstr "5 Bide"
+
+msgid "2.1 Stereo"
+msgstr "2.1 Estereoa"
+
+msgid "4.1 Quadro"
+msgstr "4.1 Laukoa"
+
+msgid "5.1 (side)"
+msgstr ""
+
+msgid "5.1 (back)"
+msgstr ""
+
+msgid "7.1 (wide)"
+msgstr ""
+
+msgid "7.1 (surround)"
+msgstr ""
+
+msgid "Dolby Surround/ProLogic"
+msgstr "Dolby Surround/ProLogic"
+
+msgid "Dolby ProLogic II"
+msgstr "Dolby ProLogic II"
+
+msgid "PCM 16bit"
+msgstr "PCM 16bit"
+
+msgid "PCM 24bit"
+msgstr "PCM 24bit"
+
+msgid "PCM 32bit"
+msgstr "PCM 32bit"
+
+msgid "PCM Float"
+msgstr "PCM Float"
+
+msgid "PCM Double"
+msgstr "PCM Bikoitza"
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %iHz"
+
+msgid "Use SPDIF"
+msgstr "Erabili SPDIF"
+
+msgid "Use SPDIF (disabled)"
+msgstr "Erabili SPDIF (ezgaituta)"
+
+msgid "Use SPDIF (passthrough)"
+msgstr "Erabili SPDIF (zeharka)"
+
+msgid "Use SPDIF (AC3 encode)"
+msgstr "Erabili SPDIF (AC3 kodeaketa)"
+
+msgid "Use SPDIF (Unknown)"
+msgstr "Erabili SPDIF (Ezezaguna)"
+
+#, c-format
+msgid ""
+"Input\tmean: %ims\tstddev: %ims\n"
+"Output\tmean: %ims\tstddev: %ims"
+msgstr ""
+"Sarrera\tmean: %ims\tstddev: %ims\n"
+"Irteera\tmean: %ims\tstddev: %ims"
+
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+"Aukera hau ARRISKUTSUA da! bidea ezaldibertu egin daiteke aukera hau gaituta "
+"badago. Sakatu 'Ez' aukera hau gaitzeko."
+
+msgid "Enter you email."
+msgstr ""
+
+msgid "Please..."
+msgstr ""
+
+msgid "Describe your proiblem."
+msgstr ""
+
+#~ msgid "5.1 (6 channels)"
+#~ msgstr "5.1 (6 bide)"
+
+#~ msgid "7.1 (8 channels)"
+#~ msgstr "7.1 (8 bide)"
+
+#~ msgid "IDC_LBL_DELAY_C"
+#~ msgstr "ER"
+
+#~ msgid "IDC_LBL_DELAY_L"
+#~ msgstr "EZ"
+
+#~ msgid "IDC_LBL_DELAY_R"
+#~ msgstr "ES"
+
+#~ msgid "IDC_LBL_DELAY_SL"
+#~ msgstr "IEZ"
+
+#~ msgid "IDC_LBL_DELAY_SR"
+#~ msgstr "IES"
+
+#~ msgid "IDC_LBL_DELAY_SW"
+#~ msgstr "AHL"
+
+#~ msgid "IDC_GRP_ENV"
+#~ msgstr "Bilketa argibidea"
+
+#~ msgid "IDC_CHK_AC3"
+#~ msgstr "AC3"
+
+#~ msgid "IDC_CHK_DTS"
+#~ msgstr "DTS"
+
+#~ msgid "IDC_CHK_MPA"
+#~ msgstr "MPEG Audioa"
+
+#~ msgid "IDC_CHK_PCM"
+#~ msgstr "PCM"
+
+#~ msgid "IDC_CHK_PES"
+#~ msgstr "DVD"
+
+#~ msgid "IDC_CHK_SPDIF"
+#~ msgstr "SPDIF"
+
+#~ msgid "IDC_LBL_IN_C"
+#~ msgstr "ER"
+
+#~ msgid "IDC_LBL_IN_L"
+#~ msgstr "EZ"
+
+#~ msgid "IDC_LBL_IN_LFE"
+#~ msgstr "LFE"
+
+#~ msgid "IDC_LBL_IN_R"
+#~ msgstr "ES"
+
+#~ msgid "IDC_LBL_IN_SL"
+#~ msgstr "IEZ"
+
+#~ msgid "IDC_LBL_IN_SR"
+#~ msgstr "IES"
+
+#~ msgid "IDC_LBL_MATRIX_IN_C"
+#~ msgstr "ER"
+
+#~ msgid "IDC_LBL_MATRIX_IN_L"
+#~ msgstr "EZ"
+
+#~ msgid "IDC_LBL_MATRIX_IN_LFE"
+#~ msgstr "LFE"
+
+#~ msgid "IDC_LBL_MATRIX_IN_R"
+#~ msgstr "ES"
+
+#~ msgid "IDC_LBL_MATRIX_IN_SL"
+#~ msgstr "IEZ"
+
+#~ msgid "IDC_LBL_MATRIX_IN_SR"
+#~ msgstr "IES"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_C"
+#~ msgstr "ER"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_L"
+#~ msgstr "EZ"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_R"
+#~ msgstr "ES"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SL"
+#~ msgstr "IEZ"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SR"
+#~ msgstr "IES"
+
+#~ msgid "IDC_LBL_MATRIX_OUT_SW"
+#~ msgstr "AHL"
+
+#~ msgid "IDC_LBL_OUT_C"
+#~ msgstr "ER"
+
+#~ msgid "IDC_LBL_OUT_L"
+#~ msgstr "EZ"
+
+#~ msgid "IDC_LBL_OUT_R"
+#~ msgstr "ES"
+
+#~ msgid "IDC_LBL_OUT_SL"
+#~ msgstr "IEZ"
+
+#~ msgid "IDC_LBL_OUT_SR"
+#~ msgstr "IES"
+
+#~ msgid "IDC_LBL_OUT_SW"
+#~ msgstr "AHL"
+
+#~ msgid "Master"
+#~ msgstr "Masterra"
+
+#~ msgid "Surround Left"
+#~ msgstr "Ezker Ingurasoinua"
+
+#~ msgid "Surround Right"
+#~ msgstr "Eskuin Ingurasoinua"
+
+#~ msgid "Subwoofer"
+#~ msgstr "Azpiwooferra"
+
+#~ msgid "1/0 - mono"
+#~ msgstr "1/0 - mono"
+
+#~ msgid "2/0 - stereo"
+#~ msgstr "2/0 - estereoa"
+
+#~ msgid "3/0 - 3 front"
+#~ msgstr "3/0 - 3 aurrealdeko"
+
+#~ msgid "3/1 - surround"
+#~ msgstr "3/1 - ingurasoinua"
+
+#~ msgid "2/2 - quadro"
+#~ msgstr "2/2 - laukia"
+
+#~ msgid "3/2 - 5 channels"
+#~ msgstr "3/2 - 5 bide"
+
+#~ msgid "1/0+SW 1.1 mono"
+#~ msgstr "1/0+SW 1.1 mono"
+
+#~ msgid "3/0+SW 3.1 front"
+#~ msgstr "3/0+SW 3.1 aurrealdekoa"
+
+#~ msgid "2/1+SW 3.1 surround"
+#~ msgstr "2/1+SW 3.1 ingurasoinua"
+
+#~ msgid "3/1+SW 4.1 surround"
+#~ msgstr "3/1+SW 4.1 ingurasoinua"
