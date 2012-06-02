@@ -172,6 +172,7 @@ end;
 function OpenCandyLang: string;
 begin
   case ActiveLanguage() of
+    'baq': result := 'eu';
     'bul': result := 'bg';
     'eng': result := 'en';
     'cze': result := 'cs';
