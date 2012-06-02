@@ -1,10 +1,44 @@
-import os, sys, re, time
+import os, sys, re, time, argparse
 from os import chdir
 from os.path import exists
+
+ver_test = 'test'
 
 if not exists('config.py'):
   raise('Copy config.py.example to config.py and adjust configuration')
 from config import *
+
+###########################################################
+# Command line parser
+
+parser = argparse.ArgumentParser(description='Build distributive.')
+
+parser.add_argument('ver',
+  nargs='?',
+  default=ver_test,
+  help='Distributive version.')
+
+parser.add_argument('--no-clean',
+  dest='clean',
+  action='store_false',
+  help='Do not clean before build.')
+
+parser.add_argument('--no-source',
+  dest='source',
+  action='store_false',
+  help='Do not create source archive.')
+
+parser.add_argument('--no-symbols',
+  dest='symbols',
+  action='store_false',
+  help='Do not create symbols archive.')
+
+parser.add_argument('--no-test',
+  dest='test',
+  action='store_false',
+  help='Do not run tests.')
+
+args = parser.parse_args()
 
 ###########################################################
 # Helper funcs
@@ -67,10 +101,8 @@ start_time = time.time()
 ###########################################################
 # Version
 
-ver_test = 'test'
-
-if len(sys.argv) > 1:
-  ver = sys.argv[1]
+if args.ver != ver_test:
+  ver = args.ver
   ver_file = make_filename_ver(ver)
 
   if not exists('OCKeys.iss'):
@@ -102,8 +134,9 @@ for file in package_files:
   if exists(file):
     os.remove(file)
 
-run_at('ac3filter', 'clean.cmd')
-run_at('valib', 'clean.cmd')
+if args.clean:
+  run_at('ac3filter', 'clean.cmd')
+  run_at('valib', 'clean.cmd')
 
 ###########################################################
 # Make source archive
@@ -113,23 +146,26 @@ src_files = (
   'ac3filter/*.*',
   'valib/*.*',
 )
-run('%s -add -lev=9 -rec -dir -excl=.hg "%s" %s' % (pkzip, src_arc, ' '.join(src_files)))
+
+if args.source:
+  run('%s -add -lev=9 -rec -dir -excl=.hg "%s" %s' % (pkzip, src_arc, ' '.join(src_files)))
 
 ###########################################################
 # Build valib and run tests
 
-if not exists('samples/test/'):
-  raise Exception('No test samples!')
+if args.test:
+  if not exists('samples/test/'):
+    raise Exception('No test samples!')
 
-if not exists('samples/test/a.aac.03f.adts'):
-  run_at('samples/test', '_build.bat')
+  if not exists('samples/test/a.aac.03f.adts'):
+    run_at('samples/test', '_build.bat')
 
-chdir('valib/test2')
-run('build.cmd release')
-run('build.cmd x64 release')
-run('test.cmd release')
-run('test.cmd x64/release')
-chdir('../..')
+  chdir('valib/test2')
+  run('build.cmd release')
+  run('build.cmd x64 release')
+  run('test.cmd release')
+  run('test.cmd x64/release')
+  chdir('../..')
 
 ###########################################################
 # Build filter
@@ -178,13 +214,14 @@ for f in sym_files:
   if not exists(f):
     raise Exception('Symbol file not found: "{}"'.format(f))
 
-run('%s -add -rec -dir -lev=9 "%s" %s' % (pkzip, sym_arc, ' '.join(sym_files)))
+if args.symbols:
+  run('%s -add -rec -dir -lev=9 "%s" %s' % (pkzip, sym_arc, ' '.join(sym_files)))
 
 ###########################################################
 # Make installer
 
 iss_defines = []
-iss_defines.append('/Dappver="%s"' % ver_file)
+iss_defines.append('/Dappver="%s"' % ver)
 if exists('ac3filter/OCKeys.iss'):
   iss_defines.append('/DOPENCANDY')
 
