@@ -93,60 +93,57 @@ static bool delete_reg_key(const char *name, HKEY root)
   return true;
 }
 
-static int get_merit(HKEY hive, LPCSTR key)
+static DWORD get_merit(HKEY hive, LPCSTR key)
 {
-  HKEY  reg;
+  HKEY reg;
+  DWORD data_size;
+  DWORD type;
+  DWORD merit = 0;
+
   if (RegOpenKeyEx(hive, key, 0, KEY_READ, &reg) != ERROR_SUCCESS)
     return 0;
-  
-  DWORD buf[256];
-  DWORD buf_len = 1024;
-  DWORD type;
 
-  if (RegQueryValueEx(reg, "FilterData", NULL, &type, (LPBYTE)&buf, &buf_len) != ERROR_SUCCESS)
+  if (RegQueryValueEx(reg, "FilterData", NULL, &type, NULL, &data_size) == ERROR_SUCCESS &&
+      type == REG_BINARY && data_size >= sizeof(REGFILTER2))
   {
-    RegCloseKey(reg);
-    return 0;
+    BYTE *data = new BYTE[data_size];
+    if (RegQueryValueEx(reg, "FilterData", NULL, &type, data, &data_size) == ERROR_SUCCESS &&
+        type == REG_BINARY && data_size >= sizeof(REGFILTER2))
+      merit = ((REGFILTER2 *)data)->dwMerit;
+    delete data;
   }
 
   RegCloseKey(reg);
-
-  if (type != REG_BINARY || buf_len < sizeof(REGFILTER2) || buf[0] != 2)
-    return 0;
-
-  return buf[1];
+  return merit;
 }
 
 
-static bool set_merit(HKEY hive, LPCSTR key, int merit)
+static bool set_merit(HKEY hive, LPCSTR key, DWORD merit)
 {
-  HKEY  reg;
-  if (RegOpenKeyEx(hive, key, 0, KEY_READ | KEY_WRITE, &reg) != ERROR_SUCCESS)
-    return false;
-  
-  DWORD buf[256];
-  DWORD buf_len = 1024;
+  HKEY reg;
+  DWORD data_size;
   DWORD type;
+  bool result = false;
 
-  if (RegQueryValueEx(reg, "FilterData", NULL, &type, (LPBYTE)&buf, &buf_len) != ERROR_SUCCESS)
+  if (RegOpenKeyEx(hive, key, 0, KEY_READ | KEY_WRITE, &reg) != ERROR_SUCCESS)
+    return 0;
+
+  if (RegQueryValueEx(reg, "FilterData", NULL, &type, NULL, &data_size) == ERROR_SUCCESS &&
+      type == REG_BINARY && data_size >= sizeof(REGFILTER2))
   {
-    RegCloseKey(reg);
-    return false;
+    BYTE *data = new BYTE[data_size];
+    if (RegQueryValueEx(reg, "FilterData", NULL, &type, data, &data_size) == ERROR_SUCCESS &&
+        type == REG_BINARY && data_size >= sizeof(REGFILTER2))
+    {
+      ((REGFILTER2 *)data)->dwMerit = merit;
+      if (RegSetValueEx(reg, "FilterData", NULL, REG_BINARY, data, data_size) == ERROR_SUCCESS)
+        result = true;
+    }
+    delete data;
   }
-
-  if (type != REG_BINARY || buf_len < sizeof(REGFILTER2) || buf[0] != 2)
-  {
-    RegCloseKey(reg);
-    return false;
-  }
-
-  buf[1] = merit;
-
-  if (RegSetValueEx(reg, "FilterData", NULL, REG_BINARY, (LPBYTE)&buf, buf_len) != ERROR_SUCCESS)
-    return false;
 
   RegCloseKey(reg);
-  return true;
+  return result;
 }
 
 
