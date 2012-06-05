@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 1.40b\n"
+"Project-Id-Version: AC3Filter v2.3a\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-29 01:13+0400\n"
-"PO-Revision-Date: 2008-08-08 16:27+0200\n"
-"Last-Translator: Георги Бързев <georgedb@gmail.com>\n"
+"PO-Revision-Date: 2012-06-04 17:59+0200\n"
+"Last-Translator: Georgi Barzev <georgedb@gmail.com>\n"
 "Language-Team: AC3Filter <ac3filter@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -74,56 +74,56 @@ msgid "BR"
 msgstr ""
 
 msgid "Left"
-msgstr ""
+msgstr "Ляв"
 
 msgid "Center"
-msgstr ""
+msgstr "Център"
 
 msgid "Right"
-msgstr ""
+msgstr "Десен"
 
 msgid "Left surround"
-msgstr ""
+msgstr "Ляв съраунд"
 
 msgid "Right surround"
-msgstr ""
+msgstr "Десен съраунд"
 
 msgid "Low frequency"
-msgstr ""
+msgstr "Ниска честота"
 
 msgid "Left of center"
-msgstr ""
+msgstr "Ляво център"
 
 msgid "Right of center"
-msgstr ""
+msgstr "Дясно център"
 
 msgid "Left back"
-msgstr ""
+msgstr "Ляв отзад"
 
 msgid "Center back"
-msgstr ""
+msgstr "Център отзад"
 
 msgid "Right back"
-msgstr ""
+msgstr "Десен отзад"
 
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 msgid "dB"
-msgstr ""
+msgstr "dB"
 
 msgid "Hz"
-msgstr ""
+msgstr "Hz"
 
 msgid "AC3Filter configuration"
-msgstr ""
+msgstr "AC3Filter конфигурация"
 
 msgid "Adjust track"
-msgstr ""
+msgstr "Настройка на канал"
 
 #. TRANSLATORS: Cancel
 msgid "IDCANCEL"
-msgstr ""
+msgstr "Отмяна"
 
 #. TRANSLATORS: Donate
 msgid "IDC_BTN_DONATE"
@@ -131,7 +131,7 @@ msgstr "Подкрепи"
 
 #. TRANSLATORS: Help
 msgid "IDC_BTN_HELP"
-msgstr ""
+msgstr "Помощ"
 
 #. TRANSLATORS: Log scale spectrum
 msgid "IDC_CHK_EQ_LOG"
@@ -139,19 +139,19 @@ msgstr "Лог. спектър"
 
 #. TRANSLATORS: Frequency (Hz)
 msgid "IDC_LBL_EQ_FREQ"
-msgstr ""
+msgstr "Честота (Hz)"
 
 #. TRANSLATORS: Gain (dB)
 msgid "IDC_LBL_EQ_GAIN"
-msgstr ""
+msgstr "Усилване (dB)"
 
 #. TRANSLATORS: Filter length:
 msgid "IDC_LBL_EQ_LEN"
-msgstr ""
+msgstr "Дължина на филтъра:"
 
 #. TRANSLATORS: Problem description:
 msgid "IDC_LBL_ERROR_DESC"
-msgstr ""
+msgstr "Описание на проблема:"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -159,23 +159,23 @@ msgstr "НЧ"
 
 #. TRANSLATORS: Surround
 msgid "IDC_LBL_SUR"
-msgstr "Околен"
+msgstr "Съраунд"
 
 #. TRANSLATORS: Voice
 msgid "IDC_LBL_VOICE"
-msgstr "Глас"
+msgstr "Център"
 
 #. TRANSLATORS: Save all (multichannel and master equalizers).
 msgid "IDC_RBT_EQ_ALL"
-msgstr ""
+msgstr "Запиши всичко (главен и многоканален еквалайзер)."
 
 #. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
 msgid "IDC_RBT_EQ_CUR"
-msgstr ""
+msgstr "Запис само на текущия канал, тези настройки може да се ползват за всеки канал."
 
 #. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
 msgid "IDC_RBT_EQ_MCH"
-msgstr ""
+msgstr "Запис на всички канали (освен Главния), може да се ползва за  възстановяване на многоканалните настройки."
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
 msgid "IDC_VER"
@@ -183,7 +183,7 @@ msgstr ""
 
 #. TRANSLATORS: OK
 msgid "IDOK"
-msgstr ""
+msgstr "Изпрати"
 
 #. TRANSLATORS: What is it?
 msgid "IDC_GRP_ABOUT"
@@ -191,16 +191,11 @@ msgstr "Описание"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr ""
-"AC3Filter - това е висококочествен DirectShow филтър, предназначен за "
-"декодиране и обработка на звука в реално време. Поддържа многоканален и "
-"цифров (SPDIF) изход."
+msgstr "AC3Filter - това е висококочествен DirectShow филтър, предназначен за декодиране и обработка на звука в реално време. Поддържа многоканален и цифров (SPDIF) изход."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr ""
-"Използва се от болшинството плейъри. Необходим е за плейване на AVI файлове "
-"с AC3 и DTS звук. Може да бъде използван за плейване звука на DVD."
+msgstr "Използва се от болшинството плейъри. Необходим е за плейване на AVI файлове с AC3 и DTS звук. Може да бъде използван за плейване звука на DVD."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -212,27 +207,27 @@ msgstr "Скорост (dB/sec)"
 
 #. TRANSLATORS: Bass redirection
 msgid "IDC_GRP_BASS"
-msgstr ""
+msgstr "Пренасочване на НЧ"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_BASS_ENABLE"
-msgstr ""
+msgstr "Включи"
 
 #. TRANSLATORS: Cutoff frequency
 msgid "IDC_LBL_BASS_FREQ"
-msgstr "Честота на среза"
+msgstr "Чест. на среза"
 
 #. TRANSLATORS: Bass destination:
 msgid "IDC_LBL_BASS_ROUTE"
-msgstr ""
+msgstr "Пренасочи в:"
 
 #. TRANSLATORS: Front channels
 msgid "IDC_RBT_BASS_FRONT"
-msgstr ""
+msgstr "Предните канали"
 
 #. TRANSLATORS: Subwoofer
 msgid "IDC_RBT_BASS_SUB"
-msgstr ""
+msgstr "Суббуфер"
 
 #. TRANSLATORS: Contact author
 msgid "IDC_GRP_CONTACT"
@@ -240,7 +235,7 @@ msgstr "Връзка с автора"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
-msgstr ""
+msgstr "Моля, изпращайте ми всички забелязани грешки, идеи, и градивни критики. Моля пишете само на Английски или Руски. 'Subject' -а в имейла, трябва да съдържа текста 'AC3Filter' (заради автоматичното филтриране)."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
@@ -268,27 +263,27 @@ msgstr "Благодарности"
 
 #. TRANSLATORS: Debug
 msgid "IDC_GRP_DEBUG"
-msgstr ""
+msgstr "Отстраняване на грешки"
 
 #. TRANSLATORS: Error report
 msgid "IDC_BTN_ERROR_REPORT"
-msgstr ""
+msgstr "Отчет за грешка"
 
 #. TRANSLATORS: Save logs on exit
 msgid "IDC_CHK_SAVE_LOGS"
-msgstr ""
+msgstr "Запис на логове при изход от програмата"
 
 #. TRANSLATORS: Send  audio data
 msgid "IDC_CHK_SEND_AUDIO_DATA"
-msgstr ""
+msgstr "Изпращане на звуковите данни"
 
 #. TRANSLATORS: Feedback email:
 msgid "IDC_LBL_FEEDBACK"
-msgstr ""
+msgstr "Адрес на електронната поща"
 
 #. TRANSLATORS: How to report a bug?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug
 msgid "IDC_LNK_ERROR_REPORT"
-msgstr ""
+msgstr "Как да изпратите отчет за грешка?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug"
 
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
@@ -304,7 +299,7 @@ msgstr "Задръжки"
 
 #. TRANSLATORS: Reset
 msgid "IDC_BTN_DELAYS_RESET"
-msgstr ""
+msgstr "Нулир."
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DELAYS"
@@ -312,11 +307,11 @@ msgstr "Включи"
 
 #. TRANSLATORS: Units:
 msgid "IDC_LBL_DELAY_UNITS"
-msgstr ""
+msgstr "Единици"
 
 #. TRANSLATORS: DRC
 msgid "IDC_GRP_DRC"
-msgstr "Динам. компр."
+msgstr "Динам. компресия"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_DRC"
@@ -332,7 +327,7 @@ msgstr "Проверка за поддръжка на изходния форм�
 
 #. TRANSLATORS: Force sound card to reinit after seek / pause
 msgid "IDC_CHK_REINIT"
-msgstr ""
+msgstr "Инициал. на звуковата карта след търсене/пауза"
 
 #. TRANSLATORS: Disallow PCM output in SPDIF mode
 msgid "IDC_CHK_SPDIF_NO_PCM"
@@ -360,7 +355,7 @@ msgstr "Режим SPDIF/DTS"
 
 #. TRANSLATORS: Auto
 msgid "IDC_RBT_DTS_MODE_AUTO"
-msgstr "Автом."
+msgstr "Автоматичен"
 
 #. TRANSLATORS: Padded DTS
 msgid "IDC_RBT_DTS_MODE_PADDED"
@@ -380,11 +375,11 @@ msgstr "Настройки еквалайзер"
 
 #. TRANSLATORS: Custom
 msgid "IDC_BTN_EQ_CUSTOM"
-msgstr ""
+msgstr "Промени"
 
 #. TRANSLATORS: Reset
 msgid "IDC_BTN_EQ_RESET"
-msgstr "Нулиране еквалайзер"
+msgstr "Нулиране"
 
 #. TRANSLATORS: Enable
 msgid "IDC_CHK_EQ"
@@ -424,7 +419,7 @@ msgstr "Входни нива"
 
 #. TRANSLATORS: Input levels
 msgid "IDC_GRP_INPUT_LEVELS"
-msgstr "Изходни нива"
+msgstr "Входни нива"
 
 #. TRANSLATORS: Interface options
 msgid "IDC_GRP_INTERFACE"
@@ -452,9 +447,7 @@ msgstr "Лиценз"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
-msgstr ""
-"Тази програма е свободно програмно обезпечение и се разпространява свободно, "
-"в съответствие с условията на лиценза GNU GPL v2."
+msgstr "Тази програма е свободно програмно обезпечение и се разпространява свободно, в съответствие с условията на лиценза GNU GPL v2."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
@@ -478,7 +471,7 @@ msgstr "Приоритетно използване"
 
 #. TRANSLATORS: Disable AC3Filter
 msgid "IDC_RBT_MERIT_DO_NOT_USE"
-msgstr ""
+msgstr "Изключи AC3Filter"
 
 #. TRANSLATORS: Prefer AC3Filter
 msgid "IDC_RBT_MERIT_PREFERRED"
@@ -502,7 +495,7 @@ msgstr "Авт. матрица"
 
 #. TRANSLATORS: Expand stereo
 msgid "IDC_CHK_EXPAND_STEREO"
-msgstr "Упр. околен"
+msgstr "Упр. съраунд"
 
 #. TRANSLATORS: One-pass norm
 msgid "IDC_CHK_NORMALIZE"
@@ -514,7 +507,7 @@ msgstr "Норм. матрицата"
 
 #. TRANSLATORS: Voice control
 msgid "IDC_CHK_VOICE_CONTROL"
-msgstr "Упр. центъра"
+msgstr "Упр. център"
 
 #. TRANSLATORS: Output format
 msgid "IDC_GRP_OUTPUT"
@@ -662,7 +655,7 @@ msgstr "Език:"
 
 #. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
 msgid "IDC_LNK_TRANSLATE"
-msgstr ""
+msgstr "Как да преведем?|http://ac3filter.net/guides/how_to_translate"
 
 msgid "Samples"
 msgstr "Примери"
@@ -683,7 +676,7 @@ msgid "Inches"
 msgstr "Дюймове"
 
 msgid "All channels"
-msgstr ""
+msgstr "Всички канали"
 
 #, c-format
 msgid "%ikHz"
@@ -708,43 +701,39 @@ msgstr "Убедени ли сте, че искате да изтриете ма
 msgid "Are you sure you want to delete '%s' equalizer preset?"
 msgstr "Убедени ли сте, че искате да изтриете еквалайзера '%s'?"
 
-msgid ""
-"This option is DANGEROUS! Filter may make very loud noise with this option "
-"enabled. Press 'No' to enable this option."
-msgstr ""
-"Тази опция е опасна! При включена опция филтъра може да генерира много силен "
-"шум. Натиснете \"Не\" за включване на опцията."
+msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
+msgstr "Тази опция е опасна! При включена опция филтъра може да генерира много силен шум. Натиснете \"Не\" за включване на опцията."
 
 msgid "Dangerous option!"
 msgstr "Внимание! Опасна опция!"
 
 msgid "Spectrum: no data"
-msgstr ""
+msgstr "Спектър: няма данни"
 
 #, c-format
 msgid "Spectrum: %s"
-msgstr ""
+msgstr "Спектър: %s"
 
 msgid "Do not change"
-msgstr ""
+msgstr "Не променяй"
 
 msgid "Mono"
-msgstr ""
+msgstr "Моно"
 
 msgid "Stereo"
-msgstr ""
+msgstr "Стерео"
 
 msgid "Quadro"
-msgstr ""
+msgstr "Квадро"
 
 msgid "5 channels"
-msgstr ""
+msgstr "5 канала"
 
 msgid "2.1 Stereo"
-msgstr ""
+msgstr "2.1 Стерео"
 
 msgid "4.1 Quadro"
-msgstr ""
+msgstr "4.1 Квадро"
 
 msgid "5.1 (side)"
 msgstr ""
@@ -777,7 +766,7 @@ msgid "PCM Float"
 msgstr "PCM Float"
 
 msgid "PCM Double"
-msgstr ""
+msgstr "PCM Double"
 
 #, c-format
 msgid "%s %s %iHz"
@@ -806,21 +795,17 @@ msgstr ""
 "Вход\tсредно: %iмс\tдевиация: %ims\n"
 "Изход\tсредно: %iмс\tдевиация: %ims"
 
-msgid ""
-"This option is DANGEROUS! Video may go out of sync with this option enabled. "
-"Press 'No' to enable this option."
-msgstr ""
-"Тази опция е опасна! При включена опция видеото може да се разсинхронизира. "
-"Натиснете \"Не\" за включване на опцията."
+msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
+msgstr "Тази опция е опасна! При включена опция видеото може да се разсинхронизира. Натиснете \"Не\" за включване на опцията."
 
 msgid "Enter you email."
-msgstr ""
+msgstr "Напишете вашият имейл."
 
 msgid "Please..."
-msgstr ""
+msgstr "Моля..."
 
 msgid "Describe your proiblem."
-msgstr ""
+msgstr "Опишете вашият проблем."
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "Информация за версията"

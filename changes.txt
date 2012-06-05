@@ -1,6 +1,8 @@
 v2.4
-  * Basque language added (thanks to Xabier Aramendi!)
-  * Finnish translation updated (thanks to Kristian Epäilys)
+  * No freeze after pause in WMP.
+  * More speaker layouts.
+  * Basque language added (thanks to Xabier Aramendi!).
+  * Translations updated: Finnish (thanks to Kristian Epäilys), Bulgarian (thanks to Georgi Barzev)
 
 v2.3a - 2012-05-29
   * Dolby TrueHD support
