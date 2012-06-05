@@ -166,7 +166,7 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
       return TRUE;
 
     case DRV_FREE:
-      valib_log(log_event, module, "DRV_FREE");
+      // Cannot use logging here
       return TRUE;
 
     ///////////////////////////////////////////////////////
@@ -202,15 +202,9 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
 
     case DRV_CLOSE: 
     {
-      valib_log(log_event, module, "DRV_CLOSE");
+      // Cannot use logging here
       if (acm)
-      {
-        valib_log(log_event, module, "Instance close (0x%08X)", acm);
         delete acm;
-      }
-      else
-        valib_log(log_error, module, "cannot close null instance");
-
       return TRUE;
     }
     
