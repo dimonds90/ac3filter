@@ -34,6 +34,10 @@ static int controls[] =
   0
 };
 
+static const int mask_mpa = FORMAT_MASK_MPA;
+static const int mask_dts = FORMAT_MASK_DTS;
+static const int mask_ac3 = FORMAT_MASK_AC3 | FORMAT_MASK_EAC3 | FORMAT_MASK_DOLBY;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Encoder bitrate
 ///////////////////////////////////////////////////////////////////////////////
@@ -106,9 +110,9 @@ void ControlSPDIF::update()
   /////////////////////////////////////
   // SPDIF passthrough
 
-  CheckDlgButton(hdlg, IDC_CHK_SPDIF_MPA, (spdif_pt & FORMAT_MASK_MPA) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_SPDIF_AC3, (spdif_pt & FORMAT_MASK_AC3) != 0? BST_CHECKED: BST_UNCHECKED);
-  CheckDlgButton(hdlg, IDC_CHK_SPDIF_DTS, (spdif_pt & FORMAT_MASK_DTS) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_SPDIF_MPA, (spdif_pt & mask_mpa) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_SPDIF_AC3, (spdif_pt & mask_ac3) != 0? BST_CHECKED: BST_UNCHECKED);
+  CheckDlgButton(hdlg, IDC_CHK_SPDIF_DTS, (spdif_pt & mask_dts) != 0? BST_CHECKED: BST_UNCHECKED);
 
   /////////////////////////////////////
   // SPDIF/DTS output mode
@@ -159,9 +163,9 @@ ControlSPDIF::cmd_result ControlSPDIF::command(int control, int message)
     case IDC_CHK_SPDIF_DTS:
     {
       spdif_pt = 0;
-      spdif_pt |= IsDlgButtonChecked(hdlg, IDC_CHK_SPDIF_MPA) == BST_CHECKED? FORMAT_MASK_MPA: 0;
-      spdif_pt |= IsDlgButtonChecked(hdlg, IDC_CHK_SPDIF_AC3) == BST_CHECKED? FORMAT_MASK_AC3: 0;
-      spdif_pt |= IsDlgButtonChecked(hdlg, IDC_CHK_SPDIF_DTS) == BST_CHECKED? FORMAT_MASK_DTS: 0;
+      spdif_pt |= IsDlgButtonChecked(hdlg, IDC_CHK_SPDIF_MPA) == BST_CHECKED? mask_mpa: 0;
+      spdif_pt |= IsDlgButtonChecked(hdlg, IDC_CHK_SPDIF_AC3) == BST_CHECKED? mask_ac3: 0;
+      spdif_pt |= IsDlgButtonChecked(hdlg, IDC_CHK_SPDIF_DTS) == BST_CHECKED? mask_dts: 0;
       dec->set_spdif_pt(spdif_pt);
       update();
       return cmd_ok;
