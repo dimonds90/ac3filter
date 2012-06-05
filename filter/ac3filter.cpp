@@ -386,11 +386,9 @@ AC3Filter::Receive(IMediaSample *in)
   in->GetPointer((BYTE**)&buf);
   buf_size = in->GetActualDataLength();
 
-  // Mark output as preroll
+  // Skip preroll samples
   if (in->IsPreroll() == S_OK)
-    sink->set_preroll();
-  else
-    sink->unset_preroll();
+    buf_size = 0;
 
   /////////////////////////////////////////////////////////
   // Fill chunk
