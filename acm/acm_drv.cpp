@@ -12,12 +12,14 @@ static const std::string module("ACMDrv");
 // * DLLMain(DLL_PROCESS_ATTACH)
 //   On this step CRT initializes and can be used afterwards.
 // * DriverProc(DRV_LOAD)
+// * DriverProc(DRV_ENABLE)
 // * DriverProc(DRV_OPEN)
 //   Here we allocate the driver instance
 // * DLLMain(DLL_PROCESS_DETACH)
 //   On this step CRT shuts down and destroys memory heap.
 // * DriverProc(DRV_CLOSE)
 //   Here we must deallocate instance data
+// * DriverProc(DRV_DISABLE)
 // * DriverProc(DRV_FREE)
 //
 // Therefore we cannot rely on CRT memory allocation in this case...
@@ -205,6 +207,21 @@ DriverProc(DWORD_PTR dwDriverId, HDRVR hdrvr, UINT msg, LPARAM lParam1, LPARAM l
       // Cannot use logging here
       if (acm)
         delete acm;
+      return TRUE;
+    }
+
+    ///////////////////////////////////////////////////////
+    // DRV_ENABLE/DRV_DISABLE
+
+    case DRV_ENABLE:
+    {
+      valib_log(log_event, module, "DRV_ENABLE");
+      return TRUE;
+    }
+    
+    case DRV_DISABLE:
+    {
+      // Cannot use logging here
       return TRUE;
     }
     
