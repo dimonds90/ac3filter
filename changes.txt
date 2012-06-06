@@ -1,7 +1,8 @@
 v2.4
   * No freeze after pause in WMP.
   * More speaker layouts.
-  * ACM driver crash fixed (thanks to maxsmi)
+  * ACM driver crash fixed (thanks to maxsmi).
+  * AC3 SPDIF passthrough fixed.
   * Basque language added (thanks to Xabier Aramendi!).
   * Translations updated: Finnish (thanks to Kristian Epäilys), Bulgarian (thanks to Georgi Barzev)
 
