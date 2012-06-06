@@ -12,7 +12,7 @@ REGEDIT4
 "threshold"="0.1"
 "query_sink"=dword:00000001
 "use_detector"=dword:00000001
-"spdif_pt"=dword:00002000
+"spdif_pt"=dword:0001a000
 "spdif_as_pcm"=dword:00000000
 "spdif_encode"=dword:00000001
 "spdif_stereo_pt"=dword:00000001
@@ -255,7 +255,7 @@ REGEDIT4
 "threshold"="0.1"
 "query_sink"=dword:00000001
 "use_detector"=dword:00000001
-"spdif_pt"=dword:00002000
+"spdif_pt"=dword:0001a000
 "spdif_as_pcm"=dword:00000000
 "spdif_encode"=dword:00000001
 "spdif_stereo_pt"=dword:00000001
