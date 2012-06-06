@@ -38,6 +38,11 @@ parser.add_argument('--no-test',
   action='store_false',
   help='Do not run tests.')
 
+parser.add_argument('--no-opencandy',
+  dest='opencandy',
+  action='store_false',
+  help='Do not bundle OpenCandy.')
+
 args = parser.parse_args()
 
 ###########################################################
@@ -222,7 +227,7 @@ if args.symbols:
 
 iss_defines = []
 iss_defines.append('/Dappver="%s"' % ver)
-if exists('ac3filter/OCKeys.iss'):
+if exists('ac3filter/OCKeys.iss') and args.opencandy:
   iss_defines.append('/DOPENCANDY')
 
 iss_defines = ' '.join(iss_defines)
