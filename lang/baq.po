@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 2.1a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-29 01:13+0400\n"
+"POT-Creation-Date: 2012-06-07 05:16+0400\n"
 "PO-Revision-Date: 2012-04-14 01:15+0400\n"
 "Last-Translator: Valex <xvalex@mail.ru>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -743,11 +743,17 @@ msgstr "Monoa"
 msgid "Stereo"
 msgstr "Esteroa"
 
-msgid "Quadro"
-msgstr "Laukoa"
+msgid "4.0 Quadro"
+msgstr ""
 
-msgid "5 channels"
-msgstr "5 Bide"
+msgid "5.0 Surround"
+msgstr ""
+
+msgid "6.0 Surround"
+msgstr ""
+
+msgid "7.0 Surround"
+msgstr ""
 
 msgid "2.1 Stereo"
 msgstr "2.1 Estereoa"
@@ -755,16 +761,13 @@ msgstr "2.1 Estereoa"
 msgid "4.1 Quadro"
 msgstr "4.1 Laukoa"
 
-msgid "5.1 (side)"
+msgid "5.1 Surround"
 msgstr ""
 
-msgid "5.1 (back)"
+msgid "6.1 Surround"
 msgstr ""
 
-msgid "7.1 (wide)"
-msgstr ""
-
-msgid "7.1 (surround)"
+msgid "7.1 Surround"
 msgstr ""
 
 msgid "Dolby Surround/ProLogic"
@@ -830,6 +833,12 @@ msgstr ""
 
 msgid "Describe your proiblem."
 msgstr ""
+
+#~ msgid "Quadro"
+#~ msgstr "Laukoa"
+
+#~ msgid "5 channels"
+#~ msgstr "5 Bide"
 
 #~ msgid "5.1 (6 channels)"
 #~ msgstr "5.1 (6 bide)"
