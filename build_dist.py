@@ -110,7 +110,7 @@ if args.ver != ver_test:
   ver = args.ver
   ver_file = make_filename_ver(ver)
 
-  if not exists('OCKeys.iss'):
+  if args.opencandy and not exists('OCKeys.iss'):
     ans = raw_input('OpenCandy keys file (OCKeys.iss) not found. Continue without OpenCandy integration? (Y/n)?'.format(ver));
     if ans != 'Y':
       sys.exit(1)
