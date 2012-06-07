@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.46\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-29 01:13+0400\n"
+"POT-Creation-Date: 2012-06-07 05:16+0400\n"
 "PO-Revision-Date: 2007-09-14 18:31+0200\n"
 "Last-Translator: PhistucK UnRuleD <sorrybi@hotmail.com>\n"
 "Language-Team: Hebrew <LL@li.org>\n"
@@ -728,10 +728,16 @@ msgstr ""
 msgid "Stereo"
 msgstr ""
 
-msgid "Quadro"
+msgid "4.0 Quadro"
 msgstr ""
 
-msgid "5 channels"
+msgid "5.0 Surround"
+msgstr ""
+
+msgid "6.0 Surround"
+msgstr ""
+
+msgid "7.0 Surround"
 msgstr ""
 
 msgid "2.1 Stereo"
@@ -740,16 +746,13 @@ msgstr ""
 msgid "4.1 Quadro"
 msgstr ""
 
-msgid "5.1 (side)"
+msgid "5.1 Surround"
 msgstr ""
 
-msgid "5.1 (back)"
+msgid "6.1 Surround"
 msgstr ""
 
-msgid "7.1 (wide)"
-msgstr ""
-
-msgid "7.1 (surround)"
+msgid "7.1 Surround"
 msgstr ""
 
 msgid "Dolby Surround/ProLogic"

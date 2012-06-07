@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.62b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-29 01:13+0400\n"
+"POT-Creation-Date: 2012-06-07 05:16+0400\n"
 "PO-Revision-Date: 2012-05-31 10:15+0100\n"
 "Last-Translator: \n"
 "Language-Team: Philippe AGUESSE <nantesph@hotmail.fr>\n"
@@ -191,11 +191,17 @@ msgstr "A propos d'..."
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filterest un filtre DirectShow de haute qualité, créé pour le décodage et la gestion en temps réel du son. Il intègre de nombreux paramètres et fonctionalités. Il supporte les sorties multi-canaux digital (SPDIF)."
+msgstr ""
+"AC3Filterest un filtre DirectShow de haute qualité, créé pour le décodage et "
+"la gestion en temps réel du son. Il intègre de nombreux paramètres et "
+"fonctionalités. Il supporte les sorties multi-canaux digital (SPDIF)."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr "Il est utilisé automatiquement par la majorité des applications multimedia. Requis pour jouer les AVI contenant des pistes audios AC3 ou DTS. Il peut aussi être utilisé pour jouer les DVD."
+msgstr ""
+"Il est utilisé automatiquement par la majorité des applications multimedia. "
+"Requis pour jouer les AVI contenant des pistes audios AC3 ou DTS. Il peut "
+"aussi être utilisé pour jouer les DVD."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -235,7 +241,11 @@ msgstr "Contacter l'auteur"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
-msgstr "Merci de faire un rapport en cas de bogues. N'hésitez pas à contacter l'auteur avec vos idées, critiques, etc. Merci de rédiger vos emails en Anglais ou en Russe uniquement. Le sujet devra contenir le mot 'AC3Filter' (requis pour le filtrage automatique)."
+msgstr ""
+"Merci de faire un rapport en cas de bogues. N'hésitez pas à contacter "
+"l'auteur avec vos idées, critiques, etc. Merci de rédiger vos emails en "
+"Anglais ou en Russe uniquement. Le sujet devra contenir le mot "
+"'AC3Filter' (requis pour le filtrage automatique)."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
@@ -447,7 +457,9 @@ msgstr "Licence"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
-msgstr "Ce Logiciel est gratuit et peut être distribué selon les termes de la licence GNU General Public License version 2."
+msgstr ""
+"Ce Logiciel est gratuit et peut être distribué selon les termes de la "
+"licence GNU General Public License version 2."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
@@ -701,8 +713,12 @@ msgstr "Vous voulez supprimer sûr '%s' matrix ?"
 msgid "Are you sure you want to delete '%s' equalizer preset?"
 msgstr "Vous êtes certain à supprimer la présélection de l'égaliseur '%s' ?"
 
-msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
-msgstr "Cette option est DANGEROUS ! Filtre peut faire de bruit très fort avec cette option activée. Appuyez sur 'Non' pour activer cette option."
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Cette option est DANGEROUS ! Filtre peut faire de bruit très fort avec cette "
+"option activée. Appuyez sur 'Non' pour activer cette option."
 
 msgid "Dangerous option!"
 msgstr "Option dangereuse !"
@@ -723,11 +739,17 @@ msgstr "Mono"
 msgid "Stereo"
 msgstr "Stéréo"
 
-msgid "Quadro"
-msgstr "Quadro"
+msgid "4.0 Quadro"
+msgstr ""
 
-msgid "5 channels"
-msgstr "5 channels"
+msgid "5.0 Surround"
+msgstr ""
+
+msgid "6.0 Surround"
+msgstr ""
+
+msgid "7.0 Surround"
+msgstr ""
 
 msgid "2.1 Stereo"
 msgstr "2.1 Stéréo"
@@ -735,17 +757,14 @@ msgstr "2.1 Stéréo"
 msgid "4.1 Quadro"
 msgstr "4.1 Quadro"
 
-msgid "5.1 (side)"
-msgstr "5.1 (côté)"
+msgid "5.1 Surround"
+msgstr ""
 
-msgid "5.1 (back)"
-msgstr "5.1 (arrière)"
+msgid "6.1 Surround"
+msgstr ""
 
-msgid "7.1 (wide)"
-msgstr "7.1 (large )"
-
-msgid "7.1 (surround)"
-msgstr "7.1 (surround)"
+msgid "7.1 Surround"
+msgstr ""
 
 msgid "Dolby Surround/ProLogic"
 msgstr "Dolby Surround/ProLogic"
@@ -795,8 +814,12 @@ msgstr ""
 "Entrée\tmean: %ims\tstddev: %ims\n"
 "Sortie\tmean: %ims\tstddev: %ims"
 
-msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
-msgstr "Cette option est DANGEROUS ! Vidéo peut aller hors synchronisation avec cette option activée. Appuyez sur 'Non' pour activer cette option."
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+"Cette option est DANGEROUS ! Vidéo peut aller hors synchronisation avec "
+"cette option activée. Appuyez sur 'Non' pour activer cette option."
 
 msgid "Enter you email."
 msgstr "Entrer votre e-mail."
@@ -806,6 +829,24 @@ msgstr "Veuillez..."
 
 msgid "Describe your proiblem."
 msgstr "Décrire votre problème."
+
+#~ msgid "Quadro"
+#~ msgstr "Quadro"
+
+#~ msgid "5 channels"
+#~ msgstr "5 channels"
+
+#~ msgid "5.1 (side)"
+#~ msgstr "5.1 (côté)"
+
+#~ msgid "5.1 (back)"
+#~ msgstr "5.1 (arrière)"
+
+#~ msgid "7.1 (wide)"
+#~ msgstr "7.1 (large )"
+
+#~ msgid "7.1 (surround)"
+#~ msgstr "7.1 (surround)"
 
 #~ msgid "5.1 (6 channels)"
 #~ msgstr "5.1 (6 canaux)"

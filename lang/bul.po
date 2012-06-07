@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter v2.3a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-29 01:13+0400\n"
+"POT-Creation-Date: 2012-06-07 05:16+0400\n"
 "PO-Revision-Date: 2012-06-04 17:59+0200\n"
 "Last-Translator: Georgi Barzev <georgedb@gmail.com>\n"
 "Language-Team: AC3Filter <ac3filter@gmail.com>\n"
@@ -171,11 +171,15 @@ msgstr "Запиши всичко (главен и многоканален ек
 
 #. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
 msgid "IDC_RBT_EQ_CUR"
-msgstr "Запис само на текущия канал, тези настройки може да се ползват за всеки канал."
+msgstr ""
+"Запис само на текущия канал, тези настройки може да се ползват за всеки "
+"канал."
 
 #. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
 msgid "IDC_RBT_EQ_MCH"
-msgstr "Запис на всички канали (освен Главния), може да се ползва за  възстановяване на многоканалните настройки."
+msgstr ""
+"Запис на всички канали (освен Главния), може да се ползва за  възстановяване "
+"на многоканалните настройки."
 
 #. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
 msgid "IDC_VER"
@@ -191,11 +195,16 @@ msgstr "Описание"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filter - това е висококочествен DirectShow филтър, предназначен за декодиране и обработка на звука в реално време. Поддържа многоканален и цифров (SPDIF) изход."
+msgstr ""
+"AC3Filter - това е висококочествен DirectShow филтър, предназначен за "
+"декодиране и обработка на звука в реално време. Поддържа многоканален и "
+"цифров (SPDIF) изход."
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr "Използва се от болшинството плейъри. Необходим е за плейване на AVI файлове с AC3 и DTS звук. Може да бъде използван за плейване звука на DVD."
+msgstr ""
+"Използва се от болшинството плейъри. Необходим е за плейване на AVI файлове "
+"с AC3 и DTS звук. Може да бъде използван за плейване звука на DVD."
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -235,7 +244,10 @@ msgstr "Връзка с автора"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
-msgstr "Моля, изпращайте ми всички забелязани грешки, идеи, и градивни критики. Моля пишете само на Английски или Руски. 'Subject' -а в имейла, трябва да съдържа текста 'AC3Filter' (заради автоматичното филтриране)."
+msgstr ""
+"Моля, изпращайте ми всички забелязани грешки, идеи, и градивни критики. Моля "
+"пишете само на Английски или Руски. 'Subject' -а в имейла, трябва да съдържа "
+"текста 'AC3Filter' (заради автоматичното филтриране)."
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
@@ -283,7 +295,9 @@ msgstr "Адрес на електронната поща"
 
 #. TRANSLATORS: How to report a bug?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug
 msgid "IDC_LNK_ERROR_REPORT"
-msgstr "Как да изпратите отчет за грешка?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug"
+msgstr ""
+"Как да изпратите отчет за грешка?|http://ac3filter.net/wiki/AC3Filter:"
+"How_to_report_a_bug"
 
 #. TRANSLATORS: Decoder info
 msgid "IDC_GRP_DECODER_INFO"
@@ -447,7 +461,9 @@ msgstr "Лиценз"
 
 #. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
 msgid "IDC_LBL_LICENSE"
-msgstr "Тази програма е свободно програмно обезпечение и се разпространява свободно, в съответствие с условията на лиценза GNU GPL v2."
+msgstr ""
+"Тази програма е свободно програмно обезпечение и се разпространява свободно, "
+"в съответствие с условията на лиценза GNU GPL v2."
 
 #. TRANSLATORS: Mixing matrix
 msgid "IDC_GRP_MATRIX"
@@ -701,8 +717,12 @@ msgstr "Убедени ли сте, че искате да изтриете ма
 msgid "Are you sure you want to delete '%s' equalizer preset?"
 msgstr "Убедени ли сте, че искате да изтриете еквалайзера '%s'?"
 
-msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
-msgstr "Тази опция е опасна! При включена опция филтъра може да генерира много силен шум. Натиснете \"Не\" за включване на опцията."
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Тази опция е опасна! При включена опция филтъра може да генерира много силен "
+"шум. Натиснете \"Не\" за включване на опцията."
 
 msgid "Dangerous option!"
 msgstr "Внимание! Опасна опция!"
@@ -723,11 +743,17 @@ msgstr "Моно"
 msgid "Stereo"
 msgstr "Стерео"
 
-msgid "Quadro"
-msgstr "Квадро"
+msgid "4.0 Quadro"
+msgstr ""
 
-msgid "5 channels"
-msgstr "5 канала"
+msgid "5.0 Surround"
+msgstr ""
+
+msgid "6.0 Surround"
+msgstr ""
+
+msgid "7.0 Surround"
+msgstr ""
 
 msgid "2.1 Stereo"
 msgstr "2.1 Стерео"
@@ -735,16 +761,13 @@ msgstr "2.1 Стерео"
 msgid "4.1 Quadro"
 msgstr "4.1 Квадро"
 
-msgid "5.1 (side)"
+msgid "5.1 Surround"
 msgstr ""
 
-msgid "5.1 (back)"
+msgid "6.1 Surround"
 msgstr ""
 
-msgid "7.1 (wide)"
-msgstr ""
-
-msgid "7.1 (surround)"
+msgid "7.1 Surround"
 msgstr ""
 
 msgid "Dolby Surround/ProLogic"
@@ -795,8 +818,12 @@ msgstr ""
 "Вход\tсредно: %iмс\tдевиация: %ims\n"
 "Изход\tсредно: %iмс\tдевиация: %ims"
 
-msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
-msgstr "Тази опция е опасна! При включена опция видеото може да се разсинхронизира. Натиснете \"Не\" за включване на опцията."
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+"Тази опция е опасна! При включена опция видеото може да се разсинхронизира. "
+"Натиснете \"Не\" за включване на опцията."
 
 msgid "Enter you email."
 msgstr "Напишете вашият имейл."
@@ -806,6 +833,12 @@ msgstr "Моля..."
 
 msgid "Describe your proiblem."
 msgstr "Опишете вашият проблем."
+
+#~ msgid "Quadro"
+#~ msgstr "Квадро"
+
+#~ msgid "5 channels"
+#~ msgstr "5 канала"
 
 #~ msgid "IDC_GRP_ENV"
 #~ msgstr "Информация за версията"
