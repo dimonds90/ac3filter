@@ -368,9 +368,8 @@ STDMETHODIMP COMDecoder::get_spdif_status(int *_spdif_status)
 STDMETHODIMP COMDecoder::get_frames(int *_frames, int *_errors)
 {
   AutoLock config_lock(&config);
-  if (_frames) *_frames = 0;
   if (_errors) *_errors = 0;
-//  *_frames = dvd.dec.get_frames() + dvd.spdifer_pt.get_frames() + dvd.spdifer_enc.get_frames();
+  if (_frames) *_frames = dvd.dec.get_frames() + dvd.spdifer_pt.get_frames() + dvd.spdifer_enc.get_frames();
 //  *_errors = dvd.dec.get_errors() + dvd.spdifer_pt.get_errors() + dvd.spdifer_enc.get_errors();
   return S_OK;
 }
