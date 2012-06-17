@@ -1,4 +1,4 @@
-2.5b
+v2.5b - 2012-06-17
   * FFMPEG is used for DTS decoding.
   * Better decoding quality for EAC3 and OGG Vorbis.
   * Correct SPDIF output status.
