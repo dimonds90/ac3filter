@@ -1,3 +1,8 @@
+2.5b
+  * FFMPEG is used for DTS decoding.
+  * Better decoding quality for EAC3 and OGG Vorbis.
+  * Correct SPDIF output status.
+
 v2.4a - 2012-06-07
   * No freeze after pause in WMP.
   * More speaker layouts.
