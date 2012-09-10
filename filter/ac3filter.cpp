@@ -76,14 +76,12 @@ AC3Filter::AC3Filter(TCHAR *tszName, LPUNKNOWN punk, HRESULT *phr) :
     char lang[LANG_LEN];
     memset(lang, 0, LANG_LEN);
     reg.get_text("Language", lang, LANG_LEN);
-    if (lang_index(lang) != -1)
-    {
-      char lang_dir[MAX_PATH];
-      reg.get_text("Lang_Dir", lang_dir, array_size(lang_dir));
-      DWORD attr = GetFileAttributes(lang_dir);
-      if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
-        set_lang(lang, "ac3filter", lang_dir);
-    }
+
+    char lang_dir[MAX_PATH];
+    reg.get_text("Lang_Dir", lang_dir, array_size(lang_dir));
+    DWORD attr = GetFileAttributes(lang_dir);
+    if (attr != -1 && (attr & FILE_ATTRIBUTE_DIRECTORY))
+      set_lang(lang, "ac3filter", lang_dir);
   }
 
   // init decoder
