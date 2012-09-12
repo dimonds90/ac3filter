@@ -1,16 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: AC3Filter 2.1a\n"
+"Project-Id-Version: AC3Filter 2.5b\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-07 05:16+0400\n"
-"PO-Revision-Date: 2012-04-14 01:15+0400\n"
-"Last-Translator: Valex <xvalex@mail.ru>\n"
+"PO-Revision-Date: 2012-08-25 22:39+0100\n"
+"Last-Translator: Xabier Aramendi (Azpidatziak) <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Basque (Euskara)\n"
-"X-Poedit-Country: Basque  Coutry (Navarre)\n"
+"Language: Euskara (Basque)\n"
 
 #. TRANSLATORS: Main
 msgid "IDD_MAIN"
@@ -151,7 +150,7 @@ msgstr "Iragazki luzera:"
 
 #. TRANSLATORS: Problem description:
 msgid "IDC_LBL_ERROR_DESC"
-msgstr ""
+msgstr "Akats azalpena"
 
 #. TRANSLATORS: LFE
 msgid "IDC_LBL_LFE"
@@ -289,7 +288,7 @@ msgstr "Gorde oharrak"
 
 #. TRANSLATORS: Send  audio data
 msgid "IDC_CHK_SEND_AUDIO_DATA"
-msgstr ""
+msgstr "Bidali audio datuak"
 
 #. TRANSLATORS: Feedback email:
 msgid "IDC_LBL_FEEDBACK"
@@ -744,16 +743,16 @@ msgid "Stereo"
 msgstr "Esteroa"
 
 msgid "4.0 Quadro"
-msgstr ""
+msgstr "4.0 Laukoa"
 
 msgid "5.0 Surround"
-msgstr ""
+msgstr "5.0 Ingurasoinua"
 
 msgid "6.0 Surround"
-msgstr ""
+msgstr "6.0 Ingurasoinua"
 
 msgid "7.0 Surround"
-msgstr ""
+msgstr "7.0 Ingurasoinua"
 
 msgid "2.1 Stereo"
 msgstr "2.1 Estereoa"
@@ -762,13 +761,13 @@ msgid "4.1 Quadro"
 msgstr "4.1 Laukoa"
 
 msgid "5.1 Surround"
-msgstr ""
+msgstr "5.1 Ingurasoinua"
 
 msgid "6.1 Surround"
-msgstr ""
+msgstr "6.1 Ingurasoinua"
 
 msgid "7.1 Surround"
-msgstr ""
+msgstr "7.1 Ingurasoinua"
 
 msgid "Dolby Surround/ProLogic"
 msgstr "Dolby Surround/ProLogic"
@@ -826,13 +825,13 @@ msgstr ""
 "badago. Sakatu 'Ez' aukera hau gaitzeko."
 
 msgid "Enter you email."
-msgstr ""
+msgstr "Sartu zure post@ hebidea."
 
 msgid "Please..."
-msgstr ""
+msgstr "Mesedez..."
 
 msgid "Describe your proiblem."
-msgstr ""
+msgstr "Azaldu zure arazoa."
 
 #~ msgid "Quadro"
 #~ msgstr "Laukoa"

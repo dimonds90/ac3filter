@@ -1,3 +1,7 @@
+v2.6b
+  * Serbian language added (thanks to Rancher).
+  * Languages updated: Basque (thanks to Xabier Aramendi), Chineese (thanks to PoYang).
+
 v2.5b - 2012-06-17
   * FFMPEG is used for DTS decoding.
   * Better decoding quality for EAC3 and OGG Vorbis.

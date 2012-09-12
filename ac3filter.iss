@@ -53,6 +53,8 @@ Name: rus; MessagesFile: "compiler:Languages\Russian.isl"
 Name: slo; MessagesFile: "compiler:Languages\Slovak.isl"
 Name: slv; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: spa; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: sr_at_Cyrillic; MessagesFile: "compiler:Languages\SerbianCyrillic.isl"
+Name: sr_at_Latin;    MessagesFile: "compiler:Languages\SerbianLatin.isl"
 Name: swe; MessagesFile: "compiler:Default.isl,lang\isl\Swedish-10-5.1.12.isl"
 Name: tur; MessagesFile: "compiler:Default.isl,lang\isl\Turkish-3-5.1.11.isl"
 Name: ukr; MessagesFile: "compiler:Languages\Ukrainian.isl"
@@ -195,6 +197,8 @@ begin
     'slo': result := 'sk';
     'slv': result := 'sl';
     'spa': result := 'es';
+    'sr_at_Cyrillic': result := 'sr';
+    'sr_at_Latin': result := 'sr';
     'swe': result := 'sv';
     'tur': result := 'tr';
     'ukr': result := 'uk';
