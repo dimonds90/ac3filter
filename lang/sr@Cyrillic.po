@@ -1,0 +1,980 @@
+# Serbian Cyrillic translation of AC3Filter.
+# Copyright (C) 2012
+# This file is distributed under the same license as the AC3Filter package.
+# Rancher <theranchcowboy@gmail.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AC3Filter 1.63b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 05:16+0400\n"
+"PO-Revision-Date: 2012-09-10 03:17+0100\n"
+"Last-Translator: Rancher <theranchcowboy@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# TRANSLATORS: Main
+#. TRANSLATORS: Main
+msgid "IDD_MAIN"
+msgstr "Главно"
+
+# TRANSLATORS: Mixer
+#. TRANSLATORS: Mixer
+msgid "IDD_MIXER"
+msgstr "Миксер"
+
+# TRANSLATORS: Gains
+#. TRANSLATORS: Gains
+msgid "IDD_GAINS"
+msgstr "Појачања"
+
+# TRANSLATORS: Equalizer
+#. TRANSLATORS: Equalizer
+msgid "IDD_EQ"
+msgstr "Изједначивач"
+
+# TRANSLATORS: SPDIF
+#. TRANSLATORS: SPDIF
+msgid "IDD_SPDIF"
+msgstr "S/PDIF"
+
+# TRANSLATORS: System
+#. TRANSLATORS: System
+msgid "IDD_SYSTEM"
+msgstr "Систем"
+
+# TRANSLATORS: About
+#. TRANSLATORS: About
+msgid "IDD_ABOUT"
+msgstr "О програму"
+
+msgid "L"
+msgstr "L"
+
+msgid "C"
+msgstr "C"
+
+msgid "R"
+msgstr "R"
+
+msgid "SL"
+msgstr "SL"
+
+msgid "SR"
+msgstr "SR"
+
+msgid "LF"
+msgstr "LF"
+
+msgid "CL"
+msgstr "CL"
+
+msgid "CR"
+msgstr "CR"
+
+msgid "BL"
+msgstr "BL"
+
+msgid "BC"
+msgstr "BC"
+
+msgid "BR"
+msgstr "BR"
+
+msgid "Left"
+msgstr "Леви"
+
+msgid "Center"
+msgstr "Средишњи"
+
+msgid "Right"
+msgstr "Десни"
+
+msgid "Left surround"
+msgstr "Леви просторни"
+
+msgid "Right surround"
+msgstr "Десни просторни"
+
+msgid "Low frequency"
+msgstr "Ниска учесталост"
+
+msgid "Left of center"
+msgstr "Слева од центра"
+
+msgid "Right of center"
+msgstr "Здесна од центра"
+
+msgid "Left back"
+msgstr "Леви позадински"
+
+msgid "Center back"
+msgstr "Позадински"
+
+msgid "Right back"
+msgstr "Десни позадински"
+
+msgid "kHz"
+msgstr "kHz"
+
+msgid "dB"
+msgstr "dB"
+
+msgid "Hz"
+msgstr "Hz"
+
+msgid "AC3Filter configuration"
+msgstr "Подешавање AC3Filter-а"
+
+msgid "Adjust track"
+msgstr "Прилагоди запис"
+
+# TRANSLATORS: Cancel
+#. TRANSLATORS: Cancel
+msgid "IDCANCEL"
+msgstr "Откажи"
+
+# TRANSLATORS: Donate
+#. TRANSLATORS: Donate
+msgid "IDC_BTN_DONATE"
+msgstr "Приложи"
+
+# TRANSLATORS: Donate
+#. TRANSLATORS: Help
+msgid "IDC_BTN_HELP"
+msgstr "Помоћ"
+
+# TRANSLATORS: Log scale spectrum
+#. TRANSLATORS: Log scale spectrum
+msgid "IDC_CHK_EQ_LOG"
+msgstr "Бележи спектар"
+
+# TRANSLATORS: Frequency (Hz)
+#. TRANSLATORS: Frequency (Hz)
+msgid "IDC_LBL_EQ_FREQ"
+msgstr "Учесталост (Hz):"
+
+# TRANSLATORS: Gain (dB)
+#. TRANSLATORS: Gain (dB)
+msgid "IDC_LBL_EQ_GAIN"
+msgstr "Појачање (dB):"
+
+# TRANSLATORS: Filter length:
+#. TRANSLATORS: Filter length:
+msgid "IDC_LBL_EQ_LEN"
+msgstr "Дужина филтера:"
+
+# TRANSLATORS: Frames / Errors
+#. TRANSLATORS: Problem description:
+msgid "IDC_LBL_ERROR_DESC"
+msgstr "Опис проблема:"
+
+# TRANSLATORS: LFE
+#. TRANSLATORS: LFE
+msgid "IDC_LBL_LFE"
+msgstr "LFE"
+
+# TRANSLATORS: Surround
+#. TRANSLATORS: Surround
+msgid "IDC_LBL_SUR"
+msgstr "Простор"
+
+# TRANSLATORS: Voice
+#. TRANSLATORS: Voice
+msgid "IDC_LBL_VOICE"
+msgstr "Глас"
+
+# TRANSLATORS: Save all (multichannel and master equalizers).
+#. TRANSLATORS: Save all (multichannel and master equalizers).
+msgid "IDC_RBT_EQ_ALL"
+msgstr "Сачувај све (вишеканални и главни изједначивачи)."
+
+# TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
+#. TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
+msgid "IDC_RBT_EQ_CUR"
+msgstr ""
+"Сачувај само текући канал ради примене овог претподешавања на било који "
+"канал."
+
+# TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
+#. TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later.
+msgid "IDC_RBT_EQ_MCH"
+msgstr ""
+"Сачувај све канале (осим главног) ради каснијег враћања вишеканалног "
+"подешавања."
+
+# TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2009 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
+msgid "IDC_VER"
+msgstr "AC3Filter вер. %s, ауторска права © 2002-2009, Александар Виговски"
+
+# TRANSLATORS: OK
+#. TRANSLATORS: OK
+msgid "IDOK"
+msgstr "У реду"
+
+# TRANSLATORS: What is it?
+#. TRANSLATORS: What is it?
+msgid "IDC_GRP_ABOUT"
+msgstr "Основни подаци"
+
+# TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
+#. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
+msgid "IDC_LBL_ABOUT1"
+msgstr ""
+"AC3Filter је бесплатан висококвалитетни филтер Директшоуа створен за "
+"декодирање и обраду звука. Има широки распон могућности и згодних  "
+"подешавања. Подржава вишеканалне и дигиталне (S/PDIF) излазе."
+
+# TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
+#. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
+msgid "IDC_LBL_ABOUT2"
+msgstr ""
+"Користе га већина мултимедијалних плејера. Подржава датотеке AVI формата са "
+"AC3 или DTS звучним записима. Може да се користи и за пуштање ДВД-јева."
+
+# TRANSLATORS: AGC
+#. TRANSLATORS: AGC
+msgid "IDC_GRP_AGC"
+msgstr "AGC"
+
+# TRANSLATORS: Attack/release speed (dB/s):
+#. TRANSLATORS: Attack/release speed (dB/s):
+msgid "IDC_LBL_ATTACK_RELEASE"
+msgstr "Брзина напада/отпуштања:"
+
+# TRANSLATORS: Gains
+#. TRANSLATORS: Bass redirection
+msgid "IDC_GRP_BASS"
+msgstr "Преусмеравање баса"
+
+# TRANSLATORS: Bass redirection
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_BASS_ENABLE"
+msgstr "Омогући"
+
+# TRANSLATORS: Cutoff frequency
+#. TRANSLATORS: Cutoff frequency
+msgid "IDC_LBL_BASS_FREQ"
+msgstr "Честоћа прекида"
+
+# TRANSLATORS: Cutoff frequency
+#. TRANSLATORS: Bass destination:
+msgid "IDC_LBL_BASS_ROUTE"
+msgstr "Одредиште баса:"
+
+# TRANSLATORS: Cutoff frequency
+#. TRANSLATORS: Front channels
+msgid "IDC_RBT_BASS_FRONT"
+msgstr "Предњи канали"
+
+# TRANSLATORS: Save current channel only, so you can apply this preset to any channel.
+#. TRANSLATORS: Subwoofer
+msgid "IDC_RBT_BASS_SUB"
+msgstr "Сабвуфер"
+
+# TRANSLATORS: Contact author
+#. TRANSLATORS: Contact author
+msgid "IDC_GRP_CONTACT"
+msgstr "Контакт"
+
+# TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
+#. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
+msgid "IDC_LBL_CONTACT"
+msgstr ""
+"Пријавите све грешке на које наиђете. Слободно пошаљите поруку аутору ако "
+"имате било какве идеје, критике или питања. Пишите само на енглеском или "
+"руском језику. Наслов би требало да садржи реч „AC3Filter“ ради "
+"самофилтрирања."
+
+# TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
+#. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
+msgid "IDC_LNK_EMAIL"
+msgstr "пошаљи поруку|mailto:ac3filter@gmail.com?Subject=AC3Filter"
+
+# TRANSLATORS: Project forum|http://ac3filter.net/forum/
+#. TRANSLATORS: Project forum|http://ac3filter.net/forum/
+msgid "IDC_LNK_FORUM"
+msgstr "форум пројекта|http://ac3filter.net/forum/"
+
+# TRANSLATORS: Homepage|http://ac3filter.net/
+#. TRANSLATORS: Homepage|http://ac3filter.net/
+msgid "IDC_LNK_HOME"
+msgstr "веб страница|http://ac3filter.net/"
+
+# TRANSLATORS: CPU
+#. TRANSLATORS: CPU
+msgid "IDC_GRP_CPU"
+msgstr "Проц."
+
+# TRANSLATORS: 0%
+#. TRANSLATORS: 0%
+msgid "IDC_CPU_LABEL"
+msgstr "0%"
+
+# TRANSLATORS: Thanks to
+#. TRANSLATORS: Thanks to
+msgid "IDC_GRP_CREDITS"
+msgstr "Заслуге"
+
+# TRANSLATORS: Equalizer
+#. TRANSLATORS: Debug
+msgid "IDC_GRP_DEBUG"
+msgstr "Отклањање грешака"
+
+# TRANSLATORS: Reset
+#. TRANSLATORS: Error report
+msgid "IDC_BTN_ERROR_REPORT"
+msgstr "Извештај о грешци"
+
+# TRANSLATORS: Log scale spectrum
+#. TRANSLATORS: Save logs on exit
+msgid "IDC_CHK_SAVE_LOGS"
+msgstr "Сачувај извештаје по изласку"
+
+# TRANSLATORS: DTS
+#. TRANSLATORS: Send  audio data
+msgid "IDC_CHK_SEND_AUDIO_DATA"
+msgstr "Пошаљи податке о звуку"
+
+# TRANSLATORS: LFE
+#. TRANSLATORS: Feedback email:
+msgid "IDC_LBL_FEEDBACK"
+msgstr "Адреса за контакт:"
+
+# TRANSLATORS: Homepage|http://ac3filter.net/
+#. TRANSLATORS: How to report a bug?|http://ac3filter.net/wiki/AC3Filter:How_to_report_a_bug
+msgid "IDC_LNK_ERROR_REPORT"
+msgstr ""
+"Како да пријавим грешку?|http://ac3filter.net/wiki/AC3Filter:"
+"How_to_report_a_bug"
+
+# TRANSLATORS: Decoder info
+#. TRANSLATORS: Decoder info
+msgid "IDC_GRP_DECODER_INFO"
+msgstr "Подаци о декодеру"
+
+# TRANSLATORS: Frames / Errors
+#. TRANSLATORS: Frames / Errors
+msgid "IDC_LBL_FRAMES_ERRORS"
+msgstr "Кадрови/грешке:"
+
+# TRANSLATORS: Delays
+#. TRANSLATORS: Delays
+msgid "IDC_GRP_DELAYS"
+msgstr "Кашњење"
+
+# TRANSLATORS: Reset
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_DELAYS_RESET"
+msgstr "Поништи"
+
+# TRANSLATORS: Enable
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_DELAYS"
+msgstr "Омогући"
+
+# TRANSLATORS: Units:
+#. TRANSLATORS: Units:
+msgid "IDC_LBL_DELAY_UNITS"
+msgstr "Јединице:"
+
+# TRANSLATORS: DRC
+#. TRANSLATORS: DRC
+msgid "IDC_GRP_DRC"
+msgstr "DRC"
+
+# TRANSLATORS: Enable
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_DRC"
+msgstr "Омогући"
+
+# TRANSLATORS: DirectShow options
+#. TRANSLATORS: DirectShow options
+msgid "IDC_GRP_DSHOW"
+msgstr "Директшоу"
+
+# TRANSLATORS: Check output format support
+#. TRANSLATORS: Check output format support
+msgid "IDC_CHK_QUERY_SINK"
+msgstr "Провери подршку излазног формата"
+
+# TRANSLATORS: Force sound card to reinit after seek / pause
+#. TRANSLATORS: Force sound card to reinit after seek / pause
+msgid "IDC_CHK_REINIT"
+msgstr "Покрени звучну картицу након премот. и пауз."
+
+# TRANSLATORS: Disallow PCM output in SPDIF mode
+#. TRANSLATORS: Disallow PCM output in SPDIF mode
+msgid "IDC_CHK_SPDIF_NO_PCM"
+msgstr "Забрани PCM излаз у S/PDIF режиму"
+
+# TRANSLATORS: SPDIF/DTS conversion
+#. TRANSLATORS: SPDIF/DTS conversion
+msgid "IDC_GRP_DTS_CONV"
+msgstr "SPDIF/DTS претварање"
+
+# TRANSLATORS: Convert to DTS14
+#. TRANSLATORS: Convert to DTS14
+msgid "IDC_RBT_DTS_CONV_14BIT"
+msgstr "Претвори у DTS14"
+
+# TRANSLATORS: Convert to DTS16
+#. TRANSLATORS: Convert to DTS16
+msgid "IDC_RBT_DTS_CONV_16BIT"
+msgstr "Претвори у DTS16"
+
+# TRANSLATORS: Do not convert
+#. TRANSLATORS: Do not convert
+msgid "IDC_RBT_DTS_CONV_NONE"
+msgstr "Не претварај"
+
+# TRANSLATORS: SPDIF/DTS mode
+#. TRANSLATORS: SPDIF/DTS mode
+msgid "IDC_GRP_DTS_MODE"
+msgstr "SPDIF/DTS режим"
+
+# TRANSLATORS: Auto
+#. TRANSLATORS: Auto
+msgid "IDC_RBT_DTS_MODE_AUTO"
+msgstr "Аутоматски"
+
+# TRANSLATORS: Padded DTS
+#. TRANSLATORS: Padded DTS
+msgid "IDC_RBT_DTS_MODE_PADDED"
+msgstr "Допуњени DTS"
+
+# TRANSLATORS: SPDIF wrapped
+#. TRANSLATORS: SPDIF wrapped
+msgid "IDC_RBT_DTS_MODE_WRAPPED"
+msgstr "Омотани S/PDIF"
+
+# TRANSLATORS: Equalizer
+#. TRANSLATORS: Equalizer
+msgid "IDC_GRP_EQ"
+msgstr "Изједначивач"
+
+# TRANSLATORS: Equalizer options
+#. TRANSLATORS: Equalizer options
+msgid "IDC_GRP_EQ_OPTIONS"
+msgstr "Поставке изједначивача"
+
+# TRANSLATORS: Custom
+#. TRANSLATORS: Custom
+msgid "IDC_BTN_EQ_CUSTOM"
+msgstr "Прилаг."
+
+# TRANSLATORS: Reset
+#. TRANSLATORS: Reset
+msgid "IDC_BTN_EQ_RESET"
+msgstr "Поништи"
+
+# TRANSLATORS: Enable
+#. TRANSLATORS: Enable
+msgid "IDC_CHK_EQ"
+msgstr "Омогући"
+
+# TRANSLATORS: Equalizer preset
+#. TRANSLATORS: Equalizer preset
+msgid "IDC_GRP_EQ_PRESET"
+msgstr "Претпод. изједначивача"
+
+# TRANSLATORS: Delete
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_EQ_DELETE"
+msgstr "Обриши"
+
+# TRANSLATORS: Save
+#. TRANSLATORS: Save
+msgid "IDC_BTN_EQ_SAVE"
+msgstr "Сачувај"
+
+# TRANSLATORS: Use AC3Filter for:
+#. TRANSLATORS: Use AC3Filter for:
+msgid "IDC_GRP_FORMATS"
+msgstr "Намена AC3Filter-а"
+
+# TRANSLATORS: Gain
+#. TRANSLATORS: Gain
+msgid "IDC_GRP_GAIN"
+msgstr "Појачање"
+
+# TRANSLATORS: Gain
+#. TRANSLATORS: Gain
+msgid "IDC_LBL_GAIN"
+msgstr "Појач."
+
+# TRANSLATORS: Master
+#. TRANSLATORS: Master
+msgid "IDC_LBL_MASTER"
+msgstr "Главно"
+
+# TRANSLATORS: Input gains
+#. TRANSLATORS: Input gains
+msgid "IDC_GRP_INPUT_GAINS"
+msgstr "Улазна појачања"
+
+# TRANSLATORS: Input levels
+#. TRANSLATORS: Input levels
+msgid "IDC_GRP_INPUT_LEVELS"
+msgstr "Улазни нивои"
+
+# TRANSLATORS: Interface options
+#. TRANSLATORS: Interface options
+msgid "IDC_GRP_INTERFACE"
+msgstr "Корисничко окружење"
+
+# TRANSLATORS: Invert levels
+#. TRANSLATORS: Invert levels
+msgid "IDC_CHK_INVERT_LEVELS"
+msgstr "Обрни нивое"
+
+# TRANSLATORS: Show tooltips
+#. TRANSLATORS: Show tooltips
+msgid "IDC_CHK_TOOLTIPS"
+msgstr "Облачићи"
+
+# TRANSLATORS: Show tray icon
+#. TRANSLATORS: Show tray icon
+msgid "IDC_CHK_TRAY"
+msgstr "Икона у системској палети"
+
+# TRANSLATORS: Interface update rate (ms)
+#. TRANSLATORS: Interface update rate (ms)
+msgid "IDC_LBL_REFRESH_TIME"
+msgstr "— освежавање сучеља (мс)"
+
+# TRANSLATORS: License
+#. TRANSLATORS: License
+msgid "IDC_GRP_LICENSE"
+msgstr "Лиценца"
+
+# TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
+#. TRANSLATORS: This program is free software and can be distributed according to the terms of GNU General Public License version 2.
+msgid "IDC_LBL_LICENSE"
+msgstr ""
+"Овај програм је слободан. Објављен је под условима ГНУ-ове опште јавне "
+"лиценце верзије 2."
+
+# TRANSLATORS: Mixing matrix
+#. TRANSLATORS: Mixing matrix
+msgid "IDC_GRP_MATRIX"
+msgstr "Мешање матрице"
+
+# TRANSLATORS: Matrix preset
+#. TRANSLATORS: Matrix preset
+msgid "IDC_GRP_MATRIX_PRESET"
+msgstr "Претпод. матрице"
+
+# TRANSLATORS: Delete
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_MATRIX_DELETE"
+msgstr "Обриши"
+
+# TRANSLATORS: Save
+#. TRANSLATORS: Save
+msgid "IDC_BTN_MATRIX_SAVE"
+msgstr "Сачувај"
+
+# TRANSLATORS: Filter merit
+#. TRANSLATORS: Filter merit
+msgid "IDC_GRP_MERIT"
+msgstr "Поновно покретање филтера"
+
+# TRANSLATORS: Prefer other decoder
+#. TRANSLATORS: Disable AC3Filter
+msgid "IDC_RBT_MERIT_DO_NOT_USE"
+msgstr "Онемогући AC3Filter"
+
+# TRANSLATORS: Prefer AC3Filter
+#. TRANSLATORS: Prefer AC3Filter
+msgid "IDC_RBT_MERIT_PREFERRED"
+msgstr "AC3Filter"
+
+# TRANSLATORS: Prefer other decoder
+#. TRANSLATORS: Prefer other decoder
+msgid "IDC_RBT_MERIT_UNLIKELY"
+msgstr "Други декодер"
+
+# TRANSLATORS: Options
+#. TRANSLATORS: Options
+msgid "IDC_GRP_MIXER_OPTIONS"
+msgstr "Поставке"
+
+# TRANSLATORS: Auto gain control
+#. TRANSLATORS: Auto gain control
+msgid "IDC_CHK_AUTO_GAIN"
+msgstr "Упр. појачањем"
+
+# TRANSLATORS: Auto matrix
+#. TRANSLATORS: Auto matrix
+msgid "IDC_CHK_AUTO_MATRIX"
+msgstr "Аутоматска матрица"
+
+# TRANSLATORS: Expand stereo
+#. TRANSLATORS: Expand stereo
+msgid "IDC_CHK_EXPAND_STEREO"
+msgstr "Прошири стерео"
+
+# TRANSLATORS: One-pass norm
+#. TRANSLATORS: One-pass norm
+msgid "IDC_CHK_NORMALIZE"
+msgstr "Нормализовање"
+
+# TRANSLATORS: Normalize matrix
+#. TRANSLATORS: Normalize matrix
+msgid "IDC_CHK_NORM_MATRIX"
+msgstr "Нормализ. матрице"
+
+# TRANSLATORS: Voice control
+#. TRANSLATORS: Voice control
+msgid "IDC_CHK_VOICE_CONTROL"
+msgstr "Упр. гласом"
+
+# TRANSLATORS: Output format
+#. TRANSLATORS: Output format
+msgid "IDC_GRP_OUTPUT"
+msgstr "Излазни формат"
+
+# TRANSLATORS: Use SPDIF
+#. TRANSLATORS: Use SPDIF
+msgid "IDC_CHK_USE_SPDIF"
+msgstr "S/PDIF"
+
+# TRANSLATORS: Format
+#. TRANSLATORS: Format
+msgid "IDC_LBL_FORMAT"
+msgstr "Формат:"
+
+# TRANSLATORS: input format
+#. TRANSLATORS: input format
+msgid "IDC_LBL_INPUT"
+msgstr "Улазни формат"
+
+# TRANSLATORS: Rate
+#. TRANSLATORS: Rate
+msgid "IDC_LBL_RATE"
+msgstr "Брзина:"
+
+# TRANSLATORS: Output gains
+#. TRANSLATORS: Output gains
+msgid "IDC_GRP_OUTPUT_GAINS"
+msgstr "Излазна појачања"
+
+# TRANSLATORS: Output levels
+#. TRANSLATORS: Output levels
+msgid "IDC_GRP_OUTPUT_LEVELS"
+msgstr "Излазни нивои"
+
+# TRANSLATORS: Preset
+#. TRANSLATORS: Preset
+msgid "IDC_GRP_PRESET"
+msgstr "Претподешавање"
+
+# TRANSLATORS: Delete
+#. TRANSLATORS: Delete
+msgid "IDC_BTN_PRESET_DELETE"
+msgstr "Обриши"
+
+# TRANSLATORS: File
+#. TRANSLATORS: File
+msgid "IDC_BTN_PRESET_FILE"
+msgstr "Увези…"
+
+# TRANSLATORS: Save
+#. TRANSLATORS: Save
+msgid "IDC_BTN_PRESET_SAVE"
+msgstr "Сачувај"
+
+# TRANSLATORS: Default audio renderer
+#. TRANSLATORS: Default audio renderer
+msgid "IDC_GRP_RENDERER"
+msgstr "Добављач звука"
+
+# TRANSLATORS: Use Direct Sound by default
+#. TRANSLATORS: Use Direct Sound by default
+msgid "IDC_RBT_RENDER_DS"
+msgstr "Директсаунд"
+
+# TRANSLATORS: Use Wave Out by default
+#. TRANSLATORS: Use Wave Out by default
+msgid "IDC_RBT_RENDER_WO"
+msgstr "Вејваут"
+
+# TRANSLATORS: SPDIF options
+#. TRANSLATORS: SPDIF options
+msgid "IDC_GRP_SPDIF"
+msgstr "S/PDIF поставке"
+
+# TRANSLATORS: 32kHz
+#. TRANSLATORS: 32kHz
+msgid "IDC_CHK_SPDIF_ALLOW_32"
+msgstr "32 kHz"
+
+# TRANSLATORS: 44kHz
+#. TRANSLATORS: 44kHz
+msgid "IDC_CHK_SPDIF_ALLOW_44"
+msgstr "44 kHz"
+
+# TRANSLATORS: 48kHz
+#. TRANSLATORS: 48kHz
+msgid "IDC_CHK_SPDIF_ALLOW_48"
+msgstr "48 kHz"
+
+# TRANSLATORS: Output SPDIF as PCM
+#. TRANSLATORS: Output SPDIF as PCM
+msgid "IDC_CHK_SPDIF_AS_PCM"
+msgstr "Извези SPDIF као PCM"
+
+# TRANSLATORS: Restrict SPDIF sample rate
+#. TRANSLATORS: Restrict SPDIF sample rate
+msgid "IDC_CHK_SPDIF_CHECK_SR"
+msgstr "Ограничи S/PDIF узорковање"
+
+# TRANSLATORS: Use AC3 encoder
+#. TRANSLATORS: Use AC3 encoder
+msgid "IDC_CHK_SPDIF_ENCODE"
+msgstr "AC3 кодер"
+
+# TRANSLATORS: Do not encode stereo PCM
+#. TRANSLATORS: Do not encode stereo PCM
+msgid "IDC_CHK_SPDIF_STEREO_PT"
+msgstr "Не кодирај PCM стерео"
+
+# TRANSLATORS: Detect SPDIF stream in PCM data
+#. TRANSLATORS: Detect SPDIF stream in PCM data
+msgid "IDC_CHK_USE_DETECTOR"
+msgstr "Препознај S/PDIF ток у PCM подацима"
+
+# TRANSLATORS: AC3 encoder bitrate (kbps)
+#. TRANSLATORS: AC3 encoder bitrate (kbps)
+msgid "IDC_LBL_SPDIF_BITRATE"
+msgstr "— проток AC3 кодера (kB/с)"
+
+# TRANSLATORS: SPDIF passthrough
+#. TRANSLATORS: SPDIF passthrough
+msgid "IDC_GRP_SPDIF_PT"
+msgstr "SPDIF пролаз"
+
+# TRANSLATORS: AC3
+#. TRANSLATORS: AC3
+msgid "IDC_CHK_SPDIF_AC3"
+msgstr "AC3"
+
+# TRANSLATORS: DTS
+#. TRANSLATORS: DTS
+msgid "IDC_CHK_SPDIF_DTS"
+msgstr "DTS"
+
+# TRANSLATORS: MPEG Audio
+#. TRANSLATORS: MPEG Audio
+msgid "IDC_CHK_SPDIF_MPA"
+msgstr "MPA"
+
+# TRANSLATORS: Audio/Video sync
+#. TRANSLATORS: Audio/Video sync
+msgid "IDC_GRP_SYNC"
+msgstr "Усклађивање слике и звука"
+
+# TRANSLATORS: Jitter correction.
+#. TRANSLATORS: Jitter correction.
+msgid "IDC_CHK_JITTER"
+msgstr "Исправљање џитера"
+
+# TRANSLATORS: Current jitter:
+#. TRANSLATORS: Current jitter:
+msgid "IDC_LBL_JITTER"
+msgstr "Текући џитер:"
+
+# TRANSLATORS: Time shift (ms):
+#. TRANSLATORS: Time shift (ms):
+msgid "IDC_LBL_TIME_SHIFT"
+msgstr "Временско померање (мс):"
+
+# TRANSLATORS: <- sound lags
+#. TRANSLATORS: <- sound lags
+msgid "IDC_LBL_TIME_SHIFT_MINUS"
+msgstr "< кашњење звука"
+
+# TRANSLATORS: sound hastes ->
+#. TRANSLATORS: sound hastes ->
+msgid "IDC_LBL_TIME_SHIFT_PLUS"
+msgstr "журење звука >"
+
+# TRANSLATORS: Localization
+#. TRANSLATORS: Localization
+msgid "IDC_GRP_TRANS"
+msgstr "Превод"
+
+# TRANSLATORS: Language:
+#. TRANSLATORS: Language:
+msgid "IDC_LBL_LANG"
+msgstr "Језик:"
+
+# TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
+#. TRANSLATORS: How to translate?|http://ac3filter.net/guides/how_to_translate
+msgid "IDC_LNK_TRANSLATE"
+msgstr "Како да преведем програм?|http://ac3filter.net/guides/how_to_translate"
+
+msgid "Samples"
+msgstr "узорци"
+
+msgid "Millisecs"
+msgstr "милисекунде"
+
+msgid "Meters"
+msgstr "метри"
+
+msgid "Centimeters"
+msgstr "центиметри"
+
+msgid "Feet"
+msgstr "стопе"
+
+msgid "Inches"
+msgstr "инчи"
+
+msgid "All channels"
+msgstr "Сви канали"
+
+#, c-format
+msgid "%ikHz"
+msgstr "%i kHz"
+
+#, c-format
+msgid "%iHz"
+msgstr "%i Hz"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' preset?"
+msgstr "Желите ли да обришете претподешавање „%s“?"
+
+msgid "Delete confirmation"
+msgstr "Потврда брисања"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' matrix?"
+msgstr "Желите ли да обришете матрицу „%s“?"
+
+#, c-format
+msgid "Are you sure you want to delete '%s' equalizer preset?"
+msgstr "Желите ли да обришете претподешавање „%s“ изједначивача?"
+
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"Ова поставка је опасна! Филтер може да прави прегласне звуке. Кликните на "
+"„Не“ ако желите да ипак омогућите ову поставку."
+
+msgid "Dangerous option!"
+msgstr "Опасна поставка"
+
+msgid "Spectrum: no data"
+msgstr "Спектар: нема података"
+
+#, c-format
+msgid "Spectrum: %s"
+msgstr "Спектар: %s"
+
+msgid "Do not change"
+msgstr "Без промене"
+
+msgid "Mono"
+msgstr "Моно"
+
+msgid "Stereo"
+msgstr "Стерео"
+
+msgid "4.0 Quadro"
+msgstr "4.0 квадро"
+
+msgid "5.0 Surround"
+msgstr "5.0 просторни"
+
+msgid "6.0 Surround"
+msgstr "6.0 просторни"
+
+msgid "7.0 Surround"
+msgstr "7.0 просторни"
+
+msgid "2.1 Stereo"
+msgstr "2.1 стерео"
+
+msgid "4.1 Quadro"
+msgstr "4.1 квадро"
+
+msgid "5.1 Surround"
+msgstr "5.1 просторни"
+
+msgid "6.1 Surround"
+msgstr "6.1 просторни"
+
+msgid "7.1 Surround"
+msgstr "7.1 просторни"
+
+msgid "Dolby Surround/ProLogic"
+msgstr "Долби сураунд/пролоџик"
+
+msgid "Dolby ProLogic II"
+msgstr "Долби пролоџик II"
+
+msgid "PCM 16bit"
+msgstr "PCM 16-битни"
+
+msgid "PCM 24bit"
+msgstr "PCM 24-битни"
+
+msgid "PCM 32bit"
+msgstr "PCM 32-битни"
+
+msgid "PCM Float"
+msgstr "PCM Float"
+
+msgid "PCM Double"
+msgstr "PCM Double"
+
+#, c-format
+msgid "%s %s %iHz"
+msgstr "%s %s %i Hz"
+
+msgid "Use SPDIF"
+msgstr "S/PDIF"
+
+msgid "Use SPDIF (disabled)"
+msgstr "S/PDIF (онемогућено)"
+
+msgid "Use SPDIF (passthrough)"
+msgstr "S/PDIF (пролаз)"
+
+msgid "Use SPDIF (AC3 encode)"
+msgstr "S/PDIF (AC3 кодирање)"
+
+msgid "Use SPDIF (Unknown)"
+msgstr "S/PDIF (непознато)"
+
+#, c-format
+msgid ""
+"Input\tmean: %ims\tstddev: %ims\n"
+"Output\tmean: %ims\tstddev: %ims"
+msgstr ""
+"Улаз:\tсредина: %i мс\tодступање: %i мс\n"
+"Излаз:\tсредина: %i мс\tодступање: %i мс"
+
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+"Ова поставка је опасна! Слика и звук могу постати у нескладу. Кликните на "
+"„Не“ ако ипак желите да омогућите ову поставку."
+
+msgid "Enter you email."
+msgstr "Унесите е-адресу."
+
+msgid "Please..."
+msgstr "Молимо вас…"
+
+msgid "Describe your proiblem."
+msgstr "Опишите проблем."
