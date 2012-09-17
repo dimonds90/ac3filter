@@ -18,6 +18,7 @@ AppCopyright=Copyright (c) 2002-2012 by Alexander Vigovsky
 OutputBaseFilename=ac3filter_{#filever}
 DefaultDirName={pf}\AC3Filter
 DefaultGroupName=AC3Filter
+AllowNoIcons=yes
 SolidCompression=yes
 LanguageDetectionMethod=locale
 MinVersion=0, 5.0
