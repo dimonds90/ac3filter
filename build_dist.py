@@ -65,7 +65,7 @@ def run_at(dir, command):
   chdir(old_dir)
 
 def split_ver(ver):
-  m = re.match(r'(\d+)\.(\d+)(.?)', ver)
+  m = re.match(r'(\d+)\.(\d+)\.(\d+)(.?)', ver)
   if not m:
     raise Exception('Incorrect version format.')
   return m.groups()  
@@ -75,14 +75,16 @@ def make_filename_ver(ver_dot):
 
 def update_ac3filter_ver(file, ver):
   result = []
-  major, minor, status = split_ver(ver)
+  major, minor, release, state = split_ver(ver)
   for str in open(file):
     if str.find('#define AC3FILTER_VER_MAJOR') == 0:
       result.append('#define AC3FILTER_VER_MAJOR %s\n' % major)
     elif str.find('#define AC3FILTER_VER_MINOR') == 0:
       result.append('#define AC3FILTER_VER_MINOR %s\n' % minor)
+    elif str.find('#define AC3FILTER_VER_RELEASE') == 0:
+      result.append('#define AC3FILTER_VER_RELEASE %s\n' % release)
     elif str.find('#define AC3FILTER_VER_STATE') == 0:
-      result.append('#define AC3FILTER_VER_STATE "%s"\n' % status)
+      result.append('#define AC3FILTER_VER_STATE "%s"\n' % state)
     else:
       result.append(str)
   open(file, 'w').write(''.join(result))

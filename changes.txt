@@ -1,6 +1,9 @@
-v2.6b
+v2.5.1
+  * SPDIF/AC3 encoder: encode 5.1 with back channels (used by flac for instance) like 5.1 with side channels (standard for ac3).
   * Serbian language added (thanks to Rancher).
   * Languages updated: Basque (thanks to Xabier Aramendi), Chineese (thanks to PoYang).
+  * Bug fixed: some languages was reset to english after restart.
+  * Installer: /noicons option works now
 
 v2.5b - 2012-06-17
   * FFMPEG is used for DTS decoding.
