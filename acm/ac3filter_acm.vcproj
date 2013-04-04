@@ -63,11 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkLibraryDependencies="false"
-				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(ConfigurationName)/valib.lib ../../valib/lib/$(ConfigurationName)/aac/aac.lib ../../valib/lib/$(ConfigurationName)/mpa/mpa.lib ../../valib/lib/$(ConfigurationName)/ffmpeg/avcodec-53.lib ../../valib/lib/$(ConfigurationName)/ffmpeg/avutil-51.lib"
+				AdditionalDependencies="winmm.lib ../../valib/3rdparty/ffmpeg/lib/libavcodec.lib ../../valib/3rdparty/ffmpeg/lib/libavutil.lib"
 				OutputFile="$(OutDir)\ac3filter.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
-				DelayLoadDLLs="avcodec-53.dll;avutil-51.dll"
+				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -91,7 +90,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;"
+				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -140,11 +139,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkLibraryDependencies="false"
-				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/valib.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/aac/aac.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/mpa/mpa.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avcodec64-53.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avutil64-51.lib"
+				AdditionalDependencies="winmm.lib ../../valib/3rdparty/ffmpeg/lib/x64/libavcodec.lib ../../valib/3rdparty/ffmpeg/lib/x64/libavutil.lib"
 				OutputFile="$(OutDir)\ac3filter64.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
-				DelayLoadDLLs="avcodec64-53.dll;avutil64-51.dll"
+				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -168,7 +166,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;"
+				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -217,11 +215,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkLibraryDependencies="false"
-				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(ConfigurationName)/valib.lib ../../valib/lib/$(ConfigurationName)/aac/aac.lib ../../valib/lib/$(ConfigurationName)/mpa/mpa.lib ../../valib/lib/$(ConfigurationName)/ffmpeg/avcodec-53.lib ../../valib/lib/$(ConfigurationName)/ffmpeg/avutil-51.lib"
+				AdditionalDependencies="winmm.lib ../../valib/3rdparty/ffmpeg/lib/libavcodec.lib ../../valib/3rdparty/ffmpeg/lib/libavutil.lib"
 				OutputFile="$(OutDir)\ac3filter.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
-				DelayLoadDLLs="avcodec-53.dll;avutil-51.dll"
+				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -247,7 +244,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\*.dll $(OutDir)&#x0D;&#x0A;"
+				CommandLine="call register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -297,11 +294,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkLibraryDependencies="false"
-				AdditionalDependencies="winmm.lib delayimp.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/valib.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/aac/aac.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/mpa/mpa.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avcodec64-53.lib ../../valib/lib/$(PlatformName)/$(ConfigurationName)/ffmpeg/avutil64-51.lib"
+				AdditionalDependencies="winmm.lib ../../valib/3rdparty/ffmpeg/lib/x64/libavcodec.lib ../../valib/3rdparty/ffmpeg/lib/x64/libavutil.lib"
 				OutputFile="$(OutDir)\ac3filter64.acm"
 				ModuleDefinitionFile="ac3filter_acm.def"
-				DelayLoadDLLs="avcodec64-53.dll;avutil64-51.dll"
+				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -327,7 +323,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;copy /b ..\..\valib\3rdparty\ffmpeg\bin\x64\*.dll $(OutDir)&#x0D;&#x0A;"
+				CommandLine="register.cmd $(PlatformName) $(ConfigurationName)&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>

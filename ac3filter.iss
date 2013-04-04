@@ -77,16 +77,12 @@ Name: "lang";          Description: "Language files"; Types: full
 #endif
 
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\Release\avcodec-53.dll";           DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\Release\avutil-51.dll";            DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "BugTrap\Release\BugTrap.dll";             DestDir: "{app}"; Components: prog\filter32 or prog\acm32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "intl\Release\ac3filter_intl.dll";         DestDir: "{app}"; Components: prog\filter32 and lang; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 
 Source: "filter\x64\Release\ac3filter64.ax";           DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\x64\Release\avcodec64-53.dll";         DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\x64\Release\avutil64-51.dll";          DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "BugTrap\x64\Release\BugTrap-x64.dll";         DestDir: "{app}\x64"; Components: prog\filter64 or prog\acm64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "intl\x64\Release\ac3filter64_intl.dll";       DestDir: "{app}\x64"; Components: prog\filter64 and lang; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\x64\Release\ac3config.exe";   DestDir: "{app}\x64"; Components: prog\filter64; Flags: 64bit RestartReplace UninsRestartDelete IgnoreVersion
@@ -111,6 +107,11 @@ Type: files; Name: "{app}\ac3filter.map"
 Type: files; Name: "{app}\BugTrap.map"
 Type: files; Name: "{app}\ac3filter64.map"
 Type: files; Name: "{app}\BugTrap-x64.map"
+; Delete dlls installed by v2.0a - v2.5b
+Type: files; Name: "{app}\avcodec-53.dll"
+Type: files; Name: "{app}\avutil-51.dll"
+Type: files; Name: "{app}\x64\avcodec64-53.dll"
+Type: files; Name: "{app}\x64\avutil64-51.dll"
 
 [Icons]
 Name: "{group}\Home"; Filename: "http://ac3filter.net"
