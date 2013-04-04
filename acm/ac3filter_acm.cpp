@@ -212,7 +212,7 @@ ACMDrv *make_acm(HDRVR hdrvr, LPACMDRVOPENDESC pado)
 LRESULT
 AC3FilterACM::about(HWND parent)
 {
-  MessageBox(parent, "Copyright (c) 2007-2012 by Alexander Vigovsky", "About", MB_OK);
+  MessageBox(parent, "Copyright (c) 2007-2013 by Alexander Vigovsky", "About", MB_OK);
   return DRVCNF_OK;
 }
 
@@ -249,7 +249,7 @@ AC3FilterACM::driver_details(const HDRVR hdrvr, LPACMDRIVERDETAILS driver_detail
 
   lstrcpyW(driver_details->szShortName, L"AC3Filter ACM codec");
   lstrcpyW(driver_details->szLongName,  L"Decode AC3 and DTS audio");
-  lstrcpyW(driver_details->szCopyright, L"2007-2012 Alexander Vigovsky");
+  lstrcpyW(driver_details->szCopyright, L"2007-2013 Alexander Vigovsky");
   lstrcpyW(driver_details->szLicensing, L"GPL");
   lstrcpyW(driver_details->szFeatures,  L"Stereo decoding only");
 
