@@ -8,7 +8,9 @@ size_t patch_size = sizeof(seq);
 
 int main()
 {
-  FILE *f = fopen(filename, "r+b");
+  size_t i;
+  FILE *f = 0;
+  fopen_s(&f, filename, "r+b");
 
   if (!f)
   {
@@ -36,7 +38,7 @@ int main()
   }
 
   bool patched = true;
-  for (size_t i = 0; i < file_size - patch_size; i++)
+  for (i = 0; i < file_size - patch_size; i++)
   {
     if (!memcmp(buf+i, seq, patch_size))
     {
