@@ -25,7 +25,7 @@ Main features:
 * Direct access to mixing matrix
 * 32bit and 64bit OS support
   
-Copyright (c) 2002-2012 by Alexander Vigovsky (support@ac3filter.net)
+Copyright (c) 2002-2013 by Alexander Vigovsky (support@ac3filter.net)
 
 
 License:

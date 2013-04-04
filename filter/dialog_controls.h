@@ -45,8 +45,8 @@ static const ControlDesc dialog_controls[] =
   { IDC_RBT_EQ_CUR, N_("IDC_RBT_EQ_CUR"), "Save current channel only, so you can apply this preset to any channel.", "" },
   /* TRANSLATORS: Save all channels (except Master), so you can restore multichannel setup later. */
   { IDC_RBT_EQ_MCH, N_("IDC_RBT_EQ_MCH"), "Save all channels (except Master), so you can restore multichannel setup later.", "" },
-  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky */
-  { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky", "" },
+  /* TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2013 by Alexander Vigovsky */
+  { IDC_VER, N_("IDC_VER"), "AC3Filter ver. %s Copyright (c) 2002-2013 by Alexander Vigovsky", "" },
   /* TRANSLATORS: OK */
   { IDOK, N_("IDOK"), "OK", "" },
 
