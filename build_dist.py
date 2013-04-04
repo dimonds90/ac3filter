@@ -211,10 +211,6 @@ sym_files = (
  'ac3filter/intl/Release/ac3filter_intl.pdb',
  'ac3filter/intl/x64/Release/ac3filter64_intl.dll',
  'ac3filter/intl/x64/Release/ac3filter64_intl.pdb',
- 'valib/3rdparty/ffmpeg/bin/avcodec-53.dll',
- 'valib/3rdparty/ffmpeg/bin/avutil-51.dll',
- 'valib/3rdparty/ffmpeg/bin/x64/avcodec64-53.dll',
- 'valib/3rdparty/ffmpeg/bin/x64/avutil64-51.dll',
 )
 
 for f in sym_files:

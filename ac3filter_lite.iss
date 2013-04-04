@@ -55,8 +55,6 @@ Name: "prog\filter32"; Description: "AC3Filter (32bit)"; Types: full compact
 
 [Files]
 Source: "filter\Release\ac3filter.ax";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit Regserver RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\Release\avcodec-53.dll";           DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
-Source: "filter\Release\avutil-51.dll";            DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "BugTrap\Release\BugTrap.dll";             DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\ac3config\Release\ac3config.exe";   DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
 Source: "tools\spdif_test\Release\spdif_test.exe"; DestDir: "{app}"; Components: prog\filter32; Flags: 32bit RestartReplace UninsRestartDelete IgnoreVersion
@@ -72,6 +70,11 @@ Type: files; Name: "{app}\ac3filter.map"
 Type: files; Name: "{app}\BugTrap.map"
 Type: files; Name: "{app}\ac3filter64.map"
 Type: files; Name: "{app}\BugTrap-x64.map"
+; Delete dlls installed by v2.0a - v2.5b
+Type: files; Name: "{app}\avcodec-53.dll"
+Type: files; Name: "{app}\avutil-51.dll"
+Type: files; Name: "{app}\x64\avcodec64-53.dll"
+Type: files; Name: "{app}\x64\avutil64-51.dll"
 
 [Icons]
 Name: "{group}\Home"; Filename: "http://ac3filter.net"
