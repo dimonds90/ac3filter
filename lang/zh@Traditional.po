@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 2.5b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-07 05:16+0400\n"
+"POT-Creation-Date: 2013-04-04 16:15+0400\n"
 "PO-Revision-Date: 2012-06-22 20:06+0800\n"
 "Last-Translator: PoYang <roams.msn@gmail.com>\n"
 "Language-Team: POYANG <roams.msn@gmail.com>\n"
@@ -182,7 +182,7 @@ msgstr "僅儲存目前聲道，因此你可以應用這個預設到任何聲道
 msgid "IDC_RBT_EQ_MCH"
 msgstr "儲存所有聲道 (主聲道除外)，以便你以後可以恢復多通道設置。"
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2013 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter 版本. %s 版權所有 (c) 2002-2012 by Alexander Vigovsky"
 
@@ -196,11 +196,15 @@ msgstr "關於本軟體"
 
 #. TRANSLATORS: AC3Filter is a high quality free DirectShow filter designed for real time audio decoding and processing. It has a priority on wide functionality and convenient settings. Supports multi-channel and digital (SPDIF) outputs.
 msgid "IDC_LBL_ABOUT1"
-msgstr "AC3Filter 是專為音效即時解碼和處理而設計的一個高品質，免費的 DirectShow 篩選器。他有全方位的功能與便利的設定。並且支援多聲道和數位輸出 (SPDIF)。"
+msgstr ""
+"AC3Filter 是專為音效即時解碼和處理而設計的一個高品質，免費的 DirectShow 篩選"
+"器。他有全方位的功能與便利的設定。並且支援多聲道和數位輸出 (SPDIF)。"
 
 #. TRANSLATORS: It is used automatically by most multimedia players. Required to playback AVI files with AC3 or DTS audio tracks. Also can be used to playback DVD.
 msgid "IDC_LBL_ABOUT2"
-msgstr "AC3Filter 能夠被大部分的媒體播放程式自動啟用。並能夠播放以 AC3 或 DTS 為音軌的 AVI 檔案當然也可以用來播放 DVD。"
+msgstr ""
+"AC3Filter 能夠被大部分的媒體播放程式自動啟用。並能夠播放以 AC3 或 DTS 為音軌"
+"的 AVI 檔案當然也可以用來播放 DVD。"
 
 #. TRANSLATORS: AGC
 msgid "IDC_GRP_AGC"
@@ -240,7 +244,10 @@ msgstr "聯絡作者"
 
 #. TRANSLATORS: Please report about all bugs. Feel free to email author with your ideas, criticism, etc. Please write in English or Russian only. Subject should contain 'AC3Filter' word (due to automatic filtering).
 msgid "IDC_LBL_CONTACT"
-msgstr "請回報所有的相關問題。你可以隨意的向作者提供你的意見或是批評等等。但是請以英文或是俄文書寫。並且在標題列中包含'AC3Filter'這個單字(因為電子郵件有自動過濾器)"
+msgstr ""
+"請回報所有的相關問題。你可以隨意的向作者提供你的意見或是批評等等。但是請以英"
+"文或是俄文書寫。並且在標題列中包含'AC3Filter'這個單字(因為電子郵件有自動過濾"
+"器)"
 
 #. TRANSLATORS: mail to author|mailto:ac3filter@gmail.com?Subject=AC3Filter
 msgid "IDC_LNK_EMAIL"
@@ -706,8 +713,12 @@ msgstr "確定要刪除矩陣 '%s' 嗎？"
 msgid "Are you sure you want to delete '%s' equalizer preset?"
 msgstr "確定要刪除等化器預設 '%s' 嗎？"
 
-msgid "This option is DANGEROUS! Filter may make very loud noise with this option enabled. Press 'No' to enable this option."
-msgstr "這個選項是危險的! 啟用後可能會產生非常大的噪音。要啟用該選項，請按下\"否\"的按鈕。"
+msgid ""
+"This option is DANGEROUS! Filter may make very loud noise with this option "
+"enabled. Press 'No' to enable this option."
+msgstr ""
+"這個選項是危險的! 啟用後可能會產生非常大的噪音。要啟用該選項，請按下\"否\"的"
+"按鈕。"
 
 msgid "Dangerous option!"
 msgstr "危險的選項！"
@@ -803,8 +814,11 @@ msgstr ""
 "輸入\t平均: %i 毫秒\t標準偏差: %i 毫秒\n"
 "輸出\t平均: %i 毫秒\t標準偏差: %i 毫秒"
 
-msgid "This option is DANGEROUS! Video may go out of sync with this option enabled. Press 'No' to enable this option."
-msgstr "這個選項是有危險的! 啟用後可能造成影音不同步。如要啟用請按下\"否\"的按鈕。"
+msgid ""
+"This option is DANGEROUS! Video may go out of sync with this option enabled. "
+"Press 'No' to enable this option."
+msgstr ""
+"這個選項是有危險的! 啟用後可能造成影音不同步。如要啟用請按下\"否\"的按鈕。"
 
 msgid "Enter you email."
 msgstr "輸入你的電子郵件。"
@@ -814,4 +828,3 @@ msgstr "請..."
 
 msgid "Describe your proiblem."
 msgstr "描述你的問題。"
-

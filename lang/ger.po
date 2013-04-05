@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.61b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-07 05:16+0400\n"
+"POT-Creation-Date: 2013-04-04 16:15+0400\n"
 "PO-Revision-Date: 2009-06-24 19:46+0100\n"
 "Last-Translator: Filico <findme@dvbviewer.forum>\n"
 "Language-Team: \n"
@@ -180,7 +180,7 @@ msgstr ""
 "Alle Kanäle (außer Master) sichern, um das Multikanal-Setup später "
 "wiederherzustellen."
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2013 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 von Alexander Vigovsky"
 

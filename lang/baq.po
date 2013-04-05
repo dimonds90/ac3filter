@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 2.5b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-07 05:16+0400\n"
+"POT-Creation-Date: 2013-04-04 16:15+0400\n"
 "PO-Revision-Date: 2012-08-25 22:39+0100\n"
 "Last-Translator: Xabier Aramendi (Azpidatziak) <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -179,7 +179,7 @@ msgstr ""
 "Gorde bide guztiak (Masterra ezik), gero bide-anitzeko itxurapena "
 "berreskuratu ahal izateko bezala."
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2013 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter ikusi. %s Copyrighta (c) 2002-2009 Alexander Vigovsky"
 
