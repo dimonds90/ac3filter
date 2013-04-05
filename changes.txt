@@ -1,4 +1,4 @@
-v2.6b
+v2.6.0b - 2013-04-05
   * FFMPEG updated to v1.1.4
   * Use FFMPEG for AAC decoding (should be less crashes because faad bugs).
   * SPDIF/AC3 encoder: encode 5.1 with back channels (used by flac for instance) like 5.1 with side channels (standard for ac3).
