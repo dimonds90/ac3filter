@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AC3Filter 1.61b\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-07 05:16+0400\n"
+"POT-Creation-Date: 2013-04-04 16:15+0400\n"
 "PO-Revision-Date: 2009-09-09 00:42+0100\n"
 "Last-Translator: NimmerSoft <nimmer@dbmail.dk>\n"
 "Language-Team: \n"
@@ -180,7 +180,7 @@ msgstr ""
 "Gem Alle Kanaler (undtagen Master), så du kan gendanne Multikanal-Setup "
 "senere."
 
-#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2012 by Alexander Vigovsky
+#. TRANSLATORS: AC3Filter ver. %s Copyright (c) 2002-2013 by Alexander Vigovsky
 msgid "IDC_VER"
 msgstr "AC3Filter ver. %s Copyright (c) 2002-2007 af Alexander Vigovsky"
 
