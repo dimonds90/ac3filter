@@ -236,9 +236,9 @@ run_at('ac3filter', '"%s" %s /o".." ac3filter_lite.iss' % (innosetup, iss_define
 # Commit and tag
 
 if ver != ver_test:
-  run('hg commit -R ac3filter -m "Update version"')
   run('hg tag -R ac3filter ac3filter_%s' % ver_file)
   run('hg tag -R valib ac3filter_%s' % ver_file)
+  run('hg commit -R ac3filter -m "Update version"')
 
 ###########################################################
 
